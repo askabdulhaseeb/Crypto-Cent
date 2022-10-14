@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "229137297335",
+    "project_id": "crypto-cent",
+    "storage_bucket": "crypto-cent.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:229137297335:android:eda1ca79bb89ccaa014232",
+        "android_client_info": {
+          "package_name": "com.devmarkaz.crypto_cent"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "229137297335-g8s8lom0mtu2t7sq8egrp0g5bal88c1c.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDkVAK5Kr4U-e3ylCG3rIuMqACle_BfkPg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "229137297335-g8s8lom0mtu2t7sq8egrp0g5bal88c1c.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
