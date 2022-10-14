@@ -1,7 +1,12 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
 
 import 'firebase_options.dart';
+import 'providers/app_theme.dart';
+import 'screens/auth/auth_screen.dart';
+import 'screens/auth/signup-screen.dart';
 import 'screens/screens.dart';
 
 void main() async {
@@ -9,21 +14,57 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Crypto Cent',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: const IntroScreen(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider<AppThemeProvider>.value(
+          value: AppThemeProvider(),
+        ),
+      ],
+      child: Consumer<AppThemeProvider>(
+          builder: (BuildContext context, AppThemeProvider theme, _) {
+        return MaterialApp.router(
+          title: 'Crypto Cent',
+          debugShowCheckedModeBanner: false,
+          theme: AppThemes.light,
+          darkTheme: AppThemes.dark,
+          themeMode: theme.themeMode,
+          routerDelegate: _router.routerDelegate,
+          routeInformationParser: _router.routeInformationParser,
+          routeInformationProvider: _router.routeInformationProvider,
+        );
+      }),
     );
   }
+
+  final GoRouter _router = GoRouter(
+    initialLocation: IntroScreen.routeName,
+    routes: <GoRoute>[
+      GoRoute(
+        path: AuthScreen.routeName,
+        builder: (BuildContext context, GoRouterState state) {
+          return const AuthScreen();
+        },
+      ),
+      GoRoute(
+        path: IntroScreen.routeName,
+        builder: (BuildContext context, GoRouterState state) {
+          return const IntroScreen();
+        },
+      ),
+      GoRoute(
+        path: SignupScreen.routeName,
+        builder: (BuildContext context, GoRouterState state) {
+          return const SignupScreen();
+        },
+      ),
+    ],
+  );
 }

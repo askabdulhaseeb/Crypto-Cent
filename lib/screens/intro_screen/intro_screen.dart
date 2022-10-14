@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 
 import '../../utilities/app_images.dart';
 import '../../widgets/custom_widgets/custom_elevated_button.dart';
-
 
 class IntroScreen extends StatelessWidget {
   const IntroScreen({Key? key}) : super(key: key);
@@ -31,8 +31,7 @@ class IntroScreen extends StatelessWidget {
                   bodyWidget: _ViewModelBody(
                     imagePath: AppImages.discountIntroIcon,
                     title: 'Supper Discounts And Offers',
-                    subtitle:
-                        '',
+                    subtitle: '',
                   ),
                   titleWidget: const SizedBox(),
                 ),
@@ -41,8 +40,7 @@ class IntroScreen extends StatelessWidget {
                     imagePath: AppImages.deliveryIntroIcon,
                     titleSpace: 40,
                     title: 'First Delivery Service',
-                    subtitle:
-                        '',
+                    subtitle: '',
                   ),
                   titleWidget: const SizedBox(),
                 ),
@@ -51,8 +49,7 @@ class IntroScreen extends StatelessWidget {
                     imagePath: AppImages.paymentIntroIcon,
                     titleSpace: 40,
                     title: 'Easy Payment System',
-                    subtitle:
-                        '',
+                    subtitle: '',
                   ),
                   titleWidget: const SizedBox(),
                 ),
@@ -63,9 +60,9 @@ class IntroScreen extends StatelessWidget {
             padding: const EdgeInsets.only(left: 16, right: 16, bottom: 16),
             child: CustomElevatedButton(
               title: 'Next Step',
-              onTap: (){},
-             // onTap: () => Navigator.of(context).pushNamedAndRemoveUntil(
-               //   SigninScreen.routeName, (Route<dynamic> route) => false),
+              onTap: () => context.go('/authscren'),
+              // onTap: () => Navigator.of(context).pushNamedAndRemoveUntil(
+              //   SigninScreen.routeName, (Route<dynamic> route) => false),
             ),
           ),
         ],
