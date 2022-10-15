@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 
 import '../../utilities/app_images.dart';
-import '../../widgets/custom_widgets/custom_textformfield.dart';
-import '../../widgets/custom_widgets/custom_validator.dart';
 import '../../widgets/custom_widgets/custom_widget.dart';
+import 'auth_screen.dart';
 import 'login_screen.dart';
 
 class SignupScreen extends StatelessWidget {
@@ -17,10 +16,18 @@ class SignupScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      
       appBar: AppBar(
+        
           leading: IconButton(
         icon: const Icon(Icons.arrow_back, color: Colors.black),
-        onPressed: () => Navigator.of(context).pop(),
+        onPressed: (() {
+          Navigator.pop(
+            context,
+            MaterialPageRoute(
+                builder: (BuildContext context) => const AuthScreen()),
+          );
+        }),
       )
           // leading: const Icon(Icons.arrow_back, color: Colors.black),
           ),

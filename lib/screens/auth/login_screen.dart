@@ -4,6 +4,7 @@ import '../../utilities/app_images.dart';
 import '../../widgets/custom_widgets/custom_textformfield.dart';
 import '../../widgets/custom_widgets/custom_validator.dart';
 import '../../widgets/custom_widgets/custom_widget.dart';
+import 'auth_screen.dart';
 import 'signup-screen.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -17,12 +18,19 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          leading: IconButton(
-        icon: const Icon(Icons.arrow_back, color: Colors.black),
-        onPressed: () => Navigator.of(context).pop(),
-      )
-          // leading: const Icon(Icons.arrow_back, color: Colors.black),
-          ),
+        leading: IconButton(
+            icon: const Icon(Icons.arrow_back, color: Colors.black),
+          
+            onPressed: (() {
+              Navigator.pop(
+                context,
+                MaterialPageRoute(
+                    builder: (BuildContext context) => AuthScreen()),
+              );
+            }),
+   
+            ),
+      ),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 26, horizontal: 18),
