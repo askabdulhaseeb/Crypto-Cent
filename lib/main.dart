@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import 'firebase_options.dart';
 import 'providers/app_theme.dart';
 import 'screens/auth/auth_screen.dart';
+import 'screens/auth/login_screen.dart';
 import 'screens/auth/signup-screen.dart';
 import 'screens/screens.dart';
 
@@ -62,7 +63,13 @@ class MyApp extends StatelessWidget {
       GoRoute(
         path: SignupScreen.routeName,
         builder: (BuildContext context, GoRouterState state) {
-          return const SignupScreen();
+          return  SignupScreen();
+        },
+      ),
+      GoRoute(
+        path: LoginScreen.routeName,
+        builder: (BuildContext context, GoRouterState state) {
+          return  LoginScreen();
         },
       ),
     ],

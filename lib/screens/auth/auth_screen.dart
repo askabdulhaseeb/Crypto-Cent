@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-
 import '../../utilities/app_images.dart';
-import '../../utilities/for_text.dart';
-import '../../widgets/custom_widgets/custom_elevated_button.dart';
+import '../../widgets/custom_widgets/custom_widget.dart';
+import 'login_screen.dart';
+import 'signup-screen.dart';
 
 class AuthScreen extends StatelessWidget {
   static const String routeName = '/authscren';
@@ -21,15 +21,29 @@ class AuthScreen extends StatelessWidget {
               const ForText(name: 'Welcome', bold: true, size: 26),
               const SizedBox(height: 70),
               CustomElevatedButton(
-                  title: 'Continue with email or phone number', onTap: () {}),
+                title: 'Continue with email or phone number',
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (BuildContext context) => LoginScreen()),
+                  );
+                },
+              ),
               const SizedBox(height: 20),
               CustomElevatedButton(
                 title: 'Create a account',
-                onTap: () =>  context.go('/signupscreen'),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (BuildContext context) =>
+                             SignupScreen()),
+                  );
+                },
                 bgColor: const Color(0xffE2F0F7),
                 textStyle: const TextStyle(color: Colors.black, fontSize: 18),
               ),
-             
               const SizedBox(height: 30),
             ],
           ),
