@@ -68,3 +68,11 @@ class MyApp extends StatelessWidget {
     ],
   );
 }
+
+
+
+
+
+
+// Figma File 
+//https://www.figma.com/file/9ictqL5CrszrXY302KBqDa/Cryptocent?node-id=27%3A4835
