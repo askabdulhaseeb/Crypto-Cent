@@ -25,21 +25,15 @@ class MainBottomNavigationBar extends StatelessWidget {
           label: 'Home',
         ),
         BottomNavigationBarItem(
-          icon: ImageIcon(AssetImage(AppImages.profitUnselected)),
-          activeIcon: ImageIcon(AssetImage(AppImages.profitSelected)),
-          label: 'Profit',
+          icon: ImageIcon(AssetImage(AppImages.bookmarkUnselected)),
+          activeIcon: ImageIcon(AssetImage(AppImages.bookmarkSelected)),
+          label: 'Bookmark',
         ),
         BottomNavigationBarItem(
-          icon: SizedBox(
-            height: 36,
-            child: Image.asset(AppImages.exchangeIcon),
-          ),
-          label: 'Exchange',
-        ),
-        BottomNavigationBarItem(
-          icon: ImageIcon(AssetImage(AppImages.timeUnselected)),
-          activeIcon: ImageIcon(AssetImage(AppImages.timeSelected)),
-          label: 'Time',
+          icon: ImageIcon(AssetImage(AppImages.paymentUnselected)),
+          activeIcon: ImageIcon(AssetImage(AppImages.paymentSelected),
+              color: Theme.of(context).primaryColor),
+          label: 'Payment',
         ),
         BottomNavigationBarItem(
           icon: ImageIcon(AssetImage(AppImages.profileUnselected)),

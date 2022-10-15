@@ -10,15 +10,16 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  MyApp({super.key});
+ const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
+      // ignore: always_specify_types
       providers: [
         ChangeNotifierProvider<AppThemeProvider>.value(
           value: AppThemeProvider(),
@@ -35,7 +36,7 @@ class MyApp extends StatelessWidget {
           theme: AppThemes.light,
           darkTheme: AppThemes.dark,
           themeMode: theme.themeMode,
-          home: Dashboard(),
+          home: const MainScreen(),
         );
       }),
     );

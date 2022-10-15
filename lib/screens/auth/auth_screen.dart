@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import '../../utilities/app_images.dart';
 import '../../widgets/custom_widgets/custom_widget.dart';
 import 'login_screen.dart';
 import 'signup-screen.dart';
 
 class AuthScreen extends StatelessWidget {
-  static const String routeName = '/authscren';
   const AuthScreen({super.key});
+  static const String routeName = '/authscren';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,6 +24,7 @@ class AuthScreen extends StatelessWidget {
                 onTap: () {
                   Navigator.push(
                     context,
+                    // ignore: always_specify_types
                     MaterialPageRoute(
                         builder: (BuildContext context) => LoginScreen()),
                   );
@@ -36,6 +36,7 @@ class AuthScreen extends StatelessWidget {
                 onTap: () {
                   Navigator.push(
                     context,
+                    // ignore: always_specify_types
                     MaterialPageRoute(
                         builder: (BuildContext context) =>
                              SignupScreen()),

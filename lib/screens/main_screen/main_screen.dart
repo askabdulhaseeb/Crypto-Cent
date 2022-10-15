@@ -1,13 +1,26 @@
+
+import '../screens.dart';
 import 'package:flutter/material.dart';
-class Dashboard extends StatelessWidget {
-static const String routeName = '/Dashboard';
-const Dashboard({super.key});
-@override
- Widget build(BuildContext context) {
-return Scaffold(
-appBar: AppBar(
-title: const Text('Dashboard'),
-),
-);
-}
+import 'package:provider/provider.dart';
+import '../../providers/app_provider.dart';
+class MainScreen extends StatelessWidget {
+  const MainScreen({Key? key}) : super(key: key);
+  static const String routeName = '/MainScreen';
+
+  static const List<Widget> _pages = <Widget>[
+    HomeScreen(),
+    BookmarkScreen(),
+    PaymentScreen(),
+    ProfileScreen(),
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    int currentIndex = Provider.of<AppProvider>(context).currentTap;
+   
+    return Scaffold(
+      body: _pages[currentIndex],
+      bottomNavigationBar: const MainBottomNavigationBar(),
+    );
+  }
 }
