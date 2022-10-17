@@ -1,9 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
+import '../../models/product_model.dart';
+import '../../providers/categories_provider.dart';
+import '../../providers/product_provider.dart';
 import '../../utilities/app_images.dart';
 import '../../widgets/custom_widgets/custom_widget.dart';
 import 'card_swiper.dart';
+import 'upload_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   static const String routeName = '/HomeScreen';
@@ -13,13 +18,43 @@ class HomeScreen extends StatelessWidget {
     double width = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: appBar(context),
-      floatingActionButton:
-          FloatingActionButton(onPressed: () {}, child: const Icon(Icons.add)),
-      body: Column(
-        children: const <Widget>[
-          Headeriamge(),
-        ],
-      ),
+      floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            Navigator.push(
+              context,
+              // ignore: always_specify_types
+              MaterialPageRoute(
+                  builder: (BuildContext context) => UploadScreen()),
+            );
+          },
+          child: const Icon(Icons.add)),
+      body: Consumer2<ProductProvider, CategoriesProvider>(builder: (
+        BuildContext context,
+        ProductProvider productPro,
+        CategoriesProvider catPro,
+        _,
+      ) {
+        return Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Headeriamge(),
+              ElevatedButton(
+                  onPressed: () {
+                    print(productPro.product.length);
+                  },
+                  child: Text('press')),
+              const ForText(
+                name: 'category',
+                bold: true,
+                size: 22,
+              ),
+            ],
+          ),
+        );
+      }),
     );
   }
 

@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-class ProductModel {
+class Product {
   final String pid;
   final double amount;
   final String colors;
@@ -13,7 +13,7 @@ class ProductModel {
   final String subCategory;
   final String createdByUID;
   final String imageurl;
-  ProductModel({
+  Product({
     required this.pid,
     required this.amount,
     required this.colors,
@@ -43,8 +43,8 @@ class ProductModel {
     };
   }
 
-  factory ProductModel.fromMap(DocumentSnapshot<Map<String, dynamic>> doc) {
-    return ProductModel(
+  factory Product.fromMap(DocumentSnapshot<Map<String, dynamic>> doc) {
+    return Product(
         pid: doc.data()?['pid'] ?? '',
         amount: doc.data()?['amount'] ?? 0,
         colors: doc.data()?['colors'] ?? '',

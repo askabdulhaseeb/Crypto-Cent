@@ -2,8 +2,9 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'firebase_options.dart';
+import 'providers/categories_provider.dart';
+import 'providers/product_provider.dart';
 import 'providers/provider.dart';
-import 'screens/home_screen/upload_screen.dart';
 import 'screens/screens.dart';
 
 void main() async {
@@ -22,11 +23,17 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       // ignore: always_specify_types
       providers: [
+        ChangeNotifierProvider<CategoriesProvider>(
+          create: (BuildContext context) => CategoriesProvider(),
+        ),
         ChangeNotifierProvider<AppThemeProvider>.value(
           value: AppThemeProvider(),
         ),
         ChangeNotifierProvider<AppProvider>.value(
           value: AppProvider(),
+        ),
+        ChangeNotifierProvider<ProductProvider>.value(
+          value: ProductProvider(),
         ),
       ],
       child: Consumer<AppThemeProvider>(
@@ -37,7 +44,7 @@ class MyApp extends StatelessWidget {
           theme: AppThemes.light,
           darkTheme: AppThemes.dark,
           themeMode: theme.themeMode,
-          home: const UploadScreen(),
+          home: const MainScreen(),
         );
       }),
     );

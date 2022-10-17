@@ -26,16 +26,20 @@ class _UploadScreenState extends State<UploadScreen> {
   final TextEditingController category = TextEditingController();
   final TextEditingController subcategory = TextEditingController();
   Uint8List? _image;
+  bool _isloading = false;
   final _formKey = GlobalKey<FormState>();
   Future<void> uploaddata() async {
     if (_formKey.currentState!.validate() && _image != null) {
+      setState(() {
+        _isloading = true;
+      });
       String imageurl = await Storagemethod().uploadtostorage(
         'post',
         'tester',
         _image!,
       );
 
-      ProductModel product = ProductModel(
+      Product product = Product(
         pid: TimeStamp.timestamp.toString(),
         amount: double.parse(amount.text),
         colors: '',
@@ -58,6 +62,9 @@ class _UploadScreenState extends State<UploadScreen> {
         quantity.clear();
         subcategory.clear();
       }
+      setState(() {
+        _isloading = false;
+      });
     }
   }
 
@@ -116,11 +123,13 @@ class _UploadScreenState extends State<UploadScreen> {
                 textField(context, category, 'category'),
                 textField(context, subcategory, 'subcategory'),
                 const SizedBox(height: 20),
-                CustomElevatedButton(
-                    title: 'upload',
-                    onTap: () {
-                      uploaddata();
-                    })
+                _isloading
+                    ? const CircularProgressIndicator()
+                    : CustomElevatedButton(
+                        title: 'upload',
+                        onTap: () {
+                          uploaddata();
+                        })
               ],
             ),
           ),
