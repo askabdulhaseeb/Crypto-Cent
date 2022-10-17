@@ -4,10 +4,12 @@ import 'package:provider/provider.dart';
 import '../../../providers/categories_provider.dart';
 
 class CategoryScreen extends StatelessWidget {
+  const CategoryScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     CategoriesProvider catPro = Provider.of<CategoriesProvider>(context);
-    return Container(
+    return SizedBox(
       height: 35,
       width: MediaQuery.of(context).size.width,
       child: ListView.builder(
