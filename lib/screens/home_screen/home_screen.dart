@@ -42,27 +42,23 @@ class HomeScreen extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
+              children: const <Widget>[
                 Headeriamge(),
-                ElevatedButton(
-                    onPressed: () {
-                      print(productPro.product.length);
-                    },
-                    child: Text('press')),
-                const ForText(
+                SizedBox(height: 20),
+                ForText(
                   name: 'category',
                   bold: true,
                   size: 22,
                 ),
-                const SizedBox(height: 20),
+                SizedBox(height: 20),
                 CategoryScreen(),
-                const SizedBox(height: 20),
-                const ForText(
+                SizedBox(height: 20),
+                ForText(
                   name: 'Latest Product',
                   bold: true,
                   size: 22,
                 ),
-                const SizedBox(height: 20),
+                SizedBox(height: 20),
                 LatestProduct(),
               ],
             ),

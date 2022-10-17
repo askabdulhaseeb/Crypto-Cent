@@ -2,20 +2,24 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../models/product_model.dart';
+import '../product_full_screen/product_full_screen.dart';
 
 class ListViewScreen extends StatelessWidget {
   const ListViewScreen({super.key, required this.product});
   final Product product;
   @override
   Widget build(BuildContext context) {
-    //feedScreendatabase feedattribute = Provider.of<feedScreendatabase>(context);
-    //final favproviderScreens = Provider.of<favprovider>(context);
     return Padding(
       padding: const EdgeInsets.only(left: 8, right: 8, top: 15),
       child: InkWell(
         onTap: () {
-          // Navigator.of(context)
-          //     .pushNamed('/productdetail', arguments: widget.id);
+          Navigator.push(
+              context,
+              // ignore: always_specify_types
+              MaterialPageRoute(
+                  builder: (BuildContext context) => ProductFullScreen(
+                        product: product,
+                      )));
         },
         child: Container(
           height: 180,

@@ -1,6 +1,10 @@
+import 'package:crypto_cent/screens/screens.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../../providers/categories_provider.dart';
 import '../../utilities/app_images.dart';
 import '../../widgets/custom_widgets/custom_widget.dart';
+import '../home_screen/home_screen.dart';
 import 'auth_screen.dart';
 import 'signup-screen.dart';
 
@@ -13,6 +17,7 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    CategoriesProvider catPro = Provider.of<CategoriesProvider>(context);
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -55,7 +60,15 @@ class LoginScreen extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 70),
                   child: CustomElevatedButton(
                     title: 'Login',
-                    onTap: () {},
+                    onTap: () {
+                      catPro.load();
+                      Navigator.push(
+                        context,
+                        // ignore: always_specify_types
+                        MaterialPageRoute(
+                            builder: (BuildContext context) => MainScreen()),
+                      );
+                    },
                   ),
                 ),
                 const SizedBox(height: 20),

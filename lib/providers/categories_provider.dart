@@ -5,13 +5,14 @@ import '../models/categories/categories.dart';
 
 class CategoriesProvider extends ChangeNotifier {
   CategoriesProvider() {
-    _load();
+    load();
   }
   List<Categories> _categories = <Categories>[];
 
   List<Categories> get categories => <Categories>[..._categories];
 
-  _load() async {
+  load() async {
+    _categories.clear();
     _categories = await CategoriesApi().categories();
   }
 }

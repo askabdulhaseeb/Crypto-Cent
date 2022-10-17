@@ -1,3 +1,4 @@
+import 'package:crypto_cent/screens/home_screen/product_full_screen/product_full_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
