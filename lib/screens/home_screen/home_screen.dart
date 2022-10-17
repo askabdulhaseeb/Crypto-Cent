@@ -8,6 +8,8 @@ import '../../providers/product_provider.dart';
 import '../../utilities/app_images.dart';
 import '../../widgets/custom_widgets/custom_widget.dart';
 import 'card_swiper.dart';
+import 'categories/category.dart';
+import 'latest_product/latest_product.dart';
 import 'upload_screen.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -34,24 +36,36 @@ class HomeScreen extends StatelessWidget {
         CategoriesProvider catPro,
         _,
       ) {
-        return Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Headeriamge(),
-              ElevatedButton(
-                  onPressed: () {
-                    print(productPro.product.length);
-                  },
-                  child: Text('press')),
-              const ForText(
-                name: 'category',
-                bold: true,
-                size: 22,
-              ),
-            ],
+        return SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Headeriamge(),
+                ElevatedButton(
+                    onPressed: () {
+                      print(productPro.product.length);
+                    },
+                    child: Text('press')),
+                const ForText(
+                  name: 'category',
+                  bold: true,
+                  size: 22,
+                ),
+                const SizedBox(height: 20),
+                CategoryScreen(),
+                const SizedBox(height: 20),
+                const ForText(
+                  name: 'Latest Product',
+                  bold: true,
+                  size: 22,
+                ),
+                const SizedBox(height: 20),
+                LatestProduct(),
+              ],
+            ),
           ),
         );
       }),

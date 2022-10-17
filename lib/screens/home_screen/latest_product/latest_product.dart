@@ -1,0 +1,27 @@
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../../../providers/product_provider.dart';
+import 'latest_screen_extend.dart';
+
+class LatestProduct extends StatelessWidget {
+  const LatestProduct({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    ProductProvider productPro = Provider.of<ProductProvider>(context);
+    return SizedBox(
+      height: 250,
+      width: double.infinity,
+      child: ListView.builder(
+        itemCount: productPro.product.length,
+        scrollDirection: Axis.horizontal,
+        itemBuilder: (BuildContext context, int index) {
+          return LatestScreenExtend(
+            product: productPro.product[index],
+          );
+        },
+      ),
+    );
+  }
+}
