@@ -10,7 +10,8 @@ class MainBottomNavigationBar extends StatelessWidget {
   Widget build(BuildContext context) {
     AppProvider navBar = Provider.of<AppProvider>(context);
     return BottomNavigationBar(
-      backgroundColor: Colors.transparent,
+      backgroundColor: const Color(0xffe2f0f7),
+      
       selectedLabelStyle: TextStyle(color: Theme.of(context).primaryColor),
       selectedItemColor: Theme.of(context).primaryColor,
       showUnselectedLabels: false,
@@ -28,6 +29,18 @@ class MainBottomNavigationBar extends StatelessWidget {
           icon: ImageIcon(AssetImage(AppImages.bookmarkUnselected)),
           activeIcon: ImageIcon(AssetImage(AppImages.bookmarkSelected)),
           label: 'Bookmark',
+        ),
+        const BottomNavigationBarItem(
+          // icon: ImageIcon(AssetImage(AppImages.paymentUnselected)),
+          // activeIcon: ImageIcon(AssetImage(AppImages.paymentSelected),
+          //     color: Theme.of(context).primaryColor),
+          icon: Icon(
+            Icons.shopping_cart,
+          ),
+          activeIcon: Icon(
+            Icons.shopping_cart,
+          ),
+          label: 'cart',
         ),
         BottomNavigationBarItem(
           icon: ImageIcon(AssetImage(AppImages.paymentUnselected)),
