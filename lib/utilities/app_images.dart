@@ -22,4 +22,7 @@ class AppImages {
 
   //drwaer
   static String get drawer => 'assets/icons/drawer.png';
+
+  //images
+  static String get controller => 'assets/images/controller.png';
 }

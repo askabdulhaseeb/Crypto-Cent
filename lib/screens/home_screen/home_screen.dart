@@ -2,21 +2,22 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../utilities/app_images.dart';
+import '../../widgets/custom_widgets/custom_widget.dart';
+import 'card_swiper.dart';
 
 class HomeScreen extends StatelessWidget {
   static const String routeName = '/HomeScreen';
   const HomeScreen({super.key});
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: appBar(context),
+      floatingActionButton:
+          FloatingActionButton(onPressed: () {}, child: const Icon(Icons.add)),
       body: Column(
-        children: [
-          Container(
-            height: 150,
-            width: 200,
-            decoration: BoxDecoration(),
-          ),
+        children: const <Widget>[
+          Headeriamge(),
         ],
       ),
     );
