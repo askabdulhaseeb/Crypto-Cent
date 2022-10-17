@@ -17,7 +17,7 @@ class LatestProduct extends StatelessWidget {
         itemCount: productPro.product.length,
         scrollDirection: Axis.horizontal,
         itemBuilder: (BuildContext context, int index) {
-          return LatestScreenExtend(
+          return ListViewScreen(
             product: productPro.product[index],
           );
         },

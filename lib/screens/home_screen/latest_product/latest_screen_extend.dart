@@ -3,8 +3,8 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../../../models/product_model.dart';
 
-class LatestScreenExtend extends StatelessWidget {
-  const LatestScreenExtend({super.key, required this.product});
+class ListViewScreen extends StatelessWidget {
+  const ListViewScreen({super.key, required this.product});
   final Product product;
   @override
   Widget build(BuildContext context) {
