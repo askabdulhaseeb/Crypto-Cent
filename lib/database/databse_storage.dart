@@ -8,11 +8,11 @@ class Storagemethod {
   final FirebaseStorage _storage = FirebaseStorage.instance;
   final FirebaseAuth _auth = FirebaseAuth.instance;
   int uuid = TimeStamp.timestamp;
-  Future<String> uploadtostorage(String collection, Uint8List file) async {
+  Future<String> uploadtostorage(String collection,String createrid, Uint8List file) async {
     Reference ref = _storage
         .ref()
         .child(collection)
-        .child(_auth.currentUser!.uid)
+        .child(createrid)
         .child(uuid.toString());
     UploadTask uploadTask = ref.putData(file);
     TaskSnapshot snap = await uploadTask;

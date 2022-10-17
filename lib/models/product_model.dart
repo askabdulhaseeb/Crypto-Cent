@@ -6,6 +6,7 @@ class ProductModel {
   final double amount;
   final String colors;
   final String quantity;
+  final String productname;
   final String description;
   final int timestamp;
   final String category;
@@ -17,6 +18,7 @@ class ProductModel {
     required this.amount,
     required this.colors,
     required this.quantity,
+    required this.productname,
     required this.description,
     required this.timestamp,
     required this.category,
@@ -36,7 +38,8 @@ class ProductModel {
       'category': category,
       'sub_category': subCategory,
       'created_by_uid': createdByUID,
-      'image_url': imageurl
+      'image_url': imageurl,
+      'product_name': productname
     };
   }
 
@@ -51,6 +54,7 @@ class ProductModel {
         category: doc.data()?['category'] ?? '',
         subCategory: doc.data()?['sub_category'] ?? '',
         createdByUID: doc.data()?['created_by_uid'] ?? '',
+        productname: doc.data()?['product_name'],
         imageurl: doc.data()?['image_url'] ?? '');
   }
 }

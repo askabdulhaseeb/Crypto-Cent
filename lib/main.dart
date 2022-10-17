@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'firebase_options.dart';
 import 'providers/provider.dart';
+import 'screens/home_screen/upload_screen.dart';
 import 'screens/screens.dart';
 
 void main() async {
@@ -14,7 +15,7 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
- const MyApp({super.key});
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +37,7 @@ class MyApp extends StatelessWidget {
           theme: AppThemes.light,
           darkTheme: AppThemes.dark,
           themeMode: theme.themeMode,
-          home: const MainScreen(),
+          home: const UploadScreen(),
         );
       }),
     );
