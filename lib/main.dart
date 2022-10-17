@@ -3,6 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'firebase_options.dart';
+import 'providers/cart_provider.dart';
 import 'providers/categories_provider.dart';
 import 'providers/product_provider.dart';
 import 'providers/provider.dart';
@@ -26,6 +27,9 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider<CategoriesProvider>(
           create: (BuildContext context) => CategoriesProvider(),
+        ),
+        ChangeNotifierProvider<CartProvider>(
+          create: (BuildContext context) => CartProvider(),
         ),
         ChangeNotifierProvider<AppThemeProvider>.value(
           value: AppThemeProvider(),

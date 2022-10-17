@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 import '../../../models/product_model.dart';
+import '../../../providers/cart_provider.dart';
 import '../../../widgets/custom_widgets/custom_widget.dart';
 
 class ProductFullScreen extends StatelessWidget {
@@ -9,6 +11,7 @@ class ProductFullScreen extends StatelessWidget {
   const ProductFullScreen({super.key, required this.product});
   @override
   Widget build(BuildContext context) {
+    CartProvider cartPro = Provider.of<CartProvider>(context);
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -176,9 +179,56 @@ class ProductFullScreen extends StatelessWidget {
                                     ],
                                   ),
                                   const SizedBox(height: 20),
-                                  const ForText(
-                                    name: 'Quantity',
-                                    bold: true,
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: const [
+                                      ForText(
+                                        name: 'Quantity',
+                                        bold: true,
+                                      ),
+                                    ],
+                                  ),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      IconButton(
+                                        onPressed: cartPro.quantity < 2
+                                            ? null
+                                            : () {
+                                                cartPro.removeProduct(product);
+                                              },
+                                        icon: const Icon(
+                                          Icons.remove_circle_outline,
+                                          size: 15,
+                                        ),
+                                      ),
+                                      Text(
+                                        cartPro.quantity.toString(),
+                                        style: const TextStyle(
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 15,
+                                        ),
+                                      ),
+                                      IconButton(
+                                        onPressed: () {
+                                          print('add press');
+                                          cartPro.addProduct(product);
+                                        },
+                                        icon: const Icon(
+                                            Icons.add_circle_outline,
+                                            size: 15),
+                                      ),
+                                      // Spacer(),
+                                      // IconButton(
+                                      //   onPressed: () {
+                                      //     cartproviderScreen
+                                      //         .deleteItem(cartattribute.id);
+                                      //   },
+                                      //   icon: Icon(Icons.delete_outline,
+                                      //       size: 22),
+                                      // ),
+                                    ],
                                   ),
                                   Expanded(child: Container()),
                                   CustomElevatedButton(
