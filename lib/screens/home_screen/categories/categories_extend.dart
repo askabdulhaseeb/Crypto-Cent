@@ -5,6 +5,7 @@ import '../../../models/product_model.dart';
 import '../../../providers/product_provider.dart';
 import '../list_view/list_view_extend.dart';
 
+// ignore: must_be_immutable
 class CategoriesExtend extends StatelessWidget {
   CategoriesExtend({super.key, required this.categoryName});
   String categoryName;
