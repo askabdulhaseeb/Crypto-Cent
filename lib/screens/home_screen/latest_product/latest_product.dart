@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../providers/product_provider.dart';
-import 'latest_screen_extend.dart';
+import '../list_view/list_view_extend.dart';
 
 class LatestProduct extends StatelessWidget {
   const LatestProduct({Key? key}) : super(key: key);
