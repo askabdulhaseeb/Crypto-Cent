@@ -7,16 +7,6 @@ class CartProvider extends ChangeNotifier {
   final List<Cart> _cartItems = <Cart>[];
   List<Cart> get cartItem => _cartItems;
 
-  void addProduct(Product value) {
-    print('Enter Ho giya');
-    final int index = _indexOfSelectedIndex(value.pid);
-    if (index >= 0) {
-      _cartItems[index].quantity = _cartItems[index].quantity + 1;
-    } else {}
-
-    notifyListeners();
-  }
-
   void addtocart(Product value, int quantity) {
     Cart temp = Cart(
         id: value.pid,
@@ -29,10 +19,30 @@ class CartProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  bool checkExit(Product value) {
+    bool temp = false;
+    final int index = _indexOfSelectedIndex(value.pid);
+    if (index >= 0) {
+      temp = true;
+    } else {}
+
+    return temp;
+  }
+
   void removeProduct(Product value) {
     final int index = _indexOfSelectedIndex(value.pid);
     if (index >= 0) {
       _cartItems[index].quantity = _cartItems[index].quantity - 1;
+    } else {}
+
+    notifyListeners();
+  }
+
+  void addProduct(Product value) {
+    print('Enter Ho giya');
+    final int index = _indexOfSelectedIndex(value.pid);
+    if (index >= 0) {
+      _cartItems[index].quantity = _cartItems[index].quantity + 1;
     } else {}
 
     notifyListeners();
