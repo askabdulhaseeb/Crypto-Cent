@@ -81,7 +81,6 @@ class ListViewScreen extends StatelessWidget {
                         ),
                         child: IconButton(
                           onPressed: () {
-                            print(productPro.fvrt.length);
                             productPro.updateFavorite(product.pid);
                           },
                           icon: (productPro.favorites.contains(product.pid))

@@ -12,11 +12,18 @@ class ProductProvider with ChangeNotifier {
   List<Product> _product = <Product>[];
   final List<String> _favorites = <String>[];
   List<String> get favorites => _favorites;
-  List<Product> get product => _product;
+  List<Product> get products => _product;
+
   Future<void> load() async {
     _product = await ProductApi().getdata();
     _favorites.addAll(LocalData.getFavroites);
     notifyListeners();
+  }
+
+  Product product(String value) {
+    final int index =
+        _product.indexWhere((Product element) => element.pid == value);
+    return index < 0 ? _null : _product[index];
   }
 
   List<String> categories = [];
@@ -29,15 +36,6 @@ class ProductProvider with ChangeNotifier {
     return _categoryList;
   }
 
-  bool checkfvrt(String value) {
-    bool temp = false;
-    final int index = _indexOfSelectedIndex(value);
-    if (index >= 0) {
-      temp = true;
-    }
-    return temp;
-  }
-
   updateFavorite(String value) {
     if (_favorites.contains(value)) {
       _favorites.remove(value);
@@ -48,22 +46,17 @@ class ProductProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  // void addFvrt(String value) {
-  //   final int index = _indexOfSelectedIndex(value);
-  //   if (index >= 0) {
-  //     print('function chal giya ha');
-  //     _fvrt.remove(value);
-  //   } else {
-  //     Favorite temp = Favorite(uid: value);
-  //     _fvrt.add(temp);
-  //   }
-  //   notifyListeners();
-  // }
-
-  int _indexOfSelectedIndex(String value) {
-    return _fvrt.indexWhere((Favorite element) => element.uid == value);
-  }
-
-  List<Favorite> _fvrt = <Favorite>[];
-  List<Favorite> get fvrt => _fvrt;
+  Product get _null => Product(
+        pid: 'null',
+        amount: 0,
+        colors: 'null',
+        quantity: '0',
+        productname: 'null',
+        description: 'null',
+        timestamp: 0,
+        category: 'null',
+        subCategory: 'null',
+        createdByUID: 'null',
+        imageurl: '',
+      );
 }

@@ -14,11 +14,11 @@ class LatestProduct extends StatelessWidget {
       height: 250,
       width: double.infinity,
       child: ListView.builder(
-        itemCount: productPro.product.length,
+        itemCount: productPro.products.length,
         scrollDirection: Axis.horizontal,
         itemBuilder: (BuildContext context, int index) {
           return ListViewScreen(
-            product: productPro.product[index],
+            product: productPro.products[index],
           );
         },
       ),

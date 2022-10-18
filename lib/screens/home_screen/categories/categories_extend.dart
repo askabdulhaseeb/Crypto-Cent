@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
 import '../../../models/product_model.dart';
 import '../../../providers/product_provider.dart';
 import '../list_view/list_view_extend.dart';
@@ -15,7 +14,7 @@ class CategoriesExtend extends StatelessWidget {
     ProductProvider prouctPro = Provider.of<ProductProvider>(context);
     List<Product> products = <Product>[];
     if (categoryName == 'All') {
-      products = prouctPro.product;
+      products = prouctPro.products;
     } else {
       products = prouctPro.findByCategory(categoryName);
     }
