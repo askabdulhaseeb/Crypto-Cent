@@ -7,10 +7,8 @@ class CartProvider extends ChangeNotifier {
   final List<Cart> _cartItems = <Cart>[];
   List<Cart> get cartItem => _cartItems;
   int quantity = 0;
-  int _indexOfSelectedIndex(String testID) {
-    return _cartItems.indexWhere((Cart element) => element.id == testID);
-  }
-
+  
+   
   void addProduct(Product value) {
     print('Enter Ho giya');
     final int index = _indexOfSelectedIndex(value.pid);
@@ -39,5 +37,8 @@ class CartProvider extends ChangeNotifier {
     } else {}
 
     notifyListeners();
+  }
+  int _indexOfSelectedIndex(String testID) {
+    return _cartItems.indexWhere((Cart element) => element.id == testID);
   }
 }
