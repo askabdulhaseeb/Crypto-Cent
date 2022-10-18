@@ -9,7 +9,7 @@ class MainScreen extends StatelessWidget {
 
   static const List<Widget> _pages = <Widget>[
     HomeScreen(),
-    BookmarkScreen(),
+    FavoriteScreen(),
     CartScreen(),
     PaymentScreen(),
     ProfileScreen(),

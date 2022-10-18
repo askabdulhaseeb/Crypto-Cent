@@ -4,7 +4,7 @@ export 'auth/auth_screen.dart';
 export 'auth/login_screen.dart';
 export 'auth/phone_verification.dart';
 export 'auth/signup-screen.dart';
-export 'bookmark_screen/bookmark_screen.dart';
+export 'favorite_screen/favorite_screen.dart';
 export 'cart_screen/cart_screen.dart';
 export 'home_screen/home_screen.dart';
 export 'intro_screen/intro_screen.dart';
