@@ -33,12 +33,8 @@ class MainBottomNavigationBar extends StatelessWidget {
           // icon: ImageIcon(AssetImage(AppImages.paymentUnselected)),
           // activeIcon: ImageIcon(AssetImage(AppImages.paymentSelected),
           //     color: Theme.of(context).primaryColor),
-          icon: Icon(
-            Icons.shopping_cart,
-          ),
-          activeIcon: Icon(
-            Icons.shopping_cart,
-          ),
+          icon: Icon(Icons.shopping_cart_outlined),
+          activeIcon: Icon(Icons.shopping_cart),
           label: 'cart',
         ),
         const BottomNavigationBarItem(
