@@ -1,7 +1,7 @@
-
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'database/local_data.dart';
 import 'firebase_options.dart';
 import 'providers/cart_provider.dart';
 import 'providers/categories_provider.dart';
@@ -14,6 +14,7 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  await LocalData.init();
   runApp(const MyApp());
 }
 

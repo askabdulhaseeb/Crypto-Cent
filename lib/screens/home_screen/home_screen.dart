@@ -102,6 +102,7 @@ class HomeScreen extends StatelessWidget {
               fit: BoxFit.fill,
             ),
           ),
-        ));
+        ),
+        );
   }
 }

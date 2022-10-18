@@ -1,11 +1,15 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 import '../../../models/product_model.dart';
+import '../../../providers/product_provider.dart';
+import '../../../utilities/app_images.dart';
 import '../product_full_screen/product_full_screen.dart';
 
 class ListViewScreen extends StatelessWidget {
-  const ListViewScreen({super.key, required this.product});
+  const ListViewScreen({required this.product, Key? key}) : super(key: key);
   final Product product;
   @override
   Widget build(BuildContext context) {
@@ -66,20 +70,45 @@ class ListViewScreen extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    Container(
-                      height: 30,
-                      width: 40,
-                      decoration: BoxDecoration(
-                        color: Colors.white.withOpacity(0.5),
-                        borderRadius: BorderRadius.circular(16),
-                      ),
-                      child: IconButton(
-                          onPressed: () {},
-                          icon: const Icon(
-                            Icons.favorite_border_rounded,
-                            color: Colors.black,
-                          )),
-                    ),
+                    Consumer<ProductProvider>(builder:
+                        (BuildContext context, ProductProvider productPro, _) {
+                      return Container(
+                        height: 30,
+                        width: 30,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(16),
+                        ),
+                        child: IconButton(
+                          onPressed: () {
+                            print(productPro.fvrt.length);
+                            productPro.updateFavorite(product.pid);
+                          },
+                          icon: (productPro.favorites.contains(product.pid))
+                              ? Container(
+                                  height: 20,
+                                  width: 20,
+                                  decoration: BoxDecoration(
+                                    image: DecorationImage(
+                                      image: AssetImage(AppImages.fvrtSelected),
+                                      fit: BoxFit.fill,
+                                    ),
+                                  ),
+                                )
+                              : Container(
+                                  height: 20,
+                                  width: 20,
+                                  decoration: BoxDecoration(
+                                    image: DecorationImage(
+                                      image:
+                                          AssetImage(AppImages.fvrtUnselected),
+                                      fit: BoxFit.fill,
+                                    ),
+                                  ),
+                                ),
+                        ),
+                      );
+                    }),
                   ],
                 ),
               ],
