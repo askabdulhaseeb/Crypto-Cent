@@ -29,8 +29,8 @@ class CartProvider extends ChangeNotifier {
     return temp;
   }
 
-  void removeProduct(Product value) {
-    final int index = _indexOfSelectedIndex(value.pid);
+  void removeProduct(String value) {
+    final int index = _indexOfSelectedIndex(value);
     if (index >= 0) {
       _cartItems[index].quantity = _cartItems[index].quantity - 1;
     } else {}
@@ -38,9 +38,9 @@ class CartProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void addProduct(Product value) {
+  void addProduct(String value) {
     print('Enter Ho giya');
-    final int index = _indexOfSelectedIndex(value.pid);
+    final int index = _indexOfSelectedIndex(value);
     if (index >= 0) {
       _cartItems[index].quantity = _cartItems[index].quantity + 1;
     } else {}
@@ -50,5 +50,10 @@ class CartProvider extends ChangeNotifier {
 
   int _indexOfSelectedIndex(String testID) {
     return _cartItems.indexWhere((Cart element) => element.id == testID);
+  }
+  void deleteItem(String id) {
+    // ignore: list_remove_unrelated_type
+    _cartItems.remove(id);
+    notifyListeners();
   }
 }
