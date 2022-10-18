@@ -30,9 +30,6 @@ class MainBottomNavigationBar extends StatelessWidget {
           label: 'Favroite',
         ),
         const BottomNavigationBarItem(
-          // icon: ImageIcon(AssetImage(AppImages.paymentUnselected)),
-          // activeIcon: ImageIcon(AssetImage(AppImages.paymentSelected),
-          //     color: Theme.of(context).primaryColor),
           icon: Icon(Icons.shopping_cart_outlined),
           activeIcon: Icon(Icons.shopping_cart),
           label: 'cart',
