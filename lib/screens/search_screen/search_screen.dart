@@ -2,13 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../providers/categories_provider.dart';
+import '../home_screen/categories/categories_extend.dart';
 
 class SerachScreen extends StatelessWidget {
   const SerachScreen({super.key});
   @override
   Widget build(BuildContext context) {
     CategoriesProvider categoriesPro = Provider.of<CategoriesProvider>(context);
-    List<String> product = categoriesPro.forSearch();
+    List<String> categories = categoriesPro.forSearch();
     return Scaffold(
       appBar: AppBar(
         title: const Text('SerachScreen'),
@@ -43,13 +44,21 @@ class SerachScreen extends StatelessWidget {
           ),
           Expanded(
               child: ListView.builder(
-            itemCount: product.length,
+            itemCount: categories.length,
             itemBuilder: (BuildContext context, int index) {
-              print(product.length);
+              print(categories.length);
               return ListTile(
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      // ignore: always_specify_types
+                      MaterialPageRoute(
+                          builder: (BuildContext context) => CategoriesExtend(
+                                categoryName: categories[index],
+                              )));
+                },
                 title: Text(
-                  product[index],
+                  categories[index],
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                   style: const TextStyle(
