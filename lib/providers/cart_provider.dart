@@ -51,9 +51,18 @@ class CartProvider extends ChangeNotifier {
   int _indexOfSelectedIndex(String testID) {
     return _cartItems.indexWhere((Cart element) => element.id == testID);
   }
+
   void deleteItem(String id) {
     // ignore: list_remove_unrelated_type
     _cartItems.remove(id);
     notifyListeners();
+  }
+
+  double totalPrice() {
+    double temp = 0;
+    for (Cart element in _cartItems) {
+      temp += element.quantity * element.price;
+    }
+    return temp;
   }
 }
