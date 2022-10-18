@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../../providers/cart_provider.dart';
+import 'empty_cart_screen.dart';
+import 'fill_cart_screen.dart';
 
 class CartScreen extends StatelessWidget {
-  static const String routeName = '/CartScreen';
   const CartScreen({super.key});
   @override
   Widget build(BuildContext context) {
+    CartProvider cartPro = Provider.of<CartProvider>(context);
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('CartScreen'),
-      ),
+      body: cartPro.cartItem.isNotEmpty ? FillCartScreen() : EmptyCartScreen(),
     );
   }
 }
