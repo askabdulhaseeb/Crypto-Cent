@@ -6,26 +6,26 @@ import '../models/product_model.dart';
 class CartProvider extends ChangeNotifier {
   final List<Cart> _cartItems = <Cart>[];
   List<Cart> get cartItem => _cartItems;
-  int quantity = 0;
-  
-   
+
   void addProduct(Product value) {
     print('Enter Ho giya');
     final int index = _indexOfSelectedIndex(value.pid);
     if (index >= 0) {
       _cartItems[index].quantity = _cartItems[index].quantity + 1;
-      quantity++;
-    } else {
-      Cart temp = Cart(
-          id: value.pid,
-          title: value.productname,
-          imageurl: value.imageurl,
-          price: value.amount,
-          quantity: 1);
+    } else {}
 
-      _cartItems.add(temp);
-    }
+    notifyListeners();
+  }
 
+  void addtocart(Product value, int quantity) {
+    Cart temp = Cart(
+        id: value.pid,
+        title: value.productname,
+        imageurl: value.imageurl,
+        price: value.amount,
+        quantity: quantity);
+
+    _cartItems.add(temp);
     notifyListeners();
   }
 
@@ -33,11 +33,11 @@ class CartProvider extends ChangeNotifier {
     final int index = _indexOfSelectedIndex(value.pid);
     if (index >= 0) {
       _cartItems[index].quantity = _cartItems[index].quantity - 1;
-      quantity--;
     } else {}
 
     notifyListeners();
   }
+
   int _indexOfSelectedIndex(String testID) {
     return _cartItems.indexWhere((Cart element) => element.id == testID);
   }

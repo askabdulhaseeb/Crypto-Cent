@@ -6,9 +6,16 @@ import '../../../models/product_model.dart';
 import '../../../providers/cart_provider.dart';
 import '../../../widgets/custom_widgets/custom_widget.dart';
 
-class ProductFullScreen extends StatelessWidget {
+class ProductFullScreen extends StatefulWidget {
   final Product product;
   const ProductFullScreen({super.key, required this.product});
+
+  @override
+  State<ProductFullScreen> createState() => _ProductFullScreenState();
+}
+
+class _ProductFullScreenState extends State<ProductFullScreen> {
+  int quantity = 1;
   @override
   Widget build(BuildContext context) {
     CartProvider cartPro = Provider.of<CartProvider>(context);
@@ -53,14 +60,14 @@ class ProductFullScreen extends StatelessWidget {
                   height: 250,
                   width: MediaQuery.of(context).size.width * 0.8,
                   child: Image(
-                    image: NetworkImage(product.imageurl),
+                    image: NetworkImage(widget.product.imageurl),
                   ),
                 ),
                 const SizedBox(
                   height: 20,
                 ),
                 Text(
-                  product.productname.toString(),
+                  widget.product.productname.toString(),
                   maxLines: 3,
                   overflow: TextOverflow.ellipsis,
                   style: const TextStyle(
@@ -82,7 +89,7 @@ class ProductFullScreen extends StatelessWidget {
                     ),
                     const Spacer(),
                     Text(
-                      '\$ ${product.amount}',
+                      '\$ ${widget.product.amount}',
                       style: const TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 20,
@@ -102,7 +109,7 @@ class ProductFullScreen extends StatelessWidget {
                   height: 20,
                 ),
                 Text(
-                  product.description.toString(),
+                  widget.product.description.toString(),
                   maxLines: 4,
                   overflow: TextOverflow.ellipsis,
                   style: GoogleFonts.quicksand(
@@ -145,7 +152,8 @@ class ProductFullScreen extends StatelessWidget {
                                         height: 100,
                                         width: 100,
                                         child: Image(
-                                          image: NetworkImage(product.imageurl),
+                                          image: NetworkImage(
+                                              widget.product.imageurl),
                                         ),
                                       ),
                                       Column(
@@ -157,7 +165,8 @@ class ProductFullScreen extends StatelessWidget {
                                           Container(
                                             width: 250,
                                             child: Text(
-                                              product.productname.toString(),
+                                              widget.product.productname
+                                                  .toString(),
                                               maxLines: 2,
                                               overflow: TextOverflow.ellipsis,
                                               style: const TextStyle(
@@ -168,7 +177,7 @@ class ProductFullScreen extends StatelessWidget {
                                           ),
                                           const SizedBox(height: 10),
                                           Text(
-                                            '\$${product.amount}',
+                                            '\$${widget.product.amount}',
                                             style: const TextStyle(
                                               fontWeight: FontWeight.bold,
                                               fontSize: 16,
@@ -192,10 +201,12 @@ class ProductFullScreen extends StatelessWidget {
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     children: [
                                       IconButton(
-                                        onPressed: cartPro.quantity < 2
+                                        onPressed: quantity < 2
                                             ? null
                                             : () {
-                                                cartPro.removeProduct(product);
+                                                setState(() {
+                                                  quantity--;
+                                                });
                                               },
                                         icon: const Icon(
                                           Icons.remove_circle_outline,
@@ -203,7 +214,7 @@ class ProductFullScreen extends StatelessWidget {
                                         ),
                                       ),
                                       Text(
-                                        cartPro.quantity.toString(),
+                                        quantity.toString(),
                                         style: const TextStyle(
                                           color: Colors.black,
                                           fontWeight: FontWeight.bold,
@@ -213,26 +224,23 @@ class ProductFullScreen extends StatelessWidget {
                                       IconButton(
                                         onPressed: () {
                                           print('add press');
-                                          cartPro.addProduct(product);
+                                          setState(() {
+                                            quantity++;
+                                          });
                                         },
                                         icon: const Icon(
                                             Icons.add_circle_outline,
                                             size: 15),
                                       ),
-                                      // Spacer(),
-                                      // IconButton(
-                                      //   onPressed: () {
-                                      //     cartproviderScreen
-                                      //         .deleteItem(cartattribute.id);
-                                      //   },
-                                      //   icon: Icon(Icons.delete_outline,
-                                      //       size: 22),
-                                      // ),
                                     ],
                                   ),
                                   Expanded(child: Container()),
                                   CustomElevatedButton(
-                                      title: 'Add to cart', onTap: () {}),
+                                      title: 'Add to cart',
+                                      onTap: () {
+                                        cartPro.addtocart(
+                                            widget.product, quantity);
+                                      }),
                                   const SizedBox(height: 20),
                                 ],
                               ),
