@@ -59,4 +59,10 @@ class ProductProvider with ChangeNotifier {
         createdByUID: 'null',
         imageurl: '',
       );
+
+
+
+
+
+   
 }

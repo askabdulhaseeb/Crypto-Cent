@@ -15,4 +15,26 @@ class CategoriesProvider extends ChangeNotifier {
     _categories.clear();
     _categories = await CategoriesApi().categories();
   }
+
+
+     //Search in the product
+  String? _search;
+  onSearch(String? value) {
+    _search = value;
+    notifyListeners();
+  }
+  List<String> forSearch() {
+    final List<String> temp = <String>[];
+    for (Categories element in _categories) {
+      if (_search == null || (_search?.isEmpty ?? true)) {
+        temp.add('');
+      } else if (element.title
+          .toLowerCase()
+          .startsWith((_search?.toLowerCase() ?? ''))) {
+        temp.add(element.title);
+      }
+    }
+    return temp;
+  }
+  
 }
