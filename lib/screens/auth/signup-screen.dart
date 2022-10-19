@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:intl_phone_field/phone_number.dart';
+import 'package:provider/provider.dart';
 
+import '../../providers/auth_provider.dart';
 import '../../utilities/app_images.dart';
 import '../../widgets/custom_widgets/custom_widget.dart';
+import '../../widgets/custom_widgets/phone_number_field.dart';
 import 'auth_screen.dart';
 import 'login_screen.dart';
 
@@ -15,10 +19,9 @@ class SignupScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    AuthProvider authPro=Provider.of<AuthProvider>(context);
     return Scaffold(
-      
       appBar: AppBar(
-        
           leading: IconButton(
         icon: const Icon(Icons.arrow_back, color: Colors.black),
         onPressed: (() {
@@ -48,12 +51,11 @@ class SignupScreen extends StatelessWidget {
                       CustomValidator.username(context, value),
                 ),
                 const SizedBox(height: 10),
-                CustomTextFormField(
-                  controller: phonenumber,
-                  starticon: Icons.email,
-                  hint: 'Phone Number',
-                  validator: (String? value) =>
-                      CustomValidator.validateMobile(value!),
+                PhoneNumberField(
+                  initialCountryCode: authPro.phoneNumber?.countryCode ?? 'UK',
+                  bgColor: Colors.transparent,
+                  onChange: (PhoneNumber? value) =>
+                      authPro.onPhoneNumberChange(value),
                 ),
                 const SizedBox(height: 10),
                 CustomTextFormField(

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'database/local_data.dart';
 import 'firebase_options.dart';
+import 'providers/auth_provider.dart';
 import 'providers/cart_provider.dart';
 import 'providers/categories_provider.dart';
 import 'providers/product_provider.dart';
@@ -26,14 +27,16 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       // ignore: always_specify_types
       providers: [
-        
         ChangeNotifierProvider<CartProvider>(
           create: (BuildContext context) => CartProvider(),
+        ),
+        ChangeNotifierProvider<AuthProvider>(
+          create: (BuildContext context) => AuthProvider(),
         ),
         ChangeNotifierProvider<AppThemeProvider>.value(
           value: AppThemeProvider(),
         ),
-         ChangeNotifierProvider<CategoriesProvider>.value(
+        ChangeNotifierProvider<CategoriesProvider>.value(
           value: CategoriesProvider(),
         ),
         ChangeNotifierProvider<AppProvider>.value(
@@ -51,7 +54,7 @@ class MyApp extends StatelessWidget {
           theme: AppThemes.light,
           darkTheme: AppThemes.dark,
           themeMode: theme.themeMode,
-          home: const MainScreen(),
+          home: const AuthScreen(),
         );
       }),
     );
