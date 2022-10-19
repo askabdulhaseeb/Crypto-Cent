@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 
 import '../database/local_data.dart';
 import '../database/product_api.dart';
-import '../models/favorite.dart';
 import '../models/product_model.dart';
 
 class ProductProvider with ChangeNotifier {
