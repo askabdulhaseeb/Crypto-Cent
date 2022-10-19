@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import '../database/categories_api.dart';
 import '../models/categories/categories.dart';
 
-class CategoriesProvider extends ChangeNotifier {
+class CategoriesProvider with ChangeNotifier {
   CategoriesProvider() {
     load();
   }

@@ -26,14 +26,15 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       // ignore: always_specify_types
       providers: [
-        ChangeNotifierProvider<CategoriesProvider>(
-          create: (BuildContext context) => CategoriesProvider(),
-        ),
+        
         ChangeNotifierProvider<CartProvider>(
           create: (BuildContext context) => CartProvider(),
         ),
         ChangeNotifierProvider<AppThemeProvider>.value(
           value: AppThemeProvider(),
+        ),
+         ChangeNotifierProvider<CategoriesProvider>.value(
+          value: CategoriesProvider(),
         ),
         ChangeNotifierProvider<AppProvider>.value(
           value: AppProvider(),
