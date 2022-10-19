@@ -32,6 +32,6 @@ class AuthProvider with ChangeNotifier {
 
   PhoneNumber? _phoneNumber;
   String? _verificationId;
-
+  String? get verificationId => _verificationId;
   PhoneNumber? get phoneNumber => _phoneNumber;
 }

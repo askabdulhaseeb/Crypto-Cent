@@ -8,6 +8,7 @@ import 'providers/cart_provider.dart';
 import 'providers/categories_provider.dart';
 import 'providers/product_provider.dart';
 import 'providers/provider.dart';
+import 'screens/auth/phone_number_screen.dart';
 import 'screens/screens.dart';
 
 void main() async {
@@ -54,7 +55,7 @@ class MyApp extends StatelessWidget {
           theme: AppThemes.light,
           darkTheme: AppThemes.dark,
           themeMode: theme.themeMode,
-          home: const AuthScreen(),
+          home: const PhoneNumberScreen(),
         );
       }),
     );
