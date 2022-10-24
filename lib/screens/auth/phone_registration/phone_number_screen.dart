@@ -64,11 +64,7 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
                   },
                 ),
               ),
-              ElevatedButton(
-                  onPressed: () {
-                   // print(authPro.verificationId);
-                  },
-                  child: const Text('otp'))
+              
             ],
           ),
         );

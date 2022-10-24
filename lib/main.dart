@@ -1,6 +1,8 @@
+import 'package:crypto_cent/screens/auth/phone_registration/phone_number_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'database/app_user/auth_method.dart';
 import 'database/local_data.dart';
 import 'firebase_options.dart';
 import 'providers/auth_provider.dart';
@@ -54,7 +56,9 @@ class MyApp extends StatelessWidget {
           theme: AppThemes.light,
           darkTheme: AppThemes.dark,
           themeMode: theme.themeMode,
-          home: const MainScreen(),
+          home: 
+          (AuthMethods.uid.isEmpty)?const PhoneNumberScreen():
+          const MainScreen(),
         );
       }),
     );

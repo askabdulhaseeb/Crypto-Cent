@@ -25,31 +25,28 @@ class AuthProvider extends ChangeNotifier {
     if (_phoneNumber == null || AuthMethods.getCurrentUser == null) {
       CustomToast.errorToast(message: 'Enter Phone Number again');
       Navigator.push(
-                    context,
-                    // ignore: always_specify_types
-                    MaterialPageRoute(
-                      builder: (BuildContext context) => PhoneNumberScreen(),
-                    ),
-                  );
-      
+        context,
+        // ignore: always_specify_types
+        MaterialPageRoute(
+          builder: (BuildContext context) => const PhoneNumberScreen(),
+        ),
+      );
     } else if (_registerKey.currentState!.validate()) {
       String? url = '';
       _isRegsiterScreenLoading = true;
       notifyListeners();
       if (_profilePhoto != null) {
         //url = await UserApi().uploadProfilePhoto(file: _profilePhoto!);
-       url = await Storagemethod().uploadtostorage(
-        'users',
-        AuthMethods.uid,
-        _profilePhoto!,
-      );
+        url = await Storagemethod().uploadtostorage(
+          'users',
+          AuthMethods.uid,
+          _profilePhoto!,
+        );
       }
       final AppUser appuser = AppUser(
         uid: AuthMethods.uid,
         name: _name.text.trim(),
-       
         imageURL: url,
-        
         phoneNumber: NumberDetails(
           countryCode: _phoneNumber!.countryCode,
           number: _phoneNumber!.number,
@@ -65,15 +62,15 @@ class AuthProvider extends ChangeNotifier {
       if (added) {
         // ignore: use_build_context_synchronously
         Navigator.push(
-                      context,
-                      // ignore: always_specify_types
-                      MaterialPageRoute(
-                        builder: (BuildContext context) => const MainScreen(),
-                      ),
-                    );
+          context,
+          // ignore: always_specify_types
+          MaterialPageRoute(
+            builder: (BuildContext context) => const MainScreen(),
+          ),
+        );
         //push to main Screen
         // ignore: use_build_context_synchronously
-        
+
       }
     }
   }
@@ -129,31 +126,16 @@ class AuthProvider extends ChangeNotifier {
     return num;
   }
 
-  //
-  // INIT
-  //
-  // init() async {
-  //   try {
-  //     http.Response response =
-  //         await http.get(Uri.parse('http://ip-api.com/json'));
-  //     // ignore: always_specify_types
-  //     Map data = json.decode(response.body);
-  //     log(data['countryCode']);
-  //     if (response.statusCode == 200) {
-  //       _phoneNumber!.countryCode = data['countryCode'];
-  //       // dialCode = CountryCode.fromCountryCode(countryCode).dialCode ?? '+1';
-
-  //     } else {
-  //       _phoneNumber!.countryCode = 'UK';
-  //     }
-  //   } catch (e) {
-  //     _phoneNumber!.countryCode = 'UK';
-  //   }
-  //   notifyListeners();
-  // }
+  //GetUser
+  void getUser() async {
+    _apUser = await UserApi().user(uid: AuthMethods.uid);
+    notifyListeners();
+  }
 
   //
   // VARIABLES
+  AppUser? _apUser;
+  AppUser get apUser => _apUser!;
   PhoneNumber? _phoneNumber;
   String? _verificationId;
   // String? _smsOTP;

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
+import '../../providers/auth_provider.dart';
 import '../../utilities/app_images.dart';
 import '../../widgets/custom_widgets/custom_widget.dart';
 import '../empty_screen/empty_screen.dart';
@@ -8,6 +10,7 @@ class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
   @override
   Widget build(BuildContext context) {
+   AuthProvider authPro= Provider.of<AuthProvider>(context);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).primaryColor,
@@ -18,7 +21,7 @@ class ProfileScreen extends StatelessWidget {
       ),
       body: Column(
         children: <Widget>[
-          uperscreen(context),
+          uperscreen(context,authPro.apUser.name!,authPro.apUser.imageURL!),
           const SizedBox(height: 10),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -62,7 +65,7 @@ class ProfileScreen extends StatelessWidget {
           context,
           // ignore: always_specify_types
           MaterialPageRoute(
-            builder: (BuildContext context) => EmptyScreen(),
+            builder: (BuildContext context) => const EmptyScreen(),
           ),
         );
       },
@@ -102,7 +105,7 @@ class ProfileScreen extends StatelessWidget {
     );
   }
 
-  Container middelItems(BuildContext context, String text, String imageURl) {
+  Container middelItems(BuildContext context, String? text, String? imageURl) {
     return Container(
       height: 80,
       width: 173,
@@ -118,11 +121,11 @@ class ProfileScreen extends StatelessWidget {
             width: 50,
             decoration: BoxDecoration(
                 image: DecorationImage(
-              image: AssetImage(imageURl),
+              image: AssetImage(imageURl!),
             )),
           ),
           ForText(
-            name: text,
+            name: text!,
             color: Colors.white,
           ),
         ],
@@ -130,22 +133,23 @@ class ProfileScreen extends StatelessWidget {
     );
   }
 
-  Widget uperscreen(BuildContext context) {
+  Widget uperscreen(BuildContext context,String name,String ImageUrl) {
     return Container(
       height: 220,
       width: double.infinity,
       color: Theme.of(context).primaryColor,
       child: Column(
-        children: const <Widget>[
+        children: <Widget>[
           CircleAvatar(
             radius: 64,
-            backgroundColor: Colors.white,
+            backgroundImage: NetworkImage(
+                ImageUrl),
           ),
-          SizedBox(
+         const SizedBox(
             height: 10,
           ),
           ForText(
-            name: 'Usman Afzal',
+            name: name,
             size: 20,
             bold: true,
             color: Colors.white,
