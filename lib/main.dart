@@ -55,7 +55,7 @@ class MyApp extends StatelessWidget {
           theme: AppThemes.light,
           darkTheme: AppThemes.dark,
           themeMode: theme.themeMode,
-          home: const PhoneNumberScreen(),
+          home: const MainScreen(),
         );
       }),
     );
