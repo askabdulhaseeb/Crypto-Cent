@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../widgets/custom_widgets/custom_widget.dart';
 import '../../empty_screen/empty_screen.dart';
+import '../categories/category.dart';
 
 class AllScreen extends StatelessWidget {
   const AllScreen({super.key});
@@ -20,7 +21,15 @@ class AllScreen extends StatelessWidget {
             ),
           );
         }),
-        allitems(context, 'Categories', 40, 120, false, () {}),
+        allitems(context, 'Categories', 40, 120, false, () {
+          Navigator.push(
+            context,
+            // ignore: always_specify_types
+            MaterialPageRoute(
+              builder: (BuildContext context) => const CategoryScreen(),
+            ),
+          );
+        }),
       ],
     );
   }
