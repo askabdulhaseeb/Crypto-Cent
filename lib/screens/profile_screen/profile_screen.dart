@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../utilities/app_images.dart';
 import '../../widgets/custom_widgets/custom_widget.dart';
+import '../empty_screen/empty_screen.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -33,20 +34,19 @@ class ProfileScreen extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Column(
               children: [
-                bottomnav('My Profile',AppImages.profileUnselected),
+                bottomnav(context, 'My Profile', AppImages.profileUnselected),
                 const SizedBox(
                   height: 25,
                 ),
-               bottomnav('Setting',AppImages.setting),
+                bottomnav(context, 'Setting', AppImages.setting),
                 const SizedBox(
                   height: 25,
                 ),
-                bottomnav('Wallet',AppImages.wallet),
+                bottomnav(context, 'Wallet', AppImages.wallet),
                 const SizedBox(
                   height: 25,
                 ),
-                bottomnav('Log Out',AppImages.logout),
-                
+                bottomnav(context, 'Log Out', AppImages.logout),
               ],
             ),
           ),
@@ -55,41 +55,50 @@ class ProfileScreen extends StatelessWidget {
     );
   }
 
- Widget bottomnav(String name,String imageURL) {
-    return Container(
-      height: 50,
-      width: double.infinity,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(24),
-        color: const Color(0xffF6F7F9),
-      ),
-      child: Row(
-        children: <Widget>[
-          const SizedBox(
-            width: 30,
+  Widget bottomnav(BuildContext context, String name, String imageURL) {
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          // ignore: always_specify_types
+          MaterialPageRoute(
+            builder: (BuildContext context) => EmptyScreen(),
           ),
-          Container(
-            height: 40,
-            width: 40,
-            decoration:  BoxDecoration(
+        );
+      },
+      child: Container(
+        height: 50,
+        width: double.infinity,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(24),
+          color: const Color(0xffF6F7F9),
+        ),
+        child: Row(
+          children: <Widget>[
+            const SizedBox(
+              width: 30,
+            ),
+            Container(
+              height: 40,
+              width: 40,
+              decoration: BoxDecoration(
                   image: DecorationImage(
                 image: AssetImage(imageURL),
-              )
-              
+              )),
             ),
-          ),
-          const SizedBox(
-            width: 30,
-          ),
-           ForText(
-            name: name,
-            size: 20,
-          ),
-          const Spacer(),
-          const Icon(Icons.arrow_forward_ios)
-        ],
+            const SizedBox(
+              width: 30,
+            ),
+            ForText(
+              name: name,
+              size: 20,
+            ),
+            const Spacer(),
+            const Icon(Icons.arrow_forward_ios)
+          ],
+        ),
+        //color: const Color(0xffF6F7F9),
       ),
-      //color: const Color(0xffF6F7F9),
     );
   }
 

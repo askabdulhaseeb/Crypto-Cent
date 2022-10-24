@@ -54,7 +54,7 @@ class MyApp extends StatelessWidget {
           theme: AppThemes.light,
           darkTheme: AppThemes.dark,
           themeMode: theme.themeMode,
-          home: const ProfileScreen(),
+          home: const MainScreen(),
         );
       }),
     );
