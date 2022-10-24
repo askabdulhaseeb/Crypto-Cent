@@ -18,6 +18,7 @@ class CategoryScreen extends StatelessWidget {
           childAspectRatio: 100 / 80,
           mainAxisSpacing: 8,
           crossAxisCount: 2,
+          // ignore: always_specify_types
           children: List.generate(catPro.categories.length, (int index) {
             return InkWell(
               onTap: () {
