@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../widgets/custom_widgets/custom_widget.dart';
+import '../../empty_screen/empty_screen.dart';
 
 class AllScreen extends StatelessWidget {
   const AllScreen({super.key});
@@ -10,7 +11,15 @@ class AllScreen extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: <Widget>[
         allitems(context, 'All', 40, 80, true, () {}),
-        allitems(context, 'Contacts', 40, 120, false, () {}),
+        allitems(context, 'Contacts', 40, 120, false, () {
+          Navigator.push(
+            context,
+            // ignore: always_specify_types
+            MaterialPageRoute(
+              builder: (BuildContext context) => const EmptyScreen(),
+            ),
+          );
+        }),
         allitems(context, 'Categories', 40, 120, false, () {}),
       ],
     );
