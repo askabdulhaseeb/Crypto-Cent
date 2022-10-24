@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class PaymentScreen extends StatelessWidget {
-  static const String routeName = '/PaymentScreen';
-  const PaymentScreen({super.key});
+class NotificationScreen extends StatelessWidget {
+  static const String routeName = '/NotificationScreen';
+  const NotificationScreen({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('PaymentScreen'),
+        title: const Text('NotificationScreen'),
       ),
     );
   }

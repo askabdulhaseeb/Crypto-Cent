@@ -1,3 +1,4 @@
+import '../empty_screen/empty_screen.dart';
 import '../screens.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -11,7 +12,7 @@ class MainScreen extends StatelessWidget {
     HomeScreen(),
     FavoriteScreen(),
     CartScreen(),
-    PaymentScreen(),
+    EmptyScreen(),
     ProfileScreen(),
   ];
 
