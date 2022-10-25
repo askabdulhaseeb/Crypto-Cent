@@ -5,6 +5,7 @@ class ResponsiveWidget extends StatelessWidget {
   final Widget? mediumScreen;
   final Widget? smallScreen;
 
+  // ignore: sort_constructors_first
   const ResponsiveWidget({
     Key? key,
     required this.largeScreen,

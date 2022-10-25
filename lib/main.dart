@@ -10,6 +10,7 @@ import 'providers/cart_provider.dart';
 import 'providers/categories_provider.dart';
 import 'providers/product_provider.dart';
 import 'providers/provider.dart';
+
 import 'screens/screens.dart';
 
 void main() async {
@@ -56,7 +57,8 @@ class MyApp extends StatelessWidget {
           theme: AppThemes.light,
           darkTheme: AppThemes.dark,
           themeMode: theme.themeMode,
-          home: 
+         // home: PhoneNumberS(),
+          home:
           (AuthMethods.uid.isEmpty)?const PhoneNumberScreen():
           const MainScreen(),
         );
@@ -65,10 +67,5 @@ class MyApp extends StatelessWidget {
   }
 }
 
-
-
-
-
-
-// Figma File 
+// Figma File
 //https://www.figma.com/file/9ictqL5CrszrXY302KBqDa/Cryptocent?node-id=27%3A4835

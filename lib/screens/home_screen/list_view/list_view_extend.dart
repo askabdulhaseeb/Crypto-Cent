@@ -46,9 +46,7 @@ class ListViewScreen extends StatelessWidget {
                 SizedBox(
                   height: 150,
                   width: 150,
-                  child: Image(
-                    image: NetworkImage(product.imageurl),
-                  ),
+                  child: Image.network(product.imageurl),
                 ),
                 Text(
                   product.productname,
