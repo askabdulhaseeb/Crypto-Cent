@@ -11,6 +11,8 @@ import 'providers/categories_provider.dart';
 import 'providers/product_provider.dart';
 import 'providers/provider.dart';
 
+import 'screens/home_screen/upload_screen.dart';
+import 'screens/home_screen/uploadsc.dart';
 import 'screens/screens.dart';
 
 void main() async {
@@ -57,10 +59,10 @@ class MyApp extends StatelessWidget {
           theme: AppThemes.light,
           darkTheme: AppThemes.dark,
           themeMode: theme.themeMode,
-         // home: PhoneNumberS(),
-          home:
-          (AuthMethods.uid.isEmpty)?const PhoneNumberScreen():
-          const MainScreen(),
+          home: const UploadS(),
+          // home:
+          // (AuthMethods.uid.isEmpty)?const PhoneNumberScreen():
+          // const MainScreen(),
         );
       }),
     );
