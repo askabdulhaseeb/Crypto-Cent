@@ -21,8 +21,8 @@ class AppImages {
   static String get profileUnselected => 'assets/icons/profile.png';
 
   //profile screen icon
-  static String get delivery_address => 'assets/icons/delivery_address.png';
-  static String get order_history => 'assets/icons/order_history.png';
+  static String get deliveryaddress => 'assets/icons/delivery_address.png';
+  static String get orderhistory => 'assets/icons/order_history.png';
   static String get logout => 'assets/icons/logout.png';
   static String get setting => 'assets/icons/setting.png';
   static String get wallet => 'assets/icons/wallet.png';

@@ -10,7 +10,7 @@ class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
   @override
   Widget build(BuildContext context) {
-   AuthProvider authPro= Provider.of<AuthProvider>(context);
+    AuthProvider authPro = Provider.of<AuthProvider>(context);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).primaryColor,
@@ -21,22 +21,21 @@ class ProfileScreen extends StatelessWidget {
       ),
       body: Column(
         children: <Widget>[
-          uperscreen(context,authPro.apUser.name!,authPro.apUser.imageURL!),
+          uperscreen(context, authPro.apUser.name!, authPro.apUser.imageURL!),
           const SizedBox(height: 10),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: <Widget>[
+              middelItems(context, 'My Order\nHistory', AppImages.orderhistory),
               middelItems(
-                  context, 'My Order\nHistory', AppImages.order_history),
-              middelItems(
-                  context, 'Delivery\nAddress', AppImages.delivery_address)
+                  context, 'Delivery\nAddress', AppImages.deliveryaddress)
             ],
           ),
           const SizedBox(height: 40),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Column(
-              children: [
+              children: <Widget>[
                 bottomnav(context, 'My Profile', AppImages.profileUnselected),
                 const SizedBox(
                   height: 25,
@@ -58,7 +57,7 @@ class ProfileScreen extends StatelessWidget {
     );
   }
 
-  Widget bottomnav(BuildContext context, String name, String imageURL) {
+  Widget bottomnav(BuildContext context, String name, String image) {
     return GestureDetector(
       onTap: () {
         Navigator.push(
@@ -85,9 +84,7 @@ class ProfileScreen extends StatelessWidget {
               height: 40,
               width: 40,
               decoration: BoxDecoration(
-                  image: DecorationImage(
-                image: AssetImage(imageURL),
-              )),
+                  image: DecorationImage(image: AssetImage(image))),
             ),
             const SizedBox(
               width: 30,
@@ -105,7 +102,7 @@ class ProfileScreen extends StatelessWidget {
     );
   }
 
-  Container middelItems(BuildContext context, String? text, String? imageURl) {
+  Container middelItems(BuildContext context, String? text, String image) {
     return Container(
       height: 80,
       width: 173,
@@ -121,7 +118,7 @@ class ProfileScreen extends StatelessWidget {
             width: 50,
             decoration: BoxDecoration(
                 image: DecorationImage(
-              image: AssetImage(imageURl!),
+              image: AssetImage(image),
             )),
           ),
           ForText(
@@ -133,7 +130,7 @@ class ProfileScreen extends StatelessWidget {
     );
   }
 
-  Widget uperscreen(BuildContext context,String name,String ImageUrl) {
+  Widget uperscreen(BuildContext context, String name, String ImageUrl) {
     return Container(
       height: 220,
       width: double.infinity,
@@ -142,10 +139,9 @@ class ProfileScreen extends StatelessWidget {
         children: <Widget>[
           CircleAvatar(
             radius: 64,
-            backgroundImage: NetworkImage(
-                ImageUrl),
+            backgroundImage: NetworkImage(ImageUrl),
           ),
-         const SizedBox(
+          const SizedBox(
             height: 10,
           ),
           ForText(
