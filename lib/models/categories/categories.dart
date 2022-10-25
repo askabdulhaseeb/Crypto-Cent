@@ -6,12 +6,14 @@ class Categories {
     required this.catID,
     required this.title,
     required this.status,
+    required this.imageURl,
     required this.subCategories,
   });
 
   final String catID;
   final String title;
   final bool status;
+  final String imageURl;
   final List<SubCategory> subCategories;
 
   Map<String, dynamic> toMap() {
@@ -19,6 +21,7 @@ class Categories {
       'cat_id': catID,
       'title': title,
       'status': status,
+      'image_url': imageURl,
       'sub_categories':
           subCategories.map((SubCategory x) => x.toMap()).toList(),
     };
@@ -33,6 +36,7 @@ class Categories {
     }
     return Categories(
       catID: doc.data()?['cat_id'] ?? '',
+      imageURl: doc.data()?['image_url'] ?? '',
       title: doc.data()?['title'] ?? '',
       status: doc.data()?['status'] ?? '',
       subCategories: subCats,

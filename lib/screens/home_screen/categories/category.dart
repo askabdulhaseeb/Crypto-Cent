@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../providers/categories_provider.dart';
+import '../../../widgets/custom_widgets/custom_widget.dart';
 import 'categories_extend.dart';
 
 class CategoryScreen extends StatelessWidget {
@@ -15,9 +16,9 @@ class CategoryScreen extends StatelessWidget {
           title: const Text('Categories'),
         ),
         body: GridView.count(
-          childAspectRatio: 100 / 80,
+          childAspectRatio: 96 / 118,
           mainAxisSpacing: 8,
-          crossAxisCount: 2,
+          crossAxisCount: 3,
           // ignore: always_specify_types
           children: List.generate(catPro.categories.length, (int index) {
             return InkWell(
@@ -32,24 +33,34 @@ class CategoryScreen extends StatelessWidget {
               },
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: Theme.of(context).primaryColor,
-                    borderRadius: BorderRadius.circular(24),
-                    border: Border.all(color: Colors.black),
-                  ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: <Widget>[
-                      Text(
-                        catPro.categories[index].title,
-                        style: const TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 18),
-                        textAlign: TextAlign.center,
+                child: Stack(
+                  children: <Widget>[
+                    Container(
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                            image: NetworkImage(
+                                catPro.categories[index].imageURl)),
+                        borderRadius: BorderRadius.circular(24),
                       ),
-                      const SizedBox(height: 30),
-                    ],
-                  ),
+                    ),
+                    Container(
+                      decoration: BoxDecoration(
+                        color: Colors.black26,
+                        borderRadius: BorderRadius.circular(24),
+                      ),
+                    ),
+                    Positioned(
+                        bottom: 20,
+                        left: 10,
+                        right: 10,
+                        child: Center(
+                          child: ForText(
+                            name: catPro.categories[index].title,
+                            color: Colors.white,
+                            bold: true,
+                          ),
+                        ))
+                  ],
                 ),
               ),
             );
