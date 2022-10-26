@@ -1,9 +1,11 @@
-// ignore_for_file: depend_on_referenced_packages
+// ignore_for_file: depend_on_referenced_packages, non_constant_identifier_names, always_specify_types
 
 import 'dart:convert';
+import 'dart:developer';
 
-import'package:http/http.dart' as http;
+import 'package:http/http.dart' as http;
 
+import '../../function/encryption_function.dart';
 import '../../models/crypto_wallet/coin_wallet.dart';
 import '../../widgets/custom_widgets/custom_toast.dart';
 
@@ -11,12 +13,13 @@ class WallletWithApi {
   static String myWalletId = '';
   static String url = 'https://apirone.com/api/v2/wallets';
   List<String> units = ['btc'];
+  Encryption encrypt = Encryption();
 
   Map<String, String> requestHeaders = {
     'Content-type': 'application/json',
   };
-  Future<CoinsWallet?> createWallet() async {
-    CoinsWallet? wallet;
+  Future<List<CoinsWallet>> createWallet() async {
+    List<CoinsWallet> wallet = <CoinsWallet>[];
 
     for (String un in units) {
       Map<String, dynamic> body = <String, dynamic>{
@@ -48,13 +51,14 @@ class WallletWithApi {
                 if (value.statusCode == 200) {
                   var body = jsonDecode(value.body);
                   String address = body['address'];
+                 
                   CoinsWallet temp = CoinsWallet(
                     symble: un,
-                    address: address,
-                    transferKey: transferKey,
-                    wallet: walletId,
+                    address: encrypt.appEncrypt(address),
+                    transferKey: encrypt.appEncrypt(transferKey),
+                    wallet: encrypt.appEncrypt(walletId),
                   );
-                  wallet = temp;
+                  wallet.add(temp);
                 } else {
                   CustomToast.errorToast(message: 'Error');
                 }
@@ -101,5 +105,66 @@ class WallletWithApi {
       CustomToast.errorToast(message: e.toString());
     }
     return temp;
+  }
+
+  String TRANSFERKEY = 'transfer_key';
+  String DESTINATIONS = 'destinations';
+  String ADDRESS = 'address';
+  String AMOUNT = 'amount';
+  String STATUS = 'status';
+  String HASH = 'hash';
+  Future<Map> transferCoin(
+    String walletId,
+    String transferKey,
+    String address,
+    String amount,
+  ) async {
+    Map result;
+
+    Map<String, dynamic> trxnBody = {
+      TRANSFERKEY: transferKey,
+      DESTINATIONS: [
+        {
+          ADDRESS: address,
+          AMOUNT: (double.tryParse(amount)! * 100000000).toInt()
+        },
+      ],
+    };
+    try {
+      http.Response response = await http
+          .post(Uri.parse('$url/$walletId/transfer'),
+              headers: requestHeaders, body: jsonEncode(trxnBody))
+          .timeout(
+            const Duration(seconds: 30),
+          );
+
+      var body = jsonDecode(response.body);
+      int status = response.statusCode;
+      var txs = body['txs'];
+
+      if (status == 200) {
+        result = {
+          STATUS: true,
+          HASH: txs,
+        };
+
+        return result;
+      } else {
+        result = {
+          STATUS: false,
+          HASH: null,
+        };
+
+        return result;
+      }
+    } catch (e) {
+      print(e);
+      result = {
+        STATUS: false,
+        HASH: null,
+      };
+
+      return result;
+    }
   }
 }

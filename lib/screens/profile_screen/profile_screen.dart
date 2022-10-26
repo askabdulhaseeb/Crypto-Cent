@@ -5,7 +5,6 @@ import '../../providers/auth_provider.dart';
 import '../../utilities/app_images.dart';
 import '../../widgets/custom_widgets/custom_widget.dart';
 import '../empty_screen/empty_screen.dart';
-import 'wallet/tabbar.dart';
 import 'wallet/wallet_screen.dart';
 
 class ProfileScreen extends StatelessWidget {

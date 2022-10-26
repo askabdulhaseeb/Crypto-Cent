@@ -1,10 +1,7 @@
-import 'dart:io';
 import 'dart:typed_data';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-
 import 'package:intl_phone_field/phone_number.dart';
 import '../database/app_user/auth_method.dart';
 import '../database/app_user/user_api.dart';
@@ -63,9 +60,9 @@ class AuthProvider extends ChangeNotifier {
       final bool added = await UserApi().register(user: appuser);
 
       if (added) {
-        CoinsWallet? coinsWallet = await WallletWithApi().createWallet();
+        List<CoinsWallet> coinsWallet = await WallletWithApi().createWallet();
         final Wallets wallets = Wallets(
-          coinsWallet: coinsWallet!,
+          coinsWallet: coinsWallet,
           walletId: AuthMethods.uid,
         );
         bool temp1 = await WalletsApi().add(wallets);

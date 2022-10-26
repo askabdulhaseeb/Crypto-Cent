@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 
+import '../../../database/crypto_wallet/wallet_create_api.dart';
+import '../../../function/encryption_function.dart';
+import '../../../providers/crypto_wallet/wallet_provider.dart';
 import '../../../widgets/custom_widgets/cutom_text.dart';
 import 'send_bitcoin.dart';
 
@@ -13,10 +17,14 @@ class WalletScreen extends StatefulWidget {
 
 class _WalletScreenState extends State<WalletScreen> {
   bool temp = false;
+  Encryption encryption = Encryption();
   @override
   Widget build(BuildContext context) {
+    WalletProvider walletPro = Provider.of<WalletProvider>(context);
+    String address =
+        encryption.appDecrypt(walletPro.wallet!.coinsWallet[0].address);
     return Scaffold(
-      appBar: AppBar(title: Text('Wallet')),
+      appBar: AppBar(title: const Text('Wallet')),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(16),
@@ -44,12 +52,26 @@ class _WalletScreenState extends State<WalletScreen> {
                         bold: true,
                         size: 28,
                       ),
-                      const ForText(
-                        name: '\$ 0',
-                        color: Colors.white,
-                        bold: true,
-                        size: 24,
-                      ),
+                      FutureBuilder<double>(
+                          future: WallletWithApi().getWalletBalance(address),
+                          builder: (BuildContext context,
+                              AsyncSnapshot<double> snapshot) {
+                            if (snapshot.hasData) {
+                              double balance = snapshot.data!;
+                              return Text(
+                                '\$${balance.toStringAsFixed(4)}',
+                                style: const TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w500,
+                                  color: Colors.white,
+                                ),
+                              );
+                            } else {
+                              return snapshot.hasError
+                                  ? const Text('ERROR')
+                                  : const CircularProgressIndicator.adaptive();
+                            }
+                          }),
                       const SizedBox(height: 20),
                       Container(
                         height: 40,
@@ -92,17 +114,17 @@ class _WalletScreenState extends State<WalletScreen> {
                               fontWeight: FontWeight.w500, fontSize: 16),
                         ),
                         const SizedBox(height: 16),
-                        const Text(
-                          'walletPro.wallet!.coinsWallet.address',
+                        Text(
+                          address,
                           //walletPro.walletadd,
-                          style: TextStyle(
+                          style: const TextStyle(
                               fontWeight: FontWeight.w500, fontSize: 16),
                         ),
                         const SizedBox(height: 20),
                         TextButton.icon(
                           onPressed: () async {
-                            await Clipboard.setData(const ClipboardData(
-                              text: 'walletPro.wallet!.coinsWallet.address',
+                            await Clipboard.setData(ClipboardData(
+                              text: address,
                             ));
                           },
                           icon: const Icon(Icons.copy),
