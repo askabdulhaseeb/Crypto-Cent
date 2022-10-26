@@ -6,6 +6,7 @@ import '../../utilities/app_images.dart';
 import '../../widgets/custom_widgets/custom_widget.dart';
 import '../empty_screen/empty_screen.dart';
 import 'wallet/tabbar.dart';
+import 'wallet/wallet_screen.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -69,7 +70,7 @@ class ProfileScreen extends StatelessWidget {
                       context,
                       // ignore: always_specify_types
                       MaterialPageRoute(
-                        builder: (BuildContext context) => const Tabbarview(),
+                        builder: (BuildContext context) => const WalletScreen(),
                       ),
                     );
                   }),

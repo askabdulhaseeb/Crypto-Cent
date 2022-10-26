@@ -1,20 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import '../../../widgets/custom_widgets/custom_widget.dart';
 
-class RecieveBitcoinScreen extends StatefulWidget {
-  const RecieveBitcoinScreen({super.key});
+import '../../../widgets/custom_widgets/cutom_text.dart';
+import 'send_bitcoin.dart';
+
+class WalletScreen extends StatefulWidget {
+  const WalletScreen({super.key});
 
   @override
-  State<RecieveBitcoinScreen> createState() => _RecieveBitcoinScreenState();
+  State<WalletScreen> createState() => _WalletScreenState();
 }
 
-class _RecieveBitcoinScreenState extends State<RecieveBitcoinScreen> {
+class _WalletScreenState extends State<WalletScreen> {
   bool temp = false;
   @override
   Widget build(BuildContext context) {
-    //WalletProvider walletPro = Provider.of<WalletProvider>(context);
     return Scaffold(
+      appBar: AppBar(title: Text('Wallet')),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(16),
@@ -67,7 +69,16 @@ class _RecieveBitcoinScreenState extends State<RecieveBitcoinScreen> {
                 children: [
                   send(context, 'Add Money', Icons.add, () {}),
                   recieve(context, 'Send Money', Icons.arrow_drop_down_sharp,
-                      () {}),
+                      () {
+                    Navigator.push(
+                      context,
+                      // ignore: always_specify_types
+                      MaterialPageRoute(
+                        builder: (BuildContext context) =>
+                            const SendBitcoinScreen(),
+                      ),
+                    );
+                  }),
                 ],
               ),
               const SizedBox(height: 20),
