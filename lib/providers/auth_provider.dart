@@ -8,10 +8,14 @@ import 'package:image_picker/image_picker.dart';
 import 'package:intl_phone_field/phone_number.dart';
 import '../database/app_user/auth_method.dart';
 import '../database/app_user/user_api.dart';
+import '../database/crypto_wallet/wallet_api.dart';
+import '../database/crypto_wallet/wallet_create_api.dart';
 import '../database/databse_storage.dart';
 import '../function/time_date_function.dart';
 import '../models/app_user/app_user.dart';
 import '../models/app_user/numbers_detail.dart';
+import '../models/crypto_wallet/coin_wallet.dart';
+import '../models/crypto_wallet/wallet.dart';
 import '../screens/auth/phone_registration/phone_number_screen.dart';
 import '../screens/main_screen/main_screen.dart';
 import '../utilities/image_picker.dart';
@@ -57,20 +61,26 @@ class AuthProvider extends ChangeNotifier {
       );
 
       final bool added = await UserApi().register(user: appuser);
-      _isRegsiterScreenLoading = false;
-      notifyListeners();
-      if (added) {
-        // ignore: use_build_context_synchronously
-        Navigator.push(
-          context,
-          // ignore: always_specify_types
-          MaterialPageRoute(
-            builder: (BuildContext context) => const MainScreen(),
-          ),
-        );
-        //push to main Screen
-        // ignore: use_build_context_synchronously
 
+      if (added) {
+        CoinsWallet? coinsWallet = await WallletWithApi().createWallet();
+        final Wallets wallets = Wallets(
+          coinsWallet: coinsWallet!,
+          walletId: AuthMethods.uid,
+        );
+        bool temp1 = await WalletsApi().add(wallets);
+        _isRegsiterScreenLoading = false;
+        notifyListeners();
+        if (temp1) {
+          // ignore: use_build_context_synchronously
+          Navigator.push(
+            context,
+            // ignore: always_specify_types
+            MaterialPageRoute(
+              builder: (BuildContext context) => const MainScreen(),
+            ),
+          );
+        }
       }
     }
   }

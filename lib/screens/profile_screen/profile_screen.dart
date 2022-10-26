@@ -38,19 +38,43 @@ class ProfileScreen extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Column(
                 children: <Widget>[
-                  bottomnav(context, 'My Profile', AppImages.profileUnselected),
+                  bottomnav(context, 'My Profile', AppImages.profileUnselected,(){ Navigator.push(
+          context,
+          // ignore: always_specify_types
+          MaterialPageRoute(
+            builder: (BuildContext context) => const EmptyScreen(),
+          ),
+        );}),
                   const SizedBox(
                     height: 25,
                   ),
-                  bottomnav(context, 'Setting', AppImages.setting),
+                  bottomnav(context, 'Setting', AppImages.setting,(){ Navigator.push(
+          context,
+          // ignore: always_specify_types
+          MaterialPageRoute(
+            builder: (BuildContext context) => const EmptyScreen(),
+          ),
+        );}),
                   const SizedBox(
                     height: 25,
                   ),
-                  bottomnav(context, 'Wallet', AppImages.wallet),
+                  bottomnav(context, 'Wallet', AppImages.wallet,(){ Navigator.push(
+          context,
+          // ignore: always_specify_types
+          MaterialPageRoute(
+            builder: (BuildContext context) => const EmptyScreen(),
+          ),
+        );}),
                   const SizedBox(
                     height: 25,
                   ),
-                  bottomnav(context, 'Log Out', AppImages.logout),
+                  bottomnav(context, 'Log Out', AppImages.logout,(){ Navigator.push(
+          context,
+          // ignore: always_specify_types
+          MaterialPageRoute(
+            builder: (BuildContext context) => const EmptyScreen(),
+          ),
+        );}),
                 ],
               ),
             ),
@@ -60,17 +84,9 @@ class ProfileScreen extends StatelessWidget {
     );
   }
 
-  Widget bottomnav(BuildContext context, String name, String image) {
+  Widget bottomnav(BuildContext context, String name, String image,VoidCallback ontap) {
     return GestureDetector(
-      onTap: () {
-        Navigator.push(
-          context,
-          // ignore: always_specify_types
-          MaterialPageRoute(
-            builder: (BuildContext context) => const EmptyScreen(),
-          ),
-        );
-      },
+      onTap: ontap,
       child: Container(
         height: 50,
         width: double.infinity,

@@ -1,4 +1,6 @@
+import '../../database/app_user/auth_method.dart';
 import '../../providers/auth_provider.dart';
+import '../../providers/crypto_wallet/wallet_provider.dart';
 import '../empty_screen/empty_screen.dart';
 import '../screens.dart';
 import 'package:flutter/material.dart';
@@ -22,31 +24,33 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
-    @override
+  @override
   void initState() {
     load();
     super.initState();
   }
-  bool loading=false;
-   void load(){
+
+  bool loading = false;
+  void load() {
     setState(() {
-      loading=true;
+      loading = true;
     });
-  Provider.of<AuthProvider>(context,listen: false).getUser();
+    Provider.of<AuthProvider>(context, listen: false).getUser();
+    Provider.of<WalletProvider>(context, listen: false).load(AuthMethods.uid);
     setState(() {
-      loading=false;
+      loading = false;
     });
-   }
+  }
+
   @override
   Widget build(BuildContext context) {
     int currentIndex = Provider.of<AppProvider>(context).currentTap;
-    
 
-    return loading? 
-    const CircularProgressIndicator()
-    :Scaffold(
-      body: MainScreen._pages[currentIndex],
-      bottomNavigationBar: const MainBottomNavigationBar(),
-    );
+    return loading
+        ? const CircularProgressIndicator()
+        : Scaffold(
+            body: MainScreen._pages[currentIndex],
+            bottomNavigationBar: const MainBottomNavigationBar(),
+          );
   }
 }

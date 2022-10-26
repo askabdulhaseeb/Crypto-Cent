@@ -1,4 +1,4 @@
-import 'package:crypto_cent/screens/auth/phone_registration/phone_number_screen.dart';
+
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -8,11 +8,12 @@ import 'firebase_options.dart';
 import 'providers/auth_provider.dart';
 import 'providers/cart_provider.dart';
 import 'providers/categories_provider.dart';
+import 'providers/crypto_wallet/wallet_provider.dart';
 import 'providers/product_provider.dart';
 import 'providers/provider.dart';
 
-import 'screens/home_screen/upload_screen.dart';
-import 'screens/home_screen/uploadsc.dart';
+
+import 'screens/auth/phone_registration/phone_number_screen.dart';
 import 'screens/screens.dart';
 
 void main() async {
@@ -44,6 +45,9 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider<CategoriesProvider>.value(
           value: CategoriesProvider(),
         ),
+        ChangeNotifierProvider<WalletProvider>.value(
+          value: WalletProvider(),
+        ),
         ChangeNotifierProvider<AppProvider>.value(
           value: AppProvider(),
         ),
@@ -59,7 +63,7 @@ class MyApp extends StatelessWidget {
           theme: AppThemes.light,
           darkTheme: AppThemes.dark,
           themeMode: theme.themeMode,
-          // home: const UploadScreen(),
+          //  home: const PhoneNumberScreen(),
           home: (AuthMethods.uid.isEmpty)
               ? const PhoneNumberScreen()
               : const MainScreen(),
