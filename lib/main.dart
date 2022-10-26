@@ -59,10 +59,10 @@ class MyApp extends StatelessWidget {
           theme: AppThemes.light,
           darkTheme: AppThemes.dark,
           themeMode: theme.themeMode,
-          home: const UploadScreen(),
-          // home:
-          // (AuthMethods.uid.isEmpty)?const PhoneNumberScreen():
-          // const MainScreen(),
+          // home: const UploadScreen(),
+          home: (AuthMethods.uid.isEmpty)
+              ? const PhoneNumberScreen()
+              : const MainScreen(),
         );
       }),
     );
