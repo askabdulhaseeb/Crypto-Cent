@@ -71,19 +71,6 @@ class HomeScreen extends StatelessWidget {
 
   AppBar appBar(BuildContext context) {
     return AppBar(
-      leading: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Container(
-          height: 30,
-          width: 50,
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage(AppImages.drawer),
-              fit: BoxFit.fill,
-            ),
-          ),
-        ),
-      ),
       actions: <Widget>[
         IconButton(
           onPressed: () {
@@ -102,9 +89,10 @@ class HomeScreen extends StatelessWidget {
           ),
         ),
       ],
+      centerTitle: false,
       title: Container(
-        height: 50,
-        width: 100,
+        height: 40,
+        width: 80,
         decoration: BoxDecoration(
           image: DecorationImage(
             image: AssetImage(AppImages.logo),

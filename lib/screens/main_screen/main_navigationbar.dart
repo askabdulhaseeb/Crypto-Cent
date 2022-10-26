@@ -25,7 +25,7 @@ class MainBottomNavigationBar extends StatelessWidget {
           label: 'Home',
         ),
         BottomNavigationBarItem(
-          icon: ImageIcon(AssetImage(AppImages.fvrtUnselected)),
+          icon: const Icon(Icons.favorite_border),
           activeIcon: ImageIcon(AssetImage(AppImages.fvrtSelected)),
           label: 'Favroite',
         ),

@@ -19,40 +19,43 @@ class ProfileScreen extends StatelessWidget {
           style: TextStyle(color: Colors.white, fontSize: 22),
         ),
       ),
-      body: Column(
-        children: <Widget>[
-          uperscreen(context, authPro.apUser.name!, authPro.apUser.imageURL!),
-          const SizedBox(height: 10),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: <Widget>[
-              middelItems(context, 'My Order\nHistory', AppImages.orderhistory),
-              middelItems(
-                  context, 'Delivery\nAddress', AppImages.deliveryaddress)
-            ],
-          ),
-          const SizedBox(height: 40),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: Column(
+      body: SingleChildScrollView(
+        child: Column(
+          children: <Widget>[
+            uperscreen(context, authPro.apUser.name!, authPro.apUser.imageURL!),
+            const SizedBox(height: 10),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: <Widget>[
-                bottomnav(context, 'My Profile', AppImages.profileUnselected),
-                const SizedBox(
-                  height: 25,
-                ),
-                bottomnav(context, 'Setting', AppImages.setting),
-                const SizedBox(
-                  height: 25,
-                ),
-                bottomnav(context, 'Wallet', AppImages.wallet),
-                const SizedBox(
-                  height: 25,
-                ),
-                bottomnav(context, 'Log Out', AppImages.logout),
+                middelItems(
+                    context, 'My Order\nHistory', AppImages.orderhistory),
+                middelItems(
+                    context, 'Delivery\nAddress', AppImages.deliveryaddress)
               ],
             ),
-          ),
-        ],
+            const SizedBox(height: 40),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: Column(
+                children: <Widget>[
+                  bottomnav(context, 'My Profile', AppImages.profileUnselected),
+                  const SizedBox(
+                    height: 25,
+                  ),
+                  bottomnav(context, 'Setting', AppImages.setting),
+                  const SizedBox(
+                    height: 25,
+                  ),
+                  bottomnav(context, 'Wallet', AppImages.wallet),
+                  const SizedBox(
+                    height: 25,
+                  ),
+                  bottomnav(context, 'Log Out', AppImages.logout),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
