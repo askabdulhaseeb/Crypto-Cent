@@ -11,7 +11,7 @@ class WalletsApi {
           .collection(_collection)
           .doc(wallets.walletId)
           .set(wallets.toMap());
-      CustomToast.successToast(message: 'Successfully Added');
+      //CustomToast.successToast(message: 'Successfully Added');
       return true;
     } catch (e) {
       CustomToast.errorToast(message: e.toString());
@@ -29,7 +29,7 @@ class WalletsApi {
       for (DocumentSnapshot<Map<String, dynamic>> e in snapshot.docs) {
         wallet = Wallets.fromMap(e);
       }
-      CustomToast.successToast(message: 'Success');
+      //CustomToast.successToast(message: 'Success');
     } catch (e) {
       CustomToast.errorToast(message: e.toString());
     }

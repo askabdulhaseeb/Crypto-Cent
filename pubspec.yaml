@@ -44,6 +44,7 @@ dependencies:
   card_swiper: ^2.0.4
   image_picker: ^0.8.6
   file_picker: ^5.2.2
+  qr_flutter: ^4.0.0
 
 dev_dependencies:
   flutter_test:

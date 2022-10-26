@@ -12,7 +12,7 @@ class ProductApi {
           .collection(_collection)
           .doc(product.pid)
           .set(product.toMap());
-      CustomToast.successToast(message: 'Successfully Added');
+     // CustomToast.successToast(message: 'Successfully Added');
       return true;
     } catch (e) {
       CustomToast.errorToast(message: e.toString());

@@ -5,6 +5,7 @@ import '../../providers/auth_provider.dart';
 import '../../utilities/app_images.dart';
 import '../../widgets/custom_widgets/custom_widget.dart';
 import '../empty_screen/empty_screen.dart';
+import 'wallet/tabbar.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -38,43 +39,52 @@ class ProfileScreen extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Column(
                 children: <Widget>[
-                  bottomnav(context, 'My Profile', AppImages.profileUnselected,(){ Navigator.push(
-          context,
-          // ignore: always_specify_types
-          MaterialPageRoute(
-            builder: (BuildContext context) => const EmptyScreen(),
-          ),
-        );}),
+                  bottomnav(context, 'My Profile', AppImages.profileUnselected,
+                      () {
+                    Navigator.push(
+                      context,
+                      // ignore: always_specify_types
+                      MaterialPageRoute(
+                        builder: (BuildContext context) => const EmptyScreen(),
+                      ),
+                    );
+                  }),
                   const SizedBox(
                     height: 25,
                   ),
-                  bottomnav(context, 'Setting', AppImages.setting,(){ Navigator.push(
-          context,
-          // ignore: always_specify_types
-          MaterialPageRoute(
-            builder: (BuildContext context) => const EmptyScreen(),
-          ),
-        );}),
+                  bottomnav(context, 'Setting', AppImages.setting, () {
+                    Navigator.push(
+                      context,
+                      // ignore: always_specify_types
+                      MaterialPageRoute(
+                        builder: (BuildContext context) => const EmptyScreen(),
+                      ),
+                    );
+                  }),
                   const SizedBox(
                     height: 25,
                   ),
-                  bottomnav(context, 'Wallet', AppImages.wallet,(){ Navigator.push(
-          context,
-          // ignore: always_specify_types
-          MaterialPageRoute(
-            builder: (BuildContext context) => const EmptyScreen(),
-          ),
-        );}),
+                  bottomnav(context, 'Wallet', AppImages.wallet, () {
+                    Navigator.push(
+                      context,
+                      // ignore: always_specify_types
+                      MaterialPageRoute(
+                        builder: (BuildContext context) => const Tabbarview(),
+                      ),
+                    );
+                  }),
                   const SizedBox(
                     height: 25,
                   ),
-                  bottomnav(context, 'Log Out', AppImages.logout,(){ Navigator.push(
-          context,
-          // ignore: always_specify_types
-          MaterialPageRoute(
-            builder: (BuildContext context) => const EmptyScreen(),
-          ),
-        );}),
+                  bottomnav(context, 'Log Out', AppImages.logout, () {
+                    Navigator.push(
+                      context,
+                      // ignore: always_specify_types
+                      MaterialPageRoute(
+                        builder: (BuildContext context) => const EmptyScreen(),
+                      ),
+                    );
+                  }),
                 ],
               ),
             ),
@@ -84,7 +94,8 @@ class ProfileScreen extends StatelessWidget {
     );
   }
 
-  Widget bottomnav(BuildContext context, String name, String image,VoidCallback ontap) {
+  Widget bottomnav(
+      BuildContext context, String name, String image, VoidCallback ontap) {
     return GestureDetector(
       onTap: ontap,
       child: Container(
