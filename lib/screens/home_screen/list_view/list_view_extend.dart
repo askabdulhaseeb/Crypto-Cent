@@ -38,17 +38,27 @@ class ListViewScreen extends StatelessWidget {
                   blurRadius: 4,
                 )
               ]),
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(
-                  height: 150,
-                  width: 150,
-                  child: Image.network(product.imageurl),
-                ),
-                Text(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                height: 150,
+                width: double.infinity,
+                decoration: BoxDecoration(
+                    //color: Colors.black,
+                    borderRadius: const BorderRadius.only(
+                        topLeft: Radius.circular(24),
+                        topRight: Radius.circular(24)),
+                    image: DecorationImage(
+                        image: NetworkImage(
+                          product.imageurl,
+                        ),
+                        fit: BoxFit.fill)),
+              ),
+              const SizedBox(height: 5),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8),
+                child: Text(
                   product.productname,
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
@@ -58,7 +68,11 @@ class ListViewScreen extends StatelessWidget {
                     fontSize: 16,
                   ),
                 ),
-                Row(
+              ),
+              const SizedBox(height: 5),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8),
+                child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
@@ -108,8 +122,8 @@ class ListViewScreen extends StatelessWidget {
                     }),
                   ],
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),

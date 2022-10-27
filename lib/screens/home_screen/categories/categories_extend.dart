@@ -32,7 +32,7 @@ class CategoriesExtend extends StatelessWidget {
         backgroundColor: Colors.transparent,
       ),
       body: GridView.count(
-        childAspectRatio: 200 / 280,
+        childAspectRatio: 200 / 240,
         mainAxisSpacing: 8,
         crossAxisCount: 2,
         children: List.generate(products.length, (int index) {
