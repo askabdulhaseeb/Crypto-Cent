@@ -13,15 +13,22 @@ class FillCartScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Cart '),
       ),
-      bottomSheet: checkoutSection(context, cartPro),
-      body: ListView.builder(
-        itemCount: cartPro.cartItem.length,
-        itemBuilder: (BuildContext context, int index) {
-          return cartItems(
-            cartPro: cartPro,
-            index: index,
-          );
-        },
+      body: Column(
+        children: <Widget>[
+          Expanded(
+            child: ListView.builder(
+              shrinkWrap: true,
+              itemCount: cartPro.cartItem.length,
+              itemBuilder: (BuildContext context, int index) {
+                return CartItem(
+                  cartPro: cartPro,
+                  index: index,
+                );
+              },
+            ),
+          ),
+          checkoutSection(context, cartPro),
+        ],
       ),
     );
   }
@@ -104,8 +111,8 @@ class FillCartScreen extends StatelessWidget {
   }
 }
 
-class cartItems extends StatelessWidget {
-  const cartItems({Key? key, required this.cartPro, required this.index})
+class CartItem extends StatelessWidget {
+  const CartItem({Key? key, required this.cartPro, required this.index})
       : super(key: key);
 
   final CartProvider cartPro;

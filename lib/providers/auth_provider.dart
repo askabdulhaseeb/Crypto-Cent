@@ -70,13 +70,16 @@ class AuthProvider extends ChangeNotifier {
         notifyListeners();
         if (temp1) {
           // ignore: use_build_context_synchronously
-          Navigator.push(
-            context,
-            // ignore: always_specify_types
-            MaterialPageRoute(
-              builder: (BuildContext context) => const MainScreen(),
-            ),
-          );
+          // Navigator.push(
+          //   context,
+          //   // ignore: always_specify_types
+          //   MaterialPageRoute(
+          //     builder: (BuildContext context) => const MainScreen(),
+          //   ),
+          // );
+          // ignore: use_build_context_synchronously
+          Navigator.of(context).pushNamedAndRemoveUntil(
+              MainScreen.routeName, (Route<dynamic> route) => false);
         }
       }
     }

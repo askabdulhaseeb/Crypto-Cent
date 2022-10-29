@@ -62,7 +62,7 @@ class ProfileScreen extends StatelessWidget {
                     );
                   }),
                   const SizedBox(
-                    height: 25,
+                    height: 25
                   ),
                   bottomnav(context, 'Wallet', AppImages.wallet, () {
                     Navigator.push(
@@ -160,7 +160,7 @@ class ProfileScreen extends StatelessWidget {
     );
   }
 
-  Widget uperscreen(BuildContext context, String name, String ImageUrl) {
+  Widget uperscreen(BuildContext context, String name, String imageURL) {
     return Container(
       height: 220,
       width: double.infinity,
@@ -169,7 +169,10 @@ class ProfileScreen extends StatelessWidget {
         children: <Widget>[
           CircleAvatar(
             radius: 64,
-            backgroundImage: NetworkImage(ImageUrl),
+            backgroundImage: imageURL.isEmpty ? null : NetworkImage(imageURL),
+            child: imageURL.isEmpty
+                ? const Icon(Icons.person, size: 80, color: Colors.grey)
+                : null,
           ),
           const SizedBox(
             height: 10,
