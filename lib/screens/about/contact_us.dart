@@ -1,10 +1,24 @@
-import 'package:flutter/material.dart';
+import 'dart:async';
 
+import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:location/location.dart';
 import '../../widgets/custom_widgets/custom_widget.dart';
 
-class ContactUsScreen extends StatelessWidget {
+class ContactUsScreen extends StatefulWidget {
   const ContactUsScreen({super.key});
 
+  @override
+  State<ContactUsScreen> createState() => _ContactUsScreenState();
+}
+
+class _ContactUsScreenState extends State<ContactUsScreen> {
+  final Completer<GoogleMapController> _controller = Completer();
+
+  static double currentlat = 31.485722;
+  static double currentlng = 74.32648689999996;
+  CameraPosition cameraPosition =
+      CameraPosition(zoom: 14, target: LatLng(currentlat, currentlng));
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -15,17 +29,98 @@ class ContactUsScreen extends StatelessWidget {
         ),
         body: Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: const <Widget>[
-              ForText(name: 'About Us', bold: true),
-              SizedBox(height: 15),
-              ForText(
-                  name:
-                      '''Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets.'''),
-            ],
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                const ForText(name: 'Contact Us', bold: true),
+                const SizedBox(height: 15),
+                containers(
+                    context, Icons.phone, '+92345 1234567', '+92345 1234567'),
+                const SizedBox(height: 15),
+                containers(context, Icons.email, 'bloodoapp@gmail.com', ''),
+                const SizedBox(height: 15),
+                containers(
+                    context, Icons.location_on_sharp, 'Model Town,Lahore', ''),
+                const SizedBox(height: 15),
+                Container(
+                  height: MediaQuery.of(context).size.width,
+                  width: double.infinity,
+                  color: Colors.black,
+                  child: GoogleMap(
+                    initialCameraPosition: cameraPosition,
+                    markers: {
+                      Marker(
+                        onTap: () {
+                          
+                        },
+                        markerId: const MarkerId('current location'),
+                        position: LatLng(currentlat, currentlng),
+                      ),
+                    },
+                    onMapCreated: (GoogleMapController controller) {
+                      _controller.complete(controller);
+                    },
+                  ),
+                ),
+                const SizedBox(height: 15),
+              ],
+            ),
           ),
         ));
+  }
+
+  Widget containers(
+      BuildContext context, IconData icon, String text, String? textt) {
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 16),
+      width: double.infinity,
+      height: 120,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(12),
+        color: Theme.of(context).secondaryHeaderColor,
+      ),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 18),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: <Widget>[
+            Container(
+              height: 70,
+              width: 70,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(12),
+                color: Colors.white,
+              ),
+              child: Center(
+                  child: Icon(
+                icon,
+                color: Colors.black,
+              )),
+            ),
+            const SizedBox(width: 20),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                ForText(
+                  name: text,
+                  bold: true,
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                textt == ''
+                    ? const SizedBox()
+                    : ForText(
+                        name: textt!,
+                        bold: true,
+                      ),
+              ],
+            )
+          ],
+        ),
+      ),
+    );
   }
 }
