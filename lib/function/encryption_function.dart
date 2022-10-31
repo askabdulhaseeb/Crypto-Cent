@@ -12,20 +12,20 @@ class Encryption {
   static final Key key = Key.fromBase64(x);
   final IV iv = IV.fromBase64(x);
 
-
   final Encrypter encrypter = Encrypter(AES(key));
 
   String appEncrypt(String data) {
-   log('bs64: $bs64');
+    log('bs64: $bs64');
     log('x: $x');
     final Encrypted encrypted = encrypter.encrypt(data, iv: iv);
     final String encrypted64 = encrypted.base64;
-   
+
     return encrypted64;
   }
 
   String appDecrypt(String data) {
-    final String decrypted64 = encrypter.decrypt(Encrypted.fromBase64(data), iv: iv);
+    final String decrypted64 =
+        encrypter.decrypt(Encrypted.fromBase64(data), iv: iv);
 
     return decrypted64;
   }

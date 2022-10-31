@@ -1,4 +1,3 @@
-
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -12,7 +11,8 @@ import 'providers/crypto_wallet/wallet_provider.dart';
 import 'providers/product_provider.dart';
 import 'providers/provider.dart';
 
-
+import 'screens/about/aboust_us.dart';
+import 'screens/about/contact_us.dart';
 import 'screens/auth/phone_registration/phone_number_screen.dart';
 import 'screens/screens.dart';
 
@@ -63,10 +63,10 @@ class MyApp extends StatelessWidget {
           theme: AppThemes.light,
           darkTheme: AppThemes.dark,
           themeMode: theme.themeMode,
-          // home: const PhoneNumberScreen(),
-          home: (AuthMethods.uid.isEmpty)
-              ? const PhoneNumberScreen()
-              : const MainScreen(),
+          home: const ContactUsScreen(),
+          // home: (AuthMethods.uid.isEmpty)
+          //     ? const PhoneNumberScreen()
+          //     : const MainScreen(),
         );
       }),
     );
