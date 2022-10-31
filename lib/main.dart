@@ -13,8 +13,8 @@ import 'providers/crypto_wallet/wallet_provider.dart';
 import 'providers/product_provider.dart';
 import 'providers/provider.dart';
 
-import 'screens/about/contact_us.dart';
 import 'screens/auth/phone_registration/phone_number_screen.dart';
+import 'screens/payment.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -67,6 +67,7 @@ class MyApp extends StatelessWidget {
           home: (AuthMethods.uid.isEmpty)
               ? const PhoneNumberScreen()
               : const MainScreen(),
+          //home: const PaymentScreen(),
         );
       }),
     );
