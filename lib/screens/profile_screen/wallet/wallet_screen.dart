@@ -59,7 +59,7 @@ class _WalletScreenState extends State<WalletScreen> {
                             if (snapshot.hasData) {
                               double balance = snapshot.data!;
                               return Text(
-                                '\$${balance.toStringAsFixed(4)}',
+                                '\$${balance.toStringAsFixed(8)}',
                                 style: const TextStyle(
                                   fontSize: 20,
                                   fontWeight: FontWeight.w500,
