@@ -11,7 +11,8 @@ class AboutUsScreen extends StatelessWidget {
         appBar: AppBar(
           title: const Text('About Us'),
           leading: const Icon(Icons.arrow_back_ios_sharp),
-          actions: const [Icon(Icons.more_vert)],
+          // ignore: always_specify_types
+          actions:  const [Icon(Icons.more_vert)],
         ),
         body: Padding(
           padding: const EdgeInsets.all(8.0),

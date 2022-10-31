@@ -25,14 +25,15 @@ class ProductProvider with ChangeNotifier {
     return index < 0 ? _null : _product[index];
   }
 
+  // ignore: always_specify_types
   List<String> categories = [];
 
   List<Product> findByCategory(String categoryname) {
-    List<Product> _categoryList = _product
+    List<Product> categoryList = _product
         .where((Product element) =>
             element.category.toLowerCase().contains(categoryname.toLowerCase()))
         .toList();
-    return _categoryList;
+    return categoryList;
   }
 
   updateFavorite(String value) {

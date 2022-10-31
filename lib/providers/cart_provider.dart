@@ -39,7 +39,7 @@ class CartProvider extends ChangeNotifier {
   }
 
   void addProduct(String value) {
-    print('Enter Ho giya');
+    
     final int index = _indexOfSelectedIndex(value);
     if (index >= 0) {
       _cartItems[index].quantity = _cartItems[index].quantity + 1;

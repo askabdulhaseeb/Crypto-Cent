@@ -30,6 +30,7 @@ class Categories {
   // ignore: sort_constructors_first
   factory Categories.fromDoc(DocumentSnapshot<Map<String, dynamic>> doc) {
     List<SubCategory> subCats = <SubCategory>[];
+    // ignore: always_specify_types
     final List<dynamic> data = doc.data()?['sub_categories'] ?? [];
     for (dynamic element in data) {
       subCats.add(SubCategory.fromMap(element));

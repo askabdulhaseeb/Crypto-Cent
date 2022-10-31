@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:location/location.dart';
 import '../../widgets/custom_widgets/custom_widget.dart';
 
 class ContactUsScreen extends StatefulWidget {
@@ -13,6 +12,7 @@ class ContactUsScreen extends StatefulWidget {
 }
 
 class _ContactUsScreenState extends State<ContactUsScreen> {
+  // ignore: always_specify_types
   final Completer<GoogleMapController> _controller = Completer();
 
   static double currentlat = 31.485722;
@@ -25,7 +25,7 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
         appBar: AppBar(
           title: const Text('Contact Us'),
           leading: const Icon(Icons.arrow_back_ios_sharp),
-          actions: const [Icon(Icons.more_vert)],
+          actions: const <Widget>[Icon(Icons.more_vert)],
         ),
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 8),
@@ -50,6 +50,7 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                   color: Colors.black,
                   child: GoogleMap(
                     initialCameraPosition: cameraPosition,
+                    // ignore: always_specify_types
                     markers: {
                       Marker(
                         onTap: () {
@@ -58,8 +59,8 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                                 borderRadius: BorderRadius.circular(10.0),
                               ),
                               context: context,
-                              builder: ((context) {
-                                return Container(
+                              builder: ((BuildContext context) {
+                                return SizedBox(
                                   height: 70,
                                   width: double.infinity,
                                   child: Row(
@@ -119,7 +120,7 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
             const SizedBox(width: 20),
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: [
+              children: <Widget>[
                 ForText(
                   name: text,
                   bold: true,

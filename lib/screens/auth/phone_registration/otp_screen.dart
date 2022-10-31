@@ -1,4 +1,3 @@
-import 'package:crypto_cent/screens/auth/phone_registration/registration_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -6,6 +5,7 @@ import '../../../providers/auth_provider.dart';
 import '../../../widgets/custom_widgets/custom_textformfield.dart';
 import '../../../widgets/custom_widgets/show_loading.dart';
 import '../../main_screen/main_screen.dart';
+import 'registration_screen.dart';
 
 class OTPScreen extends StatefulWidget {
   const OTPScreen({Key? key}) : super(key: key);
@@ -45,22 +45,21 @@ class _OTPScreenState extends State<OTPScreen> {
                     if (!mounted) return;
                     if (num == 0) {
                       Navigator.push(
-                                    context,
-                                    // ignore: always_specify_types
-                                    MaterialPageRoute(
-                                      builder: (BuildContext context) => RegisterScreen(),
-                                    ),
-                                  );
-                      
+                        context,
+                        // ignore: always_specify_types
+                        MaterialPageRoute(
+                          builder: (BuildContext context) =>
+                              const RegisterScreen(),
+                        ),
+                      );
                     } else if (num == 1) {
                       Navigator.push(
-                                    context,
-                                    // ignore: always_specify_types
-                                    MaterialPageRoute(
-                                      builder: (BuildContext context) => MainScreen(),
-                                    ),
-                                  );
-                      
+                        context,
+                        // ignore: always_specify_types
+                        MaterialPageRoute(
+                          builder: (BuildContext context) => MainScreen(),
+                        ),
+                      );
                     }
                   }
                 },

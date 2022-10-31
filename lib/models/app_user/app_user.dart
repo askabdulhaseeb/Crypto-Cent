@@ -11,9 +11,9 @@ class AppUser {
   final String? email;
   AppUser({
     required this.uid,
+    required this.phoneNumber,
     this.name,
     this.imageURL,
-    required this.phoneNumber,
     this.email,
   });
   Map<String, dynamic> toMap() {
@@ -26,7 +26,7 @@ class AppUser {
     };
   }
 
-   factory AppUser.fromDoc(DocumentSnapshot<Map<String, dynamic>> doc) {
+  factory AppUser.fromDoc(DocumentSnapshot<Map<String, dynamic>> doc) {
     return AppUser(
       uid: doc.data()?['uid'] ?? '',
       phoneNumber: NumberDetails.fromMap(

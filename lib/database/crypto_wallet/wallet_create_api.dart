@@ -24,7 +24,7 @@ class WallletWithApi {
       Map<String, dynamic> body = <String, dynamic>{
         'type': 'saving',
         'currency': un,
-        // ignore: always_specify_types
+        
         'callback': {
           'url': 'https://yourweburl.com/notifications-wallet.php',
         }
@@ -80,7 +80,7 @@ class WallletWithApi {
     return wallet;
   }
 
-  // ignore: always_specify_types
+
   Future<double> getWalletBalance(String walletIds) async {
     double temp = 0;
     try {
@@ -157,7 +157,7 @@ class WallletWithApi {
         return result;
       }
     } catch (e) {
-      print(e);
+      
       result = {
         STATUS: false,
         HASH: null,

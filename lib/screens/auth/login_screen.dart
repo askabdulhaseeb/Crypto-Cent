@@ -1,12 +1,10 @@
-import 'package:crypto_cent/screens/screens.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../providers/categories_provider.dart';
 import '../../utilities/app_images.dart';
 import '../../widgets/custom_widgets/custom_widget.dart';
-import '../home_screen/home_screen.dart';
-import 'auth_screen.dart';
-import 'signup-screen.dart';
+
+import '../screens.dart';
 
 class LoginScreen extends StatelessWidget {
   LoginScreen({super.key});
@@ -25,6 +23,7 @@ class LoginScreen extends StatelessWidget {
           onPressed: (() {
             Navigator.pop(
               context,
+              // ignore: always_specify_types
               MaterialPageRoute(
                   builder: (BuildContext context) => const AuthScreen()),
             );
@@ -66,7 +65,8 @@ class LoginScreen extends StatelessWidget {
                         context,
                         // ignore: always_specify_types
                         MaterialPageRoute(
-                            builder: (BuildContext context) => MainScreen()),
+                            builder: (BuildContext context) =>
+                                const MainScreen()),
                       );
                     },
                   ),
@@ -82,6 +82,7 @@ class LoginScreen extends StatelessWidget {
                       onTap: () {
                         Navigator.push(
                           context,
+                          // ignore: always_specify_types
                           MaterialPageRoute(
                               builder: (BuildContext context) =>
                                   SignupScreen()),
