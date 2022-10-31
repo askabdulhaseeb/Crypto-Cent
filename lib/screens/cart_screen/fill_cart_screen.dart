@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 
 import '../../providers/cart_provider.dart';
 import '../../widgets/custom_widgets/custom_widget.dart';
+import '../payment.dart';
 
 class FillCartScreen extends StatelessWidget {
   const FillCartScreen({super.key});
@@ -27,13 +28,13 @@ class FillCartScreen extends StatelessWidget {
               },
             ),
           ),
-          checkoutSection(context, cartPro),
+          checkoutSection(context, cartPro,context),
         ],
       ),
     );
   }
 
-  Widget checkoutSection(BuildContext ctx, CartProvider cartPro) {
+  Widget checkoutSection(BuildContext ctx, CartProvider cartPro,BuildContext context) {
     //int  cartproviderScreen;
     return Container(
       height: 250,
@@ -102,7 +103,15 @@ class FillCartScreen extends StatelessWidget {
             SizedBox(
                 width: 300,
                 height: 60,
-                child: CustomElevatedButton(title: 'Check out', onTap: () {})),
+                child: CustomElevatedButton(title: 'Check out', onTap: () {
+                   Navigator.push(
+                              context,
+                              // ignore: always_specify_types
+                              MaterialPageRoute(
+                                builder: (BuildContext context) => const PaymentScreen(),
+                              ),
+                            );
+                })),
             const SizedBox(height: 10),
           ],
         ),

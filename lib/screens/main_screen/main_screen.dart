@@ -16,7 +16,7 @@ class MainScreen extends StatefulWidget {
     HomeScreen(),
     FavoriteScreen(),
     CartScreen(),
-    PaymentScreen(),
+    EmptyScreen(),
     ProfileScreen(),
   ];
 

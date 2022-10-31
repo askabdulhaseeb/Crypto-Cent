@@ -21,15 +21,15 @@ class _PaymentScreenState extends State<PaymentScreen> {
   Widget build(BuildContext context) {
     CartProvider cartPro = Provider.of<CartProvider>(context);
     WalletProvider walletPro = Provider.of<WalletProvider>(context);
-    // String address =
-    // encryption.appDecrypt(walletPro.wallet!.coinsWallet[0].address);
+    String address =
+        encryption.appDecrypt(walletPro.wallet!.coinsWallet[0].address);
     return Scaffold(
       appBar: AppBar(
         title: const Text('Payment'),
         leading: IconButton(
             onPressed: (() {
-              // Provider.of<AppProvider>(context, listen: false).onTabTapped(0);
-              // Navigator.pop(context);
+              Provider.of<AppProvider>(context, listen: false).onTabTapped(3);
+              Navigator.pop(context);
             }),
             icon: const Icon(Icons.arrow_back_ios_sharp)),
         // ignore: always_specify_types
@@ -65,26 +65,26 @@ class _PaymentScreenState extends State<PaymentScreen> {
                       bold: true,
                       size: 28,
                     ),
-                    // FutureBuilder<double>(
-                    //     future: WallletWithApi().getWalletBalance(address),
-                    //     builder: (BuildContext context,
-                    //         AsyncSnapshot<double> snapshot) {
-                    //       if (snapshot.hasData) {
-                    //         double balance = snapshot.data!;
-                    //         return Text(
-                    //           '\$${balance.toStringAsFixed(8)}',
-                    //           style: const TextStyle(
-                    //             fontSize: 20,
-                    //             fontWeight: FontWeight.w500,
-                    //             color: Colors.white,
-                    //           ),
-                    //         );
-                    //       } else {
-                    //         return snapshot.hasError
-                    //             ? const Text('ERROR')
-                    //             : const CircularProgressIndicator.adaptive();
-                    //       }
-                    //     }),
+                    FutureBuilder<double>(
+                        future: WallletWithApi().getWalletBalance(address),
+                        builder: (BuildContext context,
+                            AsyncSnapshot<double> snapshot) {
+                          if (snapshot.hasData) {
+                            double balance = snapshot.data!;
+                            return Text(
+                              '\$${balance.toStringAsFixed(8)}',
+                              style: const TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.w500,
+                                color: Colors.white,
+                              ),
+                            );
+                          } else {
+                            return snapshot.hasError
+                                ? const Text('ERROR')
+                                : const CircularProgressIndicator.adaptive();
+                          }
+                        }),
                     const SizedBox(height: 20),
                     Container(
                       height: 40,
