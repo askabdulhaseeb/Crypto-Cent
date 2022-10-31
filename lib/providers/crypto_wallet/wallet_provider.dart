@@ -17,8 +17,8 @@ class WalletProvider with ChangeNotifier {
         break;
       }
     }
-
-   temp = true;
+    print(wallets.length);
+    temp = true;
     return temp;
   }
 }
