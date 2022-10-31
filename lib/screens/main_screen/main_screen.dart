@@ -36,7 +36,7 @@ class _MainScreenState extends State<MainScreen> {
       loading = true;
     });
     Provider.of<AuthProvider>(context, listen: false).getUser();
-    Provider.of<WalletProvider>(context, listen: false).load(AuthMethods.uid);
+    Provider.of<WalletProvider>(context, listen: false).load();
     setState(() {
       loading = false;
     });
