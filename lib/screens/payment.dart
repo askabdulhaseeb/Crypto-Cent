@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import '../database/crypto_wallet/wallet_create_api.dart';
 import '../function/encryption_function.dart';
 import '../providers/app_provider.dart';
+import '../providers/cart_provider.dart';
 import '../providers/crypto_wallet/wallet_provider.dart';
 import '../widgets/custom_widgets/custom_widget.dart';
 
@@ -18,6 +19,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
   Encryption encryption = Encryption();
   @override
   Widget build(BuildContext context) {
+    CartProvider cartPro = Provider.of<CartProvider>(context);
     WalletProvider walletPro = Provider.of<WalletProvider>(context);
     // String address =
     // encryption.appDecrypt(walletPro.wallet!.coinsWallet[0].address);
@@ -96,6 +98,20 @@ class _PaymentScreenState extends State<PaymentScreen> {
                     ],
                   ),
                 ),
+              ),
+              const SizedBox(height: 15),
+              Row(
+                children: <Widget>[
+                  const ForText(
+                    name: 'Total',
+                    bold: true,
+                  ),
+                  const SizedBox(width: 20),
+                  ForText(
+                    name: cartPro.totalPrice().toString(),
+                    bold: true,
+                  ),
+                ],
               ),
             ],
           ),

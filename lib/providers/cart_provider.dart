@@ -10,6 +10,7 @@ class CartProvider extends ChangeNotifier {
   void addtocart(Product value, int quantity) {
     Cart temp = Cart(
         id: value.pid,
+        createdID: value.createdByUID,
         title: value.productname,
         imageurl: value.imageurl,
         price: value.amount,
@@ -39,7 +40,6 @@ class CartProvider extends ChangeNotifier {
   }
 
   void addProduct(String value) {
-    
     final int index = _indexOfSelectedIndex(value);
     if (index >= 0) {
       _cartItems[index].quantity = _cartItems[index].quantity + 1;
