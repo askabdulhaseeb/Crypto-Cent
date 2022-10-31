@@ -28,7 +28,7 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
           actions: const [Icon(Icons.more_vert)],
         ),
         body: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 8),
           child: SingleChildScrollView(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
@@ -53,7 +53,25 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                     markers: {
                       Marker(
                         onTap: () {
-                          
+                          showModalBottomSheet(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10.0),
+                              ),
+                              context: context,
+                              builder: ((context) {
+                                return Container(
+                                  height: 70,
+                                  width: double.infinity,
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceAround,
+                                    children: const <Widget>[
+                                      Icon(Icons.location_on),
+                                      ForText(name: 'bloodo headquatar')
+                                    ],
+                                  ),
+                                );
+                              }));
                         },
                         markerId: const MarkerId('current location'),
                         position: LatLng(currentlat, currentlng),
@@ -74,7 +92,6 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
   Widget containers(
       BuildContext context, IconData icon, String text, String? textt) {
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 16),
       width: double.infinity,
       height: 120,
       decoration: BoxDecoration(
