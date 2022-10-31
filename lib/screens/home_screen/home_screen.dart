@@ -6,6 +6,8 @@ import '../../providers/categories_provider.dart';
 import '../../providers/product_provider.dart';
 import '../../utilities/app_images.dart';
 import '../../widgets/custom_widgets/custom_widget.dart';
+import '../about/aboust_us.dart';
+import '../about/contact_us.dart';
 import '../search_screen/search_screen.dart';
 import 'all_contacts_catrgories/all_screen.dart';
 import 'card_swiper.dart';
@@ -102,24 +104,107 @@ class HomeScreen extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 20),
-            Container(
-              height: 50,
-              width: double.infinity,
-              color: Theme.of(context).secondaryHeaderColor,
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                child: Row(
-                  children: const <Widget>[
-                    Icon(Icons.search),
-                    SizedBox(
-                      width: 20,
-                    ),
-                    ForText(name: 'Search')
-                  ],
-                ),
-              ),
+            drawerContainer(
+              context,
+              'Search',
+              Icons.search,
+              (() {
+                Navigator.push(
+                  context,
+                  // ignore: always_specify_types
+                  MaterialPageRoute(
+                    builder: (BuildContext context) => const SerachScreen(),
+                  ),
+                );
+              }),
+            ),
+            const SizedBox(height: 10),
+            drawerImageContainer(
+              context,
+              'Home',
+              ImageIcon(AssetImage(AppImages.homeUnselected)),
+              (() {
+                Provider.of<AppProvider>(context, listen: false).onTabTapped(0);
+                Navigator.pop(context);
+              }),
+            ),
+            const SizedBox(height: 10),
+            drawerContainer(
+              context,
+              'Contact Us',
+              Icons.phone,
+              (() {
+                Navigator.push(
+                  context,
+                  // ignore: always_specify_types
+                  MaterialPageRoute(
+                    builder: (BuildContext context) => const ContactUsScreen(),
+                  ),
+                );
+              }),
+            ),
+            const SizedBox(height: 10),
+            drawerImageContainer(
+              context,
+              'About Us',
+              ImageIcon(AssetImage(AppImages.profileUnselected)),
+              (() {
+                Navigator.push(
+                  context,
+                  // ignore: always_specify_types
+                  MaterialPageRoute(
+                    builder: (BuildContext context) => const AboutUsScreen(),
+                  ),
+                );
+              }),
             ),
           ],
+        ),
+      ),
+    );
+  }
+
+  Widget drawerContainer(
+      BuildContext context, String name, IconData icon, VoidCallback onTap) {
+    return GestureDetector(
+      onTap: onTap,
+      child: SizedBox(
+        height: 50,
+        width: double.infinity,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: Row(
+            children: <Widget>[
+              Icon(icon),
+              const SizedBox(
+                width: 20,
+              ),
+              ForText(name: name)
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget drawerImageContainer(
+      BuildContext context, String name, ImageIcon icon, VoidCallback onTap) {
+    return GestureDetector(
+      onTap: onTap,
+      child: SizedBox(
+        height: 50,
+        width: double.infinity,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: Row(
+            children: <Widget>[
+              icon,
+              const SizedBox(
+                width: 20,
+              ),
+              ForText(name: name)
+            ],
+          ),
         ),
       ),
     );
