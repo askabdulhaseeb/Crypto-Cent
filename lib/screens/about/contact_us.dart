@@ -2,6 +2,8 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:provider/provider.dart';
+import '../../providers/app_provider.dart';
 import '../../widgets/custom_widgets/custom_widget.dart';
 
 class ContactUsScreen extends StatefulWidget {
@@ -24,7 +26,12 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
     return Scaffold(
         appBar: AppBar(
           title: const Text('Contact Us'),
-          leading: const Icon(Icons.arrow_back_ios_sharp),
+          leading: IconButton(
+              onPressed: (() {
+                Provider.of<AppProvider>(context, listen: false).onTabTapped(0);
+                Navigator.pop(context);
+              }),
+              icon: const Icon(Icons.arrow_back_ios_sharp)),
           actions: const <Widget>[Icon(Icons.more_vert)],
         ),
         body: Padding(

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
+import '../../providers/app_provider.dart';
 import '../../widgets/custom_widgets/custom_widget.dart';
 
 class AboutUsScreen extends StatelessWidget {
@@ -10,9 +12,14 @@ class AboutUsScreen extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(
           title: const Text('About Us'),
-          leading: const Icon(Icons.arrow_back_ios_sharp),
+          leading: IconButton(
+              onPressed: (() {
+                Provider.of<AppProvider>(context, listen: false).onTabTapped(0);
+                Navigator.pop(context);
+              }),
+              icon: const Icon(Icons.arrow_back_ios_sharp)),
           // ignore: always_specify_types
-          actions:  const [Icon(Icons.more_vert)],
+          actions: const [Icon(Icons.more_vert)],
         ),
         body: Padding(
           padding: const EdgeInsets.all(8.0),
