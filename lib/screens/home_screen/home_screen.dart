@@ -11,6 +11,7 @@ import '../about/contact_us.dart';
 import '../search_screen/search_screen.dart';
 import 'all_contacts_catrgories/all_screen.dart';
 import 'card_swiper.dart';
+import 'categories/categories_extend.dart';
 import 'categories/category.dart';
 import 'latest_product/latest_product.dart';
 import 'upload_screen.dart';
@@ -20,7 +21,6 @@ class HomeScreen extends StatelessWidget {
   static const String routeName = '/HomeScreen';
   @override
   Widget build(BuildContext context) {
-    // double width = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: appBar(context),
       drawer: drawerScreen(context),
@@ -28,8 +28,7 @@ class HomeScreen extends StatelessWidget {
           onPressed: () {
             Navigator.push(
               context,
-              // ignore: always_specify_types
-              MaterialPageRoute(
+              MaterialPageRoute<UploadScreen>(
                   builder: (BuildContext context) => const UploadScreen()),
             );
           },
@@ -46,25 +45,57 @@ class HomeScreen extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: const <Widget>[
-                Headeriamge(),
-                SizedBox(height: 20),
-                ForText(
-                  name: 'category',
-                  bold: true,
-                  size: 22,
+              children: <Widget>[
+                const Headeriamge(),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    const ForText(name: 'Category', size: 18, bold: true),
+                    TextButton(
+                      onPressed: (() {
+                        Navigator.push(
+                            context,
+                            // ignore: always_specify_types
+                            MaterialPageRoute(
+                                builder: (BuildContext context) =>
+                                    const CategoryScreen()));
+                      }),
+                      child: ForText(
+                        name: 'View All',
+                        color: Theme.of(context).primaryColor,
+                      ),
+                    ),
+                  ],
                 ),
-                SizedBox(height: 20),
                 //CategoryScreen(),
-                AllScreen(),
-                SizedBox(height: 20),
-                ForText(
-                  name: 'Latest Product',
-                  bold: true,
-                  size: 22,
+                const AllScreen(),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const ForText(
+                      name: 'Latest Product',
+                      bold: true,
+                      size: 18,
+                    ),
+                    TextButton(
+                      onPressed: (() {
+                        Navigator.push(
+                            context,
+                            // ignore: always_specify_types
+                            MaterialPageRoute(
+                                builder: (BuildContext context) =>
+                                    CategoriesExtend(
+                                      categoryName: 'All',
+                                    )));
+                      }),
+                      child: ForText(
+                        name: 'View All',
+                        color: Theme.of(context).primaryColor,
+                      ),
+                    ),
+                  ],
                 ),
-                SizedBox(height: 20),
-                LatestProduct(),
+                const LatestProduct(),
               ],
             ),
           ),
@@ -213,8 +244,8 @@ class HomeScreen extends StatelessWidget {
   AppBar appBar(BuildContext context) {
     return AppBar(
       actions: <Widget>[
-        IconButton(
-          onPressed: () {
+        GestureDetector(
+          onTap: () {
             Navigator.push(
               context,
               // ignore: always_specify_types
@@ -223,14 +254,17 @@ class HomeScreen extends StatelessWidget {
               ),
             );
           },
-          splashRadius: 20,
-          icon: Icon(
-            CupertinoIcons.search,
-            color: Theme.of(context).iconTheme.color,
+          child: CircleAvatar(
+            backgroundColor: Theme.of(context).secondaryHeaderColor,
+            child: Icon(
+              CupertinoIcons.search,
+              color: Theme.of(context).primaryColor,
+            ),
           ),
         ),
+        const SizedBox(width: 10),
       ],
-      centerTitle: false,
+      centerTitle: true,
       title: Container(
         height: 40,
         width: 80,

@@ -20,8 +20,8 @@ class ForText extends StatelessWidget {
       name,
       style: GoogleFonts.roboto(
         color: color ?? Colors.black,
-        fontSize: size ?? 18,
-        fontWeight: bold == true ? FontWeight.w800 : FontWeight.w400,
+        fontSize: size,
+        fontWeight: bold == true ? FontWeight.w600 : FontWeight.w400,
       ),
     );
   }

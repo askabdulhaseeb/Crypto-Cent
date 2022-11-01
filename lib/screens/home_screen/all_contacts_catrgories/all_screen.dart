@@ -11,8 +11,8 @@ class AllScreen extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: <Widget>[
-        allitems(context, 'All', 40, 80, true, () {}),
-        allitems(context, 'Contacts', 40, 120, false, () {
+        allitems(context, 'All', 80, true, () {}),
+        allitems(context, 'Contacts', 120, false, () {
           Navigator.push(
             context,
             // ignore: always_specify_types
@@ -21,7 +21,7 @@ class AllScreen extends StatelessWidget {
             ),
           );
         }),
-        allitems(context, 'Categories', 40, 120, false, () {
+        allitems(context, 'Categories', 120, false, () {
           Navigator.push(
             context,
             // ignore: always_specify_types
@@ -34,12 +34,12 @@ class AllScreen extends StatelessWidget {
     );
   }
 
-  Widget allitems(BuildContext context, String name, double height,
-      double width, bool primary, VoidCallback onTap) {
+  Widget allitems(BuildContext context, String name, double width, bool primary,
+      VoidCallback onTap) {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        height: height,
+        height: 48,
         width: width,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(24),
@@ -50,8 +50,7 @@ class AllScreen extends StatelessWidget {
         child: Center(
             child: ForText(
           name: name,
-          size: 20,
-          color: (primary) ? Colors.white : Colors.black,
+          color: (primary) ? Colors.white : Colors.black38,
         )),
       ),
     );

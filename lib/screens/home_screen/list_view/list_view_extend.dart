@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import '../../../models/product_model.dart';
 import '../../../providers/product_provider.dart';
 import '../../../utilities/app_images.dart';
+import '../../../widgets/custom_widgets/custom_widget.dart';
 import '../product_full_screen/product_full_screen.dart';
 
 class ListViewScreen extends StatelessWidget {
@@ -30,8 +31,9 @@ class ListViewScreen extends StatelessWidget {
           width: 170,
           decoration: BoxDecoration(
               color: const Color(0xffF6F7F9),
-              borderRadius: BorderRadius.circular(24),
-              boxShadow: [
+              borderRadius: BorderRadius.circular(10),
+              border: Border.all(color: Colors.grey.withOpacity(0.5), width: 2),
+              boxShadow: <BoxShadow>[
                 BoxShadow(
                   color: Colors.black.withOpacity(0.1),
                   offset: const Offset(1, 0),
@@ -45,22 +47,24 @@ class ListViewScreen extends StatelessWidget {
                 height: 150,
                 width: double.infinity,
                 decoration: BoxDecoration(
-                    //color: Colors.black,
-                    borderRadius: const BorderRadius.only(
-                        topLeft: Radius.circular(24),
-                        topRight: Radius.circular(24)),
-                    image: DecorationImage(
-                        image: NetworkImage(
-                          product.imageurl,
-                        ),
-                        fit: BoxFit.fill)),
+                  //color: Colors.black,
+                  borderRadius: const BorderRadius.only(
+                    topLeft: Radius.circular(10),
+                    topRight: Radius.circular(10),
+                  ),
+                  image: DecorationImage(
+                      image: NetworkImage(
+                        product.imageurl,
+                      ),
+                      fit: BoxFit.fill),
+                ),
               ),
               const SizedBox(height: 5),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8),
                 child: Text(
                   product.productname,
-                  maxLines: 2,
+                  maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   style: GoogleFonts.lato(
                     color: Colors.black,
@@ -70,6 +74,7 @@ class ListViewScreen extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 5),
+              const ForText(name: 'Review here...',),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8),
                 child: Row(
