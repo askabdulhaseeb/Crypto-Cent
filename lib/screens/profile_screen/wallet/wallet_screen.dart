@@ -7,6 +7,8 @@ import '../../../function/encryption_function.dart';
 import '../../../providers/crypto_wallet/binance_provider.dart';
 import '../../../providers/crypto_wallet/wallet_provider.dart';
 import '../../../widgets/custom_widgets/cutom_text.dart';
+import 'history_bitcoin.dart';
+import 'recieve_bitcoin.dart';
 import 'send_bitcoin.dart';
 
 class WalletScreen extends StatefulWidget {
@@ -112,19 +114,29 @@ class _WalletScreenState extends State<WalletScreen> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  send(context, 'Add Money', Icons.add, () {}),
-                  recieve(context, 'History', Icons.arrow_drop_down_sharp, () {
-                    // Navigator.push(
-                    //   context,
-                    //   // ignore: always_specify_types
-                    //   MaterialPageRoute(
-                    //     builder: (BuildContext context) =>
-                    //         const SendBitcoinScreen(),
-                    //   ),
-                    // );
+                  customWidget(context, 'Add Money', Icons.add, () {
+                    Navigator.push(
+                      context,
+                      // ignore: always_specify_types
+                      MaterialPageRoute(
+                        builder: (BuildContext context) =>
+                            const ReceiveBTCScreen(),
+                      ),
+                    );
                   }),
-                  recieve(context, 'Send Money', Icons.arrow_drop_down_sharp,
+                  customWidget(context, 'History', Icons.arrow_drop_down_sharp,
                       () {
+                    Navigator.push(
+                      context,
+                      // ignore: always_specify_types
+                      MaterialPageRoute(
+                        builder: (BuildContext context) =>
+                            const BitcoinHistroyScreen(),
+                      ),
+                    );
+                  }),
+                  customWidget(
+                      context, 'Send Money', Icons.arrow_drop_down_sharp, () {
                     Navigator.push(
                       context,
                       // ignore: always_specify_types
@@ -135,72 +147,6 @@ class _WalletScreenState extends State<WalletScreen> {
                     );
                   }),
                 ],
-              ),
-              const SizedBox(height: 20),
-              temp == false
-                  ? const SizedBox()
-                  : Column(
-                      children: <Widget>[
-                        const Text(
-                          'Your BTC Address :',
-                          style: TextStyle(
-                              fontWeight: FontWeight.w500, fontSize: 16),
-                        ),
-                        const SizedBox(height: 16),
-                        Text(
-                          address,
-                          //walletPro.walletadd,
-                          style: const TextStyle(
-                              fontWeight: FontWeight.w500, fontSize: 16),
-                        ),
-                        const SizedBox(height: 20),
-                        TextButton.icon(
-                          onPressed: () async {
-                            await Clipboard.setData(ClipboardData(
-                              text: address,
-                            ));
-                          },
-                          icon: const Icon(Icons.copy),
-                          label: const Text('Copy Address'),
-                        ),
-                      ],
-                    ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget send(
-      BuildContext context, String name, IconData? icon, VoidCallback ontap) {
-    return GestureDetector(
-      onTap: () {
-        setState(() {
-          temp = !temp;
-        });
-      },
-      child: Container(
-        height: 100,
-        width: 100,
-        decoration: BoxDecoration(
-          color: temp
-              ? Theme.of(context).primaryColor
-              : Theme.of(context).secondaryHeaderColor,
-          borderRadius: BorderRadius.circular(16),
-        ),
-        child: Center(
-          child: Column(
-            children: <Widget>[
-              Icon(
-                icon,
-                color: temp ? Colors.white : Colors.black,
-                size: 46,
-              ),
-              ForText(
-                name: name,
-                color: temp ? Colors.white : Colors.black,
-                bold: true,
               )
             ],
           ),
@@ -209,7 +155,7 @@ class _WalletScreenState extends State<WalletScreen> {
     );
   }
 
-  Widget recieve(
+  Widget customWidget(
       BuildContext context, String name, IconData? icon, VoidCallback ontap) {
     return GestureDetector(
       onTap: ontap,
@@ -226,12 +172,11 @@ class _WalletScreenState extends State<WalletScreen> {
               Icon(
                 icon,
                 color: Colors.black,
-                size: 46,
+                size: 26,
               ),
               ForText(
                 name: name,
                 color: Colors.black,
-                bold: true,
               )
             ],
           ),
