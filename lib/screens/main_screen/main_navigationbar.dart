@@ -29,7 +29,6 @@ class _MainBottomNavigationBarState extends State<MainBottomNavigationBar> {
         const Icon(Icons.favorite_border),
         const Icon(Icons.shopping_cart_outlined),
         const Icon(Icons.notifications_active_outlined),
-        ImageIcon(AssetImage(AppImages.profileUnselected)),
       ],
     );
   }
