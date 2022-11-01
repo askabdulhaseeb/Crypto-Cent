@@ -16,7 +16,7 @@ class BinanceApi {
       var json = jsonDecode(response.body);
     //  print(json['symbol']);
       Binance coinData = Binance(
-        price: json['price'].toDouble() ?? 0,
+        price: double.parse(json['price']),
         symbol: json['symbol'] ?? '',
       );
       coin = coinData;

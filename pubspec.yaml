@@ -48,6 +48,7 @@ dependencies:
   encrypt: ^5.0.1
   location: ^4.4.0
   google_maps_flutter: ^2.2.1
+  curved_navigation_bar: ^1.0.3
 
 dev_dependencies:
   flutter_test:

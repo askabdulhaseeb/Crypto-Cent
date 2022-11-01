@@ -16,7 +16,7 @@ class MainScreen extends StatefulWidget {
     HomeScreen(),
     FavoriteScreen(),
     CartScreen(),
-    EmptyScreen(),
+    PaymentScreen(),
     ProfileScreen(),
   ];
 
@@ -37,7 +37,7 @@ class _MainScreenState extends State<MainScreen> {
       loading = true;
     });
     Provider.of<AuthProvider>(context, listen: false).getUser();
-    Provider.of<WalletProvider>(context, listen: false).load();
+    Provider.of<WalletProvider>(context, listen: false).load(); 
     setState(() {
       loading = false;
     });
@@ -51,7 +51,7 @@ class _MainScreenState extends State<MainScreen> {
         ? const CircularProgressIndicator()
         : Scaffold(
             body: MainScreen._pages[currentIndex],
-            bottomNavigationBar: const MainBottomNavigationBar(),
+            bottomNavigationBar:  MainBottomNavigationBar(),
           );
   }
 }
