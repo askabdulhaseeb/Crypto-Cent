@@ -9,6 +9,7 @@ import 'firebase_options.dart';
 import 'providers/auth_provider.dart';
 import 'providers/cart_provider.dart';
 import 'providers/categories_provider.dart';
+import 'providers/crypto_wallet/binance_provider.dart';
 import 'providers/crypto_wallet/wallet_provider.dart';
 import 'providers/product_provider.dart';
 import 'providers/provider.dart';
@@ -53,6 +54,9 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider<ProductProvider>.value(
           value: ProductProvider(),
+        ),
+        ChangeNotifierProvider<BinanceProvider>.value(
+          value: BinanceProvider(),
         ),
       ],
       child: Consumer<AppThemeProvider>(
