@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 
 import '../../../database/crypto_wallet/wallet_create_api.dart';
 import '../../../function/encryption_function.dart';
+import '../../../providers/crypto_wallet/binance_provider.dart';
 import '../../../providers/crypto_wallet/wallet_provider.dart';
 import '../../../widgets/custom_widgets/cutom_text.dart';
 import 'send_bitcoin.dart';
@@ -21,6 +22,7 @@ class _WalletScreenState extends State<WalletScreen> {
   @override
   Widget build(BuildContext context) {
     WalletProvider walletPro = Provider.of<WalletProvider>(context);
+    BinanceProvider coinprice=Provider.of<BinanceProvider>(context);
     String address =
         encryption.appDecrypt(walletPro.wallet!.coinsWallet[0].address);
     return Scaffold(
@@ -57,9 +59,29 @@ class _WalletScreenState extends State<WalletScreen> {
                           builder: (BuildContext context,
                               AsyncSnapshot<double> snapshot) {
                             if (snapshot.hasData) {
+                              double balance = snapshot.data! * coinprice.coin.price;
+                              return Text(
+                                '\$ ${balance.toStringAsFixed(2)}',
+                                style: const TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w500,
+                                  color: Colors.white,
+                                ),
+                              );
+                            } else {
+                              return snapshot.hasError
+                                  ? const Text('ERROR')
+                                  : const CircularProgressIndicator.adaptive();
+                            }
+                          }),
+                           FutureBuilder<double>(
+                          future: WallletWithApi().getWalletBalance(address),
+                          builder: (BuildContext context,
+                              AsyncSnapshot<double> snapshot) {
+                            if (snapshot.hasData) {
                               double balance = snapshot.data!;
                               return Text(
-                                '\$${balance.toStringAsFixed(8)}',
+                                'BTC ${balance.toStringAsFixed(2)}',
                                 style: const TextStyle(
                                   fontSize: 20,
                                   fontWeight: FontWeight.w500,
