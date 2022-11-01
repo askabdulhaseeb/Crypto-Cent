@@ -22,7 +22,7 @@ class _WalletScreenState extends State<WalletScreen> {
   @override
   Widget build(BuildContext context) {
     WalletProvider walletPro = Provider.of<WalletProvider>(context);
-    BinanceProvider coinprice=Provider.of<BinanceProvider>(context);
+    BinanceProvider coinprice = Provider.of<BinanceProvider>(context);
     String address =
         encryption.appDecrypt(walletPro.wallet!.coinsWallet[0].address);
     return Scaffold(
@@ -59,7 +59,8 @@ class _WalletScreenState extends State<WalletScreen> {
                           builder: (BuildContext context,
                               AsyncSnapshot<double> snapshot) {
                             if (snapshot.hasData) {
-                              double balance = snapshot.data! * coinprice.coin.price;
+                              double balance =
+                                  snapshot.data! * coinprice.coin.price;
                               return Text(
                                 '\$ ${balance.toStringAsFixed(2)}',
                                 style: const TextStyle(
@@ -74,7 +75,7 @@ class _WalletScreenState extends State<WalletScreen> {
                                   : const CircularProgressIndicator.adaptive();
                             }
                           }),
-                           FutureBuilder<double>(
+                      FutureBuilder<double>(
                           future: WallletWithApi().getWalletBalance(address),
                           builder: (BuildContext context,
                               AsyncSnapshot<double> snapshot) {
@@ -112,6 +113,16 @@ class _WalletScreenState extends State<WalletScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   send(context, 'Add Money', Icons.add, () {}),
+                  recieve(context, 'History', Icons.arrow_drop_down_sharp, () {
+                    // Navigator.push(
+                    //   context,
+                    //   // ignore: always_specify_types
+                    //   MaterialPageRoute(
+                    //     builder: (BuildContext context) =>
+                    //         const SendBitcoinScreen(),
+                    //   ),
+                    // );
+                  }),
                   recieve(context, 'Send Money', Icons.arrow_drop_down_sharp,
                       () {
                     Navigator.push(
@@ -171,7 +182,7 @@ class _WalletScreenState extends State<WalletScreen> {
       },
       child: Container(
         height: 100,
-        width: 150,
+        width: 100,
         decoration: BoxDecoration(
           color: temp
               ? Theme.of(context).primaryColor
@@ -204,7 +215,7 @@ class _WalletScreenState extends State<WalletScreen> {
       onTap: ontap,
       child: Container(
         height: 100,
-        width: 150,
+        width: 100,
         decoration: BoxDecoration(
           color: Theme.of(context).secondaryHeaderColor,
           borderRadius: BorderRadius.circular(16),
