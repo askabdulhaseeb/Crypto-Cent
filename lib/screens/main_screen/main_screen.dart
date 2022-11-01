@@ -17,7 +17,7 @@ class MainScreen extends StatefulWidget {
     HomeScreen(),
     FavoriteScreen(),
     CartScreen(),
-    PaymentScreen(),
+    EmptyScreen(),
     ProfileScreen(),
   ];
 
@@ -69,13 +69,8 @@ class _MainScreenState extends State<MainScreen> {
               color: Theme.of(context).secondaryHeaderColor,
               shape: const CircularNotchedRectangle(),
               notchMargin: 10,
-              child: Container(
+              child: SizedBox(
                 height: 60,
-                decoration: const BoxDecoration(
-                    //color: Theme.of(context).secondaryHeaderColor,
-                    borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(18),
-                        topRight: Radius.circular(18))),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
@@ -153,7 +148,8 @@ class _MainScreenState extends State<MainScreen> {
                                       ),
                                       color: Theme.of(context).primaryColor,
                                     )
-                                  : ImageIcon(AssetImage(AppImages.profileUnselected)),
+                                  : ImageIcon(
+                                      AssetImage(AppImages.profileUnselected)),
                             ],
                           ),
                         ),
