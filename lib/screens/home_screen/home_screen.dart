@@ -25,6 +25,7 @@ class HomeScreen extends StatelessWidget {
       appBar: appBar(context),
       drawer: drawerScreen(context),
       floatingActionButton: FloatingActionButton(
+          heroTag: null,
           onPressed: () {
             Navigator.push(
               context,
@@ -99,9 +100,9 @@ class HomeScreen extends StatelessWidget {
                   ],
                 ),
               ),
-             const Padding (
-                padding:  EdgeInsets.symmetric(horizontal: 16),
-                child:  LatestProduct(),
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 16),
+                child: LatestProduct(),
               ),
             ],
           ),
