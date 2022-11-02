@@ -10,6 +10,7 @@ import '../widgets/custom_widgets/custom_widget.dart';
 
 class PaymentScreen extends StatefulWidget {
   const PaymentScreen({super.key});
+  static String routes = '/payment';
 
   @override
   State<PaymentScreen> createState() => _PaymentScreenState();
@@ -28,7 +29,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
         title: const Text('Payment'),
         leading: IconButton(
             onPressed: (() {
-              Provider.of<AppProvider>(context, listen: false).onTabTapped(3);
+              Provider.of<AppProvider>(context, listen: false).onTabTapped(2);
               Navigator.pop(context);
             }),
             icon: const Icon(Icons.arrow_back_ios_sharp)),

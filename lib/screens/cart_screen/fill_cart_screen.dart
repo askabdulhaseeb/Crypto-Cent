@@ -28,92 +28,101 @@ class FillCartScreen extends StatelessWidget {
               },
             ),
           ),
-          checkoutSection(context, cartPro,context),
+          checkoutSection(context, cartPro, context),
         ],
       ),
     );
   }
 
-  Widget checkoutSection(BuildContext ctx, CartProvider cartPro,BuildContext context) {
+  Widget checkoutSection(
+      BuildContext ctx, CartProvider cartPro, BuildContext context) {
     //int  cartproviderScreen;
-    return Container(
-      height: 250,
-      color: Colors.transparent,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16),
-        child: Column(
-          children: [
-            const Divider(),
-            Row(
-              children: <Widget>[
-                const ForText(
-                  name: 'Select Item',
-                  bold: true,
-                ),
-                const Spacer(),
-                ForText(
-                  name: cartPro.cartItem.length.toString(),
-                  bold: true,
-                ),
-              ],
-            ),
-            const SizedBox(height: 15),
-            Row(
-              children: <Widget>[
-                const ForText(
-                  name: 'Price',
-                  bold: true,
-                ),
-                const Spacer(),
-                ForText(
-                  name: cartPro.totalPrice().toString(),
-                  bold: true,
-                ),
-              ],
-            ),
-            const SizedBox(height: 15),
-            Row(
-              children: const <Widget>[
-                ForText(
-                  name: 'Discount',
-                  bold: true,
-                ),
-                Spacer(),
-                ForText(
-                  name: '0',
-                  bold: true,
-                ),
-              ],
-            ),
-            const SizedBox(height: 15),
-            Row(
-              children: <Widget>[
-                const ForText(
-                  name: 'Total Price',
-                  bold: true,
-                ),
-                const Spacer(),
-                ForText(
-                  name: cartPro.totalPrice().toString(),
-                  bold: true,
-                ),
-              ],
-            ),
-            const Spacer(),
-            SizedBox(
-                width: 300,
-                height: 60,
-                child: CustomElevatedButton(title: 'Check out', onTap: () {
-                   Navigator.push(
-                              context,
-                              // ignore: always_specify_types
-                              MaterialPageRoute(
-                                builder: (BuildContext context) => const PaymentScreen(),
-                              ),
-                            );
-                })),
-            const SizedBox(height: 10),
-          ],
+    return GestureDetector(
+      onTap: () {
+        Navigator.of(context).pushNamed(PaymentScreen.routes);
+      },
+      child: Container(
+        height: 250,
+        color: Colors.transparent,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: Column(
+            children: [
+              const Divider(),
+              Row(
+                children: <Widget>[
+                  const ForText(
+                    name: 'Select Item',
+                    bold: true,
+                  ),
+                  const Spacer(),
+                  ForText(
+                    name: cartPro.cartItem.length.toString(),
+                    bold: true,
+                  ),
+                ],
+              ),
+              const SizedBox(height: 15),
+              Row(
+                children: <Widget>[
+                  const ForText(
+                    name: 'Price',
+                    bold: true,
+                  ),
+                  const Spacer(),
+                  ForText(
+                    name: cartPro.totalPrice().toString(),
+                    bold: true,
+                  ),
+                ],
+              ),
+              const SizedBox(height: 15),
+              Row(
+                children: const <Widget>[
+                  ForText(
+                    name: 'Discount',
+                    bold: true,
+                  ),
+                  Spacer(),
+                  ForText(
+                    name: '0',
+                    bold: true,
+                  ),
+                ],
+              ),
+              const SizedBox(height: 15),
+              Row(
+                children: <Widget>[
+                  const ForText(
+                    name: 'Total Price',
+                    bold: true,
+                  ),
+                  const Spacer(),
+                  ForText(
+                    name: cartPro.totalPrice().toString(),
+                    bold: true,
+                  ),
+                ],
+              ),
+              const Spacer(),
+              SizedBox(
+                  width: 300,
+                  height: 60,
+                  child: CustomElevatedButton(
+                      title: 'Check out',
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          // ignore: always_specify_types
+                          MaterialPageRoute(
+                            builder: (BuildContext context) =>
+                                const PaymentScreen(),
+                          ),
+                        );
+                      })),
+              const SizedBox(height: 10),
+            ],
+          ),
         ),
       ),
     );
