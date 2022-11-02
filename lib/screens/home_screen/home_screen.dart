@@ -40,14 +40,14 @@ class HomeScreen extends StatelessWidget {
         _,
       ) {
         return SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                const Headeriamge(),
-                Row(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              const Headeriamge(),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
                     const ForText(name: 'Category', size: 18, bold: true),
@@ -67,9 +67,12 @@ class HomeScreen extends StatelessWidget {
                     ),
                   ],
                 ),
-                //CategoryScreen(),
-                const AllScreen(),
-                Row(
+              ),
+              //CategoryScreen(),
+              const AllScreen(),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     const ForText(
@@ -95,9 +98,12 @@ class HomeScreen extends StatelessWidget {
                     ),
                   ],
                 ),
-                const LatestProduct(),
-              ],
-            ),
+              ),
+             const Padding (
+                padding:  EdgeInsets.symmetric(horizontal: 16),
+                child:  LatestProduct(),
+              ),
+            ],
           ),
         );
       }),
@@ -266,8 +272,8 @@ class HomeScreen extends StatelessWidget {
       ],
       centerTitle: true,
       title: Container(
-        height: 40,
-        width: 80,
+        height: 30,
+        width: 60,
         decoration: BoxDecoration(
           image: DecorationImage(
             image: AssetImage(AppImages.logo),

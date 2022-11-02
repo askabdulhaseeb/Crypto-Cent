@@ -1,6 +1,7 @@
 // ignore_for_file: library_private_types_in_public_api
 
 import 'package:card_swiper/card_swiper.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 
 import '../../providers/app_theme.dart';
@@ -17,16 +18,17 @@ class Headeriamge extends StatefulWidget {
 class _HeaderiamgeState extends State<Headeriamge> {
   @override
   Widget build(BuildContext context) {
-    return Swiper(
-      itemCount: 3,
-      autoplay: true,
-      autoplayDelay: 10000,
-      itemWidth: MediaQuery.of(context).size.width,
-      itemHeight: 150.0,
-      layout: SwiperLayout.TINDER,
-      onTap: (int index) {},
-      itemBuilder: (BuildContext ctx, int index) {
+    return CarouselSlider(
+      options: CarouselOptions(
+        autoPlay: true,
+        height:  150.0,
+        
+      ),
+      items: [1,2,3,4,5].map((i) {
+    return Builder(
+      builder: (BuildContext context) {
         return Container(
+          margin: const EdgeInsets.symmetric(horizontal: 6),
           // height: 170,
           // width: width * 0.8,
           decoration: BoxDecoration(
@@ -78,6 +80,10 @@ class _HeaderiamgeState extends State<Headeriamge> {
           ),
         );
       },
+    );
+  }).toList(),
+    
+     
     );
   }
 }
