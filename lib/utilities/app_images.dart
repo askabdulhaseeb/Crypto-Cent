@@ -1,4 +1,5 @@
 class AppImages {
+  static String get banner => 'assets/images/banner.png';
   static String get brandIntroIcon => 'assets/images/brand_icon.png';
   static String get discountIntroIcon => 'assets/images/discount_icon.png';
   static String get deliveryIntroIcon => 'assets/images/delivery_icon.png';
