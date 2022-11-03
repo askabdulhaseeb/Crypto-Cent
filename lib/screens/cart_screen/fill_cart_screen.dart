@@ -10,25 +10,22 @@ class FillCartScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     CartProvider cartPro = Provider.of<CartProvider>(context);
-    return Scaffold(
-      appBar: AppBar(title: const Text('My Cart')),
-      body: Column(
-        children: <Widget>[
-          Expanded(
-            child: ListView.builder(
-              shrinkWrap: true,
-              itemCount: cartPro.cartItem.length,
-              itemBuilder: (BuildContext context, int index) {
-                return CartItem(
-                  cartPro: cartPro,
-                  index: index,
-                );
-              },
-            ),
+    return Column(
+      children: <Widget>[
+        Expanded(
+          child: ListView.builder(
+            shrinkWrap: true,
+            itemCount: cartPro.cartItem.length,
+            itemBuilder: (BuildContext context, int index) {
+              return CartItem(
+                cartPro: cartPro,
+                index: index,
+              );
+            },
           ),
-          checkoutSection(context, cartPro, context),
-        ],
-      ),
+        ),
+        checkoutSection(context, cartPro, context),
+      ],
     );
   }
 

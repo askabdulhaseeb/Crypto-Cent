@@ -11,6 +11,7 @@ class CartScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     CartProvider cartPro = Provider.of<CartProvider>(context);
     return Scaffold(
+      appBar: AppBar(title: const Text('My Cart')),
       body: cartPro.cartItem.isNotEmpty ? FillCartScreen() : EmptyCartScreen(),
     );
   }
