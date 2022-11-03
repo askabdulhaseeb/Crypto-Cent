@@ -56,8 +56,7 @@ class HomeScreen extends StatelessWidget {
                       onPressed: (() {
                         Navigator.push(
                             context,
-                            // ignore: always_specify_types
-                            MaterialPageRoute(
+                            MaterialPageRoute<CategoryScreen>(
                                 builder: (BuildContext context) =>
                                     const CategoryScreen()));
                       }),
@@ -71,6 +70,36 @@ class HomeScreen extends StatelessWidget {
               ),
               //CategoryScreen(),
               const AllScreen(),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const ForText(
+                      name: 'Popular Product',
+                      bold: true,
+                      size: 18,
+                    ),
+                    TextButton(
+                      onPressed: (() {
+                        Navigator.push(
+                            context,
+                            // ignore: always_specify_types
+                            MaterialPageRoute(
+                                builder: (BuildContext context) =>
+                                    CategoriesExtend(
+                                      categoryName: 'All',
+                                    )));
+                      }),
+                      child: ForText(
+                        name: 'View All',
+                        color: Theme.of(context).primaryColor,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const LatestProduct(),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: Row(
@@ -100,10 +129,8 @@ class HomeScreen extends StatelessWidget {
                   ],
                 ),
               ),
-              const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 16),
-                child: LatestProduct(),
-              ),
+              const LatestProduct(),
+              const SizedBox(height: 50),
             ],
           ),
         );
@@ -130,15 +157,16 @@ class HomeScreen extends StatelessWidget {
                     },
                     icon: const Icon(Icons.arrow_back_ios)),
                 const Spacer(),
-                const ForText(name: 'More', bold: true),
+                const ForText(name: 'More', bold: true, size: 18),
                 const Spacer(),
                 IconButton(
-                    onPressed: () {
-                      Provider.of<AppProvider>(context, listen: false)
-                          .onTabTapped(0);
-                      Navigator.pop(context);
-                    },
-                    icon: const Icon(Icons.cancel_outlined)),
+                  onPressed: () {
+                    Provider.of<AppProvider>(context, listen: false)
+                        .onTabTapped(0);
+                    Navigator.pop(context);
+                  },
+                  icon: const Icon(Icons.cancel),
+                ),
               ],
             ),
             const SizedBox(height: 20),
@@ -273,8 +301,8 @@ class HomeScreen extends StatelessWidget {
       ],
       centerTitle: true,
       title: Container(
-        height: 30,
-        width: 60,
+        height: 24,
+        width: 48,
         decoration: BoxDecoration(
           image: DecorationImage(
             image: AssetImage(AppImages.logo),

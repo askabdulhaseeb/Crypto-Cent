@@ -20,7 +20,7 @@ class _FillFvrtScreenState extends State<FillFvrtScreen> {
         title: const Text('Favorite Screen'),
       ),
       body: GridView.count(
-        childAspectRatio: 200 / 280,
+        childAspectRatio: 183 / 210,
         mainAxisSpacing: 8,
         crossAxisCount: 2,
         children: List.generate(favList.length, (int index) {

@@ -11,7 +11,7 @@ class LatestProduct extends StatelessWidget {
   Widget build(BuildContext context) {
     ProductProvider productPro = Provider.of<ProductProvider>(context);
     return SizedBox(
-      height: 250,
+      height: 230,
       width: double.infinity,
       child: ListView.builder(
         itemCount: productPro.products.length,

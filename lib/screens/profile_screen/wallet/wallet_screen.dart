@@ -25,18 +25,18 @@ class _WalletScreenState extends State<WalletScreen> {
   Widget build(BuildContext context) {
     WalletProvider walletPro = Provider.of<WalletProvider>(context);
     BinanceProvider coinprice = Provider.of<BinanceProvider>(context);
-    String address =
-        encryption.appDecrypt(walletPro.wallet!.coinsWallet[0].address);
+    String address = walletPro.wallet == null
+        ? 'loading'
+        : encryption.appDecrypt(walletPro.wallet!.coinsWallet[0].address);
     return Scaffold(
       appBar: AppBar(title: const Text('Wallet')),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(16),
+          padding: const EdgeInsets.symmetric(horizontal: 16),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
-              const SizedBox(height: 16),
               Container(
                 height: 200,
                 width: double.infinity,
@@ -45,28 +45,30 @@ class _WalletScreenState extends State<WalletScreen> {
                   color: Theme.of(context).primaryColor,
                 ),
                 child: Padding(
-                  padding: const EdgeInsets.only(left: 30),
+                  padding: const EdgeInsets.only(left: 16),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
+                      const SizedBox(height: 16),
                       const ForText(
                         name: 'Your Balance',
                         color: Colors.white,
                         bold: true,
                         size: 28,
                       ),
+                      const SizedBox(height: 10),
                       FutureBuilder<double>(
                           future: WallletWithApi().getWalletBalance(address),
                           builder: (BuildContext context,
                               AsyncSnapshot<double> snapshot) {
                             if (snapshot.hasData) {
                               double balance =
-                                  snapshot.data! * coinprice.coin.price;
+                                  (snapshot.data ?? 0) * coinprice.coin.price;
                               return Text(
                                 '\$ ${balance.toStringAsFixed(2)}',
                                 style: const TextStyle(
-                                  fontSize: 20,
+                                  fontSize: 18,
                                   fontWeight: FontWeight.w500,
                                   color: Colors.white,
                                 ),
@@ -82,11 +84,11 @@ class _WalletScreenState extends State<WalletScreen> {
                           builder: (BuildContext context,
                               AsyncSnapshot<double> snapshot) {
                             if (snapshot.hasData) {
-                              double balance = snapshot.data!;
+                              double balance = snapshot.data ?? 0;
                               return Text(
-                                'BTC ${balance.toStringAsFixed(2)}',
+                                'BTC $balance',
                                 style: const TextStyle(
-                                  fontSize: 20,
+                                  fontSize: 18,
                                   fontWeight: FontWeight.w500,
                                   color: Colors.white,
                                 ),
@@ -114,40 +116,58 @@ class _WalletScreenState extends State<WalletScreen> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  customWidget(context, 'Add Money', Icons.add, () {
-                    Navigator.push(
-                      context,
-                      // ignore: always_specify_types
-                      MaterialPageRoute(
-                        builder: (BuildContext context) =>
-                            const ReceiveBTCScreen(),
-                      ),
-                    );
-                  }),
-                  customWidget(context, 'History', Icons.arrow_drop_down_sharp,
-                      () {
-                    Navigator.push(
-                      context,
-                      // ignore: always_specify_types
-                      MaterialPageRoute(
-                        builder: (BuildContext context) =>
-                            const BitcoinHistroyScreen(),
-                      ),
-                    );
-                  }),
                   customWidget(
-                      context, 'Send Money', Icons.arrow_drop_down_sharp, () {
-                    Navigator.push(
-                      context,
-                      // ignore: always_specify_types
-                      MaterialPageRoute(
-                        builder: (BuildContext context) =>
-                            const SendBitcoinScreen(),
-                      ),
-                    );
-                  }),
+                    context,
+                    'Add Money',
+                    Icons.add,
+                    () {
+                      Navigator.push(
+                        context,
+                        // ignore: always_specify_types
+                        MaterialPageRoute(
+                          builder: (BuildContext context) =>
+                              const ReceiveBTCScreen(),
+                        ),
+                      );
+                    },
+                  ),
+                  customWidget(
+                    context,
+                    'Transfer',
+                    Icons.call_missed_outgoing_outlined,
+                    () {
+                      Navigator.push(
+                        context,
+                        // ignore: always_specify_types
+                        MaterialPageRoute(
+                          builder: (BuildContext context) =>
+                              const SendBitcoinScreen(),
+                        ),
+                      );
+                    },
+                  ),
+                  customWidget(
+                    context,
+                    'History',
+                    Icons.history,
+                    () {
+                      Navigator.push(
+                        context,
+                        // ignore: always_specify_types
+                        MaterialPageRoute(
+                          builder: (BuildContext context) =>
+                              const BitcoinHistroyScreen(),
+                        ),
+                      );
+                    },
+                  ),
                 ],
-              )
+              ),
+              const Padding(
+                padding: EdgeInsets.symmetric(vertical: 16, horizontal: 32),
+                child: Divider(color: Colors.grey),
+              ),
+              const Center(child: Text('No history found to display')),
             ],
           ),
         ),
@@ -159,28 +179,16 @@ class _WalletScreenState extends State<WalletScreen> {
       BuildContext context, String name, IconData? icon, VoidCallback ontap) {
     return GestureDetector(
       onTap: ontap,
-      child: Container(
-        height: 100,
-        width: 100,
-        decoration: BoxDecoration(
-          color: Theme.of(context).secondaryHeaderColor,
-          borderRadius: BorderRadius.circular(16),
-        ),
-        child: Center(
-          child: Column(
-            children: <Widget>[
-              Icon(
-                icon,
-                color: Colors.black,
-                size: 26,
-              ),
-              ForText(
-                name: name,
-                color: Colors.black,
-              )
-            ],
+      child: Column(
+        children: <Widget>[
+          CircleAvatar(
+            radius: 24,
+            backgroundColor: Theme.of(context).colorScheme.secondary,
+            child: Icon(icon),
           ),
-        ),
+          const SizedBox(height: 6),
+          Text(name),
+        ],
       ),
     );
   }

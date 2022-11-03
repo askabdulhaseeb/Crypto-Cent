@@ -78,8 +78,12 @@ class AuthProvider extends ChangeNotifier {
           //   ),
           // );
           // ignore: use_build_context_synchronously
-          Navigator.of(context).pushNamedAndRemoveUntil(
-              MainScreen.routeName, (Route<dynamic> route) => false);
+          Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute<MainScreen>(
+                builder: (BuildContext context) => const MainScreen()),
+            (Route<dynamic> route) => false,
+          );
         }
       }
     }

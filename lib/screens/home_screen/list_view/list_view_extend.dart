@@ -27,7 +27,7 @@ class ListViewScreen extends StatelessWidget {
                       )));
         },
         child: Container(
-          height: 180,
+          height: 220,
           width: 170,
           decoration: BoxDecoration(
               color: const Color(0xffF6F7F9),
@@ -44,7 +44,7 @@ class ListViewScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
-                height: 150,
+                height: 130,
                 width: double.infinity,
                 decoration: BoxDecoration(
                   //color: Colors.black,
@@ -74,12 +74,27 @@ class ListViewScreen extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 5),
-              const ForText(name: 'Review here...',),
+              Row(
+                children: <Widget>[
+                  const SizedBox(width: 6),
+                  Icon(
+                    Icons.star,
+                    color: Theme.of(context).primaryColor,
+                    size: 14,
+                  ),
+                  const SizedBox(width: 6),
+                  const ForText(
+                    name: '0 Review',
+                    size: 11,
+                    color: Colors.grey,
+                  ),
+                ],
+              ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
+                  children: <Widget>[
                     Text(
                       '\$${product.amount}',
                       style: const TextStyle(

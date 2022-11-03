@@ -28,8 +28,9 @@ class _ReceiveBTCScreenState extends State<ReceiveBTCScreen> {
   Widget build(BuildContext context) {
     WalletProvider walletPro = Provider.of<WalletProvider>(context);
     BinanceProvider coinprice = Provider.of<BinanceProvider>(context);
-    String address =
-        Encryption().appDecrypt(walletPro.wallet!.coinsWallet[0].address);
+    String address = walletPro.wallet == null
+        ? 'loading...'
+        : Encryption().appDecrypt(walletPro.wallet!.coinsWallet[0].address);
     return Scaffold(
       appBar: AppBar(
         title: const Text('Recieve Bitcoin'),
@@ -86,7 +87,7 @@ class _ReceiveBTCScreenState extends State<ReceiveBTCScreen> {
                           AsyncSnapshot<double> snapshot) {
                         if (snapshot.hasData) {
                           double balance =
-                              snapshot.data! * coinprice.coin.price;
+                              (snapshot.data ?? 0) * coinprice.coin.price;
                           return Text(
                             '\$ ${balance.toStringAsFixed(3)}',
                             style: const TextStyle(

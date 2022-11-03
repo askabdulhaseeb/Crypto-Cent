@@ -19,22 +19,29 @@ class ProfileScreen extends StatelessWidget {
           'Profile',
           style: TextStyle(color: Colors.white, fontSize: 22),
         ),
+        iconTheme: const IconThemeData(color: Colors.white),
       ),
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
             uperscreen(context, authPro.apUser.name!, authPro.apUser.imageURL!),
-            const SizedBox(height: 10),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: <Widget>[
-                middelItems(
-                    context, 'My Order\nHistory', AppImages.orderhistory),
-                middelItems(
-                    context, 'Delivery\nAddress', AppImages.deliveryaddress)
-              ],
+            Padding(
+              padding: const EdgeInsets.all(16),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Expanded(
+                    child: middelItems(
+                        context, 'My Order\nHistory', AppImages.orderhistory),
+                  ),
+                  const SizedBox(width: 16),
+                  Expanded(
+                    child: middelItems(context, 'Delivery\nAddress',
+                        AppImages.deliveryaddress),
+                  )
+                ],
+              ),
             ),
-            const SizedBox(height: 40),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Column(
@@ -61,9 +68,7 @@ class ProfileScreen extends StatelessWidget {
                       ),
                     );
                   }),
-                  const SizedBox(
-                    height: 25
-                  ),
+                  const SizedBox(height: 25),
                   bottomnav(context, 'Wallet', AppImages.wallet, () {
                     Navigator.push(
                       context,
@@ -107,27 +112,27 @@ class ProfileScreen extends StatelessWidget {
         ),
         child: Row(
           children: <Widget>[
-            const SizedBox(
-              width: 30,
-            ),
+            const SizedBox(width: 24),
             Container(
               height: 40,
               width: 40,
               decoration: BoxDecoration(
-                  image: DecorationImage(image: AssetImage(image))),
+                image: DecorationImage(image: AssetImage(image)),
+              ),
             ),
-            const SizedBox(
-              width: 30,
-            ),
+            const SizedBox(width: 16),
             ForText(
               name: name,
-              size: 20,
+              size: 18,
             ),
             const Spacer(),
-            const Icon(Icons.arrow_forward_ios)
+            const Icon(
+              Icons.arrow_forward_ios,
+              color: Colors.grey,
+            ),
+            const SizedBox(width: 16),
           ],
         ),
-        //color: const Color(0xffF6F7F9),
       ),
     );
   }
@@ -135,14 +140,13 @@ class ProfileScreen extends StatelessWidget {
   Container middelItems(BuildContext context, String? text, String image) {
     return Container(
       height: 80,
-      width: 173,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16),
         color: Theme.of(context).primaryColor,
       ),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
+          const SizedBox(width: 16),
           Container(
             height: 50,
             width: 50,
@@ -151,6 +155,7 @@ class ProfileScreen extends StatelessWidget {
               image: AssetImage(image),
             )),
           ),
+          const SizedBox(width: 16),
           ForText(
             name: text!,
             color: Colors.white,
@@ -162,7 +167,7 @@ class ProfileScreen extends StatelessWidget {
 
   Widget uperscreen(BuildContext context, String name, String imageURL) {
     return Container(
-      height: 220,
+      height: 200,
       width: double.infinity,
       color: Theme.of(context).primaryColor,
       child: Column(

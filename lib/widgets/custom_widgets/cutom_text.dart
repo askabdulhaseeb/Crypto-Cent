@@ -2,17 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class ForText extends StatelessWidget {
-  final String name;
-  final double? size;
-  final bool? bold;
-  final Color? color;
   const ForText({
-    Key? key,
     required this.name,
     this.size,
     this.bold,
     this.color,
+    Key? key,
   }) : super(key: key);
+  final String name;
+  final double? size;
+  final bool? bold;
+  final Color? color;
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +21,7 @@ class ForText extends StatelessWidget {
       style: GoogleFonts.roboto(
         color: color ?? Colors.black,
         fontSize: size,
-        fontWeight: bold == true ? FontWeight.w600 : FontWeight.w400,
+        fontWeight: bold == true ? FontWeight.w500 : FontWeight.w400,
       ),
     );
   }

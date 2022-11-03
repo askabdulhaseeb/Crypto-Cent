@@ -4,11 +4,13 @@ import 'package:provider/provider.dart';
 
 import '../../../models/product_model.dart';
 import '../../../providers/cart_provider.dart';
+import '../../../widgets/custom_widgets/custom_rating_star.dart';
 import '../../../widgets/custom_widgets/custom_widget.dart';
+import '../../screens.dart';
 
 class ProductFullScreen extends StatefulWidget {
+  const ProductFullScreen({required this.product, super.key});
   final Product product;
-  const ProductFullScreen({super.key, required this.product});
 
   @override
   State<ProductFullScreen> createState() => _ProductFullScreenState();
@@ -25,112 +27,105 @@ class _ProductFullScreenState extends State<ProductFullScreen> {
         centerTitle: true,
         backgroundColor: Colors.white,
         elevation: 0,
-        actions: [
-          Padding(
-            padding: const EdgeInsets.all(12),
-            child: Container(
-              height: 30,
-              width: 40,
-              decoration: BoxDecoration(
-                color: Colors.grey.withOpacity(0.2),
-                borderRadius: BorderRadius.circular(16),
-              ),
-              child: IconButton(
-                  onPressed: () {},
-                  icon: const Icon(
-                    Icons.shopping_cart,
-                    color: Colors.black,
-                  )),
-            ),
+        actions: <Widget>[
+          CircleAvatar(
+            backgroundColor: Colors.grey[300],
+            child: IconButton(
+                onPressed: () =>
+                    Navigator.of(context).push(MaterialPageRoute<CartScreen>(
+                      builder: (BuildContext context) => const CartScreen(),
+                    )),
+                icon: Icon(
+                  Icons.shopping_cart,
+                  color: Theme.of(context).primaryColor,
+                )),
           ),
+          const SizedBox(width: 10),
         ],
         leading: const BackButton(
           color: Colors.black,
         ),
       ),
-      body: Stack(
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(right: 20, left: 20),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(
-                  height: 250,
-                  width: MediaQuery.of(context).size.width * 0.8,
-                  child: Image(
-                    image: NetworkImage(widget.product.imageurl),
-                  ),
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                Text(
-                  widget.product.productname.toString(),
-                  maxLines: 3,
-                  overflow: TextOverflow.ellipsis,
-                  style: const TextStyle(
-                      letterSpacing: 0.5,
-                      fontWeight: FontWeight.w900,
-                      fontSize: 22),
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                Row(
-                  children: [
-                    const Text(
-                      'Review ',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20,
-                      ),
-                    ),
-                    const Spacer(),
-                    Text(
-                      '\$ ${widget.product.amount}',
-                      style: const TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20,
-                      ),
-                    )
-                  ],
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                const ForText(
-                  name: 'About',
-                  bold: true,
-                  size: 22,
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                Text(
-                  widget.product.description.toString(),
-                  maxLines: 4,
-                  overflow: TextOverflow.ellipsis,
-                  style: GoogleFonts.quicksand(
-                    color: Colors.grey,
-                    fontSize: 18,
-                  ),
-                ),
-                Expanded(child: Container()),
-                CustomElevatedButton(
-                    title: 'Add to Cart',
-                    onTap: () {
-                      bottomSheet(context, cartPro);
-                    }),
-                const SizedBox(height: 20)
-              ],
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          SizedBox(
+            height: 250,
+            width: MediaQuery.of(context).size.width * 0.8,
+            child: Image(
+              image: NetworkImage(widget.product.imageurl),
             ),
           ),
+          Expanded(
+            child: SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text(
+                      widget.product.productname.toString(),
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(
+                        fontSize: 22,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                    const SizedBox(height: 10),
+                    Row(
+                      children: <Widget>[
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            CustomRatingBar(
+                              itemSize: 24,
+                              initialRating: 5,
+                              onRatingUpdate: (_) {},
+                            ),
+                            const ForText(
+                              name: '(0 reviews)',
+                              size: 13,
+                              color: Colors.grey,
+                            ),
+                          ],
+                        ),
+                        const Spacer(),
+                        Text(
+                          '\$ ${widget.product.amount}',
+                          style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20,
+                          ),
+                        )
+                      ],
+                    ),
+                    const SizedBox(height: 10),
+                    const ForText(
+                      name: 'About',
+                      bold: true,
+                      size: 22,
+                    ),
+                    const SizedBox(height: 10),
+                    Text(
+                      widget.product.description.toString(),
+                      style: const TextStyle(color: Colors.grey),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+          CustomElevatedButton(
+              title: 'Add to Cart',
+              onTap: () {
+                bottomSheet(context, cartPro);
+              }),
+          const SizedBox(height: 6),
         ],
       ),
     );
-    ;
   }
 
   Future<dynamic> bottomSheet(BuildContext context, CartProvider cartPro) {
