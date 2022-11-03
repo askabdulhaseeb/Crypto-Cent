@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../providers/cart_provider.dart';
+import '../../widgets/custom_widgets/custom_network_image.dart';
 import '../../widgets/custom_widgets/custom_widget.dart';
 import '../payment.dart';
 
@@ -226,14 +227,12 @@ class CartItem extends StatelessWidget {
                   ),
                 ],
               ),
-              Container(
+              SizedBox(
                 height: double.infinity,
                 width: 120,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                child: Image(
-                  image: NetworkImage(cartPro.cartItem[index].imageurl),
+                child: CustomNetworkImage(
+                  imageURL: cartPro.cartItem[index].imageurl,
+                  fit: BoxFit.cover,
                 ),
               ),
             ],
