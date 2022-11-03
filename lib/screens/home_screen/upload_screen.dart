@@ -79,9 +79,7 @@ class _UploadScreenState extends State<UploadScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Upload'),
-      ),
+      appBar: AppBar(title: const Text('Upload')),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -89,62 +87,110 @@ class _UploadScreenState extends State<UploadScreen> {
             key: _formKey,
             child: Column(
               children: <Widget>[
-                _image != null
-                    ? GestureDetector(
-                        onTap: () {
-                          selectImage();
-                        },
-                        child: Container(
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(4),
+                  child: _image != null
+                      ? GestureDetector(
+                          onTap: () {
+                            selectImage();
+                          },
+                          child: Container(
+                            height: 200,
+                            width: 200,
+                            decoration: BoxDecoration(
+                                image: DecorationImage(
+                                    image: MemoryImage(_image!))),
+                          ),
+                        )
+                      : Container(
                           height: 200,
-                          width: 200,
-                          decoration: BoxDecoration(
-                              image:
-                                  DecorationImage(image: MemoryImage(_image!))),
-                        ),
-                      )
-                    : Container(
-                        height: 200,
-                        width: double.infinity,
-                        decoration: const BoxDecoration(
-                          color: Colors.grey,
-                        ),
-                        child: Center(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              IconButton(
-                                onPressed: selectImage,
-                                icon: const Icon(
-                                    Icons.add_circle_outline_outlined,
-                                    color: Colors.white,
-                                    size: 36),
-                              ),
-                              const SizedBox(
-                                width: 10,
-                              ),
-                              const ForText(
-                                name: 'Add Image',
-                                color: Colors.white,
-                                size: 22,
-                              )
-                            ],
+                          width: double.infinity,
+                          decoration: const BoxDecoration(
+                            color: Colors.grey,
+                          ),
+                          child: Center(
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                IconButton(
+                                  onPressed: selectImage,
+                                  icon: const Icon(
+                                      Icons.add_circle_outline_outlined,
+                                      color: Colors.white,
+                                      size: 36),
+                                ),
+                                const SizedBox(
+                                  width: 10,
+                                ),
+                                const ForText(
+                                  name: 'Add Image',
+                                  color: Colors.white,
+                                  size: 22,
+                                )
+                              ],
+                            ),
                           ),
                         ),
-                      ),
-                textField(context, productname, 'productname'),
-                textField(context, productdecription, 'product Description'),
-                textField(context, amount, 'amount'),
-                textField(context, quantity, 'quantity'),
-                textField(context, category, 'category'),
-                textField(context, subcategory, 'subcategory'),
+                ),
+                const SizedBox(height: 10),
+                CustomTextFormField(
+                  controller: productname,
+                  hint: 'Enter Product Name',
+                  maxLength: 160,
+                  readOnly: _isloading,
+                  validator: (String? value) =>
+                      CustomValidator.lessThen2(value),
+                ),
+                CustomTextFormField(
+                  controller: productdecription,
+                  hint: 'Enter Product Description',
+                  maxLines: 5,
+                  readOnly: _isloading,
+                  validator: (String? value) =>
+                      CustomValidator.lessThen2(value),
+                ),
+                CustomTextFormField(
+                  controller: amount,
+                  hint: 'Enter Product Price',
+                  readOnly: _isloading,
+                  validator: (String? value) => CustomValidator.isEmpty(value),
+                  keyboardType: const TextInputType.numberWithOptions(
+                    decimal: true,
+                    signed: true,
+                  ),
+                ),
+                CustomTextFormField(
+                  controller: quantity,
+                  hint: 'Enter Product Quantity',
+                  readOnly: _isloading,
+                  validator: (String? value) => CustomValidator.isEmpty(value),
+                  keyboardType: const TextInputType.numberWithOptions(
+                    decimal: true,
+                    signed: true,
+                  ),
+                ),
+                CustomTextFormField(
+                  controller: category,
+                  hint: 'Enter Product Category',
+                  readOnly: _isloading,
+                  validator: (String? value) =>
+                      CustomValidator.lessThen2(value),
+                ),
+                CustomTextFormField(
+                  controller: subcategory,
+                  hint: 'Enter Product Sub Category',
+                  readOnly: _isloading,
+                  validator: (String? value) =>
+                      CustomValidator.lessThen2(value),
+                ),
                 const SizedBox(height: 20),
                 _isloading
                     ? const CircularProgressIndicator()
                     : CustomElevatedButton(
-                        title: 'upload',
-                        onTap: () {
-                          uploaddata();
-                        })
+                        title: 'Upload',
+                        onTap: () async => await uploaddata(),
+                      ),
+                const SizedBox(height: 20),
               ],
             ),
           ),
