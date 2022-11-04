@@ -90,7 +90,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                                 : const CircularProgressIndicator.adaptive();
                           }
                         }),
-                    SizedBox(
+                    const SizedBox(
                       height: 5,
                     ),
                     FutureBuilder<double>(

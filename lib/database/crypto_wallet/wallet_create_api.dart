@@ -6,6 +6,7 @@ import 'package:http/http.dart' as http;
 
 import '../../function/encryption_function.dart';
 import '../../models/crypto_wallet/coin_wallet.dart';
+import '../../models/crypto_wallet/wallet_histroty.dart';
 import '../../widgets/custom_widgets/custom_toast.dart';
 
 class WallletWithApi {
@@ -24,7 +25,6 @@ class WallletWithApi {
       Map<String, dynamic> body = <String, dynamic>{
         'type': 'saving',
         'currency': un,
-        
         'callback': {
           'url': 'https://yourweburl.com/notifications-wallet.php',
         }
@@ -50,7 +50,7 @@ class WallletWithApi {
                 if (value.statusCode == 200) {
                   var body = jsonDecode(value.body);
                   String address = body['address'];
-                 
+
                   CoinsWallet temp = CoinsWallet(
                     symble: un,
                     address: encrypt.appEncrypt(address),
@@ -80,6 +80,29 @@ class WallletWithApi {
     return wallet;
   }
 
+  Future<WalletHistory?> getWalletHistory(String walletId) async {
+    try {
+      http.Response response = await http
+          .get(
+            Uri.parse('$url/$walletId/history?limit=20&offset=0'),
+            headers: requestHeaders,
+          )
+          .timeout(
+            const Duration(seconds: 30),
+          );
+
+      var body = jsonDecode(response.body);
+      var status = response.statusCode;
+      if (status == 200) {
+        return WalletHistory.fromMap(body);
+      } else {
+        CustomToast.errorToast(message: 'Error While fetching history');
+      }
+    } catch (e) {
+      CustomToast.errorToast(message: 'Error While fetching history');
+    }
+    return null;
+  }
 
   Future<double> getWalletBalance(String walletIds) async {
     double temp = 0;
@@ -157,7 +180,6 @@ class WallletWithApi {
         return result;
       }
     } catch (e) {
-      
       result = {
         STATUS: false,
         HASH: null,
