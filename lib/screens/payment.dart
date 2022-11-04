@@ -5,6 +5,7 @@ import '../database/crypto_wallet/wallet_create_api.dart';
 import '../function/encryption_function.dart';
 import '../providers/app_provider.dart';
 import '../providers/cart_provider.dart';
+import '../providers/crypto_wallet/binance_provider.dart';
 import '../providers/crypto_wallet/wallet_provider.dart';
 import '../widgets/custom_widgets/custom_widget.dart';
 
@@ -22,6 +23,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
   Widget build(BuildContext context) {
     CartProvider cartPro = Provider.of<CartProvider>(context);
     WalletProvider walletPro = Provider.of<WalletProvider>(context);
+    BinanceProvider coinprice = Provider.of<BinanceProvider>(context);
     String address =
         encryption.appDecrypt(walletPro.wallet!.coinsWallet[0].wallet);
     return Scaffold(
@@ -66,6 +68,31 @@ class _PaymentScreenState extends State<PaymentScreen> {
                       bold: true,
                       size: 28,
                     ),
+                    const SizedBox(height: 10),
+                    FutureBuilder<double>(
+                        future: WallletWithApi().getWalletBalance(address),
+                        builder: (BuildContext context,
+                            AsyncSnapshot<double> snapshot) {
+                          if (snapshot.hasData) {
+                            double balance =
+                                (snapshot.data ?? 0) * coinprice.coin.price;
+                            return Text(
+                              '\$ ${balance.toStringAsFixed(2)}',
+                              style: const TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.w500,
+                                color: Colors.white,
+                              ),
+                            );
+                          } else {
+                            return snapshot.hasError
+                                ? const Text('ERROR')
+                                : const CircularProgressIndicator.adaptive();
+                          }
+                        }),
+                    SizedBox(
+                      height: 5,
+                    ),
                     FutureBuilder<double>(
                         future: WallletWithApi().getWalletBalance(address),
                         builder: (BuildContext context,
@@ -73,7 +100,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                           if (snapshot.hasData) {
                             double balance = snapshot.data!;
                             return Text(
-                              '\$${balance.toStringAsFixed(8)}',
+                              'Btc ${balance.toStringAsFixed(8)}',
                               style: const TextStyle(
                                 fontSize: 20,
                                 fontWeight: FontWeight.w500,
