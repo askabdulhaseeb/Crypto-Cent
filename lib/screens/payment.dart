@@ -23,7 +23,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
     CartProvider cartPro = Provider.of<CartProvider>(context);
     WalletProvider walletPro = Provider.of<WalletProvider>(context);
     String address =
-        encryption.appDecrypt(walletPro.wallet!.coinsWallet[0].address);
+        encryption.appDecrypt(walletPro.wallet!.coinsWallet[0].wallet);
     return Scaffold(
       appBar: AppBar(
         title: const Text('Payment'),
