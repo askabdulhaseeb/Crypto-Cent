@@ -25,7 +25,11 @@ class Headeriamge extends StatelessWidget {
         items: imgList
             .map((String item) => SizedBox(
                   width: double.infinity,
-                  child: CustomNetworkImage(imageURL: item, fit: BoxFit.cover),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(20),
+                    child:
+                        CustomNetworkImage(imageURL: item, fit: BoxFit.cover),
+                  ),
                 ))
             .toList());
   }

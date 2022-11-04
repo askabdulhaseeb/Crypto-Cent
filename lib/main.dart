@@ -1,4 +1,3 @@
-import 'package:crypto_cent/screens/screens.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -15,7 +14,7 @@ import 'providers/product_provider.dart';
 import 'providers/provider.dart';
 
 import 'screens/auth/phone_registration/phone_number_screen.dart';
-import 'screens/payment.dart';
+import 'screens/main_screen/main_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -67,11 +66,9 @@ class MyApp extends StatelessWidget {
           theme: AppThemes.light,
           darkTheme: AppThemes.dark,
           themeMode: theme.themeMode,
-          //home: const MainScreen(),
           home: (AuthMethods.uid.isEmpty)
               ? const PhoneNumberScreen()
               : const MainScreen(),
-          //home: const PaymentScreen(),
         );
       }),
     );
