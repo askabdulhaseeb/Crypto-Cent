@@ -15,7 +15,6 @@ import 'card_swiper.dart';
 import 'categories/categories_extend.dart';
 import 'categories/category.dart';
 import 'latest_product/latest_product.dart';
-import 'upload_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -25,16 +24,16 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       appBar: appBar(context),
       drawer: drawerScreen(context),
-      floatingActionButton: FloatingActionButton(
-          heroTag: null,
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute<UploadScreen>(
-                  builder: (BuildContext context) => const UploadScreen()),
-            );
-          },
-          child: const Icon(Icons.add)),
+      // floatingActionButton: FloatingActionButton(
+      //     heroTag: null,
+      //     onPressed: () {
+      //       Navigator.push(
+      //         context,
+      //         MaterialPageRoute<UploadScreen>(
+      //             builder: (BuildContext context) => const UploadScreen()),
+      //       );
+      //     },
+      //     child: const Icon(Icons.add)),
       body: Consumer2<ProductProvider, CategoriesProvider>(builder: (
         BuildContext context,
         ProductProvider productPro,
