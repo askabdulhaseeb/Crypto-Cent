@@ -28,6 +28,9 @@ class _WalletScreenState extends State<WalletScreen> {
     String address = walletPro.wallet == null
         ? 'loading'
         : encryption.appDecrypt(walletPro.wallet!.coinsWallet[0].address);
+    String Walletid = walletPro.wallet == null
+        ? 'loading'
+        : encryption.appDecrypt(walletPro.wallet!.coinsWallet[0].wallet);
     return Scaffold(
       appBar: AppBar(title: const Text('Wallet')),
       body: SingleChildScrollView(
@@ -59,10 +62,12 @@ class _WalletScreenState extends State<WalletScreen> {
                       ),
                       const SizedBox(height: 10),
                       FutureBuilder<double>(
-                          future: WallletWithApi().getWalletBalance(address),
+                          future: WallletWithApi().getWalletBalance(Walletid),
                           builder: (BuildContext context,
                               AsyncSnapshot<double> snapshot) {
                             if (snapshot.hasData) {
+                              print(coinprice.coin.price);
+                              print(Walletid);
                               double balance =
                                   (snapshot.data ?? 0) * coinprice.coin.price;
                               return Text(
@@ -80,7 +85,7 @@ class _WalletScreenState extends State<WalletScreen> {
                             }
                           }),
                       FutureBuilder<double>(
-                          future: WallletWithApi().getWalletBalance(address),
+                          future: WallletWithApi().getWalletBalance(Walletid),
                           builder: (BuildContext context,
                               AsyncSnapshot<double> snapshot) {
                             if (snapshot.hasData) {
