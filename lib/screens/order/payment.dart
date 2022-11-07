@@ -9,6 +9,7 @@ import '../../providers/crypto_wallet/binance_provider.dart';
 import '../../providers/crypto_wallet/wallet_provider.dart';
 import '../../widgets/custom_widgets/custom_toast.dart';
 import '../../widgets/custom_widgets/custom_widget.dart';
+import 'order_succefully.dart';
 
 class PaymentScreen extends StatefulWidget {
   const PaymentScreen({super.key});
@@ -171,7 +172,16 @@ class _PaymentScreenState extends State<PaymentScreen> {
                 title: 'Pay',
                 onTap: () {
                   bool temp = btcSend(cartPro.totalPrice()) as bool;
-                  if (temp) {}
+                  if (temp) {
+                    Navigator.push(
+                      context,
+                      // ignore: always_specify_types
+                      MaterialPageRoute(
+                        builder: (BuildContext context) =>
+                            const OrderSuccefully(),
+                      ),
+                    );
+                  }
                 })
           ],
         ),
