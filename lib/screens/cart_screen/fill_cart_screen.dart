@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import '../../providers/cart_provider.dart';
 import '../../widgets/custom_widgets/custom_network_image.dart';
 import '../../widgets/custom_widgets/custom_widget.dart';
-import '../payment.dart';
+import '../order/payment.dart';
 
 class FillCartScreen extends StatelessWidget {
   const FillCartScreen({super.key});

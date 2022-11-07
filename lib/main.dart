@@ -15,6 +15,7 @@ import 'providers/provider.dart';
 
 import 'screens/auth/phone_registration/phone_number_screen.dart';
 import 'screens/main_screen/main_screen.dart';
+import 'screens/order/order_succefully.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -66,9 +67,10 @@ class MyApp extends StatelessWidget {
           theme: AppThemes.light,
           darkTheme: AppThemes.dark,
           themeMode: theme.themeMode,
-          home: (AuthMethods.uid.isEmpty)
-              ? const PhoneNumberScreen()
-              : const MainScreen(),
+          home: const OrderSuccefully(),
+          // home: (AuthMethods.uid.isEmpty)
+          //     ? const PhoneNumberScreen()
+          //     : const MainScreen(),
         );
       }),
     );

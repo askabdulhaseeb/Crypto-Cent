@@ -3,7 +3,7 @@ import '../../providers/auth_provider.dart';
 import '../../providers/crypto_wallet/wallet_provider.dart';
 import '../../utilities/app_images.dart';
 import '../empty_screen/empty_screen.dart';
-import '../payment.dart';
+import '../order/payment.dart';
 import '../screens.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
