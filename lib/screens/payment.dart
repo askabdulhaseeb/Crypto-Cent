@@ -7,6 +7,7 @@ import '../providers/app_provider.dart';
 import '../providers/cart_provider.dart';
 import '../providers/crypto_wallet/binance_provider.dart';
 import '../providers/crypto_wallet/wallet_provider.dart';
+import '../widgets/custom_widgets/custom_toast.dart';
 import '../widgets/custom_widgets/custom_widget.dart';
 
 class PaymentScreen extends StatefulWidget {
@@ -19,6 +20,31 @@ class PaymentScreen extends StatefulWidget {
 
 class _PaymentScreenState extends State<PaymentScreen> {
   Encryption encryption = Encryption();
+  bool paid = false;
+  Future<bool> btcSend(
+    double totalAmount,
+  ) async {
+    WalletProvider walletPro =
+        Provider.of<WalletProvider>(context, listen: false);
+    double amount = totalAmount;
+    String address =
+        encryption.appDecrypt(walletPro.wallet!.coinsWallet[0].address);
+    String walletAddress =
+        encryption.appDecrypt(walletPro.wallet!.coinsWallet[0].wallet);
+    String transferKey =
+        encryption.appDecrypt(walletPro.wallet!.coinsWallet[0].transferKey);
+    final double balance = await WallletWithApi().getWalletBalance(address);
+    String adminWalletAddress = '3Fv1QCCbmUfNf8R8y7Ujp1tg9VHnEWMm27';
+    if (balance > amount) {
+      await WallletWithApi().transferCoin(
+          walletAddress, transferKey, adminWalletAddress, amount.toString());
+      paid = true;
+    } else {
+      CustomToast.errorToast(message: 'You havenot enough Balance ');
+    }
+    return paid;
+  }
+
   @override
   Widget build(BuildContext context) {
     CartProvider cartPro = Provider.of<CartProvider>(context);
@@ -141,7 +167,15 @@ class _PaymentScreenState extends State<PaymentScreen> {
               ],
             ),
             const Spacer(),
-            CustomElevatedButton(title: 'Pay', onTap: () {})
+            CustomElevatedButton(
+                title: 'Pay',
+                onTap: () {
+               bool temp= btcSend(cartPro.totalPrice()) as bool;
+                if( temp)
+                {
+                  
+                }
+                })
           ],
         ),
       ),

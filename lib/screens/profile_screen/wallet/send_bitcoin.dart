@@ -24,7 +24,7 @@ class _SendBitcoinScreenState extends State<SendBitcoinScreen> {
     Encryption encryption = Encryption();
     String address=encryption.appDecrypt(walletPro.wallet!.coinsWallet[0].address);
     String walletAddress=encryption.appDecrypt(walletPro.wallet!.coinsWallet[0].wallet);
-    String transferKey=encryption.appDecrypt(walletPro.wallet!.coinsWallet[0].wallet);
+    String transferKey=encryption.appDecrypt(walletPro.wallet!.coinsWallet[0].transferKey);
     final double balance = await WallletWithApi()
         .getWalletBalance(address);
     if (balance > amount) {
