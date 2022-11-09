@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../providers/auth_provider.dart';
-import '../../../widgets/custom_file_image_box.dart';
-import '../../../widgets/custom_widgets/custom_elevated_button.dart';
-import '../../../widgets/custom_widgets/custom_textformfield.dart';
-import '../../../widgets/custom_widgets/custom_validator.dart';
-import '../../../widgets/custom_widgets/show_loading.dart';
+import '../../providers/auth_provider.dart';
+import '../../widgets/custom_file_image_box.dart';
+import '../../widgets/custom_widgets/custom_elevated_button.dart';
+import '../../widgets/custom_widgets/custom_textformfield.dart';
+import '../../widgets/custom_widgets/custom_validator.dart';
+import '../../widgets/custom_widgets/show_loading.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({Key? key}) : super(key: key);

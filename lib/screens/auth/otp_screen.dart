@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../providers/auth_provider.dart';
-import '../../../widgets/custom_widgets/custom_textformfield.dart';
-import '../../../widgets/custom_widgets/show_loading.dart';
-import '../../main_screen/main_screen.dart';
+import '../../providers/auth_provider.dart';
+import '../../widgets/custom_widgets/custom_textformfield.dart';
+import '../../widgets/custom_widgets/show_loading.dart';
+import '../main_screen/main_screen.dart';
 import 'registration_screen.dart';
 
 class OTPScreen extends StatefulWidget {

@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:intl_phone_field/phone_number.dart';
 import 'package:provider/provider.dart';
 
-import '../../../providers/auth_provider.dart';
-import '../../../widgets/custom_widgets/custom_elevated_button.dart';
-import '../../../widgets/custom_widgets/phone_number_field.dart';
+import '../../providers/auth_provider.dart';
+import '../../widgets/custom_widgets/custom_elevated_button.dart';
+import '../../widgets/custom_widgets/phone_number_field.dart';
 import 'otp_screen.dart';
 
 class PhoneNumberScreen extends StatefulWidget {

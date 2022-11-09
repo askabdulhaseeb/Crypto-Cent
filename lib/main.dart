@@ -13,7 +13,7 @@ import 'providers/crypto_wallet/wallet_provider.dart';
 import 'providers/product_provider.dart';
 import 'providers/provider.dart';
 
-import 'screens/auth/phone_registration/phone_number_screen.dart';
+import 'screens/auth/phone_number_screen.dart';
 import 'screens/main_screen/main_screen.dart';
 import 'screens/order/order_succefully.dart';
 

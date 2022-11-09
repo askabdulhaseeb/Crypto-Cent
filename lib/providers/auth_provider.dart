@@ -13,7 +13,7 @@ import '../models/app_user/app_user.dart';
 import '../models/app_user/numbers_detail.dart';
 import '../models/crypto_wallet/coin_wallet.dart';
 import '../models/crypto_wallet/wallet.dart';
-import '../screens/auth/phone_registration/phone_number_screen.dart';
+import '../screens/auth/phone_number_screen.dart';
 import '../screens/main_screen/main_screen.dart';
 import '../utilities/image_picker.dart';
 import '../widgets/custom_widgets/custom_toast.dart';
