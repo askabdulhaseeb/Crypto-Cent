@@ -55,9 +55,8 @@ class _OTPScreenState extends State<OTPScreen> {
                     } else if (num == 1) {
                       Navigator.push(
                         context,
-                        // ignore: always_specify_types
-                        MaterialPageRoute(
-                          builder: (BuildContext context) => MainScreen(),
+                        MaterialPageRoute<MainScreen>(
+                          builder: (BuildContext context) => const MainScreen(),
                         ),
                       );
                     }

@@ -1,9 +1,7 @@
-import '../../database/app_user/auth_method.dart';
 import '../../providers/auth_provider.dart';
 import '../../providers/crypto_wallet/wallet_provider.dart';
 import '../../utilities/app_images.dart';
 import '../empty_screen/empty_screen.dart';
-import '../order/payment.dart';
 import '../screens.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -11,7 +9,7 @@ import '../../providers/app_provider.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({Key? key}) : super(key: key);
-  static const String routeName = '/MainScreen';
+  static const String routeName = '/main-screen';
 
   static const List<Widget> _pages = <Widget>[
     HomeScreen(),
@@ -75,7 +73,7 @@ class _MainScreenState extends State<MainScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
                     Row(
-                      children: [
+                      children: <Widget>[
                         MaterialButton(
                           onPressed: () {
                             navBar.onTabTapped(0);
@@ -116,14 +114,14 @@ class _MainScreenState extends State<MainScreen> {
                       ],
                     ),
                     Row(
-                      children: [
+                      children: <Widget>[
                         MaterialButton(
                           onPressed: () {
                             navBar.onTabTapped(3);
                           },
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
+                            children: <Widget>[
                               navBar.currentTap == 3
                                   ? Icon(
                                       Icons.notifications_active_outlined,

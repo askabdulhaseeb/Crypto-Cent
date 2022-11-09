@@ -1,39 +1,28 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../database/crypto_wallet/wallet_create_api.dart';
 import '../../providers/app_provider.dart';
 import '../../providers/categories_provider.dart';
 import '../../providers/product_provider.dart';
 import '../../utilities/app_images.dart';
+import '../../widgets/custom_widgets/custom_network_image_slider.dart';
 import '../../widgets/custom_widgets/custom_widget.dart';
+import '../../widgets/home/home_categories_list.dart';
+import '../../widgets/product/latest_product.dart';
 import '../about/aboust_us.dart';
 import '../about/contact_us.dart';
 import '../search_screen/search_screen.dart';
-import 'all_contacts_catrgories/all_screen.dart';
-import 'card_swiper.dart';
-import 'categories/categories_extend.dart';
-import 'categories/category.dart';
-import 'latest_product/latest_product.dart';
+import '../category_screens/categories_extend.dart';
+import '../category_screens/category.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
-  static const String routeName = '/HomeScreen';
+  static const String routeName = '/home-screen';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: appBar(context),
       drawer: drawerScreen(context),
-      // floatingActionButton: FloatingActionButton(
-      //     heroTag: null,
-      //     onPressed: () {
-      //       Navigator.push(
-      //         context,
-      //         MaterialPageRoute<UploadScreen>(
-      //             builder: (BuildContext context) => const UploadScreen()),
-      //       );
-      //     },
-      //     child: const Icon(Icons.add)),
       body: Consumer2<ProductProvider, CategoriesProvider>(builder: (
         BuildContext context,
         ProductProvider productPro,
@@ -45,7 +34,7 @@ class HomeScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              const Headeriamge(),
+              const CustomNetworkImageSlider(),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: Row(
@@ -68,13 +57,12 @@ class HomeScreen extends StatelessWidget {
                   ],
                 ),
               ),
-              //CategoryScreen(),
-              const AllScreen(),
+              const HomeCategoriesList(),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
+                  children: <Widget>[
                     const ForText(
                       name: 'Popular Product',
                       bold: true,
@@ -99,12 +87,12 @@ class HomeScreen extends StatelessWidget {
                   ],
                 ),
               ),
-              const LatestProduct(),
+              const LatestProductsList(),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
+                  children: <Widget>[
                     const ForText(
                       name: 'Latest Product',
                       bold: true,
@@ -129,7 +117,7 @@ class HomeScreen extends StatelessWidget {
                   ],
                 ),
               ),
-              const LatestProduct(),
+              const LatestProductsList(),
               const SizedBox(height: 50),
             ],
           ),

@@ -5,7 +5,6 @@ import 'package:qr_flutter/qr_flutter.dart';
 
 import '../../../database/crypto_wallet/wallet_create_api.dart';
 import '../../../function/encryption_function.dart';
-import '../../../providers/app_provider.dart';
 import '../../../providers/crypto_wallet/binance_provider.dart';
 import '../../../providers/crypto_wallet/wallet_provider.dart';
 import '../../../widgets/custom_widgets/show_loading.dart';

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../providers/categories_provider.dart';
-import '../home_screen/categories/categories_extend.dart';
+import '../category_screens/categories_extend.dart';
 
 class SerachScreen extends StatelessWidget {
   const SerachScreen({super.key});
@@ -46,7 +46,6 @@ class SerachScreen extends StatelessWidget {
               child: ListView.builder(
             itemCount: categories.length,
             itemBuilder: (BuildContext context, int index) {
-              print(categories.length);
               return ListTile(
                 onTap: () {
                   Navigator.push(

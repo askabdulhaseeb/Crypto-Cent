@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
 import '../../../widgets/custom_widgets/custom_widget.dart';
-import '../../empty_screen/empty_screen.dart';
-import '../categories/category.dart';
-import '../upload_screen.dart';
+import '../../screens/empty_screen/empty_screen.dart';
+import '../../screens/category_screens/category.dart';
+import '../../screens/product_screens/add_product_screen.dart';
 
-class AllScreen extends StatelessWidget {
-  const AllScreen({super.key});
+class HomeCategoriesList extends StatelessWidget {
+  const HomeCategoriesList({super.key});
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -36,8 +36,8 @@ class AllScreen extends StatelessWidget {
           allitems(context, 'Sell', 80, false, () {
             Navigator.push(
               context,
-              MaterialPageRoute<UploadScreen>(
-                builder: (BuildContext context) => const UploadScreen(),
+              MaterialPageRoute<AddProductScreen>(
+                builder: (BuildContext context) => const AddProductScreen(),
               ),
             );
           }),

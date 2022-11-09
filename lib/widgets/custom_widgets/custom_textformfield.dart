@@ -118,7 +118,7 @@ class CustomTextFormFieldState extends State<CustomTextFormField> {
               : SizedBox(
                   width: 40,
                   child: Row(
-                    children: [
+                    children: <Widget>[
                       Icon(
                         widget.starticon,
                         color: Colors.grey,

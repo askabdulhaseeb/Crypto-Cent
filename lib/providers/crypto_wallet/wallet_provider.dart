@@ -1,6 +1,6 @@
-import 'package:crypto_cent/database/app_user/auth_method.dart';
 import 'package:flutter/cupertino.dart';
 
+import '../../database/app_user/auth_method.dart';
 import '../../database/crypto_wallet/wallet_api.dart';
 import '../../models/crypto_wallet/wallet.dart';
 
@@ -17,7 +17,6 @@ class WalletProvider with ChangeNotifier {
         break;
       }
     }
-    print(wallets.length);
     temp = true;
     return temp;
   }

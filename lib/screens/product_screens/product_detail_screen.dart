@@ -1,22 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 import '../../../models/product_model.dart';
 import '../../../providers/cart_provider.dart';
 import '../../../widgets/custom_widgets/custom_rating_star.dart';
 import '../../../widgets/custom_widgets/custom_widget.dart';
-import '../../screens.dart';
+import '../../widgets/custom_widgets/custom_network_image.dart';
+import '../cart_screen/cart_screen.dart';
 
-class ProductFullScreen extends StatefulWidget {
-  const ProductFullScreen({required this.product, super.key});
+class ProductDetailScreen extends StatefulWidget {
+  const ProductDetailScreen({required this.product, super.key});
   final Product product;
 
   @override
-  State<ProductFullScreen> createState() => _ProductFullScreenState();
+  State<ProductDetailScreen> createState() => _ProductDetailScreenState();
 }
 
-class _ProductFullScreenState extends State<ProductFullScreen> {
+class _ProductDetailScreenState extends State<ProductDetailScreen> {
   int quantity = 1;
   @override
   Widget build(BuildContext context) {
@@ -53,9 +53,7 @@ class _ProductFullScreenState extends State<ProductFullScreen> {
           SizedBox(
             height: 250,
             width: MediaQuery.of(context).size.width * 0.8,
-            child: Image(
-              image: NetworkImage(widget.product.imageurl),
-            ),
+            child: CustomNetworkImage(imageURL: widget.product.imageurl),
           ),
           Expanded(
             child: SingleChildScrollView(
@@ -140,7 +138,10 @@ class _ProductFullScreenState extends State<ProductFullScreen> {
           height: MediaQuery.of(context).size.height * 0.55,
           child: Padding(
             padding: const EdgeInsets.all(8.0),
-            child: StatefulBuilder(builder: (BuildContext context, setState) {
+            child: StatefulBuilder(builder: (
+              BuildContext context,
+              Function setState,
+            ) {
               return Column(
                 children: <Widget>[
                   Row(
@@ -155,7 +156,7 @@ class _ProductFullScreenState extends State<ProductFullScreen> {
                   const SizedBox(height: 50),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
+                    children: <Widget>[
                       SizedBox(
                         height: 100,
                         width: 100,
@@ -192,18 +193,10 @@ class _ProductFullScreenState extends State<ProductFullScreen> {
                     ],
                   ),
                   const SizedBox(height: 20),
+                  const ForText(name: 'Quantity', bold: true),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
-                    children: const [
-                      ForText(
-                        name: 'Quantity',
-                        bold: true,
-                      ),
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
+                    children: <Widget>[
                       IconButton(
                         onPressed: quantity < 2
                             ? null
@@ -227,7 +220,6 @@ class _ProductFullScreenState extends State<ProductFullScreen> {
                       ),
                       IconButton(
                         onPressed: () {
-                          print('add press');
                           setState(() {
                             quantity++;
                           });

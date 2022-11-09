@@ -1,5 +1,3 @@
-import '../screens/order/order_succefully.dart';
-
 class AppImages {
   static String get banner => 'assets/images/banner.png';
   static String get brandIntroIcon => 'assets/images/brand_icon.png';

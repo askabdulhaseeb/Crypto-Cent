@@ -1,4 +1,3 @@
-
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -17,7 +16,31 @@ class UserApi {
     final AppUser appUser = AppUser.fromDoc(doc);
     return appUser;
   }
-Future<bool> register({required AppUser user}) async {
+
+  Future<List<AppUser>> getAllUsers() async {
+    final List<AppUser> appUser = <AppUser>[];
+    final QuerySnapshot<Map<String, dynamic>> doc =
+        await _instance.collection(_collection).get();
+
+    for (DocumentSnapshot<Map<String, dynamic>> element in doc.docs) {
+      appUser.add(AppUser.fromDoc(element));
+    }
+    return appUser;
+  }
+
+  Future<void> updateProfile({required AppUser user}) async {
+    if (user.uid != AuthMethods.uid) return;
+    try {
+      await _instance
+          .collection(_collection)
+          .doc(user.uid)
+          .update(user.toMap());
+    } catch (e) {
+      CustomToast.errorToast(message: e.toString());
+    }
+  }
+
+  Future<bool> register({required AppUser user}) async {
     try {
       await _instance.collection(_collection).doc(user.uid).set(user.toMap());
       return true;
@@ -26,6 +49,7 @@ Future<bool> register({required AppUser user}) async {
       return false;
     }
   }
+
   Future<String?> uploadProfilePhoto({required File file}) async {
     try {
       TaskSnapshot snapshot = await FirebaseStorage.instance

@@ -19,13 +19,14 @@ class WalletHistory {
   // ignore: sort_constructors_first
   factory WalletHistory.fromMap(Map<String, dynamic> json) => WalletHistory(
         wallet: json['wallet'],
-        items: List<WalletItem>.from(json['items'].map((x) => WalletItem.fromMap(x))),
+        items: List<WalletItem>.from(
+            json['items'].map((dynamic x) => WalletItem.fromMap(x))),
         pagination: WalletPagination.fromMap(json['pagination']),
       );
 
-  Map<String, dynamic> toMap() => {
+  Map<String, dynamic> toMap() => <String, dynamic>{
         'wallet': wallet,
-        'items': List<dynamic>.from(items.map((x) => x.toMap())),
+        'items': List<dynamic>.from(items.map((dynamic x) => x.toMap())),
         'pagination': pagination.toMap(),
       };
 }
@@ -52,16 +53,16 @@ class WalletItem {
         id: json['id'],
         date: DateTime.parse(json['date']),
         type: json['type'],
-        txs: List<String>.from(json['txs'].map((x) => x)),
+        txs: List<String>.from(json['txs'].map((dynamic x) => x)),
         isConfirmed: json['is_confirmed'],
         amount: json['amount'],
       );
 
-  Map<String, dynamic> toMap() => {
+  Map<String, dynamic> toMap() => <String, dynamic>{
         'id': id,
         'date': date.toIso8601String(),
         'type': type,
-        'txs': List<dynamic>.from(txs.map((x) => x)),
+        'txs': List<dynamic>.from(txs.map((dynamic x) => x)),
         'is_confirmed': isConfirmed,
         'amount': amount,
       };
@@ -79,13 +80,14 @@ class WalletPagination {
   final int limit;
 
   // ignore: sort_constructors_first
-  factory WalletPagination.fromMap(Map<String, dynamic> json) => WalletPagination(
+  factory WalletPagination.fromMap(Map<String, dynamic> json) =>
+      WalletPagination(
         total: json['total'],
         offset: json['offset'],
         limit: json['limit'],
       );
 
-  Map<String, dynamic> toMap() => {
+  Map<String, dynamic> toMap() => <String, dynamic>{
         'total': total,
         'offset': offset,
         'limit': limit,

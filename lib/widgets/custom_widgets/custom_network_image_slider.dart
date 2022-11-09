@@ -1,10 +1,10 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 
-import '../../widgets/custom_widgets/custom_network_image.dart';
+import 'custom_network_image.dart';
 
-class Headeriamge extends StatelessWidget {
-  const Headeriamge({Key? key}) : super(key: key);
+class CustomNetworkImageSlider extends StatelessWidget {
+  const CustomNetworkImageSlider({Key? key}) : super(key: key);
 
   static const List<String> imgList = <String>[
     'https://images.unsplash.com/photo-1522205408450-add114ad53fe?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=368f45b0888aeb0b7b08e3a1084d3ede&auto=format&fit=crop&w=1950&q=80',

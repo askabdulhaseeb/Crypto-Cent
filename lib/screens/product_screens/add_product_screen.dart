@@ -11,14 +11,14 @@ import '../../utilities/image_picker.dart';
 import '../../widgets/custom_widgets/custom_toast.dart';
 import '../../widgets/custom_widgets/custom_widget.dart';
 
-class UploadScreen extends StatefulWidget {
-  const UploadScreen({super.key});
+class AddProductScreen extends StatefulWidget {
+  const AddProductScreen({super.key});
 
   @override
-  State<UploadScreen> createState() => _UploadScreenState();
+  State<AddProductScreen> createState() => _AddProductScreenState();
 }
 
-class _UploadScreenState extends State<UploadScreen> {
+class _AddProductScreenState extends State<AddProductScreen> {
   final TextEditingController productname = TextEditingController();
   final TextEditingController productdecription = TextEditingController();
   final TextEditingController amount = TextEditingController();
@@ -27,7 +27,7 @@ class _UploadScreenState extends State<UploadScreen> {
   final TextEditingController subcategory = TextEditingController();
   Uint8List? _image;
   bool _isloading = false;
-  final _formKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   Future<void> uploaddata() async {
     if (_formKey.currentState!.validate() && _image != null) {
       setState(() {

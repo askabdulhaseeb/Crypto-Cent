@@ -8,10 +8,10 @@ import '../../../providers/product_provider.dart';
 import '../../../utilities/app_images.dart';
 import '../../../widgets/custom_widgets/custom_network_image.dart';
 import '../../../widgets/custom_widgets/custom_widget.dart';
-import '../product_full_screen/product_full_screen.dart';
+import '../../screens/product_screens/product_detail_screen.dart';
 
-class ListViewScreen extends StatelessWidget {
-  const ListViewScreen({required this.product, Key? key}) : super(key: key);
+class ProductTile extends StatelessWidget {
+  const ProductTile({required this.product, Key? key}) : super(key: key);
   final Product product;
   @override
   Widget build(BuildContext context) {
@@ -23,7 +23,7 @@ class ListViewScreen extends StatelessWidget {
               context,
               // ignore: always_specify_types
               MaterialPageRoute(
-                  builder: (BuildContext context) => ProductFullScreen(
+                  builder: (BuildContext context) => ProductDetailScreen(
                         product: product,
                       )));
         },

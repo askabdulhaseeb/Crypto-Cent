@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../../models/product_model.dart';
-import '../../../providers/product_provider.dart';
-import '../list_view/list_view_extend.dart';
+import '../../models/product_model.dart';
+import '../../providers/product_provider.dart';
+import '../../widgets/product/product_tile.dart';
 
 // ignore: must_be_immutable
 class CategoriesExtend extends StatelessWidget {
-  CategoriesExtend({super.key, required this.categoryName});
+  CategoriesExtend({required this.categoryName, super.key});
   String categoryName;
 
   @override
@@ -36,9 +36,7 @@ class CategoriesExtend extends StatelessWidget {
         mainAxisSpacing: 8,
         crossAxisCount: 2,
         children: List.generate(products.length, (int index) {
-          return ListViewScreen(
-            product: products[index],
-          );
+          return ProductTile(product: products[index]);
         }),
       ),
     );

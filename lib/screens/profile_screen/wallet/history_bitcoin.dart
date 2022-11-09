@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 import '../../../database/crypto_wallet/wallet_create_api.dart';
@@ -7,6 +6,7 @@ import '../../../function/encryption_function.dart';
 import '../../../models/crypto_wallet/wallet_histroty.dart';
 import '../../../providers/crypto_wallet/wallet_provider.dart';
 import '../../../widgets/custom_widgets/show_loading.dart';
+import '../../../widgets/wallet/wallet_history_tile.dart';
 
 class BitcoinHistroyScreen extends StatelessWidget {
   const BitcoinHistroyScreen({super.key});
@@ -26,8 +26,6 @@ class BitcoinHistroyScreen extends StatelessWidget {
                 Navigator.pop(context);
               }),
               icon: const Icon(Icons.arrow_back_ios_sharp)),
-          // ignore: always_specify_types
-          actions: const [Icon(Icons.more_vert)],
         ),
         body: FutureBuilder<WalletHistory?>(
           future: WallletWithApi().getWalletHistory(walletID),
@@ -53,44 +51,8 @@ class BitcoinHistroyScreen extends StatelessWidget {
                     : ListView.builder(
                         itemCount: history.items.length,
                         itemBuilder: (BuildContext context, int index) {
-                          final bool received =
-                              history.items[index].type == 'receipt';
                           final WalletItem item = history.items[index];
-                          DateFormat format = DateFormat('dd-MM-yy');
-                          return ListTile(
-                            leading: const Icon(Icons.attach_money_outlined),
-                            title: Text(
-                              item.id,
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                            subtitle: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: <Widget>[
-                                Text(
-                                  'Status: ${item.isConfirmed}',
-                                ),
-                                // const SizedBox(height: 10),
-                                Text(
-                                  'Date: ${format.format(item.date)}',
-                                  style: TextStyle(
-                                    color: received ? Colors.green : Colors.red,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            trailing: Column(
-                              children: <Widget>[
-                                const Text('BTC'),
-                                Text(
-                                  '${item.amount / 100000000}',
-                                  style: TextStyle(
-                                    color: received ? Colors.green : Colors.red,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          );
+                          return WalletHistoryTile(item: item);
                         });
               }
             } else {

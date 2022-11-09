@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 import '../../models/crypto_wallet/binance.dart';
+import '../../widgets/custom_widgets/custom_toast.dart';
 
 class BinanceApi {
   Future<Binance?> getPrice() async {
@@ -20,7 +21,7 @@ class BinanceApi {
       );
       coin = coinData;
     } catch (e) {
-      print(e.toString());
+      CustomToast.errorToast(message: e.toString());
     }
     return coin;
   }

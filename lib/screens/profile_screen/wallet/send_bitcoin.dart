@@ -22,17 +22,16 @@ class _SendBitcoinScreenState extends State<SendBitcoinScreen> {
     String temp = _amount.text;
     double amount = double.parse(temp);
     Encryption encryption = Encryption();
-    String address=encryption.appDecrypt(walletPro.wallet!.coinsWallet[0].address);
-    String walletAddress=encryption.appDecrypt(walletPro.wallet!.coinsWallet[0].wallet);
-    String transferKey=encryption.appDecrypt(walletPro.wallet!.coinsWallet[0].transferKey);
-    final double balance = await WallletWithApi()
-        .getWalletBalance(address);
+    String address =
+        encryption.appDecrypt(walletPro.wallet!.coinsWallet[0].address);
+    String walletAddress =
+        encryption.appDecrypt(walletPro.wallet!.coinsWallet[0].wallet);
+    String transferKey =
+        encryption.appDecrypt(walletPro.wallet!.coinsWallet[0].transferKey);
+    final double balance = await WallletWithApi().getWalletBalance(address);
     if (balance > amount) {
       await WallletWithApi().transferCoin(
-          walletAddress,
-          transferKey,
-          _walletaddress.text,
-          amount.toString());
+          walletAddress, transferKey, _walletaddress.text, amount.toString());
     } else {
       CustomToast.errorToast(message: 'You havenot enough Balance ');
     }
@@ -42,14 +41,14 @@ class _SendBitcoinScreenState extends State<SendBitcoinScreen> {
   Widget build(BuildContext context) {
     WalletProvider walletPro = Provider.of<WalletProvider>(context);
     return Scaffold(
-      appBar: AppBar(title: Text('Send Btc')),
+      appBar: AppBar(title: const Text('Send Btc')),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
+            children: <Widget>[
               const SizedBox(height: 16),
               const Text(
                 'Enter BTC Address :',
@@ -93,7 +92,7 @@ class _SendBitcoinScreenState extends State<SendBitcoinScreen> {
                 ),
               ),
               Row(
-                children: [
+                children:<Widget> [
                   const Text(
                     'Available Balance : ',
                     style: TextStyle(fontWeight: FontWeight.w500, fontSize: 16),
@@ -101,7 +100,10 @@ class _SendBitcoinScreenState extends State<SendBitcoinScreen> {
                   FutureBuilder<double>(
                       future: WallletWithApi().getWalletBalance(
                           walletPro.wallet!.coinsWallet[0].address),
-                      builder: (context, snapshot) {
+                      builder: (
+                        BuildContext context,
+                        AsyncSnapshot<double> snapshot,
+                      ) {
                         if (snapshot.hasData) {
                           double balance = snapshot.data!;
                           return Text(

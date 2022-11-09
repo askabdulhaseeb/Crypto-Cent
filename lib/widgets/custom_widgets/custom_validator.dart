@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class CustomValidator {
   static String? email(String? value) {
@@ -10,17 +9,18 @@ class CustomValidator {
     }
     return null;
   }
- static String? validateMobile(String value) {
+
+  static String? validateMobile(String value) {
     String pattern = r'(^(?:[+0]9)?[0-9]{10,12}$)';
-    RegExp regExp = new RegExp(pattern);
-    if (value.length == 0) {
-          return 'Please enter mobile number';
-    }
-    else if (!regExp.hasMatch(value)) {
+    RegExp regExp = RegExp(pattern);
+    if (value.isEmpty) {
+      return 'Please enter mobile number';
+    } else if (!regExp.hasMatch(value)) {
       return 'Please enter valid mobile number';
     }
     return null;
-}  
+  }
+
   static String? password(String? value) {
     if (value!.length < 6) {
       return 'Password should be greater then 6 digits';
