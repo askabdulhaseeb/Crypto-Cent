@@ -1,4 +1,4 @@
-enum OrderStatusEnum {
+enum OrderStatusEnum<String> {
   pending('pending'),
   inProgress('in_progress'),
   completed('completed'),

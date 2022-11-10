@@ -4,17 +4,17 @@ import 'orderd_product.dart';
 class Order {
   Order({
     required this.orderID,
+    required this.receiptID,
     required this.sellerUID,
     required this.customerUID,
-    required this.receiptID,
     required this.products,
     this.status = OrderStatusEnum.pending,
   });
 
   final String orderID;
+  final String receiptID;
   final String sellerUID;
   final String customerUID;
-  final String receiptID;
   final List<OrderdProduct> products;
   OrderStatusEnum status;
 
@@ -25,6 +25,7 @@ class Order {
       'seller_uid': sellerUID,
       'customer_uid': customerUID,
       'products': products.map((OrderdProduct x) => x.toMap()).toList(),
+      'status': status.value,
     };
   }
 
@@ -42,6 +43,7 @@ class Order {
                 (int x) => OrderdProduct.fromMap(x as Map<String, dynamic>),
               ),
             ),
+      status: OrderStatusEnum.pending,
     );
   }
 }
