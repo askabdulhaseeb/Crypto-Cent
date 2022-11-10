@@ -47,30 +47,30 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyAsy-wgawIw6tDAbw-efaWXT3gyAxEBUDo',
-    appId: '1:229137297335:web:ba90b4e102b364ee014232',
-    messagingSenderId: '229137297335',
-    projectId: 'crypto-cent',
-    authDomain: 'crypto-cent.firebaseapp.com',
-    storageBucket: 'crypto-cent.appspot.com',
-    measurementId: 'G-ZVZZSB2SRJ',
+    apiKey: 'AIzaSyBda5JvmeRZje6VZQplTWtLtFkUnI-58SE',
+    appId: '1:624098099021:web:b6465db26313fe43884104',
+    messagingSenderId: '624098099021',
+    projectId: 'bloodo-app',
+    authDomain: 'bloodo-app.firebaseapp.com',
+    storageBucket: 'bloodo-app.appspot.com',
+    measurementId: 'G-8E9765HQC6',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyDkVAK5Kr4U-e3ylCG3rIuMqACle_BfkPg',
-    appId: '1:229137297335:android:eda1ca79bb89ccaa014232',
-    messagingSenderId: '229137297335',
-    projectId: 'crypto-cent',
-    storageBucket: 'crypto-cent.appspot.com',
+    apiKey: 'AIzaSyCYIOTkjNEC7WuCtfcC481Kn1jZ9950fnM',
+    appId: '1:624098099021:android:4b55f5f8e946810b884104',
+    messagingSenderId: '624098099021',
+    projectId: 'bloodo-app',
+    storageBucket: 'bloodo-app.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyA4z53cZ6RpIGQKMDx7l-GMu_ie9BV5Krk',
-    appId: '1:229137297335:ios:c8f8140190512f43014232',
-    messagingSenderId: '229137297335',
-    projectId: 'crypto-cent',
-    storageBucket: 'crypto-cent.appspot.com',
-    iosClientId: '229137297335-prg1amdhikgqm4srpn66c9ja0uh5gl1l.apps.googleusercontent.com',
+    apiKey: 'AIzaSyCF8zARmBBzC48EPcuPBlUGsBFh5K3aem8',
+    appId: '1:624098099021:ios:fc523bcbfbf23bbc884104',
+    messagingSenderId: '624098099021',
+    projectId: 'bloodo-app',
+    storageBucket: 'bloodo-app.appspot.com',
+    iosClientId: '624098099021-m71t32lm0rg3ngjglbam2klntvtq7unf.apps.googleusercontent.com',
     iosBundleId: 'com.devmarkaz.cryptoCent',
   );
 }

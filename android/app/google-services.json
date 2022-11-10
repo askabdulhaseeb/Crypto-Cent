@@ -1,57 +1,34 @@
 {
   "project_info": {
-    "project_number": "229137297335",
-    "project_id": "crypto-cent",
-    "storage_bucket": "crypto-cent.appspot.com"
+    "project_number": "624098099021",
+    "project_id": "bloodo-app",
+    "storage_bucket": "bloodo-app.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:229137297335:android:eda1ca79bb89ccaa014232",
+        "mobilesdk_app_id": "1:624098099021:android:4b55f5f8e946810b884104",
         "android_client_info": {
-          "package_name": "com.devmarkaz.crypto_cent"
+          "package_name": "com.devmarkaz.boloodo"
         }
       },
       "oauth_client": [
         {
-          "client_id": "229137297335-fvirljf0qbedsjrvud7a1vfk30n88n0r.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.devmarkaz.crypto_cent",
-            "certificate_hash": "a08fb573120edf58fcaf1ef3f19d11207bec1d9c"
-          }
-        },
-        {
-          "client_id": "229137297335-if9he7nft1e3qijbatja9r88e0ufc5va.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.devmarkaz.crypto_cent",
-            "certificate_hash": "e78c6cb8941fc5ec6b275e37087cda9b7b58d549"
-          }
-        },
-        {
-          "client_id": "229137297335-g8s8lom0mtu2t7sq8egrp0g5bal88c1c.apps.googleusercontent.com",
+          "client_id": "624098099021-9jl4ah6601lcei38je4mrs6eb24pcq0c.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDkVAK5Kr4U-e3ylCG3rIuMqACle_BfkPg"
+          "current_key": "AIzaSyCYIOTkjNEC7WuCtfcC481Kn1jZ9950fnM"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "229137297335-g8s8lom0mtu2t7sq8egrp0g5bal88c1c.apps.googleusercontent.com",
+              "client_id": "624098099021-9jl4ah6601lcei38je4mrs6eb24pcq0c.apps.googleusercontent.com",
               "client_type": 3
-            },
-            {
-              "client_id": "229137297335-prg1amdhikgqm4srpn66c9ja0uh5gl1l.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.devmarkaz.cryptoCent"
-              }
             }
           ]
         }

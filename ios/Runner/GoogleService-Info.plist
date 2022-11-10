@@ -3,21 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>229137297335-prg1amdhikgqm4srpn66c9ja0uh5gl1l.apps.googleusercontent.com</string>
+	<string>624098099021-m71t32lm0rg3ngjglbam2klntvtq7unf.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.229137297335-prg1amdhikgqm4srpn66c9ja0uh5gl1l</string>
+	<string>com.googleusercontent.apps.624098099021-m71t32lm0rg3ngjglbam2klntvtq7unf</string>
 	<key>API_KEY</key>
-	<string>AIzaSyA4z53cZ6RpIGQKMDx7l-GMu_ie9BV5Krk</string>
+	<string>AIzaSyCF8zARmBBzC48EPcuPBlUGsBFh5K3aem8</string>
 	<key>GCM_SENDER_ID</key>
-	<string>229137297335</string>
+	<string>624098099021</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
 	<string>com.devmarkaz.cryptoCent</string>
 	<key>PROJECT_ID</key>
-	<string>crypto-cent</string>
+	<string>bloodo-app</string>
 	<key>STORAGE_BUCKET</key>
-	<string>crypto-cent.appspot.com</string>
+	<string>bloodo-app.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,6 +29,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:229137297335:ios:c8f8140190512f43014232</string>
+	<string>1:624098099021:ios:fc523bcbfbf23bbc884104</string>
 </dict>
 </plist>
