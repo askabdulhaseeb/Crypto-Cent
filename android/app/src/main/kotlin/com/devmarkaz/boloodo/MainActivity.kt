@@ -1,4 +1,4 @@
-package com.devmarkaz.crypto_cent
+package com.devmarkaz.boloodo
 
 import io.flutter.embedding.android.FlutterActivity
 

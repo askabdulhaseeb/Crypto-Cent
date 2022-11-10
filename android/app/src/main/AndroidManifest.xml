@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.devmarkaz.crypto_cent">
+    package="com.devmarkaz.boloodo">
    <application
         android:label="crypto_cent"
         android:name="${applicationName}"
