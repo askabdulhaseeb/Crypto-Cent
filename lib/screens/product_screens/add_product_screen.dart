@@ -27,12 +27,11 @@ class _AddProductScreenState extends State<AddProductScreen> {
   final TextEditingController productdecription = TextEditingController();
   final TextEditingController amount = TextEditingController();
   final TextEditingController quantity = TextEditingController();
-  final TextEditingController category = TextEditingController();
-  final TextEditingController subcategory = TextEditingController();
+  
   Uint8List? _image;
   bool _isloading = false;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  Future<void> uploaddata() async {
+  Future<void> uploaddata(CategoriesProvider catPro) async {
     if (_formKey.currentState!.validate() && _image != null) {
       setState(() {
         _isloading = true;
@@ -51,20 +50,20 @@ class _AddProductScreenState extends State<AddProductScreen> {
         productname: productname.text,
         description: productdecription.text,
         timestamp: TimeStamp.timestamp,
-        category: category.text,
-        subCategory: subcategory.text,
+        category: catPro.currentCat!.catID,
+        subCategory: catPro.subcurrentCat!.catID,
         createdByUID: 'tester',
         imageurl: imageurl,
       );
       bool temp = await ProductApi().add(product);
       if (temp) {
-        CustomToast.successToast(message: 'ho giya upload');
+        CustomToast.successToast(message: 'upload');
         productname.clear();
         productdecription.clear();
         amount.clear();
-        category.clear();
+      
         quantity.clear();
-        subcategory.clear();
+       
       }
       setState(() {
         _isloading = false;
@@ -187,7 +186,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                     ? const CircularProgressIndicator()
                     : CustomElevatedButton(
                         title: 'Upload',
-                        onTap: () async => await uploaddata(),
+                        onTap: () async => await uploaddata(catPro),
                       ),
                 const SizedBox(height: 20),
               ],
