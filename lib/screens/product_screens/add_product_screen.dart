@@ -2,11 +2,15 @@ import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:provider/provider.dart';
 
 import '../../database/databse_storage.dart';
 import '../../database/product_api.dart';
 import '../../function/time_date_function.dart';
+import '../../models/categories/categories.dart';
+import '../../models/categories/sub_categories.dart';
 import '../../models/product_model.dart';
+import '../../providers/categories_provider.dart';
 import '../../utilities/image_picker.dart';
 import '../../widgets/custom_widgets/custom_toast.dart';
 import '../../widgets/custom_widgets/custom_widget.dart';
@@ -78,6 +82,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
 
   @override
   Widget build(BuildContext context) {
+    CategoriesProvider catPro = Provider.of<CategoriesProvider>(context);
     return Scaffold(
       appBar: AppBar(title: const Text('Upload')),
       body: SingleChildScrollView(
@@ -169,20 +174,14 @@ class _AddProductScreenState extends State<AddProductScreen> {
                     signed: true,
                   ),
                 ),
-                CustomTextFormField(
-                  controller: category,
-                  hint: 'Enter Product Category',
-                  readOnly: _isloading,
-                  validator: (String? value) =>
-                      CustomValidator.lessThen2(value),
-                ),
-                CustomTextFormField(
-                  controller: subcategory,
-                  hint: 'Enter Product Sub Category',
-                  readOnly: _isloading,
-                  validator: (String? value) =>
-                      CustomValidator.lessThen2(value),
-                ),
+                categorie(context, catPro),
+                // DropdownButton(
+
+                //   items: items,
+
+                //    onChanged: onChanged),
+                subCategorie(context,catPro),
+                
                 const SizedBox(height: 20),
                 _isloading
                     ? const CircularProgressIndicator()
@@ -195,6 +194,89 @@ class _AddProductScreenState extends State<AddProductScreen> {
             ),
           ),
         ),
+      ),
+    );
+  }
+
+  Widget categorie(BuildContext context, CategoriesProvider catPro) {
+    return Container(
+      height: 70,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(
+          color: Theme.of(context).textTheme.bodyText1!.color!.withOpacity(0.5),
+        ),
+      ),
+      child: Row(
+        children: [
+          Expanded(
+              child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Container(
+              child: const Text('Categories'),
+            ),
+          )),
+          // ignore: always_specify_types
+          DropdownButton(
+              value: catPro.currentCat,
+              style: const TextStyle(color: Colors.black),
+              underline: const SizedBox(),
+              hint: const Text(
+                'Category',
+                style: TextStyle(color: Colors.black),
+              ),
+              items: catPro.categories
+                  .map((Categories cats) => DropdownMenuItem<Categories>(
+                        value: cats,
+                        child: Text(
+                          cats.title.toUpperCase(),
+                          style: const TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                      ))
+                  .toList(),
+              onChanged: (Categories? value) => catPro.formValueChange(value!)),
+        ],
+      ),
+    );
+  }
+  Widget subCategorie(BuildContext context, CategoriesProvider catPro) {
+    return Container(
+      height: 70,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(
+          color: Theme.of(context).textTheme.bodyText1!.color!.withOpacity(0.5),
+        ),
+      ),
+      child: Row(
+        children: [
+          Expanded(
+              child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Container(
+              child: const Text('SubCategories'),
+            ),
+          )),
+          // ignore: always_specify_types
+          DropdownButton(
+              value: catPro.subcurrentCat,
+              style: const TextStyle(color: Colors.black),
+              underline: const SizedBox(),
+              hint: const Text(
+                'Category',
+                style: TextStyle(color: Colors.black),
+              ),
+              items: catPro.subCa
+                  .map((SubCategory subcats) => DropdownMenuItem<SubCategory>(
+                        value: subcats,
+                        child: Text(
+                          subcats.title.toUpperCase(),
+                          style: const TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                      ))
+                  .toList(),
+              onChanged: (SubCategory? value) => catPro.subCategoryChange(value!)),
+        ],
       ),
     );
   }

@@ -39,14 +39,15 @@ class CategoryScreen extends StatelessWidget {
                     Container(
                       decoration: BoxDecoration(
                         image: DecorationImage(
-                            image: NetworkImage(
-                                catPro.categories[index].imageURl)),
+                            image:
+                                NetworkImage(catPro.categories[index].imageURl),
+                            fit: BoxFit.fill),
                         borderRadius: BorderRadius.circular(24),
                       ),
                     ),
                     Container(
                       decoration: BoxDecoration(
-                        color: Colors.black26,
+                        color: Colors.black38,
                         borderRadius: BorderRadius.circular(24),
                       ),
                     ),
