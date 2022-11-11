@@ -27,6 +27,7 @@ class OrderdProduct {
       'crypto_coin_symbol': cryptoCoinSymbol,
       'local_price': localPrice,
       'crypto_price': cryptoPrice,
+      'status': status.value,
     };
   }
 
@@ -39,6 +40,7 @@ class OrderdProduct {
       cryptoCoinSymbol: map['crypto_coin_symbol'] ?? 'btc',
       localPrice: map['local_price'] ?? 0.0,
       cryptoPrice: map['crypto_price'] ?? 0.0,
+      status: OrderStatusConvetion().stringToEnum(map['status']),
     );
   }
 }

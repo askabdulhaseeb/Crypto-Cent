@@ -43,7 +43,7 @@ class Order {
                 (int x) => OrderdProduct.fromMap(x as Map<String, dynamic>),
               ),
             ),
-      status: OrderStatusEnum.pending,
+      status: OrderStatusConvetion().stringToEnum(map['status']),
     );
   }
 }

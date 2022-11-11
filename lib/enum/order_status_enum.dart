@@ -7,3 +7,18 @@ enum OrderStatusEnum<String> {
   const OrderStatusEnum(this.value);
   final String value;
 }
+
+class OrderStatusConvetion {
+  OrderStatusEnum<String> stringToEnum(String value) {
+    switch (value) {
+      case 'pending':
+        return OrderStatusEnum.pending;
+      case 'in_progress':
+        return OrderStatusEnum.inProgress;
+      case 'completed':
+        return OrderStatusEnum.completed;
+      default:
+        return OrderStatusEnum.cancel;
+    }
+  }
+}
