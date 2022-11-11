@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import '../../providers/categories_provider.dart';
 import '../../widgets/custom_widgets/custom_widget.dart';
 import 'categories_extend.dart';
-
+ 
 class CategoryScreen extends StatelessWidget {
   const CategoryScreen({super.key});
   static const String routeName = '/category-screen';
@@ -29,7 +29,7 @@ class CategoryScreen extends StatelessWidget {
                     // ignore: always_specify_types
                     MaterialPageRoute(
                         builder: (BuildContext context) => CategoriesExtend(
-                              categoryName: catPro.categories[index].title,
+                              categoryName: catPro.categories[index].catID,
                             )));
               },
               child: Padding(
