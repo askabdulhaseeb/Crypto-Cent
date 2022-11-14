@@ -53,7 +53,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
           SizedBox(
             height: 250,
             width: MediaQuery.of(context).size.width * 0.8,
-            child: CustomNetworkImage(imageURL: widget.product.imageurl),
+            child: CustomNetworkImage(imageURL: widget.product.imageurl,fit: BoxFit.fill),
           ),
           Expanded(
             child: SingleChildScrollView(
@@ -62,6 +62,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
+                    const SizedBox(height: 15),
                     Text(
                       widget.product.productname.toString(),
                       maxLines: 2,
