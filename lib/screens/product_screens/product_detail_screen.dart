@@ -50,10 +50,17 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          SizedBox(
-            height: 250,
-            width: MediaQuery.of(context).size.width * 0.8,
-            child: CustomNetworkImage(imageURL: widget.product.imageurl,fit: BoxFit.fill),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              SizedBox(
+                height: 250,
+                width: 250,
+                child: CustomNetworkImage(
+                    imageURL: widget.product.imageurl, fit: BoxFit.fill),
+              ),
+            ],
           ),
           Expanded(
             child: SingleChildScrollView(
