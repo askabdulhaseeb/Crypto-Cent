@@ -73,7 +73,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
 
   selectImage() async {
     Uint8List? im = await pickImage(ImageSource.gallery);
-    // set state because we need to display the image we selected on the circle avatar
+    
     setState(() {
       _image = im;
     });
@@ -174,11 +174,11 @@ class _AddProductScreenState extends State<AddProductScreen> {
                   ),
                 ),
                 categorie(context, catPro),
-                // DropdownButton(
+                
 
-                //   items: items,
+                
 
-                //    onChanged: onChanged),
+                
                 subCategorie(context,catPro),
                 
                 const SizedBox(height: 20),
@@ -215,7 +215,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
               child: const Text('Categories'),
             ),
           )),
-          // ignore: always_specify_types
+          
           DropdownButton(
               value: catPro.currentCat,
               style: const TextStyle(color: Colors.black),
@@ -256,7 +256,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
               child: const Text('SubCategories'),
             ),
           )),
-          // ignore: always_specify_types
+          
           DropdownButton(
               value: catPro.subcurrentCat,
               style: const TextStyle(color: Colors.black),
@@ -287,7 +287,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
         const SizedBox(height: 10),
         CustomTextFormField(
           controller: controller,
-          // starticon: Icons.person,
+          
           hint: hint,
           validator: (String? value) => CustomValidator.isEmpty(value),
         ),

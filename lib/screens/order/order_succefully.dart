@@ -18,7 +18,7 @@ class OrderSuccefully extends StatelessWidget {
               Navigator.pop(context);
             }),
             icon: const Icon(Icons.arrow_back_ios_sharp)),
-        // ignore: always_specify_types
+        
         actions: const [Icon(Icons.more_vert)],
       ),
       body: SingleChildScrollView(

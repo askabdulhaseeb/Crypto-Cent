@@ -62,7 +62,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
               Navigator.pop(context);
             }),
             icon: const Icon(Icons.arrow_back_ios_sharp)),
-        // ignore: always_specify_types
+        
         actions: const [Icon(Icons.more_vert)],
       ),
       body: Padding(
@@ -175,7 +175,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                   if (temp) {
                     Navigator.push(
                       context,
-                      // ignore: always_specify_types
+                      
                       MaterialPageRoute(
                         builder: (BuildContext context) =>
                             const OrderSuccefully(),
