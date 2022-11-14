@@ -14,6 +14,22 @@
       },
       "oauth_client": [
         {
+          "client_id": "624098099021-bcbr43fffbsjtsc7nvgd3v9l8d2pun62.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.devmarkaz.boloodo",
+            "certificate_hash": "e78c6cb8941fc5ec6b275e37087cda9b7b58d549"
+          }
+        },
+        {
+          "client_id": "624098099021-spbhp2ue3a4u1r9me2a9vf65u2qi0vhs.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.devmarkaz.boloodo",
+            "certificate_hash": "db855260d5d83dc052afb12c577129f58683bb52"
+          }
+        },
+        {
           "client_id": "624098099021-9jl4ah6601lcei38je4mrs6eb24pcq0c.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -29,6 +45,49 @@
             {
               "client_id": "624098099021-9jl4ah6601lcei38je4mrs6eb24pcq0c.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "624098099021-3urqg2uoj1p5kjnm0dh8b0h4r74s47p1.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.devmarkaz.boloodoAdmin"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:624098099021:android:b47b7e00fffc9779884104",
+        "android_client_info": {
+          "package_name": "com.devmarkaz.boloodo_admin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "624098099021-9jl4ah6601lcei38je4mrs6eb24pcq0c.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCYIOTkjNEC7WuCtfcC481Kn1jZ9950fnM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "624098099021-9jl4ah6601lcei38je4mrs6eb24pcq0c.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "624098099021-3urqg2uoj1p5kjnm0dh8b0h4r74s47p1.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.devmarkaz.boloodoAdmin"
+              }
             }
           ]
         }
