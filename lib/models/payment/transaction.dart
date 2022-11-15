@@ -3,7 +3,7 @@
 import '../../enum/order_status_enum.dart';
 import 'orderd_product.dart';
 
-class Transaction {
+class Transactions {
   final String transactionID;
   final List<OrderdProduct> products;
   final String orderID;
@@ -15,7 +15,7 @@ class Transaction {
   final double totalCryptoPrice;
   // ignore: always_specify_types
   OrderStatusEnum status;
-  Transaction({
+  Transactions({
     required this.transactionID,
     required this.products,
     required this.orderID,
@@ -43,8 +43,8 @@ class Transaction {
     };
   }
 
-  factory Transaction.fromMap(Map<String, dynamic> map) {
-    return Transaction(
+  factory Transactions.fromMap(Map<String, dynamic> map) {
+    return Transactions(
       transactionID: map['transactionID'] as String,
       products: map['products'] == null
           ? <OrderdProduct>[]

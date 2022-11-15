@@ -36,7 +36,7 @@ class PaymentProvider with ChangeNotifier {
         exchangeRate: cart[i].exchangeRate,
         totalCrypto: total,
       );
-      Transaction tempTransaction = Transaction(
+      Transactions tempTransaction = Transactions(
         transactionID: uid,
         products: _orderProduct,
         orderID: uid,
