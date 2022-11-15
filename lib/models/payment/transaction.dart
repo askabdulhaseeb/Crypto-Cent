@@ -1,33 +1,37 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 
 import '../../enum/order_status_enum.dart';
+import 'orderd_product.dart';
 
 class Transaction {
   final String transactionID;
+  final List<OrderdProduct> products;
   final String orderID;
   final String buyerID;
   final String sellerID;
   final int timeStamp;
   final double exchangeRate;
   final String cryptoSymbol;
-  final double cryptoPrice;
+  final double totalCryptoPrice;
   // ignore: always_specify_types
   OrderStatusEnum status;
   Transaction({
     required this.transactionID,
+    required this.products,
     required this.orderID,
     required this.buyerID,
     required this.sellerID,
     required this.timeStamp,
     required this.exchangeRate,
     required this.cryptoSymbol,
-    required this.cryptoPrice,
+    required this.totalCryptoPrice,
     this.status = OrderStatusEnum.pending,
   });
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'transactionID': transactionID,
+      'products': products.map((OrderdProduct x) => x.toMap()).toList(),
       'orderID': orderID,
       'buyerID': buyerID,
       'sellerID': sellerID,
@@ -35,13 +39,20 @@ class Transaction {
       'timeStamp': timeStamp,
       'exchangeRate': exchangeRate,
       'cryptoSymbol': cryptoSymbol,
-      'cryptoPrice': cryptoPrice,
+      'totalCryptoPrice': totalCryptoPrice,
     };
   }
 
   factory Transaction.fromMap(Map<String, dynamic> map) {
     return Transaction(
       transactionID: map['transactionID'] as String,
+      products: map['products'] == null
+          ? <OrderdProduct>[]
+          : List<OrderdProduct>.from(
+              (map['products'] as List<int>).map<OrderdProduct>(
+                (int x) => OrderdProduct.fromMap(x as Map<String, dynamic>),
+              ),
+            ),
       orderID: map['orderID'] as String,
       buyerID: map['buyerID'] as String,
       sellerID: map['sellerID'] as String,
@@ -49,7 +60,7 @@ class Transaction {
       timeStamp: map['timeStamp'] as int,
       exchangeRate: map['exchangeRate'] as double,
       cryptoSymbol: map['cryptoSymbol'] as String,
-      cryptoPrice: map['cryptoPrice'] as double,
+      totalCryptoPrice: map['totalCryptoPrice'] as double,
     );
   }
 }

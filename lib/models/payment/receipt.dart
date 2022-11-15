@@ -3,7 +3,7 @@ class Receipt {
     required this.receiptID,
     required this.customerUID,
     required this.timestamp,
-    required this.totalLocal,
+    required this.exchangeRate,
     required this.totalCrypto,
     this.localCurrency = '\$',
     this.cryptoCoinSymbol = 'btc',
@@ -14,7 +14,7 @@ class Receipt {
   final int timestamp;
   final String localCurrency;
   final String cryptoCoinSymbol;
-  final double totalLocal;
+  final double exchangeRate;
   final double totalCrypto;
 
   Map<String, dynamic> toMap() {
@@ -24,7 +24,7 @@ class Receipt {
       'timestamp': timestamp,
       'local_currency': localCurrency,
       'crypto_coin_symbol': cryptoCoinSymbol,
-      'total_local': totalLocal,
+      'exchange_rate': exchangeRate,
       'total_crypto': totalCrypto,
     };
   }
@@ -37,7 +37,7 @@ class Receipt {
       timestamp: map['timestamp'] ?? 0,
       localCurrency: map['local_currency'] ?? '\$',
       cryptoCoinSymbol: map['crypto_coin_symbol'] ?? 'btc',
-      totalLocal: map['total_local'] ?? 0.0,
+      exchangeRate: map['exchange_rate'] ?? 0.0,
       totalCrypto: map['total_crypto'] ?? 0.0,
     );
   }
