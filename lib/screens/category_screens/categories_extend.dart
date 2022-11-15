@@ -35,8 +35,7 @@ class CategoriesExtend extends StatelessWidget {
         childAspectRatio: 200 / 240,
         mainAxisSpacing: 8,
         crossAxisCount: 2,
-        // ignore: always_specify_types
-        children: List.generate(products.length, (int index) {
+        children: List<Widget>.generate(products.length, (int index) {
           return ProductTile(product: products[index]);
         }),
       ),

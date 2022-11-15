@@ -1,6 +1,4 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
-
 import '../custom_widgets/cutom_text.dart';
 
 class ProfileNavTile extends StatelessWidget {
@@ -28,17 +26,11 @@ class ProfileNavTile extends StatelessWidget {
         child: Row(
           children: <Widget>[
             const SizedBox(width: 24),
-            Container(
-              height: 40,
-              width: 40,
-              decoration: BoxDecoration(
-                image: DecorationImage(image: AssetImage(image)),
-              ),
-            ),
+            ImageIcon(AssetImage(image), color: Colors.black),
             const SizedBox(width: 16),
             ForText(name: name, size: 18),
             const Spacer(),
-            const Icon(Icons.arrow_forward_ios, color: Colors.grey),
+            const Icon(Icons.arrow_forward_ios, color: Colors.grey, size: 20),
             const SizedBox(width: 16),
           ],
         ),

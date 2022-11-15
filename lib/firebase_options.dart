@@ -66,11 +66,12 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyCF8zARmBBzC48EPcuPBlUGsBFh5K3aem8',
-    appId: '1:624098099021:ios:fc523bcbfbf23bbc884104',
+    appId: '1:624098099021:ios:71d26f6ed119585b884104',
     messagingSenderId: '624098099021',
     projectId: 'bloodo-app',
     storageBucket: 'bloodo-app.appspot.com',
-    iosClientId: '624098099021-m71t32lm0rg3ngjglbam2klntvtq7unf.apps.googleusercontent.com',
-    iosBundleId: 'com.devmarkaz.cryptoCent',
+    iosClientId:
+        '624098099021-81tvngbk0ojq3mnla5638m5tiv23a1pa.apps.googleusercontent.com',
+    iosBundleId: 'com.devmarkaz.boloodo',
   );
 }
