@@ -29,8 +29,8 @@ class _MainBottomNavigationBarState extends State<MainBottomNavigationBar> {
           ImageIcon(
             AssetImage(
               currentTap == 0
-                  ? AppImages.homeUnselected
-                  : AppImages.homeSelected,
+                  ? AppImages.homeSelected
+                  : AppImages.homeUnselected,
             ),
             color: currentTap == 0 ? Theme.of(context).primaryColor : null,
           ),
