@@ -3,9 +3,11 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>624098099021-m71t32lm0rg3ngjglbam2klntvtq7unf.apps.googleusercontent.com</string>
+	<string>624098099021-81tvngbk0ojq3mnla5638m5tiv23a1pa.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.624098099021-m71t32lm0rg3ngjglbam2klntvtq7unf</string>
+	<string>com.googleusercontent.apps.624098099021-81tvngbk0ojq3mnla5638m5tiv23a1pa</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>624098099021-bcbr43fffbsjtsc7nvgd3v9l8d2pun62.apps.googleusercontent.com</string>
 	<key>API_KEY</key>
 	<string>AIzaSyCF8zARmBBzC48EPcuPBlUGsBFh5K3aem8</string>
 	<key>GCM_SENDER_ID</key>
@@ -13,7 +15,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.devmarkaz.cryptoCent</string>
+	<string>com.devmarkaz.boloodo</string>
 	<key>PROJECT_ID</key>
 	<string>bloodo-app</string>
 	<key>STORAGE_BUCKET</key>
@@ -29,6 +31,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:624098099021:ios:fc523bcbfbf23bbc884104</string>
+	<string>1:624098099021:ios:71d26f6ed119585b884104</string>
 </dict>
 </plist>
