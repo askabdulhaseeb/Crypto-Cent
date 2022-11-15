@@ -5,7 +5,7 @@ import '../../widgets/custom_widgets/custom_toast.dart';
 
 class OrderApi{
   final FirebaseFirestore _instance = FirebaseFirestore.instance;
-  static const String _collection = 'orer';
+  static const String _collection = 'orders';
   Future<bool> add(Order order) async {
     try {
       await _instance

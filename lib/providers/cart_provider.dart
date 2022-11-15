@@ -13,7 +13,7 @@ class CartProvider extends ChangeNotifier {
         createdID: value.createdByUID,
         title: value.productname,
         imageurl: value.imageurl,
-        price: value.amount,
+        price: value.amount/exchangeRate,
         exchangeRate: exchangeRate,
         quantity: quantity);
 

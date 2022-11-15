@@ -10,6 +10,7 @@ import '../../providers/crypto_wallet/wallet_provider.dart';
 import '../../providers/payment/payment_provider.dart';
 import '../../widgets/custom_widgets/custom_toast.dart';
 import '../../widgets/custom_widgets/custom_widget.dart';
+import '../empty_screen/empty_screen.dart';
 import 'order_succefully.dart';
 
 class PaymentScreen extends StatefulWidget {
@@ -162,14 +163,14 @@ class _PaymentScreenState extends State<PaymentScreen> {
             ),
             const SizedBox(height: 15),
             Row(
-              children: const <Widget>[
-                ForText(
+              children:  <Widget>[
+              const  ForText(
                   name: 'Total',
                   bold: true,
                 ),
-                SizedBox(width: 20),
+                const SizedBox(width: 20),
                 ForText(
-                  name: '\$ 10',
+                  name: '\$ ${cartPro.totalPrice()}',
                   bold: true,
                 ),
               ],
@@ -181,7 +182,14 @@ class _PaymentScreenState extends State<PaymentScreen> {
                   bool? temp = await paymentPro.productOrder(
                       cartPro.cartItem, cartPro.totalPrice());
                   if (temp!) {
-                    print('all ok');
+                     // ignore: use_build_context_synchronously
+                     Navigator.push(
+                                context,
+                                // ignore: always_specify_types
+                                MaterialPageRoute<EmptyScreen>(
+                                  builder: (BuildContext context) => const EmptyScreen(),
+                                ),
+                              );
                   }
                   // bool temp = btcSend(cartPro.totalPrice()) as bool;
                   // if (temp) {

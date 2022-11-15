@@ -8,7 +8,7 @@ class Transactions {
   final List<OrderdProduct> products;
   final String orderID;
   final String buyerID;
-  final String sellerID;
+
   final int timeStamp;
   final double exchangeRate;
   final String cryptoSymbol;
@@ -20,7 +20,6 @@ class Transactions {
     required this.products,
     required this.orderID,
     required this.buyerID,
-    required this.sellerID,
     required this.timeStamp,
     required this.exchangeRate,
     required this.cryptoSymbol,
@@ -30,22 +29,21 @@ class Transactions {
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
-      'transactionID': transactionID,
+      'transaction_id': transactionID,
       'products': products.map((OrderdProduct x) => x.toMap()).toList(),
-      'orderID': orderID,
-      'buyerID': buyerID,
-      'sellerID': sellerID,
+      'order_id': orderID,
+      'buyer_id': buyerID,
       'status': status.value,
-      'timeStamp': timeStamp,
-      'exchangeRate': exchangeRate,
-      'cryptoSymbol': cryptoSymbol,
-      'totalCryptoPrice': totalCryptoPrice,
+      'timestamp': timeStamp,
+      'exchange_rate': exchangeRate,
+      'crypto_symbol': cryptoSymbol,
+      'total_crypto_price': totalCryptoPrice,
     };
   }
 
   factory Transactions.fromMap(Map<String, dynamic> map) {
     return Transactions(
-      transactionID: map['transactionID'] as String,
+      transactionID: map['transaction_id'] as String,
       products: map['products'] == null
           ? <OrderdProduct>[]
           : List<OrderdProduct>.from(
@@ -53,14 +51,13 @@ class Transactions {
                 (int x) => OrderdProduct.fromMap(x as Map<String, dynamic>),
               ),
             ),
-      orderID: map['orderID'] as String,
-      buyerID: map['buyerID'] as String,
-      sellerID: map['sellerID'] as String,
+      orderID: map['order_id'] as String,
+      buyerID: map['buyer_id'] as String,
       status: OrderStatusConvetion().stringToEnum(map['status']),
-      timeStamp: map['timeStamp'] as int,
-      exchangeRate: map['exchangeRate'] as double,
-      cryptoSymbol: map['cryptoSymbol'] as String,
-      totalCryptoPrice: map['totalCryptoPrice'] as double,
+      timeStamp: map['timestamp'] as int,
+      exchangeRate: map['exchange_rate'] as double,
+      cryptoSymbol: map['crypto_symbol'] as String,
+      totalCryptoPrice: map['total_crypto_price'] as double,
     );
   }
 }

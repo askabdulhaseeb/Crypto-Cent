@@ -30,38 +30,38 @@ class PaymentProvider with ChangeNotifier {
         quantity: cart[i].quantity,
       );
       _orderProduct.add(tempOrderProduct);
-      Order tempOrder = Order(
-          orderID: uid,
-          receiptID: uid,
-          customerUID: AuthMethods.uid,
-          products: _orderProduct);
-      Receipt tempReceipt = Receipt(
+    }
+    Order tempOrder = Order(
+        orderID: uid,
         receiptID: uid,
         customerUID: AuthMethods.uid,
-        timestamp: TimeStamp.timestamp,
-        exchangeRate: cart[i].exchangeRate,
-        totalCrypto: total,
-      );
-      Transactions tempTransaction = Transactions(
-        transactionID: uid,
-        products: _orderProduct,
-        orderID: uid,
-        buyerID: AuthMethods.uid,
-        sellerID: cart[i].createdID,
-        timeStamp: TimeStamp.timestamp,
-        exchangeRate: cart[i].exchangeRate,
-        cryptoSymbol: 'btc',
-        totalCryptoPrice: total,
-      );
-      final bool orderBool = await OrderApi().add(tempOrder);
-      final bool receiptBool = await ReceiptApi().add(tempReceipt);
-      final bool transactionBool = await TransactionApi().add(tempTransaction);
-      if (orderBool && receiptBool && transactionBool) {
-        retBool = true;
-        if (kDebugMode) {
-          print('data Upload Succefully');
-        }
+        products: _orderProduct);
+    Receipt tempReceipt = Receipt(
+      receiptID: uid,
+      customerUID: AuthMethods.uid,
+      timestamp: TimeStamp.timestamp,
+      exchangeRate: cart[0].exchangeRate,
+      totalCrypto: total,
+    );
+    Transactions tempTransaction = Transactions(
+      transactionID: uid,
+      products: _orderProduct,
+      orderID: uid,
+      buyerID: AuthMethods.uid,
+      timeStamp: TimeStamp.timestamp,
+      exchangeRate: cart[0].exchangeRate,
+      cryptoSymbol: 'btc',
+      totalCryptoPrice: total,
+    );
+    final bool orderBool = await OrderApi().add(tempOrder);
+    final bool receiptBool = await ReceiptApi().add(tempReceipt);
+    final bool transactionBool = await TransactionApi().add(tempTransaction);
+    if (orderBool && receiptBool && transactionBool) {
+      retBool = true;
+      if (kDebugMode) {
+        print('data Upload Succefully');
       }
+
       return retBool;
     }
   }
