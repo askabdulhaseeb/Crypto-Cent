@@ -2,6 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:uuid/uuid.dart';
 
 import '../../database/app_user/auth_method.dart';
+import '../../database/payment/order_api.dart';
+import '../../database/payment/receipt_api.dart';
+import '../../database/payment/transaction_api.dart';
 import '../../function/time_date_function.dart';
 import '../../models/cart.dart';
 import '../../models/payment/order.dart';
@@ -9,12 +12,13 @@ import '../../models/payment/orderd_product.dart';
 import '../../models/payment/receipt.dart';
 import '../../models/payment/transaction.dart';
 import '../../models/product_model.dart';
+import '../../widgets/custom_widgets/custom_toast.dart';
 
 class PaymentProvider with ChangeNotifier {
   final List<OrderdProduct> _orderProduct = <OrderdProduct>[];
   List<OrderdProduct> get orderdProduct => _orderProduct;
   String uid = const Uuid().v4();
-  productOrder(List<Product> product, List<Cart> cart, double total) {
+  productOrder(List<Product> product, List<Cart> cart, double total) async {
     for (int i = 0; i < product.length; i++) {
       OrderdProduct tempOrderProduct = OrderdProduct(
         pid: cart[i].id,
@@ -47,6 +51,12 @@ class PaymentProvider with ChangeNotifier {
         cryptoSymbol: 'btc',
         totalCryptoPrice: total,
       );
+      final bool orderBool = await OrderApi().add(tempOrder);
+      final bool receiptBool = await ReceiptApi().add(tempReceipt);
+      final bool transactionBool = await TransactionApi().add(tempTransaction);
+      if (orderBool && receiptBool && transactionBool) {
+        print('data Upload Succefully');
+      }
     }
   }
 }
