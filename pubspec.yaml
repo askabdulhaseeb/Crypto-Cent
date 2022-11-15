@@ -50,6 +50,7 @@ dependencies:
   google_maps_flutter: ^2.2.1
   curved_navigation_bar: ^1.0.3
   change_app_package_name: ^1.1.0
+  uuid: ^3.0.7
 
 dev_dependencies:
   flutter_test:

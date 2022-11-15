@@ -7,6 +7,7 @@ import '../../providers/app_provider.dart';
 import '../../providers/cart_provider.dart';
 import '../../providers/crypto_wallet/binance_provider.dart';
 import '../../providers/crypto_wallet/wallet_provider.dart';
+import '../../providers/payment/payment_provider.dart';
 import '../../widgets/custom_widgets/custom_toast.dart';
 import '../../widgets/custom_widgets/custom_widget.dart';
 import 'order_succefully.dart';
@@ -49,10 +50,11 @@ class _PaymentScreenState extends State<PaymentScreen> {
   @override
   Widget build(BuildContext context) {
     CartProvider cartPro = Provider.of<CartProvider>(context);
-    WalletProvider walletPro = Provider.of<WalletProvider>(context);
-    BinanceProvider coinprice = Provider.of<BinanceProvider>(context);
-    String address =
-        encryption.appDecrypt(walletPro.wallet!.coinsWallet[0].wallet);
+    PaymentProvider paymentPro = Provider.of<PaymentProvider>(context);
+    // WalletProvider walletPro = Provider.of<WalletProvider>(context);
+    // BinanceProvider coinprice = Provider.of<BinanceProvider>(context);
+    // String address =
+    //     encryption.appDecrypt(walletPro.wallet!.coinsWallet[0].wallet);
     return Scaffold(
       appBar: AppBar(
         title: const Text('Payment'),
@@ -62,7 +64,6 @@ class _PaymentScreenState extends State<PaymentScreen> {
               Navigator.pop(context);
             }),
             icon: const Icon(Icons.arrow_back_ios_sharp)),
-        // ignore: always_specify_types
         actions: const [Icon(Icons.more_vert)],
       ),
       body: Padding(
@@ -96,50 +97,56 @@ class _PaymentScreenState extends State<PaymentScreen> {
                       size: 28,
                     ),
                     const SizedBox(height: 10),
-                    FutureBuilder<double>(
-                        future: WallletWithApi().getWalletBalance(address),
-                        builder: (BuildContext context,
-                            AsyncSnapshot<double> snapshot) {
-                          if (snapshot.hasData) {
-                            double balance =
-                                (snapshot.data ?? 0) * coinprice.coin.price;
-                            return Text(
-                              '\$ ${balance.toStringAsFixed(2)}',
-                              style: const TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.w500,
-                                color: Colors.white,
-                              ),
-                            );
-                          } else {
-                            return snapshot.hasError
-                                ? const Text('ERROR')
-                                : const CircularProgressIndicator.adaptive();
-                          }
-                        }),
+                    const ForText(
+                      name: '15',
+                      color: Colors.white,
+                      bold: true,
+                      size: 28,
+                    ),
+                    // FutureBuilder<double>(
+                    //     future: WallletWithApi().getWalletBalance(address),
+                    //     builder: (BuildContext context,
+                    //         AsyncSnapshot<double> snapshot) {
+                    //       if (snapshot.hasData) {
+                    //         double balance =
+                    //             (snapshot.data ?? 0) * coinprice.coin.price;
+                    //         return Text(
+                    //           '\$ ${balance.toStringAsFixed(2)}',
+                    //           style: const TextStyle(
+                    //             fontSize: 18,
+                    //             fontWeight: FontWeight.w500,
+                    //             color: Colors.white,
+                    //           ),
+                    //         );
+                    //       } else {
+                    //         return snapshot.hasError
+                    //             ? const Text('ERROR')
+                    //             : const CircularProgressIndicator.adaptive();
+                    //       }
+                    //     }),
                     const SizedBox(
                       height: 5,
                     ),
-                    FutureBuilder<double>(
-                        future: WallletWithApi().getWalletBalance(address),
-                        builder: (BuildContext context,
-                            AsyncSnapshot<double> snapshot) {
-                          if (snapshot.hasData) {
-                            double balance = snapshot.data!;
-                            return Text(
-                              'Btc ${balance.toStringAsFixed(8)}',
-                              style: const TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.w500,
-                                color: Colors.white,
-                              ),
-                            );
-                          } else {
-                            return snapshot.hasError
-                                ? const Text('ERROR')
-                                : const CircularProgressIndicator.adaptive();
-                          }
-                        }),
+                    // FutureBuilder<double>(
+                    //     future: WallletWithApi().getWalletBalance(address),
+                    //     builder: (BuildContext context,
+                    //         AsyncSnapshot<double> snapshot) {
+                    //       if (snapshot.hasData) {
+                    //         double balance = snapshot.data!;
+                    //         return Text(
+                    //           'Btc ${balance.toStringAsFixed(8)}',
+                    //           style: const TextStyle(
+                    //             fontSize: 20,
+                    //             fontWeight: FontWeight.w500,
+                    //             color: Colors.white,
+                    //           ),
+                    //         );
+                    //       } else {
+                    //         return snapshot.hasError
+                    //             ? const Text('ERROR')
+                    //             : const CircularProgressIndicator.adaptive();
+                    //       }
+                    //     }),
                     const SizedBox(height: 20),
                     Container(
                       height: 40,
@@ -155,14 +162,14 @@ class _PaymentScreenState extends State<PaymentScreen> {
             ),
             const SizedBox(height: 15),
             Row(
-              children: <Widget>[
-                const ForText(
+              children: const <Widget>[
+                ForText(
                   name: 'Total',
                   bold: true,
                 ),
-                const SizedBox(width: 20),
+                SizedBox(width: 20),
                 ForText(
-                  name: '\$ ${cartPro.totalPrice().toString()}',
+                  name: '\$ 10',
                   bold: true,
                 ),
               ],
@@ -170,18 +177,22 @@ class _PaymentScreenState extends State<PaymentScreen> {
             const Spacer(),
             CustomElevatedButton(
                 title: 'Pay',
-                onTap: () {
-                  bool temp = btcSend(cartPro.totalPrice()) as bool;
-                  if (temp) {
-                    Navigator.push(
-                      context,
-                      // ignore: always_specify_types
-                      MaterialPageRoute(
-                        builder: (BuildContext context) =>
-                            const OrderSuccefully(),
-                      ),
-                    );
+                onTap: () async {
+                  bool? temp = await paymentPro.productOrder(
+                      cartPro.cartItem, cartPro.totalPrice());
+                  if (temp!) {
+                    print('all ok');
                   }
+                  // bool temp = btcSend(cartPro.totalPrice()) as bool;
+                  // if (temp) {
+                  //   Navigator.push(
+                  //     context,
+                  //     MaterialPageRoute(
+                  //       builder: (BuildContext context) =>
+                  //           const OrderSuccefully(),
+                  //     ),
+                  //   );
+                  // }
                 })
           ],
         ),

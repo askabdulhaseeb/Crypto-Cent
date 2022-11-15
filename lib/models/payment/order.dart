@@ -5,7 +5,6 @@ class Order {
   Order({
     required this.orderID,
     required this.receiptID,
-    required this.sellerUID,
     required this.customerUID,
     required this.products,
     this.status = OrderStatusEnum.pending,
@@ -13,16 +12,15 @@ class Order {
 
   final String orderID;
   final String receiptID;
-  final String sellerUID;
+
   final String customerUID;
   final List<OrderdProduct> products;
   OrderStatusEnum<String> status;
-
+  
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'order_id': orderID,
       'receipt_id': receiptID,
-      'seller_uid': sellerUID,
       'customer_uid': customerUID,
       'products': products.map((OrderdProduct x) => x.toMap()).toList(),
       'status': status.value,
@@ -34,7 +32,6 @@ class Order {
     return Order(
       orderID: map['order_id'] ?? '',
       receiptID: map['receipt_id'] ?? '',
-      sellerUID: map['seller_uid'] ?? '',
       customerUID: map['customer_uid'] ?? '',
       products: map['products'] == null
           ? <OrderdProduct>[]

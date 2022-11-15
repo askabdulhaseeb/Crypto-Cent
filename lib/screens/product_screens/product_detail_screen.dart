@@ -5,6 +5,7 @@ import '../../../models/product_model.dart';
 import '../../../providers/cart_provider.dart';
 import '../../../widgets/custom_widgets/custom_rating_star.dart';
 import '../../../widgets/custom_widgets/custom_widget.dart';
+import '../../providers/crypto_wallet/binance_provider.dart';
 import '../../widgets/custom_widgets/custom_network_image.dart';
 import '../cart_screen/cart_screen.dart';
 
@@ -21,6 +22,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
   @override
   Widget build(BuildContext context) {
     CartProvider cartPro = Provider.of<CartProvider>(context);
+    BinanceProvider binancePro=Provider.of<BinanceProvider>(context);
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -50,10 +52,17 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          SizedBox(
-            height: 250,
-            width: MediaQuery.of(context).size.width * 0.8,
-            child: CustomNetworkImage(imageURL: widget.product.imageurl),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              SizedBox(
+                height: 250,
+                width: 250,
+                child: CustomNetworkImage(
+                    imageURL: widget.product.imageurl, fit: BoxFit.fill),
+              ),
+            ],
           ),
           Expanded(
             child: SingleChildScrollView(
@@ -62,6 +71,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
+                    const SizedBox(height: 15),
                     Text(
                       widget.product.productname.toString(),
                       maxLines: 2,
@@ -118,7 +128,8 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
           CustomElevatedButton(
               title: 'Add to Cart',
               onTap: () {
-                bottomSheet(context, cartPro);
+                bottomSheet(context, cartPro,binancePro.coin.price
+                );
               }),
           const SizedBox(height: 6),
         ],
@@ -126,7 +137,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
     );
   }
 
-  Future<dynamic> bottomSheet(BuildContext context, CartProvider cartPro) {
+  Future<dynamic> bottomSheet(BuildContext context, CartProvider cartPro,double exchangerate) {
     return showModalBottomSheet(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10.0),
@@ -238,7 +249,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                       : CustomElevatedButton(
                           title: 'Add to cart',
                           onTap: () {
-                            cartPro.addtocart(widget.product, quantity);
+                            cartPro.addtocart(widget.product, quantity,exchangerate);
                             Navigator.of(context).pop();
                           }),
                   const SizedBox(height: 20),

@@ -72,7 +72,7 @@ class HomeScreen extends StatelessWidget {
                       onPressed: (() {
                         Navigator.push(
                             context,
-                            // ignore: always_specify_types
+                            
                             MaterialPageRoute(
                                 builder: (BuildContext context) =>
                                     CategoriesExtend(
@@ -102,7 +102,7 @@ class HomeScreen extends StatelessWidget {
                       onPressed: (() {
                         Navigator.push(
                             context,
-                            // ignore: always_specify_types
+                            
                             MaterialPageRoute(
                                 builder: (BuildContext context) =>
                                     CategoriesExtend(
@@ -165,7 +165,7 @@ class HomeScreen extends StatelessWidget {
               (() {
                 Navigator.push(
                   context,
-                  // ignore: always_specify_types
+                  
                   MaterialPageRoute(
                     builder: (BuildContext context) => const SerachScreen(),
                   ),
@@ -190,7 +190,7 @@ class HomeScreen extends StatelessWidget {
               (() {
                 Navigator.push(
                   context,
-                  // ignore: always_specify_types
+                  
                   MaterialPageRoute(
                     builder: (BuildContext context) => const ContactUsScreen(),
                   ),
@@ -205,7 +205,7 @@ class HomeScreen extends StatelessWidget {
               (() {
                 Navigator.push(
                   context,
-                  // ignore: always_specify_types
+                  
                   MaterialPageRoute(
                     builder: (BuildContext context) => const AboutUsScreen(),
                   ),
@@ -271,7 +271,7 @@ class HomeScreen extends StatelessWidget {
           onTap: () {
             Navigator.push(
               context,
-              // ignore: always_specify_types
+              
               MaterialPageRoute(
                 builder: (BuildContext context) => const SerachScreen(),
               ),

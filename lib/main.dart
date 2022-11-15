@@ -10,11 +10,13 @@ import 'providers/cart_provider.dart';
 import 'providers/categories_provider.dart';
 import 'providers/crypto_wallet/binance_provider.dart';
 import 'providers/crypto_wallet/wallet_provider.dart';
+import 'providers/payment/payment_provider.dart';
 import 'providers/product_provider.dart';
 import 'providers/provider.dart';
 
 import 'screens/auth/phone_number_screen.dart';
 import 'screens/main_screen/main_screen.dart';
+import 'screens/order/payment.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -53,9 +55,12 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider<ProductProvider>.value(
           value: ProductProvider(),
-        ),
+        ),   
         ChangeNotifierProvider<BinanceProvider>.value(
           value: BinanceProvider(),
+        ),
+        ChangeNotifierProvider<PaymentProvider>.value(
+          value: PaymentProvider(),
         ),
       ],
       child: Consumer<AppThemeProvider>(
@@ -66,7 +71,7 @@ class MyApp extends StatelessWidget {
           theme: AppThemes.light,
           darkTheme: AppThemes.dark,
           themeMode: theme.themeMode,
-          // home: const OrderSuccefully(),
+         //  home: const PaymentScreen(),
           home: (AuthMethods.uid.isEmpty)
               ? const PhoneNumberScreen()
               : const MainScreen(),
