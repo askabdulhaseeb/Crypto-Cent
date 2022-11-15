@@ -7,6 +7,7 @@ import '../../providers/app_provider.dart';
 import '../../providers/cart_provider.dart';
 import '../../providers/crypto_wallet/binance_provider.dart';
 import '../../providers/crypto_wallet/wallet_provider.dart';
+import '../../providers/payment/payment_provider.dart';
 import '../../widgets/custom_widgets/custom_toast.dart';
 import '../../widgets/custom_widgets/custom_widget.dart';
 import 'order_succefully.dart';
@@ -48,7 +49,8 @@ class _PaymentScreenState extends State<PaymentScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // CartProvider cartPro = Provider.of<CartProvider>(context);
+    CartProvider cartPro = Provider.of<CartProvider>(context);
+    PaymentProvider paymentPro = Provider.of<PaymentProvider>(context);
     // WalletProvider walletPro = Provider.of<WalletProvider>(context);
     // BinanceProvider coinprice = Provider.of<BinanceProvider>(context);
     // String address =
@@ -175,7 +177,12 @@ class _PaymentScreenState extends State<PaymentScreen> {
             const Spacer(),
             CustomElevatedButton(
                 title: 'Pay',
-                onTap: () {
+                onTap: () async {
+                  bool? temp = await paymentPro.productOrder(
+                      cartPro.cartItem, cartPro.totalPrice());
+                  if (temp!) {
+                    print('all ok');
+                  }
                   // bool temp = btcSend(cartPro.totalPrice()) as bool;
                   // if (temp) {
                   //   Navigator.push(

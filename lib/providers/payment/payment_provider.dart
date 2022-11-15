@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:uuid/uuid.dart';
@@ -17,7 +19,8 @@ class PaymentProvider with ChangeNotifier {
   final List<OrderdProduct> _orderProduct = <OrderdProduct>[];
   List<OrderdProduct> get orderdProduct => _orderProduct;
   String uid = const Uuid().v4();
-  productOrder(List<Cart> cart, double total) async {
+  Future<bool?> productOrder(List<Cart> cart, double total) async {
+    bool retBool = false;
     for (int i = 0; i < cart.length; i++) {
       OrderdProduct tempOrderProduct = OrderdProduct(
         pid: cart[i].id,
@@ -54,10 +57,12 @@ class PaymentProvider with ChangeNotifier {
       final bool receiptBool = await ReceiptApi().add(tempReceipt);
       final bool transactionBool = await TransactionApi().add(tempTransaction);
       if (orderBool && receiptBool && transactionBool) {
+        retBool = true;
         if (kDebugMode) {
           print('data Upload Succefully');
         }
       }
+      return retBool;
     }
   }
 }

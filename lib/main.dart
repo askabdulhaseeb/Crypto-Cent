@@ -10,6 +10,7 @@ import 'providers/cart_provider.dart';
 import 'providers/categories_provider.dart';
 import 'providers/crypto_wallet/binance_provider.dart';
 import 'providers/crypto_wallet/wallet_provider.dart';
+import 'providers/payment/payment_provider.dart';
 import 'providers/product_provider.dart';
 import 'providers/provider.dart';
 
@@ -57,6 +58,9 @@ class MyApp extends StatelessWidget {
         ),   
         ChangeNotifierProvider<BinanceProvider>.value(
           value: BinanceProvider(),
+        ),
+        ChangeNotifierProvider<PaymentProvider>.value(
+          value: PaymentProvider(),
         ),
       ],
       child: Consumer<AppThemeProvider>(
