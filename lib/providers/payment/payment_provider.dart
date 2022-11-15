@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:uuid/uuid.dart';
 
 import '../../database/app_user/auth_method.dart';
@@ -11,15 +12,13 @@ import '../../models/payment/order.dart';
 import '../../models/payment/orderd_product.dart';
 import '../../models/payment/receipt.dart';
 import '../../models/payment/transaction.dart';
-import '../../models/product_model.dart';
-import '../../widgets/custom_widgets/custom_toast.dart';
 
 class PaymentProvider with ChangeNotifier {
   final List<OrderdProduct> _orderProduct = <OrderdProduct>[];
   List<OrderdProduct> get orderdProduct => _orderProduct;
   String uid = const Uuid().v4();
-  productOrder(List<Product> product, List<Cart> cart, double total) async {
-    for (int i = 0; i < product.length; i++) {
+  productOrder(List<Cart> cart, double total) async {
+    for (int i = 0; i < cart.length; i++) {
       OrderdProduct tempOrderProduct = OrderdProduct(
         pid: cart[i].id,
         sellerID: cart[i].createdID,
@@ -55,7 +54,9 @@ class PaymentProvider with ChangeNotifier {
       final bool receiptBool = await ReceiptApi().add(tempReceipt);
       final bool transactionBool = await TransactionApi().add(tempTransaction);
       if (orderBool && receiptBool && transactionBool) {
-        print('data Upload Succefully');
+        if (kDebugMode) {
+          print('data Upload Succefully');
+        }
       }
     }
   }

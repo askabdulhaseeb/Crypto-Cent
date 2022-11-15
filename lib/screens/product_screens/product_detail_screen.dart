@@ -5,6 +5,7 @@ import '../../../models/product_model.dart';
 import '../../../providers/cart_provider.dart';
 import '../../../widgets/custom_widgets/custom_rating_star.dart';
 import '../../../widgets/custom_widgets/custom_widget.dart';
+import '../../providers/crypto_wallet/binance_provider.dart';
 import '../../widgets/custom_widgets/custom_network_image.dart';
 import '../cart_screen/cart_screen.dart';
 
@@ -21,6 +22,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
   @override
   Widget build(BuildContext context) {
     CartProvider cartPro = Provider.of<CartProvider>(context);
+    BinanceProvider binancePro=Provider.of<BinanceProvider>(context);
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -126,7 +128,8 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
           CustomElevatedButton(
               title: 'Add to Cart',
               onTap: () {
-                bottomSheet(context, cartPro);
+                bottomSheet(context, cartPro,binancePro.coin.price
+                );
               }),
           const SizedBox(height: 6),
         ],
@@ -134,7 +137,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
     );
   }
 
-  Future<dynamic> bottomSheet(BuildContext context, CartProvider cartPro) {
+  Future<dynamic> bottomSheet(BuildContext context, CartProvider cartPro,double exchangerate) {
     return showModalBottomSheet(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10.0),
@@ -246,7 +249,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                       : CustomElevatedButton(
                           title: 'Add to cart',
                           onTap: () {
-                            cartPro.addtocart(widget.product, quantity);
+                            cartPro.addtocart(widget.product, quantity,exchangerate);
                             Navigator.of(context).pop();
                           }),
                   const SizedBox(height: 20),

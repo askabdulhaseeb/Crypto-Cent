@@ -7,14 +7,14 @@ class CartProvider extends ChangeNotifier {
   final List<Cart> _cartItems = <Cart>[];
   List<Cart> get cartItem => _cartItems;
 
-  void addtocart(Product value, int quantity) {
+  void addtocart(Product value, int quantity, double exchangeRate) {
     Cart temp = Cart(
         id: value.pid,
         createdID: value.createdByUID,
         title: value.productname,
         imageurl: value.imageurl,
         price: value.amount,
-        exchangeRate: 90,
+        exchangeRate: exchangeRate,
         quantity: quantity);
 
     _cartItems.add(temp);
