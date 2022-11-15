@@ -23,7 +23,7 @@ class AppThemeProvider extends ChangeNotifier {
 }
 
 class AppThemes {
-  static const Color _primary = Color(0xffFCBF3A);
+  static const Color _primary = Color(0xffF9C03A);
   static const Color _secondary = Color(0xffE2F0F7);
   //
   // Dark

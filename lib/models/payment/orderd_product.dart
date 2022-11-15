@@ -18,7 +18,7 @@ class OrderdProduct {
   final String cryptoCoinSymbol;
   final double exchangeRate;
   final double cryptoPrice;
-  OrderStatusEnum status;
+  OrderStatusEnum<String> status;
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{

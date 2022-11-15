@@ -1,7 +1,4 @@
-import 'dart:developer';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
-
 import '../models/categories/categories.dart';
 
 class CategoriesApi {
@@ -10,11 +7,11 @@ class CategoriesApi {
   Future<List<Categories>> categories() async {
     List<Categories> cat = <Categories>[];
     final QuerySnapshot<Map<String, dynamic>> doc =
-        await _instance.collection(_collection).get();
+        await _instance.collection(_collection).orderBy('title').get();
     if (doc.docs.isEmpty) return cat;
     for (DocumentSnapshot<Map<String, dynamic>> element in doc.docs) {
       final Categories getterData = Categories.fromDoc(element);
-      
+
       cat.add(getterData);
     }
     return cat;

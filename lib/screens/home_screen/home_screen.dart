@@ -64,7 +64,7 @@ class HomeScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
                     const ForText(
-                      name: 'Popular Product',
+                      name: 'Popular Products',
                       bold: true,
                       size: 18,
                     ),
@@ -94,7 +94,7 @@ class HomeScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
                     const ForText(
-                      name: 'Latest Product',
+                      name: 'Latest Products',
                       bold: true,
                       size: 18,
                     ),

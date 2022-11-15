@@ -1,6 +1,5 @@
 import '../../providers/auth_provider.dart';
 import '../../providers/crypto_wallet/wallet_provider.dart';
-import '../../utilities/app_images.dart';
 import '../empty_screen/empty_screen.dart';
 import '../screens.dart';
 import 'package:flutter/material.dart';
@@ -11,6 +10,11 @@ class MainScreen extends StatefulWidget {
   const MainScreen({Key? key}) : super(key: key);
   static const String routeName = '/main-screen';
 
+  @override
+  State<MainScreen> createState() => _MainScreenState();
+}
+
+class _MainScreenState extends State<MainScreen> {
   static const List<Widget> _pages = <Widget>[
     HomeScreen(),
     FavoriteScreen(),
@@ -18,12 +22,6 @@ class MainScreen extends StatefulWidget {
     EmptyScreen(),
     ProfileScreen(),
   ];
-
-  @override
-  State<MainScreen> createState() => _MainScreenState();
-}
-
-class _MainScreenState extends State<MainScreen> {
   @override
   void initState() {
     load();
@@ -44,119 +42,13 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   Widget build(BuildContext context) {
-    int currentIndex = Provider.of<AppProvider>(context).currentTap;
-    AppProvider navBar = Provider.of<AppProvider>(context);
-
-    return loading
-        ? const CircularProgressIndicator()
-        : Scaffold(
-            body: MainScreen._pages[currentIndex],
-            floatingActionButton: FloatingActionButton(
-              backgroundColor: Theme.of(context).primaryColor,
-              onPressed: () {
-                navBar.onTabTapped(2);
-              },
-              child: const Icon(
-                Icons.shopping_cart_outlined,
-                color: Colors.white,
-              ),
-            ),
-            floatingActionButtonLocation:
-                FloatingActionButtonLocation.centerDocked,
-            bottomNavigationBar: BottomAppBar(
-              color: Theme.of(context).secondaryHeaderColor,
-              shape: const CircularNotchedRectangle(),
-              notchMargin: 10,
-              child: SizedBox(
-                height: 60,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    Row(
-                      children: <Widget>[
-                        MaterialButton(
-                          onPressed: () {
-                            navBar.onTabTapped(0);
-                          },
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              navBar.currentTap == 0
-                                  ? ImageIcon(
-                                      AssetImage(
-                                        AppImages.homeSelected,
-                                      ),
-                                      color: Theme.of(context).primaryColor,
-                                    )
-                                  : ImageIcon(
-                                      AssetImage(AppImages.homeUnselected)),
-                            ],
-                          ),
-                        ),
-                        MaterialButton(
-                          onPressed: () {
-                            navBar.onTabTapped(1);
-                          },
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              navBar.currentTap == 1
-                                  ? ImageIcon(
-                                      AssetImage(
-                                        AppImages.fvrtSelected,
-                                      ),
-                                      color: Theme.of(context).primaryColor,
-                                    )
-                                  : const Icon(Icons.favorite_border),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                    Row(
-                      children: <Widget>[
-                        MaterialButton(
-                          onPressed: () {
-                            navBar.onTabTapped(3);
-                          },
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              navBar.currentTap == 3
-                                  ? Icon(
-                                      Icons.notifications_active_outlined,
-                                      color: Theme.of(context).primaryColor,
-                                    )
-                                  : const Icon(
-                                      Icons.notifications_active_outlined),
-                            ],
-                          ),
-                        ),
-                        MaterialButton(
-                          onPressed: () {
-                            navBar.onTabTapped(4);
-                          },
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              navBar.currentTap == 4
-                                  ? ImageIcon(
-                                      AssetImage(
-                                        AppImages.profileSelected,
-                                      ),
-                                      color: Theme.of(context).primaryColor,
-                                    )
-                                  : ImageIcon(
-                                      AssetImage(AppImages.profileUnselected)),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          );
+    return Scaffold(
+      body: Consumer<AppProvider>(
+        builder: (BuildContext context, AppProvider navBar, _) {
+          return _pages[navBar.currentTap];
+        },
+      ),
+      bottomNavigationBar: const MainBottomNavigationBar(),
+    );
   }
 }

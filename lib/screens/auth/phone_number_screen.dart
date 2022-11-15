@@ -40,7 +40,7 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
               ),
               const SizedBox(height: 16),
               PhoneNumberField(
-                initialCountryCode: authPro.phoneNumber?.countryCode ?? 'UK',
+                initialCountryCode: authPro.phoneNumber?.countryCode ?? 'GB',
                 bgColor: Colors.transparent,
                 onChange: (PhoneNumber? value) =>
                     authPro.onPhoneNumberChange(value),
@@ -54,17 +54,16 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
                   onTap: () {
                     authPro.verifyPhone(context);
                     Navigator.push(
-                                  context,
-                                  // ignore: always_specify_types
-                                  MaterialPageRoute(
-                                    builder: (BuildContext context) =>const  OTPScreen(),
-                                  ),
-                                );
+                      context,
+                      // ignore: always_specify_types
+                      MaterialPageRoute(
+                        builder: (BuildContext context) => const OTPScreen(),
+                      ),
+                    );
                     //Navigator.of(context).pushNamed(OTPScreen.routeName);
                   },
                 ),
               ),
-              
             ],
           ),
         );

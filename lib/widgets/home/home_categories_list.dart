@@ -10,12 +10,13 @@ class HomeCategoriesList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 50,
+      height: 44,
       child: ListView(
         scrollDirection: Axis.horizontal,
         children: <Widget>[
-          allitems(context, 'All', 80, true, () {}),
-          allitems(context, 'Contacts', 120, false, () {
+          const SizedBox(width: 16),
+          allitems(context, 'All', true, () {}),
+          allitems(context, 'Contacts', false, () {
             Navigator.push(
               context,
               // ignore: always_specify_types
@@ -24,7 +25,7 @@ class HomeCategoriesList extends StatelessWidget {
               ),
             );
           }),
-          allitems(context, 'Categories', 120, false, () {
+          allitems(context, 'Categories', false, () {
             Navigator.push(
               context,
               // ignore: always_specify_types
@@ -33,7 +34,7 @@ class HomeCategoriesList extends StatelessWidget {
               ),
             );
           }),
-          allitems(context, 'Sell', 80, false, () {
+          allitems(context, 'Sell', false, () {
             Navigator.push(
               context,
               MaterialPageRoute<AddProductScreen>(
@@ -41,21 +42,21 @@ class HomeCategoriesList extends StatelessWidget {
               ),
             );
           }),
+          const SizedBox(width: 48),
         ],
       ),
     );
   }
 
-  Widget allitems(BuildContext context, String name, double width, bool primary,
-      VoidCallback onTap) {
+  Widget allitems(
+      BuildContext context, String name, bool primary, VoidCallback onTap) {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        height: 48,
-        width: width,
-        margin: const EdgeInsets.symmetric(horizontal: 8),
+        padding: const EdgeInsets.symmetric(horizontal: 24),
+        margin: const EdgeInsets.symmetric(horizontal: 4),
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(24),
+          borderRadius: BorderRadius.circular(16),
           color: (primary)
               ? Theme.of(context).primaryColor
               : Theme.of(context).secondaryHeaderColor,
@@ -63,7 +64,7 @@ class HomeCategoriesList extends StatelessWidget {
         child: Center(
             child: ForText(
           name: name,
-          color: (primary) ? Colors.white : Colors.black38,
+          color: (primary) ? Colors.white : Colors.black45,
         )),
       ),
     );
