@@ -1,19 +1,16 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'dart:convert';
-
 class Location {
-  final double latitude;
-  final double longitude;
-  final String country;
-  final String locality;
-  final String sublocality;
-  Location({
+  const Location({
     required this.latitude,
     required this.longitude,
     required this.country,
     required this.locality,
     required this.sublocality,
   });
+  final double latitude;
+  final double longitude;
+  final String country;
+  final String locality;
+  final String sublocality;
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
@@ -25,6 +22,7 @@ class Location {
     };
   }
 
+  // ignore: sort_constructors_first
   factory Location.fromMap(Map<String, dynamic> map) {
     return Location(
       latitude: map['latitude'] ?? '',

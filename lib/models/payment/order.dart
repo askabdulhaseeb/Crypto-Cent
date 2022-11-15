@@ -16,7 +16,7 @@ class Order {
   final String sellerUID;
   final String customerUID;
   final List<OrderdProduct> products;
-  OrderStatusEnum status;
+  OrderStatusEnum<String> status;
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{

@@ -19,18 +19,15 @@ class ProfileMiddleTile extends StatelessWidget {
         children: <Widget>[
           const SizedBox(width: 16),
           Container(
-            height: 50,
-            width: 50,
+            height: 40,
+            width: 40,
             decoration: BoxDecoration(
                 image: DecorationImage(
               image: AssetImage(image),
             )),
           ),
-          const SizedBox(width: 16),
-          ForText(
-            name: text,
-            color: Colors.white,
-          ),
+          const SizedBox(width: 10),
+          ForText(name: text, color: Colors.white),
         ],
       ),
     );

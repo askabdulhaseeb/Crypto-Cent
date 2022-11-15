@@ -27,7 +27,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
   final TextEditingController productdecription = TextEditingController();
   final TextEditingController amount = TextEditingController();
   final TextEditingController quantity = TextEditingController();
-  
+
   Uint8List? _image;
   bool _isloading = false;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
@@ -61,9 +61,8 @@ class _AddProductScreenState extends State<AddProductScreen> {
         productname.clear();
         productdecription.clear();
         amount.clear();
-      
+
         quantity.clear();
-       
       }
       setState(() {
         _isloading = false;
@@ -173,14 +172,10 @@ class _AddProductScreenState extends State<AddProductScreen> {
                     signed: true,
                   ),
                 ),
+                const SizedBox(height: 6),
                 categorie(context, catPro),
-                // DropdownButton(
-
-                //   items: items,
-
-                //    onChanged: onChanged),
-                subCategorie(context,catPro),
-                
+                const SizedBox(height: 12),
+                subCategorie(context, catPro),
                 const SizedBox(height: 20),
                 _isloading
                     ? const CircularProgressIndicator()
@@ -188,7 +183,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                         title: 'Upload',
                         onTap: () async => await uploaddata(catPro),
                       ),
-                const SizedBox(height: 20),
+                const SizedBox(height: 50),
               ],
             ),
           ),
@@ -199,7 +194,6 @@ class _AddProductScreenState extends State<AddProductScreen> {
 
   Widget categorie(BuildContext context, CategoriesProvider catPro) {
     return Container(
-      height: 70,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12),
         border: Border.all(
@@ -207,40 +201,43 @@ class _AddProductScreenState extends State<AddProductScreen> {
         ),
       ),
       child: Row(
-        children: [
-          Expanded(
-              child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Container(
-              child: const Text('Categories'),
-            ),
-          )),
-          // ignore: always_specify_types
-          DropdownButton(
-              value: catPro.currentCat,
-              style: const TextStyle(color: Colors.black),
-              underline: const SizedBox(),
-              hint: const Text(
-                'Category',
-                style: TextStyle(color: Colors.black),
+        children: <Widget>[
+          const Expanded(
+            child: Padding(
+              padding: EdgeInsets.all(8.0),
+              child: SizedBox(
+                child: Text('Categories'),
               ),
-              items: catPro.categories
-                  .map((Categories cats) => DropdownMenuItem<Categories>(
-                        value: cats,
-                        child: Text(
-                          cats.title.toUpperCase(),
-                          style: const TextStyle(fontWeight: FontWeight.bold),
-                        ),
-                      ))
-                  .toList(),
-              onChanged: (Categories? value) => catPro.formValueChange(value!)),
+            ),
+          ),
+          const Spacer(),
+          DropdownButton<Categories>(
+            value: catPro.currentCat,
+            style: const TextStyle(color: Colors.black),
+            underline: const SizedBox(),
+            hint: const Text(
+              'Category',
+              style: TextStyle(color: Colors.black),
+            ),
+            items: catPro.categories
+                .map((Categories cats) => DropdownMenuItem<Categories>(
+                      value: cats,
+                      child: Text(
+                        cats.title.toUpperCase(),
+                        style: const TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                    ))
+                .toList(),
+            onChanged: (Categories? value) => catPro.formValueChange(value!),
+          ),
+          const SizedBox(width: 8),
         ],
       ),
     );
   }
+
   Widget subCategorie(BuildContext context, CategoriesProvider catPro) {
     return Container(
-      height: 70,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12),
         border: Border.all(
@@ -248,33 +245,36 @@ class _AddProductScreenState extends State<AddProductScreen> {
         ),
       ),
       child: Row(
-        children: [
-          Expanded(
-              child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Container(
-              child: const Text('SubCategories'),
-            ),
-          )),
-          // ignore: always_specify_types
-          DropdownButton(
-              value: catPro.subcurrentCat,
-              style: const TextStyle(color: Colors.black),
-              underline: const SizedBox(),
-              hint: const Text(
-                'Category',
-                style: TextStyle(color: Colors.black),
+        children: <Widget>[
+          const Expanded(
+            child: Padding(
+              padding: EdgeInsets.all(8.0),
+              child: SizedBox(
+                child: Text('Sub Categories'),
               ),
-              items: catPro.subCa
-                  .map((SubCategory subcats) => DropdownMenuItem<SubCategory>(
-                        value: subcats,
-                        child: Text(
-                          subcats.title.toUpperCase(),
-                          style: const TextStyle(fontWeight: FontWeight.bold),
-                        ),
-                      ))
-                  .toList(),
-              onChanged: (SubCategory? value) => catPro.subCategoryChange(value!)),
+            ),
+          ),
+          const Spacer(),
+          DropdownButton<SubCategory>(
+            value: catPro.subcurrentCat,
+            style: const TextStyle(color: Colors.black),
+            underline: const SizedBox(),
+            hint: const Text(
+              'Sub Category',
+              style: TextStyle(color: Colors.black),
+            ),
+            items: catPro.subCa
+                .map((SubCategory subcats) => DropdownMenuItem<SubCategory>(
+                      value: subcats,
+                      child: Text(
+                        subcats.title.toUpperCase(),
+                        style: const TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                    ))
+                .toList(),
+            onChanged: (SubCategory? value) => catPro.subCategoryChange(value!),
+          ),
+          const SizedBox(width: 8),
         ],
       ),
     );

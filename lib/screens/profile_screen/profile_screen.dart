@@ -89,6 +89,12 @@ class ProfileScreen extends StatelessWidget {
                       }),
                   const SizedBox(height: 24),
                   ProfileNavTile(
+                    name: 'Sellings',
+                    image: AppImages.paymentUnselected,
+                    onTap: () {},
+                  ),
+                  const SizedBox(height: 24),
+                  ProfileNavTile(
                       name: 'Log Out',
                       image: AppImages.logout,
                       onTap: () {
