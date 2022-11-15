@@ -19,7 +19,8 @@ class CustomNetworkImageSlider extends StatelessWidget {
     return CarouselSlider(
         options: CarouselOptions(
           autoPlay: true,
-          height: 150,
+          aspectRatio: 16 / 7,
+          // height: 150,
           enlargeCenterPage: true,
         ),
         items: imgList
