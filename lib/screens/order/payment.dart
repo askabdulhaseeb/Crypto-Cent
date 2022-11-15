@@ -163,8 +163,8 @@ class _PaymentScreenState extends State<PaymentScreen> {
             ),
             const SizedBox(height: 15),
             Row(
-              children:  <Widget>[
-              const  ForText(
+              children: <Widget>[
+                const ForText(
                   name: 'Total',
                   bold: true,
                 ),
@@ -182,14 +182,8 @@ class _PaymentScreenState extends State<PaymentScreen> {
                   bool? temp = await paymentPro.productOrder(
                       cartPro.cartItem, cartPro.totalPrice());
                   if (temp!) {
-                     // ignore: use_build_context_synchronously
-                     Navigator.push(
-                                context,
-                                // ignore: always_specify_types
-                                MaterialPageRoute<EmptyScreen>(
-                                  builder: (BuildContext context) => const EmptyScreen(),
-                                ),
-                              );
+                    // ignore: use_build_context_synchronously
+
                   }
                   // bool temp = btcSend(cartPro.totalPrice()) as bool;
                   // if (temp) {
