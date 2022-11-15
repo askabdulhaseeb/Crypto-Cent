@@ -91,7 +91,11 @@ class ProfileScreen extends StatelessWidget {
                   ProfileNavTile(
                     name: 'Sellings',
                     image: AppImages.paymentUnselected,
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.of(context).push(MaterialPageRoute<EmptyScreen>(
+                        builder: (BuildContext context) => const EmptyScreen(),
+                      ));
+                    },
                   ),
                   const SizedBox(height: 24),
                   ProfileNavTile(
