@@ -14,6 +14,7 @@ class CartProvider extends ChangeNotifier {
         title: value.productname,
         imageurl: value.imageurl,
         price: value.amount,
+        exchangeRate: 90,
         quantity: quantity);
 
     _cartItems.add(temp);

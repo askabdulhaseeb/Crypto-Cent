@@ -4,7 +4,7 @@ class OrderdProduct {
   OrderdProduct({
     required this.pid,
     required this.cryptoPrice,
-    required this.localPrice,
+    required this.exchangeRate,
     required this.quantity,
     this.status = OrderStatusEnum.pending,
     this.localCurrency = '\$',
@@ -15,7 +15,7 @@ class OrderdProduct {
   int quantity;
   final String localCurrency;
   final String cryptoCoinSymbol;
-  final double localPrice;
+  final double exchangeRate;
   final double cryptoPrice;
   OrderStatusEnum status;
 
@@ -25,7 +25,7 @@ class OrderdProduct {
       'quantity': quantity,
       'local_currency': localCurrency,
       'crypto_coin_symbol': cryptoCoinSymbol,
-      'local_price': localPrice,
+      'exchange_rate': exchangeRate,
       'crypto_price': cryptoPrice,
       'status': status.value,
     };
@@ -38,7 +38,7 @@ class OrderdProduct {
       quantity: map['quantity'] ?? 0,
       localCurrency: map['local_currency'] ?? '\$',
       cryptoCoinSymbol: map['crypto_coin_symbol'] ?? 'btc',
-      localPrice: map['local_price'] ?? 0.0,
+      exchangeRate: map['exchange_rate'] ?? 0.0,
       cryptoPrice: map['crypto_price'] ?? 0.0,
       status: OrderStatusConvetion().stringToEnum(map['status']),
     );
