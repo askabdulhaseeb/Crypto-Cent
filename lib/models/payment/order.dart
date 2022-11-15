@@ -16,6 +16,7 @@ class Order {
   final String sellerUID;
   final String customerUID;
   final List<OrderdProduct> products;
+  // ignore: always_specify_types
   OrderStatusEnum status;
 
   Map<String, dynamic> toMap() {

@@ -53,7 +53,7 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider<ProductProvider>.value(
           value: ProductProvider(),
-        ),
+        ),   
         ChangeNotifierProvider<BinanceProvider>.value(
           value: BinanceProvider(),
         ),
