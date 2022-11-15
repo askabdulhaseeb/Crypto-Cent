@@ -21,27 +21,18 @@ class ProductTile extends StatelessWidget {
         onTap: () {
           Navigator.push(
               context,
-              // ignore: always_specify_types
-              MaterialPageRoute(
-                  builder: (BuildContext context) => ProductDetailScreen(
-                        product: product,
-                      )));
+              MaterialPageRoute<ProductDetailScreen>(
+                builder: (BuildContext context) =>
+                    ProductDetailScreen(product: product),
+              ));
         },
         child: AspectRatio(
           aspectRatio: 9 / 12,
           child: Container(
-            // height: 220,
             width: double.infinity,
             decoration: BoxDecoration(
               color: const Color(0xffEDEDED),
               borderRadius: BorderRadius.circular(16),
-              // boxShadow: <BoxShadow>[
-              //   BoxShadow(
-              //     color: Colors.black.withOpacity(0.1),
-              //     offset: const Offset(1, 0),
-              //     blurRadius: 4,
-              //   )
-              // ],
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,

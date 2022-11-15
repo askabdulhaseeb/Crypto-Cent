@@ -22,7 +22,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
   @override
   Widget build(BuildContext context) {
     CartProvider cartPro = Provider.of<CartProvider>(context);
-    BinanceProvider binancePro=Provider.of<BinanceProvider>(context);
+    BinanceProvider binancePro = Provider.of<BinanceProvider>(context);
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -125,19 +125,22 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
               ),
             ),
           ),
-          CustomElevatedButton(
-              title: 'Add to Cart',
-              onTap: () {
-                bottomSheet(context, cartPro,binancePro.coin.price
-                );
-              }),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: CustomElevatedButton(
+                title: 'Add to Cart',
+                onTap: () {
+                  bottomSheet(context, cartPro, binancePro.coin.price);
+                }),
+          ),
           const SizedBox(height: 6),
         ],
       ),
     );
   }
 
-  Future<dynamic> bottomSheet(BuildContext context, CartProvider cartPro,double exchangerate) {
+  Future<dynamic> bottomSheet(
+      BuildContext context, CartProvider cartPro, double exchangerate) {
     return showModalBottomSheet(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10.0),
@@ -249,7 +252,8 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                       : CustomElevatedButton(
                           title: 'Add to cart',
                           onTap: () {
-                            cartPro.addtocart(widget.product, quantity,exchangerate);
+                            cartPro.addtocart(
+                                widget.product, quantity, exchangerate);
                             Navigator.of(context).pop();
                           }),
                   const SizedBox(height: 20),
