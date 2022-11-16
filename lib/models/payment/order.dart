@@ -38,8 +38,8 @@ class Order {
       products: doc.data()?['products'] == null
           ? <OrderdProduct>[]
           : List<OrderdProduct>.from(
-              (doc.data()?['products'] as List<int>).map<OrderdProduct>(
-                (int x) => OrderdProduct.fromMap(x as Map<String, dynamic>),
+              (doc.data()?['products'] as List<dynamic>).map<OrderdProduct>(
+                (dynamic x) => OrderdProduct.fromMap(x as Map<String, dynamic>),
               ),
             ),
       status: OrderStatusConvetion().stringToEnum(doc.data()?['status']),

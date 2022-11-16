@@ -16,8 +16,19 @@ import '../../models/payment/receipt.dart';
 import '../../models/payment/transaction.dart';
 
 class PaymentProvider with ChangeNotifier {
+  PaymentProvider() {
+    load();
+  }
   final List<OrderdProduct> _orderProduct = <OrderdProduct>[];
   List<OrderdProduct> get orderdProduct => _orderProduct;
+  List<Order> _order = <Order>[];
+  List<Order> get order => _order;
+  load() async {
+    _order = await OrderApi().get();
+    print(_order.length);
+    notifyListeners();
+  }
+
   String uid = const Uuid().v4();
   Future<bool?> productOrder(List<Cart> cart, double total) async {
     bool retBool = false;
@@ -56,6 +67,7 @@ class PaymentProvider with ChangeNotifier {
     final bool orderBool = await OrderApi().add(tempOrder);
     final bool receiptBool = await ReceiptApi().add(tempReceipt);
     final bool transactionBool = await TransactionApi().add(tempTransaction);
+    orderdProduct.clear();
     if (orderBool && receiptBool && transactionBool) {
       retBool = true;
       if (kDebugMode) {
