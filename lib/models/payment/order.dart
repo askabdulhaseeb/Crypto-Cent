@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 import '../../enum/order_status_enum.dart';
 import 'orderd_product.dart';
 
@@ -16,7 +18,7 @@ class Order {
   final String customerUID;
   final List<OrderdProduct> products;
   OrderStatusEnum<String> status;
-  
+
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'order_id': orderID,
@@ -28,19 +30,19 @@ class Order {
   }
 
   // ignore: sort_constructors_first
-  factory Order.fromMap(Map<String, dynamic> map) {
+  factory Order.fromMap(DocumentSnapshot<Map<String, dynamic>> doc) {
     return Order(
-      orderID: map['order_id'] ?? '',
-      receiptID: map['receipt_id'] ?? '',
-      customerUID: map['customer_uid'] ?? '',
-      products: map['products'] == null
+      orderID: doc.data()?['order_id'] ?? '',
+      receiptID: doc.data()?['receipt_id'] ?? '',
+      customerUID: doc.data()?['customer_uid'] ?? '',
+      products: doc.data()?['products'] == null
           ? <OrderdProduct>[]
           : List<OrderdProduct>.from(
-              (map['products'] as List<int>).map<OrderdProduct>(
+              (doc.data()?['products'] as List<int>).map<OrderdProduct>(
                 (int x) => OrderdProduct.fromMap(x as Map<String, dynamic>),
               ),
             ),
-      status: OrderStatusConvetion().stringToEnum(map['status']),
+      status: OrderStatusConvetion().stringToEnum(doc.data()?['status']),
     );
   }
 }
