@@ -610,40 +610,6 @@ PODS:
     - firebase_core
     - Flutter
   - CocoaAsyncSocket (7.6.5)
-  - DKImagePickerController/Core (4.3.4):
-    - DKImagePickerController/ImageDataManager
-    - DKImagePickerController/Resource
-  - DKImagePickerController/ImageDataManager (4.3.4)
-  - DKImagePickerController/PhotoGallery (4.3.4):
-    - DKImagePickerController/Core
-    - DKPhotoGallery
-  - DKImagePickerController/Resource (4.3.4)
-  - DKPhotoGallery (0.0.17):
-    - DKPhotoGallery/Core (= 0.0.17)
-    - DKPhotoGallery/Model (= 0.0.17)
-    - DKPhotoGallery/Preview (= 0.0.17)
-    - DKPhotoGallery/Resource (= 0.0.17)
-    - SDWebImage
-    - SwiftyGif
-  - DKPhotoGallery/Core (0.0.17):
-    - DKPhotoGallery/Model
-    - DKPhotoGallery/Preview
-    - SDWebImage
-    - SwiftyGif
-  - DKPhotoGallery/Model (0.0.17):
-    - SDWebImage
-    - SwiftyGif
-  - DKPhotoGallery/Preview (0.0.17):
-    - DKPhotoGallery/Model
-    - DKPhotoGallery/Resource
-    - SDWebImage
-    - SwiftyGif
-  - DKPhotoGallery/Resource (0.0.17):
-    - SDWebImage
-    - SwiftyGif
-  - file_picker (0.0.1):
-    - DKImagePickerController/PhotoGallery
-    - Flutter
   - Firebase/Auth (9.6.0):
     - Firebase/CoreOnly
     - FirebaseAuth (~> 9.6.0)
@@ -818,9 +784,6 @@ PODS:
   - path_provider_ios (0.0.1):
     - Flutter
   - PromisesObjC (2.1.1)
-  - SDWebImage (5.13.4):
-    - SDWebImage/Core (= 5.13.4)
-  - SDWebImage/Core (5.13.4)
   - shared_preferences_ios (0.0.1):
     - Flutter
   - smart_auth (0.0.1):
@@ -828,7 +791,6 @@ PODS:
   - sqflite (0.0.2):
     - Flutter
     - FMDB (>= 2.7.5)
-  - SwiftyGif (5.4.3)
   - Toast (4.0.0)
   - url_launcher_ios (0.0.1):
     - Flutter
@@ -836,7 +798,6 @@ PODS:
 DEPENDENCIES:
   - cached_video_player (from `.symlinks/plugins/cached_video_player/ios`)
   - cloud_firestore (from `.symlinks/plugins/cloud_firestore/ios`)
-  - file_picker (from `.symlinks/plugins/file_picker/ios`)
   - firebase_auth (from `.symlinks/plugins/firebase_auth/ios`)
   - firebase_core (from `.symlinks/plugins/firebase_core/ios`)
   - firebase_storage (from `.symlinks/plugins/firebase_storage/ios`)
@@ -856,8 +817,6 @@ SPEC REPOS:
     - abseil
     - BoringSSL-GRPC
     - CocoaAsyncSocket
-    - DKImagePickerController
-    - DKPhotoGallery
     - Firebase
     - FirebaseAppCheckInterop
     - FirebaseAuth
@@ -882,8 +841,6 @@ SPEC REPOS:
     - Libuv-gRPC
     - nanopb
     - PromisesObjC
-    - SDWebImage
-    - SwiftyGif
     - Toast
 
 EXTERNAL SOURCES:
@@ -891,8 +848,6 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/cached_video_player/ios"
   cloud_firestore:
     :path: ".symlinks/plugins/cloud_firestore/ios"
-  file_picker:
-    :path: ".symlinks/plugins/file_picker/ios"
   firebase_auth:
     :path: ".symlinks/plugins/firebase_auth/ios"
   firebase_core:
@@ -926,9 +881,6 @@ SPEC CHECKSUMS:
   cached_video_player: 9f225ed1c46bda0fe287b8288742329d441e2cc5
   cloud_firestore: 49d69be2b924677f2974d8b38acc705c9908c09b
   CocoaAsyncSocket: 065fd1e645c7abab64f7a6a2007a48038fdc6a99
-  DKImagePickerController: b512c28220a2b8ac7419f21c491fc8534b7601ac
-  DKPhotoGallery: fdfad5125a9fdda9cc57df834d49df790dbb4179
-  file_picker: 817ab1d8cd2da9d2da412a417162deee3500fc95
   Firebase: 5ae8b7cf8efce559a653aef0ad95bab3f427c351
   firebase_auth: 07a4db69cfa447ac42cb7faa560fc100708b707c
   firebase_core: 7c28ecc1e5dd74e03829ac3e9ff5ba3314e737a9
@@ -962,11 +914,9 @@ SPEC CHECKSUMS:
   nanopb: b552cce312b6c8484180ef47159bc0f65a1f0431
   path_provider_ios: 14f3d2fd28c4fdb42f44e0f751d12861c43cee02
   PromisesObjC: ab77feca74fa2823e7af4249b8326368e61014cb
-  SDWebImage: e5cc87bf736e60f49592f307bdf9e157189298a3
   shared_preferences_ios: 548a61f8053b9b8a49ac19c1ffbc8b92c50d68ad
   smart_auth: 4bedbc118723912d0e45a07e8ab34039c19e04f2
   sqflite: 6d358c025f5b867b29ed92fc697fd34924e11904
-  SwiftyGif: 6c3eafd0ce693cad58bb63d2b2fb9bacb8552780
   Toast: 91b396c56ee72a5790816f40d3a94dd357abc196
   url_launcher_ios: 839c58cdb4279282219f5e248c3321761ff3c4de
 
