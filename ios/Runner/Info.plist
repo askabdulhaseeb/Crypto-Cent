@@ -15,7 +15,7 @@
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>crypto_cent</string>
+	<string>Boloodo</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
@@ -52,5 +52,19 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+  		<string>sms</string>
+  		<string>tel</string>
+	</array>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Need photo library access to attach product photo</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Need device camera to click product photo to attach</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Need location access to attach location with product to improve product sales and reach</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Need location access to attach location with product to improve product sales and reach</string>
+
 </dict>
 </plist>
