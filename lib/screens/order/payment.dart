@@ -24,6 +24,21 @@ class PaymentScreen extends StatefulWidget {
 class _PaymentScreenState extends State<PaymentScreen> {
   Encryption encryption = Encryption();
   bool paid = false;
+
+  uploadAndsend() async {
+    CartProvider cartPro = Provider.of<CartProvider>(context, listen: false);
+    PaymentProvider paymentPro =
+        Provider.of<PaymentProvider>(context, listen: false);
+    WalletProvider walletPro =
+        Provider.of<WalletProvider>(context, listen: false);
+    if (walletPro.remaningBalance > cartPro.totalPrice()) {
+      bool? temp =
+          await paymentPro.productOrder(cartPro.cartItem, cartPro.totalPrice());
+    } else {
+      CustomToast.errorToast(message: 'You didnot Have Enough Balance ');
+    }
+  }
+
   Future<bool> btcSend(
     double totalAmount,
   ) async {
@@ -52,7 +67,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
   Widget build(BuildContext context) {
     CartProvider cartPro = Provider.of<CartProvider>(context);
     PaymentProvider paymentPro = Provider.of<PaymentProvider>(context);
-     WalletProvider walletPro = Provider.of<WalletProvider>(context);
+    WalletProvider walletPro = Provider.of<WalletProvider>(context);
     // BinanceProvider coinprice = Provider.of<BinanceProvider>(context);
     // String address =
     //     encryption.appDecrypt(walletPro.wallet!.coinsWallet[0].wallet);
@@ -100,13 +115,12 @@ class _PaymentScreenState extends State<PaymentScreen> {
                     const SizedBox(height: 10),
                     Text(
                       walletPro.remaningBalance.toString(),
-                      style:
-                          const TextStyle(fontWeight: FontWeight.w500, fontSize: 16),
+                      style: const TextStyle(
+                          fontWeight: FontWeight.w500, fontSize: 16),
                     ),
                     const SizedBox(
                       height: 5,
                     ),
-                  
                     const SizedBox(height: 20),
                     Container(
                       height: 40,
@@ -138,12 +152,8 @@ class _PaymentScreenState extends State<PaymentScreen> {
             CustomElevatedButton(
                 title: 'Pay',
                 onTap: () async {
-                  bool? temp = await paymentPro.productOrder(
-                      cartPro.cartItem, cartPro.totalPrice());
-                  if (temp!) {
-                    // ignore: use_build_context_synchronously
+                  uploadAndsend();
 
-                  }
                   // bool temp = btcSend(cartPro.totalPrice()) as bool;
                   // if (temp) {
                   //   Navigator.push(
