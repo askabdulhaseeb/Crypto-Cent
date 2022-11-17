@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../models/product_model.dart';
+import '../../models/product/product_model.dart';
 import '../../../providers/cart_provider.dart';
 import '../../../widgets/custom_widgets/custom_rating_star.dart';
 import '../../../widgets/custom_widgets/custom_widget.dart';
 import '../../providers/crypto_wallet/binance_provider.dart';
-import '../../widgets/custom_widgets/custom_network_image.dart';
+import '../../widgets/product/product_url_slider.dart';
 import '../cart_screen/cart_screen.dart';
 
 class ProductDetailScreen extends StatefulWidget {
@@ -52,18 +52,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              SizedBox(
-                height: 250,
-                width: 250,
-                child: CustomNetworkImage(
-                    imageURL: widget.product.imageurl, fit: BoxFit.fill),
-              ),
-            ],
-          ),
+          ProductURLsSlider(urls: widget.product.prodURL),
           Expanded(
             child: SingleChildScrollView(
               child: Padding(
@@ -175,7 +164,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                         height: 100,
                         width: 100,
                         child: Image(
-                          image: NetworkImage(widget.product.imageurl),
+                          image: NetworkImage(widget.product.prodURL[0].url),
                         ),
                       ),
                       Column(
@@ -219,10 +208,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                                   quantity--;
                                 });
                               },
-                        icon: const Icon(
-                          Icons.remove_circle_outline,
-                          size: 15,
-                        ),
+                        icon: const Icon(Icons.remove_circle_outline, size: 15),
                       ),
                       Text(
                         quantity.toString(),

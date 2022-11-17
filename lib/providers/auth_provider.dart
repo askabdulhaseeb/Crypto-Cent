@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'dart:typed_data';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -41,7 +42,7 @@ class AuthProvider extends ChangeNotifier {
         url = await Storagemethod().uploadtostorage(
           'users',
           AuthMethods.uid,
-          _profilePhoto!,
+          uint8list: _profilePhoto,
         );
       }
       final AppUser appuser = AppUser(

@@ -1,0 +1,31 @@
+import 'dart:io';
+
+import 'package:image_picker/image_picker.dart';
+
+class AttachmentPicker {
+  Future<List<File?>> multiImage() async {
+    final List<File?> temp = <File?>[];
+    final ImagePicker imagePicker = ImagePicker();
+    List<XFile> result = await imagePicker.pickMultiImage();
+    if (result.isEmpty) <File?>[];
+    for (int i = 0; i < result.length && i < 10; i++) {
+      temp.add(File(result[i].path));
+    }
+    for (int i = result.length; i < 10; i++) {
+      temp.add(null);
+    }
+    return temp;
+  }
+
+  Future<List<File?>> camera() async {
+    final List<File?> temp = <File?>[];
+    final ImagePicker imagePicker = ImagePicker();
+    XFile? result = await imagePicker.pickImage(source: ImageSource.camera);
+    if (result == null) <File?>[];
+    temp.add(File(result!.path));
+    for (int i = 1; i < 10; i++) {
+      temp.add(null);
+    }
+    return temp;
+  }
+}

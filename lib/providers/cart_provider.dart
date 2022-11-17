@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 
 import '../models/cart.dart';
-import '../models/product_model.dart';
+import '../models/product/product_model.dart';
 
 class CartProvider extends ChangeNotifier {
   final List<Cart> _cartItems = <Cart>[];
@@ -12,7 +12,7 @@ class CartProvider extends ChangeNotifier {
         id: value.pid,
         createdID: value.createdByUID,
         title: value.productname,
-        imageurl: value.imageurl,
+        imageurl: value.prodURL[0].url,
         price: value.amount/exchangeRate,
         exchangeRate: exchangeRate,
         quantity: quantity);

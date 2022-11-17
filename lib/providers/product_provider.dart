@@ -2,7 +2,8 @@ import 'package:flutter/cupertino.dart';
 
 import '../database/local_data.dart';
 import '../database/product_api.dart';
-import '../models/product_model.dart';
+import '../models/product/product_model.dart';
+import '../models/product/product_url.dart';
 
 class ProductProvider with ChangeNotifier {
   ProductProvider() {
@@ -57,6 +58,6 @@ class ProductProvider with ChangeNotifier {
         category: 'null',
         subCategory: 'null',
         createdByUID: 'null',
-        imageurl: '',
+        prodURL: <ProductURL>[]
       );
 }

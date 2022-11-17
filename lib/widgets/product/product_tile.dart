@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../models/product_model.dart';
+import '../../models/product/product_model.dart';
 import '../../../providers/product_provider.dart';
 import '../../../utilities/app_images.dart';
 import '../../../widgets/custom_widgets/custom_network_image.dart';
@@ -44,7 +44,7 @@ class ProductTile extends StatelessWidget {
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(4),
                         child: CustomNetworkImage(
-                          imageURL: product.imageurl,
+                          imageURL: product.prodURL[0].url,
                           fit: BoxFit.fill,
                         ),
                       ),

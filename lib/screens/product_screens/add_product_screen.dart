@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
@@ -6,14 +7,17 @@ import 'package:provider/provider.dart';
 
 import '../../database/databse_storage.dart';
 import '../../database/product_api.dart';
+import '../../function/attachment_picker.dart';
 import '../../function/time_date_function.dart';
 import '../../models/categories/categories.dart';
 import '../../models/categories/sub_categories.dart';
-import '../../models/product_model.dart';
+import '../../models/product/product_model.dart';
+import '../../models/product/product_url.dart';
 import '../../providers/categories_provider.dart';
 import '../../utilities/image_picker.dart';
 import '../../widgets/custom_widgets/custom_toast.dart';
 import '../../widgets/custom_widgets/custom_widget.dart';
+import '../../widgets/product/get_product_attachments.dart';
 
 class AddProductScreen extends StatefulWidget {
   const AddProductScreen({super.key});
@@ -28,19 +32,34 @@ class _AddProductScreenState extends State<AddProductScreen> {
   final TextEditingController amount = TextEditingController();
   final TextEditingController quantity = TextEditingController();
 
-  Uint8List? _image;
+  List<File?> _files = <File?>[
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+  ];
   bool _isloading = false;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   Future<void> uploaddata(CategoriesProvider catPro) async {
-    if (_formKey.currentState!.validate() && _image != null) {
+    if (_formKey.currentState!.validate() && _files[0] != null) {
       setState(() {
         _isloading = true;
       });
-      String imageurl = await Storagemethod().uploadtostorage(
-        'post',
-        'tester',
-        _image!,
-      );
+      final List<ProductURL> urls = <ProductURL>[];
+      for (int i = 0; _files[i] != null; i++) {
+        String imageurl = await Storagemethod().uploadtostorage(
+          'post',
+          'tester',
+          file: _files[i],
+        );
+        urls.add(ProductURL(url: imageurl, isVideo: false, index: i));
+      }
 
       Product product = Product(
         pid: TimeStamp.timestamp.toString(),
@@ -53,11 +72,23 @@ class _AddProductScreenState extends State<AddProductScreen> {
         category: catPro.currentCat!.catID,
         subCategory: catPro.subcurrentCat!.catID,
         createdByUID: 'tester',
-        imageurl: imageurl,
+        prodURL: urls,
       );
       bool temp = await ProductApi().add(product);
       if (temp) {
         CustomToast.successToast(message: 'upload');
+        _files = <File?>[
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+        ];
         productname.clear();
         productdecription.clear();
         amount.clear();
@@ -68,14 +99,6 @@ class _AddProductScreenState extends State<AddProductScreen> {
         _isloading = false;
       });
     }
-  }
-
-  selectImage() async {
-    Uint8List? im = await pickImage(ImageSource.gallery);
-    
-    setState(() {
-      _image = im;
-    });
   }
 
   @override
@@ -90,51 +113,51 @@ class _AddProductScreenState extends State<AddProductScreen> {
             key: _formKey,
             child: Column(
               children: <Widget>[
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(4),
-                  child: _image != null
-                      ? GestureDetector(
-                          onTap: () {
-                            selectImage();
-                          },
-                          child: Container(
-                            height: 200,
-                            width: 200,
-                            decoration: BoxDecoration(
-                                image: DecorationImage(
-                                    image: MemoryImage(_image!))),
-                          ),
-                        )
-                      : Container(
-                          height: 200,
-                          width: double.infinity,
-                          decoration: const BoxDecoration(
-                            color: Colors.grey,
-                          ),
-                          child: Center(
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: <Widget>[
-                                IconButton(
-                                  onPressed: selectImage,
-                                  icon: const Icon(
-                                      Icons.add_circle_outline_outlined,
-                                      color: Colors.white,
-                                      size: 36),
-                                ),
-                                const SizedBox(
-                                  width: 10,
-                                ),
-                                const ForText(
-                                  name: 'Add Image',
-                                  color: Colors.white,
-                                  size: 22,
-                                )
-                              ],
+                GetProductAttachments(
+                    file: _files,
+                    onTap: () async {
+                      showModalBottomSheet(
+                        context: context,
+                        builder: (BuildContext context) => Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: <Widget>[
+                            const SizedBox(height: 10),
+                            ListTile(
+                              onTap: () async {
+                                final List<File?> temp =
+                                    await AttachmentPicker().camera();
+                                if (temp[0] == null) return;
+                                setState(() {
+                                  _files = temp;
+                                });
+                                Navigator.of(context).pop();
+                              },
+                              leading: const Icon(Icons.photo_camera),
+                              title: const Text('Camera'),
+                              subtitle: const Text(
+                                'Click here to click images from device Camera',
+                              ),
                             ),
-                          ),
+                            ListTile(
+                              onTap: () async {
+                                final List<File?> temp =
+                                    await AttachmentPicker().multiImage();
+                                if (temp[0] == null) return;
+                                setState(() {
+                                  _files = temp;
+                                });
+                                Navigator.of(context).pop();
+                              },
+                              leading: const Icon(Icons.photo_rounded),
+                              title: const Text('Gallery'),
+                              subtitle: const Text(
+                                  'Click here to choose images from gallery'),
+                            ),
+                            const SizedBox(height: 20),
+                          ],
                         ),
-                ),
+                      );
+                    }),
                 const SizedBox(height: 10),
                 CustomTextFormField(
                   controller: productname,
@@ -287,7 +310,6 @@ class _AddProductScreenState extends State<AddProductScreen> {
         const SizedBox(height: 10),
         CustomTextFormField(
           controller: controller,
-          
           hint: hint,
           validator: (String? value) => CustomValidator.isEmpty(value),
         ),

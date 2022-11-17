@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-import '../models/product_model.dart';
+import '../models/product/product_model.dart';
 import '../widgets/custom_widgets/custom_toast.dart';
 
 class ProductApi {
