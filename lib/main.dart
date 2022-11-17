@@ -56,7 +56,7 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider<ProductProvider>.value(
           value: ProductProvider(),
-        ),   
+        ),
         ChangeNotifierProvider<BinanceProvider>.value(
           value: BinanceProvider(),
         ),
@@ -72,10 +72,10 @@ class MyApp extends StatelessWidget {
           theme: AppThemes.light,
           darkTheme: AppThemes.dark,
           themeMode: theme.themeMode,
-           home: const OrderHistory(),
-          // home: (AuthMethods.uid.isEmpty)
-          //     ? const PhoneNumberScreen()
-          //     : const MainScreen(),
+          //home: const OrderHistory(),
+          home: (AuthMethods.uid.isEmpty)
+              ? const PhoneNumberScreen()
+              : const MainScreen(),
         );
       }),
     );

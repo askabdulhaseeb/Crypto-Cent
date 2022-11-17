@@ -5,6 +5,7 @@ import '../../widgets/profile/profile_header.dart';
 import '../../widgets/profile/profile_middle_tile.dart';
 import '../../widgets/profile/profile_nav_tile.dart';
 import '../empty_screen/empty_screen.dart';
+import '../order/order_history.dart';
 import 'wallet/wallet_screen.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -30,9 +31,20 @@ class ProfileScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   Expanded(
-                    child: ProfileMiddleTile(
-                      text: 'My Order\nHistory',
-                      image: AppImages.orderhistory,
+                    child: GestureDetector(
+                      onTap: () {
+                         Navigator.push(
+                                    context,
+                                    // ignore: always_specify_types
+                                    MaterialPageRoute(
+                                      builder: (BuildContext context) => const OrderHistory(),
+                                    ),
+                                  );
+                      },
+                      child: ProfileMiddleTile(
+                        text: 'My Order\nHistory',
+                        image: AppImages.orderhistory,
+                      ),
                     ),
                   ),
                   const SizedBox(width: 16),

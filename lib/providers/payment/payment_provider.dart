@@ -52,11 +52,11 @@ class PaymentProvider with ChangeNotifier {
     // completed = (completed / totalCount) * 200;
     // shipped = (shipped / totalCount) * 200;
     // cancel = (cancel / totalCount) * 200;
-    print('pending $proccesing');
-    print('progress $deleviry');
-    print('completed $completed');
-    print('shipped $shipped');
-    print('cancel $cancel');
+    // print('pending $proccesing');
+    // print('progress $deleviry');
+    // print('completed $completed');
+    // print('shipped $shipped');
+    // print('cancel $cancel');
   }
 
   String uid = const Uuid().v4();
