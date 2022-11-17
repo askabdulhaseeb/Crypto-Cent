@@ -6,7 +6,7 @@ import '../app_user/auth_method.dart';
 
 class OrderApi {
   final FirebaseFirestore _instance = FirebaseFirestore.instance;
-  static const String _collection = 'orer';
+  static const String _collection = 'orders';
   Future<bool> add(Order order) async {
     try {
       await _instance
@@ -23,8 +23,10 @@ class OrderApi {
 
   Future<List<Order>> get() async {
     List<Order> orders = <Order>[];
-    QuerySnapshot<Map<String, dynamic>> snapshot =
-        await _instance.collection(_collection).where('customer_uid',isEqualTo: AuthMethods.uid).get();
+    QuerySnapshot<Map<String, dynamic>> snapshot = await _instance
+        .collection(_collection)
+        .where('customer_uid', isEqualTo: AuthMethods.uid)
+        .get();
     for (DocumentSnapshot<Map<String, dynamic>> e in snapshot.docs) {
       orders.add(Order.fromMap(e));
     }

@@ -25,44 +25,61 @@ class _OrderHistoryState extends State<OrderHistory> {
     running = (paymentPro.proccesing + paymentPro.deleviry + paymentPro.shipped)
         .toInt();
     prevoius = (paymentPro.completed + paymentPro.cancel).toInt();
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('My order History'),
-        leading: IconButton(
-            onPressed: (() {
-              Provider.of<AppProvider>(context, listen: false).onTabTapped(0);
-              Navigator.pop(context);
-            }),
-            icon: const Icon(Icons.arrow_back_ios_sharp)),
-        // ignore: always_specify_types
-        actions: const [Icon(Icons.more_vert)],
-      ),
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            children: <Widget>[
-              Row(
-                children: [
-                  newMethod(context, 'All', () {
-                    paymentPro.changeName('All');
-                  }, paymentPro.tempname, total),
-                  newMethod(context, 'Running', () {
-                    paymentPro.changeName('Running');
-                  }, paymentPro.tempname, running),
-                  newMethod(context, 'Previous', () {
-                    paymentPro.changeName('Previous');
-                  }, paymentPro.tempname, prevoius),
-                ],
+    return paymentPro.order.isEmpty
+        ? Scaffold(
+            appBar: AppBar(
+              title: const Text('My order History'),
+              leading: IconButton(
+                  onPressed: (() {
+                    Provider.of<AppProvider>(context, listen: false)
+                        .onTabTapped(0);
+                    Navigator.pop(context);
+                  }),
+                  icon: const Icon(Icons.arrow_back_ios_sharp)),
+              // ignore: always_specify_types
+              actions: const [Icon(Icons.more_vert)],
+            ),
+            body: const Center(child: Text('You do not have any order')),
+          )
+        : Scaffold(
+            appBar: AppBar(
+              title: const Text('My order History'),
+              leading: IconButton(
+                  onPressed: (() {
+                    Provider.of<AppProvider>(context, listen: false)
+                        .onTabTapped(0);
+                    Navigator.pop(context);
+                  }),
+                  icon: const Icon(Icons.arrow_back_ios_sharp)),
+              // ignore: always_specify_types
+              actions: const [Icon(Icons.more_vert)],
+            ),
+            body: SafeArea(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  children: <Widget>[
+                    Row(
+                      children: [
+                        newMethod(context, 'All', () {
+                          paymentPro.changeName('All');
+                        }, paymentPro.tempname, total),
+                        newMethod(context, 'Running', () {
+                          paymentPro.changeName('Running');
+                        }, paymentPro.tempname, running),
+                        newMethod(context, 'Previous', () {
+                          paymentPro.changeName('Previous');
+                        }, paymentPro.tempname, prevoius),
+                      ],
+                    ),
+                    const SizedBox(height: 20),
+                    const CustomBarChart(),
+                    const Expanded(child: HistroyCrad())
+                  ],
+                ),
               ),
-              const SizedBox(height: 20),
-              const CustomBarChart(),
-              const Expanded(child: HistroyCrad())
-            ],
-          ),
-        ),
-      ),
-    );
+            ),
+          );
   }
 
   Widget newMethod(BuildContext context, String title, VoidCallback onTap,
