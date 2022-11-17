@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 
 import '../../../function/time_date_function.dart';
 import '../../../providers/payment/payment_provider.dart';
+import '../../../utilities/app_images.dart';
 import '../cutom_text.dart';
 
 class HistroyCrad extends StatelessWidget {
@@ -40,6 +41,7 @@ class HistroyCrad extends StatelessWidget {
                     height: 60,
                     width: 60,
                     color: Colors.white,
+                    child: paymentPro.order[index].status.value=='cancel'? Image(image: AssetImage(AppImages.ellipsecancel)):Image(image: AssetImage(AppImages.ellipse)),
                   ),
                   Column(
                     mainAxisAlignment: MainAxisAlignment.center,

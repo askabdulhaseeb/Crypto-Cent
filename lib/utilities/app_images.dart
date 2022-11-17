@@ -20,6 +20,8 @@ class AppImages {
   static String get paymentUnselected => 'assets/icons/dollar.png';
   static String get profileSelected => 'assets/icons/profile_fill.png';
   static String get profileUnselected => 'assets/icons/profile.png';
+  static String get ellipse => 'assets/icons/ellipse.png';
+  static String get ellipsecancel => 'assets/icons/ellipsecancel.png';
 
   //profile screen icon
   static String get deliveryaddress => 'assets/icons/delivery_address.png';
