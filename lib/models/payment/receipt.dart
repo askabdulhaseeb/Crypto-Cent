@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class Receipt {
   Receipt({
     required this.receiptID,
@@ -30,15 +32,15 @@ class Receipt {
   }
 
   // ignore: sort_constructors_first
-  factory Receipt.fromMap(Map<String, dynamic> map) {
+  factory Receipt.fromMap(DocumentSnapshot<Map<String, dynamic>> doc) {
     return Receipt(
-      receiptID: map['receipt_id'] ?? '',
-      customerUID: map['customer_uid'] ?? '',
-      timestamp: map['timestamp'] ?? 0,
-      localCurrency: map['local_currency'] ?? '\$',
-      cryptoCoinSymbol: map['crypto_coin_symbol'] ?? 'btc',
-      exchangeRate: map['exchange_rate'] ?? 0.0,
-      totalCrypto: map['total_crypto'] ?? 0.0,
+      receiptID: doc.data()?['receipt_id'] ?? '',
+      customerUID: doc.data()?['customer_uid'] ?? '',
+      timestamp: doc.data()?['timestamp'] ?? 0,
+      localCurrency: doc.data()?['local_currency'] ?? '\$',
+      cryptoCoinSymbol: doc.data()?['crypto_coin_symbol'] ?? 'btc',
+      exchangeRate: doc.data()?['exchange_rate'] ?? 0.0,
+      totalCrypto: doc.data()?['total_crypto'] ?? 0.0,
     );
   }
 }

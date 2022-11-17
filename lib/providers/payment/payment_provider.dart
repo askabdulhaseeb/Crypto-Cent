@@ -19,16 +19,44 @@ class PaymentProvider with ChangeNotifier {
   PaymentProvider() {
     load();
   }
-  final List<OrderdProduct> _orderProduct = <OrderdProduct>[];
-  List<OrderdProduct> get orderdProduct => _orderProduct;
-  List<Order> _order = <Order>[];
-  List<Order> get order => _order;
-  List<Receipt> _receipt = <Receipt>[];
-  List<Receipt> get receipt => _receipt;
+
   load() async {
     _order = await OrderApi().get();
+    _receipt = await ReceiptApi().get();
+    getGraphData();
     print(_order.length);
+    print(_receipt.length);
     notifyListeners();
+  }
+
+  getGraphData() {
+    for (int i = 0; i < _order.length; i++) {
+      List<OrderdProduct> temp = _order[i].products;
+      for (int j = 0; j < temp.length; j++) {
+        totalCount++;
+        if (temp[j].status.value == 'pending') {
+          proccesing++;
+        } else if (temp[j].status.value == 'in_progress') {
+          deleviry++;
+        } else if (temp[j].status.value == 'completed') {
+          completed++;
+        } else if (temp[j].status.value == 'cancel') {
+          cancel++;
+        } else
+          shipped++;
+      }
+    }
+
+    // proccesing = (proccesing / totalCount) * 200;
+    // deleviry = (deleviry / totalCount) * 200;
+    // completed = (completed / totalCount) * 200;
+    // shipped = (shipped / totalCount) * 200;
+    // cancel = (cancel / totalCount) * 200;
+    print('pending $proccesing');
+    print('progress $deleviry');
+    print('completed $completed');
+    print('shipped $shipped');
+    print('cancel $cancel');
   }
 
   String uid = const Uuid().v4();
@@ -79,4 +107,17 @@ class PaymentProvider with ChangeNotifier {
       return retBool;
     }
   }
+
+  double totalCount = 0;
+  double proccesing = 0;
+  double completed = 0;
+  double deleviry = 0;
+  double cancel = 0;
+  double shipped = 0;
+  final List<OrderdProduct> _orderProduct = <OrderdProduct>[];
+  List<OrderdProduct> get orderdProduct => _orderProduct;
+  List<Order> _order = <Order>[];
+  List<Order> get order => _order;
+  List<Receipt> _receipt = <Receipt>[];
+  List<Receipt> get receipt => _receipt;
 }
