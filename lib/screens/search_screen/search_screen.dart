@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../providers/categories_provider.dart';
+import '../../utilities/app_images.dart';
 import '../category_screens/categories_extend.dart';
 
 class SerachScreen extends StatelessWidget {
@@ -12,7 +13,17 @@ class SerachScreen extends StatelessWidget {
     List<String> categories = categoriesPro.forSearch();
     return Scaffold(
       appBar: AppBar(
-        title: const Text('SerachScreen'),
+         centerTitle: true,
+      title: Container(
+        height: 24,
+        width: 48,
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage(AppImages.logo),
+            fit: BoxFit.fill,
+          ),
+        ),
+      ),
       ),
       body: Column(
         children: <Widget>[

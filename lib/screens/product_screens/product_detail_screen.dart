@@ -111,7 +111,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                     ),
                     const SizedBox(height: 10),
                     const ForText(
-                      name: 'About',
+                      name: 'Description',
                       bold: true,
                       size: 22,
                     ),

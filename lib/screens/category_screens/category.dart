@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import '../../providers/categories_provider.dart';
 import '../../widgets/custom_widgets/custom_widget.dart';
 import 'categories_extend.dart';
- 
+
 class CategoryScreen extends StatelessWidget {
   const CategoryScreen({super.key});
   static const String routeName = '/category-screen';
@@ -42,13 +42,13 @@ class CategoryScreen extends StatelessWidget {
                             image:
                                 NetworkImage(catPro.categories[index].imageURl),
                             fit: BoxFit.fill),
-                        borderRadius: BorderRadius.circular(24),
+                        borderRadius: BorderRadius.circular(16),
                       ),
                     ),
                     Container(
                       decoration: BoxDecoration(
                         color: Colors.black38,
-                        borderRadius: BorderRadius.circular(24),
+                        borderRadius: BorderRadius.circular(16),
                       ),
                     ),
                     Positioned(

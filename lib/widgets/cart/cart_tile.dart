@@ -61,7 +61,7 @@ class CartItem extends StatelessWidget {
                     SizedBox(
                       width: 220,
                       child: Text(
-                        '\$ ${item.price * item.quantity}',
+                        'Btc  ${item.price * item.quantity}',
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         style: const TextStyle(

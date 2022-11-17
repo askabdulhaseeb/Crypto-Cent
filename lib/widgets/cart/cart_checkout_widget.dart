@@ -69,7 +69,7 @@ class CartCheckoutWidget extends StatelessWidget {
                     ),
                     const Spacer(),
                     ForText(
-                      name: '\$${cartPro.totalPrice()}',
+                      name: 'Btc ${cartPro.totalPrice()}',
                       bold: true,
                       size: 16,
                     ),

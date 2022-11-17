@@ -64,6 +64,12 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider<PaymentProvider>.value(
           value: PaymentProvider(),
         ),
+        ChangeNotifierProxyProvider<PaymentProvider,WalletProvider>(
+          
+          create: (_) => WalletProvider(),
+          update: (_, paymentPro, walletPro) => walletPro!..update(paymentPro),
+           
+           )
       ],
       child: Consumer<AppThemeProvider>(
           builder: (BuildContext context, AppThemeProvider theme, _) {

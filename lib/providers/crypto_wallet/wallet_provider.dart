@@ -5,8 +5,19 @@ import '../../database/crypto_wallet/wallet_api.dart';
 import '../../database/crypto_wallet/wallet_create_api.dart';
 import '../../function/encryption_function.dart';
 import '../../models/crypto_wallet/wallet.dart';
+import '../payment/payment_provider.dart';
 
 class WalletProvider with ChangeNotifier {
+  WalletProvider() {
+    load();
+  }
+  update(PaymentProvider paymentpro) {
+    // for(int i=0;i<paymentpro.receipt.length;i++)
+    // {
+    //   if()
+    // }
+
+  }
   Wallets? _wallet;
   Wallets? get wallet => _wallet;
   Future<bool> load() async {
@@ -33,4 +44,6 @@ class WalletProvider with ChangeNotifier {
     _balance = tempBalance;
     notifyListeners();
   }
+
+  double payableBalance = 0;
 }

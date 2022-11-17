@@ -33,13 +33,14 @@ class ProfileScreen extends StatelessWidget {
                   Expanded(
                     child: GestureDetector(
                       onTap: () {
-                         Navigator.push(
-                                    context,
-                                    // ignore: always_specify_types
-                                    MaterialPageRoute(
-                                      builder: (BuildContext context) => const OrderHistory(),
-                                    ),
-                                  );
+                        Navigator.push(
+                          context,
+                          // ignore: always_specify_types
+                          MaterialPageRoute(
+                            builder: (BuildContext context) =>
+                                const OrderHistory(),
+                          ),
+                        );
                       },
                       child: ProfileMiddleTile(
                         text: 'My Order\nHistory',
@@ -102,7 +103,7 @@ class ProfileScreen extends StatelessWidget {
                   const SizedBox(height: 24),
                   ProfileNavTile(
                     name: 'Sellings',
-                    image: AppImages.paymentUnselected,
+                    image: AppImages.bitcoinIcon,
                     onTap: () {
                       Navigator.of(context).push(MaterialPageRoute<EmptyScreen>(
                         builder: (BuildContext context) => const EmptyScreen(),
