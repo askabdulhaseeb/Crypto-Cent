@@ -23,6 +23,8 @@ class PaymentProvider with ChangeNotifier {
   List<OrderdProduct> get orderdProduct => _orderProduct;
   List<Order> _order = <Order>[];
   List<Order> get order => _order;
+  List<Receipt> _receipt = <Receipt>[];
+  List<Receipt> get receipt => _receipt;
   load() async {
     _order = await OrderApi().get();
     print(_order.length);
