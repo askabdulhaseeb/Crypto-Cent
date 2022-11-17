@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 
 import '../../database/app_user/auth_method.dart';
 import '../../database/crypto_wallet/wallet_api.dart';
+import '../../database/crypto_wallet/wallet_create_api.dart';
+import '../../function/encryption_function.dart';
 import '../../models/crypto_wallet/wallet.dart';
 
 class WalletProvider with ChangeNotifier {
@@ -18,6 +20,17 @@ class WalletProvider with ChangeNotifier {
       }
     }
     temp = true;
+    getBalance();
     return temp;
+  }
+
+  double _balance = 0;
+  double get balance => _balance;
+  getBalance() async {
+    double tempBalance = 0;
+    String address = Encryption().appDecrypt(_wallet!.coinsWallet[0].address);
+    tempBalance = await WallletWithApi().getWalletBalance(address);
+    _balance = tempBalance;
+    notifyListeners();
   }
 }

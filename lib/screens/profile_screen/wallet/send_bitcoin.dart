@@ -97,29 +97,11 @@ class _SendBitcoinScreenState extends State<SendBitcoinScreen> {
                     'Available Balance : ',
                     style: TextStyle(fontWeight: FontWeight.w500, fontSize: 16),
                   ),
-                  FutureBuilder<double>(
-                      future: WallletWithApi().getWalletBalance(
-                          walletPro.wallet!.coinsWallet[0].address),
-                      builder: (
-                        BuildContext context,
-                        AsyncSnapshot<double> snapshot,
-                      ) {
-                        if (snapshot.hasData) {
-                          double balance = snapshot.data!;
-                          return Text(
-                            '\$${balance.toStringAsFixed(4)}',
-                            style: const TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.w500,
-                              color: Colors.white,
-                            ),
-                          );
-                        } else {
-                          return snapshot.hasError
-                              ? const Text('ERROR')
-                              : const CircularProgressIndicator.adaptive();
-                        }
-                      }),
+                  Text(
+                      walletPro.balance.toString(),
+                      style:
+                          const TextStyle(fontWeight: FontWeight.w500, fontSize: 16),
+                    ),
                 ],
               ),
               const SizedBox(
