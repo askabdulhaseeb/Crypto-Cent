@@ -73,10 +73,10 @@ class MyApp extends StatelessWidget {
           theme: AppThemes.light,
           darkTheme: AppThemes.dark,
           themeMode: theme.themeMode,
-          home: const TestingScreen(),
-          // home: (AuthMethods.uid.isEmpty)
-          //     ? const PhoneNumberScreen()
-          //     : const MainScreen(),
+          //home: const TestingScreen(),
+          home: (AuthMethods.uid.isEmpty)
+              ? const PhoneNumberScreen()
+              : const MainScreen(),
         );
       }),
     );

@@ -32,7 +32,7 @@ class CustomBarChart extends StatelessWidget {
         height: 250,
         width: double.infinity,
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
             Column(
               children: const <Widget>[
@@ -40,11 +40,11 @@ class CustomBarChart extends StatelessWidget {
                 SizedBox(
                   height: 20,
                 ),
-                Text('800%'),
+                Text('80%'),
                 SizedBox(
                   height: 20,
                 ),
-                Text('600%'),
+                Text('60%'),
                 SizedBox(
                   height: 20,
                 ),
@@ -55,11 +55,46 @@ class CustomBarChart extends StatelessWidget {
                 Text('20%'),
               ],
             ),
-            CustomBarLine(percentage: completed, title: 'Confirmed'),
-            CustomBarLine(percentage: proccesing, title: 'Processing'),
-            CustomBarLine(percentage: deleviry, title: 'Delivery'),
-            CustomBarLine(percentage: cancel, title: 'Cancel'),
-            CustomBarLine(percentage: shipped, title: 'Shipped'),
+           paymentPro.tempname=='All'? Expanded(
+             child: SizedBox(
+               child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    CustomBarLine(percentage: completed, title: 'Confirmed'),
+                    
+                    CustomBarLine(percentage: proccesing, title: 'Processing'),
+                    CustomBarLine(percentage: deleviry, title: 'Delivery'),
+                    CustomBarLine(percentage: cancel, title: 'Cancel'),
+                    CustomBarLine(percentage: shipped, title: 'Shipped'),
+                  ],
+                ),
+             ),
+           ):paymentPro.tempname=='Running'?Expanded(
+             child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  const CustomBarLine(percentage: 0, title: 'Confirmed'),
+                  CustomBarLine(percentage: proccesing, title: 'Processing'),
+                  CustomBarLine(percentage: deleviry, title: 'Delivery'),
+                  const CustomBarLine(percentage: 0, title: 'Cancel'),
+                  CustomBarLine(percentage: shipped, title: 'Shipped'),
+                ],
+              ),
+           ):paymentPro.tempname=='Previous'?Expanded(
+             child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  CustomBarLine(percentage: completed, title: 'Confirmed'),
+                  const CustomBarLine(percentage: 0, title: 'Processing'),
+                  const CustomBarLine(percentage: 0, title: 'Delivery'),
+                  CustomBarLine(percentage: cancel, title: 'Cancel'),
+                  const CustomBarLine(percentage: 0, title: 'Shipped'),
+                ],
+              ),
+           ):SizedBox()
           ],
         ));
   }

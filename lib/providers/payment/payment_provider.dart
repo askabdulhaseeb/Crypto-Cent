@@ -108,6 +108,12 @@ class PaymentProvider with ChangeNotifier {
     }
   }
 
+  changeName(String value) {
+    tempname = value;
+    notifyListeners();
+  }
+
+  String tempname = 'All';
   double totalCount = 0;
   double proccesing = 0;
   double completed = 0;

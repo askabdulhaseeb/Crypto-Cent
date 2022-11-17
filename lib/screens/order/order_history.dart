@@ -18,6 +18,13 @@ class _OrderHistoryState extends State<OrderHistory> {
   @override
   Widget build(BuildContext context) {
     PaymentProvider paymentPro = Provider.of<PaymentProvider>(context);
+    int running = 0;
+    int prevoius = 0;
+    int total = 0;
+    total = paymentPro.totalCount.toInt();
+    running = (paymentPro.proccesing + paymentPro.deleviry + paymentPro.shipped)
+        .toInt();
+    prevoius = (paymentPro.completed + paymentPro.cancel).toInt();
     return Scaffold(
       appBar: AppBar(
         title: const Text('My order History'),
@@ -37,9 +44,15 @@ class _OrderHistoryState extends State<OrderHistory> {
             children: <Widget>[
               Row(
                 children: [
-                  newMethod(context, 'All', () {}),
-                  newMethod(context, 'Running', () {}),
-                  newMethod(context, 'Previous', () {}),
+                  newMethod(context, 'All', () {
+                    paymentPro.changeName('All');
+                  }, paymentPro.tempname, total),
+                  newMethod(context, 'Running', () {
+                    paymentPro.changeName('Running');
+                  }, paymentPro.tempname, running),
+                  newMethod(context, 'Previous', () {
+                    paymentPro.changeName('Previous');
+                  }, paymentPro.tempname, prevoius),
                 ],
               ),
               const SizedBox(height: 20),
@@ -52,21 +65,27 @@ class _OrderHistoryState extends State<OrderHistory> {
     );
   }
 
-  Widget newMethod(BuildContext context, String title, VoidCallback onTap) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 24),
-        decoration: BoxDecoration(
-          color: Theme.of(context).primaryColor,
-          borderRadius: BorderRadius.circular(46),
-        ),
-        child: Center(
-          child: ForText(
-            name: title,
-            color: Colors.white,
-            size: 20,
-            bold: true,
+  Widget newMethod(BuildContext context, String title, VoidCallback onTap,
+      String name, int num) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 4),
+      child: GestureDetector(
+        onTap: onTap,
+        child: Container(
+          padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 24),
+          decoration: BoxDecoration(
+            color: title == name
+                ? Theme.of(context).primaryColor
+                : Theme.of(context).secondaryHeaderColor,
+            borderRadius: BorderRadius.circular(46),
+          ),
+          child: Center(
+            child: ForText(
+              name: title + '($num)',
+              color: title == name ? Colors.white : Colors.black,
+              size: 16,
+              bold: true,
+            ),
           ),
         ),
       ),
