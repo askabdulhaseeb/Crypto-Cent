@@ -12,12 +12,24 @@ class WalletProvider with ChangeNotifier {
     load();
   }
   update(PaymentProvider paymentpro) {
-    // for(int i=0;i<paymentpro.receipt.length;i++)
-    // {
-    //   if()
-    // }
-
+    for (int i = 0; i < paymentpro.receipt.length; i++) {
+      for (int j = 0; j < paymentpro.order.length; j++) {
+        if (paymentpro.receipt[i].receiptID == paymentpro.order[j].receiptID) {
+          if (paymentpro.order[j].status.value == 'pending') {
+            _payableBalance += paymentpro.receipt[i].totalCrypto;
+          }
+        }
+      }
+    }
+    remaningBlance();
+    print('Payabale Balance : ' + _payableBalance.toString());
   }
+
+  remaningBlance() {
+    _remaningBalance = balance - payableBalance;
+    notifyListeners();
+  }
+
   Wallets? _wallet;
   Wallets? get wallet => _wallet;
   Future<bool> load() async {
@@ -35,8 +47,6 @@ class WalletProvider with ChangeNotifier {
     return temp;
   }
 
-  double _balance = 0;
-  double get balance => _balance;
   getBalance() async {
     double tempBalance = 0;
     String WalletId = Encryption().appDecrypt(_wallet!.coinsWallet[0].wallet);
@@ -45,5 +55,11 @@ class WalletProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  double payableBalance = 0;
+  double _balance = 0;
+  double get balance => _balance;
+  double _payableBalance = 0;
+  double get payableBalance => _payableBalance;
+  double _remaningBalance = 0;
+  double get remaningBalance => _remaningBalance;
+  //double payableBalance = 0;
 }

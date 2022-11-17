@@ -99,7 +99,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                     ),
                     const SizedBox(height: 10),
                     Text(
-                      walletPro.balance.toString(),
+                      walletPro.remaningBalance.toString(),
                       style:
                           const TextStyle(fontWeight: FontWeight.w500, fontSize: 16),
                     ),

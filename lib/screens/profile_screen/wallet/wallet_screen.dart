@@ -62,7 +62,7 @@ class _WalletScreenState extends State<WalletScreen> {
                     ),
                     const SizedBox(height: 10),
                     Text(
-                      walletPro.balance.toString(),
+                      walletPro.remaningBalance.toString(),
                       style: const TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.w500,

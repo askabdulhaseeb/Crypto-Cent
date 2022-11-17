@@ -89,7 +89,7 @@ class _ReceiveBTCScreenState extends State<ReceiveBTCScreen> {
                           TextStyle(fontWeight: FontWeight.w500, fontSize: 16),
                     ),
                     Text(
-                      walletPro.balance.toString(),
+                      walletPro.remaningBalance.toString(),
                       style:
                           const TextStyle(fontWeight: FontWeight.w500, fontSize: 16),
                     ),

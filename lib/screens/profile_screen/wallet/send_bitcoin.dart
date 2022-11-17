@@ -28,7 +28,7 @@ class _SendBitcoinScreenState extends State<SendBitcoinScreen> {
         encryption.appDecrypt(walletPro.wallet!.coinsWallet[0].wallet);
     String transferKey =
         encryption.appDecrypt(walletPro.wallet!.coinsWallet[0].transferKey);
-    final double balance = await WallletWithApi().getWalletBalance(address);
+    final double balance = walletPro.remaningBalance;
     if (balance > amount) {
       await WallletWithApi().transferCoin(
           walletAddress, transferKey, _walletaddress.text, amount.toString());
@@ -98,7 +98,7 @@ class _SendBitcoinScreenState extends State<SendBitcoinScreen> {
                     style: TextStyle(fontWeight: FontWeight.w500, fontSize: 16),
                   ),
                   Text(
-                      walletPro.balance.toString(),
+                      walletPro.remaningBalance.toString(),
                       style:
                           const TextStyle(fontWeight: FontWeight.w500, fontSize: 16),
                     ),
