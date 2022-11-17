@@ -61,47 +61,13 @@ class _WalletScreenState extends State<WalletScreen> {
                       size: 28,
                     ),
                     const SizedBox(height: 10),
-                    FutureBuilder<double>(
-                        future: WallletWithApi().getWalletBalance(walletID),
-                        builder: (BuildContext context,
-                            AsyncSnapshot<double> snapshot) {
-                          if (snapshot.hasData) {
-                            double balance =
-                                (snapshot.data ?? 0) * coinprice.coin.price;
-                            return Text(
-                              '\$ ${balance.toStringAsFixed(2)}',
-                              style: const TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.w500,
-                                color: Colors.white,
-                              ),
-                            );
-                          } else {
-                            return snapshot.hasError
-                                ? const Text('ERROR')
-                                : const CircularProgressIndicator.adaptive();
-                          }
-                        }),
-                    FutureBuilder<double>(
-                        future: WallletWithApi().getWalletBalance(walletID),
-                        builder: (BuildContext context,
-                            AsyncSnapshot<double> snapshot) {
-                          if (snapshot.hasData) {
-                            double balance = snapshot.data ?? 0;
-                            return Text(
-                              'BTC $balance',
-                              style: const TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.w500,
-                                color: Colors.white,
-                              ),
-                            );
-                          } else {
-                            return snapshot.hasError
-                                ? const Text('ERROR')
-                                : const CircularProgressIndicator.adaptive();
-                          }
-                        }),
+                    Text(
+                      walletPro.balance.toString(),
+                      style: const TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w500,
+                          fontSize: 16),
+                    ),
                     const SizedBox(height: 20),
                     Container(
                       height: 40,
