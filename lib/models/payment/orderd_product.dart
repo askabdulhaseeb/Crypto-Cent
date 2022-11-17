@@ -2,7 +2,8 @@ import '../../enum/order_status_enum.dart';
 
 class OrderdProduct {
   OrderdProduct({
-    required this.pid,required this.sellerID,
+    required this.pid,
+    required this.sellerID,
     required this.cryptoPrice,
     required this.exchangeRate,
     required this.quantity,
@@ -23,7 +24,7 @@ class OrderdProduct {
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'pid': pid,
-      'seller_id':sellerID,
+      'seller_id': sellerID,
       'quantity': quantity,
       'local_currency': localCurrency,
       'crypto_coin_symbol': cryptoCoinSymbol,
@@ -37,12 +38,12 @@ class OrderdProduct {
   factory OrderdProduct.fromMap(Map<String, dynamic> map) {
     return OrderdProduct(
       pid: map['pid'] ?? '',
-      sellerID: map['seller_id']??'',
+      sellerID: map['seller_id'] ?? '',
       quantity: map['quantity'] ?? 0,
       localCurrency: map['local_currency'] ?? '\$',
       cryptoCoinSymbol: map['crypto_coin_symbol'] ?? 'btc',
       exchangeRate: map['exchange_rate'] ?? 0.0,
-      cryptoPrice: map['crypto_price'] ?? 0.0,
+      cryptoPrice: double.parse(map['crypto_price'].toString()),
       status: OrderStatusConvetion().stringToEnum(map['status']),
     );
   }

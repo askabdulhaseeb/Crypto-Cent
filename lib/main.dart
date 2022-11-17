@@ -15,6 +15,7 @@ import 'providers/product_provider.dart';
 import 'providers/provider.dart';
 
 import 'screens/auth/phone_number_screen.dart';
+import 'screens/empty_screen/testing_screen.dart';
 import 'screens/main_screen/main_screen.dart';
 import 'screens/order/order_history.dart';
 import 'screens/order/payment.dart';
@@ -72,10 +73,10 @@ class MyApp extends StatelessWidget {
           theme: AppThemes.light,
           darkTheme: AppThemes.dark,
           themeMode: theme.themeMode,
-          //home: const OrderHistory(),
-          home: (AuthMethods.uid.isEmpty)
-              ? const PhoneNumberScreen()
-              : const MainScreen(),
+          home: const TestingScreen(),
+          // home: (AuthMethods.uid.isEmpty)
+          //     ? const PhoneNumberScreen()
+          //     : const MainScreen(),
         );
       }),
     );

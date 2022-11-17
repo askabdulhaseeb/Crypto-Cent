@@ -1,9 +1,8 @@
-import 'package:crypto_cent/providers/provider.dart';
-import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../providers/payment/payment_provider.dart';
+import '../../providers/provider.dart';
 import '../../widgets/custom_widgets/bar_chart/custom_bar_chart.dart';
 import '../../widgets/custom_widgets/bar_chart/history_card.dart';
 import '../../widgets/custom_widgets/custom_widget.dart';
@@ -38,22 +37,9 @@ class _OrderHistoryState extends State<OrderHistory> {
             children: <Widget>[
               Row(
                 children: [
-                  Container(
-                    padding:
-                        const EdgeInsets.symmetric(vertical: 8, horizontal: 24),
-                    decoration: BoxDecoration(
-                      color: Theme.of(context).primaryColor,
-                      borderRadius: BorderRadius.circular(46),
-                    ),
-                    child: const Center(
-                      child: ForText(
-                        name: 'All',
-                        color: Colors.white,
-                        size: 24,
-                        bold: true,
-                      ),
-                    ),
-                  ),
+                  newMethod(context, 'All', () {}),
+                  newMethod(context, 'Running', () {}),
+                  newMethod(context, 'Previous', () {}),
                 ],
               ),
               const SizedBox(height: 20),
@@ -65,5 +51,25 @@ class _OrderHistoryState extends State<OrderHistory> {
       ),
     );
   }
-}
 
+  Widget newMethod(BuildContext context, String title, VoidCallback onTap) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 24),
+        decoration: BoxDecoration(
+          color: Theme.of(context).primaryColor,
+          borderRadius: BorderRadius.circular(46),
+        ),
+        child: Center(
+          child: ForText(
+            name: title,
+            color: Colors.white,
+            size: 20,
+            bold: true,
+          ),
+        ),
+      ),
+    );
+  }
+}
