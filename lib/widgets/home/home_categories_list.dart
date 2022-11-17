@@ -42,6 +42,14 @@ class HomeCategoriesList extends StatelessWidget {
               ),
             );
           }),
+          allitems(context, 'Borrow', false, () {
+            Navigator.push(
+              context,
+              MaterialPageRoute<EmptyScreen>(
+                builder: (BuildContext context) => const EmptyScreen(),
+              ),
+            );
+          }),
           const SizedBox(width: 48),
         ],
       ),
