@@ -12,7 +12,7 @@ class ProductApi {
           .collection(_collection)
           .doc(product.pid)
           .set(product.toMap());
-     // CustomToast.successToast(message: 'Successfully Added');
+      // CustomToast.successToast(message: 'Successfully Added');
       return true;
     } catch (e) {
       CustomToast.errorToast(message: e.toString());
@@ -22,8 +22,10 @@ class ProductApi {
 
   Future<List<Product>> getdata() async {
     List<Product> product = <Product>[];
-    QuerySnapshot<Map<String, dynamic>> snapshot =
-        await _instance.collection(_collection).get();
+    QuerySnapshot<Map<String, dynamic>> snapshot = await _instance
+        .collection(_collection)
+        .orderBy('timestamp', descending: true)
+        .get();
     for (DocumentSnapshot<Map<String, dynamic>> e in snapshot.docs) {
       product.add(Product.fromMap(e));
     }
