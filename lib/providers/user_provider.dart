@@ -8,6 +8,9 @@ import '../models/app_user/app_user.dart';
 import '../models/app_user/numbers_detail.dart';
 
 class UserProvider extends ChangeNotifier {
+  UserProvider() {
+    init();
+  }
   List<AppUser> _user = <AppUser>[];
 
   void init() async {
@@ -76,7 +79,7 @@ class UserProvider extends ChangeNotifier {
 
   List<AppUser> get users => <AppUser>[..._user];
 
-  AppUser user({required String uid}) {
+  AppUser user(String uid) {
     int index = _indexOf(uid);
     return index < 0 ? _null : _user[index];
   }

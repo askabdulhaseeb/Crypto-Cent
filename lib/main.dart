@@ -8,12 +8,14 @@ import 'firebase_options.dart';
 import 'providers/auth_provider.dart';
 import 'providers/cart_provider.dart';
 import 'providers/categories_provider.dart';
+import 'providers/chat/chat_page_provider.dart';
 import 'providers/crypto_wallet/binance_provider.dart';
 import 'providers/crypto_wallet/wallet_provider.dart';
 import 'providers/payment/payment_provider.dart';
 import 'providers/product_provider.dart';
 import 'providers/provider.dart';
 
+import 'providers/user_provider.dart';
 import 'screens/auth/phone_number_screen.dart';
 import 'screens/empty_screen/testing_screen.dart';
 import 'screens/main_screen/main_screen.dart';
@@ -37,6 +39,9 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       // ignore: always_specify_types
       providers: [
+        ChangeNotifierProvider<UserProvider>(
+          create: (BuildContext context) => UserProvider(),
+        ),
         ChangeNotifierProvider<CartProvider>(
           create: (BuildContext context) => CartProvider(),
         ),
@@ -66,8 +71,12 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProxyProvider<PaymentProvider, WalletProvider>(
           create: (_) => WalletProvider(),
-          update: (_, paymentPro, walletPro) => walletPro!..update(paymentPro),
-        )
+          update: (_, PaymentProvider paymentPro, WalletProvider? walletPro) =>
+              walletPro!..update(paymentPro),
+        ),
+        ChangeNotifierProvider<ChatPageProvider>.value(
+          value: ChatPageProvider(),
+        ),
       ],
       child: Consumer<AppThemeProvider>(
           builder: (BuildContext context, AppThemeProvider theme, _) {
@@ -75,7 +84,7 @@ class MyApp extends StatelessWidget {
           title: 'Crypto Cent',
           debugShowCheckedModeBanner: false,
           theme: AppThemes.light,
-          darkTheme: AppThemes.dark, 
+          darkTheme: AppThemes.dark,
           themeMode: theme.themeMode,
           //home: const TestingScreen(),
           home: (AuthMethods.uid.isEmpty)

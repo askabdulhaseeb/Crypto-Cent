@@ -5,6 +5,7 @@ import 'product_url.dart';
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 class Product {
   final String pid;
+  final String uid;
   final double amount;
   final String colors;
   final String quantity;
@@ -17,6 +18,7 @@ class Product {
   late List<ProductURL> prodURL;
   Product({
     required this.pid,
+    required this.uid,
     required this.amount,
     required this.colors,
     required this.quantity,
@@ -32,6 +34,7 @@ class Product {
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'pid': pid,
+      'uid': uid,
       'amount': amount,
       'colors': colors,
       'quantity': quantity,
@@ -59,6 +62,7 @@ class Product {
     }
     return Product(
       pid: doc.data()?['pid'] ?? '',
+      uid: doc.data()?['uid'] ?? '',
       amount: doc.data()?['amount'] ?? 0,
       colors: doc.data()?['colors'] ?? '',
       quantity: doc.data()?['quantity'] ?? '',

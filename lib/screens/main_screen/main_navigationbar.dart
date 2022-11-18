@@ -45,9 +45,7 @@ class _MainBottomNavigationBarState extends State<MainBottomNavigationBar> {
             color: currentTap == 2 ? Theme.of(context).primaryColor : null,
           ),
           Icon(
-            currentTap == 3
-                ? Icons.notifications_active
-                : Icons.notifications_active_outlined,
+            currentTap == 3 ? Icons.chat : Icons.chat_outlined,
             color: currentTap == 3 ? Theme.of(context).primaryColor : null,
           ),
           ImageIcon(

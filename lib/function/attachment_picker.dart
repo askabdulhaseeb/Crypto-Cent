@@ -7,7 +7,7 @@ class AttachmentPicker {
     final List<File?> temp = <File?>[];
     final ImagePicker imagePicker = ImagePicker();
     List<XFile> result = await imagePicker.pickMultiImage();
-    if (result.isEmpty) <File?>[];
+    if (result.isEmpty) return <File?>[];
     for (int i = 0; i < result.length && i < 10; i++) {
       temp.add(File(result[i].path));
     }
@@ -21,11 +21,31 @@ class AttachmentPicker {
     final List<File?> temp = <File?>[];
     final ImagePicker imagePicker = ImagePicker();
     XFile? result = await imagePicker.pickImage(source: ImageSource.camera);
-    if (result == null) <File?>[];
-    temp.add(File(result!.path));
+    if (result == null) return <File?>[];
+    temp.add(File(result.path));
     for (int i = 1; i < 10; i++) {
       temp.add(null);
     }
+    return temp;
+  }
+
+  Future<List<File>> multiPicNotNULL() async {
+    final List<File> temp = <File>[];
+    final ImagePicker imagePicker = ImagePicker();
+    List<XFile> result = await imagePicker.pickMultiImage();
+    if (result.isEmpty) return <File>[];
+    for (int i = 0; i < result.length && i < 10; i++) {
+      temp.add(File(result[i].path));
+    }
+    return temp;
+  }
+
+  Future<List<File>> cameraNotNULL() async {
+    final List<File> temp = <File>[];
+    final ImagePicker imagePicker = ImagePicker();
+    XFile? result = await imagePicker.pickImage(source: ImageSource.camera);
+    if (result == null) return <File>[];
+    temp.add(File(result.path));
     return temp;
   }
 }

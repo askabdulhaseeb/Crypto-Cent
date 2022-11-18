@@ -49,6 +49,7 @@ class ProductProvider with ChangeNotifier {
 
   Product get _null => Product(
         pid: 'null',
+        uid: 'null',
         amount: 0,
         colors: 'null',
         quantity: '0',
@@ -58,6 +59,6 @@ class ProductProvider with ChangeNotifier {
         category: 'null',
         subCategory: 'null',
         createdByUID: 'null',
-        prodURL: <ProductURL>[]
+        prodURL: <ProductURL>[],
       );
 }

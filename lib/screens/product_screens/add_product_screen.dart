@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 
+import '../../database/app_user/auth_method.dart';
 import '../../database/databse_storage.dart';
 import '../../database/product_api.dart';
 import '../../function/attachment_picker.dart';
@@ -63,6 +64,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
 
       Product product = Product(
         pid: TimeStamp.timestamp.toString(),
+        uid: AuthMethods.uid,
         amount: double.parse(amount.text),
         colors: '',
         quantity: quantity.text,

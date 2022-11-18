@@ -1,11 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../database/app_user/auth_method.dart';
+import '../../database/chat_api.dart';
+import '../../enum/message_type_enum.dart';
+import '../../function/unique_id_functions.dart';
+import '../../models/app_user/app_user.dart';
+import '../../models/chat/chat.dart';
+import '../../models/chat/message.dart';
+import '../../models/chat/message_attachment.dart';
+import '../../models/chat/message_read_info.dart';
 import '../../models/product/product_model.dart';
 import '../../../providers/cart_provider.dart';
 import '../../../widgets/custom_widgets/custom_rating_star.dart';
 import '../../../widgets/custom_widgets/custom_widget.dart';
 import '../../providers/crypto_wallet/binance_provider.dart';
+import '../../providers/product_provider.dart';
+import '../../providers/user_provider.dart';
 import '../../widgets/product/product_url_slider.dart';
 import '../cart_screen/cart_screen.dart';
 
@@ -116,16 +127,129 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: CustomElevatedButton(
-                title: 'Add to Cart',
-                onTap: () {
-                  bottomSheet(context, cartPro, binancePro.coin.price);
-                }),
+            child: Row(
+              children: <Widget>[
+                Expanded(
+                  child: CustomElevatedButton(
+                    title: 'Send Offer',
+                    textStyle:
+                        const TextStyle(color: Colors.black, fontSize: 18),
+                    bgColor: Theme.of(context).secondaryHeaderColor,
+                    onTap: () {
+                      final TextEditingController _offer =
+                          TextEditingController();
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) => Dialog(
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisSize: MainAxisSize.min,
+                              children: <Widget>[
+                                const Center(
+                                  child: Text(
+                                    'Send Your Offer',
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 18,
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(height: 8),
+                                Text(
+                                    'Orignal Prince: ${widget.product.amount}'),
+                                CustomTextFormField(
+                                  controller: _offer,
+                                  keyboardType: TextInputType.number,
+                                  hint: 'Set your offer here',
+                                  validator: (String? value) =>
+                                      CustomValidator.isEmpty(value),
+                                ),
+                                const SizedBox(height: 16),
+                                Row(
+                                  children: <Widget>[
+                                    Expanded(
+                                      child: TextButton(
+                                        onPressed: () =>
+                                            Navigator.of(context).pop(),
+                                        child: const Text(
+                                          'Go Back',
+                                          style: TextStyle(
+                                            color: Colors.red,
+                                            fontSize: 18,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    const SizedBox(width: 10),
+                                    Expanded(
+                                      child: CustomElevatedButton(
+                                        title: 'Send',
+                                        onTap: () async {
+                                          sendOffer(
+                                            offer: _offer.text,
+                                            user: Provider.of<UserProvider>(
+                                                    context,
+                                                    listen: false)
+                                                .user(widget.product.uid),
+                                          );
+                                        },
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                ),
+                const SizedBox(width: 16),
+                Expanded(
+                  child: CustomElevatedButton(
+                      title: 'Add to Cart',
+                      onTap: () {
+                        bottomSheet(context, cartPro, binancePro.coin.price);
+                      }),
+                ),
+              ],
+            ),
           ),
           const SizedBox(height: 6),
         ],
       ),
     );
+  }
+
+  sendOffer({required String offer, required AppUser user}) async {
+    if (offer == '0') return;
+    final int time = DateTime.now().microsecondsSinceEpoch;
+    final String chatID = UniqueIdFunctions.productID(widget.product.pid);
+    await ChatAPI().sendMessage(
+      Chat(
+        chatID: chatID,
+        persons: <String>[AuthMethods.uid, user.uid],
+        lastMessage: Message(
+          messageID: time.toString(),
+          text: '''Hello\nI'm interested.\nMy price is $offer''',
+          timestamp: time,
+          sendBy: AuthMethods.uid,
+          type: MessageTypeEnum.prodOffer,
+          attachment: <MessageAttachment>[],
+          sendTo: <MessageReadInfo>[
+            MessageReadInfo(uid: user.uid),
+          ],
+        ),
+        timestamp: time,
+        pid: widget.product.pid,
+        prodIsVideo: false,
+      ),
+    );
+    if (!mounted) return;
+    Navigator.of(context).pop();
   }
 
   Future<dynamic> bottomSheet(

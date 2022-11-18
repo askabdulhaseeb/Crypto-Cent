@@ -1,6 +1,6 @@
 import '../../providers/auth_provider.dart';
 import '../../providers/crypto_wallet/wallet_provider.dart';
-import '../empty_screen/empty_screen.dart';
+import '../chat_screen/chat_screen.dart';
 import '../screens.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -19,7 +19,7 @@ class _MainScreenState extends State<MainScreen> {
     HomeScreen(),
     FavoriteScreen(),
     CartScreen(),
-    EmptyScreen(),
+    ChatScreen(),
     ProfileScreen(),
   ];
   @override
