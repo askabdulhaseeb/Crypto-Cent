@@ -102,7 +102,7 @@ class ProfileScreen extends StatelessWidget {
                       }),
                   const SizedBox(height: 24),
                   ProfileNavTile(
-                    name: 'Sellings',
+                    name: 'Selling',
                     image: AppImages.bitcoinIcon,
                     onTap: () {
                       Navigator.of(context).push(MaterialPageRoute<EmptyScreen>(

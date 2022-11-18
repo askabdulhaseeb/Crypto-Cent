@@ -34,35 +34,38 @@ class CategoryScreen extends StatelessWidget {
               },
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Stack(
-                  children: <Widget>[
-                    Container(
-                      decoration: BoxDecoration(
-                        image: DecorationImage(
-                            image:
-                                NetworkImage(catPro.categories[index].imageURl),
-                            fit: BoxFit.fill),
-                        borderRadius: BorderRadius.circular(16),
-                      ),
-                    ),
-                    Container(
-                      decoration: BoxDecoration(
-                        color: Colors.black38,
-                        borderRadius: BorderRadius.circular(16),
-                      ),
-                    ),
-                    Positioned(
-                        bottom: 20,
-                        left: 10,
-                        right: 10,
-                        child: Center(
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(12),
+                  child: Container(
+                    color: Colors.grey[300],
+                    padding: const EdgeInsets.all(8),
+                    child: Column(
+                      children: <Widget>[
+                        Expanded(
+                          child: Container(
+                            decoration: BoxDecoration(
+                              borderRadius:const BorderRadius.only(
+                                topLeft: Radius.circular(6),
+                                topRight: Radius.circular(6),
+                              ),
+                              image: DecorationImage(
+                                  image: NetworkImage(
+                                      catPro.categories[index].imageURl),
+                                  fit: BoxFit.fill),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: 6),
+                        Center(
                           child: ForText(
                             name: catPro.categories[index].title,
-                            color: Colors.white,
+                            color: Colors.black,
                             bold: true,
                           ),
-                        ))
-                  ],
+                        )
+                      ],
+                    ),
+                  ),
                 ),
               ),
             );

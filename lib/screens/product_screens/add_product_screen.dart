@@ -219,6 +219,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12),
+        color: Theme.of(context).secondaryHeaderColor,
         border: Border.all(
           color: Theme.of(context).textTheme.bodyText1!.color!.withOpacity(0.5),
         ),
@@ -263,6 +264,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12),
+        color: Theme.of(context).secondaryHeaderColor,
         border: Border.all(
           color: Theme.of(context).textTheme.bodyText1!.color!.withOpacity(0.5),
         ),

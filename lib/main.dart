@@ -64,12 +64,10 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider<PaymentProvider>.value(
           value: PaymentProvider(),
         ),
-        ChangeNotifierProxyProvider<PaymentProvider,WalletProvider>(
-          
+        ChangeNotifierProxyProvider<PaymentProvider, WalletProvider>(
           create: (_) => WalletProvider(),
           update: (_, paymentPro, walletPro) => walletPro!..update(paymentPro),
-           
-           )
+        )
       ],
       child: Consumer<AppThemeProvider>(
           builder: (BuildContext context, AppThemeProvider theme, _) {
@@ -77,7 +75,7 @@ class MyApp extends StatelessWidget {
           title: 'Crypto Cent',
           debugShowCheckedModeBanner: false,
           theme: AppThemes.light,
-          darkTheme: AppThemes.dark,
+          darkTheme: AppThemes.dark, 
           themeMode: theme.themeMode,
           //home: const TestingScreen(),
           home: (AuthMethods.uid.isEmpty)

@@ -18,8 +18,9 @@ class CartItem extends StatelessWidget {
         Container(
           height: 110,
           padding: const EdgeInsets.symmetric(horizontal: 16),
+          margin: const EdgeInsets.symmetric(horizontal: 8),
           decoration: BoxDecoration(
-            color: Colors.transparent,
+            color: Colors.grey[300],
             borderRadius: BorderRadius.circular(16),
           ),
           child: Row(
@@ -109,6 +110,7 @@ class CartItem extends StatelessWidget {
                   ],
                 );
               }),
+              const SizedBox(width: 10),
               SizedBox(
                 height: double.infinity,
                 width: 120,

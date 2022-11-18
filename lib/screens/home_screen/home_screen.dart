@@ -72,7 +72,6 @@ class HomeScreen extends StatelessWidget {
                       onPressed: (() {
                         Navigator.push(
                             context,
-                            
                             MaterialPageRoute(
                                 builder: (BuildContext context) =>
                                     CategoriesExtend(
@@ -102,8 +101,36 @@ class HomeScreen extends StatelessWidget {
                       onPressed: (() {
                         Navigator.push(
                             context,
-                            
                             MaterialPageRoute(
+                                builder: (BuildContext context) =>
+                                    CategoriesExtend(
+                                      categoryName: 'All',
+                                    )));
+                      }),
+                      child: ForText(
+                        name: 'View All',
+                        color: Theme.of(context).primaryColor,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const LatestProductsList(),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    const ForText(
+                      name: 'Browes Products',
+                      bold: true,
+                      size: 18,
+                    ),
+                    TextButton(
+                      onPressed: (() {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute<CategoriesExtend>(
                                 builder: (BuildContext context) =>
                                     CategoriesExtend(
                                       categoryName: 'All',
@@ -165,7 +192,6 @@ class HomeScreen extends StatelessWidget {
               (() {
                 Navigator.push(
                   context,
-                  
                   MaterialPageRoute(
                     builder: (BuildContext context) => const SerachScreen(),
                   ),
@@ -190,7 +216,6 @@ class HomeScreen extends StatelessWidget {
               (() {
                 Navigator.push(
                   context,
-                  
                   MaterialPageRoute(
                     builder: (BuildContext context) => const ContactUsScreen(),
                   ),
@@ -205,7 +230,6 @@ class HomeScreen extends StatelessWidget {
               (() {
                 Navigator.push(
                   context,
-                  
                   MaterialPageRoute(
                     builder: (BuildContext context) => const AboutUsScreen(),
                   ),
@@ -271,7 +295,6 @@ class HomeScreen extends StatelessWidget {
           onTap: () {
             Navigator.push(
               context,
-              
               MaterialPageRoute(
                 builder: (BuildContext context) => const SerachScreen(),
               ),
