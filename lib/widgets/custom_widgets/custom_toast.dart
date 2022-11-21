@@ -42,6 +42,7 @@ class CustomToast {
     required String text,
   }) {
     showDialog(
+        useSafeArea: true,
         context: context,
         builder: (BuildContext context) {
           return CupertinoAlertDialog(
