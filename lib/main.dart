@@ -17,10 +17,7 @@ import 'providers/provider.dart';
 
 import 'providers/user_provider.dart';
 import 'screens/auth/phone_number_screen.dart';
-import 'screens/empty_screen/testing_screen.dart';
 import 'screens/main_screen/main_screen.dart';
-import 'screens/order/order_history.dart';
-import 'screens/order/payment.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
