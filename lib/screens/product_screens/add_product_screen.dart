@@ -78,7 +78,8 @@ class _AddProductScreenState extends State<AddProductScreen> {
       );
       bool temp = await ProductApi().add(product);
       if (temp) {
-        CustomToast.successToast(message: 'upload');
+        CustomToast.alertDialogeBox(context: context, text: 'upload');
+
         _files = <File?>[
           null,
           null,

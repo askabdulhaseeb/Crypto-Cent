@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
@@ -34,5 +35,20 @@ class CustomToast {
     final SnackBar snackBar =
         SnackBar(content: Text(text), backgroundColor: Colors.green);
     ScaffoldMessenger.of(context).showSnackBar(snackBar);
+  }
+
+  static void alertDialogeBox({
+    required BuildContext context,
+    required String text,
+  }) {
+    showDialog(
+        useSafeArea: true,
+        context: context,
+        builder: (BuildContext context) {
+          return CupertinoAlertDialog(
+            title: Text(text),
+            //content: Text('Do you really want to delete?'),
+          );
+        });
   }
 }
