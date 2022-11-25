@@ -25,4 +25,16 @@ class BinanceApi {
     }
     return coin;
   }
+
+  Future<double> btcPrice() async {
+    try {
+      String url = 'https://api.binance.com/api/v3/ticker/price?symbol=BTCUSDT';
+      http.Response response = await http.get(Uri.parse(url));
+      dynamic json = jsonDecode(response.body);
+      return double.parse(json['price']);
+    } catch (e) {
+      CustomToast.errorToast(message: e.toString());
+    }
+    return 0;
+  }
 }

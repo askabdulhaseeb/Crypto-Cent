@@ -19,7 +19,7 @@ class WalletProvider with ChangeNotifier {
       for (int j = 0; j < paymentpro.order.length; j++) {
         if (paymentpro.receipt[i].receiptID == paymentpro.order[j].receiptID) {
           if (paymentpro.order[j].status == OrderStatusEnum.pending) {
-            _payableBalance += paymentpro.receipt[i].totalCrypto;
+            _payableBalance += paymentpro.receipt[i].totalLocalAmount;
           }
         }
       }
