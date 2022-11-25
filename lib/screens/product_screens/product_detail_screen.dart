@@ -22,6 +22,7 @@ import '../../providers/user_provider.dart';
 import '../../widgets/custom_widgets/custom_profile_image.dart';
 import '../../widgets/product/product_url_slider.dart';
 import '../cart_screen/cart_screen.dart';
+import '../chat_screen/private/product_chat_screen.dart';
 
 class ProductDetailScreen extends StatefulWidget {
   const ProductDetailScreen({required this.product, super.key});
@@ -46,7 +47,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
             final AppUser user = userPro.user(widget.product.uid);
             return Row(
               children: <Widget>[
-                CustomProfileImage(imageURL: user.imageURL ?? ''),
+                CustomProfileImage(imageURL: user.imageURL ?? '', radius: 24),
                 const SizedBox(width: 10),
                 Text(
                   user.name ?? 'null',
@@ -61,12 +62,26 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
           CircleAvatar(
             backgroundColor: Colors.grey[300],
             child: IconButton(
-                onPressed: () =>
-                    Navigator.of(context).push(MaterialPageRoute<CartScreen>(
-                      builder: (BuildContext context) => const CartScreen(),
+                onPressed: () => Navigator.of(context)
+                        .push(MaterialPageRoute<ProductChatScreen>(
+                      builder: (BuildContext context) => ProductChatScreen(
+                        chat: Chat(
+                          chatID:
+                              UniqueIdFunctions.productID(widget.product.pid),
+                          persons: <String>[
+                            AuthMethods.uid,
+                            widget.product.uid
+                          ],
+                          pid: widget.product.pid,
+                        ),
+                        chatWith:
+                            Provider.of<UserProvider>(context, listen: false)
+                                .user(widget.product.uid),
+                        product: widget.product,
+                      ),
                     )),
                 icon: Icon(
-                  Icons.shopping_cart,
+                  Icons.chat,
                   color: Theme.of(context).primaryColor,
                 )),
           ),
