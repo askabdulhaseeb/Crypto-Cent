@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import '../../enum/order_status_enum.dart';
 import '../../function/time_date_function.dart';
 import '../../models/payment/order.dart';
+import '../../models/payment/orderd_product.dart';
 import '../../utilities/app_images.dart';
 import '../custom_widgets/cutom_text.dart';
-
 
 class OrderHistoryTile extends StatelessWidget {
   const OrderHistoryTile({required this.order, Key? key}) : super(key: key);
@@ -46,7 +46,7 @@ class OrderHistoryTile extends StatelessWidget {
                   size: 16,
                 ),
                 Text(
-                  'BTC :${order.products[0].exchangeRate}',
+                  'BTC: ${totalBTC()}',
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                 ),
@@ -62,5 +62,13 @@ class OrderHistoryTile extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  double totalBTC() {
+    double total = 0;
+    for (OrderdProduct element in order.products) {
+      total += element.localAmount;
+    }
+    return total / order.products[0].exchangeRate;
   }
 }

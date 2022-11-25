@@ -81,7 +81,7 @@ class _OrderHistoryState extends State<OrderHistory> {
           ),
           child: Center(
             child: ForText(
-              name: title + '($num)',
+              name: '$title ($num)',
               color: title == name ? Colors.white : Colors.black,
               size: 16,
               bold: true,
