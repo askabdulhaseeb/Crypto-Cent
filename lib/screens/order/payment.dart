@@ -10,6 +10,7 @@ import '../../providers/crypto_wallet/wallet_provider.dart';
 import '../../providers/payment/payment_provider.dart';
 import '../../widgets/custom_widgets/custom_toast.dart';
 import '../../widgets/custom_widgets/custom_widget.dart';
+import '../../widgets/custom_widgets/show_loading.dart';
 import '../empty_screen/empty_screen.dart';
 import 'order_succefully.dart';
 
@@ -31,7 +32,8 @@ class _PaymentScreenState extends State<PaymentScreen> {
         Provider.of<PaymentProvider>(context, listen: false);
     WalletProvider walletPro =
         Provider.of<WalletProvider>(context, listen: false);
-    if (walletPro.remaningBalance > cartPro.totalPrice()) {
+    final double currentBalance = await walletPro.currentBalance();
+    if (currentBalance > cartPro.totalPrice()) {
       bool? temp =
           await paymentPro.productOrder(cartPro.cartItem, cartPro.totalPrice());
     } else {
@@ -113,14 +115,23 @@ class _PaymentScreenState extends State<PaymentScreen> {
                       size: 28,
                     ),
                     const SizedBox(height: 10),
-                    Text(
-                      walletPro.remaningBalance.toString(),
-                      style: const TextStyle(
-                          fontWeight: FontWeight.w500, fontSize: 16),
-                    ),
-                    const SizedBox(
-                      height: 5,
-                    ),
+                    FutureBuilder<double>(
+                        future: Provider.of<WalletProvider>(context)
+                            .currentBalance(),
+                        builder: (BuildContext context,
+                            AsyncSnapshot<double> snapshot) {
+                          return snapshot.hasError
+                              ? Text(snapshot.error.toString())
+                              : snapshot.hasData
+                                  ? Text(
+                                      snapshot.data.toString(),
+                                      style: const TextStyle(
+                                          fontWeight: FontWeight.w500,
+                                          fontSize: 16),
+                                    )
+                                  : const ShowLoading();
+                        }),
+                    const SizedBox(height: 5),
                     const SizedBox(height: 20),
                     Container(
                       height: 40,

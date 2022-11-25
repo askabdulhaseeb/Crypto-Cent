@@ -1,8 +1,11 @@
+import 'dart:developer';
+
 import 'package:flutter/cupertino.dart';
 
 import '../../database/app_user/auth_method.dart';
 import '../../database/crypto_wallet/wallet_api.dart';
 import '../../database/crypto_wallet/wallet_create_api.dart';
+import '../../enum/order_status_enum.dart';
 import '../../function/encryption_function.dart';
 import '../../models/crypto_wallet/wallet.dart';
 import '../payment/payment_provider.dart';
@@ -15,19 +18,13 @@ class WalletProvider with ChangeNotifier {
     for (int i = 0; i < paymentpro.receipt.length; i++) {
       for (int j = 0; j < paymentpro.order.length; j++) {
         if (paymentpro.receipt[i].receiptID == paymentpro.order[j].receiptID) {
-          if (paymentpro.order[j].status.value == 'pending') {
+          if (paymentpro.order[j].status == OrderStatusEnum.pending) {
             _payableBalance += paymentpro.receipt[i].totalCrypto;
           }
         }
       }
     }
-    remaningBlance();
-    print('Payabale Balance : ' + _payableBalance.toString());
-  }
-
-  remaningBlance() {
-    _remaningBalance = balance - payableBalance;
-    notifyListeners();
+    log('Payabale Balance : $_payableBalance');
   }
 
   Wallets? _wallet;
@@ -50,16 +47,21 @@ class WalletProvider with ChangeNotifier {
   getBalance() async {
     double tempBalance = 0;
     String WalletId = Encryption().appDecrypt(_wallet!.coinsWallet[0].wallet);
+    log('Wallet ID: $WalletId');
     tempBalance = await WallletWithApi().getWalletBalance(WalletId);
     _balance = tempBalance;
     notifyListeners();
+  }
+
+  Future<double> currentBalance() async {
+    String walletId = Encryption().appDecrypt(_wallet!.coinsWallet[0].wallet);
+    double tempBalance = await WallletWithApi().getWalletBalance(walletId);
+    return tempBalance - _payableBalance;
   }
 
   double _balance = 0;
   double get balance => _balance;
   double _payableBalance = 0;
   double get payableBalance => _payableBalance;
-  double _remaningBalance = 0;
-  double get remaningBalance => _remaningBalance;
   //double payableBalance = 0;
 }

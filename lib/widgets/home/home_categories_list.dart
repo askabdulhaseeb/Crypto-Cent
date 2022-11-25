@@ -42,7 +42,7 @@ class HomeCategoriesList extends StatelessWidget {
               ),
             );
           }),
-          allitems(context, 'Borrow', false, () {
+          allitems(context, 'News', false, () {
             Navigator.push(
               context,
               MaterialPageRoute<EmptyScreen>(

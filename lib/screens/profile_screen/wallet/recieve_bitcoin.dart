@@ -88,11 +88,22 @@ class _ReceiveBTCScreenState extends State<ReceiveBTCScreen> {
                       style:
                           TextStyle(fontWeight: FontWeight.w500, fontSize: 16),
                     ),
-                    Text(
-                      walletPro.remaningBalance.toString(),
-                      style:
-                          const TextStyle(fontWeight: FontWeight.w500, fontSize: 16),
-                    ),
+                    FutureBuilder<double>(
+                        future: Provider.of<WalletProvider>(context)
+                            .currentBalance(),
+                        builder: (BuildContext context,
+                            AsyncSnapshot<double> snapshot) {
+                          return snapshot.hasError
+                              ? Text(snapshot.error.toString())
+                              : snapshot.hasData
+                                  ? Text(
+                                      snapshot.data.toString(),
+                                      style: const TextStyle(
+                                          fontWeight: FontWeight.w500,
+                                          fontSize: 16),
+                                    )
+                                  : const ShowLoading();
+                        }),
                   ],
                 ),
               ],
