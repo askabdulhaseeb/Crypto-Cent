@@ -4,12 +4,11 @@ import 'package:provider/provider.dart';
 import '../../providers/payment/payment_provider.dart';
 import '../../providers/provider.dart';
 import '../../widgets/custom_widgets/bar_chart/custom_bar_chart.dart';
-import '../../widgets/custom_widgets/bar_chart/history_card.dart';
 import '../../widgets/custom_widgets/custom_widget.dart';
+import '../../widgets/order/order_history_tile.dart';
 
 class OrderHistory extends StatefulWidget {
   const OrderHistory({super.key});
-
   @override
   State<OrderHistory> createState() => _OrderHistoryState();
 }
@@ -27,33 +26,11 @@ class _OrderHistoryState extends State<OrderHistory> {
     prevoius = (paymentPro.completed + paymentPro.cancel).toInt();
     return paymentPro.order.isEmpty
         ? Scaffold(
-            appBar: AppBar(
-              title: const Text('My order History'),
-              leading: IconButton(
-                  onPressed: (() {
-                    Provider.of<AppProvider>(context, listen: false)
-                        .onTabTapped(0);
-                    Navigator.pop(context);
-                  }),
-                  icon: const Icon(Icons.arrow_back_ios_sharp)),
-              // ignore: always_specify_types
-              actions: const [Icon(Icons.more_vert)],
-            ),
+            appBar: AppBar(title: const Text('My order History')),
             body: const Center(child: Text('You do not have any order')),
           )
         : Scaffold(
-            appBar: AppBar(
-              title: const Text('My order History'),
-              leading: IconButton(
-                  onPressed: (() {
-                    Provider.of<AppProvider>(context, listen: false)
-                        .onTabTapped(0);
-                    Navigator.pop(context);
-                  }),
-                  icon: const Icon(Icons.arrow_back_ios_sharp)),
-              // ignore: always_specify_types
-              actions: const [Icon(Icons.more_vert)],
-            ),
+            appBar: AppBar(title: const Text('My order History')),
             body: SafeArea(
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -74,7 +51,13 @@ class _OrderHistoryState extends State<OrderHistory> {
                     ),
                     const SizedBox(height: 20),
                     const CustomBarChart(),
-                    const Expanded(child: HistroyCrad())
+                    Expanded(
+                      child: ListView.builder(
+                        itemCount: paymentPro.order.length,
+                        itemBuilder: (BuildContext context, int index) =>
+                            OrderHistoryTile(order: paymentPro.order[index]),
+                      ),
+                    )
                   ],
                 ),
               ),

@@ -65,7 +65,7 @@ class PaymentProvider with ChangeNotifier {
       OrderdProduct tempOrderProduct = OrderdProduct(
         pid: cart[i].id,
         sellerID: cart[i].sellerID,
-        cryptoPrice: cart[i].price,
+        localAmount: cart[i].price,
         exchangeRate: exchangeRate,
         quantity: cart[i].quantity,
       );
@@ -77,6 +77,7 @@ class PaymentProvider with ChangeNotifier {
       receiptID: uniqueID,
       sellerUID: _orderProduct[0].sellerID,
       customerUID: AuthMethods.uid,
+      timestamp: 0,
       products: _orderProduct,
     );
     Receipt tempReceipt = Receipt(

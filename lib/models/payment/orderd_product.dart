@@ -4,7 +4,7 @@ class OrderdProduct {
   OrderdProduct({
     required this.pid,
     required this.sellerID,
-    required this.cryptoPrice,
+    required this.localAmount,
     required this.exchangeRate,
     required this.quantity,
     this.status = OrderStatusEnum.pending,
@@ -18,7 +18,7 @@ class OrderdProduct {
   final String localCurrency;
   final String cryptoCoinSymbol;
   final double exchangeRate;
-  final double cryptoPrice;
+  final double localAmount;
   OrderStatusEnum<String> status;
 
   Map<String, dynamic> toMap() {
@@ -29,7 +29,7 @@ class OrderdProduct {
       'local_currency': localCurrency,
       'crypto_coin_symbol': cryptoCoinSymbol,
       'exchange_rate': exchangeRate,
-      'crypto_price': cryptoPrice,
+      'local_amount': localAmount,
       'status': status.value,
     };
   }
@@ -43,7 +43,7 @@ class OrderdProduct {
       localCurrency: map['local_currency'] ?? '\$',
       cryptoCoinSymbol: map['crypto_coin_symbol'] ?? 'btc',
       exchangeRate: map['exchange_rate'] ?? 0.0,
-      cryptoPrice: double.parse(map['crypto_price'].toString()),
+      localAmount: double.parse(map['local_amount']?.toString() ?? '0.0'),
       status: OrderStatusConvetion().stringToEnum(map['status']),
     );
   }
