@@ -15,7 +15,9 @@ class UserProvider extends ChangeNotifier {
 
   void init() async {
     if (_user.isNotEmpty) return;
-    _user.addAll(await UserApi().getAllUsers());
+    final List<AppUser> temp = await UserApi().getAllUsers();
+    _user = temp;
+    notifyListeners();
     log('App_Provider.dart: No of Users: ${_user.length}');
   }
 

@@ -72,11 +72,9 @@ class HomeScreen extends StatelessWidget {
                       onPressed: (() {
                         Navigator.push(
                             context,
-                            MaterialPageRoute(
+                            MaterialPageRoute<CategoriesExtend>(
                                 builder: (BuildContext context) =>
-                                    CategoriesExtend(
-                                      categoryName: 'All',
-                                    )));
+                                    CategoriesExtend(categoryName: 'All')));
                       }),
                       child: ForText(
                         name: 'View All',
@@ -312,8 +310,8 @@ class HomeScreen extends StatelessWidget {
       ],
       centerTitle: true,
       title: Container(
-        height: 24,
-        width: 48,
+        height: 32,
+        width: 58,
         decoration: BoxDecoration(
           image: DecorationImage(
             image: AssetImage(AppImages.logo),

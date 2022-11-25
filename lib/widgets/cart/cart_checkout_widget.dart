@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../function/crypto_function.dart';
 import '../../providers/cart_provider.dart';
 import '../../screens/order/payment.dart';
 import '../custom_widgets/custom_elevated_button.dart';
@@ -45,7 +46,7 @@ class CartCheckoutWidget extends StatelessWidget {
                     ),
                     const Spacer(),
                     ForText(
-                      name: cartPro.totalPrice().toString(),
+                      name: 'USD: \$${cartPro.totalPrice()}',
                     ),
                   ],
                 ),
@@ -68,11 +69,21 @@ class CartCheckoutWidget extends StatelessWidget {
                       size: 16,
                     ),
                     const Spacer(),
-                    ForText(
-                      name: 'Btc ${cartPro.totalPrice()}',
-                      bold: true,
-                      size: 16,
-                    ),
+                    FutureBuilder<double>(
+                        future: CryptoFunction()
+                            .btcPrinceLive(dollor: cartPro.totalPrice()),
+                        builder: (BuildContext context,
+                            AsyncSnapshot<double> exchangeRate) {
+                          return ForText(
+                            name: exchangeRate.hasError
+                                ? '-- ERROR --'
+                                : exchangeRate.hasData
+                                    ? 'Btc: ${exchangeRate.data ?? 0}'
+                                    : 'fetching ...',
+                            bold: true,
+                            size: 16,
+                          );
+                        }),
                   ],
                 ),
                 const Spacer(),
@@ -91,7 +102,7 @@ class CartCheckoutWidget extends StatelessWidget {
                             ),
                           );
                         })),
-                const SizedBox(height: 28),
+                const SizedBox(height: 10),
               ],
             ),
           ),

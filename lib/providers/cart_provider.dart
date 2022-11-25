@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 
+import '../database/crypto_wallet/binance_api.dart';
 import '../models/cart.dart';
 import '../models/product/product_model.dart';
 
@@ -7,16 +8,17 @@ class CartProvider extends ChangeNotifier {
   final List<Cart> _cartItems = <Cart>[];
   List<Cart> get cartItem => _cartItems;
 
-  void addtocart(Product value, int quantity, double exchangeRate) {
+  void addtocart(Product value, int quantity) async {
+    final double exchangeRate = await BinanceApi().btcPrice();
     Cart temp = Cart(
-        id: value.pid,
-        createdID: value.createdByUID,
-        title: value.productname,
-        imageurl: value.prodURL[0].url,
-        price: value.amount/exchangeRate,
-        exchangeRate: exchangeRate,
-        quantity: quantity);
-
+      id: value.pid,
+      sellerID: value.uid,
+      title: value.productname,
+      imageurl: value.prodURL[0].url,
+      price: value.amount,
+      exchangeRate: exchangeRate,
+      quantity: quantity,
+    );
     _cartItems.add(temp);
     notifyListeners();
   }
@@ -31,12 +33,17 @@ class CartProvider extends ChangeNotifier {
     return temp;
   }
 
-  void removeProduct(String value) {
+  void decreaseProduct(String value) {
     final int index = _indexOfSelectedIndex(value);
     if (index >= 0) {
       _cartItems[index].quantity = _cartItems[index].quantity - 1;
     } else {}
 
+    notifyListeners();
+  }
+
+  void removeProduct(String value) {
+    _cartItems.removeWhere((Cart element) => element.id == value);
     notifyListeners();
   }
 
@@ -60,6 +67,14 @@ class CartProvider extends ChangeNotifier {
   }
 
   double totalPrice() {
+    double temp = 0;
+    for (Cart element in _cartItems) {
+      temp += element.quantity * element.price;
+    }
+    return temp;
+  }
+
+  double btcPrice() {
     double temp = 0;
     for (Cart element in _cartItems) {
       temp += element.quantity * element.price;

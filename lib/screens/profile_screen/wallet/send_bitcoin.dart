@@ -5,6 +5,7 @@ import '../../../database/crypto_wallet/wallet_create_api.dart';
 import '../../../function/encryption_function.dart';
 import '../../../providers/crypto_wallet/wallet_provider.dart';
 import '../../../widgets/custom_widgets/custom_toast.dart';
+import '../../../widgets/custom_widgets/show_loading.dart';
 
 class SendBitcoinScreen extends StatefulWidget {
   const SendBitcoinScreen({Key? key}) : super(key: key);
@@ -28,7 +29,7 @@ class _SendBitcoinScreenState extends State<SendBitcoinScreen> {
         encryption.appDecrypt(walletPro.wallet!.coinsWallet[0].wallet);
     String transferKey =
         encryption.appDecrypt(walletPro.wallet!.coinsWallet[0].transferKey);
-    final double balance = walletPro.remaningBalance;
+    final double balance = await walletPro.currentBalance();
     if (balance > amount) {
       await WallletWithApi().transferCoin(
           walletAddress, transferKey, _walletaddress.text, amount.toString());
@@ -97,11 +98,22 @@ class _SendBitcoinScreenState extends State<SendBitcoinScreen> {
                     'Available Balance : ',
                     style: TextStyle(fontWeight: FontWeight.w500, fontSize: 16),
                   ),
-                  Text(
-                      walletPro.remaningBalance.toString(),
-                      style:
-                          const TextStyle(fontWeight: FontWeight.w500, fontSize: 16),
-                    ),
+                 FutureBuilder<double>(
+                        future: Provider.of<WalletProvider>(context)
+                            .currentBalance(),
+                        builder: (BuildContext context,
+                            AsyncSnapshot<double> snapshot) {
+                          return snapshot.hasError
+                              ? Text(snapshot.error.toString())
+                              : snapshot.hasData
+                                  ? Text(
+                                      snapshot.data.toString(),
+                                      style: const TextStyle(
+                                          fontWeight: FontWeight.w500,
+                                          fontSize: 16),
+                                    )
+                                  : const ShowLoading();
+                        }),
                 ],
               ),
               const SizedBox(

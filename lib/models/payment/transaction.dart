@@ -4,22 +4,12 @@ import '../../enum/order_status_enum.dart';
 import 'orderd_product.dart';
 
 class Transactions {
-  final String transactionID;
-  final List<OrderdProduct> products;
-  final String orderID;
-  final String buyerID;
-
-  final int timeStamp;
-  final double exchangeRate;
-  final String cryptoSymbol;
-  final double totalCryptoPrice;
-  // ignore: always_specify_types
-  OrderStatusEnum status;
   Transactions({
     required this.transactionID,
     required this.products,
     required this.orderID,
-    required this.buyerID,
+    required this.customerUID,
+    required this.sellerUID,
     required this.timeStamp,
     required this.exchangeRate,
     required this.cryptoSymbol,
@@ -27,17 +17,29 @@ class Transactions {
     this.status = OrderStatusEnum.pending,
   });
 
+  final String transactionID;
+  final List<OrderdProduct> products;
+  final String orderID;
+  final String customerUID;
+  final String sellerUID;
+  final int timeStamp;
+  final double exchangeRate;
+  final String cryptoSymbol;
+  final double totalCryptoPrice;
+  OrderStatusEnum<String> status;
+
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'transaction_id': transactionID,
       'products': products.map((OrderdProduct x) => x.toMap()).toList(),
       'order_id': orderID,
-      'buyer_id': buyerID,
+      'customer_uid': customerUID,
+      'seller_uid': sellerUID,
       'status': status.value,
       'timestamp': timeStamp,
       'exchange_rate': exchangeRate,
       'crypto_symbol': cryptoSymbol,
-      'total_crypto_price': totalCryptoPrice,
+      'total_local_price': totalCryptoPrice,
     };
   }
 
@@ -52,12 +54,13 @@ class Transactions {
               ),
             ),
       orderID: map['order_id'] as String,
-      buyerID: map['buyer_id'] as String,
+      customerUID: map['customer_uid'] as String,
+      sellerUID: map['seller_uid'] ?? '',
       status: OrderStatusConvetion().stringToEnum(map['status']),
       timeStamp: map['timestamp'] as int,
       exchangeRate: map['exchange_rate'] as double,
       cryptoSymbol: map['crypto_symbol'] as String,
-      totalCryptoPrice: map['total_crypto_price'] as double,
+      totalCryptoPrice: map['total_local_price'] as double,
     );
   }
 }

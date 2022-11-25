@@ -19,7 +19,7 @@ import 'providers/user_provider.dart';
 import 'screens/auth/phone_number_screen.dart';
 import 'screens/main_screen/main_screen.dart';
 
-void main() async {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,

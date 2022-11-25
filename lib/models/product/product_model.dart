@@ -63,7 +63,7 @@ class Product {
     return Product(
       pid: doc.data()?['pid'] ?? '',
       uid: doc.data()?['uid'] ?? '',
-      amount: doc.data()?['amount'] ?? 0,
+      amount: double.parse(doc.data()?['amount']?.toString() ?? '0.0'),
       colors: doc.data()?['colors'] ?? '',
       quantity: doc.data()?['quantity'] ?? '',
       description: doc.data()?['description'] ?? '',

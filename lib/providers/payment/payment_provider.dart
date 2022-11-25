@@ -1,14 +1,13 @@
-import 'dart:ffi';
-
-import 'package:flutter/cupertino.dart';
+import 'dart:developer';
 import 'package:flutter/foundation.dart';
-import 'package:uuid/uuid.dart';
 
 import '../../database/app_user/auth_method.dart';
+import '../../database/crypto_wallet/binance_api.dart';
 import '../../database/payment/order_api.dart';
 import '../../database/payment/receipt_api.dart';
 import '../../database/payment/transaction_api.dart';
 import '../../function/time_date_function.dart';
+import '../../function/unique_id_functions.dart';
 import '../../models/cart.dart';
 import '../../models/payment/order.dart';
 import '../../models/payment/orderd_product.dart';
@@ -24,8 +23,6 @@ class PaymentProvider with ChangeNotifier {
     _order = await OrderApi().get();
     _receipt = await ReceiptApi().get();
     getGraphData();
-    print(_order.length);
-    print(_receipt.length);
     notifyListeners();
   }
 
@@ -59,38 +56,46 @@ class PaymentProvider with ChangeNotifier {
     // print('cancel $cancel');
   }
 
-  String uid = const Uuid().v4();
-  Future<bool?> productOrder(List<Cart> cart, double total) async {
+  Future<bool> productOrder(List<Cart> cart) async {
+    String uniqueID = UniqueIdFunctions.postID;
     bool retBool = false;
+    final double exchangeRate = await BinanceApi().btcPrice();
+    double total = 0;
     for (int i = 0; i < cart.length; i++) {
       OrderdProduct tempOrderProduct = OrderdProduct(
         pid: cart[i].id,
-        sellerID: cart[i].createdID,
-        cryptoPrice: cart[i].price,
-        exchangeRate: cart[i].exchangeRate,
+        sellerID: cart[i].sellerID,
+        localAmount: cart[i].price,
+        exchangeRate: exchangeRate,
         quantity: cart[i].quantity,
       );
+      total += cart[i].price * cart[i].quantity;
       _orderProduct.add(tempOrderProduct);
     }
     Order tempOrder = Order(
-        orderID: uid,
-        receiptID: uid,
-        customerUID: AuthMethods.uid,
-        products: _orderProduct);
-    Receipt tempReceipt = Receipt(
-      receiptID: uid,
+      orderID: uniqueID,
+      receiptID: uniqueID,
+      sellerUID: _orderProduct[0].sellerID,
       customerUID: AuthMethods.uid,
+      timestamp: 0,
+      products: _orderProduct,
+    );
+    Receipt tempReceipt = Receipt(
+      receiptID: uniqueID,
+      customerUID: AuthMethods.uid,
+      sellerUID: _orderProduct[0].sellerID,
       timestamp: TimeStamp.timestamp,
-      exchangeRate: cart[0].exchangeRate,
-      totalCrypto: total,
+      exchangeRate: exchangeRate,
+      totalLocalAmount: total,
     );
     Transactions tempTransaction = Transactions(
-      transactionID: uid,
+      transactionID: uniqueID,
       products: _orderProduct,
-      orderID: uid,
-      buyerID: AuthMethods.uid,
+      orderID: uniqueID,
+      customerUID: AuthMethods.uid,
+      sellerUID: _orderProduct[0].sellerID,
       timeStamp: TimeStamp.timestamp,
-      exchangeRate: cart[0].exchangeRate,
+      exchangeRate: exchangeRate,
       cryptoSymbol: 'btc',
       totalCryptoPrice: total,
     );
@@ -101,11 +106,11 @@ class PaymentProvider with ChangeNotifier {
     if (orderBool && receiptBool && transactionBool) {
       retBool = true;
       if (kDebugMode) {
-        print('data Upload Succefully');
+        log('data Upload Succefully');
       }
-
       return retBool;
     }
+    return false;
   }
 
   changeName(String value) {

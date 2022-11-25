@@ -10,6 +10,7 @@ import '../../database/databse_storage.dart';
 import '../../database/product_api.dart';
 import '../../function/attachment_picker.dart';
 import '../../function/time_date_function.dart';
+import '../../function/unique_id_functions.dart';
 import '../../models/categories/categories.dart';
 import '../../models/categories/sub_categories.dart';
 import '../../models/product/product_model.dart';
@@ -63,7 +64,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
       }
 
       Product product = Product(
-        pid: TimeStamp.timestamp.toString(),
+        pid: UniqueIdFunctions.postID,
         uid: AuthMethods.uid,
         amount: double.parse(amount.text),
         colors: '',

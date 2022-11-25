@@ -17,21 +17,20 @@ class CustomNetworkImageSlider extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CarouselSlider(
-        options: CarouselOptions(
-          autoPlay: true,
-          aspectRatio: 16 / 7,
-          // height: 150,
-          enlargeCenterPage: true,
-        ),
-        items: imgList
-            .map((String item) => SizedBox(
-                  width: double.infinity,
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(20),
-                    child:
-                        CustomNetworkImage(imageURL: item, fit: BoxFit.cover),
-                  ),
-                ))
-            .toList());
+      options: CarouselOptions(
+        autoPlay: true,
+        aspectRatio: 16 / 7,
+        enlargeCenterPage: true,
+      ),
+      items: imgList
+          .map((String item) => SizedBox(
+                width: double.infinity,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(20),
+                  child: CustomNetworkImage(imageURL: item, fit: BoxFit.cover),
+                ),
+              ))
+          .toList(),
+    );
   }
 }

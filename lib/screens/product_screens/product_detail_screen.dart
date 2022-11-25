@@ -3,7 +3,9 @@ import 'package:provider/provider.dart';
 
 import '../../database/app_user/auth_method.dart';
 import '../../database/chat_api.dart';
+import '../../database/crypto_wallet/binance_api.dart';
 import '../../enum/message_type_enum.dart';
+import '../../function/crypto_function.dart';
 import '../../function/unique_id_functions.dart';
 import '../../models/app_user/app_user.dart';
 import '../../models/chat/chat.dart';
@@ -17,8 +19,10 @@ import '../../../widgets/custom_widgets/custom_widget.dart';
 import '../../providers/crypto_wallet/binance_provider.dart';
 import '../../providers/product_provider.dart';
 import '../../providers/user_provider.dart';
+import '../../widgets/custom_widgets/custom_profile_image.dart';
 import '../../widgets/product/product_url_slider.dart';
 import '../cart_screen/cart_screen.dart';
+import '../chat_screen/private/product_chat_screen.dart';
 
 class ProductDetailScreen extends StatefulWidget {
   const ProductDetailScreen({required this.product, super.key});
@@ -33,23 +37,51 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
   @override
   Widget build(BuildContext context) {
     CartProvider cartPro = Provider.of<CartProvider>(context);
-    BinanceProvider binancePro = Provider.of<BinanceProvider>(context);
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
         centerTitle: true,
         backgroundColor: Colors.white,
+        title: Consumer<UserProvider>(
+          builder: (BuildContext context, UserProvider userPro, _) {
+            final AppUser user = userPro.user(widget.product.uid);
+            return Row(
+              children: <Widget>[
+                CustomProfileImage(imageURL: user.imageURL ?? '', radius: 24),
+                const SizedBox(width: 10),
+                Text(
+                  user.name ?? 'null',
+                  style: const TextStyle(fontWeight: FontWeight.bold),
+                ),
+              ],
+            );
+          },
+        ),
         elevation: 0,
         actions: <Widget>[
           CircleAvatar(
             backgroundColor: Colors.grey[300],
             child: IconButton(
-                onPressed: () =>
-                    Navigator.of(context).push(MaterialPageRoute<CartScreen>(
-                      builder: (BuildContext context) => const CartScreen(),
+                onPressed: () => Navigator.of(context)
+                        .push(MaterialPageRoute<ProductChatScreen>(
+                      builder: (BuildContext context) => ProductChatScreen(
+                        chat: Chat(
+                          chatID:
+                              UniqueIdFunctions.productID(widget.product.pid),
+                          persons: <String>[
+                            AuthMethods.uid,
+                            widget.product.uid
+                          ],
+                          pid: widget.product.pid,
+                        ),
+                        chatWith:
+                            Provider.of<UserProvider>(context, listen: false)
+                                .user(widget.product.uid),
+                        product: widget.product,
+                      ),
                     )),
                 icon: Icon(
-                  Icons.shopping_cart,
+                  Icons.chat,
                   color: Theme.of(context).primaryColor,
                 )),
           ),
@@ -73,7 +105,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                   children: <Widget>[
                     const SizedBox(height: 15),
                     Text(
-                      widget.product.productname.toString(),
+                      widget.product.productname,
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                       style: const TextStyle(
@@ -100,12 +132,31 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                           ],
                         ),
                         const Spacer(),
-                        Text(
-                          '\$ ${widget.product.amount}',
-                          style: const TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20,
-                          ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: <Widget>[
+                            Text(
+                              '\$ ${widget.product.amount}',
+                              style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20,
+                              ),
+                            ),
+                            FutureBuilder<double>(
+                                future: CryptoFunction().btcPrinceLive(
+                                    dollor: widget.product.amount),
+                                builder: (BuildContext context,
+                                    AsyncSnapshot<double> exchangeRate) {
+                                  return ForText(
+                                    name: exchangeRate.hasError
+                                        ? '-- ERROR --'
+                                        : exchangeRate.hasData
+                                            ? 'Btc: ${exchangeRate.data ?? 0}'
+                                            : 'fetching ...',
+                                    size: 11,
+                                  );
+                                }),
+                          ],
                         )
                       ],
                     ),
@@ -211,8 +262,8 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                 Expanded(
                   child: CustomElevatedButton(
                       title: 'Add to Cart',
-                      onTap: () {
-                        bottomSheet(context, cartPro, binancePro.coin.price);
+                      onTap: () async {
+                        await bottomSheet(context, cartPro);
                       }),
                 ),
               ],
@@ -253,8 +304,8 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
   }
 
   Future<dynamic> bottomSheet(
-      BuildContext context, CartProvider cartPro, double exchangerate) {
-    return showModalBottomSheet(
+      BuildContext context, CartProvider cartPro) async {
+    return await showModalBottomSheet(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10.0),
       ),
@@ -362,11 +413,10 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                       : CustomElevatedButton(
                           title: 'Add to cart',
                           onTap: () {
-                            cartPro.addtocart(
-                                widget.product, quantity, exchangerate);
+                            cartPro.addtocart(widget.product, quantity);
                             Navigator.of(context).pop();
                           }),
-                  const SizedBox(height: 20),
+                  const SizedBox(height: 10),
                 ],
               );
             }),
