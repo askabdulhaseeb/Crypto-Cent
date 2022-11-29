@@ -12,6 +12,7 @@ class AppImages {
   //
   // icons
   //bottom nav bar icons
+  static String get googleLogo => 'assets/icons/google.png';
   static String get homeSelected => 'assets/icons/home_fill.png';
   static String get homeUnselected => 'assets/icons/home.png';
   static String get bookmarkSelected => 'assets/icons/bookmark_fill.png';

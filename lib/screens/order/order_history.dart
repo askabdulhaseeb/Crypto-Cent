@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../providers/payment/payment_provider.dart';
-import '../../providers/provider.dart';
 import '../../widgets/custom_widgets/bar_chart/custom_bar_chart.dart';
 import '../../widgets/custom_widgets/custom_widget.dart';
 import '../../widgets/order/order_history_tile.dart';
