@@ -17,6 +17,9 @@ import 'providers/provider.dart';
 
 import 'providers/user_provider.dart';
 import 'screens/auth/phone_number_screen.dart';
+import 'screens/auth/signin_with_email_screen.dart';
+import 'screens/auth/signup_with_email.dart';
+import 'screens/auth/welcome_screen.dart';
 import 'screens/main_screen/main_screen.dart';
 
 Future<void> main() async {
@@ -85,8 +88,15 @@ class MyApp extends StatelessWidget {
           themeMode: theme.themeMode,
           //home: const TestingScreen(),
           home: (AuthMethods.uid.isEmpty)
-              ? const PhoneNumberScreen()
+              ? const WelcomeScreen()
               : const MainScreen(),
+          routes: <String, WidgetBuilder>{
+            SigninWithEmailScreen.routeName: (_) =>
+                const SigninWithEmailScreen(),
+            SignupWithEmailScreen.routeName: (_) =>
+                const SignupWithEmailScreen(),
+            PhoneNumberScreen.routeName: (_) => const PhoneNumberScreen(),
+          },
         );
       }),
     );
