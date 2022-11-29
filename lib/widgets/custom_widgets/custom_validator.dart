@@ -23,7 +23,10 @@ class CustomValidator {
 
   static String? password(String? value) {
     if (value!.length < 6) {
-      return 'Password should be greater then 6 digits';
+      return 'Password should be greater then 6 characters';
+    }
+    if (value.length > 32) {
+      return 'Max Length is 32 characters';
     }
     return null;
   }

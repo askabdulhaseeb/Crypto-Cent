@@ -87,8 +87,9 @@ class MyApp extends StatelessWidget {
           theme: AppThemes.light,
           darkTheme: AppThemes.dark,
           themeMode: theme.themeMode,
-          //home: const TestingScreen(),
-          home: const SplashScreen(),
+          home: (AuthMethods.uid.isEmpty)
+              ? const WelcomeScreen()
+              : const MainScreen(),
           routes: <String, WidgetBuilder>{
             SigninWithEmailScreen.routeName: (_) =>
                 const SigninWithEmailScreen(),
