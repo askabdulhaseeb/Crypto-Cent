@@ -74,7 +74,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
         timestamp: TimeStamp.timestamp,
         category: catPro.currentCat!.catID,
         subCategory: catPro.subcurrentCat!.catID,
-        createdByUID: 'tester',
+        createdByUID: AuthMethods.uid,
         prodURL: urls,
       );
       bool temp = await ProductApi().add(product);

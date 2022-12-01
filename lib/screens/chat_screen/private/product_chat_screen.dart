@@ -7,9 +7,8 @@ import '../../../models/chat/message.dart';
 import '../../../models/product/product_model.dart';
 import '../../../widgets/chat/chat_text_field.dart';
 import '../../../widgets/chat/message_tile.dart';
+import '../../../widgets/chat/product/chat_product_tile.dart';
 import '../../../widgets/custom_widgets/show_loading.dart';
-import '../../../widgets/product/product_url_slider.dart';
-import '../../product_screens/product_detail_screen.dart';
 
 class ProductChatScreen extends StatelessWidget {
   const ProductChatScreen({
@@ -30,24 +29,26 @@ class ProductChatScreen extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.end,
         children: <Widget>[
           const SizedBox(height: 8),
-          _ProductTile(product: product, user: chatWith),
           const SizedBox(height: 8),
           Expanded(
             child: StreamBuilder<List<Message>>(
                 stream: ChatAPI().messages(chat.chatID),
                 builder: (BuildContext context,
                     AsyncSnapshot<List<Message>> snapshot) {
-                  switch (snapshot.connectionState) {
-                    case ConnectionState.waiting:
-                      return const ShowLoading();
-                    default:
-                      if (snapshot.hasData) {
-                        List<Message> messages = snapshot.data ?? <Message>[];
-                        return (messages.isEmpty)
-                            ? SizedBox(
-                                width: double.infinity,
+                  if (snapshot.hasData) {
+                    List<Message> messages = snapshot.data ?? <Message>[];
+                    return (messages.isEmpty)
+                        ? Column(
+                            children: <Widget>[
+                              ChatProductTile(
+                                product: product,
+                                user: chatWith,
+                                chat: chat,
+                              ),
+                              Expanded(
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
+                                  mainAxisSize: MainAxisSize.max,
                                   children: const <Widget>[
                                     Text(
                                       'Say Hi!',
@@ -62,27 +63,43 @@ class ProductChatScreen extends StatelessWidget {
                                     ),
                                   ],
                                 ),
-                              )
-                            : ListView.builder(
-                                shrinkWrap: true,
-                                itemCount: messages.length,
-                                itemBuilder: (BuildContext context, int index) {
-                                  return MessageTile(message: messages[index]);
-                                },
-                              );
-                      } else {
-                        return Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          mainAxisSize: MainAxisSize.max,
-                          children: const <Widget>[
-                            Icon(Icons.report, color: Colors.grey),
-                            Text(
-                              'Some issue found',
-                              style: TextStyle(color: Colors.grey),
-                            ),
-                          ],
-                        );
-                      }
+                              ),
+                            ],
+                          )
+                        : Column(
+                            children: <Widget>[
+                              ChatProductTile(
+                                product: product,
+                                user: chatWith,
+                                chat: chat,
+                              ),
+                              Expanded(
+                                child: ListView.builder(
+                                  shrinkWrap: true,
+                                  itemCount: messages.length,
+                                  itemBuilder:
+                                      (BuildContext context, int index) {
+                                    return MessageTile(
+                                        message: messages[index]);
+                                  },
+                                ),
+                              ),
+                            ],
+                          );
+                  } else {
+                    return snapshot.hasError
+                        ? Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            mainAxisSize: MainAxisSize.max,
+                            children: const <Widget>[
+                              Icon(Icons.report, color: Colors.grey),
+                              Text(
+                                'Some issue found',
+                                style: TextStyle(color: Colors.grey),
+                              ),
+                            ],
+                          )
+                        : const ShowLoading();
                   }
                 }),
           ),
@@ -105,7 +122,7 @@ class ProductChatScreen extends StatelessWidget {
         },
         child: Row(
           children: <Widget>[
-            CustomProfileImage(imageURL: chatWith.imageURL ?? '', radius: 24),
+            CustomProfileImage(imageURL: chatWith.imageURL ?? '', radius: 22),
             const SizedBox(width: 8),
             Expanded(
               child: Column(
@@ -127,80 +144,6 @@ class ProductChatScreen extends StatelessWidget {
                 ],
               ),
             ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class _ProductTile extends StatelessWidget {
-  const _ProductTile({required this.product, required this.user, Key? key})
-      : super(key: key);
-  final Product product;
-  final AppUser user;
-
-  @override
-  Widget build(BuildContext context) {
-    const double imageSize = 80;
-
-    return InkWell(
-      onTap: () {
-        Navigator.of(context).push(MaterialPageRoute<ProductDetailScreen>(
-          builder: (BuildContext context) =>
-              ProductDetailScreen(product: product),
-        ));
-      },
-      borderRadius: BorderRadius.circular(12),
-      child: Container(
-        padding: const EdgeInsets.all(8),
-        margin: const EdgeInsets.symmetric(horizontal: 16),
-        decoration: BoxDecoration(
-          color: Colors.grey[300],
-          borderRadius: BorderRadius.circular(12),
-        ),
-        child: Row(
-          children: <Widget>[
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Text(
-                    product.productname,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: const TextStyle(
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  const SizedBox(height: 6),
-                  const SizedBox(height: 4),
-                  Text(
-                    'Price \$${product.amount.toString()}',
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                  const SizedBox(height: 4),
-                  Text(
-                    'Available: ${product.quantity.toString()}',
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                ],
-              ),
-            ),
-            const SizedBox(width: 10),
-            SizedBox(
-              height: imageSize,
-              width: imageSize,
-              child: ProductURLsSlider(
-                urls: product.prodURL,
-                width: imageSize,
-                height: imageSize,
-              ),
-            ),
-            const SizedBox(width: 10),
           ],
         ),
       ),

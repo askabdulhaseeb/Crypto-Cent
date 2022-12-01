@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 
 import '../../database/app_user/auth_method.dart';
 import '../../enum/message_type_enum.dart';
+import '../../function/crypto_function.dart';
 import '../../function/time_date_function.dart';
 import '../../models/app_user/app_user.dart';
 import '../../models/chat/chat.dart';
@@ -21,23 +22,35 @@ class MessageTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final bool isMe = message.sendBy == AuthMethods.uid;
-    return message.type == MessageTypeEnum.announcement
+    return message.type == MessageTypeEnum.announcement ||
+            message.type == MessageTypeEnum.prodOffer
         ? Center(
             child: Container(
               padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 24),
               margin: const EdgeInsets.symmetric(vertical: 8),
               decoration: BoxDecoration(
-                color: Theme.of(context)
-                    .textTheme
-                    .bodyText1!
-                    .color!
-                    .withOpacity(0.1),
+                color: Theme.of(context).primaryColor,
                 borderRadius: BorderRadius.circular(12),
               ),
-              child: Text(
-                message.text ?? '- waiting for message -',
-                style: TextStyle(color: Theme.of(context).primaryColor),
-              ),
+              child: message.type == MessageTypeEnum.prodOffer
+                  ? Text(
+                      message.text == null
+                          ? '- waiting for message -'
+                          : '${message.text}',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: Theme.of(context).secondaryHeaderColor,
+                        decoration: TextDecoration.underline,
+                      ),
+                    )
+                  : Text(
+                      message.text ?? '- waiting for message -',
+                      style: TextStyle(
+                        color: Theme.of(context).primaryColor,
+                        decoration: TextDecoration.underline,
+                        fontSize: 18,
+                      ),
+                    ),
             ),
           )
         : Row(

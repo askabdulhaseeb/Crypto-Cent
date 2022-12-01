@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import '../../database/app_user/auth_method.dart';
 import '../../database/chat_api.dart';
 import '../../database/crypto_wallet/binance_api.dart';
+import '../../database/crypto_wallet/wallet_api.dart';
 import '../../enum/message_type_enum.dart';
 import '../../function/crypto_function.dart';
 import '../../function/unique_id_functions.dart';
@@ -12,6 +13,7 @@ import '../../models/chat/chat.dart';
 import '../../models/chat/message.dart';
 import '../../models/chat/message_attachment.dart';
 import '../../models/chat/message_read_info.dart';
+import '../../models/payment/orderd_product.dart';
 import '../../models/product/product_model.dart';
 import '../../../providers/cart_provider.dart';
 import '../../../widgets/custom_widgets/custom_rating_star.dart';
@@ -43,6 +45,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
       appBar: AppBar(
         centerTitle: true,
         backgroundColor: Colors.white,
+        elevation: 0,
         title: Consumer<UserProvider>(
           builder: (BuildContext context, UserProvider userPro, _) {
             final AppUser user = userPro.user(widget.product.uid);
@@ -58,39 +61,35 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
             );
           },
         ),
-        elevation: 0,
-        actions: <Widget>[
-          CircleAvatar(
-            backgroundColor: Colors.grey[300],
-            child: IconButton(
-                onPressed: () => Navigator.of(context)
-                        .push(MaterialPageRoute<ProductChatScreen>(
-                      builder: (BuildContext context) => ProductChatScreen(
-                        chat: Chat(
-                          chatID:
-                              UniqueIdFunctions.productID(widget.product.pid),
-                          persons: <String>[
-                            AuthMethods.uid,
-                            widget.product.uid
-                          ],
-                          pid: widget.product.pid,
-                        ),
-                        chatWith:
-                            Provider.of<UserProvider>(context, listen: false)
-                                .user(widget.product.uid),
-                        product: widget.product,
-                      ),
-                    )),
-                icon: Icon(
-                  Icons.chat,
-                  color: Theme.of(context).primaryColor,
-                )),
-          ),
-          const SizedBox(width: 10),
-        ],
-        leading: const BackButton(
-          color: Colors.black,
-        ),
+        // actions: <Widget>[
+        //   CircleAvatar(
+        //     backgroundColor: Colors.grey[300],
+        //     child: IconButton(
+        //         onPressed: () => Navigator.of(context)
+        //                 .push(MaterialPageRoute<ProductChatScreen>(
+        //               builder: (BuildContext context) => ProductChatScreen(
+        //                 chat: Chat(
+        //                   chatID:
+        //                       UniqueIdFunctions.productID(widget.product.pid),
+        //                   persons: <String>[
+        //                     AuthMethods.uid,
+        //                     widget.product.uid
+        //                   ],
+        //                   pid: widget.product.pid,
+        //                 ),
+        //                 chatWith:
+        //                     Provider.of<UserProvider>(context, listen: false)
+        //                         .user(widget.product.uid),
+        //                 product: widget.product,
+        //               ),
+        //             )),
+        //         icon: Icon(
+        //           Icons.chat,
+        //           color: Theme.of(context).primaryColor,
+        //         )),
+        //   ),
+        //   const SizedBox(width: 10),
+        // ],
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -177,99 +176,100 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
               ),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: Row(
-              children: <Widget>[
-                Expanded(
-                  child: CustomElevatedButton(
-                    title: 'Send Offer',
-                    textStyle:
-                        const TextStyle(color: Colors.black, fontSize: 18),
-                    bgColor: Theme.of(context).secondaryHeaderColor,
-                    onTap: () {
-                      final TextEditingController _offer =
-                          TextEditingController();
-                      showDialog(
-                        context: context,
-                        builder: (BuildContext context) => Dialog(
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisSize: MainAxisSize.min,
-                              children: <Widget>[
-                                const Center(
-                                  child: Text(
-                                    'Send Your Offer',
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 18,
+          if (AuthMethods.uid != widget.product.uid)
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: Row(
+                children: <Widget>[
+                  Expanded(
+                    child: CustomElevatedButton(
+                      title: 'Send Offer',
+                      textStyle:
+                          const TextStyle(color: Colors.black, fontSize: 18),
+                      bgColor: Theme.of(context).secondaryHeaderColor,
+                      onTap: () {
+                        final TextEditingController offer =
+                            TextEditingController();
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext context) => Dialog(
+                            child: Padding(
+                              padding: const EdgeInsets.all(16),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisSize: MainAxisSize.min,
+                                children: <Widget>[
+                                  const Center(
+                                    child: Text(
+                                      'Send Your Offer',
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 18,
+                                      ),
                                     ),
                                   ),
-                                ),
-                                const SizedBox(height: 8),
-                                Text(
-                                    'Orignal Prince: ${widget.product.amount}'),
-                                CustomTextFormField(
-                                  controller: _offer,
-                                  keyboardType: TextInputType.number,
-                                  hint: 'Set your offer here',
-                                  validator: (String? value) =>
-                                      CustomValidator.isEmpty(value),
-                                ),
-                                const SizedBox(height: 16),
-                                Row(
-                                  children: <Widget>[
-                                    Expanded(
-                                      child: TextButton(
-                                        onPressed: () =>
-                                            Navigator.of(context).pop(),
-                                        child: const Text(
-                                          'Go Back',
-                                          style: TextStyle(
-                                            color: Colors.red,
-                                            fontSize: 18,
+                                  const SizedBox(height: 8),
+                                  Text(
+                                      'Orignal Prince: ${widget.product.amount}'),
+                                  CustomTextFormField(
+                                    controller: offer,
+                                    keyboardType: TextInputType.number,
+                                    hint: 'Set your offer here',
+                                    validator: (String? value) =>
+                                        CustomValidator.isEmpty(value),
+                                  ),
+                                  const SizedBox(height: 16),
+                                  Row(
+                                    children: <Widget>[
+                                      Expanded(
+                                        child: TextButton(
+                                          onPressed: () =>
+                                              Navigator.of(context).pop(),
+                                          child: const Text(
+                                            'Go Back',
+                                            style: TextStyle(
+                                              color: Colors.red,
+                                              fontSize: 18,
+                                            ),
                                           ),
                                         ),
                                       ),
-                                    ),
-                                    const SizedBox(width: 10),
-                                    Expanded(
-                                      child: CustomElevatedButton(
-                                        title: 'Send',
-                                        onTap: () async {
-                                          sendOffer(
-                                            offer: _offer.text,
-                                            user: Provider.of<UserProvider>(
-                                                    context,
-                                                    listen: false)
-                                                .user(widget.product.uid),
-                                          );
-                                        },
-                                      ),
-                                    )
-                                  ],
-                                ),
-                              ],
+                                      const SizedBox(width: 10),
+                                      Expanded(
+                                        child: CustomElevatedButton(
+                                          title: 'Send',
+                                          onTap: () async {
+                                            sendOffer(
+                                              offer: offer.text,
+                                              user: Provider.of<UserProvider>(
+                                                      context,
+                                                      listen: false)
+                                                  .user(widget.product.uid),
+                                            );
+                                          },
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
-                        ),
-                      );
-                    },
+                        );
+                      },
+                    ),
                   ),
-                ),
-                const SizedBox(width: 16),
-                Expanded(
-                  child: CustomElevatedButton(
-                      title: 'Add to Cart',
-                      onTap: () async {
-                        await bottomSheet(context, cartPro);
-                      }),
-                ),
-              ],
+                  const SizedBox(width: 16),
+                  Expanded(
+                    child: CustomElevatedButton(
+                        title: 'Add to Cart',
+                        onTap: () async {
+                          await bottomSheet(context, cartPro);
+                        }),
+                  ),
+                ],
+              ),
             ),
-          ),
           const SizedBox(height: 6),
         ],
       ),
@@ -280,13 +280,20 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
     if (offer == '0') return;
     final int time = DateTime.now().microsecondsSinceEpoch;
     final String chatID = UniqueIdFunctions.productID(widget.product.pid);
+    OrderdProduct order = OrderdProduct(
+      pid: widget.product.pid,
+      sellerID: widget.product.uid,
+      localAmount: double.parse(offer),
+      exchangeRate: await BinanceApi().btcPrice(),
+      quantity: quantity,
+    );
     await ChatAPI().sendMessage(
       Chat(
         chatID: chatID,
         persons: <String>[AuthMethods.uid, user.uid],
         lastMessage: Message(
           messageID: time.toString(),
-          text: '''Hello\nI'm interested.\nMy price is $offer''',
+          text: 'UNIT PRICE: $offer & QTY: 1',
           timestamp: time,
           sendBy: AuthMethods.uid,
           type: MessageTypeEnum.prodOffer,
@@ -297,6 +304,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
         ),
         timestamp: time,
         pid: widget.product.pid,
+        offer: order,
         prodIsVideo: false,
       ),
     );
@@ -305,7 +313,9 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
   }
 
   Future<dynamic> bottomSheet(
-      BuildContext context, CartProvider cartPro) async {
+    BuildContext context,
+    CartProvider cartPro,
+  ) async {
     return await showModalBottomSheet(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10.0),

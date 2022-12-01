@@ -51,6 +51,16 @@ class ChatAPI {
     });
   }
 
+  Stream<Chat> chat(String chatID) {
+    return _instance
+        .collection(_collection)
+        .where('chat_id', isEqualTo: chatID)
+        .snapshots()
+        .asyncMap((QuerySnapshot<Map<String, dynamic>> event) {
+      return Chat.fromMap(event.docs[0].data());
+    });
+  }
+
   Stream<List<Chat>> groups() {
     // Firebase Index need to add
     // Composite Index
@@ -87,6 +97,26 @@ class ChatAPI {
           .collection(_collection)
           .doc(chat.chatID)
           .set(chat.toMap());
+    } catch (e) {
+      CustomToast.errorToast(message: e.toString());
+    }
+  }
+
+  Future<void> updateOffer(Chat chat) async {
+    final Message? newMessage = chat.lastMessage;
+    try {
+      if (newMessage != null) {
+        await _instance
+            .collection(_collection)
+            .doc(chat.chatID)
+            .collection(_subCollection)
+            .doc(newMessage.messageID)
+            .set(newMessage.toMap());
+      }
+      await _instance
+          .collection(_collection)
+          .doc(chat.chatID)
+          .update(chat.updateOffer());
     } catch (e) {
       CustomToast.errorToast(message: e.toString());
     }

@@ -1,4 +1,5 @@
 enum OrderStatusEnum<String> {
+  offer('offer'),
   pending('pending'),
   inProgress('in_progress'),
   completed('completed'),
@@ -11,6 +12,8 @@ enum OrderStatusEnum<String> {
 class OrderStatusConvetion {
   OrderStatusEnum<String> stringToEnum(String value) {
     switch (value) {
+      case 'offer':
+        return OrderStatusEnum.offer;
       case 'pending':
         return OrderStatusEnum.pending;
       case 'in_progress':

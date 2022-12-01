@@ -9,6 +9,7 @@ import '../../../providers/product_provider.dart';
 import '../../../providers/user_provider.dart';
 import '../../../screens/chat_screen/private/product_chat_screen.dart';
 import '../../custom_widgets/custom_profile_image.dart';
+import '../product_chat_photo.dart';
 
 class ProductChatDashboardTile extends StatelessWidget {
   const ProductChatDashboardTile({required this.chat, Key? key})
@@ -38,18 +39,10 @@ class ProductChatDashboardTile extends StatelessWidget {
           );
         },
         dense: true,
-        leading: Stack(
-          children: <Widget>[
-            CustomProfileImage(imageURL: product.prodURL[0].url),
-            Positioned(
-              bottom: 0,
-              right: 0,
-              child: CustomProfileImage(
-                imageURL: user.imageURL ?? '',
-                radius: 28,
-              ),
-            ),
-          ],
+        leading: ProductChatPhoto(
+          radius: 20,
+          userImage: user.imageURL ?? '',
+          productImage: product.prodURL[0].url,
         ),
         title: Text(
           user.name ?? 'issue',
