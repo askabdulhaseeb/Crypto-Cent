@@ -30,6 +30,7 @@ class WalletProvider with ChangeNotifier {
   Wallets? _wallet;
   Wallets? get wallet => _wallet;
   Future<bool> load() async {
+    if (AuthMethods.getCurrentUser == null) return false;
     bool temp = false;
     String id = AuthMethods.uid;
     List<Wallets> wallets = await WalletsApi().get();

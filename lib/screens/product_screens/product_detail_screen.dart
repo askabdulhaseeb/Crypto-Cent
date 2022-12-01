@@ -19,6 +19,7 @@ import '../../../widgets/custom_widgets/custom_widget.dart';
 import '../../providers/crypto_wallet/binance_provider.dart';
 import '../../providers/product_provider.dart';
 import '../../providers/user_provider.dart';
+import '../../widgets/custom_widgets/custom_network_image.dart';
 import '../../widgets/custom_widgets/custom_profile_image.dart';
 import '../../widgets/product/product_url_slider.dart';
 import '../cart_screen/cart_screen.dart';
@@ -312,115 +313,144 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
       backgroundColor: Colors.white,
       context: context,
       builder: (BuildContext context) {
-        return SizedBox(
-          height: MediaQuery.of(context).size.height * 0.55,
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: StatefulBuilder(builder: (
-              BuildContext context,
-              Function setState,
-            ) {
-              return Column(
-                children: <Widget>[
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: <Widget>[
-                      IconButton(
-                        onPressed: () => Navigator.of(context).pop(),
-                        icon: const Icon(Icons.close),
-                      )
-                    ],
-                  ),
-                  const SizedBox(height: 50),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: <Widget>[
-                      SizedBox(
-                        height: 100,
-                        width: 100,
-                        child: Image(
-                          image: NetworkImage(widget.product.prodURL[0].url),
-                        ),
+        return Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 18),
+          child: StatefulBuilder(builder: (
+            BuildContext context,
+            Function setState,
+          ) {
+            return Column(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: <Widget>[
+                    IconButton(
+                      onPressed: () => Navigator.of(context).pop(),
+                      icon: const Icon(Icons.close),
+                    )
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: <Widget>[
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(10),
+                      child: SizedBox(
+                        height: 120,
+                        width: 120,
+                        child: CustomNetworkImage(
+                            imageURL: widget.product.prodURL[0].url),
                       ),
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          SizedBox(
-                            width: 250,
-                            child: Text(
+                    ),
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.all(16),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Text(
                               widget.product.productname.toString(),
                               maxLines: 2,
                               overflow: TextOverflow.ellipsis,
                               style: const TextStyle(
-                                  letterSpacing: 0.5,
-                                  fontWeight: FontWeight.w900,
-                                  fontSize: 18),
+                                letterSpacing: 0.5,
+                                fontWeight: FontWeight.w900,
+                                fontSize: 18,
+                              ),
                             ),
-                          ),
-                          const SizedBox(height: 10),
-                          Text(
-                            '\$${widget.product.amount}',
-                            style: const TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 16,
+                            const SizedBox(height: 10),
+                            Text(
+                              '\$${widget.product.amount}',
+                              style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16,
+                              ),
                             ),
-                          )
-                        ],
-                      )
-                    ],
-                  ),
-                  const SizedBox(height: 20),
-                  const ForText(name: 'Quantity', bold: true),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: <Widget>[
-                      IconButton(
-                        onPressed: quantity < 2
-                            ? null
-                            : () {
-                                setState(() {
-                                  quantity--;
-                                });
-                              },
-                        icon: const Icon(Icons.remove_circle_outline, size: 15),
-                      ),
-                      Text(
-                        quantity.toString(),
-                        style: const TextStyle(
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 15,
+                            ForText(
+                              name:
+                                  'Availavle Quantity: ${widget.product.quantity}',
+                              bold: true,
+                            ),
+                          ],
                         ),
                       ),
-                      IconButton(
-                        onPressed: () {
-                          setState(() {
-                            quantity++;
-                          });
-                        },
-                        icon: const Icon(Icons.add_circle_outline, size: 15),
+                    )
+                  ],
+                ),
+                const SizedBox(height: 20),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: <Widget>[
+                    IconButton(
+                      onPressed: quantity < 2
+                          ? null
+                          : () {
+                              setState(() {
+                                quantity--;
+                              });
+                            },
+                      icon: Icon(
+                        Icons.remove_circle_outline,
+                        size: 24,
+                        color: quantity < 2 ? Colors.grey : Colors.red,
                       ),
-                    ],
-                  ),
-                  Expanded(child: Container()),
-                  (cartPro.checkExit(widget.product))
-                      ? const Icon(
-                          Icons.done,
-                          color: Colors.green,
-                          size: 29,
-                        )
-                      : CustomElevatedButton(
-                          title: 'Add to cart',
-                          onTap: () {
-                            cartPro.addtocart(widget.product, quantity);
-                            Navigator.of(context).pop();
-                          }),
-                  const SizedBox(height: 10),
-                ],
-              );
-            }),
-          ),
+                    ),
+                    Expanded(
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(vertical: 8),
+                        alignment: Alignment.center,
+                        decoration: BoxDecoration(
+                          color: Theme.of(context).secondaryHeaderColor,
+                          borderRadius: BorderRadius.circular(10),
+                          border: Border.all(color: Colors.grey),
+                        ),
+                        child: Text(
+                          quantity.toString(),
+                          style: const TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16,
+                          ),
+                        ),
+                      ),
+                    ),
+                    IconButton(
+                      onPressed: quantity >= int.parse(widget.product.quantity)
+                          ? null
+                          : () {
+                              setState(() {
+                                quantity++;
+                              });
+                            },
+                      icon: Icon(
+                        Icons.add_circle_outline,
+                        size: 24,
+                        color: quantity >= int.parse(widget.product.quantity)
+                            ? Colors.grey
+                            : Colors.green,
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 10),
+                (cartPro.checkExit(widget.product))
+                    ? const Icon(
+                        Icons.done,
+                        color: Colors.green,
+                        size: 29,
+                      )
+                    : CustomElevatedButton(
+                        title: 'Add to cart',
+                        onTap: () {
+                          cartPro.addtocart(widget.product, quantity);
+                          Navigator.of(context).pop();
+                        }),
+                const SizedBox(height: 10),
+              ],
+            );
+          }),
         );
       },
     );

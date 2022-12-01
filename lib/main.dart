@@ -21,13 +21,10 @@ import 'screens/auth/signin_with_email_screen.dart';
 import 'screens/auth/signup_with_email.dart';
 import 'screens/auth/welcome_screen.dart';
 import 'screens/main_screen/main_screen.dart';
-import 'screens/splash_screen.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await LocalData.init();
   runApp(const MyApp());
 }
