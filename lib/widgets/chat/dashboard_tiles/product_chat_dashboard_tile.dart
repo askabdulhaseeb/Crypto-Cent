@@ -29,11 +29,7 @@ class ProductChatDashboardTile extends StatelessWidget {
         onTap: () {
           Navigator.of(context).push(
             MaterialPageRoute<ProductChatScreen>(
-              builder: (_) => ProductChatScreen(
-                chatWith: user,
-                chat: chat,
-                product: product,
-              ),
+              builder: (_) => ProductChatScreen(chat: chat),
             ),
           );
         },

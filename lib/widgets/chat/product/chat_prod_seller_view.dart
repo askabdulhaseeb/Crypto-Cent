@@ -21,14 +21,14 @@ class ChatProdSellerView extends StatelessWidget {
             Column(
               children: <Widget>[
                 const Text('UNIT PRICE'),
-                Text('\$${chat.offer!.localAmount}'),
+                Text('\$${chat.offer?.localAmount ?? 0}'),
               ],
             ),
             const Text('  X  '),
             Column(
               children: <Widget>[
                 const Text('QTY'),
-                Text('\$${chat.offer!.quantity}'),
+                Text('\$${chat.offer?.quantity ?? 0}'),
               ],
             ),
             const Text('  =  '),
@@ -39,7 +39,8 @@ class ChatProdSellerView extends StatelessWidget {
                   bold: true,
                 ),
                 ForText(
-                  name: '\$${chat.offer!.localAmount * chat.offer!.quantity}',
+                  name:
+                      '\$${(chat.offer?.localAmount ?? 0) * (chat.offer?.quantity ?? 0)}',
                   bold: true,
                 ),
               ],
@@ -49,7 +50,8 @@ class ChatProdSellerView extends StatelessWidget {
         const SizedBox(height: 4),
         FutureBuilder<double>(
           future: CryptoFunction().btcPrinceLive(
-              dollor: chat.offer!.localAmount * chat.offer!.quantity),
+              dollor:
+                  (chat.offer?.localAmount ?? 0) * (chat.offer?.quantity ?? 0)),
           builder: (BuildContext context, AsyncSnapshot<double> snapshot) {
             return snapshot.hasData
                 ? Text(

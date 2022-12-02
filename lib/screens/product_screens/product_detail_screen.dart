@@ -21,6 +21,7 @@ import '../../providers/user_provider.dart';
 import '../../widgets/custom_widgets/custom_network_image.dart';
 import '../../widgets/custom_widgets/custom_profile_image.dart';
 import '../../widgets/product/product_url_slider.dart';
+import '../chat_screen/private/product_chat_screen.dart';
 
 class ProductDetailScreen extends StatefulWidget {
   const ProductDetailScreen({required this.product, super.key});
@@ -56,35 +57,31 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
             );
           },
         ),
-        // actions: <Widget>[
-        //   CircleAvatar(
-        //     backgroundColor: Colors.grey[300],
-        //     child: IconButton(
-        //         onPressed: () => Navigator.of(context)
-        //                 .push(MaterialPageRoute<ProductChatScreen>(
-        //               builder: (BuildContext context) => ProductChatScreen(
-        //                 chat: Chat(
-        //                   chatID:
-        //                       UniqueIdFunctions.productID(widget.product.pid),
-        //                   persons: <String>[
-        //                     AuthMethods.uid,
-        //                     widget.product.uid
-        //                   ],
-        //                   pid: widget.product.pid,
-        //                 ),
-        //                 chatWith:
-        //                     Provider.of<UserProvider>(context, listen: false)
-        //                         .user(widget.product.uid),
-        //                 product: widget.product,
-        //               ),
-        //             )),
-        //         icon: Icon(
-        //           Icons.chat,
-        //           color: Theme.of(context).primaryColor,
-        //         )),
-        //   ),
-        //   const SizedBox(width: 10),
-        // ],
+        actions: <Widget>[
+          CircleAvatar(
+            backgroundColor: Colors.grey[300],
+            child: IconButton(
+                onPressed: () => Navigator.of(context)
+                        .push(MaterialPageRoute<ProductChatScreen>(
+                      builder: (BuildContext context) => ProductChatScreen(
+                        chat: Chat(
+                          chatID:
+                              UniqueIdFunctions.productID(widget.product.pid),
+                          persons: <String>[
+                            AuthMethods.uid,
+                            widget.product.uid
+                          ],
+                          pid: widget.product.pid,
+                        ),
+                      ),
+                    )),
+                icon: Icon(
+                  Icons.chat,
+                  color: Theme.of(context).primaryColor,
+                )),
+          ),
+          const SizedBox(width: 10),
+        ],
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.start,

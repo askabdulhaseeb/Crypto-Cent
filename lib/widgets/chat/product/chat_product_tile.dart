@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../../database/app_user/auth_method.dart';
 import '../../../database/chat_api.dart';
-import '../../../models/app_user/app_user.dart';
 import '../../../models/chat/chat.dart';
 import '../../../models/product/product_model.dart';
+import '../../../providers/provider.dart';
 import '../../../screens/product_screens/product_detail_screen.dart';
 import '../../custom_widgets/custom_network_image.dart';
 import '../../custom_widgets/show_loading.dart';
@@ -12,18 +13,13 @@ import 'chat_prod_buy_view.dart';
 import 'chat_prod_seller_view.dart';
 
 class ChatProductTile extends StatelessWidget {
-  const ChatProductTile({
-    required this.product,
-    required this.user,
-    required this.chat,
-    Key? key,
-  }) : super(key: key);
-  final Product product;
-  final AppUser user;
+  const ChatProductTile({required this.chat, Key? key}) : super(key: key);
   final Chat chat;
 
   @override
   Widget build(BuildContext context) {
+    final Product product = Provider.of<ProductProvider>(context, listen: false)
+        .product(chat.pid ?? 'null');
     const double imageSize = 80;
     return Container(
       padding: const EdgeInsets.all(8),
@@ -38,12 +34,13 @@ class ChatProductTile extends StatelessWidget {
               stream: ChatAPI().chat(chat.chatID),
               builder: (BuildContext context, AsyncSnapshot<Chat> snapshot) {
                 if (snapshot.hasData) {
+                  final Chat liveChat = snapshot.data!;
                   return Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         InkWell(
-                          onTap: () => showProdDetail(context),
+                          onTap: () => showProdDetail(context, product),
                           child: Text(
                             product.productname,
                             maxLines: 1,
@@ -56,8 +53,8 @@ class ChatProductTile extends StatelessWidget {
                         ),
                         const SizedBox(height: 6),
                         product.uid == AuthMethods.uid
-                            ? ChatProdSellerView(chat: chat)
-                            : ChatProdBuyView(product: product, chat: chat),
+                            ? ChatProdSellerView(chat: liveChat)
+                            : ChatProdBuyView(product: product, chat: liveChat),
                       ],
                     ),
                   );
@@ -69,7 +66,7 @@ class ChatProductTile extends StatelessWidget {
               }),
           const SizedBox(width: 10),
           InkWell(
-            onTap: () => showProdDetail(context),
+            onTap: () => showProdDetail(context, product),
             child: SizedBox(
               height: imageSize,
               width: imageSize,
@@ -85,7 +82,7 @@ class ChatProductTile extends StatelessWidget {
     );
   }
 
-  showProdDetail(BuildContext context) {
+  showProdDetail(BuildContext context, Product product) {
     Navigator.of(context).push(MaterialPageRoute<ProductDetailScreen>(
       builder: (BuildContext context) => ProductDetailScreen(product: product),
     ));

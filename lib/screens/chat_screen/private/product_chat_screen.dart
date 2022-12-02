@@ -1,30 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../../../../../database/chat_api.dart';
 import '../../../../../widgets/custom_widgets/custom_profile_image.dart';
+import '../../../database/app_user/auth_method.dart';
 import '../../../models/app_user/app_user.dart';
 import '../../../models/chat/chat.dart';
 import '../../../models/chat/message.dart';
-import '../../../models/product/product_model.dart';
+import '../../../providers/provider.dart';
 import '../../../widgets/chat/chat_text_field.dart';
 import '../../../widgets/chat/message_tile.dart';
 import '../../../widgets/chat/product/chat_product_tile.dart';
 import '../../../widgets/custom_widgets/show_loading.dart';
 
 class ProductChatScreen extends StatelessWidget {
-  const ProductChatScreen({
-    required this.chat,
-    required this.chatWith,
-    required this.product,
-    Key? key,
-  }) : super(key: key);
+  const ProductChatScreen({required this.chat, Key? key}) : super(key: key);
   final Chat chat;
-  final AppUser chatWith;
-  final Product product;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: _appBar(context, chatWith: chatWith),
+      appBar: _appBar(context),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.end,
         children: <Widget>[
@@ -38,11 +33,7 @@ class ProductChatScreen extends StatelessWidget {
                     return (messages.isEmpty)
                         ? Column(
                             children: <Widget>[
-                              ChatProductTile(
-                                product: product,
-                                user: chatWith,
-                                chat: chat,
-                              ),
+                              ChatProductTile(chat: chat),
                               Expanded(
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
@@ -66,11 +57,7 @@ class ProductChatScreen extends StatelessWidget {
                           )
                         : Column(
                             children: <Widget>[
-                              ChatProductTile(
-                                product: product,
-                                user: chatWith,
-                                chat: chat,
-                              ),
+                              ChatProductTile(chat: chat),
                               Expanded(
                                 child: ListView.builder(
                                   shrinkWrap: true,
@@ -107,44 +94,53 @@ class ProductChatScreen extends StatelessWidget {
     );
   }
 
-  AppBar _appBar(BuildContext context, {required AppUser chatWith}) {
+  AppBar _appBar(BuildContext context) {
     return AppBar(
       titleSpacing: 0,
-      title: GestureDetector(
-        onTap: () {
-          // Navigator.of(context).push(
-          //   MaterialPageRoute<OthersProfile>(
-          //     builder: (_) => OthersProfile(user: chatWith),
-          //   ),
-          // );
-        },
-        child: Row(
-          children: <Widget>[
-            CustomProfileImage(imageURL: chatWith.imageURL ?? '', radius: 22),
-            const SizedBox(width: 8),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Text(
-                    chatWith.name ?? 'issue',
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: const TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16,
+      title: Consumer<UserProvider>(builder: (
+        BuildContext context,
+        UserProvider userPro,
+        _,
+      ) {
+        final AppUser chatWith = userPro.user(chat.persons
+            .where((String element) => element != AuthMethods.uid)
+            .first);
+        return GestureDetector(
+          onTap: () {
+            // Navigator.of(context).push(
+            //   MaterialPageRoute<OthersProfile>(
+            //     builder: (_) => OthersProfile(user: chatWith),
+            //   ),
+            // );
+          },
+          child: Row(
+            children: <Widget>[
+              CustomProfileImage(imageURL: chatWith.imageURL ?? '', radius: 22),
+              const SizedBox(width: 8),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text(
+                      chatWith.name ?? 'issue',
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16,
+                      ),
                     ),
-                  ),
-                  const Text(
-                    'Tap here to open profile',
-                    style: TextStyle(fontSize: 11, color: Colors.grey),
-                  )
-                ],
+                    const Text(
+                      'Tap here to open profile',
+                      style: TextStyle(fontSize: 11, color: Colors.grey),
+                    )
+                  ],
+                ),
               ),
-            ),
-          ],
-        ),
-      ),
+            ],
+          ),
+        );
+      }),
     );
   }
 }
