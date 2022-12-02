@@ -68,14 +68,6 @@ class _TabBar extends StatelessWidget {
               _page.updateTab(MessageTabBarEnum.group);
             },
           ),
-          // TabBarIconButton(
-          //   icon: Icons.blur_circular_sharp,
-          //   title: 'Stories',
-          //   isSelected: _page.currentTab == MessageTabBarEnum.story,
-          //   onTab: () {
-          //     _page.updateTab(MessageTabBarEnum.story);
-          //   },
-          // ),
         ],
       ),
     );
