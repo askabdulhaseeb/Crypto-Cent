@@ -27,7 +27,6 @@ class Categories {
     };
   }
 
-  // ignore: sort_constructors_first
   factory Categories.fromDoc(DocumentSnapshot<Map<String, dynamic>> doc) {
     List<SubCategory> subCats = <SubCategory>[];
     // ignore: always_specify_types
