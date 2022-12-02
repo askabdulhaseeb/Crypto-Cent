@@ -28,8 +28,6 @@ class ProductChatScreen extends StatelessWidget {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.end,
         children: <Widget>[
-          const SizedBox(height: 8),
-          const SizedBox(height: 8),
           Expanded(
             child: StreamBuilder<List<Message>>(
                 stream: ChatAPI().messages(chat.chatID),

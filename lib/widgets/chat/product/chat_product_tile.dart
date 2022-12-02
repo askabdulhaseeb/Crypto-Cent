@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 
 import '../../../database/app_user/auth_method.dart';
@@ -55,9 +57,9 @@ class ChatProductTile extends StatelessWidget {
                           ),
                         ),
                         const SizedBox(height: 6),
-                        product.createdByUID == AuthMethods.uid
-                            ? ChatProdBuyView(product: product, chat: chat)
-                            : ChatProdSellerView(chat: chat),
+                        product.uid == AuthMethods.uid
+                            ? ChatProdSellerView(chat: chat)
+                            : ChatProdBuyView(product: product, chat: chat),
                       ],
                     ),
                   );

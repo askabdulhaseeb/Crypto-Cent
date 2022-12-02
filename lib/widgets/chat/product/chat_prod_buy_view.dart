@@ -11,7 +11,6 @@ import '../../../models/chat/message_attachment.dart';
 import '../../../models/chat/message_read_info.dart';
 import '../../../models/product/product_model.dart';
 import '../../custom_widgets/custom_textformfield.dart';
-import '../../custom_widgets/show_loading.dart';
 
 class ChatProdBuyView extends StatefulWidget {
   const ChatProdBuyView({
@@ -33,8 +32,8 @@ class ChatProdBuyViewState extends State<ChatProdBuyView> {
   late TextEditingController _controller;
   @override
   void initState() {
-    newOffer = widget.chat.offer!.localAmount.toString();
-    _qty = widget.chat.offer!.quantity.toString();
+    newOffer = widget.chat.offer?.localAmount.toString() ?? '1';
+    _qty = widget.chat.offer?.quantity.toString() ?? '0';
     _controller = TextEditingController(text: newOffer);
     super.initState();
   }
@@ -102,19 +101,19 @@ class ChatProdBuyViewState extends State<ChatProdBuyView> {
                           signed: true, decimal: true),
                     ),
                   ),
-                  newOffer == widget.chat.offer!.localAmount.toString() &&
-                          _qty == widget.chat.offer!.quantity.toString()
+                  newOffer == widget.chat.offer?.localAmount.toString() &&
+                          _qty == widget.chat.offer?.quantity.toString()
                       ? const SizedBox()
                       : TextButton(
                           onPressed: () async {
-                            widget.chat.offer!.localAmount =
+                            widget.chat.offer?.localAmount =
                                 double.parse(newOffer);
-                            widget.chat.offer!.quantity = int.parse(_qty);
+                            widget.chat.offer?.quantity = int.parse(_qty);
                             final int time = TimeStamp.timestamp;
                             Message newMsg = Message(
                               messageID: '$time',
                               text:
-                                  'UNIT PRICE: ${widget.chat.offer!.localAmount} & QTY: ${widget.chat.offer!.quantity}',
+                                  'UNIT PRICE: ${widget.chat.offer?.localAmount} & QTY: ${widget.chat.offer?.quantity}',
                               type: MessageTypeEnum.prodOffer,
                               attachment: <MessageAttachment>[],
                               sendBy: AuthMethods.uid,
@@ -123,7 +122,6 @@ class ChatProdBuyViewState extends State<ChatProdBuyView> {
                               ],
                               timestamp: time,
                             );
-                            widget.chat.offer = widget.chat.offer!;
                             widget.chat.lastMessage = newMsg;
                             await ChatAPI().updateOffer(widget.chat);
                           },
@@ -136,8 +134,8 @@ class ChatProdBuyViewState extends State<ChatProdBuyView> {
               ),
               FutureBuilder<double>(
                 future: CryptoFunction().btcPrinceLive(
-                    dollor: widget.chat.offer!.localAmount *
-                        widget.chat.offer!.quantity),
+                    dollor: (widget.chat.offer?.localAmount ?? 0) *
+                        (widget.chat.offer?.quantity ?? 0)),
                 builder:
                     (BuildContext context, AsyncSnapshot<double> snapshot) {
                   return snapshot.hasData
@@ -146,8 +144,8 @@ class ChatProdBuyViewState extends State<ChatProdBuyView> {
                           style: const TextStyle(fontSize: 11),
                         )
                       : snapshot.hasError
-                          ? const Text('-ERROR-')
-                          : const ShowLoading();
+                          ? const Text('BTC: -ERROR-')
+                          : const Text('BTC: fetching...');
                 },
               ),
             ],

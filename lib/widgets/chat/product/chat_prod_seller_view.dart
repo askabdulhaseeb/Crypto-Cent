@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../../../function/crypto_function.dart';
 import '../../../models/chat/chat.dart';
+import '../../custom_widgets/custom_elevated_button.dart';
 import '../../custom_widgets/cutom_text.dart';
-import '../../custom_widgets/show_loading.dart';
 
 class ChatProdSellerView extends StatelessWidget {
   const ChatProdSellerView({required this.chat, Key? key}) : super(key: key);
@@ -12,7 +12,7 @@ class ChatProdSellerView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.end,
+      // crossAxisAlignment: CrossAxisAlignment.end,
       children: <Widget>[
         Row(
           crossAxisAlignment: CrossAxisAlignment.end,
@@ -57,10 +57,15 @@ class ChatProdSellerView extends StatelessWidget {
                     style: const TextStyle(fontSize: 11),
                   )
                 : snapshot.hasError
-                    ? const Text('-ERROR-')
-                    : const ShowLoading();
+                    ? const Text('BTC: -ERROR-')
+                    : const Text('BTC: fetching...');
           },
-        )
+        ),
+        CustomElevatedButton(
+          title: 'Accept Offer',
+          padding: const EdgeInsets.all(5),
+          onTap: () {},
+        ),
       ],
     );
   }
