@@ -5,22 +5,9 @@ import 'package:provider/provider.dart';
 import 'database/app_user/auth_method.dart';
 import 'database/local_data.dart';
 import 'firebase_options.dart';
-import 'providers/auth_provider.dart';
-import 'providers/cart_provider.dart';
-import 'providers/categories_provider.dart';
-import 'providers/chat/chat_page_provider.dart';
-import 'providers/crypto_wallet/binance_provider.dart';
-import 'providers/crypto_wallet/wallet_provider.dart';
-import 'providers/payment/payment_provider.dart';
-import 'providers/product_provider.dart';
 import 'providers/provider.dart';
+import 'screens/screens.dart';
 
-import 'providers/user_provider.dart';
-import 'screens/auth/phone_number_screen.dart';
-import 'screens/auth/signin_with_email_screen.dart';
-import 'screens/auth/signup_with_email.dart';
-import 'screens/auth/welcome_screen.dart';
-import 'screens/main_screen/main_screen.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
