@@ -18,7 +18,7 @@ class ChatAPI {
         .collection(_collection)
         .doc(chatID)
         .collection(_subCollection)
-        .orderBy('timestamp')
+        .orderBy('timestamp', descending: true)
         .snapshots()
         .map((QuerySnapshot<Map<String, dynamic>> event) {
       final List<Message> messages = <Message>[];

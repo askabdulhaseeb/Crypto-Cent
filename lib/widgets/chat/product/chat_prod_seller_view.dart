@@ -66,7 +66,18 @@ class ChatProdSellerView extends StatelessWidget {
         CustomElevatedButton(
           title: 'Accept Offer',
           padding: const EdgeInsets.all(5),
-          onTap: () {},
+          onTap: () {
+            // TODO: Accept offer
+
+            // when user accept the offer it remove update the value amount from
+            // buys wallets (means pending payment)
+
+            // if Buy didn't have that much payment their sould be an error message
+            // send where message type will be MessageTypeEnum.prodOfferRejected
+
+            // and if the available balance is more then that amount
+            // success message will send where message type will be MessageTypeEnum.prodOfferAccepted
+          },
         ),
       ],
     );

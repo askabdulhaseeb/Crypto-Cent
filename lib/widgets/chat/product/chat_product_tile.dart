@@ -65,17 +65,18 @@ class ChatProductTile extends StatelessWidget {
                 }
               }),
           const SizedBox(width: 10),
-          InkWell(
-            onTap: () => showProdDetail(context, product),
-            child: SizedBox(
-              height: imageSize,
-              width: imageSize,
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(6),
-                child: CustomNetworkImage(imageURL: product.prodURL[0].url),
+          if (product.prodURL.isNotEmpty)
+            InkWell(
+              onTap: () => showProdDetail(context, product),
+              child: SizedBox(
+                height: imageSize,
+                width: imageSize,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(6),
+                  child: CustomNetworkImage(imageURL: product.prodURL[0].url),
+                ),
               ),
             ),
-          ),
           const SizedBox(width: 10),
         ],
       ),

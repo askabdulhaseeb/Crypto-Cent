@@ -4,6 +4,8 @@ enum MessageTypeEnum {
   audio('audio', 'Audio'),
   video('video', 'Video'),
   prodOffer('prod_offer', 'Product Offer'),
+  prodOfferAccepted('prod_offer_accept', 'Product Offer Acepted'),
+  prodOfferRejected('prod_offer_reject', 'Product Offer Rejected'),
   document('document', 'Document'),
   announcement('announcement', 'Announcement'),
   storyReply('story_reply', 'Story Reply');

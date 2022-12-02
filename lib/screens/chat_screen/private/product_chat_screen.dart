@@ -62,6 +62,7 @@ class ProductChatScreen extends StatelessWidget {
                                 child: ListView.builder(
                                   shrinkWrap: true,
                                   itemCount: messages.length,
+                                  reverse: true,
                                   itemBuilder:
                                       (BuildContext context, int index) {
                                     return MessageTile(
