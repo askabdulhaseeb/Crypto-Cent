@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../../providers/cart_provider.dart';
+import '../../../widgets/custom_widgets/custom_rating_star.dart';
+import '../../../widgets/custom_widgets/custom_widget.dart';
 import '../../database/app_user/auth_method.dart';
 import '../../database/chat_api.dart';
 import '../../database/crypto_wallet/binance_api.dart';
-import '../../database/crypto_wallet/wallet_api.dart';
 import '../../enum/message_type_enum.dart';
 import '../../function/crypto_function.dart';
 import '../../function/unique_id_functions.dart';
@@ -15,17 +17,10 @@ import '../../models/chat/message_attachment.dart';
 import '../../models/chat/message_read_info.dart';
 import '../../models/payment/orderd_product.dart';
 import '../../models/product/product_model.dart';
-import '../../../providers/cart_provider.dart';
-import '../../../widgets/custom_widgets/custom_rating_star.dart';
-import '../../../widgets/custom_widgets/custom_widget.dart';
-import '../../providers/crypto_wallet/binance_provider.dart';
-import '../../providers/product_provider.dart';
 import '../../providers/user_provider.dart';
 import '../../widgets/custom_widgets/custom_network_image.dart';
 import '../../widgets/custom_widgets/custom_profile_image.dart';
 import '../../widgets/product/product_url_slider.dart';
-import '../cart_screen/cart_screen.dart';
-import '../chat_screen/private/product_chat_screen.dart';
 
 class ProductDetailScreen extends StatefulWidget {
   const ProductDetailScreen({required this.product, super.key});

@@ -4,7 +4,6 @@ import 'package:provider/provider.dart';
 import '../../../database/crypto_wallet/wallet_create_api.dart';
 import '../../../function/encryption_function.dart';
 import '../../../models/crypto_wallet/wallet_histroty.dart';
-import '../../../providers/crypto_wallet/binance_provider.dart';
 import '../../../providers/crypto_wallet/wallet_provider.dart';
 import '../../../widgets/custom_widgets/cutom_text.dart';
 import '../../../widgets/custom_widgets/show_loading.dart';
@@ -26,7 +25,6 @@ class _WalletScreenState extends State<WalletScreen> {
   @override
   Widget build(BuildContext context) {
     WalletProvider walletPro = Provider.of<WalletProvider>(context);
-    BinanceProvider coinprice = Provider.of<BinanceProvider>(context);
 
     String walletID = walletPro.wallet == null
         ? 'loading'

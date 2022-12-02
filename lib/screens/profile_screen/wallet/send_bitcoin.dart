@@ -40,7 +40,6 @@ class _SendBitcoinScreenState extends State<SendBitcoinScreen> {
 
   @override
   Widget build(BuildContext context) {
-    WalletProvider walletPro = Provider.of<WalletProvider>(context);
     return Scaffold(
       appBar: AppBar(title: const Text('Send Btc')),
       body: SafeArea(

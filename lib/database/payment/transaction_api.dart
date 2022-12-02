@@ -28,7 +28,7 @@ class TransactionApi {
         .where('customer_uid', isEqualTo: AuthMethods.uid)
         .get();
     for (DocumentSnapshot<Map<String, dynamic>> e in snapshot.docs) {
-      value.add(Transactions.fromMap(e.data() ?? {}));
+      value.add(Transactions.fromMap(e.data() ?? <String, dynamic>{}));
     }
     return value;
   }

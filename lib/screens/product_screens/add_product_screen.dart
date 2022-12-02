@@ -1,8 +1,5 @@
 import 'dart:io';
-import 'dart:typed_data';
-
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 
 import '../../database/app_user/auth_method.dart';
@@ -16,7 +13,6 @@ import '../../models/categories/sub_categories.dart';
 import '../../models/product/product_model.dart';
 import '../../models/product/product_url.dart';
 import '../../providers/categories_provider.dart';
-import '../../utilities/image_picker.dart';
 import '../../widgets/custom_widgets/custom_toast.dart';
 import '../../widgets/custom_widgets/custom_widget.dart';
 import '../../widgets/product/get_product_attachments.dart';
@@ -134,6 +130,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                                 setState(() {
                                   _files = temp;
                                 });
+                                if (!mounted) return;
                                 Navigator.of(context).pop();
                               },
                               leading: const Icon(Icons.photo_camera),
@@ -150,6 +147,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                                 setState(() {
                                   _files = temp;
                                 });
+                                if (!mounted) return;
                                 Navigator.of(context).pop();
                               },
                               leading: const Icon(Icons.photo_rounded),

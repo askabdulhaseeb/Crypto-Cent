@@ -30,7 +30,7 @@ class GroupChatDashboard extends StatelessWidget {
                       ),
                       itemBuilder: (_, int index) {
                         // return GroupChatDashboardTile(chat: chat[index]);
-                        return Text('data');
+                        return const Text('data');
                       },
                     );
             } else {

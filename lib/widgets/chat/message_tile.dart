@@ -3,7 +3,6 @@ import 'package:provider/provider.dart';
 
 import '../../database/app_user/auth_method.dart';
 import '../../enum/message_type_enum.dart';
-import '../../function/crypto_function.dart';
 import '../../function/time_date_function.dart';
 import '../../models/app_user/app_user.dart';
 import '../../models/chat/chat.dart';

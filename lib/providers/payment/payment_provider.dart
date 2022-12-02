@@ -39,8 +39,9 @@ class PaymentProvider with ChangeNotifier {
           completed++;
         } else if (temp[j].status.value == 'cancel') {
           cancel++;
-        } else
+        } else {
           shipped++;
+        }
       }
     }
 

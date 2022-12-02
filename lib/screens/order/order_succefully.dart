@@ -19,7 +19,7 @@ class OrderSuccefully extends StatelessWidget {
             }),
             icon: const Icon(Icons.arrow_back_ios_sharp)),
         
-        actions: const [Icon(Icons.more_vert)],
+        actions: const <Widget>[Icon(Icons.more_vert)],
       ),
       body: SingleChildScrollView(
         child: Padding(

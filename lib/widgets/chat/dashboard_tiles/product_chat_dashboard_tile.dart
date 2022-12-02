@@ -8,7 +8,6 @@ import '../../../models/product/product_model.dart';
 import '../../../providers/product_provider.dart';
 import '../../../providers/user_provider.dart';
 import '../../../screens/chat_screen/private/product_chat_screen.dart';
-import '../../custom_widgets/custom_profile_image.dart';
 import '../product_chat_photo.dart';
 
 class ProductChatDashboardTile extends StatelessWidget {

@@ -36,7 +36,7 @@ class _OrderHistoryState extends State<OrderHistory> {
                 child: Column(
                   children: <Widget>[
                     Row(
-                      children: [
+                      children: <Widget>[
                         newMethod(context, 'All', () {
                           paymentPro.changeName('All');
                         }, paymentPro.tempname, total),

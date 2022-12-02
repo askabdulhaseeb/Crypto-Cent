@@ -98,12 +98,11 @@ class HomeScreen extends StatelessWidget {
                     TextButton(
                       onPressed: (() {
                         Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (BuildContext context) =>
-                                    CategoriesExtend(
-                                      categoryName: 'All',
-                                    )));
+                          context,
+                          MaterialPageRoute<CategoriesExtend>(
+                              builder: (BuildContext context) =>
+                                  CategoriesExtend(categoryName: 'All')),
+                        );
                       }),
                       child: ForText(
                         name: 'View All',
@@ -190,7 +189,7 @@ class HomeScreen extends StatelessWidget {
               (() {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(
+                  MaterialPageRoute<SerachScreen>(
                     builder: (BuildContext context) => const SerachScreen(),
                   ),
                 );
@@ -214,7 +213,7 @@ class HomeScreen extends StatelessWidget {
               (() {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(
+                  MaterialPageRoute<ContactUsScreen>(
                     builder: (BuildContext context) => const ContactUsScreen(),
                   ),
                 );
@@ -228,7 +227,7 @@ class HomeScreen extends StatelessWidget {
               (() {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(
+                  MaterialPageRoute<AboutUsScreen>(
                     builder: (BuildContext context) => const AboutUsScreen(),
                   ),
                 );
@@ -293,7 +292,7 @@ class HomeScreen extends StatelessWidget {
           onTap: () {
             Navigator.push(
               context,
-              MaterialPageRoute(
+              MaterialPageRoute<SerachScreen>(
                 builder: (BuildContext context) => const SerachScreen(),
               ),
             );

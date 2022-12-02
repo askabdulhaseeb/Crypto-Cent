@@ -1,11 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:intl/intl.dart';
 
-import '../../enum/message_type_enum.dart';
 import '../payment/orderd_product.dart';
 import 'chat_group_info.dart';
 import 'message.dart';
-import 'message_attachment.dart';
 
 class Chat {
   Chat({

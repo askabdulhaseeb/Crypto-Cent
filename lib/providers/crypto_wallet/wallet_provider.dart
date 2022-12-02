@@ -47,9 +47,9 @@ class WalletProvider with ChangeNotifier {
 
   getBalance() async {
     double tempBalance = 0;
-    String WalletId = Encryption().appDecrypt(_wallet!.coinsWallet[0].wallet);
-    log('Wallet ID: $WalletId');
-    tempBalance = await WallletWithApi().getWalletBalance(WalletId);
+    String walletIDD = Encryption().appDecrypt(_wallet!.coinsWallet[0].wallet);
+    log('Wallet ID: $walletIDD');
+    tempBalance = await WallletWithApi().getWalletBalance(walletIDD);
     _balance = tempBalance;
     notifyListeners();
   }

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:intl_phone_field/phone_number.dart';
 
 import '../../utilities/app_images.dart';
-import '../../widgets/custom_widgets/custom_textformfield.dart';
 import '../../widgets/custom_widgets/custom_widget.dart';
 import '../../widgets/custom_widgets/password_textformfield.dart';
 

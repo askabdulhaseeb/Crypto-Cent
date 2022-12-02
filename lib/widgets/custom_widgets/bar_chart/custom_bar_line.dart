@@ -5,19 +5,19 @@ import '../custom_widget.dart';
 
 class CustomBarLine extends StatelessWidget {
   const CustomBarLine({
-    Key? key,
-    required this.title,
     required this.percentage,
+    required this.title,
+    Key? key,
   }) : super(key: key);
-  final String title;
   final double percentage;
+  final String title;
 
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: [
+      children: <Widget>[
         Stack(
-          children: [
+          children: <Widget>[
             Container(
               width: 14,
               height: 200,

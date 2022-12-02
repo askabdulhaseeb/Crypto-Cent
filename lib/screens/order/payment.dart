@@ -1,19 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../database/crypto_wallet/wallet_create_api.dart';
 import '../../function/crypto_function.dart';
 import '../../function/encryption_function.dart';
 import '../../providers/app_provider.dart';
 import '../../providers/cart_provider.dart';
-import '../../providers/crypto_wallet/binance_provider.dart';
 import '../../providers/crypto_wallet/wallet_provider.dart';
 import '../../providers/payment/payment_provider.dart';
-import '../../widgets/custom_widgets/custom_toast.dart';
 import '../../widgets/custom_widgets/custom_widget.dart';
 import '../../widgets/custom_widgets/show_loading.dart';
-import '../empty_screen/empty_screen.dart';
-import 'order_succefully.dart';
 
 class PaymentScreen extends StatefulWidget {
   const PaymentScreen({super.key});

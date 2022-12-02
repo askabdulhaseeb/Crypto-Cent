@@ -1,8 +1,5 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
-
 import '../../utilities/app_images.dart';
-import '../custom_widgets/custom_network_image.dart';
 
 class ProductChatPhoto extends StatelessWidget {
   const ProductChatPhoto({

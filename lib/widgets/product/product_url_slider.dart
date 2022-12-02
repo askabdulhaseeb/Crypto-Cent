@@ -1,10 +1,7 @@
-
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 import '../../models/product/product_url.dart';
-import '../../providers/app_provider.dart';
 import '../custom_widgets/custom_network_image.dart';
 
 class ProductURLsSlider extends StatelessWidget {

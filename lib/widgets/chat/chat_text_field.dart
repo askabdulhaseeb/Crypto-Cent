@@ -1,6 +1,8 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+
 import '../../database/app_user/auth_method.dart';
 import '../../database/chat_api.dart';
 import '../../enum/message_type_enum.dart';
@@ -214,48 +216,6 @@ class _ChatTextFieldState extends State<ChatTextField> {
           ],
         ),
       ],
-    );
-  }
-}
-
-class _TextHintButton extends StatelessWidget {
-  const _TextHintButton({required this.hint, required this.chat, Key? key})
-      : super(key: key);
-  final String hint;
-  final Chat chat;
-
-  @override
-  Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () async {
-        final int time = TimeStamp.timestamp;
-        final Message msg = Message(
-          messageID: time.toString(),
-          text: hint,
-          type: MessageTypeEnum.text,
-          attachment: <MessageAttachment>[],
-          sendBy: AuthMethods.uid,
-          sendTo: <MessageReadInfo>[],
-          timestamp: time,
-        );
-        chat.lastMessage = msg;
-        chat.timestamp = time;
-        await ChatAPI().sendMessage(chat);
-      },
-      child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-        decoration: BoxDecoration(
-          color: Theme.of(context).primaryColor,
-          borderRadius: BorderRadius.circular(10),
-        ),
-        child: Text(
-          hint,
-          style: const TextStyle(
-            fontWeight: FontWeight.bold,
-            color: Colors.white,
-          ),
-        ),
-      ),
     );
   }
 }

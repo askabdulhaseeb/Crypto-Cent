@@ -16,29 +16,26 @@ class _TestingScreenState extends State<TestingScreen> {
     return Scaffold(
       body: SafeArea(
         child: Column(
-          children: [
+          children: <Widget>[
             const SizedBox(
-              height: 30,
+              height: 30
             ),
             Row(
-              children: [
+              children:<Widget>[
                 newMethod(context, 'All', () {
                   setState(() {
                     name = 'All';
                   });
-                  print(name);
                 }, name),
                 newMethod(context, 'Running', () {
                   setState(() {
                     name = 'Running';
                   });
-                  print(name);
                 }, name),
                 newMethod(context, 'Previous', () {
                   setState(() {
                     name = 'Previous';
                   });
-                  print(name);
                 }, name),
               ],
             )

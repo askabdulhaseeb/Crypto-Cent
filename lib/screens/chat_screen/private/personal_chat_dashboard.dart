@@ -14,7 +14,6 @@ class PersonalChatDashboard extends StatelessWidget {
       stream: ChatAPI().chats(),
       builder: (_, AsyncSnapshot<List<Chat>> snapshot) {
         if (snapshot.hasError) {
-          print(snapshot.error);
           return const _ErrorWidget();
         } else {
           if (snapshot.connectionState == ConnectionState.waiting) {

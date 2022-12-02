@@ -2,7 +2,6 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 import '../../utilities/app_images.dart';
-import '../../widgets/custom_widgets/custom_textformfield.dart';
 import '../../widgets/custom_widgets/custom_widget.dart';
 import '../../widgets/custom_widgets/password_textformfield.dart';
 import 'signup_with_email.dart';
