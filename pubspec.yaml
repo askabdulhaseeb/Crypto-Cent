@@ -51,6 +51,7 @@ dependencies:
   change_app_package_name: ^1.1.0
   uuid: ^3.0.7
   fl_chart: ^0.55.2
+  google_sign_in: ^5.4.2
 
 dev_dependencies:
   flutter_test:

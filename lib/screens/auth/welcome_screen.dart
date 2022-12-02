@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
+import '../../database/app_user/auth_method.dart';
+import '../../providers/app_provider.dart';
 import '../../utilities/app_images.dart';
 import '../../widgets/custom_widgets/custom_elevated_button.dart';
+import '../main_screen/main_screen.dart';
 import 'phone_number_screen.dart';
 import 'signin_with_email_screen.dart';
 
@@ -64,8 +68,15 @@ class WelcomeScreen extends StatelessWidget {
                   ),
                 ),
                 GestureDetector(
-                  onTap: () {
-                    // TODO: SIGN IN WITH GOOGLE
+                  onTap: () async {
+                    int index = await AuthMethods().signinWithGoogle();
+                    if (index == -1) return;
+                    Provider.of<AppProvider>(context, listen: false)
+                        .onTabTapped(0);
+                    Navigator.of(context).pushNamedAndRemoveUntil(
+                      MainScreen.routeName,
+                      (Route<dynamic> route) => false,
+                    );
                   },
                   child: CircleAvatar(
                     radius: 30,

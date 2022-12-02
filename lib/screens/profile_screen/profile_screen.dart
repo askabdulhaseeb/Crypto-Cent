@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 
+import '../../database/app_user/auth_method.dart';
 import '../../utilities/app_images.dart';
 import '../../widgets/profile/profile_header.dart';
 import '../../widgets/profile/profile_middle_tile.dart';
 import '../../widgets/profile/profile_nav_tile.dart';
+import '../auth/welcome_screen.dart';
 import '../empty_screen/empty_screen.dart';
 import '../order/order_history.dart';
 import 'wallet/wallet_screen.dart';
@@ -112,18 +114,15 @@ class ProfileScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 24),
                   ProfileNavTile(
-                      name: 'Log Out',
-                      image: AppImages.logout,
-                      onTap: () {
-                        Navigator.pushAndRemoveUntil(
-                          context,
-                          MaterialPageRoute<EmptyScreen>(
-                            builder: (BuildContext context) =>
-                                const EmptyScreen(),
-                          ),
-                          (Route<dynamic> route) => false,
-                        );
-                      }),
+                    name: 'Log Out',
+                    image: AppImages.logout,
+                    onTap: () async {
+                      await AuthMethods().signOut();
+                      Navigator.of(context).pushNamedAndRemoveUntil(
+                          WelcomeScreen.routeName,
+                          (Route<dynamic> route) => false);
+                    },
+                  ),
                 ],
               ),
             ),

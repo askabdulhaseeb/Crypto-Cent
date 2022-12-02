@@ -8,7 +8,6 @@ import 'firebase_options.dart';
 import 'providers/provider.dart';
 import 'screens/screens.dart';
 
-
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
@@ -75,11 +74,13 @@ class MyApp extends StatelessWidget {
               ? const WelcomeScreen()
               : const MainScreen(),
           routes: <String, WidgetBuilder>{
+            WelcomeScreen.routeName: (_) => const WelcomeScreen(),
             SigninWithEmailScreen.routeName: (_) =>
                 const SigninWithEmailScreen(),
             SignupWithEmailScreen.routeName: (_) =>
                 const SignupWithEmailScreen(),
             PhoneNumberScreen.routeName: (_) => const PhoneNumberScreen(),
+            MainScreen.routeName: (_) => const MainScreen(),
           },
         );
       }),
