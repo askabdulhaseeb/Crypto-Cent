@@ -6,6 +6,7 @@ import 'database/app_user/auth_method.dart';
 import 'database/local_data.dart';
 import 'firebase_options.dart';
 import 'providers/provider.dart';
+import 'providers/providers_list.dart';
 import 'screens/screens.dart';
 
 Future<void> main() async {
@@ -22,46 +23,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       // ignore: always_specify_types
-      providers: [
-        ChangeNotifierProvider<UserProvider>(
-          create: (BuildContext context) => UserProvider(),
-        ),
-        ChangeNotifierProvider<CartProvider>(
-          create: (BuildContext context) => CartProvider(),
-        ),
-        ChangeNotifierProvider<AuthProvider>(
-          create: (BuildContext context) => AuthProvider(),
-        ),
-        ChangeNotifierProvider<AppThemeProvider>.value(
-          value: AppThemeProvider(),
-        ),
-        ChangeNotifierProvider<CategoriesProvider>.value(
-          value: CategoriesProvider(),
-        ),
-        ChangeNotifierProvider<WalletProvider>.value(
-          value: WalletProvider(),
-        ),
-        ChangeNotifierProvider<AppProvider>.value(
-          value: AppProvider(),
-        ),
-        ChangeNotifierProvider<ProductProvider>.value(
-          value: ProductProvider(),
-        ),
-        ChangeNotifierProvider<BinanceProvider>.value(
-          value: BinanceProvider(),
-        ),
-        ChangeNotifierProvider<PaymentProvider>.value(
-          value: PaymentProvider(),
-        ),
-        ChangeNotifierProxyProvider<PaymentProvider, WalletProvider>(
-          create: (_) => WalletProvider(),
-          update: (_, PaymentProvider paymentPro, WalletProvider? walletPro) =>
-              walletPro!..update(paymentPro),
-        ),
-        ChangeNotifierProvider<ChatPageProvider>.value(
-          value: ChatPageProvider(),
-        ),
-      ],
+      providers: listOfProvider,
       child: Consumer<AppThemeProvider>(
           builder: (BuildContext context, AppThemeProvider theme, _) {
         return MaterialApp(
