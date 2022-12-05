@@ -20,10 +20,6 @@ class PaymentProvider with ChangeNotifier {
   PaymentProvider() {
     load();
   }
-  update(ProductProvider value) {
-    _product = value.products;
-    notifyListeners();
-  }
 
   Product? getproduct(String value) {
     Product temp;
@@ -43,10 +39,27 @@ class PaymentProvider with ChangeNotifier {
         _order.add(tempOrder[i]);
       }
     }
-
+    _allOrder = tempOrder;
     _receipt = await ReceiptApi().get();
     getGraphData();
+    sellProductFun();
     notifyListeners();
+  }
+
+  void sellProductFun() {
+    sellProducts.clear();
+    for (int i = 0; i < allOrder.length; i++) {
+      //print(allOrder[i].orderID);
+      for (int j = 0; j < allOrder[i].products.length; j++) {
+        // print(allOrder[i].products[j].sellerID);
+        // print(AuthMethods.uid);
+        if (AuthMethods.uid == allOrder[i].products[j].sellerID) {
+          sellProducts.add(allOrder[i].products[j]);
+          print(allOrder[i].products[j].sellerID);
+        }
+      }
+    }
+    print(sellProducts.length);
   }
 
   getGraphData() {
@@ -153,9 +166,13 @@ class PaymentProvider with ChangeNotifier {
   List<OrderdProduct> get orderdProduct => _orderProduct;
   List<Order> _order = <Order>[];
   List<Order> get order => _order;
+  List<Order> _allOrder = <Order>[];
+  List<Order> get allOrder => _allOrder;
   List<Receipt> _receipt = <Receipt>[];
   List<Receipt> get receipt => _receipt;
 
   List<Product> _product = <Product>[];
   List<Product> get products => _product;
+  List<OrderdProduct> _sellProduct = <OrderdProduct>[];
+  List<OrderdProduct> get sellProducts => _sellProduct;
 }
