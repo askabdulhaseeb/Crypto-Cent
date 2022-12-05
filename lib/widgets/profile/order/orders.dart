@@ -31,7 +31,7 @@ class _OrderTabbarState extends State<OrderTabbar> {
           ),
           bottom: const TabBar(tabs: <Widget>[
             Text(
-              'Recieve',
+              'Buy',
               style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
@@ -39,7 +39,7 @@ class _OrderTabbarState extends State<OrderTabbar> {
               ),
             ),
             Text(
-              'Send',
+              'Sell',
               style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,

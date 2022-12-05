@@ -49,6 +49,11 @@ dynamic get listOfProvider => [
         ChangeNotifierProvider<PaymentProvider>.value(
           value: PaymentProvider(),
         ),
+        ChangeNotifierProxyProvider<ProductProvider, PaymentProvider>(
+          create: (_) => PaymentProvider(),
+          update: (_, ProductProvider value, PaymentProvider? paymentPro) =>
+              paymentPro!..update(value),
+        ),
         ChangeNotifierProxyProvider<PaymentProvider, WalletProvider>(
           create: (_) => WalletProvider(),
           update: (_, PaymentProvider paymentPro, WalletProvider? walletPro) =>

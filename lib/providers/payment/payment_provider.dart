@@ -13,10 +13,16 @@ import '../../models/payment/order.dart';
 import '../../models/payment/orderd_product.dart';
 import '../../models/payment/receipt.dart';
 import '../../models/payment/transaction.dart';
+import '../../models/product/product_model.dart';
+import '../product_provider.dart';
 
 class PaymentProvider with ChangeNotifier {
   PaymentProvider() {
     load();
+  }
+  update(ProductProvider value) {
+    _product = value.products;
+    notifyListeners();
   }
 
   load() async {
@@ -139,4 +145,7 @@ class PaymentProvider with ChangeNotifier {
   List<Order> get order => _order;
   List<Receipt> _receipt = <Receipt>[];
   List<Receipt> get receipt => _receipt;
+
+  List<Product> _product = <Product>[];
+  List<Product> get products => _product;
 }
