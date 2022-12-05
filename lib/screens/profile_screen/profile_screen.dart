@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../database/app_user/auth_method.dart';
 import '../../utilities/app_images.dart';
+import '../../widgets/profile/orders.dart';
 import '../../widgets/profile/profile_header.dart';
 import '../../widgets/profile/profile_middle_tile.dart';
 import '../../widgets/profile/profile_nav_tile.dart';
@@ -86,6 +87,19 @@ class ProfileScreen extends StatelessWidget {
                           MaterialPageRoute<EmptyScreen>(
                             builder: (BuildContext context) =>
                                 const EmptyScreen(),
+                          ),
+                        );
+                      }),
+                  const SizedBox(height: 24),
+                  ProfileNavTile(
+                      name: 'Orders',
+                      image: AppImages.setting,
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute<EmptyScreen>(
+                            builder: (BuildContext context) =>
+                                const OrdersScreen(),
                           ),
                         );
                       }),
