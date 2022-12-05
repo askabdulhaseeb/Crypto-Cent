@@ -58,28 +58,29 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
           },
         ),
         actions: <Widget>[
-          CircleAvatar(
-            backgroundColor: Colors.grey[300],
-            child: IconButton(
-                onPressed: () => Navigator.of(context)
-                        .push(MaterialPageRoute<ProductChatScreen>(
-                      builder: (BuildContext context) => ProductChatScreen(
-                        chat: Chat(
-                          chatID:
-                              UniqueIdFunctions.productID(widget.product.pid),
-                          persons: <String>[
-                            AuthMethods.uid,
-                            widget.product.uid
-                          ],
-                          pid: widget.product.pid,
+          if (widget.product.uid != AuthMethods.uid)
+            CircleAvatar(
+              backgroundColor: Colors.grey[300],
+              child: IconButton(
+                  onPressed: () => Navigator.of(context)
+                          .push(MaterialPageRoute<ProductChatScreen>(
+                        builder: (BuildContext context) => ProductChatScreen(
+                          chat: Chat(
+                            chatID:
+                                UniqueIdFunctions.productID(widget.product.pid),
+                            persons: <String>[
+                              AuthMethods.uid,
+                              widget.product.uid
+                            ],
+                            pid: widget.product.pid,
+                          ),
                         ),
-                      ),
-                    )),
-                icon: Icon(
-                  Icons.chat,
-                  color: Theme.of(context).primaryColor,
-                )),
-          ),
+                      )),
+                  icon: Icon(
+                    Icons.chat,
+                    color: Theme.of(context).primaryColor,
+                  )),
+            ),
           const SizedBox(width: 10),
         ],
       ),

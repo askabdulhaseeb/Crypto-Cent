@@ -59,6 +59,7 @@ class BitcoinHistroyScreen extends StatelessWidget {
               return const ShowLoading();
             }
           },
-        ));
+        ),
+        );
   }
 }

@@ -20,7 +20,14 @@ class PaymentProvider with ChangeNotifier {
   }
 
   load() async {
-    _order = await OrderApi().get();
+    List<Order> tempOrder = <Order>[];
+    tempOrder = await OrderApi().get();
+    for (int i = 0; i < tempOrder.length; i++) {
+      if (AuthMethods.uid == tempOrder[i].customerUID) {
+        _order.add(tempOrder[i]);
+      }
+    }
+
     _receipt = await ReceiptApi().get();
     getGraphData();
     notifyListeners();

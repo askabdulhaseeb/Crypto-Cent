@@ -23,10 +23,8 @@ class OrderApi {
 
   Future<List<Order>> get() async {
     List<Order> orders = <Order>[];
-    QuerySnapshot<Map<String, dynamic>> snapshot = await _instance
-        .collection(_collection)
-        .where('customer_uid', isEqualTo: AuthMethods.uid)
-        .get();
+    QuerySnapshot<Map<String, dynamic>> snapshot =
+        await _instance.collection(_collection).get();
     for (DocumentSnapshot<Map<String, dynamic>> e in snapshot.docs) {
       orders.add(Order.fromMap(e));
     }

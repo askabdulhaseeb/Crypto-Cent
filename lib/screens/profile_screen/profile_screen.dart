@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../database/app_user/auth_method.dart';
 import '../../utilities/app_images.dart';
-import '../../widgets/profile/orders.dart';
+import '../../widgets/profile/order/orders.dart';
 import '../../widgets/profile/profile_header.dart';
 import '../../widgets/profile/profile_middle_tile.dart';
 import '../../widgets/profile/profile_nav_tile.dart';
@@ -99,7 +99,7 @@ class ProfileScreen extends StatelessWidget {
                           context,
                           MaterialPageRoute<EmptyScreen>(
                             builder: (BuildContext context) =>
-                                const OrdersScreen(),
+                                const OrderTabbar(),
                           ),
                         );
                       }),
