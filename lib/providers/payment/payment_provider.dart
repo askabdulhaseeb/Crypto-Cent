@@ -48,6 +48,7 @@ class PaymentProvider with ChangeNotifier {
 
   void sellProductFun() {
     sellProducts.clear();
+     sellingOrder.clear();
     for (int i = 0; i < allOrder.length; i++) {
       //print(allOrder[i].orderID);
       for (int j = 0; j < allOrder[i].products.length; j++) {
@@ -55,6 +56,7 @@ class PaymentProvider with ChangeNotifier {
         // print(AuthMethods.uid);
         if (AuthMethods.uid == allOrder[i].products[j].sellerID) {
           sellProducts.add(allOrder[i].products[j]);
+          sellingOrder.add(allOrder[i]);
           print(allOrder[i].products[j].sellerID);
         }
       }
@@ -173,6 +175,8 @@ class PaymentProvider with ChangeNotifier {
 
   List<Product> _product = <Product>[];
   List<Product> get products => _product;
+  List<Order> _sellingOrder = <Order>[];
+  List<Order> get sellingOrder => _sellingOrder;
   List<OrderdProduct> _sellProduct = <OrderdProduct>[];
   List<OrderdProduct> get sellProducts => _sellProduct;
 }
