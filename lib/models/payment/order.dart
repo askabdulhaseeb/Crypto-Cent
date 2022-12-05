@@ -34,6 +34,12 @@ class Order {
     };
   }
 
+  Map<String, dynamic> updateStatus() {
+    return <String, dynamic>{
+      'products': products.map((OrderdProduct x) => x.toMap()).toList(),
+    };
+  }
+
   // ignore: sort_constructors_first
   factory Order.fromMap(DocumentSnapshot<Map<String, dynamic>> doc) {
     return Order(

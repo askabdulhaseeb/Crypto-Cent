@@ -30,4 +30,11 @@ class OrderApi {
     }
     return orders;
   }
+
+  Future<void> updateStatus(Order value) async {
+    await _instance
+        .collection(_collection)
+        .doc(value.orderID)
+        .update(value.updateStatus());
+  }
 }

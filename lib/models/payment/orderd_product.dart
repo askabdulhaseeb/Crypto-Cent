@@ -34,6 +34,12 @@ class OrderdProduct {
     };
   }
 
+  Map<String, dynamic> updateStatus() {
+    return <String, dynamic>{
+      'status': status.value,
+    };
+  }
+
   // ignore: sort_constructors_first
   factory OrderdProduct.fromMap(Map<String, dynamic> map) {
     return OrderdProduct(

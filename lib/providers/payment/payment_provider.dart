@@ -25,6 +25,16 @@ class PaymentProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  Product? getproduct(String value) {
+    Product temp;
+    for (int i = 0; i < _product.length; i++) {
+      if (value == _product[i].pid) {
+        return _product[i];
+      }
+    }
+    return null;
+  }
+
   load() async {
     List<Order> tempOrder = <Order>[];
     tempOrder = await OrderApi().get();

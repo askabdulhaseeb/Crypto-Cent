@@ -2,9 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
+import '../../../database/payment/order_api.dart';
+import '../../../enum/order_status_enum.dart';
 import '../../../models/payment/order.dart';
 import '../../../models/payment/orderd_product.dart';
+import '../../../models/product/product_model.dart';
 import '../../../providers/payment/payment_provider.dart';
+import '../../../providers/product_provider.dart';
+import '../../custom_widgets/custom_elevated_button.dart';
+import '../../custom_widgets/custom_network_image.dart';
+import '../../custom_widgets/show_loading.dart';
 
 class OrderHistoryTile extends StatelessWidget {
   const OrderHistoryTile({required this.item, super.key});
@@ -19,11 +26,89 @@ class OrderHistoryTile extends StatelessWidget {
       subtitle:
           Text(item.orderID, maxLines: 1, overflow: TextOverflow.ellipsis),
       children: item.products
-          .map(
-            (OrderdProduct e) => ListTile(
-              title: Text(e.pid),
-            ),
-          )
+          .map((OrderdProduct e) => Consumer<ProductProvider>(builder:
+                  (BuildContext context, ProductProvider productPro,
+                      Widget? snapshot) {
+                Product product = productPro.product(e.pid);
+                return Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ListTile(
+                    // leading: SizedBox(
+                    //   width: 50,
+                    //   height: 50,
+                    //   child: ClipRRect(
+                    //     borderRadius: BorderRadius.circular(4),
+                    //     child: CustomNetworkImage(
+                    //       imageURL: product.prodURL[0].url,
+                    //       fit: BoxFit.fill,
+                    //     ),
+                    //   ),
+                    // ),
+                    title: Text(product.productname),
+                    subtitle: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Text(
+                          ' \$ : ${e.localAmount.toString()} - Btc : ${(e.localAmount / e.exchangeRate).toStringAsFixed(8)}',
+                        ),
+                        Row(
+                          children: <Widget>[
+                            if (e.status == OrderStatusEnum.pending ||
+                                e.status == OrderStatusEnum.offer)
+                              Expanded(
+                                child: CustomElevatedButton(
+                                  title: 'Cancel',
+                                  bgColor: Colors.red,
+                                  onTap: () async {
+                                    e.status = OrderStatusEnum.cancel;
+                                    await OrderApi().updateStatus(item);
+                                  },
+                                ),
+                              ),
+                            if (e.status == OrderStatusEnum.pending ||
+                                e.status == OrderStatusEnum.inProgress)
+                              Expanded(
+                                child: Padding(
+                                  padding: const EdgeInsets.only(left: 8),
+                                  child: CustomElevatedButton(
+                                    title: 'Done',
+                                    bgColor: Colors.green,
+                                    onTap: () async {
+                                      e.status = OrderStatusEnum.completed;
+                                      await OrderApi().updateStatus(item);
+                                    },
+                                  ),
+                                ),
+                              ),
+                          ],
+                        ),
+                      ],
+                    ),
+
+                    trailing: Column(
+                      children: <Widget>[
+                        const Text('Status'),
+                        Text(
+                          e.status.name,
+                          style: TextStyle(
+                            color: e.status == OrderStatusEnum.completed
+                                ? Colors.green
+                                : Colors.red,
+                          ),
+                        ),
+                        Text(
+                          e.status.name,
+                          style: TextStyle(
+                            color: e.status == OrderStatusEnum.completed
+                                ? Colors.green
+                                : Colors.red,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                );
+              }))
           .toList(),
     );
   }
