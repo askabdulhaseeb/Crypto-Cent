@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'recieve_order.dart';
-import 'send_order.dart';
+import 'buy_order.dart';
+import 'sell_order.dart';
 
 class OrderTabbar extends StatefulWidget {
   const OrderTabbar({Key? key}) : super(key: key);
@@ -50,8 +50,8 @@ class _OrderTabbarState extends State<OrderTabbar> {
         ),
         body: const TabBarView(
           children: <Widget>[
-            RecieveOrder(),
-            SendOrder(),
+            BuyOrder(),
+            SellOrder(),
           ],
         ),
       ),
