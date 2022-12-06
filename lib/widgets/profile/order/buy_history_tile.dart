@@ -76,7 +76,13 @@ class OrderHistoryTile extends StatelessWidget {
                                     bgColor: Colors.green,
                                     onTap: () async {
                                       //e.status = OrderStatusEnum.completed;
-                                      print(e.sellerID);
+                                      bool temp =
+                                          walletPro.getSellerWallet(e.sellerID);
+                                      if (temp) {
+                                        print(walletPro.sellerWallet!
+                                            .coinsWallet[0].address);
+                                      }
+                                      //print(e.sellerID);
                                       //await OrderApi().updateStatus(item);
                                     },
                                   ),

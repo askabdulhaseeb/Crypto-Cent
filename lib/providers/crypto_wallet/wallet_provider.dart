@@ -31,7 +31,7 @@ class WalletProvider with ChangeNotifier {
     if (AuthMethods.getCurrentUser == null) return false;
     bool temp = false;
     String id = AuthMethods.uid;
-    _allWallets= await WalletsApi().get();
+    _allWallets = await WalletsApi().get();
     for (int i = 0; i < _allWallets.length; i++) {
       if (_allWallets[i].walletId == id) {
         _wallet = _allWallets[i];
@@ -43,13 +43,16 @@ class WalletProvider with ChangeNotifier {
     return temp;
   }
 
-  getSellerWallet(String id) {
+  bool getSellerWallet(String id) {
+    bool temp = false;
     for (int i = 0; i < _allWallets.length; i++) {
       if (_allWallets[i].walletId == id) {
-        _wallet = _allWallets[i];
+        temp = true;
+        _sellerWallet = _allWallets[i];
         break;
       }
     }
+    return temp;
   }
 
   getBalance() async {
