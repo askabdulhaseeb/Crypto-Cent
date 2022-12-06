@@ -65,6 +65,11 @@ class CartProvider extends ChangeNotifier {
     _cartItems.remove(id);
     notifyListeners();
   }
+  void deleteAllItem() {
+    // ignore: list_remove_unrelated_type
+    _cartItems.clear();
+    notifyListeners();
+  }
 
   double totalPrice() {
     double temp = 0;
