@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 
 import '../../../models/payment/order.dart';
 import '../../../providers/provider.dart';
-import 'order_history_tile.dart';
+import 'buy_history_tile.dart';
 
 class BuyOrder extends StatelessWidget {
   const BuyOrder({super.key});

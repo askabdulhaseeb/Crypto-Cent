@@ -33,17 +33,17 @@ class OrderHistoryTile extends StatelessWidget {
                 return Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: ListTile(
-                    // leading: SizedBox(
-                    //   width: 50,
-                    //   height: 50,
-                    //   child: ClipRRect(
-                    //     borderRadius: BorderRadius.circular(4),
-                    //     child: CustomNetworkImage(
-                    //       imageURL: product.prodURL[0].url,
-                    //       fit: BoxFit.fill,
-                    //     ),
-                    //   ),
-                    // ),
+                    leading: SizedBox(
+                      width: 50,
+                      height: 50,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(4),
+                        child: CustomNetworkImage(
+                          imageURL: product.prodURL[0].url,
+                          fit: BoxFit.fill,
+                        ),
+                      ),
+                    ),
                     title: Text(product.productname),
                     subtitle: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -75,6 +75,7 @@ class OrderHistoryTile extends StatelessWidget {
                                     bgColor: Colors.green,
                                     onTap: () async {
                                       e.status = OrderStatusEnum.completed;
+                                      print(e.sellerID);
                                       await OrderApi().updateStatus(item);
                                     },
                                   ),
@@ -84,18 +85,9 @@ class OrderHistoryTile extends StatelessWidget {
                         ),
                       ],
                     ),
-
                     trailing: Column(
                       children: <Widget>[
                         const Text('Status'),
-                        Text(
-                          e.status.name,
-                          style: TextStyle(
-                            color: e.status == OrderStatusEnum.completed
-                                ? Colors.green
-                                : Colors.red,
-                          ),
-                        ),
                         Text(
                           e.status.name,
                           style: TextStyle(

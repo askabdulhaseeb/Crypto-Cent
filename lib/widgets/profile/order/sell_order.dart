@@ -10,7 +10,7 @@ import '../../../providers/payment/payment_provider.dart';
 import '../../../providers/provider.dart';
 import '../../custom_widgets/custom_elevated_button.dart';
 import '../../custom_widgets/custom_network_image.dart';
-import 'order_history_tile.dart';
+import 'buy_history_tile.dart';
 
 class SellOrder extends StatelessWidget {
   const SellOrder({super.key});
