@@ -27,22 +27,29 @@ class WalletProvider with ChangeNotifier {
     log('Payabale Balance : $_payableBalance');
   }
 
-  Wallets? _wallet;
-  Wallets? get wallet => _wallet;
   Future<bool> load() async {
     if (AuthMethods.getCurrentUser == null) return false;
     bool temp = false;
     String id = AuthMethods.uid;
-    List<Wallets> wallets = await WalletsApi().get();
-    for (int i = 0; i < wallets.length; i++) {
-      if (wallets[i].walletId == id) {
-        _wallet = wallets[i];
+    _allWallets= await WalletsApi().get();
+    for (int i = 0; i < _allWallets.length; i++) {
+      if (_allWallets[i].walletId == id) {
+        _wallet = _allWallets[i];
         break;
       }
     }
     temp = true;
     getBalance();
     return temp;
+  }
+
+  getSellerWallet(String id) {
+    for (int i = 0; i < _allWallets.length; i++) {
+      if (_allWallets[i].walletId == id) {
+        _wallet = _allWallets[i];
+        break;
+      }
+    }
   }
 
   getBalance() async {
@@ -64,5 +71,11 @@ class WalletProvider with ChangeNotifier {
   double get balance => _balance;
   double _payableBalance = 0;
   double get payableBalance => _payableBalance;
+  Wallets? _wallet;
+  Wallets? get wallet => _wallet;
+  List<Wallets> _allWallets = <Wallets>[];
+  List<Wallets> get allWallets => _allWallets;
+  Wallets? _sellerWallet;
+  Wallets? get sellerWallet => _sellerWallet;
   //double payableBalance = 0;
 }

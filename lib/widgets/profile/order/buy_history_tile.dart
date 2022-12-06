@@ -7,6 +7,7 @@ import '../../../enum/order_status_enum.dart';
 import '../../../models/payment/order.dart';
 import '../../../models/payment/orderd_product.dart';
 import '../../../models/product/product_model.dart';
+import '../../../providers/crypto_wallet/wallet_provider.dart';
 import '../../../providers/payment/payment_provider.dart';
 import '../../../providers/product_provider.dart';
 import '../../custom_widgets/custom_elevated_button.dart';
@@ -26,9 +27,9 @@ class OrderHistoryTile extends StatelessWidget {
       subtitle:
           Text(item.orderID, maxLines: 1, overflow: TextOverflow.ellipsis),
       children: item.products
-          .map((OrderdProduct e) => Consumer<ProductProvider>(builder:
-                  (BuildContext context, ProductProvider productPro,
-                      Widget? snapshot) {
+          .map((OrderdProduct e) => Consumer2<ProductProvider, WalletProvider>(
+                  builder: (BuildContext context, ProductProvider productPro,
+                      WalletProvider walletPro, Widget? snapshot) {
                 Product product = productPro.product(e.pid);
                 return Padding(
                   padding: const EdgeInsets.all(8.0),
@@ -74,9 +75,9 @@ class OrderHistoryTile extends StatelessWidget {
                                     title: 'Done',
                                     bgColor: Colors.green,
                                     onTap: () async {
-                                      e.status = OrderStatusEnum.completed;
+                                      //e.status = OrderStatusEnum.completed;
                                       print(e.sellerID);
-                                      await OrderApi().updateStatus(item);
+                                      //await OrderApi().updateStatus(item);
                                     },
                                   ),
                                 ),
