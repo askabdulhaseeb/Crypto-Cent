@@ -66,28 +66,28 @@ class OrderHistoryTile extends StatelessWidget {
                                   },
                                 ),
                               ),
-                            if (e.status == OrderStatusEnum.pending ||
-                                e.status == OrderStatusEnum.inProgress)
-                              Expanded(
-                                child: Padding(
-                                  padding: const EdgeInsets.only(left: 8),
-                                  child: CustomElevatedButton(
-                                    title: 'Done',
-                                    bgColor: Colors.green,
-                                    onTap: () async {
-                                      //e.status = OrderStatusEnum.completed;
-                                      bool temp =
-                                          walletPro.getSellerWallet(e.sellerID);
-                                      if (temp) {
-                                        print(walletPro.sellerWallet!
-                                            .coinsWallet[0].address);
-                                      }
-                                      //print(e.sellerID);
-                                      //await OrderApi().updateStatus(item);
-                                    },
-                                  ),
+                            // if (e.status == OrderStatusEnum.pending ||
+                            //     e.status == OrderStatusEnum.inProgress)
+                            Expanded(
+                              child: Padding(
+                                padding: const EdgeInsets.only(left: 8),
+                                child: CustomElevatedButton(
+                                  title: 'Done',
+                                  bgColor: Colors.green,
+                                  onTap: () async {
+                                    //e.status = OrderStatusEnum.completed;
+                                    bool temp =
+                                        walletPro.getSellerWallet(e.sellerID);
+                                    if (temp) {
+                                      print(walletPro.sellerWallet!
+                                          .coinsWallet[0].address);
+                                    }
+                                    //print(e.sellerID);
+                                    //await OrderApi().updateStatus(item);
+                                  },
                                 ),
                               ),
+                            ),
                           ],
                         ),
                       ],
