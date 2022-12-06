@@ -38,5 +38,5 @@ class OrderApi {
         .collection(_collection)
         .doc(value.orderID)
         .update(value.updateStatus());
-  }  
+  }
 }
