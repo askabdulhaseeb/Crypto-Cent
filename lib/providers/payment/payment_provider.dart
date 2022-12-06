@@ -32,6 +32,9 @@ class PaymentProvider with ChangeNotifier {
   }
 
   load() async {
+    _allOrder.clear();
+    _receipt.clear();
+    _order.clear();
     List<Order> tempOrder = <Order>[];
     tempOrder = await OrderApi().get();
     for (int i = 0; i < tempOrder.length; i++) {
@@ -48,7 +51,7 @@ class PaymentProvider with ChangeNotifier {
 
   void sellProductFun() {
     sellProducts.clear();
-     sellingOrder.clear();
+    sellingOrder.clear();
     for (int i = 0; i < allOrder.length; i++) {
       //print(allOrder[i].orderID);
       for (int j = 0; j < allOrder[i].products.length; j++) {
@@ -65,6 +68,12 @@ class PaymentProvider with ChangeNotifier {
   }
 
   getGraphData() {
+  totalCount = 0;
+   proccesing = 0;
+   completed = 0;
+  deleviry = 0;
+   cancel = 0;
+   shipped = 0;
     for (int i = 0; i < _order.length; i++) {
       List<OrderdProduct> temp = _order[i].products;
       for (int j = 0; j < temp.length; j++) {
