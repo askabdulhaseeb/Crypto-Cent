@@ -29,4 +29,18 @@ class Encryption {
 
     return decrypted64;
   }
+
+  String userDecrypt(String data,String id) {
+     String uid = id;
+   String bs64 = base64.encode(uid.codeUnits);
+   String x = bs64.substring(bs64.length - 24, bs64.length);
+   final Key key = Key.fromBase64(x);
+  final IV iv = IV.fromBase64(x);
+
+  final Encrypter encrypter = Encrypter(AES(key));
+    final String decrypted64 =
+        encrypter.decrypt(Encrypted.fromBase64(data), iv: iv);
+
+    return decrypted64;
+  }
 }

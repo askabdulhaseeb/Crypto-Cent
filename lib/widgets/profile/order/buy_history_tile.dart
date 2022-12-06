@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 
 import '../../../database/payment/order_api.dart';
 import '../../../enum/order_status_enum.dart';
+import '../../../function/encryption_function.dart';
 import '../../../models/payment/order.dart';
 import '../../../models/payment/orderd_product.dart';
 import '../../../models/product/product_model.dart';
@@ -66,28 +67,35 @@ class OrderHistoryTile extends StatelessWidget {
                                   },
                                 ),
                               ),
-                            // if (e.status == OrderStatusEnum.pending ||
-                            //     e.status == OrderStatusEnum.inProgress)
-                            Expanded(
-                              child: Padding(
-                                padding: const EdgeInsets.only(left: 8),
-                                child: CustomElevatedButton(
-                                  title: 'Done',
-                                  bgColor: Colors.green,
-                                  onTap: () async {
-                                    //e.status = OrderStatusEnum.completed;
-                                    bool temp =
-                                        walletPro.getSellerWallet(e.sellerID);
-                                    if (temp) {
-                                      print(walletPro.sellerWallet!
-                                          .coinsWallet[0].address);
-                                    }
-                                    //print(e.sellerID);
-                                    //await OrderApi().updateStatus(item);
-                                  },
+                            if (e.status == OrderStatusEnum.pending ||
+                                e.status == OrderStatusEnum.inProgress)
+                              Expanded(
+                                child: Padding(
+                                  padding: const EdgeInsets.only(left: 8),
+                                  child: CustomElevatedButton(
+                                    title: 'Done',
+                                    bgColor: Colors.green,
+                                    onTap: () async {
+                                      //e.status = OrderStatusEnum.completed;
+                                      bool temp =
+                                          walletPro.getSellerWallet(e.sellerID);
+                                      if (temp) {
+                                        print(walletPro.sellerWallet!
+                                            .coinsWallet[0].wallet);
+
+                                        // String walletIDD =
+                                        //     Encryption(sellerID: e.sellerID)
+                                        //         .appDecrypt(walletPro
+                                        //             .sellerWallet!
+                                        //             .coinsWallet[0]
+                                        //             .wallet);
+                                      }
+                                      //print(e.sellerID);
+                                      //await OrderApi().updateStatus(item);
+                                    },
+                                  ),
                                 ),
                               ),
-                            ),
                           ],
                         ),
                       ],
