@@ -64,8 +64,7 @@ class SellOrder extends StatelessWidget {
                           ),
                         ),
                       if (orderPro.sellProducts[index].status ==
-                              OrderStatusEnum.pending 
-                          )
+                          OrderStatusEnum.pending)
                         Expanded(
                           child: Padding(
                             padding: const EdgeInsets.only(left: 8),
@@ -87,15 +86,6 @@ class SellOrder extends StatelessWidget {
               trailing: Column(
                 children: <Widget>[
                   const Text('Status'),
-                  Text(
-                    orderPro.sellProducts[index].status.name,
-                    style: TextStyle(
-                      color: orderPro.sellProducts[index].status ==
-                              OrderStatusEnum.completed
-                          ? Colors.green
-                          : Colors.red,
-                    ),
-                  ),
                   Text(
                     orderPro.sellProducts[index].status.name,
                     style: TextStyle(

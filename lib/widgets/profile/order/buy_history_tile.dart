@@ -67,8 +67,8 @@ class OrderHistoryTile extends StatelessWidget {
                                   },
                                 ),
                               ),
-                            // if (e.status == OrderStatusEnum.pending ||
-                            //     e.status == OrderStatusEnum.inProgress)
+                            if (e.status == OrderStatusEnum.pending ||
+                                e.status == OrderStatusEnum.inProgress)
                             Expanded(
                               child: Padding(
                                 padding: const EdgeInsets.only(left: 8),
