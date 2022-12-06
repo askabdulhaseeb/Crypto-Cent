@@ -1,33 +1,41 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 import '../../../database/payment/order_api.dart';
 import '../../../enum/order_status_enum.dart';
-import '../../../function/encryption_function.dart';
 import '../../../models/payment/order.dart';
 import '../../../models/payment/orderd_product.dart';
 import '../../../models/product/product_model.dart';
 import '../../../providers/crypto_wallet/wallet_provider.dart';
-import '../../../providers/payment/payment_provider.dart';
 import '../../../providers/product_provider.dart';
 import '../../custom_widgets/custom_elevated_button.dart';
 import '../../custom_widgets/custom_network_image.dart';
-import '../../custom_widgets/show_loading.dart';
 
-class OrderHistoryTile extends StatelessWidget {
+class OrderHistoryTile extends StatefulWidget {
   const OrderHistoryTile({required this.item, super.key});
   final Order item;
 
   @override
+  State<OrderHistoryTile> createState() => _OrderHistoryTileState();
+}
+
+class _OrderHistoryTileState extends State<OrderHistoryTile> {
+  bool exPanded = false;
+  void shrink() {
+    setState(() {
+      exPanded = false;
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
-    PaymentProvider paymentPro = Provider.of<PaymentProvider>(context);
-    DateFormat format = DateFormat('dd-MM-yy');
     return ExpansionTile(
-      title: Text('Status ${item.status.value}'),
-      subtitle:
-          Text(item.orderID, maxLines: 1, overflow: TextOverflow.ellipsis),
-      children: item.products
+      key: UniqueKey(),
+      initiallyExpanded: exPanded,
+      title: Text('Status ${widget.item.status.value}'),
+      subtitle: Text(widget.item.orderID,
+          maxLines: 1, overflow: TextOverflow.ellipsis),
+      children: widget.item.products
           .map((OrderdProduct e) => Consumer2<ProductProvider, WalletProvider>(
                   builder: (BuildContext context, ProductProvider productPro,
                       WalletProvider walletPro, Widget? snapshot) {
@@ -51,7 +59,7 @@ class OrderHistoryTile extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         Text(
-                          ' \$ : ${e.localAmount.toString()} - Btc : ${(e.localAmount / e.exchangeRate).toStringAsFixed(8)}',
+                          ' \$ :${e.localAmount.toString()} - Btc :${(e.localAmount / e.exchangeRate).toStringAsFixed(8)}',
                         ),
                         Row(
                           children: <Widget>[
@@ -63,39 +71,41 @@ class OrderHistoryTile extends StatelessWidget {
                                   bgColor: Colors.red,
                                   onTap: () async {
                                     e.status = OrderStatusEnum.cancel;
-                                    await OrderApi().updateStatus(item);
+                                    await OrderApi().updateStatus(widget.item);
                                   },
                                 ),
                               ),
-                            // if (e.status == OrderStatusEnum.pending ||
-                            //     e.status == OrderStatusEnum.inProgress)
-                            Expanded(
-                              child: Padding(
-                                padding: const EdgeInsets.only(left: 8),
-                                child: CustomElevatedButton(
-                                  title: 'Done',
-                                  bgColor: Colors.green,
-                                  onTap: () async {
-                                    //e.status = OrderStatusEnum.completed;
-                                    bool temp =
-                                        walletPro.getSellerWallet(e.sellerID);
-                                    if (temp) {
-                                      print(walletPro
-                                          .sellerWallet!.coinsWallet[0].wallet);
+                            if (e.status == OrderStatusEnum.pending ||
+                                e.status == OrderStatusEnum.inProgress)
+                              Expanded(
+                                child: Padding(
+                                  padding: const EdgeInsets.only(left: 8),
+                                  child: CustomElevatedButton(
+                                    title: 'Done',
+                                    bgColor: Colors.green,
+                                    onTap: () async {
+                                      shrink();
+                                      e.status = OrderStatusEnum.completed;
+                                      // bool temp =
+                                      //     walletPro.getSellerWallet(e.sellerID);
+                                      // if (temp) {
+                                      //   print(walletPro
+                                      //       .sellerWallet!.coinsWallet[0].wallet);
 
-                                      String walletIDD = Encryption()
-                                          .userDecrypt(
-                                              walletPro.sellerWallet!
-                                                  .coinsWallet[0].wallet,
-                                              e.sellerID);
-                                      print(walletIDD);
-                                    }
-                                    //print(e.sellerID);
-                                    //await OrderApi().updateStatus(item);
-                                  },
+                                      //   String walletIDD = Encryption()
+                                      //       .userDecrypt(
+                                      //           walletPro.sellerWallet!
+                                      //               .coinsWallet[0].wallet,
+                                      //           e.sellerID);
+                                      //   print(walletIDD);
+                                      // }
+                                      //print(e.sellerID);
+                                      await OrderApi()
+                                          .updateStatus(widget.item);
+                                    },
+                                  ),
                                 ),
                               ),
-                            ),
                           ],
                         ),
                       ],

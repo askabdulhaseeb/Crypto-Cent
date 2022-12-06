@@ -93,7 +93,7 @@ class ProfileScreen extends StatelessWidget {
                   const SizedBox(height: 24),
                   ProfileNavTile(
                       name: 'Orders',
-                      image: AppImages.setting,
+                      image: AppImages.orderhistory,
                       onTap: () {
                         Navigator.push(
                           context,

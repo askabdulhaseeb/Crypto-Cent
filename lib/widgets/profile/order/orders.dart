@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../../providers/provider.dart';
+import '../../custom_widgets/show_loading.dart';
 import 'buy_order.dart';
 import 'sell_order.dart';
 
@@ -13,6 +15,11 @@ class OrderTabbar extends StatefulWidget {
 
 class _OrderTabbarState extends State<OrderTabbar> {
   @override
+  void initState() {
+    Provider.of<PaymentProvider>(context, listen: false).load();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(

@@ -188,6 +188,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                   if (done) {
                     // TODO: EMPTY CART
                     if (!mounted) return;
+                    cartPro.deleteAllItem();
                     Navigator.of(context).pop();
                   }
                 },

@@ -15,6 +15,7 @@ class WalletProvider with ChangeNotifier {
     load();
   }
   update(PaymentProvider paymentpro) {
+    _payableBalance = 0;
     for (int i = 0; i < paymentpro.receipt.length; i++) {
       for (int j = 0; j < paymentpro.order.length; j++) {
         if (paymentpro.receipt[i].receiptID == paymentpro.order[j].receiptID) {
