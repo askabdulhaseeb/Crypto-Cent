@@ -67,35 +67,35 @@ class OrderHistoryTile extends StatelessWidget {
                                   },
                                 ),
                               ),
-                            if (e.status == OrderStatusEnum.pending ||
-                                e.status == OrderStatusEnum.inProgress)
-                              Expanded(
-                                child: Padding(
-                                  padding: const EdgeInsets.only(left: 8),
-                                  child: CustomElevatedButton(
-                                    title: 'Done',
-                                    bgColor: Colors.green,
-                                    onTap: () async {
-                                      //e.status = OrderStatusEnum.completed;
-                                      bool temp =
-                                          walletPro.getSellerWallet(e.sellerID);
-                                      if (temp) {
-                                        print(walletPro.sellerWallet!
-                                            .coinsWallet[0].wallet);
+                            // if (e.status == OrderStatusEnum.pending ||
+                            //     e.status == OrderStatusEnum.inProgress)
+                            Expanded(
+                              child: Padding(
+                                padding: const EdgeInsets.only(left: 8),
+                                child: CustomElevatedButton(
+                                  title: 'Done',
+                                  bgColor: Colors.green,
+                                  onTap: () async {
+                                    //e.status = OrderStatusEnum.completed;
+                                    bool temp =
+                                        walletPro.getSellerWallet(e.sellerID);
+                                    if (temp) {
+                                      print(walletPro
+                                          .sellerWallet!.coinsWallet[0].wallet);
 
-                                        // String walletIDD =
-                                        //     Encryption(sellerID: e.sellerID)
-                                        //         .appDecrypt(walletPro
-                                        //             .sellerWallet!
-                                        //             .coinsWallet[0]
-                                        //             .wallet);
-                                      }
-                                      //print(e.sellerID);
-                                      //await OrderApi().updateStatus(item);
-                                    },
-                                  ),
+                                      String walletIDD = Encryption()
+                                          .userDecrypt(
+                                              walletPro.sellerWallet!
+                                                  .coinsWallet[0].wallet,
+                                              e.sellerID);
+                                      print(walletIDD);
+                                    }
+                                    //print(e.sellerID);
+                                    //await OrderApi().updateStatus(item);
+                                  },
                                 ),
                               ),
+                            ),
                           ],
                         ),
                       ],
