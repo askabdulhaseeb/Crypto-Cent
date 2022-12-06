@@ -1,19 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 import '../../../database/payment/order_api.dart';
 import '../../../enum/order_status_enum.dart';
-import '../../../function/encryption_function.dart';
 import '../../../models/payment/order.dart';
 import '../../../models/payment/orderd_product.dart';
 import '../../../models/product/product_model.dart';
 import '../../../providers/crypto_wallet/wallet_provider.dart';
-import '../../../providers/payment/payment_provider.dart';
 import '../../../providers/product_provider.dart';
 import '../../custom_widgets/custom_elevated_button.dart';
 import '../../custom_widgets/custom_network_image.dart';
-import '../../custom_widgets/show_loading.dart';
 
 class OrderHistoryTile extends StatefulWidget {
   const OrderHistoryTile({required this.item, super.key});
@@ -33,8 +29,6 @@ class _OrderHistoryTileState extends State<OrderHistoryTile> {
 
   @override
   Widget build(BuildContext context) {
-    PaymentProvider paymentPro = Provider.of<PaymentProvider>(context);
-    DateFormat format = DateFormat('dd-MM-yy');
     return ExpansionTile(
       key: UniqueKey(),
       initiallyExpanded: exPanded,
