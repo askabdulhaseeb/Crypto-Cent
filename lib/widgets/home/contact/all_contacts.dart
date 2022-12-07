@@ -2,6 +2,8 @@ import 'package:crypto_cent/widgets/home/contact/contact_image.dart';
 import 'package:fast_contacts/fast_contacts.dart';
 import 'package:flutter/material.dart';
 
+import '../../custom_widgets/custom_widget.dart';
+
 class ContactItem extends StatelessWidget {
   const ContactItem({
     Key? key,
@@ -37,7 +39,11 @@ class ContactItem extends StatelessWidget {
       child: ListTile(
         leading: ContactImage(contact: contact),
         title: Text(contact.displayName),
-        subtitle: Text(_subtitle),
+        // subtitle: Text(_subtitle),
+        trailing: const ForText(
+          name: 'invite',
+          color: Colors.green,
+        ),
       ),
     );
   }
