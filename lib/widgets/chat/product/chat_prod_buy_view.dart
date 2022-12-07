@@ -33,7 +33,7 @@ class ChatProdBuyViewState extends State<ChatProdBuyView> {
   @override
   void initState() {
     newOffer = widget.chat.offer?.localAmount.toString() ?? '1';
-    _qty = widget.chat.offer?.quantity.toString() ?? '0';
+    _qty = widget.chat.offer?.quantity.toString() ?? '1';
     _controller = TextEditingController(text: newOffer);
     super.initState();
   }
@@ -46,17 +46,15 @@ class ChatProdBuyViewState extends State<ChatProdBuyView> {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
             GestureDetector(
-              onTap:
-                  // _qty == widget.product.quantity
-                  //     ? null
-                  //     :
-                  () {
-                int temp = int.parse(_qty);
-                temp++;
-                setState(() {
-                  _qty = temp.toString();
-                });
-              },
+              onTap: _qty == widget.product.quantity
+                  ? null
+                  : () {
+                      int temp = int.parse(_qty);
+                      temp++;
+                      setState(() {
+                        _qty = temp.toString();
+                      });
+                    },
               child: const Icon(Icons.add_circle_outline, size: 20),
             ),
             Container(

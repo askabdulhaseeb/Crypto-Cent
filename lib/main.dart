@@ -39,7 +39,7 @@ class MyApp extends StatelessWidget {
             WelcomeScreen.routeName: (_) => const WelcomeScreen(),
             SigninWithEmailScreen.routeName: (_) =>
                 const SigninWithEmailScreen(),
-            SignupWithEmailScreen.routeName: (_) =>
+            SignupWithEmailScreen.routeName: (_) => 
                 const SignupWithEmailScreen(),
             PhoneNumberScreen.routeName: (_) => const PhoneNumberScreen(),
             MainScreen.routeName: (_) => const MainScreen(),

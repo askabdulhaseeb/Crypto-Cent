@@ -28,7 +28,7 @@ class MessageTile extends StatelessWidget {
               padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 24),
               margin: const EdgeInsets.symmetric(vertical: 8),
               decoration: BoxDecoration(
-                color: Theme.of(context).primaryColor,
+                color: Theme.of(context).secondaryHeaderColor,
                 borderRadius: BorderRadius.circular(12),
               ),
               child: message.type == MessageTypeEnum.prodOffer
@@ -38,7 +38,7 @@ class MessageTile extends StatelessWidget {
                           : '${message.text}',
                       textAlign: TextAlign.center,
                       style: TextStyle(
-                        color: Theme.of(context).secondaryHeaderColor,
+                        color: Theme.of(context).primaryColor,
                         decoration: TextDecoration.underline,
                       ),
                     )
