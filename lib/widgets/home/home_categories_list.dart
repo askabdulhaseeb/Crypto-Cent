@@ -1,7 +1,10 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../widgets/custom_widgets/custom_widget.dart';
+import '../../providers/app_provider.dart';
 import '../../providers/contact_provider.dart';
 import '../../screens/empty_screen/empty_screen.dart';
 import '../../screens/category_screens/category.dart';
@@ -23,7 +26,8 @@ class HomeCategoriesList extends StatelessWidget {
           const SizedBox(width: 16),
           allitems(context, 'All', true, () {}),
           allitems(context, 'Contacts', false, () async {
-            bool temp = await contactPro.loadContact();
+            // await contactPro.loading();
+            bool temp = await contactPro.loadContacts(context);
             if (temp) {
               Navigator.push(
                 context,
@@ -33,6 +37,8 @@ class HomeCategoriesList extends StatelessWidget {
                 ),
               );
             } else {
+              Provider.of<AppProvider>(context, listen: false).onTabTapped(0);
+              //  Navigator.pop(context);
               CustomToast.errorToast(message: 'Permission Denied');
             }
           }),

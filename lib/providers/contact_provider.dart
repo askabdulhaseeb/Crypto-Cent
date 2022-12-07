@@ -5,19 +5,19 @@ import 'package:permission_handler/permission_handler.dart';
 class ContactProvider with ChangeNotifier {
   List<Contact> _mobileContacts = [];
   List<Contact> get mobileContact => _mobileContacts;
-  Future<bool> loadContact() async {
-    bool temp = await Permission.contacts.status.isGranted;
 
-    if (!temp) {
-      temp = await Permission.contacts.request().isGranted;
-      if (await Permission.contacts.request().isDenied) {
-        return false;
-      }
-    }
-    if (temp) {
+  Future<bool> loadContacts(BuildContext context) async {
+    bool temp = false;
+    await Permission.contacts.request();
+    final status = await Permission.contacts.status;
+    print(status.name);
+    if (await Permission.contacts.isGranted) {
       _mobileContacts = await FastContacts.allContacts;
+      temp = true;
     } else {
-      _mobileContacts = [];
+      openAppSettings();
+
+      Navigator.of(context).pop();
     }
     return temp;
   }

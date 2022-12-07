@@ -14,14 +14,14 @@ class ContactList extends StatefulWidget {
 
 class _ContactListState extends State<ContactList> {
   Future<List<Contact>> getContact() async {
-    bool temp = await Permission.contacts.status.isGranted;
-
-    if (!temp) {
-      temp = await Permission.contacts.request().isGranted;
-    }
-    if (temp) {
+    await Permission.contacts.request();
+    final status = await Permission.contacts.status;
+    print(status.name);
+    if (await Permission.contacts.isGranted) {
       return FastContacts.allContacts;
     } else {
+      openAppSettings();
+       Navigator.of(context).pop();
       return [];
     }
   }
