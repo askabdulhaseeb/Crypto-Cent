@@ -12,7 +12,6 @@ class ContactList extends StatefulWidget {
 }
 
 class _ContactListState extends State<ContactList> {
- 
   Future<List<Contact>> getContact() async {
     bool temp = await Permission.contacts.status.isGranted;
 
@@ -41,7 +40,9 @@ class _ContactListState extends State<ContactList> {
                     // final String phones = snapshot.data![index].phones[0];
                     // //final emails = snapshot.data![index].emails.join(', ');
                     // final String name = snapshot.data![index].displayName;
-                    return ContactItem(contact: snapshot.data![index],);
+                    return ContactItem(
+                      contact: snapshot.data![index],
+                    );
                   },
                 )
               : snapshot.hasError

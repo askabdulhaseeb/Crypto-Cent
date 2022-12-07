@@ -1,3 +1,4 @@
+import 'package:crypto_cent/widgets/home/contact/contact_image.dart';
 import 'package:fast_contacts/fast_contacts.dart';
 import 'package:flutter/material.dart';
 
@@ -34,7 +35,7 @@ class ContactItem extends StatelessWidget {
     return SizedBox(
       height: height,
       child: ListTile(
-        
+        leading: ContactImage(contact: contact),
         title: Text(contact.displayName),
         subtitle: Text(_subtitle),
       ),
