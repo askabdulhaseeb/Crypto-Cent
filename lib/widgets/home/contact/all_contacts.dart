@@ -34,6 +34,7 @@ class ContactItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print(1);
     return SizedBox(
       height: height,
       child: ListTile(

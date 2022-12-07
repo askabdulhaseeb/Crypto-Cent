@@ -36,57 +36,14 @@ class ContactList extends StatelessWidget {
             const SizedBox(width: 10),
           ],
         ),
-        body: Column(
-          children: [
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  const Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 18, vertical: 8),
-                    child: Text('Contact on list'),
-                  ),
-                  Expanded(
-                    child: ListView.builder(
-                      itemCount: contactPro.boloodoContact.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        // final String phones = snapshot.data![index].phones[0];
-                        // //final emails = snapshot.data![index].emails.join(', ');
-                        // final String name = snapshot.data![index].displayName;
-                        return ContactItem(
-                          contact: contactPro.boloodoContact[index],
-                        );
-                      },
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  const Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 18, vertical: 8),
-                    child: Text('Contact on list'),
-                  ),
-                  Expanded(
-                    child: ListView.builder(
-                      itemCount: contactPro.mobileContact.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        // final String phones = snapshot.data![index].phones[0];
-                        // //final emails = snapshot.data![index].emails.join(', ');
-                        // final String name = snapshot.data![index].displayName;
-                        return ContactItem(
-                          contact: contactPro.mobileContact[index],
-                        );
-                      },
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ],
+        body: ListView.builder(
+          itemCount: contactPro.mobileContact.length,
+          itemBuilder: (BuildContext context, int index) {
+         
+            return ContactItem(
+              contact: contactPro.mobileContact[index],
+            );
+          },
         ),
       );
     });

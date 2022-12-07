@@ -3,12 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 class ContactProvider with ChangeNotifier {
-  List<Contact> _mobileContacts = [];
-  List<Contact> get mobileContact => _mobileContacts;
-  List<Contact> _boloodoContacts = [];
-  List<Contact> get boloodoContact => _boloodoContacts;
-  List<Contact> _inviteContacts = [];
-  List<Contact> get inviteContact => _inviteContacts;
+  
 
   Future<bool> contactsPermission(BuildContext context) async {
     bool temp = false;
@@ -47,4 +42,11 @@ class ContactProvider with ChangeNotifier {
       }
     }
   }
+  List<Contact> _mobileContacts = [];
+  List<Contact> get mobileContact => _mobileContacts;
+  List<Contact> _boloodoContacts = [];
+  List<Contact> get boloodoContact => _boloodoContacts;
+  List<Contact> _inviteContacts = [];
+  List<Contact> get inviteContact => _inviteContacts;
+
 }
