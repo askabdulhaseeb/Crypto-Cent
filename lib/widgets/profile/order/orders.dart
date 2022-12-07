@@ -29,7 +29,7 @@ class _OrderTabbarState extends State<OrderTabbar> {
           backgroundColor: Colors.transparent,
           elevation: 0,
           title: const Text(
-            'Order complete Transaction',
+            'Order Complete Transaction',
             style: TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.bold,

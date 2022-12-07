@@ -70,6 +70,7 @@ class _OrderHistoryTileState extends State<OrderHistoryTile> {
                                   title: 'Cancel',
                                   bgColor: Colors.red,
                                   onTap: () async {
+                                    shrink();
                                     e.status = OrderStatusEnum.cancel;
                                     await OrderApi().updateStatus(widget.item);
                                   },
