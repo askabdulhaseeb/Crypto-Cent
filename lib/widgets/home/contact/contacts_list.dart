@@ -20,15 +20,31 @@ class _ContactListState extends State<ContactList> {
     }
     if (temp) {
       return FastContacts.allContacts;
-    } else
+    } else {
       return [];
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Contacts'),
+        title: Column(
+          children: [
+            const Text('Contacts'),
+            FutureBuilder<List<Contact>>(
+              future: getContact(),
+              builder: (BuildContext context,
+                  AsyncSnapshot<List<Contact>> snapshot) {
+                return snapshot.hasData
+                    ? Text(snapshot.data!.length.toString())
+                    : snapshot.hasError
+                        ? const Text(' -ERROR-')
+                        : const Text(' Fetching...');
+              },
+            )
+          ],
+        ),
       ),
       body: FutureBuilder<List<Contact>>(
         future: getContact(),
