@@ -6,6 +6,7 @@ import '../../providers/contact_provider.dart';
 import '../../screens/empty_screen/empty_screen.dart';
 import '../../screens/category_screens/category.dart';
 import '../../screens/product_screens/add_product_screen.dart';
+import '../custom_widgets/custom_toast.dart';
 import 'contact/contacts_list.dart';
 
 class HomeCategoriesList extends StatelessWidget {
@@ -31,6 +32,8 @@ class HomeCategoriesList extends StatelessWidget {
                   builder: (BuildContext context) => const ContactList(),
                 ),
               );
+            } else {
+              CustomToast.errorToast(message: 'Permission Denied');
             }
           }),
           allitems(context, 'Categories', false, () {
