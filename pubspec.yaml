@@ -52,6 +52,7 @@ dependencies:
   uuid: ^3.0.7
   fl_chart: ^0.55.2
   google_sign_in: ^5.4.2
+  fast_contacts: ^1.1.1
 
 dev_dependencies:
   flutter_test:

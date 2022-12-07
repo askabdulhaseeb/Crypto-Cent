@@ -65,6 +65,7 @@
 	<string>Need location access to attach location with product to improve product sales and reach</string>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>Need location access to attach location with product to improve product sales and reach</string>
-
+    <key>NSContactsUsageDescription</key>  
+    <string>Description of why you need the contacts permission.</string>  
 </dict>
 </plist>
