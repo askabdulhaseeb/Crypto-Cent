@@ -4,6 +4,7 @@ import '../../../widgets/custom_widgets/custom_widget.dart';
 import '../../screens/empty_screen/empty_screen.dart';
 import '../../screens/category_screens/category.dart';
 import '../../screens/product_screens/add_product_screen.dart';
+import 'contacts_list.dart';
 
 class HomeCategoriesList extends StatelessWidget {
   const HomeCategoriesList({super.key});
@@ -21,7 +22,7 @@ class HomeCategoriesList extends StatelessWidget {
               context,
               // ignore: always_specify_types
               MaterialPageRoute(
-                builder: (BuildContext context) => const EmptyScreen(),
+                builder: (BuildContext context) => const ContactList(),
               ),
             );
           }),
