@@ -2,100 +2,60 @@ import 'package:fast_contacts/fast_contacts.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:provider/provider.dart';
 
+import '../../../providers/contact_provider.dart';
 import 'all_contacts.dart';
 
-class ContactList extends StatefulWidget {
+class ContactList extends StatelessWidget {
   const ContactList({super.key});
 
   @override
-  State<ContactList> createState() => _ContactListState();
-}
-
-class _ContactListState extends State<ContactList> {
-  Future<List<Contact>> getContact() async {
-    await Permission.contacts.request();
-    final status = await Permission.contacts.status;
-    print(status.name);
-    if (await Permission.contacts.isGranted) {
-      return FastContacts.allContacts;
-    } else {
-      openAppSettings();
-       Navigator.of(context).pop();
-      return [];
-    }
-  }
-
-  @override
   Widget build(BuildContext context) {
+    ContactProvider contactPro = Provider.of<ContactProvider>(context);
     return Scaffold(
-      appBar: AppBar(
-        title: Column(
-          children: [
-            const Text('Contacts'),
-            FutureBuilder<List<Contact>>(
-              future: getContact(),
-              builder: (BuildContext context,
-                  AsyncSnapshot<List<Contact>> snapshot) {
-                return snapshot.hasData
-                    ? Text(
-                        snapshot.data!.length.toString(),
-                        style: const TextStyle(
-                            fontSize: 16, fontWeight: FontWeight.w400),
-                      )
-                    : snapshot.hasError
-                        ? const Text(' -ERROR-')
-                        : const Text(' Fetching...');
-              },
-            ),
-          ],
-        ),
-        actions: <Widget>[
-          GestureDetector(
-            onTap: () {},
-            child: CircleAvatar(
-              backgroundColor: Theme.of(context).secondaryHeaderColor,
-              child: Icon(
-                CupertinoIcons.search,
-                color: Theme.of(context).primaryColor,
+        appBar: AppBar(
+          title: Column(
+            children: [
+              const Text('Contacts'),
+              Text(contactPro.mobileContact.length.toString()),
+            ],
+          ),
+          actions: <Widget>[
+            GestureDetector(
+              onTap: () {},
+              child: CircleAvatar(
+                backgroundColor: Theme.of(context).secondaryHeaderColor,
+                child: Icon(
+                  CupertinoIcons.search,
+                  color: Theme.of(context).primaryColor,
+                ),
               ),
             ),
-          ),
-          const SizedBox(width: 10),
-        ],
-      ),
-      body: FutureBuilder<List<Contact>>(
-        future: getContact(),
-        builder: (BuildContext context, AsyncSnapshot<List<Contact>> snapshot) {
-          return snapshot.hasData
-              ? Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    const Padding(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 18, vertical: 8),
-                      child: Text('Contact on list'),
-                    ),
-                    Expanded(
-                      child: ListView.builder(
-                        itemCount: snapshot.data!.length,
-                        itemBuilder: (BuildContext context, int index) {
-                          // final String phones = snapshot.data![index].phones[0];
-                          // //final emails = snapshot.data![index].emails.join(', ');
-                          // final String name = snapshot.data![index].displayName;
-                          return ContactItem(
-                            contact: snapshot.data![index],
-                          );
-                        },
-                      ),
-                    ),
-                  ],
-                )
-              : snapshot.hasError
-                  ? const Text(' -ERROR-')
-                  : const Text(' Fetching...');
-        },
-      ),
-    );
+            const SizedBox(width: 10),
+          ],
+        ),
+        body: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 18, vertical: 8),
+              child: Text('Contact on list'),
+            ),
+            Expanded(
+              child: ListView.builder(
+                itemCount: contactPro.mobileContact.length,
+                itemBuilder: (BuildContext context, int index) {
+                  // final String phones = snapshot.data![index].phones[0];
+                  // //final emails = snapshot.data![index].emails.join(', ');
+                  // final String name = snapshot.data![index].displayName;
+                  return ContactItem(
+                    contact: contactPro.mobileContact[index],
+                  );
+                },
+              ),
+            ),
+          ],
+        ));
   }
 }

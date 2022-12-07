@@ -15,9 +15,7 @@ class ContactProvider with ChangeNotifier {
       _mobileContacts = await FastContacts.allContacts;
       temp = true;
     } else {
-      openAppSettings();
-
-      Navigator.of(context).pop();
+      await openAppSettings();
     }
     return temp;
   }
