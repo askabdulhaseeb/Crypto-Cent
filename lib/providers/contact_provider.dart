@@ -5,8 +5,12 @@ import 'package:permission_handler/permission_handler.dart';
 class ContactProvider with ChangeNotifier {
   List<Contact> _mobileContacts = [];
   List<Contact> get mobileContact => _mobileContacts;
+  List<Contact> _boloodoContacts = [];
+  List<Contact> get boloodoContact => _boloodoContacts;
+  List<Contact> _inviteContacts = [];
+  List<Contact> get inviteContact => _inviteContacts;
 
-  Future<bool> loadContacts(BuildContext context) async {
+  Future<bool> contactsPermission(BuildContext context) async {
     bool temp = false;
     await Permission.contacts.request();
     final status = await Permission.contacts.status;
@@ -18,5 +22,29 @@ class ContactProvider with ChangeNotifier {
       await openAppSettings();
     }
     return temp;
+  }
+
+  loadContacts(List<String> value) {
+    String mobileNumber = '';
+    bool isFind = false;
+    for (int i = 0; i < _mobileContacts.length; i++) {
+      String temp = _mobileContacts[i].phones[0];
+      temp = temp.replaceAll(' ', '');
+      if (temp.length >= 10) {
+        mobileNumber = temp.substring(temp.length - 10, temp.length);
+      }
+
+      for (int j = 0; j < value.length; j++) {
+        if (mobileNumber == value[j]) {
+          print(_mobileContacts[i].displayName);
+          _boloodoContacts.add(_mobileContacts[i]);
+          isFind = true;
+          break;
+        }
+      }
+      if (!isFind) {
+        _inviteContacts.add(_mobileContacts[i]);
+      }
+    }
   }
 }

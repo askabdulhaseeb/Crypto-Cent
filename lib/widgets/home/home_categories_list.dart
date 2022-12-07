@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import '../../../widgets/custom_widgets/custom_widget.dart';
 import '../../providers/app_provider.dart';
 import '../../providers/contact_provider.dart';
+import '../../providers/user_provider.dart';
 import '../../screens/empty_screen/empty_screen.dart';
 import '../../screens/category_screens/category.dart';
 import '../../screens/product_screens/add_product_screen.dart';
@@ -17,6 +18,7 @@ class HomeCategoriesList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ContactProvider contactPro = Provider.of<ContactProvider>(context);
+    UserProvider userPro = Provider.of<UserProvider>(context);
 
     return SizedBox(
       height: 44,
@@ -27,8 +29,10 @@ class HomeCategoriesList extends StatelessWidget {
           allitems(context, 'All', true, () {}),
           allitems(context, 'Contacts', false, () async {
             // await contactPro.loading();
-            bool temp = await contactPro.loadContacts(context);
-            if (temp) {
+            bool temp = await contactPro.contactsPermission(context);
+            if (temp)  {
+            List<String> bloodoNumber= await userPro.number();
+             await contactPro.loadContacts(bloodoNumber);
               Navigator.push(
                 context,
                 // ignore: always_specify_types

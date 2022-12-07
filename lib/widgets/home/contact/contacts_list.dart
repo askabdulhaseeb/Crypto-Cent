@@ -12,50 +12,52 @@ class ContactList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ContactProvider contactPro = Provider.of<ContactProvider>(context);
-    return Scaffold(
-        appBar: AppBar(
-          title: Column(
-            children: [
-              const Text('Contacts'),
-              Text(contactPro.mobileContact.length.toString()),
-            ],
-          ),
-          actions: <Widget>[
-            GestureDetector(
-              onTap: () {},
-              child: CircleAvatar(
-                backgroundColor: Theme.of(context).secondaryHeaderColor,
-                child: Icon(
-                  CupertinoIcons.search,
-                  color: Theme.of(context).primaryColor,
+    return Consumer<ContactProvider>(builder:
+        (BuildContext context, ContactProvider contactPro, Widget? snapshot) {
+      return Scaffold(
+          appBar: AppBar(
+            title: Column(
+              children: [
+                const Text('Contacts'),
+                Text(contactPro.mobileContact.length.toString()),
+              ],
+            ),
+            actions: <Widget>[
+              GestureDetector(
+                onTap: () {},
+                child: CircleAvatar(
+                  backgroundColor: Theme.of(context).secondaryHeaderColor,
+                  child: Icon(
+                    CupertinoIcons.search,
+                    color: Theme.of(context).primaryColor,
+                  ),
                 ),
               ),
-            ),
-            const SizedBox(width: 10),
-          ],
-        ),
-        body: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 18, vertical: 8),
-              child: Text('Contact on list'),
-            ),
-            Expanded(
-              child: ListView.builder(
-                itemCount: contactPro.mobileContact.length,
-                itemBuilder: (BuildContext context, int index) {
-                  // final String phones = snapshot.data![index].phones[0];
-                  // //final emails = snapshot.data![index].emails.join(', ');
-                  // final String name = snapshot.data![index].displayName;
-                  return ContactItem(
-                    contact: contactPro.mobileContact[index],
-                  );
-                },
+              const SizedBox(width: 10),
+            ],
+          ),
+          body: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 18, vertical: 8),
+                child: Text('Contact on list'),
               ),
-            ),
-          ],
-        ));
+              Expanded(
+                child: ListView.builder(
+                  itemCount: contactPro.mobileContact.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    // final String phones = snapshot.data![index].phones[0];
+                    // //final emails = snapshot.data![index].emails.join(', ');
+                    // final String name = snapshot.data![index].displayName;
+                    return ContactItem(
+                      contact: contactPro.mobileContact[index],
+                    );
+                  },
+                ),
+              ),
+            ],
+          ));
+    });
   }
 }
