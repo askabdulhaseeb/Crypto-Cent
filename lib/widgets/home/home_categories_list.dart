@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../../widgets/custom_widgets/custom_widget.dart';
+import '../../providers/contact_provider.dart';
 import '../../screens/empty_screen/empty_screen.dart';
 import '../../screens/category_screens/category.dart';
 import '../../screens/product_screens/add_product_screen.dart';
@@ -10,6 +12,8 @@ class HomeCategoriesList extends StatelessWidget {
   const HomeCategoriesList({super.key});
   @override
   Widget build(BuildContext context) {
+    ContactProvider contactPro = Provider.of<ContactProvider>(context);
+
     return SizedBox(
       height: 44,
       child: ListView(
@@ -17,14 +21,17 @@ class HomeCategoriesList extends StatelessWidget {
         children: <Widget>[
           const SizedBox(width: 16),
           allitems(context, 'All', true, () {}),
-          allitems(context, 'Contacts', false, () {
-            Navigator.push(
-              context,
-              // ignore: always_specify_types
-              MaterialPageRoute(
-                builder: (BuildContext context) => const ContactList(),
-              ),
-            );
+          allitems(context, 'Contacts', false, () async {
+            bool temp = await contactPro.loadContact();
+            if (temp) {
+              Navigator.push(
+                context,
+                // ignore: always_specify_types
+                MaterialPageRoute(
+                  builder: (BuildContext context) => const ContactList(),
+                ),
+              );
+            }
           }),
           allitems(context, 'Categories', false, () {
             Navigator.push(
