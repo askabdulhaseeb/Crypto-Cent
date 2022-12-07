@@ -13,7 +13,6 @@ class BloodoContacts extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       height: 60,
-      width: 200,
       child: ListTile(
         leading: SizedBox(
             height: 40,
@@ -39,7 +38,7 @@ class BloodoContacts extends StatelessWidget {
               textStyle: TextStyle(
                   color: Theme.of(context).primaryColor, fontSize: 18),
               border: Border.all(color: Theme.of(context).primaryColor),
-              padding: EdgeInsets.symmetric(horizontal: 6),
+              padding: const EdgeInsets.symmetric(horizontal: 6),
             )
           ],
         ),

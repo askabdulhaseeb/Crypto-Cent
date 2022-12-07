@@ -43,10 +43,58 @@ class ContactList extends StatelessWidget {
         body: ListView.builder(
           itemCount: mobileContacts.length,
           itemBuilder: (BuildContext context, int index) {
-            if (index >= bloodoContactLength) {
-              return ContactItem(
-                contact: mobileContacts[index],
-              );
+            if (bloodoContactLength > 0) {
+              if (index == 0) {
+                return Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    const Padding(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                      child: Text('contacts on Boloodo'),
+                    ),
+                    BloodoContacts(
+                      user: contactPro.blodooUser[0],
+                    )
+                  ],
+                );
+              }
+              if (index == bloodoContactLength) {
+                return bloodoContactLength>1? Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    const Padding(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 16, vertical: 18),
+                      child: Text(
+                        'Invite on Boloodo',
+                        style: TextStyle(
+                            color: Colors.green, fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                    ContactItem(
+                      contact: mobileContacts[index],
+                    )
+                  ],
+                ):const Padding(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 16, vertical: 18),
+                      child: Text(
+                        'Invite on Boloodo',
+                        style: TextStyle(
+                            color: Colors.green, fontWeight: FontWeight.bold),
+                      ),
+                    );
+              }
+              if (index > bloodoContactLength) {
+                return ContactItem(
+                  contact: mobileContacts[index],
+                );
+              } else {
+                return BloodoContacts(
+                  user: contactPro.blodooUser[index],
+                );
+              }
             } else {
               return BloodoContacts(
                 user: contactPro.blodooUser[index],
