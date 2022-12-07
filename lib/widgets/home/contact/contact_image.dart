@@ -27,12 +27,13 @@ class _ContactImageState extends State<ContactImage> {
   Widget build(BuildContext context) {
     return FutureBuilder<Uint8List?>(
       future: _imageFuture,
-      builder: (context, snapshot) => Container(
+      builder: (BuildContext context, AsyncSnapshot<Uint8List?> snapshot) =>
+          SizedBox(
         width: 56,
         height: 56,
         child: snapshot.hasData
             ? Image.memory(snapshot.data!, gaplessPlayback: true)
-            : Icon(Icons.account_box_rounded),
+            : const Icon(Icons.account_box_rounded),
       ),
     );
   }

@@ -30,16 +30,18 @@ class HomeCategoriesList extends StatelessWidget {
           allitems(context, 'Contacts', false, () async {
             // await contactPro.loading();
             bool temp = await contactPro.contactsPermission(context);
-            if (temp)  {
-            List<String> bloodoNumber= await userPro.number();
-             await contactPro.loadContacts(bloodoNumber);
-              Navigator.push(
-                context,
-                // ignore: always_specify_types
-                MaterialPageRoute(
-                  builder: (BuildContext context) => const ContactList(),
-                ),
-              );
+            if (temp) {
+              // List<String> bloodoNumber = await userPro.number();
+              bool change = contactPro.loadContacts(userPro.users);
+              if (change) {
+                Navigator.push(
+                  context,
+                  // ignore: always_specify_types
+                  MaterialPageRoute(
+                    builder: (BuildContext context) => const ContactList(),
+                  ),
+                );
+              }
             } else {
               Provider.of<AppProvider>(context, listen: false).onTabTapped(0);
               //  Navigator.pop(context);

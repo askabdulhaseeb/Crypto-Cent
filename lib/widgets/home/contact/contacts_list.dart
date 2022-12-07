@@ -1,3 +1,4 @@
+import 'package:crypto_cent/widgets/home/contact/bloodo_contacts.dart';
 import 'package:fast_contacts/fast_contacts.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -14,6 +15,9 @@ class ContactList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<ContactProvider>(builder:
         (BuildContext context, ContactProvider contactPro, Widget? snapshot) {
+      List<Contact> mobileContacts = contactPro.mobileContact;
+      int bloodoContactLength = contactPro.blodooUser.length;
+
       return Scaffold(
         appBar: AppBar(
           title: Column(
@@ -37,12 +41,17 @@ class ContactList extends StatelessWidget {
           ],
         ),
         body: ListView.builder(
-          itemCount: contactPro.mobileContact.length,
+          itemCount: mobileContacts.length,
           itemBuilder: (BuildContext context, int index) {
-         
-            return ContactItem(
-              contact: contactPro.mobileContact[index],
-            );
+            if (index >= bloodoContactLength) {
+              return ContactItem(
+                contact: mobileContacts[index],
+              );
+            } else {
+              return BloodoContacts(
+                user: contactPro.blodooUser[index],
+              );
+            }
           },
         ),
       );
