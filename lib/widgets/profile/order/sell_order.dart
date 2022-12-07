@@ -59,7 +59,10 @@ class SellOrder extends StatelessWidget {
                             onTap: () async {
                               orderPro.sellProducts[index].status =
                                   OrderStatusEnum.cancel;
-                              //await OrderApi().updateStatus(item);
+                              await OrderApi().updateStatus(item);
+                              Provider.of<AppProvider>(context, listen: false)
+                                  .onTabTapped(4);
+                              Navigator.pop(context);
                             },
                           ),
                         ),
@@ -75,6 +78,9 @@ class SellOrder extends StatelessWidget {
                                 orderPro.sellProducts[index].status =
                                     OrderStatusEnum.inProgress;
                                 await OrderApi().updateStatus(item);
+                                Provider.of<AppProvider>(context, listen: false)
+                                    .onTabTapped(4);
+                                Navigator.pop(context);
                               },
                             ),
                           ),
