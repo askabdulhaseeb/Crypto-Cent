@@ -82,7 +82,7 @@ class _OrderHistoryState extends State<OrderHistory> {
             child: ForText(
               name: '$title ($num)',
               color: title == name ? Colors.white : Colors.black,
-              size: 16,
+              size: 14,
               bold: true,
             ),
           ),
