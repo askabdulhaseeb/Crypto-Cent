@@ -1,7 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
 import 'database/app_user/auth_method.dart';
 import 'database/local_data.dart';
 import 'firebase_options.dart';

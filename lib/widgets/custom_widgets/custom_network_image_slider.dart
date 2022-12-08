@@ -52,9 +52,16 @@ class _CustomNetworkImageSliderState extends State<CustomNetworkImageSlider> {
             carouselController: controller,
             itemCount: CustomNetworkImageSlider.imgList.length,
             itemBuilder: (BuildContext context, int index, int realIndex) {
-              return SizedBox(
+              return Container(
                 width: width,
-                child: Image.asset(CustomNetworkImageSlider.imgList[index]),
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.only(
+                        bottomLeft: Radius.circular(22),
+                        bottomRight: Radius.circular(22)),
+                    image: DecorationImage(
+                        image: AssetImage(
+                            CustomNetworkImageSlider.imgList[index]))),
+                // child: Image.asset(CustomNetworkImageSlider.imgList[index]),
               );
             },
             options: CarouselOptions(
