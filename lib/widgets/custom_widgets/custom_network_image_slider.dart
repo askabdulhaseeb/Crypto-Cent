@@ -55,7 +55,7 @@ class _CustomNetworkImageSliderState extends State<CustomNetworkImageSlider> {
               return Container(
                 width: width,
                 decoration: BoxDecoration(
-                    borderRadius: BorderRadius.only(
+                    borderRadius: const BorderRadius.only(
                         bottomLeft: Radius.circular(22),
                         bottomRight: Radius.circular(22)),
                     image: DecorationImage(
@@ -91,7 +91,7 @@ class _CustomNetworkImageSliderState extends State<CustomNetworkImageSlider> {
       effect: WormEffect(
         dotHeight: 8,
         dotWidth: 8,
-        dotColor: Color(0xFFD9D9D9),
+        dotColor: const Color(0xFFD9D9D9),
         activeDotColor: Theme.of(context).primaryColor,
       ),
     );
