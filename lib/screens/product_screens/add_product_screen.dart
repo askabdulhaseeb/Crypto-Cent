@@ -35,12 +35,6 @@ class _AddProductScreenState extends State<AddProductScreen> {
     null,
     null,
     null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
   ];
   bool _isloading = false;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
@@ -78,12 +72,6 @@ class _AddProductScreenState extends State<AddProductScreen> {
         CustomToast.alertDialogeBox(context: context, text: 'upload');
 
         _files = <File?>[
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
           null,
           null,
           null,

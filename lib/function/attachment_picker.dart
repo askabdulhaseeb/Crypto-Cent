@@ -8,13 +8,20 @@ class AttachmentPicker {
     final ImagePicker imagePicker = ImagePicker();
     List<XFile> result = await imagePicker.pickMultiImage();
     if (result.isEmpty) return <File?>[];
-    for (int i = 0; i < result.length && i < 10; i++) {
+    for (int i = 0; i < result.length && i < 4; i++) {
       temp.add(File(result[i].path));
     }
-    for (int i = result.length; i < 10; i++) {
+    for (int i = result.length; i < 4; i++) {
       temp.add(null);
     }
     return temp;
+  }
+
+  Future<File?> gallery() async {
+    final ImagePicker imagePicker = ImagePicker();
+    XFile? result = await imagePicker.pickImage(source: ImageSource.gallery);
+    if (result == null) return null;
+    return File(result.path);
   }
 
   Future<List<File?>> camera() async {

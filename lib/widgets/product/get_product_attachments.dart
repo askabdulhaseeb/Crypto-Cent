@@ -21,57 +21,64 @@ class _GetProductImageAttachments extends State<GetProductAttachments> {
     final double width = MediaQuery.of(context).size.width - 32 - 20;
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8),
-      child: Column(
+      child: Row(
         children: <Widget>[
-          InkWell(
-            onTap: widget.onTap,
-            child: Container(
-              width: double.infinity,
-              height: (width / 5) * 2,
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                border: Border.all(width: 0.5),
-                color: Colors.grey[300],
-              ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: const <Widget>[
-                  SizedBox(height: 16),
-                  Icon(Icons.add_circle_rounded),
-                  SizedBox(height: 6),
-                  Text('Add Images'),
-                ],
-              ),
-            ),
-          ),
-          const SizedBox(height: 6),
-          SizedBox(
-            height: width / 5,
-            child: ListView.separated(
-              scrollDirection: Axis.horizontal,
-              itemCount: 5,
-              separatorBuilder: (BuildContext context, int index) =>
-                  const SizedBox(width: 5),
-              itemBuilder: (BuildContext context, int index) => _ImageBox(
-                index: index + 1,
-                width: width / 5,
-                file: widget.file[index],
+          Expanded(
+            child: InkWell(
+              onTap: widget.onTap,
+              child: Container(
+                height: (width / 5) * 2 + 6,
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                  border: Border.all(width: 0.5),
+                  color: Colors.grey[300],
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: const <Widget>[
+                    SizedBox(height: 16),
+                    Icon(Icons.add_circle_rounded),
+                    SizedBox(height: 6),
+                    Text('Add Images'),
+                  ],
+                ),
               ),
             ),
           ),
-          const SizedBox(height: 6),
-          SizedBox(
-            height: width / 5,
-            child: ListView.separated(
-              scrollDirection: Axis.horizontal,
-              itemCount: 5,
-              separatorBuilder: (BuildContext context, int index) =>
-                  const SizedBox(width: 5),
-              itemBuilder: (BuildContext context, int index) => _ImageBox(
-                index: index + 6,
-                width: width / 5,
-                file: widget.file[index + 5],
-              ),
+          const SizedBox(width: 6),
+          Flexible(
+            child: Column(
+              children: <Widget>[
+                SizedBox(
+                  height: width / 5,
+                  child: ListView.separated(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: 2,
+                    separatorBuilder: (BuildContext context, int index) =>
+                        const SizedBox(width: 5),
+                    itemBuilder: (BuildContext context, int index) => _ImageBox(
+                      index: index + 1,
+                      width: width / 4,
+                      file: widget.file[index],
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 6),
+                SizedBox(
+                  height: width / 5,
+                  child: ListView.separated(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: 2,
+                    separatorBuilder: (BuildContext context, int index) =>
+                        const SizedBox(width: 5),
+                    itemBuilder: (BuildContext context, int index) => _ImageBox(
+                      index: index + 3,
+                      width: width / 4,
+                      file: widget.file[index + 2],
+                    ),
+                  ),
+                ),
+              ],
             ),
           ),
         ],
@@ -120,7 +127,7 @@ class _ImageBox extends StatelessWidget {
           : SizedBox(
               height: double.infinity,
               width: double.infinity,
-              child:  Image.file(File(file!.path)),
+              child: Image.file(File(file!.path)),
             ),
     );
   }
