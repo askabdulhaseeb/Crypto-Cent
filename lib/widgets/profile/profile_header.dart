@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../database/app_user/auth_method.dart';
+import '../../models/app_user/app_user.dart';
 import '../../providers/auth_provider.dart';
+import '../../providers/provider.dart';
 import '../custom_widgets/cutom_text.dart';
 
 class ProfileHeader extends StatelessWidget {
@@ -9,10 +12,11 @@ class ProfileHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<AuthProvider>(
-      builder: (BuildContext context, AuthProvider authPro, _) {
-        final String imageURL = authPro.apUser.imageURL ?? '';
-        final String name = authPro.apUser.name ?? '';
+    return Consumer<UserProvider>(
+      builder: (BuildContext context, UserProvider userPro, _) {
+        final AppUser user = userPro.user(AuthMethods.uid);
+        final String imageURL = user.imageURL ?? '';
+        final String name = user.name ?? '';
         return Container(
           height: 200,
           width: double.infinity,

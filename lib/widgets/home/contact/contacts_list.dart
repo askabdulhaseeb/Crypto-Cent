@@ -1,6 +1,6 @@
 import 'dart:developer';
 
-import 'package:crypto_cent/widgets/home/contact/bloodo_contacts.dart';
+import 'bloodo_contacts.dart';
 import 'package:fast_contacts/fast_contacts.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
