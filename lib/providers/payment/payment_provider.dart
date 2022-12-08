@@ -68,12 +68,12 @@ class PaymentProvider with ChangeNotifier {
   }
 
   getGraphData() {
-  totalCount = 0;
-   proccesing = 0;
-   completed = 0;
-  deleviry = 0;
-   cancel = 0;
-   shipped = 0;
+    totalCount = 0;
+    proccesing = 0;
+    completed = 0;
+    deleviry = 0;
+    cancel = 0;
+    shipped = 0;
     for (int i = 0; i < _order.length; i++) {
       List<OrderdProduct> temp = _order[i].products;
       for (int j = 0; j < temp.length; j++) {
@@ -125,7 +125,7 @@ class PaymentProvider with ChangeNotifier {
       receiptID: uniqueID,
       sellerUID: _orderProduct[0].sellerID,
       customerUID: AuthMethods.uid,
-      timestamp: 0,
+      timestamp: TimeStamp.timestamp,
       products: _orderProduct,
     );
     Receipt tempReceipt = Receipt(
