@@ -28,25 +28,24 @@ class CustomFileImageBox extends StatelessWidget {
             child: ClipRRect(
               borderRadius: BorderRadius.circular(10),
               child: Container(
-                height: size,
-                width: size,
-                color: Theme.of(context).primaryColor,
-                child: file == null
-                    ? Padding(
-                        padding: padding ?? EdgeInsets.zero,
-                        child: FittedBox(
-                          child: Icon(
-                            Icons.person,
-                            color: iconColor ?? Colors.white,
+                  height: size,
+                  width: size,
+                  color: Theme.of(context).primaryColor,
+                  child: file == null
+                      ? Padding(
+                          padding: padding ?? EdgeInsets.zero,
+                          child: FittedBox(
+                            child: Icon(
+                              Icons.person,
+                              color: iconColor ?? Colors.white,
+                            ),
                           ),
-                        ),
-                      )
-                    : CircleAvatar(
-                                radius: 64,
-                                backgroundImage: MemoryImage(file!),
-                                backgroundColor: Colors.red,
-                              )
-              ),
+                        )
+                      : CircleAvatar(
+                          radius: 64,
+                          backgroundImage: MemoryImage(file!),
+                          backgroundColor: Colors.red,
+                        )),
             ),
           ),
           TextButton(

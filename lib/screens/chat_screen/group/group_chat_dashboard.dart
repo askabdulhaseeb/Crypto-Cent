@@ -20,19 +20,29 @@ class GroupChatDashboard extends StatelessWidget {
           } else {
             if (snapshot.hasData) {
               List<Chat> chat = snapshot.data ?? <Chat>[];
-              return chat.isEmpty
-                  ? const Center(child: Text('No Group available yet'))
-                  : ListView.separated(
-                      itemCount: chat.length,
-                      separatorBuilder: (_, __) => const Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 16),
-                        child: Divider(height: 1),
-                      ),
-                      itemBuilder: (_, int index) {
-                        // return GroupChatDashboardTile(chat: chat[index]);
-                        return const Text('data');
-                      },
-                    );
+              return Column(
+                children: <Widget>[
+                  TextButton.icon(
+                    onPressed: () {},
+                    icon: const Icon(Icons.add),
+                    label: const Text('Create Group'),
+                  ),
+                  chat.isEmpty
+                      ? const Center(child: Text('No Group available yet'))
+                      : ListView.separated(
+                          shrinkWrap: true,
+                          itemCount: chat.length,
+                          separatorBuilder: (_, __) => const Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 16),
+                            child: Divider(height: 1),
+                          ),
+                          itemBuilder: (_, int index) {
+                            // return GroupChatDashboardTile(chat: chat[index]);
+                            return const Text('data');
+                          },
+                        ),
+                ],
+              );
             } else {
               return const Text('Error Text');
             }

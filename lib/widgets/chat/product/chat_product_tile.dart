@@ -3,7 +3,9 @@ import 'package:provider/provider.dart';
 
 import '../../../database/app_user/auth_method.dart';
 import '../../../database/chat_api.dart';
+import '../../../function/crypto_function.dart';
 import '../../../models/chat/chat.dart';
+import '../../../models/payment/orderd_product.dart';
 import '../../../models/product/product_model.dart';
 import '../../../providers/provider.dart';
 import '../../../screens/product_screens/product_detail_screen.dart';
@@ -60,7 +62,20 @@ class ChatProductTile extends StatelessWidget {
                   );
                 } else {
                   return snapshot.hasError
-                      ? const Text('- ERROR -')
+                      ? product.uid == AuthMethods.uid
+                          ? const Text('NO OFFER PLACED YET!')
+                          : Expanded(
+                              child: ChatProdBuyView(
+                                  product: product,
+                                  chat: chat
+                                    ..offer = OrderdProduct(
+                                      pid: product.pid,
+                                      sellerID: product.uid,
+                                      localAmount: product.amount,
+                                      exchangeRate: 1000,
+                                      quantity: 1,
+                                    )),
+                            )
                       : const ShowLoading();
                 }
               }),
