@@ -69,7 +69,7 @@ class _CustomNetworkImageSliderState extends State<CustomNetworkImageSlider> {
               viewportFraction: 1,
               //  height: width,
               aspectRatio: 1 / 1,
-              onPageChanged: (index, reason) =>
+              onPageChanged: (int index, CarouselPageChangedReason reason) =>
                   setState(() => activeIndex = index),
             )),
         Positioned(
