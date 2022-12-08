@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 class AppImages {
   static String get banner => 'assets/images/banner.png';
   static String get brandIntroIcon => 'assets/images/brand_icon.png';
@@ -8,9 +10,12 @@ class AppImages {
   //logo
 
   static String get logo => 'assets/logos/logo.png';
+  static String get whiteLogo => 'assets/logos/boloodologo.png';
 
   //
   // icons
+  static String get drawerIcon => 'assets/icons/Vector.png';
+
   //bottom nav bar icons
   static String get googleLogo => 'assets/icons/google.png';
   static String get homeSelected => 'assets/icons/home_fill.png';

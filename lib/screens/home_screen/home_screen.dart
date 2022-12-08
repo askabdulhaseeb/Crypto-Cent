@@ -36,12 +36,56 @@ class HomeScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Stack(
-                  children: [
+                  children: <Widget>[
                     const CustomNetworkImageSlider(),
-                    Container(
-                      height: 10,
-                      width: 10,
-                      color: Colors.white,
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 16   , vertical: 12),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Container(
+                            height: 45,
+                            width: 45,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(16),
+                              color: Colors.white,
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 8, vertical: 12),
+                              child: Image.asset(
+                                AppImages.drawerIcon,
+                                fit: BoxFit.fill,
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            height: 50,
+                            width: 200,
+                            child: Image.asset(AppImages.whiteLogo),
+                          ),
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute<SerachScreen>(
+                                  builder: (BuildContext context) =>
+                                      const SerachScreen(),
+                                ),
+                              );
+                            },
+                            child: CircleAvatar(
+                              backgroundColor:
+                                  Theme.of(context).secondaryHeaderColor,
+                              child: const Icon(
+                                CupertinoIcons.search,
+                                color: Colors.black,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ],
                 ),
