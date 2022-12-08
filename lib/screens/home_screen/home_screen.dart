@@ -21,132 +21,135 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appBar(context),
-      drawer: drawerScreen(context),
-      body: Consumer2<ProductProvider, CategoriesProvider>(builder: (
-        BuildContext context,
-        ProductProvider productPro,
-        CategoriesProvider catPro,
-        _,
-      ) {
-        return SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              const CustomNetworkImageSlider(),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    const ForText(name: 'Category', size: 18, bold: true),
-                    TextButton(
-                      onPressed: (() {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute<CategoryScreen>(
-                                builder: (BuildContext context) =>
-                                    const CategoryScreen()));
-                      }),
-                      child: ForText(
-                        name: 'View All',
-                        color: Theme.of(context).primaryColor,
+      //appBar: appBar(context),
+      // drawer: drawerScreen(context),
+      body: SafeArea(
+        child: Consumer2<ProductProvider, CategoriesProvider>(builder: (
+          BuildContext context,
+          ProductProvider productPro,
+          CategoriesProvider catPro,
+          _,
+        ) {
+          return SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                const SizedBox(height: 10),
+                const CustomNetworkImageSlider(),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      const ForText(name: 'Category', size: 18, bold: true),
+                      TextButton(
+                        onPressed: (() {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute<CategoryScreen>(
+                                  builder: (BuildContext context) =>
+                                      const CategoryScreen()));
+                        }),
+                        child: ForText(
+                          name: 'View All',
+                          color: Theme.of(context).primaryColor,
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
-              const HomeCategoriesList(),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    const ForText(
-                      name: 'Popular Products',
-                      bold: true,
-                      size: 18,
-                    ),
-                    TextButton(
-                      onPressed: (() {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute<CategoriesExtend>(
-                                builder: (BuildContext context) =>
-                                    CategoriesExtend(categoryName: 'All')));
-                      }),
-                      child: ForText(
-                        name: 'View All',
-                        color: Theme.of(context).primaryColor,
+                const HomeCategoriesList(),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      const ForText(
+                        name: 'Popular Products',
+                        bold: true,
+                        size: 18,
                       ),
-                    ),
-                  ],
-                ),
-              ),
-              const LatestProductsList(),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    const ForText(
-                      name: 'Latest Products',
-                      bold: true,
-                      size: 18,
-                    ),
-                    TextButton(
-                      onPressed: (() {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute<CategoriesExtend>(
-                              builder: (BuildContext context) =>
-                                  CategoriesExtend(categoryName: 'All')),
-                        );
-                      }),
-                      child: ForText(
-                        name: 'View All',
-                        color: Theme.of(context).primaryColor,
+                      TextButton(
+                        onPressed: (() {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute<CategoriesExtend>(
+                                  builder: (BuildContext context) =>
+                                      CategoriesExtend(categoryName: 'All')));
+                        }),
+                        child: ForText(
+                          name: 'View All',
+                          color: Theme.of(context).primaryColor,
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
-              const LatestProductsList(),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    const ForText(
-                      name: 'Browes Products',
-                      bold: true,
-                      size: 18,
-                    ),
-                    TextButton(
-                      onPressed: (() {
-                        Navigator.push(
+                const LatestProductsList(),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      const ForText(
+                        name: 'Latest Products',
+                        bold: true,
+                        size: 18,
+                      ),
+                      TextButton(
+                        onPressed: (() {
+                          Navigator.push(
                             context,
                             MaterialPageRoute<CategoriesExtend>(
                                 builder: (BuildContext context) =>
-                                    CategoriesExtend(
-                                      categoryName: 'All',
-                                    )));
-                      }),
-                      child: ForText(
-                        name: 'View All',
-                        color: Theme.of(context).primaryColor,
+                                    CategoriesExtend(categoryName: 'All')),
+                          );
+                        }),
+                        child: ForText(
+                          name: 'View All',
+                          color: Theme.of(context).primaryColor,
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
-              const LatestProductsList(),
-              const SizedBox(height: 50),
-            ],
-          ),
-        );
-      }),
+                const LatestProductsList(),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      const ForText(
+                        name: 'Browes Products',
+                        bold: true,
+                        size: 18,
+                      ),
+                      TextButton(
+                        onPressed: (() {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute<CategoriesExtend>(
+                                  builder: (BuildContext context) =>
+                                      CategoriesExtend(
+                                        categoryName: 'All',
+                                      )));
+                        }),
+                        child: ForText(
+                          name: 'View All',
+                          color: Theme.of(context).primaryColor,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                const LatestProductsList(),
+                const SizedBox(height: 50),
+              ],
+            ),
+          );
+        }),
+      ),
     );
   }
 
