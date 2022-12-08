@@ -12,7 +12,7 @@ class CustomPageIndicator extends StatelessWidget {
       effect: SlideEffect(
         dotHeight: 8,
         dotWidth: 8,
-        dotColor: Color(0xFFD9D9D9),
+        dotColor: const Color(0xFFD9D9D9),
         activeDotColor: Theme.of(context).primaryColor,
       ),
     );
