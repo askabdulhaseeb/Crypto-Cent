@@ -1,8 +1,9 @@
+import 'dart:developer';
+
 import 'package:crypto_cent/widgets/home/contact/bloodo_contacts.dart';
 import 'package:fast_contacts/fast_contacts.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
 
 import '../../../providers/contact_provider.dart';
@@ -51,7 +52,11 @@ class ContactList extends StatelessWidget {
                     const Padding(
                       padding:
                           EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                      child: Text('contacts on Boloodo'),
+                      child: Text(
+                        'Contacts on Boloodo',
+                        style: TextStyle(
+                            color: Colors.green, fontWeight: FontWeight.bold),
+                      ),
                     ),
                     BloodoContacts(
                       user: contactPro.blodooUser[0],
@@ -60,31 +65,36 @@ class ContactList extends StatelessWidget {
                 );
               }
               if (index == bloodoContactLength) {
-                return bloodoContactLength>1? Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    const Padding(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 16, vertical: 18),
-                      child: Text(
-                        'Invite on Boloodo',
-                        style: TextStyle(
-                            color: Colors.green, fontWeight: FontWeight.bold),
-                      ),
-                    ),
-                    ContactItem(
-                      contact: mobileContacts[index],
-                    )
-                  ],
-                ):const Padding(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 16, vertical: 18),
-                      child: Text(
-                        'Invite on Boloodo',
-                        style: TextStyle(
-                            color: Colors.green, fontWeight: FontWeight.bold),
-                      ),
-                    );
+                return bloodoContactLength > 1
+                    ? Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          const Padding(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 16, vertical: 18),
+                            child: Text(
+                              'Invite on Boloodo',
+                              style: TextStyle(
+                                  color: Colors.green,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                          ContactItem(
+                            contact: mobileContacts[index],
+                          )
+                        ],
+                      )
+                    : const Padding(
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 16, vertical: 18),
+                        child: Text(
+                          'Invite on Boloodo',
+                          style: TextStyle(
+                            color: Colors.green,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      );
               }
               if (index > bloodoContactLength) {
                 return ContactItem(
@@ -96,8 +106,8 @@ class ContactList extends StatelessWidget {
                 );
               }
             } else {
-              return BloodoContacts(
-                user: contactPro.blodooUser[index],
+              return ContactItem(
+                contact: mobileContacts[index],
               );
             }
           },
