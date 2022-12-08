@@ -15,12 +15,12 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
-  static const List<Widget> _pages = <Widget>[
+  static final List<Widget> _pages = <Widget>[
     HomeScreen(),
-    FavoriteScreen(),
-    CartScreen(),
-    ChatScreen(),
-    ProfileScreen(),
+    const FavoriteScreen(),
+    const CartScreen(),
+    const ChatScreen(),
+    const ProfileScreen(),
   ];
   @override
   void initState() {

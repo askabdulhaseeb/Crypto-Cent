@@ -16,13 +16,15 @@ import '../category_screens/categories_extend.dart';
 import '../category_screens/category.dart';
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+  HomeScreen({super.key});
   static const String routeName = '/home-screen';
+  final GlobalKey<ScaffoldState> _key = GlobalKey();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _key,
       //appBar: appBar(context),
-      // drawer: drawerScreen(context),
+      drawer: drawerScreen(context),
       body: SafeArea(
         child: Consumer2<ProductProvider, CategoriesProvider>(builder: (
           BuildContext context,
@@ -37,26 +39,31 @@ class HomeScreen extends StatelessWidget {
               children: <Widget>[
                 Stack(
                   children: <Widget>[
-                    const CustomNetworkImageSlider(),
+                    CustomNetworkImageSlider(),
                     Padding(
                       padding: const EdgeInsets.symmetric(
-                          horizontal: 16   , vertical: 12),
+                          horizontal: 16, vertical: 12),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Container(
-                            height: 45,
-                            width: 45,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(16),
-                              color: Colors.white,
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 8, vertical: 12),
-                              child: Image.asset(
-                                AppImages.drawerIcon,
-                                fit: BoxFit.fill,
+                        children: <Widget>[
+                          GestureDetector(
+                            onTap: () {
+                              _key.currentState!.openDrawer();
+                            },
+                            child: Container(
+                              height: 45,
+                              width: 45,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(16),
+                                color: Colors.white,
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 8, vertical: 12),
+                                child: Image.asset(
+                                  AppImages.drawerIcon,
+                                  fit: BoxFit.fill,
+                                ),
                               ),
                             ),
                           ),
