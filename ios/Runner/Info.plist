@@ -66,6 +66,6 @@
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>Need location access to attach location with product to improve product sales and reach</string>
     <key>NSContactsUsageDescription</key>  
-    <string>Description of why you need the contacts permission.</string>  
+    <string>Need your Contact list to accesss to display your Boloodo contacts and other to improve user experiece</string>  
 </dict>
 </plist>
