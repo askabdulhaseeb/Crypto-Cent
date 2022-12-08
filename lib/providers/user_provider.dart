@@ -26,6 +26,13 @@ class UserProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  List<String> number() {
+    List<String> temp = [];
+    for (int i = 0; i < _user.length; i++) {
+      temp.add(_user[i].phoneNumber.number);
+    }
+    return temp;
+  }
   // block(AppUser user) async {
   //   int index = _indexOf(user.uid);
   //   int myIndex = _indexOf(AuthMethods.uid);

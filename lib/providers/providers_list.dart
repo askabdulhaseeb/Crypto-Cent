@@ -42,4 +42,7 @@ dynamic get listOfProvider => [
       ChangeNotifierProvider<ChatPageProvider>.value(
         value: ChatPageProvider(),
       ),
+      ChangeNotifierProvider<ContactProvider>.value(
+        value: ContactProvider(),
+      ),
     ];
