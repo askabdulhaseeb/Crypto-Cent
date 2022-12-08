@@ -17,6 +17,13 @@ class AttachmentPicker {
     return temp;
   }
 
+  Future<File?> gallery() async {
+    final ImagePicker imagePicker = ImagePicker();
+    XFile? result = await imagePicker.pickImage(source: ImageSource.gallery);
+    if (result == null) return null;
+    return File(result.path);
+  }
+
   Future<List<File?>> camera() async {
     final List<File?> temp = <File?>[];
     final ImagePicker imagePicker = ImagePicker();

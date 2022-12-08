@@ -7,6 +7,7 @@ import 'database/local_data.dart';
 import 'firebase_options.dart';
 import 'providers/provider.dart';
 import 'providers/providers_list.dart';
+import 'screens/chat_screen/group/create_group_screen.dart';
 import 'screens/screens.dart';
 
 Future<void> main() async {
@@ -39,10 +40,12 @@ class MyApp extends StatelessWidget {
             WelcomeScreen.routeName: (_) => const WelcomeScreen(),
             SigninWithEmailScreen.routeName: (_) =>
                 const SigninWithEmailScreen(),
-            SignupWithEmailScreen.routeName: (_) => 
+            SignupWithEmailScreen.routeName: (_) =>
                 const SignupWithEmailScreen(),
             PhoneNumberScreen.routeName: (_) => const PhoneNumberScreen(),
             MainScreen.routeName: (_) => const MainScreen(),
+            CreateChatGroupScreen.routeName: (_) =>
+                const CreateChatGroupScreen(),
           },
         );
       }),
