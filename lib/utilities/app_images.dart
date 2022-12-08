@@ -42,9 +42,9 @@ class AppImages {
   static String get orderSuccefully => 'assets/images/order_succefully.png';
 
 //curosalimages
-  static String get frame1 => 'assets/images/frame2.png';
-  static String get frame2 => 'assets/images/frame3.png';
-  static String get frame3 => 'assets/images/frame14.png';
-  static String get frame4 => 'assets/images/frame17.png';
-  static String get frame5 => 'assets/images/frame18.png';
+  static String get frame1 => 'assets/images/Frame2.png';
+  static String get frame2 => 'assets/images/Frame3.png';
+  static String get frame3 => 'assets/images/Frame14.png';
+  static String get frame4 => 'assets/images/Frame17.png';
+  static String get frame5 => 'assets/images/Frame18.png';
 }

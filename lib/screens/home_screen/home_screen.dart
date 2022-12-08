@@ -35,8 +35,16 @@ class HomeScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                const SizedBox(height: 10),
-                const CustomNetworkImageSlider(),
+                Stack(
+                  children: [
+                    const CustomNetworkImageSlider(),
+                    Container(
+                      height: 10,
+                      width: 10,
+                      color: Colors.white,
+                    ),
+                  ],
+                ),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16),
                   child: Row(

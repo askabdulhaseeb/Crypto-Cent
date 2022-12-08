@@ -13,25 +13,24 @@ class CustomNetworkImageSlider extends StatelessWidget {
     AppImages.frame3,
     AppImages.frame4,
     AppImages.frame5,
-
   ];
 
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
     return CarouselSlider(
       options: CarouselOptions(
         autoPlay: true,
-        aspectRatio: 16 / 7,
-        enlargeCenterPage: true,
+        viewportFraction: 1,
+        //  height: width,
+        aspectRatio: 1 / 1,
+
+        // enlargeCenterPage: true,
       ),
       items: imgList
           .map((String item) => SizedBox(
-                width: double.infinity,
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(20),
-                  // child: CustomNetworkImage(imageURL: item, fit: BoxFit.cover),
-                  child: Image(image: AssetImage(item,),fit: BoxFit.cover,),
-                ),
+                width: width,
+                child: Image.asset(item),
               ))
           .toList(),
     );
