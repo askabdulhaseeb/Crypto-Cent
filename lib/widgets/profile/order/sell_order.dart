@@ -55,7 +55,7 @@ class SellOrder extends StatelessWidget {
                         Expanded(
                           child: CustomElevatedButton(
                             title: 'Cancel',
-                            bgColor: Colors.red,
+                            bgColor: Colors.red[200],
                             onTap: () async {
                               orderPro.sellProducts[index].status =
                                   OrderStatusEnum.cancel;
@@ -73,7 +73,6 @@ class SellOrder extends StatelessWidget {
                             padding: const EdgeInsets.only(left: 8),
                             child: CustomElevatedButton(
                               title: 'Deliver',
-                              bgColor: Colors.green,
                               onTap: () async {
                                 orderPro.sellProducts[index].status =
                                     OrderStatusEnum.inProgress;

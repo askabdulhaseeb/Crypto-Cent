@@ -30,8 +30,8 @@ class _GetProductImageAttachments extends State<GetProductAttachments> {
                 height: (width / 5) * 2 + 6,
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
-                  border: Border.all(width: 0.5),
                   color: Colors.grey[300],
+                  borderRadius: BorderRadius.circular(10),
                 ),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -102,33 +102,33 @@ class _ImageBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: _width,
-      width: _width,
-      decoration: BoxDecoration(
-        border: Border.all(color: Colors.black, width: 0.5),
-      ),
-      child: (file == null)
-          ? Container(
-              height: double.infinity,
-              width: double.infinity,
-              padding: const EdgeInsets.all(16),
-              color: Colors.grey[300],
-              child: FittedBox(
-                child: Text(
-                  index.toString(),
-                  style: TextStyle(
-                    color: Colors.black.withOpacity(0.08),
-                    fontWeight: FontWeight.w900,
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(6),
+      child: SizedBox(
+        height: _width,
+        width: _width,
+        child: (file == null)
+            ? Container(
+                height: double.infinity,
+                width: double.infinity,
+                padding: const EdgeInsets.all(16),
+                color: Colors.grey[300],
+                child: FittedBox(
+                  child: Text(
+                    index.toString(),
+                    style: TextStyle(
+                      color: Colors.black.withOpacity(0.08),
+                      fontWeight: FontWeight.w900,
+                    ),
                   ),
                 ),
+              )
+            : SizedBox(
+                height: double.infinity,
+                width: double.infinity,
+                child: Image.file(File(file!.path)),
               ),
-            )
-          : SizedBox(
-              height: double.infinity,
-              width: double.infinity,
-              child: Image.file(File(file!.path)),
-            ),
+      ),
     );
   }
 }

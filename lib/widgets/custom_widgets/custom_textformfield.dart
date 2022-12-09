@@ -71,7 +71,6 @@ class CustomTextFormFieldState extends State<CustomTextFormField> {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(14),
         color: widget.color ?? Theme.of(context).secondaryHeaderColor,
-        border: Border.all(color: Colors.grey),
       ),
       child: TextFormField(
         initialValue: widget.initialValue,

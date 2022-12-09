@@ -23,35 +23,37 @@ class MessageTile extends StatelessWidget {
     final bool isMe = message.sendBy == AuthMethods.uid;
     return message.type == MessageTypeEnum.announcement ||
             message.type == MessageTypeEnum.prodOffer
-        ? Center(
-            child: Container(
-              padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 24),
-              margin: const EdgeInsets.symmetric(vertical: 8),
-              decoration: BoxDecoration(
-                color: Theme.of(context).secondaryHeaderColor,
-                borderRadius: BorderRadius.circular(12),
-              ),
-              child: message.type == MessageTypeEnum.prodOffer
-                  ? Text(
-                      message.text == null
-                          ? '- waiting for message -'
-                          : '${message.text}',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        color: Theme.of(context).primaryColor,
-                        decoration: TextDecoration.underline,
-                      ),
-                    )
-                  : Text(
-                      message.text ?? '- waiting for message -',
-                      style: TextStyle(
-                        color: Theme.of(context).primaryColor,
-                        decoration: TextDecoration.underline,
-                        fontSize: 18,
-                      ),
-                    ),
-            ),
-          )
+        ? const SizedBox()
+        // Center(
+        //         child: Container(
+        //           padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 24),
+        //           margin: const EdgeInsets.symmetric(vertical: 8),
+        //           decoration: BoxDecoration(
+        //             color: Theme.of(context).secondaryHeaderColor,
+        //             borderRadius: BorderRadius.circular(12),
+        //           ),
+        //           child: message.type == MessageTypeEnum.prodOffer
+        //               ? Text(
+        //                   message.text == null
+        //                       ? '- waiting for message -'
+        //                       : '${message.text}',
+        //                   textAlign: TextAlign.center,
+        //                   style: TextStyle(
+        //                     color: Theme.of(context).primaryColor,
+        //                     decoration: TextDecoration.underline,
+        //                   ),
+        //                 )
+        //               : Text(
+        //                   message.text ?? '- waiting for message -',
+        //                   style: TextStyle(
+        //                     color: Theme.of(context).primaryColor,
+        //                     decoration: TextDecoration.underline,
+        //                     fontSize: 18,
+        //                   ),
+        //                 ),
+        //         ),
+        //       )
+        //     :
         : Row(
             mainAxisAlignment:
                 isMe ? MainAxisAlignment.end : MainAxisAlignment.start,

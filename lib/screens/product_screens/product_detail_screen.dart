@@ -212,7 +212,6 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
     BuildContext context,
     CartProvider cartPro,
   ) async {
-    int quantity = 1;
     return await showModalBottomSheet(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10.0),

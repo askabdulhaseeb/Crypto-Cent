@@ -151,23 +151,23 @@ class _AddProductScreenState extends State<AddProductScreen> {
                 const SizedBox(height: 10),
                 CustomTextFormField(
                   controller: productname,
-                  hint: 'Enter Product Name',
-                  maxLength: 160,
+                  hint: 'Enter Name',
                   readOnly: _isloading,
                   validator: (String? value) =>
                       CustomValidator.lessThen2(value),
                 ),
                 CustomTextFormField(
                   controller: productdecription,
-                  hint: 'Enter Product Description',
+                  hint: 'Enter Description',
                   maxLines: 5,
+                  maxLength: 2000,
                   readOnly: _isloading,
                   validator: (String? value) =>
                       CustomValidator.lessThen2(value),
                 ),
                 CustomTextFormField(
                   controller: amount,
-                  hint: 'Enter Product Price',
+                  hint: 'Enter Price',
                   readOnly: _isloading,
                   validator: (String? value) => CustomValidator.isEmpty(value),
                   keyboardType: const TextInputType.numberWithOptions(
@@ -177,7 +177,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                 ),
                 CustomTextFormField(
                   controller: quantity,
-                  hint: 'Enter Product Quantity',
+                  hint: 'Enter Quantity',
                   readOnly: _isloading,
                   validator: (String? value) => CustomValidator.isEmpty(value),
                   keyboardType: const TextInputType.numberWithOptions(
@@ -210,9 +210,6 @@ class _AddProductScreenState extends State<AddProductScreen> {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12),
         color: Theme.of(context).secondaryHeaderColor,
-        border: Border.all(
-          color: Theme.of(context).textTheme.bodyText1!.color!.withOpacity(0.5),
-        ),
       ),
       child: Row(
         children: <Widget>[
@@ -255,9 +252,6 @@ class _AddProductScreenState extends State<AddProductScreen> {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12),
         color: Theme.of(context).secondaryHeaderColor,
-        border: Border.all(
-          color: Theme.of(context).textTheme.bodyText1!.color!.withOpacity(0.5),
-        ),
       ),
       child: Row(
         children: <Widget>[

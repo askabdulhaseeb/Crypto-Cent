@@ -68,7 +68,7 @@ class _OrderHistoryTileState extends State<OrderHistoryTile> {
                               Expanded(
                                 child: CustomElevatedButton(
                                   title: 'Cancel',
-                                  bgColor: Colors.red,
+                                  bgColor: Colors.red[200],
                                   onTap: () async {
                                     shrink();
                                     e.status = OrderStatusEnum.cancel;
@@ -83,7 +83,6 @@ class _OrderHistoryTileState extends State<OrderHistoryTile> {
                                   padding: const EdgeInsets.only(left: 8),
                                   child: CustomElevatedButton(
                                     title: 'Done',
-                                    bgColor: Colors.green,
                                     onTap: () async {
                                       shrink();
                                       e.status = OrderStatusEnum.completed;

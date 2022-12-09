@@ -29,47 +29,29 @@ class _CustomNetworkImageSliderState extends State<CustomNetworkImageSlider> {
 
   @override
   Widget build(BuildContext context) {
-    double width = MediaQuery.of(context).size.width;
-    // return CarouselSlider(
-    //   options: CarouselOptions(
-    //     autoPlay: true,
-    //     viewportFraction: 1,
-    //     //  height: width,
-    //     aspectRatio: 1 / 1,
-
-    //     // enlargeCenterPage: true,
-    //   ),
-    //   items: imgList
-    //       .map((String item) => SizedBox(
-    //             width: width,
-    //             child: Image.asset(item),
-    //           ))
-    //       .toList(),
-    // );
     return Stack(
-      children: [
+      children: <Widget>[
         CarouselSlider.builder(
             carouselController: controller,
             itemCount: CustomNetworkImageSlider.imgList.length,
             itemBuilder: (BuildContext context, int index, int realIndex) {
               return Container(
-                width: width,
                 decoration: BoxDecoration(
                     borderRadius: const BorderRadius.only(
                         bottomLeft: Radius.circular(22),
                         bottomRight: Radius.circular(22)),
                     image: DecorationImage(
-                        image: AssetImage(
-                            CustomNetworkImageSlider.imgList[index]))),
-                // child: Image.asset(CustomNetworkImageSlider.imgList[index]),
+                      image:
+                          AssetImage(CustomNetworkImageSlider.imgList[index]),
+                      fit: BoxFit.cover,
+                    )),
               );
             },
             options: CarouselOptions(
               autoPlay: true,
               viewportFraction: 1,
-              //  height: width,
-              aspectRatio: 1 / 1,
-              onPageChanged: (index, reason) =>
+              aspectRatio: 16 / 9,
+              onPageChanged: (int index, CarouselPageChangedReason reason) =>
                   setState(() => activeIndex = index),
             )),
         Positioned(

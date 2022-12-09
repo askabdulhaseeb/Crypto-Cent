@@ -63,21 +63,38 @@ class ChatProdSellerView extends StatelessWidget {
                     : const Text('BTC: fetching...');
           },
         ),
-        CustomElevatedButton(
-          title: 'Accept Offer',
-          padding: const EdgeInsets.all(5),
-          onTap: () {
-            // TODO: Accept offer
+        Row(
+          children: <Widget>[
+            Expanded(
+              child: CustomElevatedButton(
+                title: 'Accept Offer',
+                padding: const EdgeInsets.all(5),
+                onTap: () {
+                  // TODO: Accept offer
 
-            // when user accept the offer it remove update the value amount from
-            // buys wallets (means pending payment)
+                  // when user accept the offer it remove update the value amount from
+                  // buys wallets (means pending payment)
 
-            // if Buy didn't have that much payment their sould be an error message
-            // send where message type will be MessageTypeEnum.prodOfferRejected
+                  // if Buy didn't have that much payment their sould be an error message
+                  // send where message type will be MessageTypeEnum.prodOfferRejected
 
-            // and if the available balance is more then that amount
-            // success message will send where message type will be MessageTypeEnum.prodOfferAccepted
-          },
+                  // and if the available balance is more then that amount
+                  // success message will send where message type will be MessageTypeEnum.prodOfferAccepted
+                },
+              ),
+            ),
+            const SizedBox(width: 8),
+            Expanded(
+              child: CustomElevatedButton(
+                title: 'Decline',
+                padding: const EdgeInsets.all(5),
+                bgColor: Colors.red[200],
+                onTap: () {
+                  // TODO: Decline offer
+                },
+              ),
+            ),
+          ],
         ),
       ],
     );

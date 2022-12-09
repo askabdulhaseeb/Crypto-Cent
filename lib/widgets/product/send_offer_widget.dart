@@ -31,120 +31,131 @@ class _SendOfferWidgetState extends State<SendOfferWidget> {
   int quantity = 1;
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(16),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          const Center(
-            child: Text(
-              'Send Your Offer',
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 18,
-              ),
-            ),
-          ),
-          const SizedBox(height: 8),
-          Text('Orignal Prince: ${widget.product.amount}'),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: <Widget>[
-              IconButton(
-                onPressed: quantity < 2
-                    ? null
-                    : () {
-                        setState(() {
-                          quantity--;
-                        });
-                      },
-                splashRadius: 16,
-                icon: Icon(
-                  Icons.remove_circle_outline,
-                  size: 24,
-                  color: quantity < 2 ? Colors.grey : Colors.red,
-                ),
-              ),
-              Container(
-                padding: const EdgeInsets.symmetric(vertical: 8),
-                width: 80,
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                  color: Theme.of(context).secondaryHeaderColor,
-                  borderRadius: BorderRadius.circular(10),
-                  border: Border.all(color: Colors.grey),
-                ),
-                child: Text(
-                  quantity.toString(),
-                  style: const TextStyle(
-                    color: Colors.black,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 16,
-                  ),
-                ),
-              ),
-              IconButton(
-                onPressed: quantity >= int.parse(widget.product.quantity)
-                    ? null
-                    : () {
-                        setState(() {
-                          quantity++;
-                        });
-                      },
-                splashRadius: 16,
-                icon: Icon(
-                  Icons.add_circle_outline,
-                  size: 24,
-                  color: quantity >= int.parse(widget.product.quantity)
-                      ? Colors.grey
-                      : Colors.green,
-                ),
-              ),
-              Expanded(
-                child: CustomTextFormField(
-                  controller: offer,
-                  keyboardType: TextInputType.number,
-                  hint: 'Set your offer here',
-                  validator: (String? value) => CustomValidator.isEmpty(value),
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 16),
-          Row(
-            children: <Widget>[
-              Expanded(
-                child: TextButton(
-                  onPressed: () => Navigator.of(context).pop(),
-                  child: const Text(
-                    'Go Back',
-                    style: TextStyle(
-                      color: Colors.red,
-                      fontSize: 18,
+    return DraggableScrollableSheet(
+        initialChildSize: 0.6,
+        maxChildSize: 0.8,
+        minChildSize: 0.4,
+        expand: false,
+        builder: (
+          BuildContext context,
+          ScrollController scrollController,
+        ) {
+          return Padding(
+            padding: const EdgeInsets.all(16),
+            child: SingleChildScrollView(
+              controller: scrollController,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  const SizedBox(height: 8),
+                  const Center(
+                    child: Text(
+                      'Send Your Offer',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18,
+                      ),
                     ),
                   ),
-                ),
+                  const SizedBox(height: 24),
+                  Text('Orignal Prince: ${widget.product.amount}'),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: <Widget>[
+                      IconButton(
+                        onPressed: quantity < 2
+                            ? null
+                            : () {
+                                setState(() {
+                                  quantity--;
+                                });
+                              },
+                        splashRadius: 16,
+                        icon: Icon(
+                          Icons.remove_circle_outline,
+                          size: 24,
+                          color: quantity < 2 ? Colors.grey : Colors.red,
+                        ),
+                      ),
+                      Container(
+                        padding: const EdgeInsets.symmetric(vertical: 8),
+                        width: 80,
+                        alignment: Alignment.center,
+                        decoration: BoxDecoration(
+                          color: Theme.of(context).secondaryHeaderColor,
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: Text(
+                          quantity.toString(),
+                          style: const TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16,
+                          ),
+                        ),
+                      ),
+                      IconButton(
+                        onPressed:
+                            quantity >= int.parse(widget.product.quantity)
+                                ? null
+                                : () {
+                                    setState(() {
+                                      quantity++;
+                                    });
+                                  },
+                        splashRadius: 16,
+                        icon: Icon(
+                          Icons.add_circle_outline,
+                          size: 24,
+                          color: quantity >= int.parse(widget.product.quantity)
+                              ? Colors.grey
+                              : Colors.green,
+                        ),
+                      ),
+                      Expanded(
+                        child: CustomTextFormField(
+                          controller: offer,
+                          autoFocus: true,
+                          keyboardType: TextInputType.number,
+                          hint: 'Set your offer here',
+                          validator: (String? value) =>
+                              CustomValidator.isEmpty(value),
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 16),
+                  Row(
+                    children: <Widget>[
+                      Expanded(
+                        child: CustomElevatedButton(
+                          onTap: () => Navigator.of(context).pop(),
+                          title: 'Back',
+                        ),
+                      ),
+                      const SizedBox(width: 10),
+                      Expanded(
+                        child: CustomElevatedButton(
+                          title: 'Send',
+                          onTap: () async {
+                            sendOffer(
+                              offer: offer.text,
+                              quantity: quantity,
+                              user: Provider.of<UserProvider>(context,
+                                      listen: false)
+                                  .user(widget.product.uid),
+                            );
+                          },
+                        ),
+                      )
+                    ],
+                  ),
+                ],
               ),
-              const SizedBox(width: 10),
-              Expanded(
-                child: CustomElevatedButton(
-                  title: 'Send',
-                  onTap: () async {
-                    sendOffer(
-                      offer: offer.text,
-                      quantity: quantity,
-                      user: Provider.of<UserProvider>(context, listen: false)
-                          .user(widget.product.uid),
-                    );
-                  },
-                ),
-              )
-            ],
-          ),
-        ],
-      ),
-    );
+            ),
+          );
+        });
   }
 
   sendOffer({

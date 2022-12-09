@@ -111,7 +111,6 @@ class _AddToCartWidgetState extends State<AddToCartWidget> {
                     decoration: BoxDecoration(
                       color: Theme.of(context).secondaryHeaderColor,
                       borderRadius: BorderRadius.circular(10),
-                      border: Border.all(color: Colors.grey),
                     ),
                     child: Text(
                       quantity.toString(),
