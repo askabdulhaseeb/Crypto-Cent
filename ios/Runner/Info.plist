@@ -63,6 +63,8 @@
 	<string>Need device camera to click product photo to attach</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Need location access to attach location with product to improve product sales and reach</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>Need location access to attach location with product to improve product sales and reach</string>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>Need location access to attach location with product to improve product sales and reach</string>
     <key>NSContactsUsageDescription</key>  
