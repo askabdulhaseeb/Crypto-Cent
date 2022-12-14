@@ -9,7 +9,7 @@ class NotificationsServices {
 
   static Future<void> init() async {
     AndroidInitializationSettings initializationSettingsAndroid =
-        const AndroidInitializationSettings('app_icon');
+        const AndroidInitializationSettings('launch_background');
     DarwinInitializationSettings initializationSettingsIOS =
         DarwinInitializationSettings(
             requestAlertPermission: true,
