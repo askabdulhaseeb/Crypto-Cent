@@ -55,6 +55,10 @@ dependencies:
   fast_contacts: ^1.1.1
   permission_handler: ^10.2.0
   smooth_page_indicator: ^1.0.0+2
+  firebase_messaging: ^13.1.0
+  cloud_functions: ^3.3.9
+  flutter_local_notifications: ^12.0.4
+  flutter_native_timezone: ^2.0.0
 
 dev_dependencies:
   flutter_test:

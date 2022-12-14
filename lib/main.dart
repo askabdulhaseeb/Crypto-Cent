@@ -1,18 +1,35 @@
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'database/app_user/auth_method.dart';
 import 'database/local_data.dart';
+import 'database/notification_services.dart';
 import 'firebase_options.dart';
 import 'providers/provider.dart';
 import 'providers/providers_list.dart';
 import 'screens/chat_screen/group/create_group_screen.dart';
 import 'screens/screens.dart';
 
+Future<void> _firebaseMessBackgroundHand(RemoteMessage message) async {
+  RemoteNotification? notification = message.notification;
+  if (notification == null) return;
+  print('--- background notification');
+  print(message.data);
+
+  // LocalNotifications.showNotification(
+  //   title: notification.title ?? 'Notification',
+  //   body: notification.body ?? 'Hi',
+  //   payload: message.data.toString(),
+  // );
+}
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await LocalData.init();
+  FirebaseMessaging.onBackgroundMessage(_firebaseMessBackgroundHand);
+  NotificationsServices.init();
   runApp(const MyApp());
 }
 
