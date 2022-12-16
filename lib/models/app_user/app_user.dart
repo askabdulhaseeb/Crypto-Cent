@@ -7,6 +7,7 @@ class AppUser {
   final String uid;
   String? name;
   String? imageURL;
+  List<String>? deviceToken;
   final NumberDetails phoneNumber;
   final String? email;
   AppUser({
@@ -15,6 +16,7 @@ class AppUser {
     this.name,
     this.imageURL,
     this.email,
+    this.deviceToken,
   });
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
@@ -23,6 +25,7 @@ class AppUser {
       'number_details': phoneNumber.toMap(),
       'image_url': imageURL ?? '',
       'email': email ?? '',
+      'devices_token': deviceToken ?? [],
     };
   }
 
@@ -34,6 +37,7 @@ class AppUser {
       name: doc.data()?['display_name'] ?? '',
       imageURL: doc.data()?['image_url'] ?? '',
       email: doc.data()?['email'] ?? '',
+      deviceToken: List<String>.from(doc.data()?['devices_token'] ?? []),
     );
   }
 }

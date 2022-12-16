@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cloud_functions/cloud_functions.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 
@@ -14,6 +16,9 @@ class PushNotification {
   Future<List<String>?>? init({required List<String> devicesToken}) async {
     final NotificationSettings? settings = await _requestPermission();
     print(settings?.authorizationStatus);
+    if (settings!.authorizationStatus == AuthorizationStatus.authorized) {
+      print('Permission mil gie ay ');
+    }
 
     if (settings != null &&
         (settings.authorizationStatus == AuthorizationStatus.provisional ||
@@ -32,9 +37,11 @@ class PushNotification {
   Future<List<String>?>? _getToken(List<String> devicesToken) async {
     _token = await _firebaseMessaging.getToken();
     if (_token == null) {
+      log('Token is null');
       CustomToast.errorToast(message: 'Unable to fetch Data, Tryagain Later');
       return null;
     }
+    log('Token is ${token}');
     if (devicesToken.contains(_token)) return null;
     devicesToken.add(_token!);
     UserApi().setDeviceToken(devicesToken);

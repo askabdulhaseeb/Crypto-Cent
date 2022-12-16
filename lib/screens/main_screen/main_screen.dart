@@ -1,3 +1,4 @@
+import '../../function/push_notification.dart';
 import '../../providers/auth_provider.dart';
 import '../../providers/crypto_wallet/wallet_provider.dart';
 import '../chat_screen/chat_screen.dart';
@@ -26,7 +27,10 @@ class _MainScreenState extends State<MainScreen> {
   void initState() {
     load();
     super.initState();
+   // tokenLoad();
   }
+
+  
 
   bool loading = false;
   void load() {
