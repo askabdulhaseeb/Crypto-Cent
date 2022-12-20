@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../../function/push_notification.dart';
 import '../../providers/app_provider.dart';
 import '../../providers/categories_provider.dart';
 import '../../providers/product_provider.dart';
@@ -23,8 +24,19 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       key: _key,
-      //appBar: appBar(context),
+      appBar: appBar(context),
       drawer: drawerScreen(context),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () async {
+          await PushNotification().sendNotification(
+            deviceToken: [
+              'c8Lcor1gQoeSZHEygz7BYS:APA91bEPR8vOhgDPyf0hWYh6zl4ig9hIi-pl0LWr8kVfiBBMJL1cMlJxMc7b_xZE9ZFVfiY78S8AA6V3B8WwZ0R6lhw7kihi_h-IEa6zwzfFH5RehSr5HbvzsQgNmrSgxxYLXqsfpVof'
+            ],
+            messageTitle: 'Answer',
+            messageBody: ' reply with an Answer in your question',
+          );
+        },
+      ),
       body: SafeArea(
         child: Consumer2<ProductProvider, CategoriesProvider>(builder: (
           BuildContext context,

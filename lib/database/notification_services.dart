@@ -1,7 +1,11 @@
+import 'dart:developer';
+
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_native_timezone/flutter_native_timezone.dart';
-import 'package:timezone/data/latest_all.dart' as tz;
-import 'package:timezone/timezone.dart' as tz;
+// import 'package:timezone/data/latest_all.dart' as tz;
+// import 'package:timezone/timezone.dart' as tz;
+import 'package:flutter/foundation.dart';
 
 class NotificationsServices {
   static final FlutterLocalNotificationsPlugin localNotificationPlugin =
@@ -9,7 +13,7 @@ class NotificationsServices {
 
   static Future<void> init() async {
     AndroidInitializationSettings initializationSettingsAndroid =
-        const AndroidInitializationSettings('launch_background');
+        const AndroidInitializationSettings('@mipmap/ic_launcher');
     DarwinInitializationSettings initializationSettingsIOS =
         DarwinInitializationSettings(
             requestAlertPermission: true,
@@ -20,16 +24,17 @@ class NotificationsServices {
                 String? payload) async {});
     InitializationSettings initializationSettings = InitializationSettings(
         android: initializationSettingsAndroid, iOS: initializationSettingsIOS);
-    await localNotificationPlugin.initialize(
-      initializationSettings,
-      //     onSelectNotification: (String? payload) async {
-      //   debugPrint('notification payload: ' + payload!);
-      // }
-    );
+    await localNotificationPlugin.initialize(initializationSettings);
+    // await localNotificationPlugin.initialize(
+    //   initializationSettings,
+    //       onSelectNotification: (String? payload) async {
+    //     debugPrint('notification payload: ' + payload!);
+    //   }
+    // );
 
-    tz.initializeTimeZones();
-    final String locationName = await FlutterNativeTimezone.getLocalTimezone();
-    tz.setLocalLocation(tz.getLocation(locationName));
+    // tz.initializeTimeZones();
+    // final String locationName = await FlutterNativeTimezone.getLocalTimezone();
+    // tz.setLocalLocation(tz.getLocation(locationName));
 
     await localNotificationPlugin
         .resolvePlatformSpecificImplementation<
@@ -39,55 +44,25 @@ class NotificationsServices {
           badge: true,
           sound: true,
         );
-  }
+    FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+      // print('Got a message whilst in the foreground!');
+      //print('Message data: ${message.data}');
 
-  static Future<void> scheduleAzanNotification(DateTime prayerTime,
-      String prayerName, int notificationId, int azanSoundIndex) async {
-    if (prayerTime.isAfter(DateTime.now())) {
-      AndroidNotificationDetails androidPlatformChannelSpecifics =
-          AndroidNotificationDetails(
-        'alarm_notif$azanSoundIndex',
-        'alarm_notif$azanSoundIndex',
-        channelDescription: 'Channel for Alarm notification',
-        icon: 'app_icon',
-        sound: RawResourceAndroidNotificationSound('azan$azanSoundIndex'),
-        largeIcon: const DrawableResourceAndroidBitmap('app_icon'),
-        playSound: true,
-        importance: Importance.max,
-        priority: Priority.max,
-      );
-
-      DarwinNotificationDetails iOSPlatformChannelSpecifics =
-          DarwinNotificationDetails(
-        sound: 'azan$azanSoundIndex.wav',
-        presentAlert: true,
-        presentBadge: true,
-        presentSound: true,
-      );
-      NotificationDetails platformSpecificDetails = NotificationDetails(
-        android: androidPlatformChannelSpecifics,
-        iOS: iOSPlatformChannelSpecifics,
-      );
-
-      await init();
-
-      await localNotificationPlugin.zonedSchedule(
-        notificationId,
-        'Salamgram',
-        'Reminder for $prayerName prayer',
-        tz.TZDateTime.from(prayerTime, tz.local),
-        platformSpecificDetails,
-        androidAllowWhileIdle: true,
-        uiLocalNotificationDateInterpretation:
-            UILocalNotificationDateInterpretation.absoluteTime,
-      );
-    }
+      if (message.notification != null) {
+        log('Message Title: ${message.notification!.title}');
+        _notificationDetails();
+        showNotification(
+            title: message.notification!.title!,
+            body: message.notification!.body!);
+        // print('Message also contained a notification: ${message.notification}');
+      }
+    });
   }
 
   static NotificationDetails _notificationDetails() {
     return const NotificationDetails(
       android: AndroidNotificationDetails('channel Id', 'channel Name',
-          importance: Importance.max),
+          playSound: true, importance: Importance.max),
       iOS: DarwinNotificationDetails(
         presentAlert: true,
         presentSound: true,

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 import '../database/app_user/auth_method.dart';
 import '../database/app_user/user_api.dart';
+import '../database/notification_services.dart';
 import '../function/push_notification.dart';
 import '../models/app_user/app_user.dart';
 import '../models/app_user/numbers_detail.dart';
@@ -27,6 +28,15 @@ class UserProvider extends ChangeNotifier {
 
     List<String> getToken =
         await PushNotification().init(devicesToken: deviceToken) ?? [];
+    // bool notificationSend = await PushNotification().sendNotification(
+    //     data: ['f', 'usman'],
+    //     deviceToken: _deviceToken,
+    //     messageBody: 'MALIK DON',
+    //     messageTitle: 'MALIK');
+
+    // if (notificationSend) {
+      //await NotificationsServices.init();
+    // }
     print(_deviceToken[0]);
     notifyListeners();
     log('App_Provider.dart: No of Users: ${_user.length}');

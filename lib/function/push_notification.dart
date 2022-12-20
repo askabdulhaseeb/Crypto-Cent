@@ -52,25 +52,24 @@ class PushNotification {
     required List<String> deviceToken,
     required String messageTitle,
     required String messageBody,
-    required List<String> data,
   }) async {
-    String value3 = data.length == 2 ? '' : data[2];
     HttpsCallable func =
         FirebaseFunctions.instance.httpsCallable('notifySubscribers');
-    final HttpsCallableResult res = await func.call(
-      <String, dynamic>{
-        'targetDevices': deviceToken,
-        'messageTitle': messageTitle,
-        'messageBody': messageBody,
-        'value1': data[0],
-        'value2': data[1],
-        'value3': value3,
-      },
-    );
-    print(res.data);
-    if (res.data as bool) {
-      return true;
-    } else {
+    try {
+      final HttpsCallableResult res = await func.call(
+        <String, dynamic>{
+          'targetDevices': deviceToken,
+          'messageTitle': messageTitle,
+          'messageBody': messageBody,
+        },
+      );
+      print(res.data);
+      if (res.data as bool) {
+        return true;
+      } else {
+        return false;
+      }
+    } catch (e) {
       return false;
     }
   }
