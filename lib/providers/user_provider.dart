@@ -39,7 +39,7 @@ class UserProvider extends ChangeNotifier {
     // }
     print(_deviceToken[0]);
     notifyListeners();
-    log('App_Provider.dart: No of Users: ${_user.length}');
+   
   }
 
   Future<void> refresh() async {

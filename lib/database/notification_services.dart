@@ -49,7 +49,7 @@ class NotificationsServices {
       //print('Message data: ${message.data}');
 
       if (message.notification != null) {
-        log('Message Title: ${message.notification!.title}');
+       
         _notificationDetails();
         showNotification(
             title: message.notification!.title!,
