@@ -3,8 +3,10 @@ import 'dart:developer';
 import 'package:cloud_functions/cloud_functions.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../database/app_user/user_api.dart';
+import '../providers/app_provider.dart';
 import '../widgets/custom_widgets/custom_toast.dart';
 
 class PushNotification {
@@ -36,11 +38,10 @@ class PushNotification {
   Future<List<String>?>? _getToken(List<String> devicesToken) async {
     _token = await _firebaseMessaging.getToken();
     if (_token == null) {
-      
       CustomToast.errorToast(message: 'Unable to fetch Data, Tryagain Later');
       return null;
     }
-  
+
     if (devicesToken.contains(_token)) return null;
     devicesToken.add(_token!);
     UserApi().setDeviceToken(devicesToken);
@@ -51,6 +52,7 @@ class PushNotification {
     required List<String> deviceToken,
     required String messageTitle,
     required String messageBody,
+    required List<String> data,
   }) async {
     HttpsCallable func =
         FirebaseFunctions.instance.httpsCallable('notifySubscribers');
@@ -60,6 +62,8 @@ class PushNotification {
           'targetDevices': deviceToken,
           'messageTitle': messageTitle,
           'messageBody': messageBody,
+          'value1': data[0],
+          'value2': data[1],
         },
       );
       if (res.data as bool) {
@@ -84,6 +88,10 @@ class PushNotification {
   _handleNotificationData(
       Map<String, dynamic> data, BuildContext context) async {
     print('on click Notification');
+    if (data['value1'] == 'post') {
+      print('post2');
+      Provider.of<AppProvider>(context, listen: false).onTabTapped(2);
+    }
   }
 
   Future<NotificationSettings?> _requestPermission() async {

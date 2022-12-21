@@ -16,30 +16,15 @@ class UserProvider extends ChangeNotifier {
   List<AppUser> _user = <AppUser>[];
   List<String> _deviceToken = <String>[];
   List<String> get deviceToken => _deviceToken;
-  void init() async {
+  AppUser? _currentUser;
+
+  AppUser get currentUser => _currentUser ?? _null;
+  Future<void> init() async {
     if (_user.isNotEmpty) return;
     final List<AppUser> temp = await UserApi().getAllUsers();
     _user = temp;
-    for (int i = 0; i < _user.length; i++) {
-      for (int j = 0; j < _user[i].deviceToken!.length; j++) {
-        _deviceToken.add(_user[i].deviceToken![j]);
-      }
-    }
-
-    List<String> getToken =
-        await PushNotification().init(devicesToken: deviceToken) ?? [];
-    // bool notificationSend = await PushNotification().sendNotification(
-    //     data: ['f', 'usman'],
-    //     deviceToken: _deviceToken,
-    //     messageBody: 'MALIK DON',
-    //     messageTitle: 'MALIK');
-
-    // if (notificationSend) {
-      //await NotificationsServices.init();
-    // }
-    print(_deviceToken[0]);
+   _currentUser= user(AuthMethods.uid);
     notifyListeners();
-   
   }
 
   Future<void> refresh() async {

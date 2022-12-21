@@ -29,12 +29,12 @@ class HomeScreen extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
           await PushNotification().sendNotification(
-            deviceToken: [
-              'c8Lcor1gQoeSZHEygz7BYS:APA91bEPR8vOhgDPyf0hWYh6zl4ig9hIi-pl0LWr8kVfiBBMJL1cMlJxMc7b_xZE9ZFVfiY78S8AA6V3B8WwZ0R6lhw7kihi_h-IEa6zwzfFH5RehSr5HbvzsQgNmrSgxxYLXqsfpVof'
-            ],
-            messageTitle: 'Answer',
-            messageBody: ' reply with an Answer in your question',
-          );
+              deviceToken: [
+                'c8Lcor1gQoeSZHEygz7BYS:APA91bEPR8vOhgDPyf0hWYh6zl4ig9hIi-pl0LWr8kVfiBBMJL1cMlJxMc7b_xZE9ZFVfiY78S8AA6V3B8WwZ0R6lhw7kihi_h-IEa6zwzfFH5RehSr5HbvzsQgNmrSgxxYLXqsfpVof'
+              ],
+              messageTitle: 'Answer',
+              messageBody: ' post',
+              data: ['post', '1234']);
         },
       ),
       body: SafeArea(
