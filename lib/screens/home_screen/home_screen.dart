@@ -5,6 +5,7 @@ import '../../function/push_notification.dart';
 import '../../providers/app_provider.dart';
 import '../../providers/categories_provider.dart';
 import '../../providers/product_provider.dart';
+import '../../providers/provider.dart';
 import '../../utilities/app_images.dart';
 import '../../widgets/custom_widgets/custom_network_image_slider.dart';
 import '../../widgets/custom_widgets/custom_widget.dart';
@@ -22,18 +23,24 @@ class HomeScreen extends StatelessWidget {
   final GlobalKey<ScaffoldState> _key = GlobalKey();
   @override
   Widget build(BuildContext context) {
+    UserProvider userPro = Provider.of<UserProvider>(context);
     return Scaffold(
       key: _key,
       appBar: appBar(context),
       drawer: drawerScreen(context),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
+          List<String> deviceToken = userPro.deviceToken;
+          print(deviceToken.length);
           await PushNotification().sendNotification(
-            deviceToken: [
-              'd-e31u-zT7e0i7ECDtSJEc:APA91bGnWOI7HPTB-S8lM0SGgleZIvHU-gr1vEfr4wij5e9eVc7JjIXOmmXG4RlsOYomcH3s3uk7YMzpL8tACjJYtmTJMWS2pZ0aRpT2TkUNNczXLi5j1hHl6Vhzz7aUzwRdo6oUm5s_'
-            ],
+            deviceToken: deviceToken,
             messageTitle: 'Answer',
             messageBody: ' reply with an Answer in your question',
+            data: [
+              'usman',
+              'afzal',
+              'Bajwa'
+            ]
           );
         },
       ),

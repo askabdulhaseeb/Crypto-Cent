@@ -1,3 +1,6 @@
+import 'package:firebase_messaging/firebase_messaging.dart';
+
+import '../../database/notification_services.dart';
 import '../../function/push_notification.dart';
 import '../../providers/auth_provider.dart';
 import '../../providers/crypto_wallet/wallet_provider.dart';
@@ -24,14 +27,23 @@ class _MainScreenState extends State<MainScreen> {
     const ProfileScreen(),
   ];
   @override
-  void initState() {
+  void initState() async{
     load();
+
+    // WidgetsBinding.instance.addPostFrameCallback((_) {
+    //   print('main main enter hova ha');
+    //   PushNotification.instance.handleNotification(context);
+    // });
     super.initState();
-   // tokenLoad();
+    listenNotification();
+   
   }
-
-  
-
+ listenNotification() {
+    NotificationsServices.onNotification.stream.listen((event) {
+      print('Evenet ' + event!);
+      
+    });
+  }
   bool loading = false;
   void load() {
     setState(() {
@@ -46,6 +58,7 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   Widget build(BuildContext context) {
+ 
     return Scaffold(
       body: Consumer<AppProvider>(
         builder: (BuildContext context, AppProvider navBar, _) {

@@ -6,11 +6,11 @@ import 'package:flutter_native_timezone/flutter_native_timezone.dart';
 // import 'package:timezone/data/latest_all.dart' as tz;
 // import 'package:timezone/timezone.dart' as tz;
 import 'package:flutter/foundation.dart';
-
+import 'package:rxdart/rxdart.dart';
 class NotificationsServices {
   static final FlutterLocalNotificationsPlugin localNotificationPlugin =
       FlutterLocalNotificationsPlugin();
-
+  static final onNotification = BehaviorSubject<String?>();
   static Future<void> init() async {
     AndroidInitializationSettings initializationSettingsAndroid =
         const AndroidInitializationSettings('@mipmap/ic_launcher');
@@ -24,13 +24,28 @@ class NotificationsServices {
                 String? payload) async {});
     InitializationSettings initializationSettings = InitializationSettings(
         android: initializationSettingsAndroid, iOS: initializationSettingsIOS);
-    await localNotificationPlugin.initialize(initializationSettings);
-    // await localNotificationPlugin.initialize(
-    //   initializationSettings,
-    //       onSelectNotification: (String? payload) async {
-    //     debugPrint('notification payload: ' + payload!);
-    //   }
-    // );
+   // await localNotificationPlugin.initialize(initializationSettings);
+    await localNotificationPlugin.initialize(
+      initializationSettings,
+      onDidReceiveNotificationResponse: (details) {
+        //onNotification.add(details.payload.toString());
+       
+          print('notification payload :${details.payload!} ');
+          print('notification id :${details.id} ');
+          print('notification input :${details.input} ');
+          print('notification payload :${details.actionId} ');
+          print('notification type  :${details.notificationResponseType.name} ');
+          print('notification payload :${details.toString()} ');
+            
+      
+        // if (details.id == 1) {
+        //   print('1 chala ha');
+        // }
+      },
+      //     onSelectNotification: (String? payload) async {
+      //   debugPrint('notification payload: ' + payload!);
+      // }
+    );
 
     // tz.initializeTimeZones();
     // final String locationName = await FlutterNativeTimezone.getLocalTimezone();

@@ -35,7 +35,7 @@ class UserProvider extends ChangeNotifier {
     //     messageTitle: 'MALIK');
 
     // if (notificationSend) {
-      //await NotificationsServices.init();
+    //await NotificationsServices.init();
     // }
     print(_deviceToken[0]);
     notifyListeners();
