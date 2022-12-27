@@ -1,12 +1,10 @@
+import 'dart:core';
 import 'dart:developer';
 
 import 'package:cloud_functions/cloud_functions.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
-<<<<<<< HEAD
-=======
 import 'package:provider/provider.dart';
->>>>>>> fc69de18b8d55a7269b8c097e257741938683c93
 
 import '../database/app_user/user_api.dart';
 import '../providers/app_provider.dart';
@@ -71,10 +69,7 @@ class PushNotification {
           'messageBody': messageBody,
           'value1': data[0],
           'value2': data[1],
-<<<<<<< HEAD
           'value3': value3,
-=======
->>>>>>> fc69de18b8d55a7269b8c097e257741938683c93
         },
       );
       if (res.data as bool) {
@@ -90,15 +85,6 @@ class PushNotification {
   handleNotification(BuildContext context) async {
     RemoteMessage? message =
         await FirebaseMessaging.instance.getInitialMessage();
-<<<<<<< HEAD
-    print('message main aya ha');
-    if (message != null) _handleNotificationData(message.data, context);
-    FirebaseMessaging.onMessageOpenedApp.listen((message) {
-      print('Message listen');
-      _handleNotificationData(message.data, context);
-    });
-  }
-=======
     if (message != null) _handleNotificationData(message.data, context);
     FirebaseMessaging.onMessageOpenedApp.listen((message) {
       _handleNotificationData(message.data, context);
@@ -113,7 +99,6 @@ class PushNotification {
       Provider.of<AppProvider>(context, listen: false).onTabTapped(2);
     }
   }
->>>>>>> fc69de18b8d55a7269b8c097e257741938683c93
 
   Future<NotificationSettings?> _requestPermission() async {
     try {
@@ -143,10 +128,4 @@ class PushNotification {
   //     if (remoteMessage.notification != null) {}
   //   });
   // }
-
-  _handleNotificationData(
-      Map<String, dynamic> data, BuildContext context) async {
-    print('it is clicked');
-    print(data['key1']);
-  }
 }

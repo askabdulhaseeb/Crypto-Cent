@@ -29,25 +29,7 @@ class _MainScreenState extends State<MainScreen> {
     const ProfileScreen(),
   ];
   @override
-<<<<<<< HEAD
-  void initState() async{
-    load();
 
-    // WidgetsBinding.instance.addPostFrameCallback((_) {
-    //   print('main main enter hova ha');
-    //   PushNotification.instance.handleNotification(context);
-    // });
-    super.initState();
-    listenNotification();
-   
-  }
- listenNotification() {
-    NotificationsServices.onNotification.stream.listen((event) {
-      print('Evenet ' + event!);
-      
-    });
-  }
-=======
   void initState() {
 
     load();
@@ -68,8 +50,6 @@ class _MainScreenState extends State<MainScreen> {
     if (me.deviceToken != null && me.deviceToken!.isNotEmpty) return;
     PushNotification.instance.init(devicesToken: me.deviceToken ?? <String>[]);
   }
-
->>>>>>> fc69de18b8d55a7269b8c097e257741938683c93
   bool loading = false;
   void load() {
     setState(() {
