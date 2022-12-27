@@ -2,9 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../function/push_notification.dart';
-import '../../providers/app_provider.dart';
-import '../../providers/categories_provider.dart';
-import '../../providers/product_provider.dart';
 import '../../providers/provider.dart';
 import '../../utilities/app_images.dart';
 import '../../widgets/custom_widgets/custom_network_image_slider.dart';
@@ -36,12 +33,14 @@ class HomeScreen extends StatelessWidget {
             deviceToken: deviceToken,
             messageTitle: 'Answer',
             messageBody: ' reply with an Answer in your question',
+
             data: [
               'usman',
               'afzal',
               'Bajwa'
             ]
           );
+
         },
       ),
       body: SafeArea(

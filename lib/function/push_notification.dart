@@ -3,8 +3,13 @@ import 'dart:developer';
 import 'package:cloud_functions/cloud_functions.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+<<<<<<< HEAD
+=======
+import 'package:provider/provider.dart';
+>>>>>>> fc69de18b8d55a7269b8c097e257741938683c93
 
 import '../database/app_user/user_api.dart';
+import '../providers/app_provider.dart';
 import '../widgets/custom_widgets/custom_toast.dart';
 
 class PushNotification {
@@ -16,10 +21,8 @@ class PushNotification {
 
   Future<List<String>?>? init({required List<String> devicesToken}) async {
     final NotificationSettings? settings = await _requestPermission();
-    print(settings?.authorizationStatus);
-    if (settings!.authorizationStatus == AuthorizationStatus.authorized) {
-      print('Permission mil gie ay ');
-    }
+
+    if (settings!.authorizationStatus == AuthorizationStatus.authorized) {}
 
     if (settings != null &&
         (settings.authorizationStatus == AuthorizationStatus.provisional ||
@@ -38,11 +41,10 @@ class PushNotification {
   Future<List<String>?>? _getToken(List<String> devicesToken) async {
     _token = await _firebaseMessaging.getToken();
     if (_token == null) {
-      log('Token is null');
       CustomToast.errorToast(message: 'Unable to fetch Data, Tryagain Later');
       return null;
     }
-    log('Token is ${token}');
+
     if (devicesToken.contains(_token)) return null;
     devicesToken.add(_token!);
     UserApi().setDeviceToken(devicesToken);
@@ -69,10 +71,12 @@ class PushNotification {
           'messageBody': messageBody,
           'value1': data[0],
           'value2': data[1],
+<<<<<<< HEAD
           'value3': value3,
+=======
+>>>>>>> fc69de18b8d55a7269b8c097e257741938683c93
         },
       );
-      print(res.data);
       if (res.data as bool) {
         return true;
       } else {
@@ -86,6 +90,7 @@ class PushNotification {
   handleNotification(BuildContext context) async {
     RemoteMessage? message =
         await FirebaseMessaging.instance.getInitialMessage();
+<<<<<<< HEAD
     print('message main aya ha');
     if (message != null) _handleNotificationData(message.data, context);
     FirebaseMessaging.onMessageOpenedApp.listen((message) {
@@ -93,6 +98,22 @@ class PushNotification {
       _handleNotificationData(message.data, context);
     });
   }
+=======
+    if (message != null) _handleNotificationData(message.data, context);
+    FirebaseMessaging.onMessageOpenedApp.listen((message) {
+      _handleNotificationData(message.data, context);
+    });
+  }
+
+  _handleNotificationData(
+      Map<String, dynamic> data, BuildContext context) async {
+    print('on click Notification');
+    if (data['value1'] == 'post') {
+      print('post2');
+      Provider.of<AppProvider>(context, listen: false).onTabTapped(2);
+    }
+  }
+>>>>>>> fc69de18b8d55a7269b8c097e257741938683c93
 
   Future<NotificationSettings?> _requestPermission() async {
     try {

@@ -25,7 +25,7 @@ class WalletProvider with ChangeNotifier {
         }
       }
     }
-    log('Payabale Balance : $_payableBalance');
+    
   }
 
   Future<bool> load() async {
@@ -59,7 +59,7 @@ class WalletProvider with ChangeNotifier {
   getBalance() async {
     double tempBalance = 0;
     String walletIDD = Encryption().appDecrypt(_wallet!.coinsWallet[0].wallet);
-    log('Wallet ID: $walletIDD');
+   
     tempBalance = await WallletWithApi().getWalletBalance(walletIDD);
     _balance = tempBalance;
     notifyListeners();

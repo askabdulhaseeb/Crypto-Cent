@@ -2,8 +2,10 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 
 import '../../database/notification_services.dart';
 import '../../function/push_notification.dart';
+import '../../models/app_user/app_user.dart';
 import '../../providers/auth_provider.dart';
 import '../../providers/crypto_wallet/wallet_provider.dart';
+import '../../providers/user_provider.dart';
 import '../chat_screen/chat_screen.dart';
 import '../screens.dart';
 import 'package:flutter/material.dart';
@@ -27,6 +29,7 @@ class _MainScreenState extends State<MainScreen> {
     const ProfileScreen(),
   ];
   @override
+<<<<<<< HEAD
   void initState() async{
     load();
 
@@ -44,6 +47,29 @@ class _MainScreenState extends State<MainScreen> {
       
     });
   }
+=======
+  void initState() {
+
+    load();
+    init();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      PushNotification.instance.handleNotification(context);
+    });
+    super.initState();
+    // tokenLoad();
+  }
+
+  init() async {
+    UserProvider userPro = Provider.of<UserProvider>(context, listen: false);
+
+    await userPro.init();
+    AppUser me = userPro.currentUser;
+    
+    if (me.deviceToken != null && me.deviceToken!.isNotEmpty) return;
+    PushNotification.instance.init(devicesToken: me.deviceToken ?? <String>[]);
+  }
+
+>>>>>>> fc69de18b8d55a7269b8c097e257741938683c93
   bool loading = false;
   void load() {
     setState(() {

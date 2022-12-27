@@ -15,8 +15,7 @@ class Encryption {
   final Encrypter encrypter = Encrypter(AES(key));
 
   String appEncrypt(String data) {
-    log('bs64: $bs64');
-    log('x: $x');
+   
     final Encrypted encrypted = encrypter.encrypt(data, iv: iv);
     final String encrypted64 = encrypted.base64;
 

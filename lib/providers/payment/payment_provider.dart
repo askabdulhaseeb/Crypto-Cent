@@ -154,7 +154,7 @@ class PaymentProvider with ChangeNotifier {
     if (orderBool && receiptBool && transactionBool) {
       retBool = true;
       if (kDebugMode) {
-        log('data Upload Succefully');
+        
       }
       return retBool;
     }
