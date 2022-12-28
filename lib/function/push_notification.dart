@@ -102,7 +102,7 @@ class PushNotification {
   _handleNotificationData(
       Map<String, dynamic> data, BuildContext context) async {
     print('on click Notification');
-    if (data['value1'] == 'post') {
+    if (data['key1'] == 'post') {
       print('post2');
       Provider.of<AppProvider>(context, listen: false).onTabTapped(2);
     }

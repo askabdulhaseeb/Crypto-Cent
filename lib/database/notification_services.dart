@@ -28,8 +28,8 @@ class NotificationsServices {
     // await localNotificationPlugin.initialize(initializationSettings);
     await localNotificationPlugin.initialize(
       initializationSettings,
-      onDidReceiveNotificationResponse: (details) {
-        onNotification.add(details.id.toString());
+      onDidReceiveNotificationResponse: (NotificationResponse details) {
+        onNotification.add(details.payload);
 
          print('notification payload :${details.payload!} ');
         // print('notification id :${details.id} ');
@@ -41,6 +41,9 @@ class NotificationsServices {
         // if (details.id == 1) {
         //   print('1 chala ha');
         // }
+      },
+      onDidReceiveBackgroundNotificationResponse: (details) {
+        
       },
       //     onSelectNotification: (String? payload) async {
       //   debugPrint('notification payload: ' + payload!);
