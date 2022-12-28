@@ -8,7 +8,7 @@ const messaging = admin.messaging();
 // eslint-disable-next-line max-len
 exports.notifySubscribers = functions.https.onCall(async (dateValue, _) => {
   try {
-    await messaging.sendToDevice(data.targetDevices, {
+    await messaging.sendToDevice(dateValue.targetDevices, {
       notification: {
         title: dateValue.messageTitle,
         body: dateValue.messageBody,

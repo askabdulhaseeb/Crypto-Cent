@@ -70,8 +70,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '624098099021',
     projectId: 'bloodo-app',
     storageBucket: 'bloodo-app.appspot.com',
-    iosClientId:
-        '624098099021-81tvngbk0ojq3mnla5638m5tiv23a1pa.apps.googleusercontent.com',
+    androidClientId: '624098099021-bcbr43fffbsjtsc7nvgd3v9l8d2pun62.apps.googleusercontent.com',
+    iosClientId: '624098099021-81tvngbk0ojq3mnla5638m5tiv23a1pa.apps.googleusercontent.com',
     iosBundleId: 'com.devmarkaz.boloodo',
   );
 }

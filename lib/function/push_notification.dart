@@ -67,15 +67,10 @@ class PushNotification {
           'messageTitle': messageTitle,
           'messageBody': messageBody,
           //'body': messageBody,
-          'messageBodyLocArgs': dataa,
+          // 'messageBodyLocArgs': dataa,
           'value1': dataa[0],
           'value2': dataa[1],
           'value3': value3,
-          'data': {
-            'key1': dataa[0],
-            'key2': dataa[1],
-            'key3': value3,
-          },
         },
       );
       print(res.data);
