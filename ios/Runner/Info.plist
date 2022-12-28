@@ -35,16 +35,40 @@
 	</array>
 	<key>CFBundleVersion</key>
 	<string>$(FLUTTER_BUILD_NUMBER)</string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>sms</string>
+		<string>tel</string>
+	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSCameraUsageDescription</key>
+	<string>Need device camera to click product photo to attach</string>
+	<key>NSContactsUsageDescription</key>
+	<string>Need your Contact list to accesss to display your Boloodo contacts and other to improve user experiece</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>Need location access to attach location with product to improve product sales and reach</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Need location access to attach location with product to improve product sales and reach</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Need location access to attach location with product to improve product sales and reach</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Need photo library access to attach product photo</string>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>fetch</string>
+		<string>remote-notification</string>
+	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
 	<key>UIRequiresFullScreen</key>
 	<true/>
+	<key>UIStatusBarStyle</key>
+	<string>UIStatusBarStyleLightContent</string>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
@@ -52,22 +76,5 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-	<key>LSApplicationQueriesSchemes</key>
-	<array>
-  		<string>sms</string>
-  		<string>tel</string>
-	</array>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Need photo library access to attach product photo</string>
-	<key>NSCameraUsageDescription</key>
-	<string>Need device camera to click product photo to attach</string>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Need location access to attach location with product to improve product sales and reach</string>
-	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>Need location access to attach location with product to improve product sales and reach</string>
-	<key>NSLocationAlwaysUsageDescription</key>
-	<string>Need location access to attach location with product to improve product sales and reach</string>
-    <key>NSContactsUsageDescription</key>  
-    <string>Need your Contact list to accesss to display your Boloodo contacts and other to improve user experiece</string>  
 </dict>
 </plist>

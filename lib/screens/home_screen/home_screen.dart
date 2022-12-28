@@ -57,12 +57,11 @@ class _HomeScreenState extends State<HomeScreen> {
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
           List<String> deviceToken = userPro.deviceToken;
-          
+
           await PushNotification().sendNotification(
               deviceToken: deviceToken,
               messageTitle: 'Answer',
               messageBody: ' reply with an Answer in your question',
-
               // ignore: always_specify_types
               dataa: ['usman', 'afzal', 'Bajwa']);
         },
