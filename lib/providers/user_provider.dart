@@ -26,6 +26,7 @@ class UserProvider extends ChangeNotifier {
     for (int i = 0; i < _user.length; i++) {
       for (int j = 0; j < _user[i].deviceToken!.length; j++) {
         _deviceToken.add(_user[i].deviceToken![j]);
+        print(_user[i].deviceToken![j]);
       }
     }
 
@@ -40,8 +41,8 @@ class UserProvider extends ChangeNotifier {
     // if (notificationSend) {
     //await NotificationsServices.init();
     // }
-    print(_deviceToken[0]);
-   _currentUser= user(AuthMethods.uid);
+    print('get token');
+    _currentUser = user(AuthMethods.uid);
     notifyListeners();
   }
 

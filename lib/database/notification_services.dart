@@ -7,6 +7,7 @@ import 'package:flutter_native_timezone/flutter_native_timezone.dart';
 // import 'package:timezone/timezone.dart' as tz;
 import 'package:flutter/foundation.dart';
 import 'package:rxdart/rxdart.dart';
+
 class NotificationsServices {
   static final FlutterLocalNotificationsPlugin localNotificationPlugin =
       FlutterLocalNotificationsPlugin();
@@ -24,20 +25,19 @@ class NotificationsServices {
                 String? payload) async {});
     InitializationSettings initializationSettings = InitializationSettings(
         android: initializationSettingsAndroid, iOS: initializationSettingsIOS);
-   // await localNotificationPlugin.initialize(initializationSettings);
+    // await localNotificationPlugin.initialize(initializationSettings);
     await localNotificationPlugin.initialize(
       initializationSettings,
       onDidReceiveNotificationResponse: (details) {
-        //onNotification.add(details.payload.toString());
-       
-          print('notification payload :${details.payload!} ');
-          print('notification id :${details.id} ');
-          print('notification input :${details.input} ');
-          print('notification payload :${details.actionId} ');
-          print('notification type  :${details.notificationResponseType.name} ');
-          print('notification payload :${details.toString()} ');
-            
-      
+        onNotification.add(details.id.toString());
+
+         print('notification payload :${details.payload!} ');
+        // print('notification id :${details.id} ');
+        // print('notification input :${details.input} ');
+        // print('notification action id :${details.actionId} ');
+        // print('notification type  :${details.notificationResponseType.name} ');
+        // print('notification detail :${details.toString()} ');
+
         // if (details.id == 1) {
         //   print('1 chala ha');
         // }
@@ -61,14 +61,15 @@ class NotificationsServices {
         );
     FirebaseMessaging.onMessage.listen((RemoteMessage message) {
       // print('Got a message whilst in the foreground!');
-      //print('Message data: ${message.data}');
+      print('Message data: ${message.data}');
 
       if (message.notification != null) {
-       
         _notificationDetails();
         showNotification(
-            title: message.notification!.title!,
-            body: message.notification!.body!);
+          title: message.notification!.title!,
+          body: message.notification!.body!,
+          payload: message.data['key1'],
+        );
         // print('Message also contained a notification: ${message.notification}');
       }
     });
@@ -90,9 +91,10 @@ class NotificationsServices {
     required String title,
     required String body,
     int id = 0,
-    String? payload,
+    required String payload,
   }) async {
-    await localNotificationPlugin.show(id, title, body, _notificationDetails());
+    await localNotificationPlugin.show(id, title, body, _notificationDetails(),
+        payload: payload);
   }
 
   static Future<void> cancelNotification(int id) async {

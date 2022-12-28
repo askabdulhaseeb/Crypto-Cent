@@ -1,6 +1,4 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
-
-import '../../database/notification_services.dart';
 import '../../function/push_notification.dart';
 import '../../models/app_user/app_user.dart';
 import '../../providers/auth_provider.dart';
@@ -29,14 +27,12 @@ class _MainScreenState extends State<MainScreen> {
     const ProfileScreen(),
   ];
   @override
-
   void initState() {
-
     load();
     init();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      PushNotification.instance.handleNotification(context);
-    });
+    // WidgetsBinding.instance.addPostFrameCallback((_) {
+    //   PushNotification.instance.handleNotification(context);
+    // });
     super.initState();
     // tokenLoad();
   }
@@ -46,10 +42,11 @@ class _MainScreenState extends State<MainScreen> {
 
     await userPro.init();
     AppUser me = userPro.currentUser;
-    
+
     if (me.deviceToken != null && me.deviceToken!.isNotEmpty) return;
     PushNotification.instance.init(devicesToken: me.deviceToken ?? <String>[]);
   }
+
   bool loading = false;
   void load() {
     setState(() {
@@ -64,7 +61,6 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   Widget build(BuildContext context) {
- 
     return Scaffold(
       body: Consumer<AppProvider>(
         builder: (BuildContext context, AppProvider navBar, _) {

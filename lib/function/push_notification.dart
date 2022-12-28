@@ -53,25 +53,32 @@ class PushNotification {
     required List<String> deviceToken,
     required String messageTitle,
     required String messageBody,
-    required List<String> data,
+    required List<String> dataa,
   }) async {
-    String value3 = data.length == 2 ? '' : data[2];
-    log(data[0]);
-    log(data[1]);
-    log(data[2]);
+    String value3 = dataa.length == 2 ? '' : dataa[2];
+
     HttpsCallable func =
         FirebaseFunctions.instance.httpsCallable('notifySubscribers');
     try {
+      // ignore: always_specify_types
       final HttpsCallableResult res = await func.call(
         <String, dynamic>{
           'targetDevices': deviceToken,
           'messageTitle': messageTitle,
           'messageBody': messageBody,
-          'value1': data[0],
-          'value2': data[1],
+          //'body': messageBody,
+          'messageBodyLocArgs': dataa,
+          'value1': dataa[0],
+          'value2': dataa[1],
           'value3': value3,
+          'data': {
+            'key1': dataa[0],
+            'key2': dataa[1],
+            'key3': value3,
+          },
         },
       );
+      print(res.data);
       if (res.data as bool) {
         return true;
       } else {
@@ -85,8 +92,14 @@ class PushNotification {
   handleNotification(BuildContext context) async {
     RemoteMessage? message =
         await FirebaseMessaging.instance.getInitialMessage();
+    print('idr a giya ha');
+    //print('message data  ${message!.data.length}');
+    if (message != null) {
+      print(message.data['key1']);
+      print(message.data['value1']);
+    }
     if (message != null) _handleNotificationData(message.data, context);
-    FirebaseMessaging.onMessageOpenedApp.listen((message) {
+    FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
       _handleNotificationData(message.data, context);
     });
   }

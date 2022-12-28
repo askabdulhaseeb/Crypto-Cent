@@ -6,17 +6,19 @@ admin.initializeApp();
 const messaging = admin.messaging();
 
 // eslint-disable-next-line max-len
-exports.notifySubscribers = functions.https.onCall(async (data, _) => {
+exports.notifySubscribers = functions.https.onCall(async (dateValue, _) => {
   try {
     await messaging.sendToDevice(data.targetDevices, {
       notification: {
-        title: data.messageTitle,
-        body: data.messageBody,
+        title: dateValue.messageTitle,
+        body: dateValue.messageBody,
+        icon: "https://freesvg.org/img/1534129544.png",
+        clickAction: "FLUTTER_NOTIFICATION_CLICK",
       },
       data: {
-        key1: data.value1,
-        key2: data.value2,
-        key3: data.value3,
+        key1: dateValue.value1,
+        key2: dateValue.value2,
+        key3: dateValue.value3,
       },
     });
     return true;

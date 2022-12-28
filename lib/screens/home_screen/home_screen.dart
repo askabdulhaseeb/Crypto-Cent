@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../../database/notification_services.dart';
 import '../../function/push_notification.dart';
 import '../../providers/provider.dart';
 import '../../utilities/app_images.dart';
@@ -14,10 +16,37 @@ import '../search_screen/search_screen.dart';
 import '../category_screens/categories_extend.dart';
 import '../category_screens/category.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   HomeScreen({super.key});
   static const String routeName = '/home-screen';
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
   final GlobalKey<ScaffoldState> _key = GlobalKey();
+  @override
+  void initState() {
+    super.initState();
+    listenNotification();
+    // WidgetsBinding.instance.addPostFrameCallback((_) {
+    //   print('Enter hova ha ');
+    //   PushNotification.instance.handleNotification(context);
+    // });
+    // tokenLoad();
+  }
+
+  listenNotification() {
+    NotificationsServices.onNotification.stream.listen((event) {
+      print('Evenet ' + event!);
+      if (event == '0') {
+        print('o main enter hova ha');
+        PushNotification.instance.handleNotification(context);
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     UserProvider userPro = Provider.of<UserProvider>(context);
@@ -28,19 +57,14 @@ class HomeScreen extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
           List<String> deviceToken = userPro.deviceToken;
-          print(deviceToken.length);
+          
           await PushNotification().sendNotification(
-            deviceToken: deviceToken,
-            messageTitle: 'Answer',
-            messageBody: ' reply with an Answer in your question',
+              deviceToken: deviceToken,
+              messageTitle: 'Answer',
+              messageBody: ' reply with an Answer in your question',
 
-            data: [
-              'usman',
-              'afzal',
-              'Bajwa'
-            ]
-          );
-
+              // ignore: always_specify_types
+              dataa: ['usman', 'afzal', 'Bajwa']);
         },
       ),
       body: SafeArea(

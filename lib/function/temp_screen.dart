@@ -39,7 +39,7 @@
 
 // Future<void> selectNotification(String? payload) async {
 //   if (payload != null) {
-//     debugPrint('notification payload: $payload');
+//     debugPrint(': $payload');
 //     navigatorKey.currentState?.pushNamed('/second');
 //   }
 // }
