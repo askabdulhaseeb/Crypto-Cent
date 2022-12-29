@@ -14,8 +14,7 @@ import 'screens/screens.dart';
 Future<void> _firebaseMessBackgroundHand(RemoteMessage message) async {
   RemoteNotification? notification = message.notification;
   if (notification == null) return;
-  print('--- background notification');
-  print(message.data);
+  
 
   // LocalNotifications.showNotification(
   //   title: notification.title ?? 'Notification',
