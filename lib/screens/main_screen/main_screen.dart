@@ -30,22 +30,15 @@ class _MainScreenState extends State<MainScreen> {
   @override
   void initState() {
     load();
-    //init();
     listenNotification();
-    // WidgetsBinding.instance.addPostFrameCallback((_) {
-    //   PushNotification.instance.handleNotification(context);
-    // });
     super.initState();
-    // tokenLoad();
   }
 
   listenNotification() {
     NotificationsServices.onNotification.stream.listen((String? event) {
       print('Evenet ' + event!);
       List<String> keys = event.split('-');
-      if (keys[0] == 'usman') {
-        Provider.of<AppProvider>(context, listen: false).onTabTapped(2);
-      }
+      PushNotification().handleNotification(context: context, keys: keys);
     });
   }
 

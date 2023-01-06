@@ -84,30 +84,13 @@ class PushNotification {
     }
   }
 
-  handleNotification(BuildContext context) async {
-    RemoteMessage? message =
-        await FirebaseMessaging.instance.getInitialMessage();
-    print('idr a giya ha');
-    print('message data  ${message!.data.length}');
-    if (message != null) {
-      print(message.data['key1']);
-      print(message.data['value1']);
-    }
-    // ignore: use_build_context_synchronously
-    if (message != null) _handleNotificationData(message.data, context);
-    FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
-      _handleNotificationData(message.data, context);
-    });
+  handleNotification({required BuildContext context,required List<String> keys}) async {
+    if (keys[0] == 'usman') {
+        Provider.of<AppProvider>(context, listen: false).onTabTapped(2);
+      }
   }
 
-  _handleNotificationData(
-      Map<String, dynamic> data, BuildContext context) async {
-    print('on click Notification');
-    if (data['key1'] == 'usman') {
-      print('post2');
-      Provider.of<AppProvider>(context, listen: false).onTabTapped(2);
-    }
-  }
+  
 
   Future<NotificationSettings?> _requestPermission() async {
     try {
