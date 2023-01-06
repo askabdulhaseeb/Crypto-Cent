@@ -31,8 +31,9 @@ class NotificationsServices {
       onDidReceiveNotificationResponse: (NotificationResponse details) {
         onNotification.add(details.payload);
 
-         print('notification payload :${details.payload!} ');
         // print('notification id :${details.id} ');
+         print('notification payload :${details.id} ');
+         print('notification payload :${details.payload} ');
         // print('notification input :${details.input} ');
         // print('notification action id :${details.actionId} ');
         // print('notification type  :${details.notificationResponseType.name} ');
@@ -69,7 +70,8 @@ class NotificationsServices {
         showNotification(
           title: message.notification!.title!,
           body: message.notification!.body!,
-          payload: message.data['key1'],
+          payload: message.data['key1']+'-'+message.data['key2']+'-'+message.data['key3'],
+          
         );
         // print('Message also contained a notification: ${message.notification}');
       }
@@ -93,6 +95,7 @@ class NotificationsServices {
     required String body,
     int id = 0,
     required String payload,
+    
   }) async {
     await localNotificationPlugin.show(id, title, body, _notificationDetails(),
         payload: payload);

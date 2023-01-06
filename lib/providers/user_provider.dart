@@ -29,6 +29,19 @@ class UserProvider extends ChangeNotifier {
         print(_user[i].deviceToken![j]);
       }
     }
+
+    List<String> getToken =
+        await PushNotification().init(devicesToken: deviceToken) ?? [];
+    // bool notificationSend = await PushNotification().sendNotification(
+    //     data: ['f', 'usman'],
+    //     deviceToken: _deviceToken,
+    //     messageBody: 'MALIK DON',
+    //     messageTitle: 'MALIK');
+
+    // if (notificationSend) {
+    //await NotificationsServices.init();
+    // }
+    print('get token');
     _currentUser = user(AuthMethods.uid);
     notifyListeners();
   }

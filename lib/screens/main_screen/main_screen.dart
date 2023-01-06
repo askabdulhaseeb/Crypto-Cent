@@ -1,4 +1,5 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
+import '../../database/notification_services.dart';
 import '../../function/push_notification.dart';
 import '../../models/app_user/app_user.dart';
 import '../../providers/auth_provider.dart';
@@ -29,12 +30,23 @@ class _MainScreenState extends State<MainScreen> {
   @override
   void initState() {
     load();
-    init();
+    //init();
+    listenNotification();
     // WidgetsBinding.instance.addPostFrameCallback((_) {
     //   PushNotification.instance.handleNotification(context);
     // });
     super.initState();
     // tokenLoad();
+  }
+
+  listenNotification() {
+    NotificationsServices.onNotification.stream.listen((String? event) {
+      print('Evenet ' + event!);
+      List<String> keys = event.split('-');
+      if (keys[0] == 'usman') {
+        Provider.of<AppProvider>(context, listen: false).onTabTapped(2);
+      }
+    });
   }
 
   init() async {
