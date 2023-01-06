@@ -52,7 +52,7 @@ class _HomeScreenState extends State<HomeScreen> {
     UserProvider userPro = Provider.of<UserProvider>(context);
     return Scaffold(
       key: _key,
-      appBar: appBar(context),
+      //appBar: appBar(context),
       drawer: drawerScreen(context),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {

@@ -13,7 +13,7 @@ class ProfileMiddleTile extends StatelessWidget {
       height: 80,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16),
-        color: Theme.of(context).primaryColor,
+        color: Theme.of(context).primaryColor.withOpacity(0.9),
       ),
       child: Row(
         children: <Widget>[

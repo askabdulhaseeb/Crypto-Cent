@@ -53,9 +53,11 @@ class ContactList extends StatelessWidget {
                       padding:
                           EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                       child: Text(
-                        'Contacts on Boloodo',
+                        'Boloodo Contacts',
                         style: TextStyle(
-                            color: Colors.green, fontWeight: FontWeight.bold),
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20),
                       ),
                     ),
                     BloodoContacts(
@@ -73,10 +75,11 @@ class ContactList extends StatelessWidget {
                             padding: EdgeInsets.symmetric(
                                 horizontal: 16, vertical: 18),
                             child: Text(
-                              'Invite on Boloodo',
+                              'Invite to Boloodo',
                               style: TextStyle(
-                                  color: Colors.green,
-                                  fontWeight: FontWeight.bold),
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20),
                             ),
                           ),
                           ContactItem(
@@ -88,11 +91,11 @@ class ContactList extends StatelessWidget {
                         padding:
                             EdgeInsets.symmetric(horizontal: 16, vertical: 18),
                         child: Text(
-                          'Invite on Boloodo',
+                          'Invite to Boloodo',
                           style: TextStyle(
-                            color: Colors.green,
-                            fontWeight: FontWeight.bold,
-                          ),
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20  ),
                         ),
                       );
               }

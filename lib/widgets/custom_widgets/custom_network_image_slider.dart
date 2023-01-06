@@ -29,14 +29,17 @@ class _CustomNetworkImageSliderState extends State<CustomNetworkImageSlider> {
 
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
     return Stack(
       children: <Widget>[
-        CarouselSlider.builder(
-            carouselController: controller,
-            itemCount: CustomNetworkImageSlider.imgList.length,
-            itemBuilder: (BuildContext context, int index, int realIndex) {
-              return Container(
-                decoration: BoxDecoration(
+        SizedBox(
+          child: CarouselSlider.builder(
+              carouselController: controller,
+              itemCount: CustomNetworkImageSlider.imgList.length,
+              itemBuilder: (BuildContext context, int index, int realIndex) {
+                return Container(
+                  height: 400,
+                  decoration: BoxDecoration(
                     borderRadius: const BorderRadius.only(
                         bottomLeft: Radius.circular(22),
                         bottomRight: Radius.circular(22)),
@@ -44,16 +47,19 @@ class _CustomNetworkImageSliderState extends State<CustomNetworkImageSlider> {
                       image:
                           AssetImage(CustomNetworkImageSlider.imgList[index]),
                       fit: BoxFit.cover,
-                    )),
-              );
-            },
-            options: CarouselOptions(
-              autoPlay: true,
-              viewportFraction: 1,
-              aspectRatio: 16 / 9,
-              onPageChanged: (int index, CarouselPageChangedReason reason) =>
-                  setState(() => activeIndex = index),
-            )),
+                    ),
+                  ),
+                );
+              },
+              options: CarouselOptions(
+                autoPlay: true,
+                viewportFraction: 1,
+                //aspectRatio: 16 / 9,
+                height: width,
+                onPageChanged: (int index, CarouselPageChangedReason reason) =>
+                    setState(() => activeIndex = index),
+              )),
+        ),
         Positioned(
           left: 10,
           right: 10,

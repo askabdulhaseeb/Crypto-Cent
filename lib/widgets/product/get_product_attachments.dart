@@ -27,10 +27,10 @@ class _GetProductImageAttachments extends State<GetProductAttachments> {
             child: InkWell(
               onTap: widget.onTap,
               child: Container(
-                height: (width / 5) * 2 + 6,
+                height: (width / 3) * 2,
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
-                  color: Colors.grey[300],
+                  color: Color.fromARGB(255, 245, 244, 244),
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: Column(
@@ -50,7 +50,7 @@ class _GetProductImageAttachments extends State<GetProductAttachments> {
             child: Column(
               children: <Widget>[
                 SizedBox(
-                  height: width / 5,
+                  height: (width / 3) - 4,
                   child: ListView.separated(
                     scrollDirection: Axis.horizontal,
                     itemCount: 2,
@@ -65,7 +65,7 @@ class _GetProductImageAttachments extends State<GetProductAttachments> {
                 ),
                 const SizedBox(height: 6),
                 SizedBox(
-                  height: width / 5,
+                  height: (width / 3) - 4,
                   child: ListView.separated(
                     scrollDirection: Axis.horizontal,
                     itemCount: 2,
@@ -111,8 +111,8 @@ class _ImageBox extends StatelessWidget {
             ? Container(
                 height: double.infinity,
                 width: double.infinity,
-                padding: const EdgeInsets.all(16),
-                color: Colors.grey[300],
+                padding: const EdgeInsets.all(32),
+                color: const Color.fromARGB(255, 245, 244, 244),
                 child: FittedBox(
                   child: Text(
                     index.toString(),

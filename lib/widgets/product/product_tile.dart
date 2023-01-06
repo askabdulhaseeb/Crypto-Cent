@@ -29,7 +29,7 @@ class ProductTile extends StatelessWidget {
           child: Container(
             width: double.infinity,
             decoration: BoxDecoration(
-              color: const Color(0xffEDEDED),
+              color: const Color.fromARGB(255, 245, 244, 244),
               borderRadius: BorderRadius.circular(16),
             ),
             child: Column(

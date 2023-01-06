@@ -67,7 +67,7 @@ class ChatProdSellerView extends StatelessWidget {
           children: <Widget>[
             Expanded(
               child: CustomElevatedButton(
-                title: 'Accept Offer',
+                title: 'Confirm',
                 padding: const EdgeInsets.all(5),
                 onTap: () {
                   // TODO: Accept offer

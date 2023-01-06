@@ -47,7 +47,7 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           theme: AppThemes.light,
           darkTheme: AppThemes.dark,
-          themeMode: theme.themeMode,
+          themeMode: theme.themeMode, 
           home: (AuthMethods.uid.isEmpty)
               ? const WelcomeScreen()
               : const MainScreen(),

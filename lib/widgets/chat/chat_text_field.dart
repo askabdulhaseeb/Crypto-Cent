@@ -95,8 +95,8 @@ class _ChatTextFieldState extends State<ChatTextField> {
           ),
         Row(
           children: <Widget>[
-            IconButton(
-              onPressed: () async {
+            InkWell(
+              onTap: () async {
                 showModalBottomSheet(
                   context: context,
                   isDismissible: true,
@@ -135,8 +135,18 @@ class _ChatTextFieldState extends State<ChatTextField> {
                   ),
                 );
               },
-              splashRadius: 16,
-              icon: const Icon(Icons.add),
+              child: Container(
+                margin: EdgeInsets.symmetric(horizontal: 8),
+                padding: const EdgeInsets.symmetric(horizontal: 2, vertical: 6),
+                decoration: BoxDecoration(
+                  color: Theme.of(context).primaryColor,
+                  borderRadius: BorderRadius.circular(6),
+                ),
+                child: const Icon(
+                  Icons.add,
+                  color: Colors.white,
+                ),
+              ),
             ),
             Flexible(
               child: TextFormField(
@@ -145,9 +155,20 @@ class _ChatTextFieldState extends State<ChatTextField> {
                 keyboardType: TextInputType.multiline,
                 maxLines: 4,
                 minLines: 1,
-                decoration: const InputDecoration(
+                decoration: InputDecoration(
                   hintText: 'Write a message...',
-                  border: InputBorder.none,
+                  filled: true,
+                  fillColor: const Color.fromARGB(255, 245, 244, 244),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: const BorderSide(
+                        color: Color.fromARGB(255, 245, 244, 244)),
+                    borderRadius: BorderRadius.circular(25.7),
+                  ),
+                  enabledBorder: UnderlineInputBorder(
+                    borderSide: const BorderSide(
+                        color: Color.fromARGB(255, 245, 244, 244)),
+                    borderRadius: BorderRadius.circular(25.7),
+                  ),
                 ),
               ),
             ),
@@ -214,6 +235,9 @@ class _ChatTextFieldState extends State<ChatTextField> {
                     icon: const Icon(Icons.send, color: Colors.grey),
                   ),
           ],
+        ),
+        const SizedBox(
+          height: 20,
         ),
       ],
     );

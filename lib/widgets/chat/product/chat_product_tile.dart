@@ -27,7 +27,7 @@ class ChatProductTile extends StatelessWidget {
       padding: const EdgeInsets.all(8),
       margin: const EdgeInsets.symmetric(horizontal: 16),
       decoration: BoxDecoration(
-        color: Colors.grey[300],
+        color: Color.fromARGB(255, 245, 244, 244),
         borderRadius: BorderRadius.circular(12),
       ),
       child: Row(
@@ -84,8 +84,8 @@ class ChatProductTile extends StatelessWidget {
             InkWell(
               onTap: () => showProdDetail(context, product),
               child: SizedBox(
-                height: imageSize,
-                width: imageSize,
+                height: imageSize * 1.3,
+                width: imageSize * 1.3,
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(6),
                   child: CustomNetworkImage(imageURL: product.prodURL[0].url),

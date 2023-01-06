@@ -17,10 +17,10 @@ class ProfileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).primaryColor,
+        backgroundColor: Theme.of(context).secondaryHeaderColor,
         title: const Text(
           'Profile',
-          style: TextStyle(color: Colors.white, fontSize: 22),
+          style: TextStyle(color: Colors.black, fontSize: 22),
         ),
         iconTheme: const IconThemeData(color: Colors.white),
       ),
