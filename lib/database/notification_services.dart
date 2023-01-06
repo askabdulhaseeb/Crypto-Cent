@@ -42,9 +42,7 @@ class NotificationsServices {
         //   print('1 chala ha');
         // }
       },
-      onDidReceiveBackgroundNotificationResponse: (details) {
-        
-      },
+      
       //     onSelectNotification: (String? payload) async {
       //   debugPrint('notification payload: ' + payload!);
       // }
