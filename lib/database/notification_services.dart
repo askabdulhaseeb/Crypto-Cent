@@ -6,13 +6,17 @@ import 'package:flutter_native_timezone/flutter_native_timezone.dart';
 // import 'package:timezone/data/latest_all.dart' as tz;
 // import 'package:timezone/timezone.dart' as tz;
 import 'package:flutter/foundation.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:rxdart/rxdart.dart';
 
 class NotificationsServices {
   static final FlutterLocalNotificationsPlugin localNotificationPlugin =
       FlutterLocalNotificationsPlugin();
-  static final onNotification = BehaviorSubject<String?>();
+  static final BehaviorSubject<String?> onNotification =
+      BehaviorSubject<String?>();
   static Future<void> init() async {
+    log('NOTIFICATION INIT START');
+    await Permission.notification.request();
     AndroidInitializationSettings initializationSettingsAndroid =
         const AndroidInitializationSettings('@mipmap/ic_launcher');
     DarwinInitializationSettings initializationSettingsIOS =
@@ -26,12 +30,12 @@ class NotificationsServices {
     InitializationSettings initializationSettings = InitializationSettings(
         android: initializationSettingsAndroid, iOS: initializationSettingsIOS);
     // await localNotificationPlugin.initialize(initializationSettings);
-    await localNotificationPlugin.initialize(
+    await FlutterLocalNotificationsPlugin().initialize(
       initializationSettings,
       onDidReceiveNotificationResponse: (NotificationResponse details) {
         onNotification.add(details.payload);
 
-         print('notification payload :${details.payload!} ');
+        print('notification payload :${details.payload!} ');
         // print('notification id :${details.id} ');
         // print('notification input :${details.input} ');
         // print('notification action id :${details.actionId} ');
@@ -42,9 +46,10 @@ class NotificationsServices {
         //   print('1 chala ha');
         // }
       },
-      onDidReceiveBackgroundNotificationResponse: (details) {
-        
-      },
+      // onDidReceiveBackgroundNotificationResponse:
+      //     (NotificationResponse details) {
+      //   print(details);
+      // },
       //     onSelectNotification: (String? payload) async {
       //   debugPrint('notification payload: ' + payload!);
       // }
@@ -76,6 +81,7 @@ class NotificationsServices {
         // print('Message also contained a notification: ${message.notification}');
       }
     });
+    log('NOTIFICATION INIT DONE');
   }
 
   static NotificationDetails _notificationDetails() {
