@@ -28,7 +28,7 @@ Future<void> main() async {
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await LocalData.init();
   FirebaseMessaging.onBackgroundMessage(_firebaseMessBackgroundHand);
-  NotificationsServices.init();
+  await NotificationsServices.init();
   runApp(const MyApp());
 }
 
