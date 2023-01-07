@@ -14,8 +14,7 @@ import 'screens/screens.dart';
 Future<void> _firebaseMessBackgroundHand(RemoteMessage message) async {
   RemoteNotification? notification = message.notification;
   if (notification == null) return;
-  print('--- background notification');
-  print(message.data);
+  
 
   // LocalNotifications.showNotification(
   //   title: notification.title ?? 'Notification',
@@ -48,7 +47,7 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           theme: AppThemes.light,
           darkTheme: AppThemes.dark,
-          themeMode: theme.themeMode,
+          themeMode: theme.themeMode, 
           home: (AuthMethods.uid.isEmpty)
               ? const WelcomeScreen()
               : const MainScreen(),

@@ -29,7 +29,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
-    listenNotification();
+    //listenNotification();
     // WidgetsBinding.instance.addPostFrameCallback((_) {
     //   print('Enter hova ha ');
     //   PushNotification.instance.handleNotification(context);
@@ -37,22 +37,22 @@ class _HomeScreenState extends State<HomeScreen> {
     // tokenLoad();
   }
 
-  listenNotification() {
-    NotificationsServices.onNotification.stream.listen((event) {
-      print('Evenet ' + event!);
-      if (event == '0') {
-        print('o main enter hova ha');
-        PushNotification.instance.handleNotification(context);
-      }
-    });
-  }
+  // listenNotification() {
+  //   NotificationsServices.onNotification.stream.listen((event) {
+  //     print('Evenet ' + event!);
+  //     if (event == '0') {
+  //       print('o main enter hova ha');
+  //       PushNotification.instance.handleNotification(context);
+  //     }
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) {
     UserProvider userPro = Provider.of<UserProvider>(context);
     return Scaffold(
       key: _key,
-      appBar: appBar(context),
+      //appBar: appBar(context),
       drawer: drawerScreen(context),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {

@@ -20,7 +20,7 @@ class ProfileHeader extends StatelessWidget {
         return Container(
           height: 200,
           width: double.infinity,
-          color: Theme.of(context).primaryColor,
+          color: Theme.of(context).secondaryHeaderColor,
           child: Column(
             children: <Widget>[
               CircleAvatar(
@@ -36,7 +36,7 @@ class ProfileHeader extends StatelessWidget {
                 name: name,
                 size: 20,
                 bold: true,
-                color: Colors.white,
+                color: Colors.black,
               )
             ],
           ),

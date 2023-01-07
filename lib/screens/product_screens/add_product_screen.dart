@@ -158,32 +158,43 @@ class _AddProductScreenState extends State<AddProductScreen> {
                 ),
                 CustomTextFormField(
                   controller: productdecription,
-                  hint: 'Enter Description',
+                  hint: 'Description',
                   maxLines: 5,
                   maxLength: 2000,
                   readOnly: _isloading,
                   validator: (String? value) =>
                       CustomValidator.lessThen2(value),
                 ),
-                CustomTextFormField(
-                  controller: amount,
-                  hint: 'Enter Price',
-                  readOnly: _isloading,
-                  validator: (String? value) => CustomValidator.isEmpty(value),
-                  keyboardType: const TextInputType.numberWithOptions(
-                    decimal: true,
-                    signed: true,
-                  ),
-                ),
-                CustomTextFormField(
-                  controller: quantity,
-                  hint: 'Enter Quantity',
-                  readOnly: _isloading,
-                  validator: (String? value) => CustomValidator.isEmpty(value),
-                  keyboardType: const TextInputType.numberWithOptions(
-                    decimal: true,
-                    signed: true,
-                  ),
+                Row(
+                  children: <Widget>[
+                    Expanded(
+                      child: CustomTextFormField(
+                        controller: amount,
+                        hint: 'Enter Price',
+                        readOnly: _isloading,
+                        validator: (String? value) =>
+                            CustomValidator.isEmpty(value),
+                        keyboardType: const TextInputType.numberWithOptions(
+                          decimal: true,
+                          signed: true,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: 16),
+                    Expanded(
+                      child: CustomTextFormField(
+                        controller: quantity,
+                        hint: 'Enter Quantity',
+                        readOnly: _isloading,
+                        validator: (String? value) =>
+                            CustomValidator.isEmpty(value),
+                        keyboardType: const TextInputType.numberWithOptions(
+                          decimal: true,
+                          signed: true,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
                 const SizedBox(height: 6),
                 categorie(context, catPro),
@@ -217,17 +228,21 @@ class _AddProductScreenState extends State<AddProductScreen> {
             child: Padding(
               padding: EdgeInsets.all(8.0),
               child: SizedBox(
-                child: Text('Categories'),
+                child: Text(
+                  'Categories',
+                  style: TextStyle(color: Colors.black54),
+                ),
               ),
             ),
           ),
           const Spacer(),
           DropdownButton<Categories>(
+            alignment: Alignment.centerRight,
             value: catPro.currentCat,
             style: const TextStyle(color: Colors.black),
             underline: const SizedBox(),
             hint: const Text(
-              'Category',
+              '',
               style: TextStyle(color: Colors.black),
             ),
             items: catPro.categories
@@ -235,7 +250,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                       value: cats,
                       child: Text(
                         cats.title.toUpperCase(),
-                        style: const TextStyle(fontWeight: FontWeight.bold),
+                        style: const TextStyle(),
                       ),
                     ))
                 .toList(),
@@ -259,17 +274,21 @@ class _AddProductScreenState extends State<AddProductScreen> {
             child: Padding(
               padding: EdgeInsets.all(8.0),
               child: SizedBox(
-                child: Text('Sub Categories'),
+                child: Text(
+                  'Sub Categories',
+                  style: TextStyle(color: Colors.black54),
+                ),
               ),
             ),
           ),
           const Spacer(),
           DropdownButton<SubCategory>(
             value: catPro.subcurrentCat,
+            alignment: Alignment.centerRight,
             style: const TextStyle(color: Colors.black),
             underline: const SizedBox(),
             hint: const Text(
-              'Sub Category',
+              '',
               style: TextStyle(color: Colors.black),
             ),
             items: catPro.subCa
@@ -277,7 +296,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                       value: subcats,
                       child: Text(
                         subcats.title.toUpperCase(),
-                        style: const TextStyle(fontWeight: FontWeight.bold),
+                        style: const TextStyle(),
                       ),
                     ))
                 .toList(),

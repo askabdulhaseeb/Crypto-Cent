@@ -219,7 +219,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
       backgroundColor: Colors.white,
       context: context,
       builder: (BuildContext context) =>
-          AddToCartWidget(product: widget.product),
+          AddToCartWidget(product: widget.product, buttonText: 'Add to cart'),
     );
   }
 }

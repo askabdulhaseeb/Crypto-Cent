@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 import '../../database/app_user/auth_method.dart';
@@ -59,7 +60,7 @@ class _SendOfferWidgetState extends State<SendOfferWidget> {
                     ),
                   ),
                   const SizedBox(height: 24),
-                  Text('Orignal Prince: ${widget.product.amount}'),
+                  Text('Orignal Price: ${widget.product.amount}'),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: <Widget>[
@@ -117,6 +118,7 @@ class _SendOfferWidgetState extends State<SendOfferWidget> {
                         child: CustomTextFormField(
                           controller: offer,
                           autoFocus: true,
+                          style: TextStyle(color: Colors.black),
                           keyboardType: TextInputType.number,
                           hint: 'Set your offer here',
                           validator: (String? value) =>
@@ -139,6 +141,8 @@ class _SendOfferWidgetState extends State<SendOfferWidget> {
                         child: CustomElevatedButton(
                           title: 'Send',
                           onTap: () async {
+                            Future.delayed(Duration(seconds: 1));
+                            await HapticFeedback.heavyImpact();
                             sendOffer(
                               offer: offer.text,
                               quantity: quantity,
@@ -164,6 +168,7 @@ class _SendOfferWidgetState extends State<SendOfferWidget> {
     required int quantity,
   }) async {
     if (offer == '0') return;
+    Navigator.of(context).pop();
     final int time = DateTime.now().microsecondsSinceEpoch;
     final String chatID = UniqueIdFunctions.productID(widget.product.pid);
     OrderdProduct order = OrderdProduct(
@@ -194,7 +199,5 @@ class _SendOfferWidgetState extends State<SendOfferWidget> {
         prodIsVideo: false,
       ),
     );
-    if (!mounted) return;
-    Navigator.of(context).pop();
   }
 }

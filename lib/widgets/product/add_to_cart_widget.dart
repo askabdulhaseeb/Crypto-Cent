@@ -8,8 +8,9 @@ import '../custom_widgets/custom_network_image.dart';
 import '../custom_widgets/cutom_text.dart';
 
 class AddToCartWidget extends StatefulWidget {
-  const AddToCartWidget({required this.product, Key? key}) : super(key: key);
+  const AddToCartWidget({required this.product,required this.buttonText, Key? key}) : super(key: key);
   final Product product;
+  final String buttonText;
 
   @override
   State<AddToCartWidget> createState() => _AddToCartWidgetState();
@@ -148,7 +149,7 @@ class _AddToCartWidgetState extends State<AddToCartWidget> {
                     size: 29,
                   )
                 : CustomElevatedButton(
-                    title: 'Add to cart',
+                    title: widget.buttonText,
                     onTap: () {
                       cartPro.addtocart(widget.product, quantity);
                       Navigator.of(context).pop();
