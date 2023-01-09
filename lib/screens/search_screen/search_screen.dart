@@ -67,6 +67,7 @@ class SerachScreen extends StatelessWidget {
               itemBuilder: (BuildContext context, int index) {
                 return ListTile(
                   onTap: () {
+                    FocusScope.of(context).unfocus();
                     Navigator.push(
                         context,
                         MaterialPageRoute<ProductDetailScreen>(
