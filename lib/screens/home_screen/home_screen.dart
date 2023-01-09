@@ -24,11 +24,15 @@ class HomeScreen extends StatefulWidget {
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
+  AnimationController? controller;
+
   final GlobalKey<ScaffoldState> _key = GlobalKey();
   @override
   void initState() {
     super.initState();
+    controller = BottomSheet.createAnimationController(this);
+    controller!.duration = const Duration(milliseconds: 400);
     //listenNotification();
     // WidgetsBinding.instance.addPostFrameCallback((_) {
     //   print('Enter hova ha ');
@@ -46,6 +50,11 @@ class _HomeScreenState extends State<HomeScreen> {
   //     }
   //   });
   // }
+  @override
+  void dispose() {
+    controller!.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -259,6 +268,7 @@ class _HomeScreenState extends State<HomeScreen> {
   ) async {
     return await showModalBottomSheet(
         isScrollControlled: true,
+        transitionAnimationController: controller,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10.0),
         ),
