@@ -17,7 +17,7 @@ import '../category_screens/categories_extend.dart';
 import '../category_screens/category.dart';
 
 class HomeScreen extends StatefulWidget {
-  HomeScreen({super.key});
+  const HomeScreen({super.key});
   static const String routeName = '/home-screen';
 
   @override
@@ -115,13 +115,14 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                           GestureDetector(
                             onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute<SerachScreen>(
-                                  builder: (BuildContext context) =>
-                                      const SerachScreen(),
-                                ),
-                              );
+                              bottomSheet(context);
+                              // Navigator.push(
+                              //   context,
+                              //   MaterialPageRoute<SerachScreen>(
+                              //     builder: (BuildContext context) =>
+                              //         const SerachScreen(),
+                              //   ),
+                              // );
                             },
                             child: CircleAvatar(
                               backgroundColor:
@@ -251,6 +252,21 @@ class _HomeScreenState extends State<HomeScreen> {
         }),
       ),
     );
+  }
+
+  Future<dynamic> bottomSheet(
+    BuildContext context,
+  ) async {
+    return await showModalBottomSheet(
+        isScrollControlled: true,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10.0),
+        ),
+        backgroundColor: Colors.white,
+        context: context,
+        builder: (BuildContext context) {
+          return const SerachScreen();
+        });
   }
 
   Widget drawerScreen(BuildContext context) {

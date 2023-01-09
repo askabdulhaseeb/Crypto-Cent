@@ -47,13 +47,33 @@ class ProductProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  String? _search;
+  onSearch(String? value) {
+    _search = value;
+    notifyListeners();
+  }
+
+  List<Product> forSearch() {
+    final List<Product> temp = <Product>[];
+    for (Product element in _product) {
+      if (_search == null || (_search?.isEmpty ?? true)) {
+        temp.add(_null);
+      } else if (element.productname
+          .toLowerCase()
+          .startsWith((_search?.toLowerCase() ?? ''))) {
+        temp.add(element);
+      }
+    }
+    return temp;
+  }
+
   Product get _null => Product(
         pid: 'null',
         uid: 'null',
         amount: 0,
         colors: 'null',
         quantity: '0',
-        productname: 'null',
+        productname: ' ',
         description: 'null',
         timestamp: 0,
         category: 'null',
