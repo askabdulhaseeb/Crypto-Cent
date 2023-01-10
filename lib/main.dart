@@ -10,6 +10,7 @@ import 'providers/provider.dart';
 import 'providers/providers_list.dart';
 import 'screens/chat_screen/group/create_group_screen.dart';
 import 'screens/screens.dart';
+import 'screens/spalsh_screen/splash_screen.dart';
 
 Future<void> _firebaseMessBackgroundHand(RemoteMessage message) async {
   RemoteNotification? notification = message.notification;
@@ -48,9 +49,10 @@ class MyApp extends StatelessWidget {
           theme: AppThemes.light,
           darkTheme: AppThemes.dark,
           themeMode: theme.themeMode, 
-          home: (AuthMethods.uid.isEmpty)
-              ? const WelcomeScreen()
-              : const MainScreen(),
+          // home: (AuthMethods.uid.isEmpty)
+          //     ? const WelcomeScreen()
+          //     : const MainScreen(),
+          home: SpalshScreen(),
           routes: <String, WidgetBuilder>{
             WelcomeScreen.routeName: (_) => const WelcomeScreen(),
             SigninWithEmailScreen.routeName: (_) =>
