@@ -12,7 +12,7 @@ class SerachScreen extends StatelessWidget {
     ProductProvider productPro = Provider.of<ProductProvider>(context);
     List<Product> products = productPro.forSearch();
     return SizedBox(
-      height: height * 0.93,
+      height: height * 0.65,
       child: Scaffold(
         appBar: AppBar(
           title: const Text('Items Search'),

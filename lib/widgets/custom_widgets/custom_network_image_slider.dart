@@ -54,8 +54,8 @@ class _CustomNetworkImageSliderState extends State<CustomNetworkImageSlider> {
               options: CarouselOptions(
                 autoPlay: true,
                 viewportFraction: 1,
-                //aspectRatio: 16 / 9,
-                height: width,
+                aspectRatio: 16 / 9,
+                //height: width,
                 onPageChanged: (int index, CarouselPageChangedReason reason) =>
                     setState(() => activeIndex = index),
               )),

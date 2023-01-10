@@ -60,20 +60,18 @@ class PushNotification {
     HttpsCallable func =
         FirebaseFunctions.instance.httpsCallable('notifySubscribers');
     try {
-      // ignore: always_specify_types
+    
       final HttpsCallableResult res = await func.call(
         <String, dynamic>{
           'targetDevices': deviceToken,
           'messageTitle': messageTitle,
           'messageBody': messageBody,
-          //'body': messageBody,
-          // 'messageBodyLocArgs': dataa,
           'value1': dataa[0],
           'value2': dataa[1],
           'value3': value3,
         },
       );
-      print(res.data);
+     
       if (res.data as bool) {
         return true;
       } else {

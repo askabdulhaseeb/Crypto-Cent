@@ -24,7 +24,9 @@ class BloodoContacts extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             CustomElevatedButton(
+              bgColor: Theme.of(context).secondaryHeaderColor,
               title: 'Send',
+              textStyle: TextStyle(color: Colors.black54, fontSize: 16),
               onTap: () {},
               padding: const EdgeInsets.symmetric(horizontal: 6),
             ),
@@ -34,9 +36,9 @@ class BloodoContacts extends StatelessWidget {
             CustomElevatedButton(
               title: 'Message',
               onTap: () {},
-              bgColor: Colors.transparent,
-              textStyle: TextStyle(
-                  color: Theme.of(context).primaryColor, fontSize: 18),
+
+              // textStyle: TextStyle(
+              //     color: Theme.of(context).secondaryHeaderColor, fontSize: 18),
               border: Border.all(color: Theme.of(context).primaryColor),
               padding: const EdgeInsets.symmetric(horizontal: 6),
             )

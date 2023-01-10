@@ -38,14 +38,21 @@ class ContactItem extends StatelessWidget {
     return SizedBox(
       height: height,
       child: ListTile(
-        leading: ContactImage(contact: contact),
-        title: Text(contact.displayName),
-        // subtitle: Text(_subtitle),
-        trailing: const ForText(
-          name: 'invite',
-          color: Colors.green,
-        ),
-      ),
+          leading: ContactImage(contact: contact),
+          title: Text(contact.displayName),
+          // subtitle: Text(_subtitle),
+          trailing: SizedBox(
+              height: 60,
+              width: 80,
+              child: CustomElevatedButton(
+                title: 'Invite',
+                onTap: () {},
+
+                // textStyle: TextStyle(
+                //     color: Theme.of(context).secondaryHeaderColor, fontSize: 18),
+                border: Border.all(color: Theme.of(context).primaryColor),
+                padding: const EdgeInsets.symmetric(horizontal: 6),
+              ))),
     );
   }
 }

@@ -25,7 +25,7 @@ class ProductTile extends StatelessWidget {
               ));
         },
         child: AspectRatio(
-          aspectRatio: 9 / 12,
+          aspectRatio: 13 / 16,
           child: Container(
             width: double.infinity,
             decoration: BoxDecoration(

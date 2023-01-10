@@ -15,7 +15,6 @@ import 'screens/spalsh_screen/splash_screen.dart';
 Future<void> _firebaseMessBackgroundHand(RemoteMessage message) async {
   RemoteNotification? notification = message.notification;
   if (notification == null) return;
-  
 
   // LocalNotifications.showNotification(
   //   title: notification.title ?? 'Notification',
@@ -48,7 +47,7 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           theme: AppThemes.light,
           darkTheme: AppThemes.dark,
-          themeMode: theme.themeMode, 
+          themeMode: theme.themeMode,
           // home: (AuthMethods.uid.isEmpty)
           //     ? const WelcomeScreen()
           //     : const MainScreen(),
