@@ -19,7 +19,7 @@ class CategoryScreen extends StatelessWidget {
         body: GridView.count(
           childAspectRatio: 96 / 118,
           mainAxisSpacing: 8,
-          crossAxisCount: 3,
+          crossAxisCount: 2,
           // ignore: always_specify_types
           children: List.generate(catPro.categories.length, (int index) {
             return InkWell(
@@ -37,14 +37,14 @@ class CategoryScreen extends StatelessWidget {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(12),
                   child: Container(
-                    color: Colors.grey[300],
+                    color: const Color.fromARGB(255, 245, 244, 244),
                     padding: const EdgeInsets.all(8),
                     child: Column(
                       children: <Widget>[
                         Expanded(
                           child: Container(
                             decoration: BoxDecoration(
-                              borderRadius:const BorderRadius.only(
+                              borderRadius: const BorderRadius.only(
                                 topLeft: Radius.circular(6),
                                 topRight: Radius.circular(6),
                               ),

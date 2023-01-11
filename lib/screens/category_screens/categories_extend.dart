@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../models/product/product_model.dart';
 import '../../providers/product_provider.dart';
+import '../../widgets/product/extend_product_tile.dart';
 import '../../widgets/product/product_tile.dart';
 
 // ignore: must_be_immutable
@@ -19,6 +20,7 @@ class CategoriesExtend extends StatelessWidget {
       products = prouctPro.findByCategory(categoryName);
     }
     return Scaffold(
+      backgroundColor: Color.fromARGB(255, 243, 243, 243),
       appBar: AppBar(
         leading: const BackButton(
           color: Colors.black,
@@ -31,13 +33,17 @@ class CategoriesExtend extends StatelessWidget {
         elevation: 0,
         backgroundColor: Colors.transparent,
       ),
-      body: GridView.count(
-        childAspectRatio: 200 / 240,
-        mainAxisSpacing: 8,
-        crossAxisCount: 2,
-        children: List<Widget>.generate(products.length, (int index) {
-          return ProductTile(product: products[index]);
-        }),
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 4),
+        child: GridView.count(
+          childAspectRatio: 200 / 330,
+          mainAxisSpacing: 8,
+          crossAxisSpacing: 4,
+          crossAxisCount: 2,
+          children: List<Widget>.generate(products.length, (int index) {
+            return ExtendProductTile(product: products[index]);
+          }),
+        ),
       ),
     );
   }

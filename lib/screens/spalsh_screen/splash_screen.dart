@@ -17,27 +17,26 @@ class SpalshScreen extends StatefulWidget {
 }
 
 class _SpalshScreenState extends State<SpalshScreen> {
-  final asset = 'assets/video/boloodo.mp4';
+  final String asset = 'assets/video/boloodo.mp4';
   VideoPlayerController? videoPlayerController;
   void initState() {
     super.initState();
     videoPlayerController = VideoPlayerController.asset(asset)
       ..addListener(() {
         setState(() {
-          
           if (videoPlayerController != null &&
               (videoPlayerController!.value.duration ==
                   videoPlayerController!.value.position)) {
             //checking the duration and position every time
-             Navigator.push(
-        context,
-        // ignore: always_specify_types
-        MaterialPageRoute(
-          builder: (BuildContext context) => (AuthMethods.uid.isEmpty)
-              ? const WelcomeScreen()
-              : const MainScreen(),
-        ),
-      );
+            Navigator.push(
+              context,
+              // ignore: always_specify_types
+              MaterialPageRoute(
+                builder: (BuildContext context) => (AuthMethods.uid.isEmpty)
+                    ? const WelcomeScreen()
+                    : const MainScreen(),
+              ),
+            );
           }
         });
       })
@@ -54,9 +53,14 @@ class _SpalshScreenState extends State<SpalshScreen> {
   @override
   Widget build(BuildContext context) {
     return videoPlayerController != null
-        ? AspectRatio(
-            aspectRatio: videoPlayerController!.value.aspectRatio,
-            child: VideoPlayer(videoPlayerController!))
-        : CircularProgressIndicator();
+        ? Scaffold(
+            backgroundColor: Colors.white,
+            body: Center(
+              child: AspectRatio(
+                  aspectRatio: 16 / 9,
+                  child: VideoPlayer(videoPlayerController!)),
+            ),
+          )
+        : const CircularProgressIndicator();
   }
 }

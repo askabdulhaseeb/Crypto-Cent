@@ -27,7 +27,7 @@ class ProductURLsSlider extends StatelessWidget {
               ))
           .toList(),
       options: CarouselOptions(
-        aspectRatio: 4 / 3,
+        aspectRatio: 5 / 6   ,
         viewportFraction: 1,
         enlargeCenterPage: true,
         enableInfiniteScroll: false,
@@ -54,8 +54,8 @@ class _Attachment extends StatelessWidget {
             width: MediaQuery.of(context).size.width,
             height: double.infinity,
             child: InteractiveViewer(
-                    child: CustomNetworkImage(imageURL: url.url),
-                  ),
+              child: CustomNetworkImage(imageURL: url.url),
+            ),
           ),
           if (totalLength > 1)
             Container(
