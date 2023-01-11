@@ -74,8 +74,12 @@ class NotificationsServices {
         showNotification(
           title: message.notification!.title!,
           body: message.notification!.body!,
-          // payload: message.data['key1']+'-'+message.data['key2']+'-'+message.data['key3'],
-          payload: '',
+          payload: message.data['key1'] +
+              '-' +
+              message.data['key2'] +
+              '-' +
+              message.data['key3'],
+          // payload: '',
         );
         // print('Message also contained a notification: ${message.notification}');
       }
