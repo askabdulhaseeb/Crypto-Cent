@@ -21,7 +21,7 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
   static final List<Widget> _pages = <Widget>[
-    HomeScreen(),
+    const HomeScreen(),
     const FavoriteScreen(),
     const CartScreen(),
     const ChatScreen(),
@@ -30,14 +30,15 @@ class _MainScreenState extends State<MainScreen> {
   @override
   void initState() {
     load();
+    init();
     listenNotification();
     super.initState();
   }
 
   listenNotification() {
     NotificationsServices.onNotification.stream.listen((String? event) {
-      print('Evenet ' + event!);
-      List<String> keys = event.split('-');
+     
+      List<String> keys = event!.split('-');
       PushNotification().handleNotification(context: context, keys: keys);
     });
   }
@@ -47,7 +48,6 @@ class _MainScreenState extends State<MainScreen> {
 
     await userPro.init();
     AppUser me = userPro.currentUser;
-
     if (me.deviceToken != null && me.deviceToken!.isNotEmpty) return;
     PushNotification.instance.init(devicesToken: me.deviceToken ?? <String>[]);
   }

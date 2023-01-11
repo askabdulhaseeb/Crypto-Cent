@@ -33,23 +33,10 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     super.initState();
     controller = BottomSheet.createAnimationController(this);
     controller!.duration = const Duration(milliseconds: 400);
-    //listenNotification();
-    // WidgetsBinding.instance.addPostFrameCallback((_) {
-    //   print('Enter hova ha ');
-    //   PushNotification.instance.handleNotification(context);
-    // });
-    // tokenLoad();
+  
   }
 
-  // listenNotification() {
-  //   NotificationsServices.onNotification.stream.listen((event) {
-  //     print('Evenet ' + event!);
-  //     if (event == '0') {
-  //       print('o main enter hova ha');
-  //       PushNotification.instance.handleNotification(context);
-  //     }
-  //   });
-  // }
+
   @override
   void dispose() {
     controller!.dispose();

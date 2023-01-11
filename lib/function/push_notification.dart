@@ -37,6 +37,7 @@ class PushNotification {
   }
 
   Future<List<String>?>? _getToken(List<String> devicesToken) async {
+   
     _token = await _firebaseMessaging.getToken();
     log('CURRENT DEVICE TOKEN');
     print(_token);
@@ -62,7 +63,6 @@ class PushNotification {
     HttpsCallable func =
         FirebaseFunctions.instance.httpsCallable('notifySubscribers');
     try {
-    
       final HttpsCallableResult res = await func.call(
         <String, dynamic>{
           'targetDevices': deviceToken,
@@ -73,7 +73,7 @@ class PushNotification {
           'value3': value3,
         },
       );
-     
+
       if (res.data as bool) {
         return true;
       } else {
