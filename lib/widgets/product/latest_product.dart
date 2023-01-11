@@ -10,8 +10,9 @@ class LatestProductsList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ProductProvider productPro = Provider.of<ProductProvider>(context);
+    double width = MediaQuery.of(context).size.width;
     return SizedBox(
-      height: 230,
+      height: width * 0.68,
       width: double.infinity,
       child: ListView.builder(
         itemCount: productPro.products.length,

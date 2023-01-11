@@ -8,52 +8,37 @@ import '../../../widgets/custom_widgets/custom_network_image.dart';
 import '../../../widgets/custom_widgets/custom_widget.dart';
 import '../../screens/product_screens/product_detail_screen.dart';
 
-class ProductTile extends StatelessWidget {
-  const ProductTile({required this.product, Key? key}) : super(key: key);
+class ExtendProductTile extends StatelessWidget {
+  const ExtendProductTile({required this.product, Key? key}) : super(key: key);
   final Product product;
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(
-        left: 4,
-      ),
-      child: InkWell(
-        onTap: () {
-          Navigator.push(
-              context,
-              MaterialPageRoute<ProductDetailScreen>(
-                builder: (BuildContext context) =>
-                    ProductDetailScreen(product: product),
-              ));
-        },
-        child: AspectRatio(
-          aspectRatio: 10 / 14,
-          child: Container(
+    double width = MediaQuery.of(context).size.width;
+    return InkWell(
+      onTap: () {
+        Navigator.push(
+            context,
+            MaterialPageRoute<ProductDetailScreen>(
+              builder: (BuildContext context) =>
+                  ProductDetailScreen(product: product),
+            ));
+      },
+      child: Column(
+        children: [
+          Container(
+            clipBehavior: Clip.hardEdge,
             width: double.infinity,
+            height: width * 0.6,
             decoration: BoxDecoration(
               color: const Color.fromARGB(255, 245, 244, 244),
               borderRadius: BorderRadius.circular(16),
             ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: SizedBox(
-                      width: double.infinity,
-                      height: double.infinity,
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(4),
-                        child: CustomNetworkImage(
-                          imageURL: product.prodURL[0].url,
-                          fit: BoxFit.fill,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-                SizedBox(
+            child: CustomNetworkImage(
+              imageURL: product.prodURL[0].url,
+              fit: BoxFit.fill,
+            ),
+          ),
+          SizedBox(
                   height: 75,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -147,10 +132,7 @@ class ProductTile extends StatelessWidget {
                     ],
                   ),
                 ),
-              ],
-            ),
-          ),
-        ),
+        ],
       ),
     );
   }
