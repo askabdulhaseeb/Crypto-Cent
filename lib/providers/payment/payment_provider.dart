@@ -6,6 +6,7 @@ import '../../database/crypto_wallet/binance_api.dart';
 import '../../database/payment/order_api.dart';
 import '../../database/payment/receipt_api.dart';
 import '../../database/payment/transaction_api.dart';
+import '../../function/push_notification.dart';
 import '../../function/time_date_function.dart';
 import '../../function/unique_id_functions.dart';
 import '../../models/cart.dart';
@@ -104,7 +105,7 @@ class PaymentProvider with ChangeNotifier {
     // print('cancel $cancel');
   }
 
-  Future<bool> productOrder(List<Cart> cart) async {
+  Future<bool> productOrder(List<Cart> cart, List<String> deviceToken) async {
     String uniqueID = UniqueIdFunctions.postID;
     bool retBool = false;
     final double exchangeRate = await BinanceApi().btcPrice();
@@ -147,16 +148,21 @@ class PaymentProvider with ChangeNotifier {
       cryptoSymbol: 'btc',
       totalCryptoPrice: total,
     );
+    print(deviceToken);
+
+    final bool isnotification = await PushNotification().sendNotification(
+        deviceToken: deviceToken,
+        messageTitle: 't',
+        messageBody: 't',
+        // ignore: always_specify_types
+        dataa: ['usman', 'afzal', 'Bajwa']);
+        print(isnotification);
     final bool orderBool = await OrderApi().add(tempOrder);
     final bool receiptBool = await ReceiptApi().add(tempReceipt);
     final bool transactionBool = await TransactionApi().add(tempTransaction);
     orderdProduct.clear();
-    if (orderBool && receiptBool && transactionBool) {
-      retBool = true;
-      if (kDebugMode) {
-        
-      }
-      return retBool;
+    if (orderBool && receiptBool && transactionBool && isnotification) {
+      return true;
     }
     return false;
   }

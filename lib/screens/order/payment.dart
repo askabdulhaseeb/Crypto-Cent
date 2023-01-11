@@ -3,10 +3,13 @@ import 'package:provider/provider.dart';
 
 import '../../function/crypto_function.dart';
 import '../../function/encryption_function.dart';
+import '../../function/push_notification.dart';
+import '../../models/app_user/app_user.dart';
 import '../../providers/app_provider.dart';
 import '../../providers/cart_provider.dart';
 import '../../providers/crypto_wallet/wallet_provider.dart';
 import '../../providers/payment/payment_provider.dart';
+import '../../providers/provider.dart';
 import '../../widgets/custom_widgets/custom_widget.dart';
 import '../../widgets/custom_widgets/show_loading.dart';
 
@@ -63,6 +66,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
 
   @override
   Widget build(BuildContext context) {
+    UserProvider userPro = Provider.of<UserProvider>(context);
     return Scaffold(
       appBar: AppBar(
         title: const Text('Payment'),
@@ -182,15 +186,20 @@ class _PaymentScreenState extends State<PaymentScreen> {
                   //   CustomToast.errorToast(
                   //       message: 'You havenot enough Balance ');
                   // }
+                  AppUser me = userPro.user(cartPro.cartItem[0].sellerID);
+                          List<String> deviceToken = me.deviceToken??[];
                   final bool done =
                       await Provider.of<PaymentProvider>(context, listen: false)
-                          .productOrder(cartPro.cartItem);
-                  if (done) {
+                          .productOrder(cartPro.cartItem,deviceToken);
+                           if (done) {
                     // TODO: EMPTY CART
                     if (!mounted) return;
                     cartPro.deleteAllItem();
                     Navigator.of(context).pop();
                   }
+                          
+
+         
                 },
               ),
             ],
