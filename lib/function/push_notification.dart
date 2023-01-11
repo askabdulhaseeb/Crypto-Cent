@@ -38,6 +38,8 @@ class PushNotification {
 
   Future<List<String>?>? _getToken(List<String> devicesToken) async {
     _token = await _firebaseMessaging.getToken();
+    log('CURRENT DEVICE TOKEN');
+    print(_token);
     if (_token == null) {
       CustomToast.errorToast(message: 'Unable to fetch Data, Tryagain Later');
       return null;
@@ -84,13 +86,12 @@ class PushNotification {
     }
   }
 
-  handleNotification({required BuildContext context,required List<String> keys}) async {
+  handleNotification(
+      {required BuildContext context, required List<String> keys}) async {
     if (keys[0] == 'usman') {
-        Provider.of<AppProvider>(context, listen: false).onTabTapped(2);
-      }
+      Provider.of<AppProvider>(context, listen: false).onTabTapped(2);
+    }
   }
-
-  
 
   Future<NotificationSettings?> _requestPermission() async {
     try {
