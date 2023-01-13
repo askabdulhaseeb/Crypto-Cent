@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../screens/empty_screen/empty_screen.dart';
 import '../../custom_widgets/custom_widget.dart';
+import '../my_profile/edit_profile.dart';
 import '../profile_nav_tile.dart';
 import 'change_password.dart';
 import 'deactive_account.dart';
@@ -58,7 +59,7 @@ class Setting extends StatelessWidget {
                 name: 'Profile Setting',
                 onTap: () {
                   Navigator.of(context).push(MaterialPageRoute<EmptyScreen>(
-                    builder: (BuildContext context) => const EmptyScreen(),
+                    builder: (BuildContext context) => const EditProfile(),
                   ));
                 },
               ),

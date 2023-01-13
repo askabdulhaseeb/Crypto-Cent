@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../database/app_user/auth_method.dart';
 import '../../utilities/app_images.dart';
+import '../../widgets/profile/my_profile/edit_profile.dart';
 import '../../widgets/profile/my_profile/my_profile.dart';
 import '../../widgets/profile/order/orders.dart';
 import '../../widgets/profile/profile_header.dart';
