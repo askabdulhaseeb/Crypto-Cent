@@ -4,12 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../widgets/custom_widgets/custom_widget.dart';
+import '../../database/app_user/auth_method.dart';
 import '../../providers/app_provider.dart';
 import '../../providers/contact_provider.dart';
 import '../../providers/user_provider.dart';
 import '../../screens/empty_screen/empty_screen.dart';
 import '../../screens/category_screens/category.dart';
 import '../../screens/product_screens/add_product_screen.dart';
+import '../custom_widgets/custom_dialog.dart';
 import '../custom_widgets/custom_toast.dart';
 import 'contact/contacts_list.dart';
 
@@ -27,27 +29,45 @@ class HomeCategoriesList extends StatelessWidget {
         children: <Widget>[
           const SizedBox(width: 16),
           allitems(context, 'All', true, () {}),
-          allitems(context, 'Contacts', false, () async {
-            // await contactPro.loading();
-            bool temp = await contactPro.contactsPermission(context);
-            if (temp) {
-              // List<String> bloodoNumber = await userPro.number();
-              bool change = contactPro.loadContacts(userPro.users);
-              if (change) {
-                Navigator.push(
-                  context,
-                  // ignore: always_specify_types
-                  MaterialPageRoute(
-                    builder: (BuildContext context) => const ContactList(),
-                  ),
-                );
-              }
-            } else {
-              Provider.of<AppProvider>(context, listen: false).onTabTapped(0);
-              //  Navigator.pop(context);
-              CustomToast.errorToast(message: 'Permission Denied');
-            }
-          }),
+          allitems(
+              context,
+              'Contacts',
+              false,
+              (AuthMethods.uid.isEmpty)
+                  ? () {
+                      showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return const CustomDialogBox(
+                              title: "To enable this function",
+                              descriptions: "Please login or create account ",
+                              text: "Login",
+                            );
+                          });
+                    }
+                  : () async {
+                      // await contactPro.loading();
+                      bool temp = await contactPro.contactsPermission(context);
+                      if (temp) {
+                        // List<String> bloodoNumber = await userPro.number();
+                        bool change = contactPro.loadContacts(userPro.users);
+                        if (change) {
+                          Navigator.push(
+                            context,
+                            // ignore: always_specify_types
+                            MaterialPageRoute(
+                              builder: (BuildContext context) =>
+                                  const ContactList(),
+                            ),
+                          );
+                        }
+                      } else {
+                        Provider.of<AppProvider>(context, listen: false)
+                            .onTabTapped(0);
+                        //  Navigator.pop(context);
+                        CustomToast.errorToast(message: 'Permission Denied');
+                      }
+                    }),
           allitems(context, 'Categories', false, () {
             Navigator.push(
               context,
@@ -57,14 +77,31 @@ class HomeCategoriesList extends StatelessWidget {
               ),
             );
           }),
-          allitems(context, 'Sell', false, () {
-            Navigator.push(
+          allitems(
               context,
-              MaterialPageRoute<AddProductScreen>(
-                builder: (BuildContext context) => const AddProductScreen(),
-              ),
-            );
-          }),
+              'Sell',
+              false,
+              (AuthMethods.uid.isEmpty)
+                  ? () {
+                      showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return const CustomDialogBox(
+                              title: "To enable this function",
+                              descriptions: "Please login or create account ",
+                              text: "Login",
+                            );
+                          });
+                    }
+                  : () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute<AddProductScreen>(
+                          builder: (BuildContext context) =>
+                              const AddProductScreen(),
+                        ),
+                      );
+                    }),
           allitems(context, 'News', false, () {
             Navigator.push(
               context,
@@ -90,7 +127,7 @@ class HomeCategoriesList extends StatelessWidget {
           borderRadius: BorderRadius.circular(16),
           color: (primary)
               ? Theme.of(context).primaryColor
-              : Theme.of(context).secondaryHeaderColor,
+              : Color.fromARGB(255, 162, 218, 246),
         ),
         child: Center(
             child: ForText(

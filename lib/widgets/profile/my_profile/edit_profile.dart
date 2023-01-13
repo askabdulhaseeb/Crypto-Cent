@@ -19,7 +19,7 @@ class EditProfile extends StatelessWidget {
         text: userPro.currentUser.phoneNumber.completeNumber);
     final TextEditingController googleAccount = TextEditingController(
         text: userPro.currentUser.email!.isEmpty
-            ? 'boloodo.com'
+            ? 'boloodo@gmail.com'
             : userPro.currentUser.email);
     double width = MediaQuery.of(context).size.width;
     return Scaffold(
@@ -37,22 +37,22 @@ class EditProfile extends StatelessWidget {
                     CustomTextFormFieldWithHeader(
                       headerText: 'First Name',
                       controller: firstName,
-                      Boardercolor: Colors.grey,
-                      color: Colors.transparent,
+                      Boardercolor: Colors.transparent,
+                      color: const Color(0xffF6F7F9),
                       hintColor: Colors.grey,
                     ),
                     CustomTextFormFieldWithHeader(
-                      headerText: 'Google Account',
+                      headerText: 'Email',
                       controller: googleAccount,
-                      Boardercolor: Colors.grey,
-                      color: Colors.transparent,
+                      Boardercolor: Colors.transparent,
+                      color: const Color(0xffF6F7F9),
                       hintColor: Colors.grey,
                     ),
                     CustomTextFormFieldWithHeader(
                       headerText: 'Phone number',
                       controller: phoneNo,
-                      Boardercolor: Colors.grey,
-                      color: Colors.transparent,
+                      Boardercolor: Colors.transparent,
+                      color: const Color(0xffF6F7F9),
                       hintColor: Colors.grey,
                     ),
                   ],
@@ -74,20 +74,6 @@ class EditProfile extends StatelessWidget {
                   },
                 ),
               ),
-              TextButton(
-                  onPressed: () {
-                    // Navigator.push(
-                    //   context,
-                    //   // ignore: always_specify_types
-                    //   MaterialPageRoute(
-                    //     builder: (BuildContext context) => DeleteAccount(),
-                    //   ),
-                    // );
-                  },
-                  child: const ForText(
-                    name: 'Delete Your Account',
-                    color: Color(0xff9B0000),
-                  ))
             ],
           ),
         ),

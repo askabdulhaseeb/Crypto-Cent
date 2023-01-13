@@ -25,7 +25,7 @@ class Setting extends StatelessWidget {
               ProfileNavTile(
                 name: 'Change Password',
                 onTap: () {
-                  Navigator.of(context).push(MaterialPageRoute<EmptyScreen>(
+                  Navigator.of(context).push(MaterialPageRoute(
                     builder: (BuildContext context) => ChnagePassword(),
                   ));
                 },
@@ -58,7 +58,7 @@ class Setting extends StatelessWidget {
               ProfileNavTile(
                 name: 'Profile Setting',
                 onTap: () {
-                  Navigator.of(context).push(MaterialPageRoute<EmptyScreen>(
+                  Navigator.of(context).push(MaterialPageRoute(
                     builder: (BuildContext context) => const EditProfile(),
                   ));
                 },
@@ -66,14 +66,14 @@ class Setting extends StatelessWidget {
               SizedBox(
                 height: 20,
               ),
-              ProfileNavTile(
-                name: 'Deactive Account',
-                onTap: () {
-                  Navigator.of(context).push(MaterialPageRoute<EmptyScreen>(
-                    builder: (BuildContext context) => DeleteAccount(),
-                  ));
-                },
-              ),
+              // ProfileNavTile(
+              //   name: 'Deactive Account',
+              //   onTap: () {
+              //     Navigator.of(context).push(MaterialPageRoute(
+              //       builder: (BuildContext context) => DeleteAccount(),
+              //     ));
+              //   },
+              // ),
             ],
           ),
         ));

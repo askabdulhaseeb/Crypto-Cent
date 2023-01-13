@@ -33,6 +33,7 @@ class ChnagePassword extends StatelessWidget {
               controller: _newPassword,
               starticon: Icons.lock,
               color: const Color(0xffF6F7F9),
+              
               hint: 'New Password',
             ),
             const SizedBox(

@@ -16,7 +16,7 @@ class PasswordTextFormField extends StatefulWidget {
   final String hint;
   final TextInputAction? textInputAction;
   final Color? color;
-   final IconData? starticon;
+  final IconData? starticon;
   @override
   PasswordTextFormFieldState createState() => PasswordTextFormFieldState();
 }
@@ -44,7 +44,7 @@ class PasswordTextFormFieldState extends State<PasswordTextFormField> {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(14),
         color: widget.color ?? Theme.of(context).secondaryHeaderColor,
-        border: Border.all(color: Colors.grey),
+        // border: Border.all(color: Colors.grey),
       ),
       child: TextFormField(
         controller: widget._controller,

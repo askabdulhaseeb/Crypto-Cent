@@ -53,6 +53,7 @@ class _CustomNetworkImageSliderState extends State<CustomNetworkImageSlider> {
               },
               options: CarouselOptions(
                 autoPlay: true,
+                autoPlayAnimationDuration: const Duration(seconds: 1),
                 viewportFraction: 1,
                 aspectRatio: 16 / 9,
                 //height: width,

@@ -46,7 +46,7 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                 containers(
                     context, Icons.phone, '+92345 1234567', '+92345 1234567'),
                 const SizedBox(height: 15),
-                containers(context, Icons.email, 'bloodoapp@gmail.com', ''),
+                containers(context, Icons.email, 'boloodoapp@gmail.com', ''),
                 const SizedBox(height: 15),
                 containers(
                     context, Icons.location_on_sharp, 'Model Town,Lahore', ''),
@@ -54,7 +54,11 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                 Container(
                   height: MediaQuery.of(context).size.width,
                   width: double.infinity,
-                  color: Colors.black,
+                  clipBehavior: Clip.hardEdge,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(12),
+                    color: Colors.black,
+                  ),
                   child: GoogleMap(
                     initialCameraPosition: cameraPosition,
                     // ignore: always_specify_types

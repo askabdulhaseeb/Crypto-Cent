@@ -1,18 +1,21 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
+import '../../database/app_user/auth_method.dart';
 import '../../database/notification_services.dart';
 import '../../function/push_notification.dart';
 import '../../models/app_user/app_user.dart';
 import '../../providers/auth_provider.dart';
 import '../../providers/crypto_wallet/wallet_provider.dart';
 import '../../providers/user_provider.dart';
+import '../../widgets/profile/profile_when_user_not_login.dart';
 import '../chat_screen/chat_screen.dart';
+import '../empty_screen/empty_screen.dart';
 import '../screens.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../providers/app_provider.dart';           
+import '../../providers/app_provider.dart';
 
 class MainScreen extends StatefulWidget {
-  const   MainScreen({Key? key}) : super(key: key);
+  const MainScreen({Key? key}) : super(key: key);
   static const String routeName = '/main-screen';
 
   @override
@@ -23,21 +26,26 @@ class _MainScreenState extends State<MainScreen> {
   static final List<Widget> _pages = <Widget>[
     const HomeScreen(),
     const FavoriteScreen(),
-    const CartScreen(),
-    const ChatScreen(),
-    const ProfileScreen(),
+    (AuthMethods.uid.isEmpty) ? const EmptyScreen() : const CartScreen(),
+    (AuthMethods.uid.isEmpty) ? const EmptyScreen() : const ChatScreen(),
+    (AuthMethods.uid.isEmpty)
+        ? const ProfilewhenUserNotLogin()
+        : const ProfileScreen(),
   ];
   @override
   void initState() {
-    load();
-    init();
-    listenNotification();
+    loadData();
     super.initState();
+  }
+
+  loadData() {
+    AuthMethods.uid.isEmpty ? const SizedBox() : load();
+    AuthMethods.uid.isEmpty ? const SizedBox() : init();
+    AuthMethods.uid.isEmpty ? const SizedBox() : listenNotification();
   }
 
   listenNotification() {
     NotificationsServices.onNotification.stream.listen((String? event) {
-     
       List<String> keys = event!.split('-');
       PushNotification().handleNotification(context: context, keys: keys);
     });

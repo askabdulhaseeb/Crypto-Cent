@@ -16,7 +16,17 @@ class WelcomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      appBar: AppBar(),
+      appBar: AppBar(
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.canPop(context)
+                ? Navigator.of(context).pop()
+                : Navigator.of(context).pushNamedAndRemoveUntil(
+                    MainScreen.routeName, (Route<dynamic> route) => false),
+            child: const Text('Skip login for now'),
+          ),
+        ],
+      ),
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: Column(
@@ -33,7 +43,7 @@ class WelcomeScreen extends StatelessWidget {
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
             ),
             const Text(
-              'Choose the Signin method to enjoy all fetchers',
+              'Choose the Signin method to enjoy all features',
               textAlign: TextAlign.center,
               style: TextStyle(color: Colors.grey),
             ),

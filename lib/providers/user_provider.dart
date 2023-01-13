@@ -23,6 +23,7 @@ class UserProvider extends ChangeNotifier {
   AppUser get currentUser => _currentUser ?? _null;
   Future<void> init() async {
     if (_user.isNotEmpty) return;
+    if (AuthMethods.uid.isEmpty) return;
     final List<AppUser> temp = await UserApi().getAllUsers();
     _user = temp;
     _currentUser = user(AuthMethods.uid);
@@ -31,7 +32,6 @@ class UserProvider extends ChangeNotifier {
     for (int i = 0; i < _user.length; i++) {
       for (int j = 0; j < _user[i].deviceToken!.length; j++) {
         _allDeviceToken.add(_user[i].deviceToken![j]);
-        // print(_user[i].deviceToken![j]);
       }
     }
     notifyListeners();
