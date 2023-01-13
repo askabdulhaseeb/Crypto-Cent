@@ -4,6 +4,7 @@ import '../../../screens/empty_screen/empty_screen.dart';
 import '../../custom_widgets/custom_widget.dart';
 import '../profile_nav_tile.dart';
 import 'change_password.dart';
+import 'deactive_account.dart';
 
 class Setting extends StatelessWidget {
   Setting({super.key});
@@ -68,7 +69,7 @@ class Setting extends StatelessWidget {
                 name: 'Deactive Account',
                 onTap: () {
                   Navigator.of(context).push(MaterialPageRoute<EmptyScreen>(
-                    builder: (BuildContext context) => const EmptyScreen(),
+                    builder: (BuildContext context) => DeleteAccount(),
                   ));
                 },
               ),

@@ -75,7 +75,7 @@ class ProfileScreen extends StatelessWidget {
                           context,
                           MaterialPageRoute<EmptyScreen>(
                             builder: (BuildContext context) =>
-                                const MyProfile(),
+                                 MyProfile(),
                           ),
                         );
                       }),
