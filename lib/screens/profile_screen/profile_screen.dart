@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 
 import '../../database/app_user/auth_method.dart';
 import '../../utilities/app_images.dart';
+import '../../widgets/profile/my_profile/my_profile.dart';
 import '../../widgets/profile/order/orders.dart';
 import '../../widgets/profile/profile_header.dart';
 import '../../widgets/profile/profile_middle_tile.dart';
 import '../../widgets/profile/profile_nav_tile.dart';
+import '../../widgets/profile/setting/setting.dart';
 import '../auth/welcome_screen.dart';
 import '../empty_screen/empty_screen.dart';
 import '../order/order_history.dart';
@@ -73,7 +75,7 @@ class ProfileScreen extends StatelessWidget {
                           context,
                           MaterialPageRoute<EmptyScreen>(
                             builder: (BuildContext context) =>
-                                const EmptyScreen(),
+                                const MyProfile(),
                           ),
                         );
                       }),
@@ -85,8 +87,7 @@ class ProfileScreen extends StatelessWidget {
                         Navigator.push(
                           context,
                           MaterialPageRoute<EmptyScreen>(
-                            builder: (BuildContext context) =>
-                                const EmptyScreen(),
+                            builder: (BuildContext context) => Setting(),
                           ),
                         );
                       }),

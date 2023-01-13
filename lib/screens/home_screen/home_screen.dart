@@ -33,9 +33,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     super.initState();
     controller = BottomSheet.createAnimationController(this);
     controller!.duration = const Duration(milliseconds: 400);
-  
   }
-
 
   @override
   void dispose() {
@@ -52,8 +50,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
       drawer: drawerScreen(context),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
-          List<String> deviceToken = userPro.deviceToken;
-
+          List<String> deviceToken = userPro.allDeviceToken;
+          print(deviceToken);
           await PushNotification().sendNotification(
               deviceToken: deviceToken,
               messageTitle: 'Answer',

@@ -9,10 +9,10 @@ import '../chat_screen/chat_screen.dart';
 import '../screens.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../providers/app_provider.dart';
+import '../../providers/app_provider.dart';           
 
 class MainScreen extends StatefulWidget {
-  const MainScreen({Key? key}) : super(key: key);
+  const   MainScreen({Key? key}) : super(key: key);
   static const String routeName = '/main-screen';
 
   @override

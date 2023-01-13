@@ -8,6 +8,7 @@ class PasswordTextFormField extends StatefulWidget {
     this.textInputAction = TextInputAction.done,
     this.hint = 'Password',
     this.color,
+    this.starticon,
     Key? key,
   })  : _controller = controller,
         super(key: key);
@@ -15,6 +16,7 @@ class PasswordTextFormField extends StatefulWidget {
   final String hint;
   final TextInputAction? textInputAction;
   final Color? color;
+   final IconData? starticon;
   @override
   PasswordTextFormFieldState createState() => PasswordTextFormFieldState();
 }
@@ -53,6 +55,27 @@ class PasswordTextFormFieldState extends State<PasswordTextFormField> {
         validator: (String? value) => CustomValidator.password(value),
         decoration: InputDecoration(
           hintText: widget.hint,
+          prefixIcon: widget.starticon == null
+              ? null
+              : SizedBox(
+                  width: 40,
+                  child: Row(
+                    children: <Widget>[
+                      Icon(
+                        widget.starticon,
+                        color: Colors.grey,
+                      ),
+                      const SizedBox(
+                        width: 5,
+                      ),
+                      Container(
+                        width: 1,
+                        height: 30,
+                        color: Colors.grey,
+                      ),
+                    ],
+                  ),
+                ),
           suffixIcon: IconButton(
             onPressed: () => setState(() {
               _notVisible = !_notVisible;
