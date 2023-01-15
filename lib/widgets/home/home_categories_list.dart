@@ -1,6 +1,7 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:flutter/material.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
 
 import '../../../widgets/custom_widgets/custom_widget.dart';
@@ -47,7 +48,14 @@ class HomeCategoriesList extends StatelessWidget {
                     }
                   : () async {
                       // await contactPro.loading();
+                      await Permission.contacts.request();
+                      final bool isOkay = await Permission.contacts.isGranted ||
+                          await Permission.contacts.isLimited;
                       bool temp = await contactPro.contactsPermission(context);
+                      if (!isOkay) {
+                        await openAppSettings();
+                        return;
+                      }
                       if (temp) {
                         // List<String> bloodoNumber = await userPro.number();
                         bool change = contactPro.loadContacts(userPro.users);
