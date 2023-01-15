@@ -39,7 +39,7 @@ class ProductTile extends StatelessWidget {
               children: <Widget>[
                 Expanded(
                   child: Padding(
-                    padding: const EdgeInsets.all(16.0),
+                    padding: const EdgeInsets.all(1),
                     child: SizedBox(
                       width: double.infinity,
                       height: double.infinity,

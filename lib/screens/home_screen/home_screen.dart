@@ -12,6 +12,7 @@ import '../../widgets/home/home_categories_list.dart';
 import '../../widgets/product/latest_product.dart';
 import '../about/aboust_us.dart';
 import '../about/contact_us.dart';
+import '../category_screens/some_categories.dart';
 import '../search_screen/search_screen.dart';
 import '../category_screens/categories_extend.dart';
 import '../category_screens/category.dart';
@@ -45,21 +46,11 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     UserProvider userPro = Provider.of<UserProvider>(context);
     return Scaffold(
+      backgroundColor: const Color.fromARGB(255, 245, 244, 244),
       key: _key,
       //appBar: appBar(context),
       drawer: drawerScreen(context),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () async {
-          List<String> deviceToken = userPro.deviceToken;
 
-          await PushNotification().sendNotification(
-              deviceToken: deviceToken,
-              messageTitle: 'Answer',
-              messageBody: ' reply with an Answer in your question',
-              // ignore: always_specify_types
-              dataa: ['usman', 'afzal', 'Bajwa']);
-        },
-      ),
       body: SafeArea(
         child: Consumer2<ProductProvider, CategoriesProvider>(builder: (
           BuildContext context,
@@ -105,7 +96,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                           SizedBox(
                             height: 50,
                             width: 200,
-                            child: Image.asset(AppImages.whiteLogo),
+                            child: Image.asset(AppImages.logo),
                           ),
                           GestureDetector(
                             onTap: () {
@@ -155,6 +146,22 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                   ),
                 ),
                 const HomeCategoriesList(),
+                SizedBox(
+                  height: 20,
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      const ForText(name: 'Quick Picks', size: 18, bold: true),
+                    ],
+                  ),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                SomeCategories(),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16),
                   child: Row(
@@ -180,6 +187,9 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                       ),
                     ],
                   ),
+                ),
+                const SizedBox(
+                  height: 10,
                 ),
                 const LatestProductsList(),
                 const SizedBox(
@@ -219,6 +229,9 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                     ],
                   ),
                 ),
+                const SizedBox(
+                  height: 10,
+                ),
                 const LatestProductsList(),
                 const SizedBox(
                   height: 10,
@@ -257,6 +270,9 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                       ),
                     ],
                   ),
+                ),
+                const SizedBox(
+                  height: 10,
                 ),
                 const LatestProductsList(),
                 const SizedBox(height: 50),

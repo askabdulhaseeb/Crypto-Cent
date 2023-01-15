@@ -11,6 +11,7 @@ import '../../models/app_user/app_user.dart';
 import '../../models/chat/chat.dart';
 import '../../models/product/product_model.dart';
 import '../../providers/user_provider.dart';
+import '../../widgets/custom_widgets/custom_dialog.dart';
 import '../../widgets/custom_widgets/custom_profile_image.dart';
 import '../../widgets/product/add_to_cart_widget.dart';
 import '../../widgets/product/product_url_slider.dart';
@@ -165,29 +166,43 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
           if (AuthMethods.uid != widget.product.uid)
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: Row(
-                children: <Widget>[
-                  Expanded(
-                    child: CustomElevatedButton(
-                      title: 'Send Offer',
-                      textStyle:
-                          const TextStyle(color: Colors.black, fontSize: 18),
-                      bgColor: Theme.of(context).secondaryHeaderColor,
-                      onTap: () async {
-                        await sendOfferBottomSheet(context);
-                      },
+              child: (AuthMethods.uid.isEmpty)
+                  ? CustomElevatedButton(
+                      title: 'Add To Cart',
+                      onTap: () {
+                        showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return const CustomDialogBox(
+                                title: "To enable this function",
+                                descriptions: "Please login or create account ",
+                                text: "Login",
+                              );
+                            });
+                      })
+                  : Row(
+                      children: <Widget>[
+                        Expanded(
+                          child: CustomElevatedButton(
+                            title: 'Send Offer',
+                            textStyle: const TextStyle(
+                                color: Colors.black, fontSize: 18),
+                            bgColor: Theme.of(context).secondaryHeaderColor,
+                            onTap: () async {
+                              await sendOfferBottomSheet(context);
+                            },
+                          ),
+                        ),
+                        const SizedBox(width: 16),
+                        Expanded(
+                          child: CustomElevatedButton(
+                              title: 'Add to Cart',
+                              onTap: () async {
+                                await bottomSheet(context, cartPro);
+                              }),
+                        ),
+                      ],
                     ),
-                  ),
-                  const SizedBox(width: 16),
-                  Expanded(
-                    child: CustomElevatedButton(
-                        title: 'Add to Cart',
-                        onTap: () async {
-                          await bottomSheet(context, cartPro);
-                        }),
-                  ),
-                ],
-              ),
             ),
           const SizedBox(height: 6),
         ],

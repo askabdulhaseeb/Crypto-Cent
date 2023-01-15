@@ -54,6 +54,6 @@
           android:name="firebase_analytics_collection_enabled"
           android:value="false" />
             <meta-data android:name="com.google.android.geo.API_KEY"
-               android:value="AIzaSyBfWTD74iNs4oZIUkRDYxVktSOGe0p4KN8"/>
+               android:value="AIzaSyC2QZO7dfWtEJuNgcpbjxOF--U6IVUNsmM"/>
     </application>
 </manifest>

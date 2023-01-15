@@ -192,7 +192,6 @@ class _PaymentScreenState extends State<PaymentScreen> {
                       await Provider.of<PaymentProvider>(context, listen: false)
                           .productOrder(cartPro.cartItem,deviceToken);
                            if (done) {
-                    // TODO: EMPTY CART
                     if (!mounted) return;
                     cartPro.deleteAllItem();
                     Navigator.of(context).pop();

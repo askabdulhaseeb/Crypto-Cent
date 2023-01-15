@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import '../custom_widgets/cutom_text.dart';
 
 class ProfileNavTile extends StatelessWidget {
-  const ProfileNavTile({
+   ProfileNavTile({
     required this.name,
-    required this.image,
+    this.image,
     required this.onTap,
     Key? key,
   }) : super(key: key);
   final String name;
-  final String image;
+  String? image;
   final VoidCallback onTap;
 
   @override
@@ -26,7 +26,7 @@ class ProfileNavTile extends StatelessWidget {
         child: Row(
           children: <Widget>[
             const SizedBox(width: 24),
-            ImageIcon(AssetImage(image), color: Colors.black),
+           image==null?SizedBox(): ImageIcon(AssetImage(image!), color: Colors.black),
             const SizedBox(width: 16),
             ForText(name: name, size: 18),
             const Spacer(),

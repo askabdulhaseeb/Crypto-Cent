@@ -11,10 +11,27 @@ class CategoriesProvider with ChangeNotifier {
   List<Categories> _categories = <Categories>[];
 
   List<Categories> get categories => <Categories>[..._categories];
+  List<Categories> _someCategories = <Categories>[];
+
+  List<Categories> get someCategories => <Categories>[..._someCategories];
 
   load() async {
     _categories.clear();
     _categories = await CategoriesApi().categories();
+    for (int i = 0; i < _categories.length; i++) {
+      if (_categories[i].title == 'Cars/vehicles') {
+        _someCategories.add(_categories[i]);
+      }
+      else if(_categories[i].title == 'Electronics') {
+        _someCategories.add(_categories[i]);
+      }
+      else if(_categories[i].title == 'Mobile phones') {
+        _someCategories.add(_categories[i]);
+      }
+      else if(_categories[i].title == 'Sport') {
+        _someCategories.add(_categories[i]);
+      }
+    }
     _currentCat = _categories[0];
     _subCa = _categories[0].subCategories;
     _subcurrentCat = _categories[0].subCategories[0];
