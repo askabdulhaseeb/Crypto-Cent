@@ -34,6 +34,12 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     super.initState();
     controller = BottomSheet.createAnimationController(this);
     controller!.duration = const Duration(milliseconds: 400);
+    _init();
+  }
+
+  _init() async {
+    final List<String>? devices = await PushNotification().getToken([]);
+    print(devices);
   }
 
   @override
