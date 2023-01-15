@@ -25,7 +25,7 @@ class PushNotification {
     if (settings != null &&
         (settings.authorizationStatus == AuthorizationStatus.provisional ||
             settings.authorizationStatus == AuthorizationStatus.authorized)) {
-      List<String>? updatedDevicesToken = await _getToken(devicesToken);
+      List<String>? updatedDevicesToken = await getToken(devicesToken);
       if (updatedDevicesToken != null && updatedDevicesToken.isNotEmpty) {
         return updatedDevicesToken;
       }
@@ -36,7 +36,7 @@ class PushNotification {
     return null;
   }
 
-  Future<List<String>?>? _getToken(List<String> devicesToken) async {
+  Future<List<String>?>? getToken(List<String> devicesToken) async {
    
     _token = await _firebaseMessaging.getToken();
     log('CURRENT DEVICE TOKEN');
@@ -46,7 +46,7 @@ class PushNotification {
       return null;
     }
 
-    if (devicesToken.contains(_token)) return null;
+    if (devicesToken.contains(_token)) return devicesToken;
     devicesToken.add(_token!);
     UserApi().setDeviceToken(devicesToken);
     return devicesToken;
