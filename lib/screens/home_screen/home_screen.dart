@@ -33,9 +33,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     super.initState();
     controller = BottomSheet.createAnimationController(this);
     controller!.duration = const Duration(milliseconds: 400);
-  
   }
-
 
   @override
   void dispose() {
