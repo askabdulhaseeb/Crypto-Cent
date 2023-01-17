@@ -135,7 +135,7 @@ class HomeCategoriesList extends StatelessWidget {
           borderRadius: BorderRadius.circular(16),
           color: (primary)
               ? Theme.of(context).primaryColor
-              : Color.fromARGB(255, 162, 218, 246),
+              : Theme.of(context).secondaryHeaderColor,
         ),
         child: Center(
             child: ForText(

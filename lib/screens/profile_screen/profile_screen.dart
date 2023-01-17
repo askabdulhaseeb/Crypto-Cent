@@ -11,7 +11,7 @@ import '../../widgets/profile/profile_nav_tile.dart';
 import '../../widgets/profile/setting/setting.dart';
 import '../auth/welcome_screen.dart';
 import '../empty_screen/empty_screen.dart';
-import '../empty_screen/profile_empty_screen.dart';
+import '../empty_screen/empty_auth_screen.dart';
 import '../order/order_history.dart';
 import 'wallet/wallet_screen.dart';
 
@@ -20,7 +20,7 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AuthMethods.uid.isEmpty
-        ? const EmptyProfileScreen()
+        ? const EmptyAuthScreen(text: 'Please Log in to view your profile',)
         : Scaffold(
             appBar: AppBar(
               backgroundColor: Theme.of(context).secondaryHeaderColor,

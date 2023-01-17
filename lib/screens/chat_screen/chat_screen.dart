@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import '../../database/app_user/auth_method.dart';
 import '../../enum/message_tabbar_enum.dart';
 import '../../providers/chat/chat_page_provider.dart';
+import '../empty_screen/empty_auth_screen.dart';
 import '../empty_screen/empty_screen.dart';
 import 'group/group_chat_dashboard.dart';
 import 'private/personal_chat_dashboard.dart';
@@ -16,7 +17,7 @@ class ChatScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     ChatPageProvider page = Provider.of<ChatPageProvider>(context);
     return AuthMethods.uid.isEmpty
-        ? const EmptyScreen()
+        ? EmptyAuthScreen(text: 'Please Log in to chat with others',)
         : Scaffold(
       appBar: AppBar(
         title: Text(

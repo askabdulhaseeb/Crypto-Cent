@@ -10,6 +10,7 @@ import 'providers/provider.dart';
 import 'providers/providers_list.dart';
 import 'screens/chat_screen/group/create_group_screen.dart';
 import 'screens/empty_screen/empty_screen.dart';
+import 'screens/empty_screen/empty_auth_screen.dart';
 import 'screens/screens.dart';
 
 Future<void> _firebaseMessBackgroundHand(RemoteMessage message) async {
@@ -51,7 +52,7 @@ class MyApp extends StatelessWidget {
           home: (AuthMethods.uid.isEmpty)
               ? const WelcomeScreen()
               : const MainScreen(),
-          // home: SpalshScreen(),
+          
           routes: <String, WidgetBuilder>{
             EmptyScreen.routeName: (_) => const EmptyScreen(),
             WelcomeScreen.routeName: (_) => const WelcomeScreen(),

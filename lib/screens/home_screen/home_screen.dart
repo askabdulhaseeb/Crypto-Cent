@@ -50,8 +50,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
-      backgroundColor: const Color.fromARGB(255, 245, 244, 244),
+    return Scaffold(
       key: _key,
       //appBar: appBar(context),
       drawer: drawerScreen(context),

@@ -72,7 +72,7 @@ class AppThemes {
       iconTheme: IconThemeData(color: Colors.black),
     ),
     fontFamily: 'DMSans',
-    scaffoldBackgroundColor: Colors.white,
+    scaffoldBackgroundColor: const Color.fromARGB(255, 245, 244, 244),
     primaryColor: _primary,
     secondaryHeaderColor: _secondary,
     iconTheme: const IconThemeData(color: Colors.black),

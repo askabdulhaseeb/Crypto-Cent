@@ -5,7 +5,8 @@ import '../../database/app_user/auth_method.dart';
 import '../../providers/cart_provider.dart';
 import '../../widgets/cart/empty_cart_widget.dart';
 import '../../widgets/cart/fill_cart_widget.dart';
-import '../empty_screen/empty_screen.dart';
+import '../empty_screen/empty_auth_screen.dart';
+
 
 class CartScreen extends StatelessWidget {
   const CartScreen({super.key});
@@ -13,7 +14,7 @@ class CartScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     CartProvider cartPro = Provider.of<CartProvider>(context);
     return AuthMethods.uid.isEmpty
-        ? const EmptyScreen()
+        ? const EmptyAuthScreen(text: 'Please Log in to view your cart',)
         : Scaffold(
             appBar: AppBar(title: const Text('My Cart')),
             body: cartPro.cartItem.isNotEmpty
