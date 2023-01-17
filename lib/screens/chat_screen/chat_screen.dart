@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 
 import 'package:provider/provider.dart';
 
+import '../../database/app_user/auth_method.dart';
 import '../../enum/message_tabbar_enum.dart';
 import '../../providers/chat/chat_page_provider.dart';
+import '../empty_screen/empty_screen.dart';
 import 'group/group_chat_dashboard.dart';
 import 'private/personal_chat_dashboard.dart';
 
@@ -13,7 +15,9 @@ class ChatScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ChatPageProvider page = Provider.of<ChatPageProvider>(context);
-    return Scaffold(
+    return AuthMethods.uid.isEmpty
+        ? const EmptyScreen()
+        : Scaffold(
       appBar: AppBar(
         title: Text(
           'Messenger',

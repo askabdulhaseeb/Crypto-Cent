@@ -26,11 +26,9 @@ class _MainScreenState extends State<MainScreen> {
   static final List<Widget> _pages = <Widget>[
     const HomeScreen(),
     const FavoriteScreen(),
-    (AuthMethods.uid.isEmpty) ? const EmptyScreen() : const CartScreen(),
-    (AuthMethods.uid.isEmpty) ? const EmptyScreen() : const ChatScreen(),
-    (AuthMethods.uid.isEmpty)
-        ? const ProfilewhenUserNotLogin()
-        : const ProfileScreen(),
+    const CartScreen(),
+    const ChatScreen(),
+    const ProfileScreen(),
   ];
   @override
   void initState() {
@@ -74,6 +72,8 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   Widget build(BuildContext context) {
+    print(AuthMethods.uid.isEmpty);
+
     return Scaffold(
       body: Consumer<AppProvider>(
         builder: (BuildContext context, AppProvider navBar, _) {

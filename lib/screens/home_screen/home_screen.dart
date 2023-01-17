@@ -50,8 +50,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    UserProvider userPro = Provider.of<UserProvider>(context);
-    return Scaffold(
+    return  Scaffold(
       backgroundColor: const Color.fromARGB(255, 245, 244, 244),
       key: _key,
       //appBar: appBar(context),
@@ -152,22 +151,22 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                   ),
                 ),
                 const HomeCategoriesList(),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      const ForText(name: 'Quick Picks', size: 18, bold: true),
+                    children: const <Widget>[
+                      ForText(name: 'Quick Picks', size: 18, bold: true),
                     ],
                   ),
                 ),
                 const SizedBox(
                   height: 10,
                 ),
-                SomeCategories(),
+                const SomeCategories(),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16),
                   child: Row(

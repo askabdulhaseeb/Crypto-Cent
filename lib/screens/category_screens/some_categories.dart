@@ -15,6 +15,7 @@ class SomeCategories extends StatelessWidget {
     double width = MediaQuery.of(context).size.width;
     return GridView.count(
       shrinkWrap: true,
+      primary: false,
       childAspectRatio: 90 / 110,
       mainAxisSpacing: 8,
       crossAxisCount: 2,

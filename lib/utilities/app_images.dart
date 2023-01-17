@@ -52,4 +52,6 @@ class AppImages {
   static String get frame3 => 'assets/images/Frame113.png';
   static String get frame4 => 'assets/images/Frame114.png';
   static String get frame5 => 'assets/images/Frame115.png';
+  static String get pro2 => 'assets/images/pro2.png';
+  static String get emptyProfile => 'assets/images/emptyProfile.jpg';
 }

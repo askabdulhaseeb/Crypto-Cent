@@ -19,10 +19,17 @@ class WelcomeScreen extends StatelessWidget {
       appBar: AppBar(
         actions: [
           TextButton(
-            onPressed: () => Navigator.canPop(context)
-                ? Navigator.of(context).pop()
-                : Navigator.of(context).pushNamedAndRemoveUntil(
-                    MainScreen.routeName, (Route<dynamic> route) => false),
+            // onPressed: () => Navigator.canPop(context)
+            //     ? Navigator.of(context).pop()
+            //     : Navigator.of(context).pushNamedAndRemoveUntil(
+            //         MainScreen.routeName, (Route<dynamic> route) => false),
+            onPressed: () {
+              Provider.of<AppProvider>(context, listen: false).onTabTapped(0);
+              Navigator.of(context).pushNamedAndRemoveUntil(
+                MainScreen.routeName,
+                (Route<dynamic> route) => false,
+              );
+            },
             child: const Text('Skip login for now'),
           ),
         ],
