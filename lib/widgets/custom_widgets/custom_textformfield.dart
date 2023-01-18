@@ -22,6 +22,7 @@ class CustomTextFormField extends StatefulWidget {
     this.style,
     this.border,
     this.starticon,
+    this.borderColor,
     Key? key,
   })  : _controller = controller,
         super(key: key);
@@ -44,6 +45,7 @@ class CustomTextFormField extends StatefulWidget {
   final InputBorder? border;
   final TextStyle? style;
   final IconData? starticon;
+  final Color? borderColor;
   @override
   CustomTextFormFieldState createState() => CustomTextFormFieldState();
 }
@@ -70,6 +72,7 @@ class CustomTextFormFieldState extends State<CustomTextFormField> {
           widget.contentPadding ?? const EdgeInsets.symmetric(horizontal: 12),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(14),
+        border: Border.all(color: Colors.blueGrey),
         color: widget.color ?? Theme.of(context).secondaryHeaderColor,
       ),
       child: TextFormField(

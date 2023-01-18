@@ -11,6 +11,7 @@ import 'providers/providers_list.dart';
 import 'screens/chat_screen/group/create_group_screen.dart';
 import 'screens/empty_screen/empty_screen.dart';
 import 'screens/empty_screen/empty_auth_screen.dart';
+import 'screens/map_screen/add_new_address.dart';
 import 'screens/screens.dart';
 import 'screens/spalsh_screen/splash_screen.dart';
 
@@ -53,7 +54,7 @@ class MyApp extends StatelessWidget {
           // home: (AuthMethods.uid.isEmpty)
           //     ? const WelcomeScreen()
           //     : const MainScreen(),
-          home:SpalshScreen(),
+          home:  AddNewAddress(),
           routes: <String, WidgetBuilder>{
             EmptyScreen.routeName: (_) => const EmptyScreen(),
             WelcomeScreen.routeName: (_) => const WelcomeScreen(),
