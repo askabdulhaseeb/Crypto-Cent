@@ -19,6 +19,7 @@ class ForText extends StatelessWidget {
     return Text(
       textAlign: TextAlign.center,
       name,
+      
       style: textStyle ??
           TextStyle(
             color: color ?? Colors.black,

@@ -13,7 +13,7 @@ import '../../widgets/custom_widgets/custom_widget.dart';
 
 class AddNewAddress extends StatefulWidget {
   AddNewAddress({super.key});
-
+   static const String routeName = '/addNewAddress';
   @override
   State<AddNewAddress> createState() => _AddNewAddressState();
 }
