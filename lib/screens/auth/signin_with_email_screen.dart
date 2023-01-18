@@ -8,6 +8,7 @@ import '../../providers/app_provider.dart';
 import '../../utilities/app_images.dart';
 import '../../widgets/custom_widgets/custom_widget.dart';
 import '../../widgets/custom_widgets/password_textformfield.dart';
+import '../../widgets/custom_widgets/show_loading.dart';
 import '../main_screen/main_screen.dart';
 import 'signup_with_email.dart';
 
@@ -61,33 +62,35 @@ class _SigninWithEmailScreenState extends State<SigninWithEmailScreen> {
               ),
               PasswordTextFormField(controller: _password),
               const SizedBox(height: 10),
-              CustomElevatedButton(
-                title: 'Sign In',
-                onTap: () async {
-                  if (_key.currentState!.validate()) {
-                    setState(() {
-                      _isLoading = true;
-                    });
-                    final User? user =
-                        await AuthMethods().loginWithEmailAndPassword(
-                      _email.text,
-                      _password.text,
-                    );
-                    setState(() {
-                      _isLoading = false;
-                    });
-                    if (!mounted) return;
-                    if (user != null) {
-                      Provider.of<AppProvider>(context, listen: false)
-                          .onTabTapped(0);
-                      Navigator.of(context).pushNamedAndRemoveUntil(
-                        MainScreen.routeName,
-                        (Route<dynamic> route) => false,
-                      );
-                    }
-                  }
-                },
-              ),
+              _isLoading
+                  ? const ShowLoading()
+                  : CustomElevatedButton(
+                      title: 'Sign In',
+                      onTap: () async {
+                        if (_key.currentState!.validate()) {
+                          setState(() {
+                            _isLoading = true;
+                          });
+                          final User? user =
+                              await AuthMethods().loginWithEmailAndPassword(
+                            _email.text,
+                            _password.text,
+                          );
+                          setState(() {
+                            _isLoading = false;
+                          });
+                          if (!mounted) return;
+                          if (user != null) {
+                            Provider.of<AppProvider>(context, listen: false)
+                                .onTabTapped(0);
+                            Navigator.of(context).pushNamedAndRemoveUntil(
+                              MainScreen.routeName,
+                              (Route<dynamic> route) => false,
+                            );
+                          }
+                        }
+                      },
+                    ),
               const Spacer(),
               RichText(
                 text: TextSpan(
