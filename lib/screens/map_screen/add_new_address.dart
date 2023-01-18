@@ -168,26 +168,35 @@ class _AddNewAddressState extends State<AddNewAddress> {
                 const SizedBox(
                   height: 20,
                 ),
-                CustomElevatedButton(
-                    title: 'Add Address',
-                    onTap: () {
-                      if (_formKey.currentState!.validate()) {
-                        UserLocation location = UserLocation(
-                          address: address.text,
-                          city: city.text,
-                          latitude: latitude,
-                          longitude: longitude,
-                          locationName: locationName.text,
-                          state: state.text,
-                          userID: TimeStamp.timestamp.toString(),
-                          userLocationID: 'usman',
-                          zipCode: zipCode.text,
-                          phonenumber: phoneNumber.text,
-                        );
-                        locationPro.addLocation(location);
-                      }
-                      //getLatlong();
-                    })
+                locationPro.isLoading
+                    ? CircularProgressIndicator()
+                    : CustomElevatedButton(
+                        title: 'Add Address',
+                        onTap: () async {
+                          if (_formKey.currentState!.validate()) {
+                            UserLocation location = UserLocation(
+                              address: address.text,
+                              city: city.text,
+                              latitude: latitude,
+                              longitude: longitude,
+                              locationName: locationName.text,
+                              state: state.text,
+                              userID: TimeStamp.timestamp.toString(),
+                              userLocationID: 'usman',
+                              zipCode: zipCode.text,
+                              phonenumber: phoneNumber.text,
+                            );
+                            await locationPro.addLocation(location);
+                            if (locationPro.isLoading) {
+                              address.clear();
+                              phoneNumber.clear();
+                              city.clear();
+                              locationName.clear();
+                              state.clear();
+                            }
+                          }
+                          //getLatlong();
+                        })
               ],
             ),
           ),
