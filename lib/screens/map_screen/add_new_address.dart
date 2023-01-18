@@ -40,12 +40,12 @@ class _AddNewAddressState extends State<AddNewAddress> {
     locationPermission = await Geolocator.checkPermission();
 
     if (locationPermission == LocationPermission.deniedForever) {
-      return Future.error("Location permission denied forever");
+      return Future.error('Location permission denied forever');
     } else if (locationPermission == LocationPermission.denied) {
       //request new permission
       locationPermission = await Geolocator.requestPermission();
       if (locationPermission == LocationPermission.denied) {
-        return Future.error("Location permission is denied");
+        return Future.error('Location permission is denied');
       }
     }
     Position position = await Geolocator.getCurrentPosition(
