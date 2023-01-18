@@ -45,6 +45,7 @@ class _SpalshScreenState extends State<SpalshScreen> {
       ..initialize().then((value) => videoPlayerController!.play());
   }
 
+  @override
   void dispose() {
     videoPlayerController!.dispose();
     super.dispose();

@@ -12,6 +12,7 @@ import 'screens/chat_screen/group/create_group_screen.dart';
 import 'screens/empty_screen/empty_screen.dart';
 import 'screens/empty_screen/empty_auth_screen.dart';
 import 'screens/screens.dart';
+import 'screens/spalsh_screen/splash_screen.dart';
 
 Future<void> _firebaseMessBackgroundHand(RemoteMessage message) async {
   RemoteNotification? notification = message.notification;
@@ -49,10 +50,10 @@ class MyApp extends StatelessWidget {
           theme: AppThemes.light,
           darkTheme: AppThemes.dark,
           themeMode: theme.themeMode,
-          home: (AuthMethods.uid.isEmpty)
-              ? const WelcomeScreen()
-              : const MainScreen(),
-          
+          // home: (AuthMethods.uid.isEmpty)
+          //     ? const WelcomeScreen()
+          //     : const MainScreen(),
+          home:SpalshScreen(),
           routes: <String, WidgetBuilder>{
             EmptyScreen.routeName: (_) => const EmptyScreen(),
             WelcomeScreen.routeName: (_) => const WelcomeScreen(),
