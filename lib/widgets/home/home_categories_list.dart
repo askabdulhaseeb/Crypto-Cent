@@ -15,6 +15,7 @@ import '../../screens/product_screens/add_product_screen.dart';
 import '../custom_widgets/custom_dialog.dart';
 import '../custom_widgets/custom_toast.dart';
 import 'contact/contacts_list.dart';
+import 'package:flutter/services.dart';
 
 class HomeCategoriesList extends StatelessWidget {
   const HomeCategoriesList({super.key});
@@ -36,6 +37,7 @@ class HomeCategoriesList extends StatelessWidget {
               false,
               (AuthMethods.uid.isEmpty)
                   ? () {
+                      HapticFeedback.heavyImpact();
                       showDialog(
                           context: context,
                           builder: (BuildContext context) {
@@ -47,6 +49,7 @@ class HomeCategoriesList extends StatelessWidget {
                           });
                     }
                   : () async {
+                      HapticFeedback.heavyImpact();
                       // await contactPro.loading();
                       await Permission.contacts.request();
                       final bool isOkay = await Permission.contacts.isGranted ||
@@ -77,6 +80,7 @@ class HomeCategoriesList extends StatelessWidget {
                       }
                     }),
           allitems(context, 'Categories', false, () {
+            HapticFeedback.heavyImpact();
             Navigator.push(
               context,
               // ignore: always_specify_types
@@ -91,6 +95,7 @@ class HomeCategoriesList extends StatelessWidget {
               false,
               (AuthMethods.uid.isEmpty)
                   ? () {
+                      HapticFeedback.heavyImpact();
                       showDialog(
                           context: context,
                           builder: (BuildContext context) {
@@ -102,6 +107,7 @@ class HomeCategoriesList extends StatelessWidget {
                           });
                     }
                   : () {
+                      HapticFeedback.heavyImpact();
                       Navigator.push(
                         context,
                         MaterialPageRoute<AddProductScreen>(
@@ -111,6 +117,7 @@ class HomeCategoriesList extends StatelessWidget {
                       );
                     }),
           allitems(context, 'News', false, () {
+            HapticFeedback.heavyImpact();
             Navigator.push(
               context,
               MaterialPageRoute<EmptyScreen>(

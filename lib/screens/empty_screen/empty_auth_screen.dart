@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 import '../../utilities/app_images.dart';
 import '../../widgets/custom_widgets/custom_widget.dart';
+import '../screens.dart';
 
 class EmptyAuthScreen extends StatelessWidget {
   const EmptyAuthScreen({required this.text, super.key});
@@ -73,7 +74,11 @@ class EmptyAuthScreen extends StatelessWidget {
                                   bgColor:
                                       const Color.fromARGB(255, 215, 236, 254)),
                               CustomElevatedButton(
-                                  title: 'Create a account', onTap: () {}),
+                                  title: 'Create a account',
+                                  onTap: () {
+                                    Navigator.of(context)
+                                        .pushNamed(WelcomeScreen.routeName);
+                                  }),
                             ],
                           ),
                         )),
