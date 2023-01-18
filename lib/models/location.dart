@@ -7,8 +7,8 @@ class UserLocation {
   final String userLocationID;
   final String userID;
   final String locationName;
-  final double latitude;
-  final double longitude;
+ double latitude;
+ double longitude;
   final String address;
   final String city;
   final String state;

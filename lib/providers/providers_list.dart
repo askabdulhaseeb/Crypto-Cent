@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'contact_provider.dart';
+import 'location_provider.dart';
 import 'provider.dart';
 
 // ignore: always_specify_types
@@ -11,11 +12,15 @@ dynamic get listOfProvider => [
       ChangeNotifierProvider<CartProvider>(
         create: (BuildContext context) => CartProvider(),
       ),
+
       ChangeNotifierProvider<AuthProvider>(
         create: (BuildContext context) => AuthProvider(),
       ),
       ChangeNotifierProvider<AppThemeProvider>.value(
         value: AppThemeProvider(),
+      ),
+      ChangeNotifierProvider<LocationProvider>.value(
+        value: LocationProvider(),
       ),
       ChangeNotifierProvider<CategoriesProvider>.value(
         value: CategoriesProvider(),
