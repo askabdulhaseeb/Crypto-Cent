@@ -1,19 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
+import '../../providers/location_provider.dart';
 import '../../widgets/custom_widgets/custom_widget.dart';
+import '../order/payment.dart';
 import 'add_new_address.dart';
 
 class LocationScreen extends StatefulWidget {
   const LocationScreen({super.key});
+  static const String routeName = '/locationScreen';
 
   @override
   State<LocationScreen> createState() => _LocationScreenState();
 }
 
 class _LocationScreenState extends State<LocationScreen> {
-  int isSelectedIndex = 0;
+  int isSelectedIndex = 1;
   @override
   Widget build(BuildContext context) {
+    LocationProvider locationPro = Provider.of<LocationProvider>(context);
     return Scaffold(
       appBar: AppBar(
         title: const Text('Select Address'),
@@ -40,8 +45,8 @@ class _LocationScreenState extends State<LocationScreen> {
                 )),
             Expanded(
               child: ListView.builder(
-                itemCount: 10,
-                itemBuilder: (context, index) {
+                itemCount: locationPro.allUserLocation.length,
+                itemBuilder: (BuildContext context, int index) {
                   return Padding(
                     padding: const EdgeInsets.symmetric(vertical: 4),
                     child: GestureDetector(
@@ -72,21 +77,22 @@ class _LocationScreenState extends State<LocationScreen> {
                                 width: 10,
                               ),
                               RichText(
-                                text: const TextSpan(
-                                  text: 'Home' '\n',
-                                  style: TextStyle(
+                                text: TextSpan(
+                                  text:
+                                      '${locationPro.allUserLocation[index].locationName} \n',
+                                  style: const TextStyle(
                                       color: Colors.black,
                                       fontSize: 18,
                                       fontWeight: FontWeight.w800),
                                   children: <TextSpan>[
                                     TextSpan(
-                                        text: 'Johar Town' '\n',
-                                        style: TextStyle(
+                                        text: '${locationPro.allUserLocation[index].address} \n',
+                                        style: const TextStyle(
                                             fontSize: 12,
                                             fontWeight: FontWeight.w200)),
                                     TextSpan(
-                                        text: 'Lahore',
-                                        style: TextStyle(
+                                        text: '${locationPro.allUserLocation[index].city} ${locationPro.allUserLocation[index].state}',
+                                        style: const TextStyle(
                                             fontSize: 12,
                                             fontWeight: FontWeight.w200)),
                                   ],
@@ -115,6 +121,16 @@ class _LocationScreenState extends State<LocationScreen> {
                   );
                 },
               ),
+            ),
+            CustomElevatedButton(
+                title: 'Adress Done',
+                onTap: () async {
+                  await locationPro.selectedIndex(
+                      locationPro.allUserLocation[isSelectedIndex]);
+                  Navigator.of(context).pushNamed(PaymentScreen.routeName);
+                }),
+            const SizedBox(
+              height: 20,
             ),
           ],
         ),

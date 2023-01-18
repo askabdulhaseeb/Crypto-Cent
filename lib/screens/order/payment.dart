@@ -15,7 +15,7 @@ import '../../widgets/custom_widgets/show_loading.dart';
 
 class PaymentScreen extends StatefulWidget {
   const PaymentScreen({super.key});
-  static String routes = '/payment';
+  static String routeName = '/payment';
 
   @override
   State<PaymentScreen> createState() => _PaymentScreenState();
@@ -187,18 +187,15 @@ class _PaymentScreenState extends State<PaymentScreen> {
                   //       message: 'You havenot enough Balance ');
                   // }
                   AppUser me = userPro.user(cartPro.cartItem[0].sellerID);
-                          List<String> deviceToken = me.deviceToken??[];
+                  List<String> deviceToken = me.deviceToken ?? [];
                   final bool done =
                       await Provider.of<PaymentProvider>(context, listen: false)
-                          .productOrder(cartPro.cartItem,deviceToken);
-                           if (done) {
+                          .productOrder(cartPro.cartItem, deviceToken);
+                  if (done) {
                     if (!mounted) return;
                     cartPro.deleteAllItem();
                     Navigator.of(context).pop();
                   }
-                          
-
-         
                 },
               ),
             ],

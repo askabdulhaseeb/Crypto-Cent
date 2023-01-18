@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:provider/provider.dart';
+import '../../database/app_user/auth_method.dart';
 import '../../function/time_date_function.dart';
 import '../../models/location.dart';
 import '../../providers/location_provider.dart';
@@ -169,7 +170,7 @@ class _AddNewAddressState extends State<AddNewAddress> {
                   height: 20,
                 ),
                 locationPro.isLoading
-                    ? CircularProgressIndicator()
+                    ? const CircularProgressIndicator()
                     : CustomElevatedButton(
                         title: 'Add Address',
                         onTap: () async {
@@ -181,12 +182,13 @@ class _AddNewAddressState extends State<AddNewAddress> {
                               longitude: longitude,
                               locationName: locationName.text,
                               state: state.text,
-                              userID: TimeStamp.timestamp.toString(),
-                              userLocationID: 'usman',
+                              userID: AuthMethods.uid,
+                              locationID: AuthMethods.uid+TimeStamp.timestamp.toString(),
+                              timestamp:TimeStamp.timestamp ,
                               zipCode: zipCode.text,
                               phonenumber: phoneNumber.text,
                             );
-                            await locationPro.addLocation(location);
+                            await locationPro.addLocation(location,context);
                             if (locationPro.isLoading) {
                               address.clear();
                               phoneNumber.clear();

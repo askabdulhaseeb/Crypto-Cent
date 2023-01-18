@@ -1,27 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
-import '../database/location.dart';
+import '../database/location_api.dart';
 import '../models/location.dart';
 import '../widgets/custom_widgets/custom_toast.dart';
 
 class LocationProvider with ChangeNotifier {
+  LocationProvider() {
+    load();
+  }
+   Future<void> load() async {
+    _allUserLocation = await LocationApi().getdata();
+    notifyListeners();
+  }
   UserLocation? _userLocation;
+  UserLocation? _selectLocation;
+  List<UserLocation> _allUserLocation = [];
+  List<UserLocation> get allUserLocation => _allUserLocation;
   bool isLoading = false;
   UserLocation get userLocation => _userLocation ?? _null;
-  UserLocation get _null => UserLocation(
-      userLocationID: '',
-      userID: '',
-      locationName: '',
-      latitude: 0,
-      longitude: 0,
-      address: '',
-      city: '',
-      state: '',
-      zipCode: '');
-  addLocation(UserLocation location) async {
+  UserLocation get selectLocation => _selectLocation ?? _null;
+  addLocation(UserLocation location, BuildContext context) async {
     isLoading = true;
     notifyListeners();
     _userLocation = location;
+    _allUserLocation.add(location);
     // if (_userLocation!.latitude == 0) {
     //   final String fulladdress =  '${location.address},${location.city},${location.state}';
     //   print(fulladdress);
@@ -36,7 +38,25 @@ class LocationProvider with ChangeNotifier {
     if (temp == true) {
       CustomToast.successToast(message: 'Location Update');
       isLoading = false;
-    notifyListeners();
+      notifyListeners();
+      Navigator.of(context).pop();
     }
   }
+
+  selectedIndex(UserLocation value) {
+    _selectLocation = value;
+    notifyListeners();
+  }
+
+  UserLocation get _null => UserLocation(
+      locationID: '',
+      userID: '',
+      locationName: '',
+      latitude: 0,
+      longitude: 0,
+      address: '',
+      city: '',
+      state: '',
+      timestamp: 0,
+      zipCode: '');
 }

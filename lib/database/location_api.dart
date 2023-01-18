@@ -11,7 +11,7 @@ class LocationApi{
     try {
       await _instance
           .collection(_collection)
-          .doc(value.userID)
+          .doc(value.locationID)
           .set(value.toMap());
       // CustomToast.successToast(message: 'Successfully Added');
       return true;
@@ -19,5 +19,16 @@ class LocationApi{
       CustomToast.errorToast(message: e.toString());
       return false;
     }
+  }
+  Future<List<UserLocation>> getdata() async {
+    List<UserLocation> value = <UserLocation>[];
+    QuerySnapshot<Map<String, dynamic>> snapshot = await _instance
+        .collection(_collection)
+        .orderBy('timestamp', descending: true)
+        .get();
+    for (DocumentSnapshot<Map<String, dynamic>> e in snapshot.docs) {
+      value.add(UserLocation.fromMap(e));
+    }
+    return value;
   }
 }

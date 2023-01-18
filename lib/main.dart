@@ -13,6 +13,7 @@ import 'screens/empty_screen/empty_screen.dart';
 import 'screens/empty_screen/empty_auth_screen.dart';
 import 'screens/map_screen/add_new_address.dart';
 import 'screens/map_screen/location_screen.dart';
+import 'screens/order/payment.dart';
 import 'screens/screens.dart';
 import 'screens/spalsh_screen/splash_screen.dart';
 
@@ -56,7 +57,7 @@ class MyApp extends StatelessWidget {
           //     ? const WelcomeScreen()
           //     : const MainScreen(),
 
-          home:  LocationScreen(),
+          home: SpalshScreen(),
 
           routes: <String, WidgetBuilder>{
             EmptyScreen.routeName: (_) => const EmptyScreen(),
@@ -68,6 +69,8 @@ class MyApp extends StatelessWidget {
                 const SignupWithEmailScreen(),
             PhoneNumberScreen.routeName: (_) => const PhoneNumberScreen(),
             MainScreen.routeName: (_) => const MainScreen(),
+            PaymentScreen.routeName: (_) => const PaymentScreen(),
+            LocationScreen.routeName: (_) => const LocationScreen(),
             CreateChatGroupScreen.routeName: (_) =>
                 const CreateChatGroupScreen(),
           },

@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 
 import '../../function/crypto_function.dart';
 import '../../providers/cart_provider.dart';
+import '../../screens/map_screen/location_screen.dart';
 import '../../screens/order/payment.dart';
 import '../custom_widgets/custom_elevated_button.dart';
 import '../custom_widgets/cutom_text.dart';
@@ -17,94 +18,82 @@ class CartCheckoutWidget extends StatelessWidget {
       CartProvider cartPro,
       _,
     ) {
-      return GestureDetector(
-        onTap: () {
-          Navigator.of(context).pushNamed(PaymentScreen.routes);
-        },
-        child: Container(
-          height: 210,
-          color: Colors.transparent,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: Column(
-              children: <Widget>[
-                const Divider(),
-                Row(
-                  children: <Widget>[
-                    const ForText(name: 'Select Item'),
-                    const Spacer(),
-                    ForText(
-                      name: cartPro.cartItem.length.toString(),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 10),
-                Row(
-                  children: <Widget>[
-                    const ForText(
-                      name: 'Price',
-                    ),
-                    const Spacer(),
-                    ForText(
-                      name: 'USD: \$${cartPro.totalPrice()}',
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 10),
-                Row(
-                  children: const <Widget>[
-                    ForText(name: 'Discount'),
-                    Spacer(),
-                    ForText(
-                      name: '0',
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 10),
-                Row(
-                  children: <Widget>[
-                    const ForText(
-                      name: 'Total Price',
-                      bold: true,
-                      size: 16,
-                    ),
-                    const Spacer(),
-                    FutureBuilder<double>(
-                        future: CryptoFunction()
-                            .btcPrinceLive(dollor: cartPro.totalPrice()),
-                        builder: (BuildContext context,
-                            AsyncSnapshot<double> exchangeRate) {
-                          return ForText(
-                            name: exchangeRate.hasError
-                                ? '-- ERROR --'
-                                : exchangeRate.hasData
-                                    ? 'Btc: ${exchangeRate.data ?? 0}'
-                                    : 'fetching ...',
-                            bold: true,
-                            size: 16,
-                          );
-                        }),
-                  ],
-                ),
-                const Spacer(),
-                SizedBox(
-                    height: 60,
-                    child: CustomElevatedButton(
-                        title: 'Check out',
-                        borderRadius: BorderRadius.circular(24),
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            // ignore: always_specify_types
-                            MaterialPageRoute(
-                              builder: (BuildContext context) =>
-                                  const PaymentScreen(),
-                            ),
-                          );
-                        })),
-                const SizedBox(height: 10),
-              ],
-            ),
+      return Container(
+        height: 210,
+        color: Colors.transparent,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: Column(
+            children: <Widget>[
+              const Divider(),
+              Row(
+                children: <Widget>[
+                  const ForText(name: 'Select Item'),
+                  const Spacer(),
+                  ForText(
+                    name: cartPro.cartItem.length.toString(),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 10),
+              Row(
+                children: <Widget>[
+                  const ForText(
+                    name: 'Price',
+                  ),
+                  const Spacer(),
+                  ForText(
+                    name: 'USD: \$${cartPro.totalPrice()}',
+                  ),
+                ],
+              ),
+              const SizedBox(height: 10),
+              Row(
+                children: const <Widget>[
+                  ForText(name: 'Discount'),
+                  Spacer(),
+                  ForText(
+                    name: '0',
+                  ),
+                ],
+              ),
+              const SizedBox(height: 10),
+              Row(
+                children: <Widget>[
+                  const ForText(
+                    name: 'Total Price',
+                    bold: true,
+                    size: 16,
+                  ),
+                  const Spacer(),
+                  FutureBuilder<double>(
+                      future: CryptoFunction()
+                          .btcPrinceLive(dollor: cartPro.totalPrice()),
+                      builder: (BuildContext context,
+                          AsyncSnapshot<double> exchangeRate) {
+                        return ForText(
+                          name: exchangeRate.hasError
+                              ? '-- ERROR --'
+                              : exchangeRate.hasData
+                                  ? 'Btc: ${exchangeRate.data ?? 0}'
+                                  : 'fetching ...',
+                          bold: true,
+                          size: 16,
+                        );
+                      }),
+                ],
+              ),
+              const Spacer(),
+              SizedBox(
+                  height: 60,
+                  child: CustomElevatedButton(
+                      title: 'Check out',
+                      borderRadius: BorderRadius.circular(24),
+                      onTap: () {
+                        Navigator.of(context).pushNamed(LocationScreen.routeName);;
+                      })),
+              const SizedBox(height: 10),
+            ],
           ),
         ),
       );
