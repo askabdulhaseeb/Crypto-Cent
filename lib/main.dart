@@ -53,7 +53,7 @@ class MyApp extends StatelessWidget {
           // home: (AuthMethods.uid.isEmpty)
           //     ? const WelcomeScreen()
           //     : const MainScreen(),
-          home:SpalshScreen(),
+          home:const SpalshScreen(),
           routes: <String, WidgetBuilder>{
             EmptyScreen.routeName: (_) => const EmptyScreen(),
             WelcomeScreen.routeName: (_) => const WelcomeScreen(),
