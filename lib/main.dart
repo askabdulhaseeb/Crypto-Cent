@@ -54,7 +54,9 @@ class MyApp extends StatelessWidget {
           // home: (AuthMethods.uid.isEmpty)
           //     ? const WelcomeScreen()
           //     : const MainScreen(),
+
           home:  AddNewAddress(),
+
           routes: <String, WidgetBuilder>{
             EmptyScreen.routeName: (_) => const EmptyScreen(),
             WelcomeScreen.routeName: (_) => const WelcomeScreen(),

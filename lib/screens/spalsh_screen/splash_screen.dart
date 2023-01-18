@@ -19,6 +19,7 @@ class SpalshScreen extends StatefulWidget {
 class _SpalshScreenState extends State<SpalshScreen> {
   final String asset = 'assets/video/boloodo.mp4';
   VideoPlayerController? videoPlayerController;
+  @override
   void initState() {
     super.initState();
     videoPlayerController = VideoPlayerController.asset(asset)
@@ -28,7 +29,7 @@ class _SpalshScreenState extends State<SpalshScreen> {
               (videoPlayerController!.value.duration ==
                   videoPlayerController!.value.position)) {
             //checking the duration and position every time
-            Navigator.push(
+            Navigator.pushReplacement(
               context,
               // ignore: always_specify_types
               MaterialPageRoute(
