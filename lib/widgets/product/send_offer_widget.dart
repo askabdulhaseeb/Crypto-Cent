@@ -181,7 +181,7 @@ class _SendOfferWidgetState extends State<SendOfferWidget> {
     final String me = AuthMethods.uid;
     final UserProvider userPro =
         // ignore: use_build_context_synchronously
-        Provider.of<UserProvider>(context);
+        Provider.of<UserProvider>(context,listen: false);
     final AppUser sender = userPro.user(me);
     final AppUser receiver = userPro.user(widget.product.uid);
     await ChatAPI().sendMessage(

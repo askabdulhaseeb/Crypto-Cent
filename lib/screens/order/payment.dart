@@ -186,7 +186,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                   List<MyDeviceToken> deviceToken = me.deviceToken ?? [];
                   final bool done =
                       await Provider.of<PaymentProvider>(context, listen: false)
-                          .productOrder(cartPro.cartItem, deviceToken);
+                          .productOrder(context, cartPro.cartItem, deviceToken);
                   if (done) {
                     if (!mounted) return;
                     cartPro.deleteAllItem();

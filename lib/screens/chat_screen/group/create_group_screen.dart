@@ -125,7 +125,7 @@ class _CreateChatGroupScreenState extends State<CreateChatGroupScreen> {
       final String groupID = UniqueIdFunctions.chatGroupID();
       final int time = TimeStamp.timestamp;
       final String me = AuthMethods.uid;
-      final UserProvider userPro = Provider.of<UserProvider>(context);
+      final UserProvider userPro = Provider.of<UserProvider>(context,listen: false);
       final AppUser sender = userPro.user(me);
       String url = '';
       if (file != null) {
