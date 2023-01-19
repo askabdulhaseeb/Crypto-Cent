@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 
 import '../../models/app_user/app_user.dart';
+import '../../models/my_device_token.dart';
 import '../../widgets/custom_widgets/custom_toast.dart';
 import 'auth_method.dart';
 
@@ -28,12 +29,12 @@ class UserApi {
     return appUser;
   }
 
-  Future<void> setDeviceToken(List<String> deviceToken) async {
+  Future<void> setDeviceToken(List<MyDeviceToken> deviceToken) async {
     try {
       await _instance
           .collection(_collection)
           .doc(AuthMethods.uid)
-          .update(<String, dynamic>{'devices_token': deviceToken});
+          .update(<String, dynamic>{'devices_tokens': deviceToken});
     } catch (e) {
       CustomToast.errorToast(message: 'Something Went Wrong');
     }

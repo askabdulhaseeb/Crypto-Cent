@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:developer';
 
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -6,6 +7,12 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 // import 'package:timezone/timezone.dart' as tz;
 import 'package:permission_handler/permission_handler.dart';
 import 'package:rxdart/rxdart.dart';
+import 'package:http/http.dart' as http;
+import '../models/app_user/app_user.dart';
+import '../models/my_device_token.dart';
+import '../utilities/utilities.dart';
+import 'app_user/auth_method.dart';
+import 'app_user/user_api.dart';
 
 class NotificationsServices {
   static final FlutterLocalNotificationsPlugin localNotificationPlugin =
@@ -107,11 +114,95 @@ class NotificationsServices {
         payload: payload);
   }
 
+  Future<bool> sendSubsceibtionNotification({
+    required List<MyDeviceToken> deviceToken,
+    required String messageTitle,
+    required String messageBody,
+    required List<String> data,
+  }) async {
+    // String value3 = data.length == 2 ? '' : data[2];
+    // HttpsCallable func =
+    //     FirebaseFunctions.instance.httpsCallable('notifySubscribers');
+    // // ignore: always_specify_types
+    // final HttpsCallableResult res = await func.call(
+    //   <String, dynamic>{
+    //     'targetDevices': deviceToken,
+    //     'messageTitle': messageTitle,
+    //     'messageBody': messageBody,
+    //     'value1': data[0],
+    //     'value2': data[1],
+    //     'value3': value3,
+    //   },
+    // );
+    // if (res.data as bool) {
+    //   return true;
+    try {
+      for (int i = 0; i < deviceToken.length; i++) {
+        log('Receiver Devive Token: ${deviceToken[i].token}');
+        final Map<String, String> headers = <String, String>{
+          'Content-Type': 'application/json',
+          'Authorization': 'key=${Utilities.firebaseServerID}',
+        };
+        final http.Request request = http.Request(
+          'POST',
+          Uri.parse('https://fcm.googleapis.com/fcm/send'),
+        );
+        request.body = json.encode(<String, dynamic>{
+          'to': deviceToken[i].token,
+          'priority': 'high',
+          'notification': <String, String>{
+            'body': messageBody,
+            'title': messageTitle,
+          }
+        });
+        request.headers.addAll(headers);
+        final http.StreamedResponse response = await request.send();
+        if (response.statusCode == 200) {
+          print(await response.stream.bytesToString());
+          log('Notification send to: ${deviceToken[i].token}');
+        } else {
+          log('ERROR in FCM');
+        }
+      }
+      return true;
+    } catch (e) {
+      log('ERROR in FCM: ${e.toString()}');
+      return false;
+    }
+  }
+
   static Future<void> cancelNotification(int id) async {
     await localNotificationPlugin.cancel(id);
   }
 
   static Future<void> cancelAllNotifications() async {
     await localNotificationPlugin.cancelAll();
+  }
+
+  Future<void> verifyTokenIsUnique({
+    required List<AppUser> allUsersValue,
+    required String deviceTokenValue,
+  }) async {
+    final String meUID = AuthMethods.uid;
+    for (AppUser element in allUsersValue) {
+      if (tokenAlreadyExist(
+              devicesValue: (element.deviceToken ?? <MyDeviceToken>[]),
+              tokenValue: deviceTokenValue) &&
+          element.uid != meUID) {
+        element.deviceToken?.removeWhere(
+            (MyDeviceToken element) => element.token == deviceTokenValue);
+        await UserApi().setDeviceToken(element.deviceToken ?? <MyDeviceToken>[]);
+      }
+    }
+  }
+
+  bool tokenAlreadyExist({
+    required List<MyDeviceToken> devicesValue,
+    required String tokenValue,
+  }) {
+    for (MyDeviceToken element in devicesValue) {
+      if (element.token == tokenValue) return true;
+    }
+    return false;
   }
 }

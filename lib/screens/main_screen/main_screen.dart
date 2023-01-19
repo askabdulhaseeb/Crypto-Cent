@@ -2,6 +2,7 @@ import '../../database/app_user/auth_method.dart';
 import '../../database/notification_services.dart';
 import '../../function/push_notification.dart';
 import '../../models/app_user/app_user.dart';
+import '../../models/my_device_token.dart';
 import '../../providers/auth_provider.dart';
 import '../../providers/crypto_wallet/wallet_provider.dart';
 import '../../providers/user_provider.dart';
@@ -52,7 +53,7 @@ class _MainScreenState extends State<MainScreen> {
     await userPro.init();
     AppUser me = userPro.currentUser;
     if (me.deviceToken != null && me.deviceToken!.isNotEmpty) return;
-    PushNotification.instance.init(devicesToken: me.deviceToken ?? <String>[]);
+    PushNotification.instance.init(devicesToken: me.deviceToken ?? <MyDeviceToken>[]);
   }
 
   bool loading = false;

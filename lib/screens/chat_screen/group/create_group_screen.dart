@@ -2,6 +2,7 @@ import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../../../../../widgets/custom_widgets/custom_elevated_button.dart';
 import '../../../../../widgets/custom_widgets/custom_textformfield.dart';
 import '../../../../../widgets/custom_widgets/show_loading.dart';
@@ -12,12 +13,15 @@ import '../../../enum/message_type_enum.dart';
 import '../../../function/attachment_picker.dart';
 import '../../../function/time_date_function.dart';
 import '../../../function/unique_id_functions.dart';
+import '../../../models/app_user/app_user.dart';
+import '../../../models/app_user/numbers_detail.dart';
 import '../../../models/chat/chat.dart';
 import '../../../models/chat/chat_group_info.dart';
 import '../../../models/chat/chat_group_member.dart';
 import '../../../models/chat/message.dart';
 import '../../../models/chat/message_attachment.dart';
 import '../../../models/chat/message_read_info.dart';
+import '../../../providers/provider.dart';
 import '../../../widgets/custom_file_image_box.dart';
 import '../../../widgets/custom_widgets/custom_validator.dart';
 
@@ -121,6 +125,8 @@ class _CreateChatGroupScreenState extends State<CreateChatGroupScreen> {
       final String groupID = UniqueIdFunctions.chatGroupID();
       final int time = TimeStamp.timestamp;
       final String me = AuthMethods.uid;
+      final UserProvider userPro = Provider.of<UserProvider>(context);
+      final AppUser sender = userPro.user(me);
       String url = '';
       if (file != null) {
         url = await ChatAPI()
@@ -145,7 +151,18 @@ class _CreateChatGroupScreenState extends State<CreateChatGroupScreen> {
         ],
       );
       await ChatAPI().sendMessage(
-        Chat(
+        sender: sender,
+        receiver: AppUser(
+          uid: 'null',
+          phoneNumber: NumberDetails(
+            completeNumber: '',
+            countryCode: '',
+            isoCode: '',
+            number: '',
+            timestamp: time,
+          ),
+        ),
+        chat: Chat(
           chatID: groupID,
           persons: <String>[AuthMethods.uid],
           groupInfo: info,

@@ -2,16 +2,19 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../database/app_user/auth_method.dart';
 import '../../database/chat_api.dart';
 import '../../enum/message_type_enum.dart';
 import '../../function/attachment_picker.dart';
 import '../../function/time_date_function.dart';
+import '../../models/app_user/app_user.dart';
 import '../../models/chat/chat.dart';
 import '../../models/chat/message.dart';
 import '../../models/chat/message_attachment.dart';
 import '../../models/chat/message_read_info.dart';
+import '../../providers/user_provider.dart';
 
 class ChatTextField extends StatefulWidget {
   const ChatTextField({required this.chat, Key? key}) : super(key: key);
@@ -185,6 +188,7 @@ class _ChatTextFieldState extends State<ChatTextField> {
                       final int time = TimeStamp.timestamp;
                       List<MessageAttachment> attachments =
                           <MessageAttachment>[];
+                      final String me = AuthMethods.uid;
                       if (files.isNotEmpty) {
                         for (File element in files) {
                           final String? url = await ChatAPI().uploadAttachment(
@@ -204,7 +208,12 @@ class _ChatTextFieldState extends State<ChatTextField> {
                         files = <File>[];
                         isLoading = false;
                       });
-
+                      final UserProvider userPro =
+                          // ignore: use_build_context_synchronously
+                          Provider.of<UserProvider>(context);
+                      final AppUser sender = userPro.user(me);
+                      final AppUser receiver = userPro
+                          .user(ChatAPI.othersUID(widget.chat.persons)[0]);
                       final Message msg = Message(
                         messageID: time.toString(),
                         text: _text.text.trim(),
@@ -212,7 +221,7 @@ class _ChatTextFieldState extends State<ChatTextField> {
                             ? MessageTypeEnum.text
                             : attachments[0].type,
                         attachment: attachments,
-                        sendBy: AuthMethods.uid,
+                        sendBy: me,
                         sendTo: <MessageReadInfo>[],
                         isPrivateMessage: !widget.chat.isGroup,
                         timestamp: time,
@@ -220,7 +229,11 @@ class _ChatTextFieldState extends State<ChatTextField> {
                       widget.chat.timestamp = time;
                       widget.chat.lastMessage = msg;
                       _text.clear();
-                      await ChatAPI().sendMessage(widget.chat);
+                      await ChatAPI().sendMessage(
+                        chat: widget.chat,
+                        sender: sender,
+                        receiver: receiver,
+                      );
                     },
                     splashRadius: 16,
                     icon: Icon(
