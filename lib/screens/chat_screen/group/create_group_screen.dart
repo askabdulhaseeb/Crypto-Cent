@@ -76,16 +76,13 @@ class _CreateChatGroupScreenState extends State<CreateChatGroupScreen> {
                         file: null,
                         onTap: () => onImagePick(),
                       ),
-                const CustomTextFormField(hint: 'Name'),
                 CustomTextFormField(
                   controller: _name,
-                  readOnly: _isLoading,
-                  hint: 'A short name of your group',
+                  hint: 'Name',
                   validator: (String? value) =>
                       CustomValidator.lessThen2(value),
                 ),
                 const SizedBox(height: 6),
-                const CustomTextFormField(hint: 'Description'),
                 CustomTextFormField(
                   controller: _description,
                   readOnly: _isLoading,

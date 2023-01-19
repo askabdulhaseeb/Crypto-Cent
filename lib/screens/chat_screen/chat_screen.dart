@@ -18,26 +18,26 @@ class ChatScreen extends StatelessWidget {
     return AuthMethods.uid.isEmpty
         ? const EmptyAuthScreen(text: 'Please Log in to chat with others',)
         : Scaffold(
-      appBar: AppBar(
-        title: Text(
-          'Messenger',
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            color: Theme.of(context).primaryColor,
-          ),
-        ),
-      ),
-      body: Column(
-        children: <Widget>[
-          _TabBar(page: page),
-          Expanded(
-            child: (page.currentTab == MessageTabBarEnum.chat)
-                ? const PersonalChatDashboard()
-                : const GroupChatDashboard(),
-          ),
-        ],
-      ),
-    );
+            appBar: AppBar(
+              title: Text(
+                'Messenger',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: Theme.of(context).primaryColor,
+                ),
+              ),
+            ),
+            body: Column(
+              children: <Widget>[
+                _TabBar(page: page),
+                Expanded(
+                  child: (page.currentTab == MessageTabBarEnum.chat)
+                      ? const PersonalChatDashboard()
+                      : const GroupChatDashboard(),
+                ),
+              ],
+            ),
+          );
   }
 }
 

@@ -9,6 +9,7 @@ import '../../../models/chat/message.dart';
 import '../../../providers/provider.dart';
 import '../../../widgets/chat/chat_text_field.dart';
 import '../../../widgets/chat/message_tile.dart';
+import '../../../widgets/chat/no_old_chat_available_widget.dart';
 import '../../../widgets/chat/product/chat_product_tile.dart';
 import '../../../widgets/custom_widgets/show_loading.dart';
 
@@ -31,30 +32,7 @@ class ProductChatScreen extends StatelessWidget {
                   if (snapshot.hasData) {
                     List<Message> messages = snapshot.data ?? <Message>[];
                     return (messages.isEmpty)
-                        ? Column(
-                            children: <Widget>[
-                              ChatProductTile(chat: chat),
-                              Expanded(
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  mainAxisSize: MainAxisSize.max,
-                                  children: const <Widget>[
-                                    Text(
-                                      'Say Hi!',
-                                      style: TextStyle(
-                                        color: Colors.grey,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                    Text(
-                                      'and start conversation',
-                                      style: TextStyle(color: Colors.grey),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          )
+                        ? const NoOldChatAvailableWidget()
                         : Column(
                             children: <Widget>[
                               ChatProductTile(chat: chat),
