@@ -1,21 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+import '../reports/report_product.dart';
 import 'product_url.dart';
 
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 class Product {
-  final String pid;
-  final String uid;
-  final double amount;
-  final String colors;
-  final String quantity;
-  final String productname;
-  final String description;
-  final int timestamp;
-  final String category;
-  final String subCategory;
-  final String createdByUID;
-  late List<ProductURL> prodURL;
   Product({
     required this.pid,
     required this.uid,
@@ -29,7 +18,21 @@ class Product {
     required this.subCategory,
     required this.createdByUID,
     required this.prodURL,
+    this.reports,
   });
+  final String pid;
+  final String uid;
+  final double amount;
+  final String colors;
+  final String quantity;
+  final String productname;
+  final String description;
+  final int timestamp;
+  final String category;
+  final String subCategory;
+  final String createdByUID;
+  late List<ProductURL> prodURL;
+  final List<ReportProduct>? reports;
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
@@ -44,12 +47,20 @@ class Product {
       'sub_category': subCategory,
       'created_by_uid': createdByUID,
       'product_name': productname,
+      'reports': <ReportProduct>[],
       'prod_urls': prodURL.map((ProductURL e) => e.toMap()).toList(),
     };
   }
 
   factory Product.fromMap(DocumentSnapshot<Map<String, dynamic>> doc) {
     List<ProductURL> prodURL = <ProductURL>[];
+    List<ReportProduct> reportInfo = <ReportProduct>[];
+    if (doc.data()!['reports'] != null) {
+      final List<dynamic> temp = doc.data()!['reports'];
+      for (dynamic e in temp) {
+        reportInfo.add(ReportProduct.fromMap(e));
+      }
+    }
     final dynamic data = doc.data()!['prod_urls'];
     if (data == null) {
       prodURL.add(
@@ -73,6 +84,14 @@ class Product {
       createdByUID: doc.data()?['created_by_uid'] ?? '',
       productname: doc.data()?['product_name'],
       prodURL: prodURL,
+      reports: reportInfo,
     );
+  }
+  Map<String, dynamic>? report() {
+    if (reports == null) return null;
+    return <String, dynamic>{
+      'reports': FieldValue.arrayUnion(
+          reports!.map((ReportProduct e) => e.toMap()).toList()),
+    };
   }
 }
