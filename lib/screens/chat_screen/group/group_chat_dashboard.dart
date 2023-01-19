@@ -23,6 +23,7 @@ class GroupChatDashboard extends StatelessWidget {
             if (snapshot.hasData) {
               List<Chat> chat = snapshot.data ?? <Chat>[];
               return Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
                 children: <Widget>[
                   TextButton.icon(
                     onPressed: () => Navigator.of(context)
