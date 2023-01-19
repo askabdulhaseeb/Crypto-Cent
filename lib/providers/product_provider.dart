@@ -1,4 +1,4 @@
-  import 'package:flutter/cupertino.dart';
+import 'package:flutter/cupertino.dart';
 
 import '../database/local_data.dart';
 import '../database/product_api.dart';
@@ -68,19 +68,27 @@ class ProductProvider with ChangeNotifier {
     return temp;
   }
 
+  Future<void> report(Product product) async {
+    final int index =
+        _product.indexWhere((Product element) => element.pid == product.pid);
+    if (index < 0) return;
+    _product[index] = product;
+    notifyListeners();
+    await ProductApi().report(product);
+  }
+
   Product get _null => Product(
-        pid: 'null',
-        uid: 'null',
-        amount: 0,
-        colors: 'null',
-        quantity: '0',
-        productname: ' ',
-        description: 'null',
-        timestamp: 0,
-        category: 'null',
-        subCategory: 'null',
-        createdByUID: 'null',
-        prodURL: <ProductURL>[],
-        reports: <ReportProduct>[]
-      );
+      pid: 'null',
+      uid: 'null',
+      amount: 0,
+      colors: 'null',
+      quantity: '0',
+      productname: ' ',
+      description: 'null',
+      timestamp: 0,
+      category: 'null',
+      subCategory: 'null',
+      createdByUID: 'null',
+      prodURL: <ProductURL>[],
+      reports: <ReportProduct>[]);
 }
