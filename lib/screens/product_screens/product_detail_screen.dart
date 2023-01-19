@@ -53,11 +53,13 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
           },
         ),
         actions: <Widget>[
-          if (widget.product.uid != AuthMethods.uid)
+          if (widget.product.uid != AuthMethods.uid &&
+              AuthMethods.uid.isNotEmpty)
             CircleAvatar(
               backgroundColor: Theme.of(context).secondaryHeaderColor,
               child: IconButton(
-                  onPressed: () => ReportBottomSheets().productReport(context, widget.product),
+                  onPressed: () => ReportBottomSheets()
+                      .productReport(context, widget.product),
                   icon: Icon(
                     Icons.report,
                     color: Theme.of(context).errorColor,
