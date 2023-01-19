@@ -7,9 +7,7 @@ import '../../../widgets/custom_widgets/custom_widget.dart';
 import '../../database/app_user/auth_method.dart';
 import '../../function/crypto_function.dart';
 import '../../function/report_bottom_sheets.dart';
-import '../../function/unique_id_functions.dart';
 import '../../models/app_user/app_user.dart';
-import '../../models/chat/chat.dart';
 import '../../models/product/product_model.dart';
 import '../../providers/user_provider.dart';
 import '../../widgets/custom_widgets/custom_dialog.dart';
@@ -17,7 +15,6 @@ import '../../widgets/custom_widgets/custom_profile_image.dart';
 import '../../widgets/product/add_to_cart_widget.dart';
 import '../../widgets/product/product_url_slider.dart';
 import '../../widgets/product/send_offer_widget.dart';
-import '../chat_screen/private/product_chat_screen.dart';
 
 class ProductDetailScreen extends StatefulWidget {
   const ProductDetailScreen({required this.product, super.key});
@@ -53,11 +50,13 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
           },
         ),
         actions: <Widget>[
-          if (widget.product.uid != AuthMethods.uid)
+          if (widget.product.uid != AuthMethods.uid &&
+              AuthMethods.uid.isNotEmpty)
             CircleAvatar(
               backgroundColor: Theme.of(context).secondaryHeaderColor,
               child: IconButton(
-                  onPressed: () => ReportBottomSheets().productReport(context, widget.product),
+                  onPressed: () => ReportBottomSheets()
+                      .productReport(context, widget.product),
                   icon: Icon(
                     Icons.report,
                     color: Theme.of(context).errorColor,

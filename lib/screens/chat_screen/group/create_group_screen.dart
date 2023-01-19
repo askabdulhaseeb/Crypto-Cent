@@ -9,6 +9,7 @@ import '../../../../../widgets/custom_widgets/show_loading.dart';
 import '../../../database/app_user/auth_method.dart';
 import '../../../database/chat_api.dart';
 import '../../../enum/group_member_role_enum.dart';
+import '../../../enum/login_method.dart';
 import '../../../enum/message_type_enum.dart';
 import '../../../function/attachment_picker.dart';
 import '../../../function/time_date_function.dart';
@@ -125,7 +126,8 @@ class _CreateChatGroupScreenState extends State<CreateChatGroupScreen> {
       final String groupID = UniqueIdFunctions.chatGroupID();
       final int time = TimeStamp.timestamp;
       final String me = AuthMethods.uid;
-      final UserProvider userPro = Provider.of<UserProvider>(context,listen: false);
+      final UserProvider userPro =
+          Provider.of<UserProvider>(context, listen: false);
       final AppUser sender = userPro.user(me);
       String url = '';
       if (file != null) {
@@ -154,6 +156,7 @@ class _CreateChatGroupScreenState extends State<CreateChatGroupScreen> {
         sender: sender,
         receiver: AppUser(
           uid: 'null',
+          loginMethod: LoginMethod.email,
           phoneNumber: NumberDetails(
             completeNumber: '',
             countryCode: '',

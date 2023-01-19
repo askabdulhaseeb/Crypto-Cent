@@ -10,6 +10,7 @@ import '../database/crypto_wallet/wallet_create_api.dart';
 import '../database/crypto_wallet/wallet_creation.dart';
 import '../database/databse_storage.dart';
 import '../database/notification_services.dart';
+import '../enum/login_method.dart';
 import '../function/time_date_function.dart';
 import '../models/app_user/app_user.dart';
 import '../models/app_user/numbers_detail.dart';
@@ -50,6 +51,7 @@ class AuthProvider extends ChangeNotifier {
         uid: AuthMethods.uid,
         name: _name.text.trim(),
         imageURL: url,
+        loginMethod: LoginMethod.phone,
         phoneNumber: NumberDetails(
           countryCode: _phoneNumber!.countryCode,
           number: _phoneNumber!.number,

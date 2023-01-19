@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 import '../database/app_user/auth_method.dart';
 import '../database/app_user/user_api.dart';
+import '../enum/login_method.dart';
 import '../models/app_user/app_user.dart';
 import '../models/app_user/numbers_detail.dart';
 import '../models/my_device_token.dart';
@@ -118,6 +119,7 @@ class UserProvider extends ChangeNotifier {
   static AppUser get _null => AppUser(
         uid: 'null',
         name: 'null',
+        loginMethod: LoginMethod.email,
         phoneNumber: NumberDetails(
           countryCode: 'null',
           number: 'null',

@@ -2,6 +2,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '../../database/app_user/auth_method.dart';
+import '../../enum/login_method.dart';
 import '../my_device_token.dart';
 import '../reports/report_user.dart';
 import 'numbers_detail.dart';
@@ -10,6 +11,7 @@ class AppUser {
   AppUser({
     required this.uid,
     required this.phoneNumber,
+    required this.loginMethod,
     this.name,
     this.imageURL,
     this.email,
@@ -24,12 +26,14 @@ class AppUser {
   final List<MyDeviceToken>? deviceToken;
   final NumberDetails phoneNumber;
   final String? email;
+  final LoginMethod loginMethod;
   final List<ReportUser>? reports;
   final List<String>? blockTo;
   final List<String>? blockedBy;
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'uid': uid,
+      'login_method': loginMethod.json,
       'display_name': name ?? '',
       'number_details': phoneNumber.toMap(),
       'image_url': imageURL ?? '',
@@ -54,6 +58,8 @@ class AppUser {
     }
     return AppUser(
       uid: doc.data()?['uid'] ?? '',
+      loginMethod: LoginMethodConvertor()
+          .toEnum(doc.data()?['login_method'] ?? LoginMethod.email.json),
       phoneNumber: NumberDetails.fromMap(
           doc.data()?['number_details'] ?? <String, dynamic>{}),
       name: doc.data()?['display_name'] ?? '',

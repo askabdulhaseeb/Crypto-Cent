@@ -15,7 +15,6 @@ class LocationProvider with ChangeNotifier {
     notifyListeners();
   }
 
- 
   userLocationwithUID() {
     for (int i = 0; i < _allUserLocation.length; i++) {
       if (_allUserLocation[i].userID == AuthMethods.uid) {
@@ -43,7 +42,7 @@ class LocationProvider with ChangeNotifier {
     if (temp == true) {
       CustomToast.successToast(message: 'Location Update');
       isLoading = false;
-      notifyListeners();
+      load();
       Navigator.of(context).pop();
     }
   }
@@ -64,7 +63,7 @@ class LocationProvider with ChangeNotifier {
       state: '',
       timestamp: 0,
       zipCode: '');
-       UserLocation? _userLocation;
+  UserLocation? _userLocation;
   UserLocation? _selectLocation;
   List<UserLocation> _allUserLocation = <UserLocation>[];
   List<UserLocation> get allUserLocation => _allUserLocation;
