@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 class CustomTextFormField extends StatefulWidget {
   const CustomTextFormField({
-    TextEditingController? controller,
+    required TextEditingController? controller,
     this.keyboardType,
     this.textInputAction,
     this.onChanged,
@@ -94,7 +94,8 @@ class CustomTextFormFieldState extends State<CustomTextFormField> {
         maxLines: (widget._controller!.text.isEmpty) ? 1 : widget.maxLines,
         maxLength: widget.maxLength,
         style: widget.style,
-        validator: (String? value) => widget.validator!(value),
+        validator: (String? value) =>
+            widget.validator == null ? null : widget.validator!(value),
         cursorColor: Theme.of(context).colorScheme.secondary,
         decoration: InputDecoration(
           fillColor: widget.color ??

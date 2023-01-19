@@ -1,1 +1,1 @@
-enum MessageTabBarEnum { chat, group, story }
+enum MessageTabBarEnum { chat, group }

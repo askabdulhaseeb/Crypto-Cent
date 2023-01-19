@@ -97,6 +97,7 @@ class ChatAPI {
           .collection(_collection)
           .doc(chat.chatID)
           .set(chat.toMap());
+          
     } catch (e) {
       CustomToast.errorToast(message: e.toString());
     }

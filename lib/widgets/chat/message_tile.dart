@@ -12,10 +12,8 @@ import '../../providers/user_provider.dart';
 import '../custom_widgets/custom_network_image.dart';
 
 class MessageTile extends StatelessWidget {
-  const MessageTile({required this.message, this.chat, Key? key})
-      : super(key: key);
+  const MessageTile({required this.message, Key? key}) : super(key: key);
   final Message message;
-  final Chat? chat;
 
   static const double _borderRadius = 12;
   @override
@@ -89,7 +87,7 @@ class MessageTile extends StatelessWidget {
                           children: <Widget>[
                             if (message.type != MessageTypeEnum.announcement &&
                                 !isMe &&
-                                (chat?.isGroup ?? false) == true)
+                                (!message.isPrivateMessage))
                               Consumer<UserProvider>(
                                 builder: (BuildContext context,
                                     UserProvider userPro, _) {

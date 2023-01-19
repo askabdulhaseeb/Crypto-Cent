@@ -71,6 +71,7 @@ class MyApp extends StatelessWidget {
             MainScreen.routeName: (_) => const MainScreen(),
             PaymentScreen.routeName: (_) => const PaymentScreen(),
             LocationScreen.routeName: (_) => const LocationScreen(),
+            // CHAT
             CreateChatGroupScreen.routeName: (_) =>
                 const CreateChatGroupScreen(),
           },

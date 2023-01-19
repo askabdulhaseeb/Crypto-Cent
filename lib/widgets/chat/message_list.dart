@@ -38,10 +38,11 @@ class MessageListsState extends State<MessageLists>
         ),
         child: ListView.builder(
           shrinkWrap: true,
+          reverse: true,
           controller: _controller,
           itemCount: widget.messages.length,
           itemBuilder: (BuildContext context, int index) =>
-              MessageTile(message: widget.messages[index], chat: widget.chat),
+              MessageTile(message: widget.messages[index]),
         ),
       ),
     );

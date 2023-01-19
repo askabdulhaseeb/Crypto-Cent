@@ -11,6 +11,7 @@ class Message {
     required this.sendBy,
     required this.sendTo,
     required this.timestamp,
+    this.isPrivateMessage = true,
     this.replyOf,
   });
 
@@ -20,12 +21,14 @@ class Message {
   final List<MessageAttachment> attachment;
   final String sendBy;
   final List<MessageReadInfo> sendTo;
+  final bool isPrivateMessage;
   final int timestamp;
   final Message? replyOf;
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'message_id': messageID,
+      'is_private_message': isPrivateMessage,
       'text': text,
       'type': type.json,
       'attachment': attachment.map((MessageAttachment x) => x.toMap()).toList(),
@@ -55,6 +58,7 @@ class Message {
       sendTo: List<MessageReadInfo>.from(map['send_to']?.map(
         (dynamic x) => MessageReadInfo.fromMap(x),
       )),
+      isPrivateMessage: map['is_private_message'] ?? true,
       timestamp: map['timestamp']?.toInt() ?? 0,
       replyOf:
           map['reply_of'] != null ? Message.fromMap(map['reply_of']) : null,

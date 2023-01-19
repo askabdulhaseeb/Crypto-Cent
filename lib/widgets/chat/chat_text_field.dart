@@ -136,7 +136,7 @@ class _ChatTextFieldState extends State<ChatTextField> {
                 );
               },
               child: Container(
-                margin: EdgeInsets.symmetric(horizontal: 8),
+                margin: const EdgeInsets.symmetric(horizontal: 8),
                 padding: const EdgeInsets.symmetric(horizontal: 2, vertical: 6),
                 decoration: BoxDecoration(
                   color: Theme.of(context).primaryColor,
@@ -214,6 +214,7 @@ class _ChatTextFieldState extends State<ChatTextField> {
                         attachment: attachments,
                         sendBy: AuthMethods.uid,
                         sendTo: <MessageReadInfo>[],
+                        isPrivateMessage: !widget.chat.isGroup,
                         timestamp: time,
                       );
                       widget.chat.timestamp = time;
@@ -236,9 +237,7 @@ class _ChatTextFieldState extends State<ChatTextField> {
                   ),
           ],
         ),
-        const SizedBox(
-          height: 20,
-        ),
+        const SizedBox(height: 20),
       ],
     );
   }

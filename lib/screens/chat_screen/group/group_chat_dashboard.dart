@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 
 import '../../../database/chat_api.dart';
 import '../../../models/chat/chat.dart';
+import '../../../widgets/chat/dashboard_tiles/group_dashboard_tile.dart';
 import '../../../widgets/custom_widgets/show_loading.dart';
+import 'create_group_screen.dart';
 
 class GroupChatDashboard extends StatelessWidget {
   const GroupChatDashboard({Key? key}) : super(key: key);
@@ -23,7 +25,8 @@ class GroupChatDashboard extends StatelessWidget {
               return Column(
                 children: <Widget>[
                   TextButton.icon(
-                    onPressed: () {},
+                    onPressed: () => Navigator.of(context)
+                        .pushNamed(CreateChatGroupScreen.routeName),
                     icon: const Icon(Icons.add),
                     label: const Text('Create Group'),
                   ),
@@ -37,8 +40,7 @@ class GroupChatDashboard extends StatelessWidget {
                             child: Divider(height: 1),
                           ),
                           itemBuilder: (_, int index) {
-                            // return GroupChatDashboardTile(chat: chat[index]);
-                            return const Text('data');
+                            return GroupChatDashboardTile(chat: chat[index]);
                           },
                         ),
                 ],
