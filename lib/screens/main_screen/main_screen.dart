@@ -1,4 +1,3 @@
-import 'package:firebase_messaging/firebase_messaging.dart';
 import '../../database/app_user/auth_method.dart';
 import '../../database/notification_services.dart';
 import '../../function/push_notification.dart';
@@ -6,9 +5,7 @@ import '../../models/app_user/app_user.dart';
 import '../../providers/auth_provider.dart';
 import '../../providers/crypto_wallet/wallet_provider.dart';
 import '../../providers/user_provider.dart';
-import '../../widgets/profile/profile_when_user_not_login.dart';
 import '../chat_screen/chat_screen.dart';
-import '../empty_screen/empty_screen.dart';
 import '../screens.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

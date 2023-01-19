@@ -30,7 +30,7 @@ class _GetProductImageAttachments extends State<GetProductAttachments> {
                 height: (width / 3) * 2,
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
-                  color: Color.fromARGB(255, 245, 244, 244),
+                  color: const Color.fromARGB(255, 245, 244, 244),
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: Column(

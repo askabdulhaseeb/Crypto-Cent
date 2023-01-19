@@ -26,7 +26,7 @@ class ProfileNavTile extends StatelessWidget {
         child: Row(
           children: <Widget>[
             const SizedBox(width: 24),
-           image==null?SizedBox(): ImageIcon(AssetImage(image!), color: Colors.black),
+           image==null?const SizedBox(): ImageIcon(AssetImage(image!), color: Colors.black),
             const SizedBox(width: 16),
             ForText(name: name, size: 18),
             const Spacer(),

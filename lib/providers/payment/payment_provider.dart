@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'package:flutter/foundation.dart';
 
 import '../../database/app_user/auth_method.dart';
@@ -15,7 +14,6 @@ import '../../models/payment/orderd_product.dart';
 import '../../models/payment/receipt.dart';
 import '../../models/payment/transaction.dart';
 import '../../models/product/product_model.dart';
-import '../product_provider.dart';
 
 class PaymentProvider with ChangeNotifier {
   PaymentProvider() {
@@ -181,17 +179,17 @@ class PaymentProvider with ChangeNotifier {
   double shipped = 0;
   final List<OrderdProduct> _orderProduct = <OrderdProduct>[];
   List<OrderdProduct> get orderdProduct => _orderProduct;
-  List<Order> _order = <Order>[];
+  final List<Order> _order = <Order>[];
   List<Order> get order => _order;
   List<Order> _allOrder = <Order>[];
   List<Order> get allOrder => _allOrder;
   List<Receipt> _receipt = <Receipt>[];
   List<Receipt> get receipt => _receipt;
 
-  List<Product> _product = <Product>[];
+  final List<Product> _product = <Product>[];
   List<Product> get products => _product;
-  List<Order> _sellingOrder = <Order>[];
+  final List<Order> _sellingOrder = <Order>[];
   List<Order> get sellingOrder => _sellingOrder;
-  List<OrderdProduct> _sellProduct = <OrderdProduct>[];
+  final List<OrderdProduct> _sellProduct = <OrderdProduct>[];
   List<OrderdProduct> get sellProducts => _sellProduct;
 }

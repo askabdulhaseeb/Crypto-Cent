@@ -6,14 +6,11 @@ import '../../database/app_user/auth_method.dart';
 import '../../function/time_date_function.dart';
 import '../../models/location.dart';
 import '../../providers/location_provider.dart';
-import '../../widgets/custom_widgets/custom_elevated_button.dart';
-import '../../widgets/custom_widgets/custom_textformfield.dart';
 import '../../widgets/custom_widgets/custom_toast.dart';
-import '../../widgets/custom_widgets/custom_validator.dart';
 import '../../widgets/custom_widgets/custom_widget.dart';
 
 class AddNewAddress extends StatefulWidget {
-  AddNewAddress({super.key});
+  const AddNewAddress({super.key});
    static const String routeName = '/addNewAddress';
   @override
   State<AddNewAddress> createState() => _AddNewAddressState();
@@ -72,7 +69,7 @@ class _AddNewAddressState extends State<AddNewAddress> {
   }
 
   getLatlong() async {
-    final locations =
+    final List<Location> locations =
         await locationFromAddress('Block R1 Johar Town,Lahore,pakistan');
     List<Placemark> addresses = await placemarkFromCoordinates(
         locations.first.latitude, locations.first.longitude);
@@ -102,7 +99,7 @@ class _AddNewAddressState extends State<AddNewAddress> {
                     onPressed: () {
                       _getLocation();
                     },
-                    child: ForText(
+                    child: const ForText(
                       name: '+Use my Current Location ',
                       color: Colors.green,
                     )),

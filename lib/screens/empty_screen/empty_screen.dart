@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../../widgets/custom_widgets/custom_widget.dart';
-import '../main_screen/main_navigationbar.dart';
 
 class EmptyScreen extends StatelessWidget {
   const EmptyScreen({super.key});

@@ -118,7 +118,7 @@ class _SendOfferWidgetState extends State<SendOfferWidget> {
                         child: CustomTextFormField(
                           controller: offer,
                           autoFocus: true,
-                          style: TextStyle(color: Colors.black),
+                          style: const TextStyle(color: Colors.black),
                           keyboardType: TextInputType.number,
                           hint: 'Set your offer here',
                           validator: (String? value) =>
@@ -141,7 +141,7 @@ class _SendOfferWidgetState extends State<SendOfferWidget> {
                         child: CustomElevatedButton(
                           title: 'Send',
                           onTap: () async {
-                            Future.delayed(Duration(seconds: 1));
+                            Future.delayed(const Duration(seconds: 1));
                             await HapticFeedback.heavyImpact();
                             sendOffer(
                               offer: offer.text,

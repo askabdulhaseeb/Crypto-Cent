@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'bloodo_contacts.dart';
 import 'package:fast_contacts/fast_contacts.dart';

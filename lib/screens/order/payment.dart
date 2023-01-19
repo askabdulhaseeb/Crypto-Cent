@@ -3,12 +3,7 @@ import 'package:provider/provider.dart';
 
 import '../../function/crypto_function.dart';
 import '../../function/encryption_function.dart';
-import '../../function/push_notification.dart';
 import '../../models/app_user/app_user.dart';
-import '../../providers/app_provider.dart';
-import '../../providers/cart_provider.dart';
-import '../../providers/crypto_wallet/wallet_provider.dart';
-import '../../providers/payment/payment_provider.dart';
 import '../../providers/provider.dart';
 import '../../widgets/custom_widgets/custom_widget.dart';
 import '../../widgets/custom_widgets/show_loading.dart';

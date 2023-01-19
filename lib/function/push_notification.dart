@@ -22,8 +22,7 @@ class PushNotification {
 
     if (settings!.authorizationStatus == AuthorizationStatus.authorized) {}
 
-    if (settings != null &&
-        (settings.authorizationStatus == AuthorizationStatus.provisional ||
+    if ((settings.authorizationStatus == AuthorizationStatus.provisional ||
             settings.authorizationStatus == AuthorizationStatus.authorized)) {
       List<String>? updatedDevicesToken = await getToken(devicesToken);
       if (updatedDevicesToken != null && updatedDevicesToken.isNotEmpty) {

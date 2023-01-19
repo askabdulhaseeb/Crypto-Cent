@@ -3,7 +3,6 @@ import 'package:provider/provider.dart';
 
 import '../../../database/app_user/auth_method.dart';
 import '../../../database/chat_api.dart';
-import '../../../function/crypto_function.dart';
 import '../../../models/chat/chat.dart';
 import '../../../models/payment/orderd_product.dart';
 import '../../../models/product/product_model.dart';
@@ -27,7 +26,7 @@ class ChatProductTile extends StatelessWidget {
       padding: const EdgeInsets.all(8),
       margin: const EdgeInsets.symmetric(horizontal: 16),
       decoration: BoxDecoration(
-        color: Color.fromARGB(255, 245, 244, 244),
+        color: const Color.fromARGB(255, 245, 244, 244),
         borderRadius: BorderRadius.circular(12),
       ),
       child: Row(

@@ -48,7 +48,7 @@ class ChatProdBuyViewState extends State<ChatProdBuyView> {
       children: <Widget>[
         Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: <Widget>[
+          children: const <Widget>[
             // GestureDetector(
             //   onTap: _qty == widget.product.quantity
             //       ? null
@@ -133,7 +133,7 @@ class ChatProdBuyViewState extends State<ChatProdBuyView> {
                             await ChatAPI().updateOffer(widget.chat);
                           },
                           child: Container(
-                            padding: EdgeInsets.symmetric(
+                            padding: const EdgeInsets.symmetric(
                                 horizontal: 12, vertical: 15),
                             decoration: BoxDecoration(
                               color: Theme.of(context).secondaryHeaderColor,

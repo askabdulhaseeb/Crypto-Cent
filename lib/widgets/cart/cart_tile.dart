@@ -18,7 +18,7 @@ class CartItem extends StatelessWidget {
       height: 110,
       margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
       decoration: BoxDecoration(
-        color: Color.fromARGB(255, 245, 244, 244),
+        color: const Color.fromARGB(255, 245, 244, 244),
         borderRadius: BorderRadius.circular(16),
       ),
       child: Row(

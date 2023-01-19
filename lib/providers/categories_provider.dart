@@ -11,7 +11,7 @@ class CategoriesProvider with ChangeNotifier {
   List<Categories> _categories = <Categories>[];
 
   List<Categories> get categories => <Categories>[..._categories];
-  List<Categories> _someCategories = <Categories>[];
+  final List<Categories> _someCategories = <Categories>[];
 
   List<Categories> get someCategories => <Categories>[..._someCategories];
 

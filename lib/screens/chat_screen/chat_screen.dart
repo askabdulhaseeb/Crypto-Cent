@@ -16,9 +16,7 @@ class ChatScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     ChatPageProvider page = Provider.of<ChatPageProvider>(context);
     return AuthMethods.uid.isEmpty
-        ? const EmptyAuthScreen(
-            text: 'Please Log in to chat with others',
-          )
+        ? const EmptyAuthScreen(text: 'Please Log in to chat with others',)
         : Scaffold(
             appBar: AppBar(
               title: Text(

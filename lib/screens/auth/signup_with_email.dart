@@ -4,7 +4,6 @@ import 'package:intl_phone_field/phone_number.dart';
 import 'package:provider/provider.dart';
 
 import '../../database/app_user/auth_method.dart';
-import '../../models/app_user/app_user.dart';
 import '../../providers/app_provider.dart';
 import '../../utilities/app_images.dart';
 import '../../widgets/custom_widgets/custom_widget.dart';

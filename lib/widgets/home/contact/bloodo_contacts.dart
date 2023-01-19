@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../models/app_user/app_user.dart';
 import '../../custom_widgets/custom_elevated_button.dart';
-import '../../custom_widgets/custom_network_image.dart';
 import '../../custom_widgets/custom_profile_image.dart';
-import '../../custom_widgets/cutom_text.dart';
 
 class BloodoContacts extends StatelessWidget {
   BloodoContacts({super.key, required this.user});
@@ -26,7 +24,7 @@ class BloodoContacts extends StatelessWidget {
             CustomElevatedButton(
               bgColor: Theme.of(context).secondaryHeaderColor,
               title: 'Send',
-              textStyle: TextStyle(color: Colors.black54, fontSize: 16),
+              textStyle: const TextStyle(color: Colors.black54, fontSize: 16),
               onTap: () {},
               padding: const EdgeInsets.symmetric(horizontal: 6),
             ),

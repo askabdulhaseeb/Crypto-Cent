@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../providers/provider.dart';
-import '../../custom_widgets/show_loading.dart';
 import 'buy_order.dart';
 import 'sell_order.dart';
 

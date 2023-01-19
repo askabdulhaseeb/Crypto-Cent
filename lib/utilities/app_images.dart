@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 
 class AppImages {
   static String get banner => 'assets/images/banner.png';

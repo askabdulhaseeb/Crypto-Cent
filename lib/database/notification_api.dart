@@ -31,7 +31,7 @@ class NotificationAPI {
         notice.add(MyNotification.fromDoc(element));
       }
     } catch (e) {
-      print(e.toString());
+     
       CustomToast.errorToast(message: e.toString());
     }
     return notice;

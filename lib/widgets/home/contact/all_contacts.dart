@@ -1,4 +1,4 @@
-import 'package:crypto_cent/widgets/home/contact/contact_image.dart';
+import 'contact_image.dart';
 import 'package:fast_contacts/fast_contacts.dart';
 import 'package:flutter/material.dart';
 
@@ -10,14 +10,14 @@ class ContactItem extends StatelessWidget {
     required this.contact,
   }) : super(key: key);
 
-  static final height = 72.0;
+  static const double height = 72.0;
 
   final Contact contact;
 
   String get _subtitle {
-    final phones = contact.phones.join(', ');
-    final emails = contact.emails.join(', ');
-    final name = contact.structuredName;
+    final String phones = contact.phones.join(', ');
+    final String emails = contact.emails.join(', ');
+    final StructuredName? name = contact.structuredName;
     return [
       if (phones.isNotEmpty) phones,
       if (emails.isNotEmpty) emails,

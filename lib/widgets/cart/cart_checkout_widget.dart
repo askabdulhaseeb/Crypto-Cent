@@ -4,7 +4,6 @@ import 'package:provider/provider.dart';
 import '../../function/crypto_function.dart';
 import '../../providers/cart_provider.dart';
 import '../../screens/map_screen/location_screen.dart';
-import '../../screens/order/payment.dart';
 import '../custom_widgets/custom_elevated_button.dart';
 import '../custom_widgets/cutom_text.dart';
 
@@ -90,7 +89,7 @@ class CartCheckoutWidget extends StatelessWidget {
                       title: 'Check out',
                       borderRadius: BorderRadius.circular(24),
                       onTap: () {
-                        Navigator.of(context).pushNamed(LocationScreen.routeName);;
+                        Navigator.of(context).pushNamed(LocationScreen.routeName);
                       })),
               const SizedBox(height: 10),
             ],

@@ -3,11 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import '../../utilities/app_images.dart';
-import 'custom_network_image.dart';
-import 'custom_page_indicator.dart';
 
 class CustomNetworkImageSlider extends StatefulWidget {
-  CustomNetworkImageSlider({Key? key}) : super(key: key);
+  const CustomNetworkImageSlider({Key? key}) : super(key: key);
 
   static List<String> imgList = <String>[
     AppImages.frame1,

@@ -42,9 +42,9 @@ class HomeCategoriesList extends StatelessWidget {
                           context: context,
                           builder: (BuildContext context) {
                             return const CustomDialogBox(
-                              title: "To enable this function",
-                              descriptions: "Please login or create account ",
-                              text: "Login",
+                              title: 'To enable this function',
+                              descriptions: 'Please login or create account ',
+                              text: 'Login',
                             );
                           });
                     }
@@ -100,9 +100,9 @@ class HomeCategoriesList extends StatelessWidget {
                           context: context,
                           builder: (BuildContext context) {
                             return const CustomDialogBox(
-                              title: "To enable this function",
-                              descriptions: "Please login or create account ",
-                              text: "Login",
+                              title: 'To enable this function',
+                              descriptions: 'Please login or create account ',
+                              text: 'Login',
                             );
                           });
                     }
