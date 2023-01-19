@@ -69,7 +69,7 @@ class MyApp extends StatelessWidget {
             PhoneNumberScreen.routeName: (_) => const PhoneNumberScreen(),
             MainScreen.routeName: (_) => const MainScreen(),
             PaymentScreen.routeName: (_) => const PaymentScreen(),
-            LocationScreen.routeName: (_) => const LocationScreen(),
+            LocationScreen.routeName: (_) => const LocationScreen(text: '',),
             // CHAT
             CreateChatGroupScreen.routeName: (_) =>
                 const CreateChatGroupScreen(),

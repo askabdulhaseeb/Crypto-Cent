@@ -9,7 +9,8 @@ import '../order/payment.dart';
 import 'add_new_address.dart';
 
 class LocationScreen extends StatefulWidget {
-  const LocationScreen({super.key});
+  const LocationScreen({required this.text, super.key});
+  final String text;
   static const String routeName = '/locationScreen';
 
   @override
@@ -17,7 +18,7 @@ class LocationScreen extends StatefulWidget {
 }
 
 class _LocationScreenState extends State<LocationScreen> {
-  int isSelectedIndex = 1;
+  int isSelectedIndex = 0;
   @override
   Widget build(BuildContext context) {
     LocationProvider locationPro = Provider.of<LocationProvider>(context);
@@ -88,12 +89,14 @@ class _LocationScreenState extends State<LocationScreen> {
                                       fontWeight: FontWeight.w800),
                                   children: <TextSpan>[
                                     TextSpan(
-                                        text: '${locationPro.currentUserLocation[index].address} \n',
+                                        text:
+                                            '${locationPro.currentUserLocation[index].address} \n',
                                         style: const TextStyle(
                                             fontSize: 12,
                                             fontWeight: FontWeight.w200)),
                                     TextSpan(
-                                        text: '${locationPro.currentUserLocation[index].city} ${locationPro.currentUserLocation[index].state}',
+                                        text:
+                                            '${locationPro.currentUserLocation[index].city} ${locationPro.currentUserLocation[index].state}',
                                         style: const TextStyle(
                                             fontSize: 12,
                                             fontWeight: FontWeight.w200)),
@@ -125,11 +128,17 @@ class _LocationScreenState extends State<LocationScreen> {
               ),
             ),
             CustomElevatedButton(
-                title: 'Adress Done',
+                title: widget.text == 'Delivery Addresses'
+                    ? 'Update Address'
+                    : 'Adress Done',
                 onTap: () async {
-                  await locationPro.selectedIndex(
-                      locationPro.currentUserLocation[isSelectedIndex]);
-                  Navigator.of(context).pushNamed(PaymentScreen.routeName);
+                  if (widget.text == 'Delivery Addresses') {
+                    Navigator.of(context).pop();
+                  } else if (widget.text == 'order') {
+                    await locationPro.selectedIndex(
+                        locationPro.currentUserLocation[isSelectedIndex]);
+                    Navigator.of(context).pushNamed(PaymentScreen.routeName);
+                  }
                 }),
             const SizedBox(
               height: 20,

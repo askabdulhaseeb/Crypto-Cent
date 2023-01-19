@@ -89,7 +89,15 @@ class CartCheckoutWidget extends StatelessWidget {
                       title: 'Check out',
                       borderRadius: BorderRadius.circular(24),
                       onTap: () {
-                        Navigator.of(context).pushNamed(LocationScreen.routeName);
+                        Navigator.push(
+                          context,
+                          // ignore: always_specify_types
+                          MaterialPageRoute(
+                            builder: (BuildContext context) =>
+                                const LocationScreen(
+                                    text: 'order'),
+                          ),
+                        );
                       })),
               const SizedBox(height: 10),
             ],

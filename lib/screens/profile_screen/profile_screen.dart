@@ -11,6 +11,7 @@ import '../../widgets/profile/setting/setting.dart';
 import '../auth/welcome_screen.dart';
 import '../empty_screen/empty_screen.dart';
 import '../empty_screen/empty_auth_screen.dart';
+import '../map_screen/location_screen.dart';
 import '../order/order_history.dart';
 import 'wallet/wallet_screen.dart';
 
@@ -58,9 +59,21 @@ class ProfileScreen extends StatelessWidget {
                         ),
                         const SizedBox(width: 16),
                         Expanded(
-                          child: ProfileMiddleTile(
-                            text: 'Delivery\nAddress',
-                            image: AppImages.deliveryaddress,
+                          child: GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                // ignore: always_specify_types
+                                MaterialPageRoute(
+                                  builder: (BuildContext context) =>
+                                      const LocationScreen(text:'Delivery Addresses' ),
+                                ),
+                              );
+                            },
+                            child: ProfileMiddleTile(
+                              text: 'Delivery\nAddress',
+                              image: AppImages.deliveryaddress,
+                            ),
                           ),
                         )
                       ],
