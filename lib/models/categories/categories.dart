@@ -2,6 +2,22 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'sub_categories.dart';
 
 class Categories {
+
+  factory Categories.fromDoc(DocumentSnapshot<Map<String, dynamic>> doc) {
+    List<SubCategory> subCats = <SubCategory>[];
+    // ignore: always_specify_types
+    final List<dynamic> data = doc.data()?['sub_categories'] ?? [];
+    for (dynamic element in data) {
+      subCats.add(SubCategory.fromMap(element));
+    }
+    return Categories(
+      catID: doc.data()?['cat_id'] ?? '',
+      imageURl: doc.data()?['image_url'] ?? '',
+      title: doc.data()?['title'] ?? '',
+      status: doc.data()?['status'] ?? '',
+      subCategories: subCats,
+    );
+  }
   Categories({
     required this.catID,
     required this.title,
@@ -25,21 +41,5 @@ class Categories {
       'sub_categories':
           subCategories.map((SubCategory x) => x.toMap()).toList(),
     };
-  }
-
-  factory Categories.fromDoc(DocumentSnapshot<Map<String, dynamic>> doc) {
-    List<SubCategory> subCats = <SubCategory>[];
-    // ignore: always_specify_types
-    final List<dynamic> data = doc.data()?['sub_categories'] ?? [];
-    for (dynamic element in data) {
-      subCats.add(SubCategory.fromMap(element));
-    }
-    return Categories(
-      catID: doc.data()?['cat_id'] ?? '',
-      imageURl: doc.data()?['image_url'] ?? '',
-      title: doc.data()?['title'] ?? '',
-      status: doc.data()?['status'] ?? '',
-      subCategories: subCats,
-    );
   }
 }

@@ -174,9 +174,9 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                             context: context,
                             builder: (BuildContext context) {
                               return const CustomDialogBox(
-                                title: "To enable this function",
-                                descriptions: "Please login or create account ",
-                                text: "Login",
+                                title: 'To enable this function',
+                                descriptions: 'Please login or create account ',
+                                text: 'Login',
                               );
                             });
                       })

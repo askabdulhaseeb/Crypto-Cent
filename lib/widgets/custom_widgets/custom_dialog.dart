@@ -1,13 +1,10 @@
-import 'dart:ui';
-import 'package:crypto_cent/widgets/custom_widgets/constants.dart';
-import 'package:flutter/cupertino.dart';
+import 'constants.dart';
 import 'package:flutter/material.dart';
 
 import '../../utilities/app_images.dart';
 import 'custom_elevated_button.dart';
 
 class CustomDialogBox extends StatefulWidget {
-  final String title, descriptions, text;
 
   const CustomDialogBox(
       {Key? key,
@@ -15,6 +12,7 @@ class CustomDialogBox extends StatefulWidget {
       required this.descriptions,
       required this.text})
       : super(key: key);
+  final String title, descriptions, text;
 
   @override
   _CustomDialogBoxState createState() => _CustomDialogBoxState();

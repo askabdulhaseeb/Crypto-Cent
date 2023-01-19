@@ -77,9 +77,9 @@ class CustomTextFormFieldWithHeaderState
       children: [
         Text(
           widget.headerText,
-          style: TextStyle(color: Colors.black, fontSize: 18),
+          style: const TextStyle(color: Colors.black, fontSize: 18),
         ),
-        SizedBox(
+        const SizedBox(
           height: 5,
         ),
         Container(

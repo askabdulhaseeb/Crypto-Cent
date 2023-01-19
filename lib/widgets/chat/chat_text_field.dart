@@ -136,7 +136,7 @@ class _ChatTextFieldState extends State<ChatTextField> {
                 );
               },
               child: Container(
-                margin: EdgeInsets.symmetric(horizontal: 8),
+                margin: const EdgeInsets.symmetric(horizontal: 8),
                 padding: const EdgeInsets.symmetric(horizontal: 2, vertical: 6),
                 decoration: BoxDecoration(
                   color: Theme.of(context).primaryColor,

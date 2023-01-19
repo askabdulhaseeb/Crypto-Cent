@@ -2,10 +2,8 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../database/app_user/auth_method.dart';
 import '../../providers/app_provider.dart';
 import '../../utilities/app_images.dart';
-import '../empty_screen/empty_screen.dart';
 
 class MainBottomNavigationBar extends StatefulWidget {
   const MainBottomNavigationBar({Key? key}) : super(key: key);

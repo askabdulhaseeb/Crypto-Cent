@@ -8,7 +8,7 @@ class ContactProvider with ChangeNotifier {
   Future<bool> contactsPermission(BuildContext context) async {
     bool temp = false;
     await Permission.contacts.request();
-    final status = await Permission.contacts.status;
+    final PermissionStatus status = await Permission.contacts.status;
     print(status.name);
     if (await Permission.contacts.isGranted) {
       _mobileContacts = await FastContacts.allContacts;
@@ -59,10 +59,10 @@ class ContactProvider with ChangeNotifier {
 
   List<Contact> _mobileContacts = [];
   List<Contact> get mobileContact => _mobileContacts;
-  List<Contact> _boloodoContacts = [];
+  final List<Contact> _boloodoContacts = [];
   List<Contact> get boloodoContact => _boloodoContacts;
-  List<Contact> _inviteContacts = [];
+  final List<Contact> _inviteContacts = [];
   List<Contact> get inviteContact => _inviteContacts;
-  List<AppUser> _blodooUser = [];
+  final List<AppUser> _blodooUser = [];
   List<AppUser> get blodooUser => _blodooUser;
 }

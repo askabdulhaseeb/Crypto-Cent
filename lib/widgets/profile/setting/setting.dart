@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 
 import '../../../screens/empty_screen/empty_screen.dart';
-import '../../custom_widgets/custom_widget.dart';
 import '../my_profile/edit_profile.dart';
 import '../profile_nav_tile.dart';
 import 'change_password.dart';
-import 'deactive_account.dart';
 
 class Setting extends StatelessWidget {
-  Setting({super.key});
+  const Setting({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,7 +17,7 @@ class Setting extends StatelessWidget {
           padding: const EdgeInsets.all(12),
           child: Column(
             children: [
-              SizedBox(
+              const SizedBox(
                 height: 30,
               ),
               ProfileNavTile(
@@ -30,7 +28,7 @@ class Setting extends StatelessWidget {
                   ));
                 },
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               ProfileNavTile(
@@ -41,7 +39,7 @@ class Setting extends StatelessWidget {
                   ));
                 },
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               ProfileNavTile(
@@ -52,7 +50,7 @@ class Setting extends StatelessWidget {
                   ));
                 },
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               ProfileNavTile(
@@ -63,7 +61,7 @@ class Setting extends StatelessWidget {
                   ));
                 },
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               // ProfileNavTile(

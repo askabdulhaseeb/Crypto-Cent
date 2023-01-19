@@ -7,7 +7,7 @@ class ProfilewhenUserNotLogin extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Profile')),
+      appBar: AppBar(title: const Text('Profile')),
       body: Center(
         child: Padding(
           padding: const EdgeInsets.all(8.0),

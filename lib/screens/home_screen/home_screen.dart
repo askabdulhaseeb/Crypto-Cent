@@ -1,8 +1,6 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../database/notification_services.dart';
 import '../../function/push_notification.dart';
 import '../../providers/provider.dart';
 import '../../utilities/app_images.dart';
@@ -69,7 +67,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
               children: <Widget>[
                 Stack(
                   children: <Widget>[
-                    CustomNetworkImageSlider(),
+                    const CustomNetworkImageSlider(),
                     Padding(
                       padding: const EdgeInsets.symmetric(
                           horizontal: 16, vertical: 12),

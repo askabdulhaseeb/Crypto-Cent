@@ -36,7 +36,7 @@ class SomeCategories extends StatelessWidget {
             child: ClipRRect(
               borderRadius: BorderRadius.circular(12),
               child: Container(
-                color: Color.fromARGB(255, 239, 239, 239),
+                color: const Color.fromARGB(255, 239, 239, 239),
                 padding: const EdgeInsets.all(8),
                 child: Column(
                   children: <Widget>[

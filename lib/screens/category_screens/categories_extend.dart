@@ -3,7 +3,6 @@ import 'package:provider/provider.dart';
 import '../../models/product/product_model.dart';
 import '../../providers/product_provider.dart';
 import '../../widgets/product/extend_product_tile.dart';
-import '../../widgets/product/product_tile.dart';
 
 // ignore: must_be_immutable
 class CategoriesExtend extends StatelessWidget {
@@ -20,7 +19,7 @@ class CategoriesExtend extends StatelessWidget {
       products = prouctPro.findByCategory(categoryName);
     }
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 243, 243, 243),
+      backgroundColor: const Color.fromARGB(255, 243, 243, 243),
       appBar: AppBar(
         leading: const BackButton(
           color: Colors.black,

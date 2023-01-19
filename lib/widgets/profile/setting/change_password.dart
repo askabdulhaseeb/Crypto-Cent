@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../custom_widgets/custom_textform_field_withheader.dart';
 import '../../custom_widgets/custom_widget.dart';
 import '../../custom_widgets/password_textformfield.dart';
 
@@ -64,11 +63,11 @@ class ChnagePassword extends StatelessWidget {
       ),
       actions: [
         Column(
-          children: [
-            const SizedBox(
+          children: const [
+            SizedBox(
               height: 15,
             ),
-            const Icon(Icons.more_vert),
+            Icon(Icons.more_vert),
           ],
         ),
         const SizedBox(

@@ -3,7 +3,6 @@ import 'package:provider/provider.dart';
 
 import '../../database/app_user/auth_method.dart';
 import '../../models/app_user/app_user.dart';
-import '../../providers/auth_provider.dart';
 import '../../providers/provider.dart';
 import '../custom_widgets/cutom_text.dart';
 

@@ -4,13 +4,10 @@ import 'package:provider/provider.dart';
 import '../../../database/payment/order_api.dart';
 import '../../../enum/order_status_enum.dart';
 import '../../../models/payment/order.dart';
-import '../../../models/payment/orderd_product.dart';
 import '../../../models/product/product_model.dart';
-import '../../../providers/payment/payment_provider.dart';
 import '../../../providers/provider.dart';
 import '../../custom_widgets/custom_elevated_button.dart';
 import '../../custom_widgets/custom_network_image.dart';
-import 'buy_history_tile.dart';
 
 class SellOrder extends StatelessWidget {
   const SellOrder({super.key});

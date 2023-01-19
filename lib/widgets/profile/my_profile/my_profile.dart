@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../providers/provider.dart';
-import '../../custom_widgets/custom_elevated_button.dart';
 import '../../custom_widgets/custom_widget.dart';
 import '../profile_header.dart';
 import 'edit_profile.dart';
