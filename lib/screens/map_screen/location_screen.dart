@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -45,7 +47,7 @@ class _LocationScreenState extends State<LocationScreen> {
                 )),
             Expanded(
               child: ListView.builder(
-                itemCount: locationPro.allUserLocation.length,
+                itemCount: locationPro.currentUserLocation.length,
                 itemBuilder: (BuildContext context, int index) {
                   return Padding(
                     padding: const EdgeInsets.symmetric(vertical: 4),
@@ -79,19 +81,19 @@ class _LocationScreenState extends State<LocationScreen> {
                               RichText(
                                 text: TextSpan(
                                   text:
-                                      '${locationPro.allUserLocation[index].locationName} \n',
+                                      '${locationPro.currentUserLocation[index].locationName} \n',
                                   style: const TextStyle(
                                       color: Colors.black,
                                       fontSize: 18,
                                       fontWeight: FontWeight.w800),
                                   children: <TextSpan>[
                                     TextSpan(
-                                        text: '${locationPro.allUserLocation[index].address} \n',
+                                        text: '${locationPro.currentUserLocation[index].address} \n',
                                         style: const TextStyle(
                                             fontSize: 12,
                                             fontWeight: FontWeight.w200)),
                                     TextSpan(
-                                        text: '${locationPro.allUserLocation[index].city} ${locationPro.allUserLocation[index].state}',
+                                        text: '${locationPro.currentUserLocation[index].city} ${locationPro.currentUserLocation[index].state}',
                                         style: const TextStyle(
                                             fontSize: 12,
                                             fontWeight: FontWeight.w200)),
@@ -126,7 +128,7 @@ class _LocationScreenState extends State<LocationScreen> {
                 title: 'Adress Done',
                 onTap: () async {
                   await locationPro.selectedIndex(
-                      locationPro.allUserLocation[isSelectedIndex]);
+                      locationPro.currentUserLocation[isSelectedIndex]);
                   Navigator.of(context).pushNamed(PaymentScreen.routeName);
                 }),
             const SizedBox(

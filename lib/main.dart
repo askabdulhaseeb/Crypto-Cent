@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'database/app_user/auth_method.dart';
 import 'database/local_data.dart';
 import 'database/notification_services.dart';
 import 'firebase_options.dart';
@@ -51,11 +52,11 @@ class MyApp extends StatelessWidget {
           theme: AppThemes.light,
           darkTheme: AppThemes.dark,
           themeMode: theme.themeMode,
-          // home: (AuthMethods.uid.isEmpty)
-          //     ? const WelcomeScreen()
-          //     : const MainScreen(),
+          home: (AuthMethods.uid.isEmpty)
+              ? const WelcomeScreen()
+              : const MainScreen(),
 
-          home: const SpalshScreen(),
+         // home: const SpalshScreen(),
 
           routes: <String, WidgetBuilder>{
             EmptyScreen.routeName: (_) => const EmptyScreen(),
