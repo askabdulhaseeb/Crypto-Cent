@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
+import '../../enum/login_method.dart';
 import '../../models/app_user/app_user.dart';
 import '../../models/app_user/numbers_detail.dart';
 import '../../widgets/custom_widgets/custom_toast.dart';
@@ -71,7 +72,7 @@ class AuthMethods {
     try {
       final UserCredential result = await _auth
           .createUserWithEmailAndPassword(
-        email: email.toLowerCase().trim(),
+        email: email.trim(),
         password: password.trim(),
       )
           .catchError((Object obj) {
@@ -82,6 +83,8 @@ class AuthMethods {
       final AppUser myUser = AppUser(
         uid: uid,
         name: name,
+        email: email.trim(),
+        loginMethod: LoginMethod.email,
         phoneNumber: NumberDetails(
           completeNumber: '',
           countryCode: '',

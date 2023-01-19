@@ -224,8 +224,8 @@ class NotificationsServices {
         tokenValue: token ?? '');
     if (!exist) {
       me.deviceToken?.add(MyDeviceToken(token: token ?? ''));
-      me.deviceToken!
-          .removeWhere((MyDeviceToken element) => element.token.isEmpty);
+      me.deviceToken
+          ?.removeWhere((MyDeviceToken element) => element.token.isEmpty);
       await UserApi().setDeviceToken(me.deviceToken ?? <MyDeviceToken>[]);
       await NotificationsServices().verifyTokenIsUnique(
         allUsersValue: userPro.users,
