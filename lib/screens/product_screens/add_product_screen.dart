@@ -20,7 +20,7 @@ import '../../widgets/product/get_product_attachments.dart';
 
 class AddProductScreen extends StatefulWidget {
   const AddProductScreen({super.key});
-
+  static const String routeName = '/add-product';
   @override
   State<AddProductScreen> createState() => _AddProductScreenState();
 }
@@ -55,20 +55,19 @@ class _AddProductScreenState extends State<AddProductScreen> {
       }
 
       Product product = Product(
-        pid: UniqueIdFunctions.postID,
-        uid: AuthMethods.uid,
-        amount: double.parse(amount.text),
-        colors: '',
-        quantity: quantity.text,
-        productname: productname.text,
-        description: productdecription.text,
-        timestamp: TimeStamp.timestamp,
-        category: catPro.currentCat!.catID,
-        subCategory: catPro.subcurrentCat!.catID,
-        createdByUID: AuthMethods.uid,
-        prodURL: urls,
-        reports: <ReportProduct>[]
-      );
+          pid: UniqueIdFunctions.postID,
+          uid: AuthMethods.uid,
+          amount: double.parse(amount.text),
+          colors: '',
+          quantity: quantity.text,
+          productname: productname.text,
+          description: productdecription.text,
+          timestamp: TimeStamp.timestamp,
+          category: catPro.currentCat!.catID,
+          subCategory: catPro.subcurrentCat!.catID,
+          createdByUID: AuthMethods.uid,
+          prodURL: urls,
+          reports: <ReportProduct>[]);
       bool temp = await ProductApi().add(product);
       if (temp) {
         CustomToast.alertDialogeBox(context: context, text: 'upload');

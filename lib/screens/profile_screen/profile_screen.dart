@@ -13,6 +13,7 @@ import '../empty_screen/empty_screen.dart';
 import '../empty_screen/empty_auth_screen.dart';
 import '../map_screen/location_screen.dart';
 import '../order/order_history.dart';
+import 'selling_screen.dart';
 import 'wallet/wallet_screen.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -20,7 +21,9 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AuthMethods.uid.isEmpty
-        ? const EmptyAuthScreen(text: 'Please Log in to view your profile',)
+        ? const EmptyAuthScreen(
+            text: 'Please Log in to view your profile',
+          )
         : Scaffold(
             appBar: AppBar(
               backgroundColor: Theme.of(context).secondaryHeaderColor,
@@ -66,7 +69,8 @@ class ProfileScreen extends StatelessWidget {
                                 // ignore: always_specify_types
                                 MaterialPageRoute(
                                   builder: (BuildContext context) =>
-                                      const LocationScreen(text:'Delivery Addresses' ),
+                                      const LocationScreen(
+                                          text: 'Delivery Addresses'),
                                 ),
                               );
                             },
@@ -103,7 +107,8 @@ class ProfileScreen extends StatelessWidget {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute<EmptyScreen>(
-                                  builder: (BuildContext context) => const Setting(),
+                                  builder: (BuildContext context) =>
+                                      const Setting(),
                                 ),
                               );
                             }),
@@ -137,13 +142,8 @@ class ProfileScreen extends StatelessWidget {
                         ProfileNavTile(
                           name: 'Selling',
                           image: AppImages.bitcoinIcon,
-                          onTap: () {
-                            Navigator.of(context)
-                                .push(MaterialPageRoute<EmptyScreen>(
-                              builder: (BuildContext context) =>
-                                  const EmptyScreen(),
-                            ));
-                          },
+                          onTap: () => Navigator.of(context)
+                              .pushNamed(SellingScreen.routeName),
                         ),
                         const SizedBox(height: 24),
                         ProfileNavTile(

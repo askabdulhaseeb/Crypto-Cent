@@ -27,6 +27,12 @@ class ProductProvider with ChangeNotifier {
     return index < 0 ? _null : _product[index];
   }
 
+  List<Product> productByUID(String value) {
+    final List<Product> prods =
+        _product.where((Product element) => element.uid == value).toList();
+    return prods;
+  }
+
   // ignore: always_specify_types
   List<String> categories = [];
 
