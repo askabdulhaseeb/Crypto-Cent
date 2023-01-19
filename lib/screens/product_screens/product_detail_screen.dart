@@ -15,6 +15,7 @@ import '../../widgets/custom_widgets/custom_profile_image.dart';
 import '../../widgets/product/add_to_cart_widget.dart';
 import '../../widgets/product/product_url_slider.dart';
 import '../../widgets/product/send_offer_widget.dart';
+import '../../widgets/profile/other_user_profile.dart';
 
 class ProductDetailScreen extends StatefulWidget {
   const ProductDetailScreen({required this.product, super.key});
@@ -37,15 +38,25 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
         title: Consumer<UserProvider>(
           builder: (BuildContext context, UserProvider userPro, _) {
             final AppUser user = userPro.user(widget.product.uid);
-            return Row(
-              children: <Widget>[
-                CustomProfileImage(imageURL: user.imageURL ?? '', radius: 24),
-                const SizedBox(width: 10),
-                Text(
-                  user.name ?? 'null',
-                  style: const TextStyle(fontWeight: FontWeight.bold),
-                ),
-              ],
+            return GestureDetector(
+              onTap: (){
+                 Navigator.push(
+            context,
+            MaterialPageRoute<ProductDetailScreen>(
+              builder: (BuildContext context) =>
+                  OtherUserProfile(appUser: user ,),
+            ));
+              },
+              child: Row(
+                children: <Widget>[
+                  CustomProfileImage(imageURL: user.imageURL ?? '', radius: 24),
+                  const SizedBox(width: 10),
+                  Text(
+                    user.name ?? 'null',
+                    style: const TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                ],
+              ),
             );
           },
         ),
