@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../function/push_notification.dart';
+import '../../models/my_device_token.dart';
 import '../../providers/provider.dart';
 import '../../utilities/app_images.dart';
 import '../../widgets/custom_widgets/custom_network_image_slider.dart';
@@ -36,7 +37,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   }
 
   _init() async {
-    final List<String>? devices = await PushNotification().getToken([]);
+    final List<MyDeviceToken>? devices = await PushNotification().getToken([]);
     print(devices);
   }
 

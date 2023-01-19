@@ -5,16 +5,17 @@ import '../database/app_user/auth_method.dart';
 import '../database/app_user/user_api.dart';
 import '../models/app_user/app_user.dart';
 import '../models/app_user/numbers_detail.dart';
+import '../models/my_device_token.dart';
 
 class UserProvider extends ChangeNotifier {
   UserProvider() {
     init();
   }
   List<AppUser> _user = <AppUser>[];
-  List<String> _deviceToken = <String>[];
-  List<String> get deviceToken => _deviceToken;
-  final List<String> _allDeviceToken = <String>[];
-  List<String> get allDeviceToken => _allDeviceToken;
+  List<MyDeviceToken> _deviceToken = <MyDeviceToken>[];
+  List<MyDeviceToken> get deviceToken => _deviceToken;
+  final List<MyDeviceToken> _allDeviceToken = <MyDeviceToken>[];
+  List<MyDeviceToken> get allDeviceToken => _allDeviceToken;
   AppUser? _currentUser;
 
   AppUser get currentUser => _currentUser ?? _null;

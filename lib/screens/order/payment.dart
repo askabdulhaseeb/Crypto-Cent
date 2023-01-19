@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import '../../function/crypto_function.dart';
 import '../../function/encryption_function.dart';
 import '../../models/app_user/app_user.dart';
+import '../../models/my_device_token.dart';
 import '../../providers/provider.dart';
 import '../../widgets/custom_widgets/custom_widget.dart';
 import '../../widgets/custom_widgets/show_loading.dart';
@@ -182,10 +183,10 @@ class _PaymentScreenState extends State<PaymentScreen> {
                   //       message: 'You havenot enough Balance ');
                   // }
                   AppUser me = userPro.user(cartPro.cartItem[0].sellerID);
-                  List<String> deviceToken = me.deviceToken ?? [];
+                  List<MyDeviceToken> deviceToken = me.deviceToken ?? [];
                   final bool done =
                       await Provider.of<PaymentProvider>(context, listen: false)
-                          .productOrder(cartPro.cartItem, deviceToken);
+                          .productOrder(context, cartPro.cartItem, deviceToken);
                   if (done) {
                     if (!mounted) return;
                     cartPro.deleteAllItem();

@@ -7,6 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../database/app_user/user_api.dart';
+import '../database/notification_services.dart';
+import '../models/my_device_token.dart';
 import '../providers/app_provider.dart';
 import '../widgets/custom_widgets/custom_toast.dart';
 
@@ -17,14 +19,14 @@ class PushNotification {
   String? _token;
   String? get token => _token;
 
-  Future<List<String>?>? init({required List<String> devicesToken}) async {
+  Future<List<MyDeviceToken>?>? init({required List<MyDeviceToken> devicesToken}) async {
     final NotificationSettings? settings = await _requestPermission();
 
     if (settings!.authorizationStatus == AuthorizationStatus.authorized) {}
 
     if ((settings.authorizationStatus == AuthorizationStatus.provisional ||
             settings.authorizationStatus == AuthorizationStatus.authorized)) {
-      List<String>? updatedDevicesToken = await getToken(devicesToken);
+      List<MyDeviceToken>? updatedDevicesToken = await getToken(devicesToken);
       if (updatedDevicesToken != null && updatedDevicesToken.isNotEmpty) {
         return updatedDevicesToken;
       }
@@ -35,18 +37,17 @@ class PushNotification {
     return null;
   }
 
-  Future<List<String>?>? getToken(List<String> devicesToken) async {
+  Future<List<MyDeviceToken>?>? getToken(List<MyDeviceToken> devicesToken) async {
    
     _token = await _firebaseMessaging.getToken();
     log('CURRENT DEVICE TOKEN');
-    print(_token);
     if (_token == null) {
       CustomToast.errorToast(message: 'Unable to fetch Data, Tryagain Later');
       return null;
     }
 
-    if (devicesToken.contains(_token)) return devicesToken;
-    devicesToken.add(_token!);
+    if (NotificationsServices().tokenAlreadyExist(devicesValue: devicesToken, tokenValue: _token??'')) return devicesToken;
+    devicesToken.add(MyDeviceToken(token:  _token??''));
     UserApi().setDeviceToken(devicesToken);
     return devicesToken;
   }

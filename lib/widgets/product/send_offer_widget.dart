@@ -178,15 +178,23 @@ class _SendOfferWidgetState extends State<SendOfferWidget> {
       exchangeRate: await BinanceApi().btcPrice(),
       quantity: quantity,
     );
+    final String me = AuthMethods.uid;
+    final UserProvider userPro =
+        // ignore: use_build_context_synchronously
+        Provider.of<UserProvider>(context,listen: false);
+    final AppUser sender = userPro.user(me);
+    final AppUser receiver = userPro.user(widget.product.uid);
     await ChatAPI().sendMessage(
-      Chat(
+      sender: sender,
+      receiver: receiver,
+      chat: Chat(
         chatID: chatID,
         persons: <String>[AuthMethods.uid, user.uid],
         lastMessage: Message(
           messageID: time.toString(),
           text: 'UNIT PRICE: $offer & QTY: 1',
           timestamp: time,
-          sendBy: AuthMethods.uid,
+          sendBy: me,
           type: MessageTypeEnum.prodOffer,
           attachment: <MessageAttachment>[],
           sendTo: <MessageReadInfo>[

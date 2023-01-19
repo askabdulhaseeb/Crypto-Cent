@@ -1,4 +1,6 @@
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../database/app_user/auth_method.dart';
 import '../../database/crypto_wallet/binance_api.dart';
@@ -8,12 +10,15 @@ import '../../database/payment/transaction_api.dart';
 import '../../function/push_notification.dart';
 import '../../function/time_date_function.dart';
 import '../../function/unique_id_functions.dart';
+import '../../models/app_user/app_user.dart';
 import '../../models/cart.dart';
+import '../../models/my_device_token.dart';
 import '../../models/payment/order.dart';
 import '../../models/payment/orderd_product.dart';
 import '../../models/payment/receipt.dart';
 import '../../models/payment/transaction.dart';
 import '../../models/product/product_model.dart';
+import '../provider.dart';
 
 class PaymentProvider with ChangeNotifier {
   PaymentProvider() {
@@ -103,7 +108,11 @@ class PaymentProvider with ChangeNotifier {
     // print('cancel $cancel');
   }
 
-  Future<bool> productOrder(List<Cart> cart, List<String> deviceToken) async {
+  Future<bool> productOrder(
+    BuildContext context,
+    List<Cart> cart,
+    List<MyDeviceToken> deviceToken,
+  ) async {
     String uniqueID = UniqueIdFunctions.postID;
     bool retBool = false;
     final double exchangeRate = await BinanceApi().btcPrice();
@@ -147,19 +156,17 @@ class PaymentProvider with ChangeNotifier {
       totalCryptoPrice: total,
     );
     print(deviceToken);
-
-    final bool isnotification = await PushNotification().sendNotification(
-        deviceToken: deviceToken,
-        messageTitle: 't',
-        messageBody: 't',
-        // ignore: always_specify_types
-        dataa: ['usman', 'afzal', 'Bajwa']);
-        print(isnotification);
+    final UserProvider userPro =
+        // ignore: use_build_context_synchronously
+        Provider.of<UserProvider>(context, listen: false);
+    final AppUser sender = userPro.user(AuthMethods.uid);
+    final AppUser receiver = userPro.user(_orderProduct[0].sellerID);
     final bool orderBool = await OrderApi().add(tempOrder);
-    final bool receiptBool = await ReceiptApi().add(tempReceipt);
+    final bool receiptBool = await ReceiptApi()
+        .add(receipt: tempReceipt, sender: sender, receiver: receiver);
     final bool transactionBool = await TransactionApi().add(tempTransaction);
     orderdProduct.clear();
-    if (orderBool && receiptBool && transactionBool && isnotification) {
+    if (orderBool && receiptBool && transactionBool) {
       return true;
     }
     return false;
