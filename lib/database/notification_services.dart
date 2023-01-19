@@ -2,14 +2,17 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 // import 'package:timezone/data/latest_all.dart' as tz;
 // import 'package:timezone/timezone.dart' as tz;
 import 'package:permission_handler/permission_handler.dart';
+import 'package:provider/provider.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:http/http.dart' as http;
 import '../models/app_user/app_user.dart';
 import '../models/my_device_token.dart';
+import '../providers/user_provider.dart';
 import '../utilities/utilities.dart';
 import 'app_user/auth_method.dart';
 import 'app_user/user_api.dart';
@@ -191,7 +194,8 @@ class NotificationsServices {
           element.uid != meUID) {
         element.deviceToken?.removeWhere(
             (MyDeviceToken element) => element.token == deviceTokenValue);
-        await UserApi().setDeviceToken(element.deviceToken ?? <MyDeviceToken>[]);
+        await UserApi()
+            .setDeviceToken(element.deviceToken ?? <MyDeviceToken>[]);
       }
     }
   }
@@ -204,5 +208,25 @@ class NotificationsServices {
       if (element.token == tokenValue) return true;
     }
     return false;
+  }
+
+  onLogin(BuildContext context) async {
+    final String? token = await FirebaseMessaging.instance.getToken();
+    final UserProvider userPro =
+        // ignore: use_build_context_synchronously
+        Provider.of<UserProvider>(context, listen: false);
+    final AppUser me = userPro.user(AuthMethods.uid);
+    if (!(NotificationsServices().tokenAlreadyExist(
+        devicesValue: me.deviceToken ?? <MyDeviceToken>[],
+        tokenValue: token ?? ''))) {
+      me.deviceToken!.add(MyDeviceToken(token: token ?? ''));
+      me.deviceToken!
+          .removeWhere((MyDeviceToken element) => element.token.isEmpty);
+      await UserApi().setDeviceToken(me.deviceToken ?? <MyDeviceToken>[]);
+      await NotificationsServices().verifyTokenIsUnique(
+        allUsersValue: userPro.users,
+        deviceTokenValue: token ?? '',
+      );
+    }
   }
 }
