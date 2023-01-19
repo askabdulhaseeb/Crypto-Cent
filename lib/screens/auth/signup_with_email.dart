@@ -1,9 +1,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:intl_phone_field/phone_number.dart';
 import 'package:provider/provider.dart';
 
 import '../../database/app_user/auth_method.dart';
+import '../../database/crypto_wallet/wallet_creation.dart';
+import '../../database/notification_services.dart';
 import '../../providers/app_provider.dart';
 import '../../utilities/app_images.dart';
 import '../../widgets/custom_widgets/custom_widget.dart';
@@ -96,12 +99,16 @@ class _SignupWithEmailScreenState extends State<SignupWithEmailScreen> {
                             });
                             if (!mounted) return;
                             if (user != null) {
-                              Provider.of<AppProvider>(context, listen: false)
-                                  .onTabTapped(0);
-                              Navigator.of(context).pushNamedAndRemoveUntil(
-                                MainScreen.routeName,
-                                (Route<dynamic> route) => false,
-                              );
+                              bool temp1 = await WalletCreation().addWallet();
+                              if (temp1) {
+                                await NotificationsServices().onLogin(context);
+                                Provider.of<AppProvider>(context, listen: false)
+                                    .onTabTapped(0);
+                                Navigator.of(context).pushNamedAndRemoveUntil(
+                                  MainScreen.routeName,
+                                  (Route<dynamic> route) => false,
+                                );
+                              }
                             }
                           }
                         },

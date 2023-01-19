@@ -39,7 +39,7 @@ class WalletProvider with ChangeNotifier {
       }
     }
     temp = true;
-    getBalance();
+    //getBalance();
     return temp;
   }
 

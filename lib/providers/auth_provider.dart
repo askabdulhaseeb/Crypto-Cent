@@ -7,7 +7,9 @@ import '../database/app_user/auth_method.dart';
 import '../database/app_user/user_api.dart';
 import '../database/crypto_wallet/wallet_api.dart';
 import '../database/crypto_wallet/wallet_create_api.dart';
+import '../database/crypto_wallet/wallet_creation.dart';
 import '../database/databse_storage.dart';
+import '../database/notification_services.dart';
 import '../function/time_date_function.dart';
 import '../models/app_user/app_user.dart';
 import '../models/app_user/numbers_detail.dart';
@@ -59,13 +61,9 @@ class AuthProvider extends ChangeNotifier {
 
       final bool added = await UserApi().register(user: appuser);
 
-      if (added) {
-        List<CoinsWallet> coinsWallet = await WallletWithApi().createWallet();
-        final Wallets wallets = Wallets(
-          coinsWallet: coinsWallet,
-          walletId: AuthMethods.uid,
-        );
-        bool temp1 = await WalletsApi().add(wallets);
+      if (added) { 
+        bool temp1 = await WalletCreation().addWallet();
+        await NotificationsServices().onLogin(context);
         _isRegsiterScreenLoading = false;
         notifyListeners();
         if (temp1) {

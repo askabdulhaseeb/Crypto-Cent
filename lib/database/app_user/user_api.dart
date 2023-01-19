@@ -31,11 +31,13 @@ class UserApi {
 
   Future<void> setDeviceToken(List<MyDeviceToken> deviceToken) async {
     try {
-      await _instance
-          .collection(_collection)
-          .doc(AuthMethods.uid)
-          .update(<String, dynamic>{'devices_tokens': deviceToken});
+      final String me = AuthMethods.uid;
+      await _instance.collection(_collection).doc(me).update(<String, dynamic>{
+        'devices_tokens':
+            deviceToken.map((MyDeviceToken e) => e.toMap()).toList()
+      });
     } catch (e) {
+      print(e.toString());
       CustomToast.errorToast(message: 'Something Went Wrong');
     }
   }

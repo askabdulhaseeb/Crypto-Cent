@@ -204,22 +204,26 @@ class NotificationsServices {
     required List<MyDeviceToken> devicesValue,
     required String tokenValue,
   }) {
+    log(tokenValue);
     for (MyDeviceToken element in devicesValue) {
+      print(element.token);
       if (element.token == tokenValue) return true;
     }
     return false;
   }
 
   onLogin(BuildContext context) async {
-    final String? token = await FirebaseMessaging.instance.getToken();
     final UserProvider userPro =
         // ignore: use_build_context_synchronously
         Provider.of<UserProvider>(context, listen: false);
+    userPro.refresh();
+    final String? token = await FirebaseMessaging.instance.getToken();
     final AppUser me = userPro.user(AuthMethods.uid);
-    if (!(NotificationsServices().tokenAlreadyExist(
+    final bool exist = NotificationsServices().tokenAlreadyExist(
         devicesValue: me.deviceToken ?? <MyDeviceToken>[],
-        tokenValue: token ?? ''))) {
-      me.deviceToken!.add(MyDeviceToken(token: token ?? ''));
+        tokenValue: token ?? '');
+    if (!exist) {
+      me.deviceToken?.add(MyDeviceToken(token: token ?? ''));
       me.deviceToken!
           .removeWhere((MyDeviceToken element) => element.token.isEmpty);
       await UserApi().setDeviceToken(me.deviceToken ?? <MyDeviceToken>[]);

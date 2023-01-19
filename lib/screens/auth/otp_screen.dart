@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../database/notification_services.dart';
 import '../../providers/auth_provider.dart';
 import '../../widgets/custom_widgets/custom_textformfield.dart';
 import '../../widgets/custom_widgets/show_loading.dart';
@@ -53,6 +54,7 @@ class _OTPScreenState extends State<OTPScreen> {
                         ),
                       );
                     } else if (num == 1) {
+                      await NotificationsServices().onLogin(context);
                       Navigator.push(
                         context,
                         MaterialPageRoute<MainScreen>(

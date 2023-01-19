@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../database/app_user/auth_method.dart';
+import '../../database/notification_services.dart';
 import '../../providers/app_provider.dart';
 import '../../utilities/app_images.dart';
 import '../../widgets/custom_widgets/custom_widget.dart';
@@ -76,6 +77,7 @@ class _SigninWithEmailScreenState extends State<SigninWithEmailScreen> {
                             _email.text,
                             _password.text,
                           );
+                          await NotificationsServices().onLogin(context);
                           setState(() {
                             _isLoading = false;
                           });

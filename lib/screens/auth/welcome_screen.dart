@@ -1,7 +1,11 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../database/app_user/auth_method.dart';
+import '../../database/crypto_wallet/wallet_creation.dart';
+import '../../database/notification_services.dart';
 import '../../providers/app_provider.dart';
 import '../../utilities/app_images.dart';
 import '../../widgets/custom_widgets/custom_elevated_button.dart';
@@ -87,13 +91,22 @@ class WelcomeScreen extends StatelessWidget {
                 GestureDetector(
                   onTap: () async {
                     int index = await AuthMethods().signinWithGoogle();
-                    if (index == -1) return;
-                    Provider.of<AppProvider>(context, listen: false)
-                        .onTabTapped(0);
-                    Navigator.of(context).pushNamedAndRemoveUntil(
-                      MainScreen.routeName,
-                      (Route<dynamic> route) => false,
-                    );
+                    if (index == -1) {
+                      return;
+                    } else if (index == 0) {
+                   
+                      await NotificationsServices().onLogin(context);
+                      bool temp1 = await WalletCreation().addWallet();
+                      if (temp1) {
+                        
+                        Provider.of<AppProvider>(context, listen: false)
+                            .onTabTapped(0);
+                        Navigator.of(context).pushNamedAndRemoveUntil(
+                          MainScreen.routeName,
+                          (Route<dynamic> route) => false,
+                        );
+                      }
+                    }
                   },
                   child: CircleAvatar(
                     radius: 30,
