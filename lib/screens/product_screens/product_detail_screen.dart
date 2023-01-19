@@ -6,6 +6,7 @@ import '../../../widgets/custom_widgets/custom_rating_star.dart';
 import '../../../widgets/custom_widgets/custom_widget.dart';
 import '../../database/app_user/auth_method.dart';
 import '../../function/crypto_function.dart';
+import '../../function/report_bottom_sheets.dart';
 import '../../function/unique_id_functions.dart';
 import '../../models/app_user/app_user.dart';
 import '../../models/chat/chat.dart';
@@ -54,25 +55,12 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
         actions: <Widget>[
           if (widget.product.uid != AuthMethods.uid)
             CircleAvatar(
-              backgroundColor: Colors.grey[300],
+              backgroundColor: Theme.of(context).secondaryHeaderColor,
               child: IconButton(
-                  onPressed: () => Navigator.of(context)
-                          .push(MaterialPageRoute<ProductChatScreen>(
-                        builder: (BuildContext context) => ProductChatScreen(
-                          chat: Chat(
-                            chatID:
-                                UniqueIdFunctions.productID(widget.product.pid),
-                            persons: <String>[
-                              AuthMethods.uid,
-                              widget.product.uid
-                            ],
-                            pid: widget.product.pid,
-                          ),
-                        ),
-                      )),
+                  onPressed: () => ReportBottomSheets().productReport(context, widget.product),
                   icon: Icon(
-                    Icons.chat,
-                    color: Theme.of(context).primaryColor,
+                    Icons.report,
+                    color: Theme.of(context).errorColor,
                   )),
             ),
           const SizedBox(width: 10),

@@ -12,6 +12,7 @@ import '../../models/categories/categories.dart';
 import '../../models/categories/sub_categories.dart';
 import '../../models/product/product_model.dart';
 import '../../models/product/product_url.dart';
+import '../../models/reports/report_product.dart';
 import '../../providers/categories_provider.dart';
 import '../../widgets/custom_widgets/custom_toast.dart';
 import '../../widgets/custom_widgets/custom_widget.dart';
@@ -19,7 +20,7 @@ import '../../widgets/product/get_product_attachments.dart';
 
 class AddProductScreen extends StatefulWidget {
   const AddProductScreen({super.key});
-
+  static const String routeName = '/add-product';
   @override
   State<AddProductScreen> createState() => _AddProductScreenState();
 }
@@ -54,19 +55,19 @@ class _AddProductScreenState extends State<AddProductScreen> {
       }
 
       Product product = Product(
-        pid: UniqueIdFunctions.postID,
-        uid: AuthMethods.uid,
-        amount: double.parse(amount.text),
-        colors: '',
-        quantity: quantity.text,
-        productname: productname.text,
-        description: productdecription.text,
-        timestamp: TimeStamp.timestamp,
-        category: catPro.currentCat!.catID,
-        subCategory: catPro.subcurrentCat!.catID,
-        createdByUID: AuthMethods.uid,
-        prodURL: urls,
-      );
+          pid: UniqueIdFunctions.postID,
+          uid: AuthMethods.uid,
+          amount: double.parse(amount.text),
+          colors: '',
+          quantity: quantity.text,
+          productname: productname.text,
+          description: productdecription.text,
+          timestamp: TimeStamp.timestamp,
+          category: catPro.currentCat!.catID,
+          subCategory: catPro.subcurrentCat!.catID,
+          createdByUID: AuthMethods.uid,
+          prodURL: urls,
+          reports: <ReportProduct>[]);
       bool temp = await ProductApi().add(product);
       if (temp) {
         CustomToast.alertDialogeBox(context: context, text: 'upload');

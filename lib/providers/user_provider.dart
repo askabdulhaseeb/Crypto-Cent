@@ -1,3 +1,4 @@
+import 'dart:developer';
 
 import 'package:flutter/material.dart';
 
@@ -6,6 +7,8 @@ import '../database/app_user/user_api.dart';
 import '../models/app_user/app_user.dart';
 import '../models/app_user/numbers_detail.dart';
 import '../models/my_device_token.dart';
+import '../models/reports/report_user.dart';
+import '../widgets/custom_widgets/custom_toast.dart';
 
 class UserProvider extends ChangeNotifier {
   UserProvider() {
@@ -47,41 +50,41 @@ class UserProvider extends ChangeNotifier {
     }
     return temp;
   }
-  // block(AppUser user) async {
-  //   int index = _indexOf(user.uid);
-  //   int myIndex = _indexOf(AuthMethods.uid);
-  //   if (index < 0 || myIndex < 0) return;
-  //   if (_user[index].blockedBy != null ||
-  //       (_user[index].blockedBy?.contains(AuthMethods.uid) ?? false)) {
-  //     _user[index].blockedBy?.remove(AuthMethods.uid);
-  //     _user[myIndex].blockTo?.remove(_user[index].uid);
-  //     CustomToast.successToast(message: 'Unblocked');
-  //     final AppUser by = _user[index];
-  //     final AppUser to = _user[myIndex];
-  //     by.blockedBy?.clear();
-  //     to.blockTo?.clear();
-  //     by.blockedBy?.add(AuthMethods.uid);
-  //     to.blockTo?.add(by.uid);
-  //     await UserApi().unblockBy(user: by);
-  //     await UserApi().unblockTo(user: to);
-  //   } else {
-  //     log('blocking');
-  //     _user[index].blockedBy?.add(AuthMethods.uid);
-  //     _user[myIndex].blockTo?.add(_user[index].uid);
-  //     CustomToast.successToast(message: 'Blocked');
-  //     await UserApi().blockBy(user: _user[index]);
-  //     await UserApi().blockTo(user: _user[myIndex]);
-  //   }
-  //   await refresh();
-  // }
+  block(AppUser user) async {
+    int index = _indexOf(user.uid);
+    int myIndex = _indexOf(AuthMethods.uid);
+    if (index < 0 || myIndex < 0) return;
+    if (_user[index].blockedBy != null ||
+        (_user[index].blockedBy?.contains(AuthMethods.uid) ?? false)) {
+      _user[index].blockedBy?.remove(AuthMethods.uid);
+      _user[myIndex].blockTo?.remove(_user[index].uid);
+      CustomToast.successToast(message: 'Unblocked');
+      final AppUser by = _user[index];
+      final AppUser to = _user[myIndex];
+      by.blockedBy?.clear();
+      to.blockTo?.clear();
+      by.blockedBy?.add(AuthMethods.uid);
+      to.blockTo?.add(by.uid);
+      await UserApi().unblockBy(user: by);
+      await UserApi().unblockTo(user: to);
+    } else {
+      log('blocking');
+      _user[index].blockedBy?.add(AuthMethods.uid);
+      _user[myIndex].blockTo?.add(_user[index].uid);
+      CustomToast.successToast(message: 'Blocked');
+      await UserApi().blockBy(user: _user[index]);
+      await UserApi().blockTo(user: _user[myIndex]);
+    }
+    await refresh();
+  }
 
-  // report(AppUser user, ReportUser repo) async {
-  //   int index = _indexOf(user.uid);
-  //   if (index < 0) return;
-  //   _user[index].reports?.add(repo);
-  //   notifyListeners();
-  //   await UserApi().report(user: _user[index]);
-  // }
+  report(AppUser user, ReportUser repo) async {
+    int index = _indexOf(user.uid);
+    if (index < 0) return;
+    _user[index].reports?.add(repo);
+    notifyListeners();
+    await UserApi().report(user: _user[index]);
+  }
 
   updateProfile(AppUser value) async {
     if (value.uid != AuthMethods.uid) return;
