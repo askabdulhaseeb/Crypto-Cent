@@ -12,6 +12,7 @@ import '../../models/categories/categories.dart';
 import '../../models/categories/sub_categories.dart';
 import '../../models/product/product_model.dart';
 import '../../models/product/product_url.dart';
+import '../../models/reports/report_product.dart';
 import '../../providers/categories_provider.dart';
 import '../../widgets/custom_widgets/custom_toast.dart';
 import '../../widgets/custom_widgets/custom_widget.dart';
@@ -66,6 +67,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
         subCategory: catPro.subcurrentCat!.catID,
         createdByUID: AuthMethods.uid,
         prodURL: urls,
+        reports: <ReportProduct>[]
       );
       bool temp = await ProductApi().add(product);
       if (temp) {
