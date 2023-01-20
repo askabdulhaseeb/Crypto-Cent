@@ -13,6 +13,7 @@ import '../../models/categories/sub_categories.dart';
 import '../../models/product/product_model.dart';
 import '../../models/product/product_url.dart';
 import '../../models/reports/report_product.dart';
+import '../../providers/add_product_p.dart';
 import '../../providers/categories_provider.dart';
 import '../../widgets/custom_widgets/custom_toast.dart';
 import '../../widgets/custom_widgets/custom_widget.dart';
@@ -26,84 +27,85 @@ class AddProductScreen extends StatefulWidget {
 }
 
 class _AddProductScreenState extends State<AddProductScreen> {
-  final TextEditingController productname = TextEditingController();
-  final TextEditingController productdecription = TextEditingController();
-  final TextEditingController amount = TextEditingController();
-  final TextEditingController quantity = TextEditingController();
+  // final TextEditingController productname = TextEditingController();
+  // final TextEditingController productdecription = TextEditingController();
+  // final TextEditingController amount = TextEditingController();
+  // final TextEditingController quantity = TextEditingController();
 
-  List<File?> _files = <File?>[
-    null,
-    null,
-    null,
-    null,
-  ];
-  bool _isloading = false;
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  Future<void> uploaddata(CategoriesProvider catPro) async {
-    if (_formKey.currentState!.validate() && _files[0] != null) {
-      setState(() {
-        _isloading = true;
-      });
-      final List<ProductURL> urls = <ProductURL>[];
-      for (int i = 0; _files[i] != null; i++) {
-        String imageurl = await Storagemethod().uploadtostorage(
-          'post',
-          'tester',
-          file: _files[i],
-        );
-        urls.add(ProductURL(url: imageurl, isVideo: false, index: i));
-      }
+  // List<File?> _files = <File?>[
+  //   null,
+  //   null,
+  //   null,
+  //   null,
+  // ];
+  // bool _isloading = false;
+  // final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  // Future<void> uploaddata(CategoriesProvider catPro) async {
+  //   if (_formKey.currentState!.validate() && _files[0] != null) {
+  //     setState(() {
+  //       _isloading = true;
+  //     });
+  //     final List<ProductURL> urls = <ProductURL>[];
+  //     for (int i = 0; _files[i] != null; i++) {
+  //       String imageurl = await Storagemethod().uploadtostorage(
+  //         'post',
+  //         'tester',
+  //         file: _files[i],
+  //       );
+  //       urls.add(ProductURL(url: imageurl, isVideo: false, index: i));
+  //     }
 
-      Product product = Product(
-          pid: UniqueIdFunctions.postID,
-          uid: AuthMethods.uid,
-          amount: double.parse(amount.text),
-          colors: '',
-          quantity: quantity.text,
-          productname: productname.text,
-          description: productdecription.text,
-          timestamp: TimeStamp.timestamp,
-          category: catPro.currentCat!.catID,
-          subCategory: catPro.subcurrentCat!.catID,
-          createdByUID: AuthMethods.uid,
-          prodURL: urls,
-          reports: <ReportProduct>[]);
-      bool temp = await ProductApi().add(product);
-      if (temp) {
-        CustomToast.alertDialogeBox(context: context, text: 'upload');
+  //     Product product = Product(
+  //         pid: UniqueIdFunctions.postID,
+  //         uid: AuthMethods.uid,
+  //         amount: double.parse(amount.text),
+  //         colors: '',
+  //         quantity: quantity.text,
+  //         productname: productname.text,
+  //         description: productdecription.text,
+  //         timestamp: TimeStamp.timestamp,
+  //         category: catPro.currentCat!.catID,
+  //         subCategory: catPro.subcurrentCat!.catID,
+  //         createdByUID: AuthMethods.uid,
+  //         prodURL: urls,
+  //         reports: <ReportProduct>[]);
+  //     bool temp = await ProductApi().add(product);
+  //     if (temp) {
+  //       CustomToast.alertDialogeBox(context: context, text: 'upload');
 
-        _files = <File?>[
-          null,
-          null,
-          null,
-          null,
-        ];
-        productname.clear();
-        productdecription.clear();
-        amount.clear();
+  //       _files = <File?>[
+  //         null,
+  //         null,
+  //         null,
+  //         null,
+  //       ];
+  //       productname.clear();
+  //       productdecription.clear();
+  //       amount.clear();
 
-        quantity.clear();
-      }
-      setState(() {
-        _isloading = false;
-      });
-    }
-  }
+  //       quantity.clear();
+  //     }
+  //     setState(() {
+  //       _isloading = false;
+  //     });
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
     CategoriesProvider catPro = Provider.of<CategoriesProvider>(context);
+    AddProductProvider addProductPro = Provider.of<AddProductProvider>(context);
     return Scaffold(
       appBar: AppBar(title: const Text('Upload')),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16),
           child: Form(
-            key: _formKey,
+            key: addProductPro.formKey,
             child: Column(
               children: <Widget>[
                 GetProductAttachments(
-                    file: _files,
+                    file: addProductPro.files,
                     onTap: () async {
                       showModalBottomSheet(
                         context: context,
@@ -117,7 +119,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                                     await AttachmentPicker().camera();
                                 if (temp[0] == null) return;
                                 setState(() {
-                                  _files = temp;
+                                  addProductPro.files = temp;
                                 });
                                 if (!mounted) return;
                                 Navigator.of(context).pop();
@@ -134,7 +136,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                                     await AttachmentPicker().multiImage();
                                 if (temp[0] == null) return;
                                 setState(() {
-                                  _files = temp;
+                                  addProductPro.files = temp;
                                 });
                                 if (!mounted) return;
                                 Navigator.of(context).pop();
@@ -151,18 +153,18 @@ class _AddProductScreenState extends State<AddProductScreen> {
                     }),
                 const SizedBox(height: 10),
                 CustomTextFormField(
-                  controller: productname,
+                  controller: addProductPro.productname,
                   hint: 'Enter Name',
-                  readOnly: _isloading,
+                  //readOnly: _isloading,
                   validator: (String? value) =>
                       CustomValidator.lessThen2(value),
                 ),
                 CustomTextFormField(
-                  controller: productdecription,
+                  controller: addProductPro.productdecription,
                   hint: 'Description',
                   maxLines: 5,
                   maxLength: 2000,
-                  readOnly: _isloading,
+                  //readOnly: _isloading,
                   validator: (String? value) =>
                       CustomValidator.lessThen2(value),
                 ),
@@ -170,9 +172,9 @@ class _AddProductScreenState extends State<AddProductScreen> {
                   children: <Widget>[
                     Expanded(
                       child: CustomTextFormField(
-                        controller: amount,
+                        controller: addProductPro.amount,
                         hint: 'Enter Price',
-                        readOnly: _isloading,
+                        // readOnly: _isloading,
                         validator: (String? value) =>
                             CustomValidator.isEmpty(value),
                         keyboardType: const TextInputType.numberWithOptions(
@@ -184,9 +186,9 @@ class _AddProductScreenState extends State<AddProductScreen> {
                     const SizedBox(width: 16),
                     Expanded(
                       child: CustomTextFormField(
-                        controller: quantity,
+                        controller: addProductPro.quantity,
                         hint: 'Enter Quantity',
-                        readOnly: _isloading,
+                        //readOnly: _isloading,
                         validator: (String? value) =>
                             CustomValidator.isEmpty(value),
                         keyboardType: const TextInputType.numberWithOptions(
@@ -202,11 +204,14 @@ class _AddProductScreenState extends State<AddProductScreen> {
                 const SizedBox(height: 12),
                 subCategorie(context, catPro),
                 const SizedBox(height: 20),
-                _isloading
+                addProductPro.isloading
                     ? const CircularProgressIndicator()
                     : CustomElevatedButton(
-                        title: 'Upload',
-                        onTap: () async => await uploaddata(catPro),
+                        title: 'Next',
+                        onTap: () {
+                          addProductPro.productData(context);
+                        },
+                        //onTap: () async => await uploaddata(catPro),
                       ),
                 const SizedBox(height: 50),
               ],

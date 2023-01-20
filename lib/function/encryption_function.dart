@@ -22,9 +22,7 @@ class Encryption {
   }
 
   String appDecrypt(String data) {
-    final String decrypted64 =
-        encrypter.decrypt(Encrypted.fromBase64(data), iv: iv);
-
+    final String decrypted64 = encrypter.decrypt(Encrypted.fromBase64(data), iv: iv);
     return decrypted64;
   }
 

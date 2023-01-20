@@ -3,6 +3,7 @@ import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:provider/provider.dart';
 import '../../database/app_user/auth_method.dart';
+import '../../enum/location_type.dart';
 import '../../function/time_date_function.dart';
 import '../../models/location.dart';
 import '../../providers/location_provider.dart';
@@ -10,8 +11,9 @@ import '../../widgets/custom_widgets/custom_toast.dart';
 import '../../widgets/custom_widgets/custom_widget.dart';
 
 class AddNewAddress extends StatefulWidget {
-  const AddNewAddress({super.key});
-   static const String routeName = '/addNewAddress';
+  const AddNewAddress({required this.isProduct,super.key});
+  static const String routeName = '/addNewAddress';
+  final bool isProduct;
   @override
   State<AddNewAddress> createState() => _AddNewAddressState();
 }
@@ -180,12 +182,14 @@ class _AddNewAddressState extends State<AddNewAddress> {
                               locationName: locationName.text,
                               state: state.text,
                               userID: AuthMethods.uid,
-                              locationID: AuthMethods.uid+TimeStamp.timestamp.toString(),
-                              timestamp:TimeStamp.timestamp ,
+                              locationID: AuthMethods.uid +
+                                  TimeStamp.timestamp.toString(),
+                              timestamp: TimeStamp.timestamp,
                               zipCode: zipCode.text,
                               phonenumber: phoneNumber.text,
+                              locationType:widget.isProduct?LocationType.product :LocationType.delievery,
                             );
-                            await locationPro.addLocation(location,context);
+                            await locationPro.addLocation(location, context);
                             if (locationPro.isLoading) {
                               address.clear();
                               phoneNumber.clear();

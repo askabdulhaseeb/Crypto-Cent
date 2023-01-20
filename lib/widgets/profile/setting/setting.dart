@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 import '../../../screens/empty_screen/empty_screen.dart';
+import '../../../screens/map_screen/add_new_address.dart';
+import '../../../screens/map_screen/location_screen.dart';
 import '../my_profile/edit_profile.dart';
 import '../profile_nav_tile.dart';
 import 'change_password.dart';
@@ -34,9 +36,7 @@ class Setting extends StatelessWidget {
               ProfileNavTile(
                 name: 'Edit Address',
                 onTap: () {
-                  Navigator.of(context).push(MaterialPageRoute<EmptyScreen>(
-                    builder: (BuildContext context) => const EmptyScreen(),
-                  ));
+                   Navigator.of(context).pushNamed(AddNewAddress.routeName);
                 },
               ),
               const SizedBox(
@@ -46,7 +46,7 @@ class Setting extends StatelessWidget {
                 name: 'Location',
                 onTap: () {
                   Navigator.of(context).push(MaterialPageRoute<EmptyScreen>(
-                    builder: (BuildContext context) => const EmptyScreen(),
+                    builder: (BuildContext context) => const LocationScreen(text: 'location',),
                   ));
                 },
               ),

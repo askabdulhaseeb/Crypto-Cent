@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../database/app_user/auth_method.dart';
 import '../database/location_api.dart';
+import '../enum/location_type.dart';
 import '../models/location.dart';
 import '../widgets/custom_widgets/custom_toast.dart';
 
@@ -19,8 +20,17 @@ class LocationProvider with ChangeNotifier {
     for (int i = 0; i < _allUserLocation.length; i++) {
       if (_allUserLocation[i].userID == AuthMethods.uid) {
         _currentUserLocation.add(_allUserLocation[i]);
+        if (_allUserLocation[i].locationType == LocationType.product) {
+          _currentUserProductLocation.add(_allUserLocation[i]);
+        }
       }
     }
+  }
+
+  UserLocation productLocation(String value) {
+    int index = _allUserLocation
+        .indexWhere((UserLocation user) => user.locationID == value);
+    return index < 0?_null: _allUserLocation[index] ;
   }
 
   addLocation(UserLocation location, BuildContext context) async {
@@ -62,6 +72,7 @@ class LocationProvider with ChangeNotifier {
       city: '',
       state: '',
       timestamp: 0,
+      locationType: LocationType.delievery,
       zipCode: '');
   UserLocation? _userLocation;
   UserLocation? _selectLocation;
@@ -69,6 +80,9 @@ class LocationProvider with ChangeNotifier {
   List<UserLocation> get allUserLocation => _allUserLocation;
   final List<UserLocation> _currentUserLocation = <UserLocation>[];
   List<UserLocation> get currentUserLocation => _currentUserLocation;
+  final List<UserLocation> _currentUserProductLocation = <UserLocation>[];
+  List<UserLocation> get currentUserProductLocation =>
+      _currentUserProductLocation;
   bool isLoading = false;
   UserLocation get userLocation => _userLocation ?? _null;
   UserLocation get selectLocation => _selectLocation ?? _null;
