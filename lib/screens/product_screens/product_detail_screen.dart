@@ -48,28 +48,32 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
         centerTitle: true,
         backgroundColor: Colors.white,
         elevation: 0,
-        title: Row(
-          children: <Widget>[
-            CustomProfileImage(imageURL: seller.imageURL ?? '', radius: 24),
-            const SizedBox(width: 10),
-            Text(
-              seller.name ?? 'null',
-              style: const TextStyle(fontWeight: FontWeight.bold),
-            ),
-          ],
+        title: GestureDetector(
+          onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute<ProductDetailScreen>(
+                  builder: (BuildContext context) => OtherUserProfile(
+                    appUser: seller,
+                  ),
+                ));
+          },
+          child: Row(
+            children: <Widget>[
+              CustomProfileImage(imageURL: seller.imageURL ?? '', radius: 24),
+              const SizedBox(width: 10),
+              Text(
+                seller.name ?? 'null',
+                style: const TextStyle(fontWeight: FontWeight.bold),
+              ),
+            ],
+          ),
         ),
         actions: <Widget>[
           if (widget.product.uid != AuthMethods.uid &&
               AuthMethods.uid.isNotEmpty)
             CircleAvatar(
               backgroundColor: Theme.of(context).secondaryHeaderColor,
-              // child: IconButton(
-              //     onPressed: () => ReportBottomSheets()
-              //         .productReport(context, widget.product),
-              //     icon: Icon(
-              //       Icons.report,
-              //       color: Theme.of(context).errorColor,
-              //     )),
               child: IconButton(
                 onPressed: () async {
                   if (!mounted) return;
