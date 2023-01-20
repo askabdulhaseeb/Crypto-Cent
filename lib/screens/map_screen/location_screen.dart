@@ -37,15 +37,17 @@ class _LocationScreenState extends State<LocationScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            TextButton(
-                onPressed: () {
-                  Navigator.of(context).pushNamed(AddNewAddress.routeName);
-                },
-                child: const ForText(
-                  name: '+ Add new Address',
-                  bold: true,
-                  color: Colors.green,
-                )),
+            widget.text == 'location'
+                ? SizedBox()
+                : TextButton(
+                    onPressed: () {
+                      Navigator.of(context).pushNamed(AddNewAddress.routeName);
+                    },
+                    child: const ForText(
+                      name: '+ Add new Address',
+                      bold: true,
+                      color: Colors.green,
+                    )),
             Expanded(
               child: ListView.builder(
                 itemCount: locationPro.currentUserLocation.length,
@@ -127,19 +129,15 @@ class _LocationScreenState extends State<LocationScreen> {
                 },
               ),
             ),
-            CustomElevatedButton(
-                title: widget.text == 'Delivery Addresses'
-                    ? 'Update Address'
-                    : 'Adress Done',
-                onTap: () async {
-                  if (widget.text == 'Delivery Addresses') {
-                    Navigator.of(context).pop();
-                  } else if (widget.text == 'order') {
-                    await locationPro.selectedIndex(
-                        locationPro.currentUserLocation[isSelectedIndex]);
-                    Navigator.of(context).pushNamed(PaymentScreen.routeName);
-                  }
-                }),
+            widget.text == 'order'
+                ? CustomElevatedButton(
+                    title: 'Adress Done',
+                    onTap: () async {
+                      await locationPro.selectedIndex(
+                          locationPro.currentUserLocation[isSelectedIndex]);
+                      Navigator.of(context).pushNamed(PaymentScreen.routeName);
+                    })
+                : SizedBox(),
             const SizedBox(
               height: 20,
             ),
