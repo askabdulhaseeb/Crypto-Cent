@@ -35,9 +35,10 @@ class _MainScreenState extends State<MainScreen> {
   }
 
   loadData() {
-    AuthMethods.uid.isEmpty ? const SizedBox() : load();
-    AuthMethods.uid.isEmpty ? const SizedBox() : init();
-    AuthMethods.uid.isEmpty ? const SizedBox() : listenNotification();
+    if (AuthMethods.uid.isEmpty) return;
+    load();
+    init();
+    listenNotification();
   }
 
   listenNotification() {
@@ -49,11 +50,11 @@ class _MainScreenState extends State<MainScreen> {
 
   init() async {
     UserProvider userPro = Provider.of<UserProvider>(context, listen: false);
-
     await userPro.init();
     AppUser me = userPro.currentUser;
     if (me.deviceToken != null && me.deviceToken!.isNotEmpty) return;
-    PushNotification.instance.init(devicesToken: me.deviceToken ?? <MyDeviceToken>[]);
+    PushNotification.instance
+        .init(devicesToken: me.deviceToken ?? <MyDeviceToken>[]);
   }
 
   bool loading = false;
@@ -70,15 +71,15 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   Widget build(BuildContext context) {
-    print(AuthMethods.uid.isEmpty);
-
-    return Scaffold(
-      body: Consumer<AppProvider>(
-        builder: (BuildContext context, AppProvider navBar, _) {
-          return _pages[navBar.currentTap];
-        },
+    return SafeArea(
+      child: Scaffold(
+        body: Consumer<AppProvider>(
+          builder: (BuildContext context, AppProvider navBar, _) {
+            return _pages[navBar.currentTap];
+          },
+        ),
+        bottomNavigationBar: const MainBottomNavigationBar(),
       ),
-      bottomNavigationBar: const MainBottomNavigationBar(),
     );
   }
 }
