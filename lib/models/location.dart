@@ -2,6 +2,7 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+import '../enum/location_type.dart';
 
 class UserLocation {
   final String locationID;
@@ -11,6 +12,7 @@ class UserLocation {
   double longitude;
   final String address;
   final String city;
+  final LocationType locationType;
   final String state;
   final String zipCode;
   final int timestamp;
@@ -25,6 +27,7 @@ class UserLocation {
     required this.city,
     required this.state,
     required this.zipCode,
+    required this.locationType,
     this.phonenumber,
     required this.timestamp,
   });
@@ -42,6 +45,7 @@ class UserLocation {
       'zipCode': zipCode,
       'phonenumber': phonenumber,
       'timestamp': timestamp,
+      'location_type':locationType.json,
     };
   }
 
@@ -58,6 +62,7 @@ class UserLocation {
       zipCode: doc.data()?['zipCode'] ?? '',
       phonenumber: doc.data()?['phonenumber'] ?? '',
       timestamp: doc.data()?['timestamp'] ?? 0,
+      locationType: LocationTypeConverter().toEnum(doc.data()?['location_type'] ?? LocationType.delievery.json),
     );
   }
 }

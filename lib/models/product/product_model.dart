@@ -18,7 +18,7 @@ class Product {
     required this.subCategory,
     required this.createdByUID,
     required this.prodURL,
-    this.reports,
+    this.reports, required this.locationUID,
   });
   final String pid;
   final String uid;
@@ -31,6 +31,7 @@ class Product {
   final String category;
   final String subCategory;
   final String createdByUID;
+   String locationUID;
   late List<ProductURL> prodURL;
   final List<ReportProduct>? reports;
 
@@ -47,6 +48,7 @@ class Product {
       'sub_category': subCategory,
       'created_by_uid': createdByUID,
       'product_name': productname,
+      'location_uid':locationUID,
       'reports': <ReportProduct>[],
       'prod_urls': prodURL.map((ProductURL e) => e.toMap()).toList(),
     };
@@ -82,7 +84,8 @@ class Product {
       category: doc.data()?['category'] ?? '',
       subCategory: doc.data()?['sub_category'] ?? '',
       createdByUID: doc.data()?['created_by_uid'] ?? '',
-      productname: doc.data()?['product_name'],
+      productname: doc.data()?['product_name']??'',
+      locationUID:doc.data()?['location_uid'] ?? '',
       prodURL: prodURL,
       reports: reportInfo,
     );

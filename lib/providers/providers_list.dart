@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'add_product_p.dart';
 import 'location_provider.dart';
 import 'provider.dart';
 
@@ -10,6 +11,9 @@ dynamic get listOfProvider => [
       ),
       ChangeNotifierProvider<CartProvider>(
         create: (BuildContext context) => CartProvider(),
+      ),
+      ChangeNotifierProvider<AddProductProvider>(
+        create: (BuildContext context) => AddProductProvider(),
       ),
 
       ChangeNotifierProvider<AuthProvider>(
