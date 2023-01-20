@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../database/chat_api.dart';
 import '../../../models/chat/chat.dart';
+import '../../../models/chat/chat_group_member.dart';
 import '../../../models/chat/message.dart';
 import '../../../widgets/chat/chat_text_field.dart';
 import '../../../widgets/chat/message_list.dart';

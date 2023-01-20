@@ -48,6 +48,11 @@ class _AddGroupMemberWidgetState extends State<AddGroupMemberWidget> {
           child: Column(
             children: <Widget>[
               const SizedBox(height: 16),
+              const Text(
+                'Your Customer',
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+              ),
+              const SizedBox(height: 16),
               if (selectedUser.isNotEmpty)
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
@@ -114,17 +119,11 @@ class _AddGroupMemberWidgetState extends State<AddGroupMemberWidget> {
                             final String cUserUID = widget.customers[index];
                             final bool isSelected =
                                 selectedUser.contains(cUserUID);
-                            return ListTile(
-                              leading: CustomProfileImage(
-                                  imageURL: user.imageURL ?? ''),
-                              title: Text(user.name ?? ''),
-                              trailing: Icon(
-                                isSelected
-                                    ? Icons.circle
-                                    : Icons.circle_outlined,
-                                color: Theme.of(context).primaryColor,
-                              ),
+                            final bool alreadyMember =
+                                widget.chat.persons.contains(cUserUID);
+                            return InkWell(
                               onTap: () {
+                                if (alreadyMember) return;
                                 if (selectedUser.contains(cUserUID)) {
                                   selectedUser.remove(cUserUID);
                                 } else {
@@ -132,6 +131,11 @@ class _AddGroupMemberWidgetState extends State<AddGroupMemberWidget> {
                                 }
                                 setState(() {});
                               },
+                              child: _MemberTile(
+                                user: user,
+                                alreadyMember: alreadyMember,
+                                isSelected: isSelected,
+                              ),
                             );
                           },
                         );
@@ -141,6 +145,40 @@ class _AddGroupMemberWidgetState extends State<AddGroupMemberWidget> {
           ),
         );
       },
+    );
+  }
+}
+
+class _MemberTile extends StatelessWidget {
+  const _MemberTile({
+    Key? key,
+    required this.user,
+    required this.alreadyMember,
+    required this.isSelected,
+  }) : super(key: key);
+
+  final AppUser user;
+  final bool alreadyMember;
+  final bool isSelected;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 4),
+      child: Row(
+        children: <Widget>[
+          CustomProfileImage(imageURL: user.imageURL ?? ''),
+          const SizedBox(width: 10),
+          Expanded(
+            child: Text(user.name ?? '', maxLines: 1),
+          ),
+          if (!alreadyMember)
+            Icon(
+              isSelected ? Icons.circle : Icons.circle_outlined,
+              color: Theme.of(context).primaryColor,
+            ),
+        ],
+      ),
     );
   }
 }
