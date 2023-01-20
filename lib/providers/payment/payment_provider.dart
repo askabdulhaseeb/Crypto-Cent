@@ -41,11 +41,11 @@ class PaymentProvider with ChangeNotifier {
     _order.clear();
     List<Order> tempOrder = <Order>[];
     tempOrder = await OrderApi().get();
-    for (int i = 0; i < tempOrder.length; i++) {
-      if (AuthMethods.uid == tempOrder[i].customerUID) {
-        _order.add(tempOrder[i]);
-      }
-    }
+    // for (int i = 0; i < tempOrder.length; i++) {
+    //   if (AuthMethods.uid == tempOrder[i].customerUID) {
+    //     _order.add(tempOrder[i]);
+    //   }
+    // }
     _allOrder = tempOrder;
     _receipt = await ReceiptApi().get();
     getGraphData();
@@ -107,17 +107,19 @@ class PaymentProvider with ChangeNotifier {
     // print('cancel $cancel');
   }
 
-   List<String> oldCustomer() {
-      final List<String> temp = <String>[];
-      final String me = AuthMethods.uid;
-      final List<Order> tempOrder = _allOrder;
-      for (Order element in tempOrder) {
-        if (element.sellerUID == me && (!temp.contains(element.sellerUID))) {
-          temp.add(element.customerUID);
-        }
+  List<String> oldCustomer() {
+    print('All Orders -> ${_allOrder.length}');
+    final List<String> temp = <String>[];
+    final String me = AuthMethods.uid;
+    final List<Order> tempOrder = _allOrder;
+    for (Order element in tempOrder) {
+      if (element.sellerUID == me && (!temp.contains(element.sellerUID))) {
+        temp.add(element.customerUID);
       }
-      return temp;
     }
+    print('Old Customer -> ${temp.length}');
+    return temp;
+  }
 
   Future<bool> productOrder(
     BuildContext context,

@@ -52,17 +52,33 @@ class GroupChatDetailScreen extends StatelessWidget {
             ),
             const SizedBox(height: 10),
             TextFieldLikeBG(child: Text(info.description, maxLines: 5)),
-            TextButton.icon(
-              onPressed: () {
-                showModalBottomSheet(
-                  context: context,
-                  builder: (BuildContext context) {
-                    return AddGroupMemberWidget(chat: chat);
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: <Widget>[
+                TextButton.icon(
+                  onPressed: () async {
+                    await showModalBottomSheet(
+                      isDismissible: true,
+                      isScrollControlled: true,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(24.0),
+                      ),
+                      backgroundColor:
+                          Theme.of(context).scaffoldBackgroundColor,
+                      context: context,
+                      builder: (BuildContext context) {
+                        final List<String> customer =
+                            Provider.of<PaymentProvider>(context, listen: false)
+                                .oldCustomer();
+                        return AddGroupMemberWidget(
+                            chat: chat, customers: customer);
+                      },
+                    );
                   },
-                );
-              },
-              icon: const Icon(Icons.add),
-              label: const Text('Add Member'),
+                  icon: const Icon(Icons.add),
+                  label: const Text('Add Member'),
+                ),
+              ],
             ),
             Expanded(
               child: TextFieldLikeBG(
@@ -70,6 +86,8 @@ class GroupChatDetailScreen extends StatelessWidget {
                 child: Consumer<UserProvider>(
                     builder: (BuildContext context, UserProvider userPro, _) {
                   return ListView.builder(
+                      shrinkWrap: true,
+                      primary: false,
                       itemCount: info.members.length,
                       itemBuilder: (BuildContext context, int index) {
                         final AppUser user =

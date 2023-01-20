@@ -46,7 +46,7 @@ class Chat {
   Map<String, dynamic> addMembers() {
     return <String, dynamic>{
       'persons': FieldValue.arrayUnion(persons),
-      'group_info': groupInfo?.addMembers(),
+      'group_info': groupInfo?.toMap(),
       'last_message': lastMessage!.toMap(),
     };
   }
