@@ -65,134 +65,137 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
           const SizedBox(width: 10),
         ],
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          ProductURLsSlider(urls: widget.product.prodURL),
-          Expanded(
-            child: SingleChildScrollView(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    const SizedBox(height: 15),
-                    Text(
-                      widget.product.productname,
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                      style: const TextStyle(
-                        fontSize: 22,
-                        fontWeight: FontWeight.w700,
-                      ),
-                    ),
-                    const SizedBox(height: 10),
-                    Row(
-                      children: <Widget>[
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            CustomRatingBar(
-                              itemSize: 24,
-                              initialRating: 5,
-                              onRatingUpdate: (_) {},
-                            ),
-                            const ForText(
-                              name: '(0 reviews)',
-                              size: 13,
-                              color: Colors.grey,
-                            ),
-                          ],
-                        ),
-                        const Spacer(),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: <Widget>[
-                            Text(
-                              '\$ ${widget.product.amount}',
-                              style: const TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 20,
-                              ),
-                            ),
-                            FutureBuilder<double>(
-                                future: CryptoFunction().btcPrinceLive(
-                                    dollor: widget.product.amount),
-                                builder: (BuildContext context,
-                                    AsyncSnapshot<double> exchangeRate) {
-                                  return ForText(
-                                    name: exchangeRate.hasError
-                                        ? '-- ERROR --'
-                                        : exchangeRate.hasData
-                                            ? 'Btc: ${exchangeRate.data ?? 0}'
-                                            : 'fetching ...',
-                                    size: 11,
-                                  );
-                                }),
-                          ],
-                        )
-                      ],
-                    ),
-                    const SizedBox(height: 10),
-                    const ForText(
-                      name: 'Description',
-                      bold: true,
-                      size: 22,
-                    ),
-                    const SizedBox(height: 10),
-                    Text(
-                      widget.product.description.toString(),
-                      style: const TextStyle(color: Colors.grey),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
-          if (AuthMethods.uid != widget.product.uid)
+      body: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            ProductURLsSlider(urls: widget.product.prodURL),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: (AuthMethods.uid.isEmpty)
-                  ? CustomElevatedButton(
-                      title: 'Add To Cart',
-                      onTap: () {
-                        showDialog(
-                            context: context,
-                            builder: (BuildContext context) {
-                              return const CustomDialogBox(
-                                title: 'To enable this function',
-                                descriptions: 'Please login or create account ',
-                                text: 'Login',
-                              );
-                            });
-                      })
-                  : Row(
-                      children: <Widget>[
-                        Expanded(
-                          child: CustomElevatedButton(
-                            title: 'Send Offer',
-                            textStyle: const TextStyle(
-                                color: Colors.black, fontSize: 18),
-                            bgColor: Theme.of(context).secondaryHeaderColor,
-                            onTap: () async {
-                              await sendOfferBottomSheet(context);
-                            },
-                          ),
-                        ),
-                        const SizedBox(width: 16),
-                        Expanded(
-                          child: CustomElevatedButton(
-                              title: 'Add to Cart',
-                              onTap: () async {
-                                await bottomSheet(context, cartPro);
-                              }),
-                        ),
-                      ],
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  const SizedBox(height: 15),
+                  Text(
+                    widget.product.productname,
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                    style: const TextStyle(
+                      fontSize: 22,
+                      fontWeight: FontWeight.w700,
                     ),
+                  ),
+                  const SizedBox(height: 10),
+                  Row(
+                    children: <Widget>[
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          CustomRatingBar(
+                            itemSize: 24,
+                            initialRating: 5,
+                            onRatingUpdate: (_) {},
+                          ),
+                          const ForText(
+                            name: '(0 reviews)',
+                            size: 13,
+                            color: Colors.grey,
+                          ),
+                        ],
+                      ),
+                      const Spacer(),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: <Widget>[
+                          Text(
+                            '\$ ${widget.product.amount}',
+                            style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20,
+                            ),
+                          ),
+                          FutureBuilder<double>(
+                              future: CryptoFunction()
+                                  .btcPrinceLive(dollor: widget.product.amount),
+                              builder: (BuildContext context,
+                                  AsyncSnapshot<double> exchangeRate) {
+                                return ForText(
+                                  name: exchangeRate.hasError
+                                      ? '-- ERROR --'
+                                      : exchangeRate.hasData
+                                          ? 'Btc: ${exchangeRate.data ?? 0}'
+                                          : 'fetching ...',
+                                  size: 11,
+                                );
+                              }),
+                        ],
+                      )
+                    ],
+                  ),
+                  const SizedBox(height: 10),
+                  const ForText(
+                    name: 'Description',
+                    bold: true,
+                    size: 22,
+                  ),
+                  const SizedBox(height: 10),
+                  Text(
+                    widget.product.description.toString(),
+                    style: const TextStyle(color: Colors.grey),
+                  ),
+                  const SizedBox(height: 100),
+                ],
+              ),
             ),
-          const SizedBox(height: 6),
-        ],
+          ],
+        ),
+      ),
+      floatingActionButton: SizedBox(
+        height: 60,
+        child: (AuthMethods.uid != widget.product.uid)
+            ? Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: (AuthMethods.uid.isEmpty)
+                    ? CustomElevatedButton(
+                        title: 'Add To Cart',
+                        onTap: () {
+                          showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return const CustomDialogBox(
+                                  title: 'To enable this function',
+                                  descriptions:
+                                      'Please login or create account ',
+                                  text: 'Login',
+                                );
+                              });
+                        })
+                    : Row(
+                        children: <Widget>[
+                          Expanded(
+                            child: CustomElevatedButton(
+                              title: 'Send Offer',
+                              textStyle: const TextStyle(
+                                  color: Colors.black, fontSize: 18),
+                              bgColor: Theme.of(context).secondaryHeaderColor,
+                              onTap: () async {
+                                await sendOfferBottomSheet(context);
+                              },
+                            ),
+                          ),
+                          const SizedBox(width: 16),
+                          Expanded(
+                            child: CustomElevatedButton(
+                                title: 'Add to Cart',
+                                onTap: () async {
+                                  await bottomSheet(context, cartPro);
+                                }),
+                          ),
+                        ],
+                      ),
+              )
+            : const SizedBox(),
       ),
     );
   }
