@@ -75,6 +75,7 @@ class MyProfile extends StatelessWidget {
           name: text!,
           bold: true,
         ),
+        trailing: const SizedBox(width: 30),
       ),
     );
   }
