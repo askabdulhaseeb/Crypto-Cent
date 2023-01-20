@@ -91,7 +91,6 @@ class _OTPScreenState extends State<OTPScreen> {
                         ),
                       ],
                     ),
-              if (_otp.text.length == 6) const ShowLoading(),
             ],
           ),
         );

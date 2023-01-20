@@ -95,7 +95,6 @@ class PaymentProvider with ChangeNotifier {
         }
       }
     }
-
     // proccesing = (proccesing / totalCount) * 200;
     // deleviry = (deleviry / totalCount) * 200;
     // completed = (completed / totalCount) * 200;
@@ -107,6 +106,18 @@ class PaymentProvider with ChangeNotifier {
     // print('shipped $shipped');
     // print('cancel $cancel');
   }
+
+   List<String> oldCustomer() {
+      final List<String> temp = <String>[];
+      final String me = AuthMethods.uid;
+      final List<Order> tempOrder = _allOrder;
+      for (Order element in tempOrder) {
+        if (element.sellerUID == me && (!temp.contains(element.sellerUID))) {
+          temp.add(element.customerUID);
+        }
+      }
+      return temp;
+    }
 
   Future<bool> productOrder(
     BuildContext context,
