@@ -8,7 +8,9 @@ import '../../database/app_user/auth_method.dart';
 import '../../function/crypto_function.dart';
 import '../../function/report_bottom_sheets.dart';
 import '../../models/app_user/app_user.dart';
+import '../../models/location.dart';
 import '../../models/product/product_model.dart';
+import '../../providers/location_provider.dart';
 import '../../providers/user_provider.dart';
 import '../../widgets/custom_widgets/custom_dialog.dart';
 import '../../widgets/custom_widgets/custom_profile_image.dart';
@@ -16,6 +18,7 @@ import '../../widgets/product/add_to_cart_widget.dart';
 import '../../widgets/product/product_url_slider.dart';
 import '../../widgets/product/send_offer_widget.dart';
 import '../../widgets/profile/other_user_profile.dart';
+import '../map_screen/map_screen.dart';
 
 class ProductDetailScreen extends StatefulWidget {
   const ProductDetailScreen({required this.product, super.key});
@@ -29,6 +32,9 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
   @override
   Widget build(BuildContext context) {
     CartProvider cartPro = Provider.of<CartProvider>(context);
+    LocationProvider locationPro = Provider.of<LocationProvider>(context);
+    final UserLocation location =
+        locationPro.productLocation(widget.product.locationUID);
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -38,14 +44,16 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
         title: Consumer<UserProvider>(
           builder: (BuildContext context, UserProvider userPro, _) {
             final AppUser user = userPro.user(widget.product.uid);
+
             return GestureDetector(
-              onTap: (){
-                 Navigator.push(
-            context,
-            MaterialPageRoute<ProductDetailScreen>(
-              builder: (BuildContext context) =>
-                  OtherUserProfile(appUser: user ,),
-            ));
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute<ProductDetailScreen>(
+                      builder: (BuildContext context) => OtherUserProfile(
+                        appUser: user,
+                      ),
+                    ));
               },
               child: Row(
                 children: <Widget>[
@@ -95,6 +103,32 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                     style: const TextStyle(
                       fontSize: 22,
                       fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: () => mapBottomSheet(context, location),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          location.address,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                              fontSize: 12,
+                              fontWeight: FontWeight.w200,
+                              color: Theme.of(context).primaryColor),
+                        ),
+                        Text(
+                          '${location.city} , ${location.state}',
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w300,
+                              color: Theme.of(context).primaryColor),
+                        ),
+                      ],
                     ),
                   ),
                   const SizedBox(height: 10),
@@ -237,5 +271,58 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
       builder: (BuildContext context) =>
           AddToCartWidget(product: widget.product, buttonText: 'Add to cart'),
     );
+  }
+
+  Future<dynamic> mapBottomSheet(
+    BuildContext context,
+    UserLocation location,
+  ) async {
+    return await showModalBottomSheet(
+        isScrollControlled: true,
+        //transitionAnimationController: controller,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10.0),
+        ),
+        backgroundColor: Colors.white,
+        context: context,
+        builder: (BuildContext context) {
+          return SizedBox(
+            height: MediaQuery.of(context).size.width * 1.15,
+            width: double.infinity,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const SizedBox(
+                  height: 10,
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  child: ForText(
+                    name: location.address,
+                    bold: true,
+                    color: Colors.black,
+                  ),
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                Container(
+                  height: MediaQuery.of(context).size.width,
+                  width: double.infinity,
+                  clipBehavior: Clip.hardEdge,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(12),
+                    color: Colors.black,
+                  ),
+                  child: GoogleMapWidget(
+                    latitude: location.latitude,
+                    longitude: location.longitude,
+                  ),
+                ),
+              ],
+            ),
+          );
+        });
   }
 }

@@ -27,6 +27,12 @@ class LocationProvider with ChangeNotifier {
     }
   }
 
+  UserLocation productLocation(String value) {
+    int index = _allUserLocation
+        .indexWhere((UserLocation user) => user.locationID == value);
+    return index < 0?_null: _allUserLocation[index] ;
+  }
+
   addLocation(UserLocation location, BuildContext context) async {
     isLoading = true;
     notifyListeners();

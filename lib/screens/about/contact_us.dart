@@ -5,6 +5,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:provider/provider.dart';
 import '../../providers/app_provider.dart';
 import '../../widgets/custom_widgets/custom_widget.dart';
+import '../map_screen/map_screen.dart';
 
 class ContactUsScreen extends StatefulWidget {
   const ContactUsScreen({super.key});
@@ -59,40 +60,7 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                     borderRadius: BorderRadius.circular(12),
                     color: Colors.black,
                   ),
-                  child: GoogleMap(
-                    initialCameraPosition: cameraPosition,
-                    // ignore: always_specify_types
-                    markers: {
-                      Marker(
-                        onTap: () {
-                          showModalBottomSheet(
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10.0),
-                              ),
-                              context: context,
-                              builder: ((BuildContext context) {
-                                return SizedBox(
-                                  height: 70,
-                                  width: double.infinity,
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceAround,
-                                    children: const <Widget>[
-                                      Icon(Icons.location_on),
-                                      ForText(name: 'bloodo headquatar')
-                                    ],
-                                  ),
-                                );
-                              }));
-                        },
-                        markerId: const MarkerId('current location'),
-                        position: LatLng(currentlat, currentlng),
-                      ),
-                    },
-                    onMapCreated: (GoogleMapController controller) {
-                      _controller.complete(controller);
-                    },
-                  ),
+                  child: GoogleMapWidget(latitude: 120,longitude: 130,),
                 ),
                 const SizedBox(height: 15),
               ],
@@ -153,3 +121,4 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
     );
   }
 }
+
