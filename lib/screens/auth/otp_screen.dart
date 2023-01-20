@@ -18,6 +18,7 @@ class OTPScreen extends StatefulWidget {
 
 class _OTPScreenState extends State<OTPScreen> {
   final TextEditingController _otp = TextEditingController();
+  bool isLoading = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,25 +43,29 @@ class _OTPScreenState extends State<OTPScreen> {
                 maxLength: 6,
                 onChanged: (String? value) async {
                   if (value!.length == 6) {
+                    setState(() {
+                      isLoading = true;
+                    });
                     final int num = await authPro.varifyOTP(value);
                     if (!mounted) return;
                     if (num == 0) {
-                      Navigator.push(
-                        context,
-                        // ignore: always_specify_types
-                        MaterialPageRoute(
-                          builder: (BuildContext context) =>
-                              const RegisterScreen(),
-                        ),
-                      );
+                      setState(() {
+                        isLoading = false;
+                      });
+                      Navigator.of(context).pushNamed(RegisterScreen.routeName);
                     } else if (num == 1) {
                       await NotificationsServices().onLogin(context);
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute<MainScreen>(
-                          builder: (BuildContext context) => const MainScreen(),
-                        ),
-                      );
+                      setState(() {
+                        isLoading = false;
+                      });
+                      if (!mounted) return;
+                      Navigator.of(context).pushNamedAndRemoveUntil(
+                          MainScreen.routeName,
+                          (Route<dynamic> route) => false);
+                    } else {
+                      setState(() {
+                        isLoading = false;
+                      });
                     }
                   }
                 },
@@ -68,22 +73,24 @@ class _OTPScreenState extends State<OTPScreen> {
                 showSuffixIcon: false,
                 style: const TextStyle(letterSpacing: 20),
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  const Text('''Didn't received the OTP?'''),
-                  TextButton(
-                    child: Text(
-                      'Resend OTP',
-                      style: TextStyle(
-                        color: Theme.of(context).colorScheme.primary,
-                        fontWeight: FontWeight.bold,
-                      ),
+              isLoading
+                  ? const ShowLoading()
+                  : Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        const Text('''Didn't received the OTP?'''),
+                        TextButton(
+                          child: Text(
+                            'Resend OTP',
+                            style: TextStyle(
+                              color: Theme.of(context).colorScheme.primary,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          onPressed: () async => authPro.verifyPhone(context),
+                        ),
+                      ],
                     ),
-                    onPressed: () async => authPro.verifyPhone(context),
-                  ),
-                ],
-              ),
               if (_otp.text.length == 6) const ShowLoading(),
             ],
           ),
