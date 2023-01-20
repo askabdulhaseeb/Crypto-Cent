@@ -46,7 +46,7 @@ class Chat {
   Map<String, dynamic> addMembers() {
     return <String, dynamic>{
       'persons': FieldValue.arrayUnion(persons),
-      'group_info': groupInfo?.addMembers(),
+      'group_info': groupInfo?.toMap(),
       'last_message': lastMessage!.toMap(),
     };
   }
@@ -78,13 +78,21 @@ class Chat {
   factory Chat.fromMap(Map<String, dynamic> map) {
     return Chat(
       chatID: map['chat_id'] ?? '',
-      persons: List<String>.from(map['persons']),
+      persons: List<String>.from(map['persons'] ?? <String>[]),
       isGroup: map['is_group'] ?? false,
       groupInfo: map['group_info'] != null
           ? ChatGroupInfo.fromMap(map['group_info'])
           : null,
-      pid: map['pid'],
-      offer: map['offer'] == null ? null : OrderdProduct.fromMap(map['offer']),
+      pid: map['pid'] ?? '',
+      offer: map['offer'] == null
+          ? OrderdProduct(
+              pid: map['pid'] ?? '',
+              sellerID: '',
+              localAmount: 0,
+              exchangeRate: 0,
+              quantity: 0,
+            )
+          : OrderdProduct.fromMap(map['offer']),
       prodIsVideo: map['prod_is_video'] ?? true,
       lastMessage: Message.fromMap(map['last_message']),
       timestamp: map['timestamp'] ?? 0,

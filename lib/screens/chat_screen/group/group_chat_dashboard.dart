@@ -31,19 +31,21 @@ class GroupChatDashboard extends StatelessWidget {
                     icon: const Icon(Icons.add),
                     label: const Text('Create Group'),
                   ),
-                  chat.isEmpty
-                      ? const Center(child: Text('No Group available yet'))
-                      : ListView.separated(
-                          shrinkWrap: true,
-                          itemCount: chat.length,
-                          separatorBuilder: (_, __) => const Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 16),
-                            child: Divider(height: 1),
+                  Expanded(
+                    child: chat.isEmpty
+                        ? const Center(child: Text('No Group available yet'))
+                        : ListView.separated(
+                            shrinkWrap: true,
+                            itemCount: chat.length,
+                            separatorBuilder: (_, __) => const Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 16),
+                              child: Divider(height: 1),
+                            ),
+                            itemBuilder: (_, int index) {
+                              return GroupChatDashboardTile(chat: chat[index]);
+                            },
                           ),
-                          itemBuilder: (_, int index) {
-                            return GroupChatDashboardTile(chat: chat[index]);
-                          },
-                        ),
+                  ),
                 ],
               );
             } else {

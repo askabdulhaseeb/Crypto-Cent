@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 // import 'package:timezone/data/latest_all.dart' as tz;
@@ -141,7 +142,6 @@ class NotificationsServices {
     //   return true;
     try {
       for (int i = 0; i < deviceToken.length; i++) {
-        log('Receiver Devive Token: ${deviceToken[i].token}');
         final Map<String, String> headers = <String, String>{
           'Content-Type': 'application/json',
           'Authorization': 'key=${Utilities.firebaseServerID}',
@@ -161,8 +161,10 @@ class NotificationsServices {
         request.headers.addAll(headers);
         final http.StreamedResponse response = await request.send();
         if (response.statusCode == 200) {
-          print(await response.stream.bytesToString());
-          log('Notification send to: ${deviceToken[i].token}');
+          if (kDebugMode) {
+            print(await response.stream.bytesToString());
+            log('Notification send to: ${deviceToken[i].token}');
+          }
         } else {
           log('ERROR in FCM');
         }

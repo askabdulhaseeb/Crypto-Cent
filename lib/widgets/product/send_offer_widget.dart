@@ -15,9 +15,11 @@ import '../../models/chat/message_read_info.dart';
 import '../../models/payment/orderd_product.dart';
 import '../../models/product/product_model.dart';
 import '../../providers/user_provider.dart';
+import '../../screens/chat_screen/private/product_chat_screen.dart';
 import '../custom_widgets/custom_elevated_button.dart';
 import '../custom_widgets/custom_textformfield.dart';
 import '../custom_widgets/custom_validator.dart';
+import '../custom_widgets/show_loading.dart';
 
 class SendOfferWidget extends StatefulWidget {
   const SendOfferWidget({required this.product, super.key});
@@ -30,6 +32,7 @@ class SendOfferWidget extends StatefulWidget {
 class _SendOfferWidgetState extends State<SendOfferWidget> {
   final TextEditingController offer = TextEditingController();
   int quantity = 1;
+  bool isLoading = false;
   @override
   Widget build(BuildContext context) {
     return DraggableScrollableSheet(
@@ -128,33 +131,35 @@ class _SendOfferWidgetState extends State<SendOfferWidget> {
                     ],
                   ),
                   const SizedBox(height: 16),
-                  Row(
-                    children: <Widget>[
-                      Expanded(
-                        child: CustomElevatedButton(
-                          onTap: () => Navigator.of(context).pop(),
-                          title: 'Back',
+                  isLoading
+                      ? const ShowLoading()
+                      : Row(
+                          children: <Widget>[
+                            Expanded(
+                              child: CustomElevatedButton(
+                                onTap: () => Navigator.of(context).pop(),
+                                title: 'Back',
+                              ),
+                            ),
+                            const SizedBox(width: 10),
+                            Expanded(
+                              child: CustomElevatedButton(
+                                title: 'Send',
+                                onTap: () async {
+                                  await HapticFeedback.heavyImpact();
+                                  sendOffer(
+                                    offer: offer.text,
+                                    quantity: quantity,
+                                    // ignore: use_build_context_synchronously
+                                    user: Provider.of<UserProvider>(context,
+                                            listen: false)
+                                        .user(widget.product.uid),
+                                  );
+                                },
+                              ),
+                            )
+                          ],
                         ),
-                      ),
-                      const SizedBox(width: 10),
-                      Expanded(
-                        child: CustomElevatedButton(
-                          title: 'Send',
-                          onTap: () async {
-                            Future.delayed(const Duration(seconds: 1));
-                            await HapticFeedback.heavyImpact();
-                            sendOffer(
-                              offer: offer.text,
-                              quantity: quantity,
-                              user: Provider.of<UserProvider>(context,
-                                      listen: false)
-                                  .user(widget.product.uid),
-                            );
-                          },
-                        ),
-                      )
-                    ],
-                  ),
                 ],
               ),
             ),
@@ -167,8 +172,10 @@ class _SendOfferWidgetState extends State<SendOfferWidget> {
     required AppUser user,
     required int quantity,
   }) async {
+    setState(() {
+      isLoading = true;
+    });
     if (offer == '0') return;
-    Navigator.of(context).pop();
     final int time = DateTime.now().microsecondsSinceEpoch;
     final String chatID = UniqueIdFunctions.productID(widget.product.pid);
     OrderdProduct order = OrderdProduct(
@@ -181,31 +188,40 @@ class _SendOfferWidgetState extends State<SendOfferWidget> {
     final String me = AuthMethods.uid;
     final UserProvider userPro =
         // ignore: use_build_context_synchronously
-        Provider.of<UserProvider>(context,listen: false);
+        Provider.of<UserProvider>(context, listen: false);
     final AppUser sender = userPro.user(me);
     final AppUser receiver = userPro.user(widget.product.uid);
+    final Chat newChat = Chat(
+      chatID: chatID,
+      persons: <String>[AuthMethods.uid, user.uid],
+      lastMessage: Message(
+        messageID: time.toString(),
+        text: 'UNIT PRICE: $offer & QTY: 1',
+        timestamp: time,
+        sendBy: me,
+        type: MessageTypeEnum.prodOffer,
+        attachment: <MessageAttachment>[],
+        sendTo: <MessageReadInfo>[
+          MessageReadInfo(uid: user.uid),
+        ],
+      ),
+      timestamp: time,
+      pid: widget.product.pid,
+      offer: order,
+      prodIsVideo: false,
+    );
     await ChatAPI().sendMessage(
       sender: sender,
       receiver: receiver,
-      chat: Chat(
-        chatID: chatID,
-        persons: <String>[AuthMethods.uid, user.uid],
-        lastMessage: Message(
-          messageID: time.toString(),
-          text: 'UNIT PRICE: $offer & QTY: 1',
-          timestamp: time,
-          sendBy: me,
-          type: MessageTypeEnum.prodOffer,
-          attachment: <MessageAttachment>[],
-          sendTo: <MessageReadInfo>[
-            MessageReadInfo(uid: user.uid),
-          ],
-        ),
-        timestamp: time,
-        pid: widget.product.pid,
-        offer: order,
-        prodIsVideo: false,
-      ),
+      chat: newChat,
     );
+    setState(() {
+      isLoading = false;
+    });
+    if (!mounted) return;
+    Navigator.of(context).pop();
+    Navigator.of(context).push(MaterialPageRoute<ProductChatScreen>(
+      builder: (BuildContext context) => ProductChatScreen(chat: newChat),
+    ));
   }
 }

@@ -5,9 +5,12 @@ import '../../../providers/cart_provider.dart';
 import '../../../widgets/custom_widgets/custom_rating_star.dart';
 import '../../../widgets/custom_widgets/custom_widget.dart';
 import '../../database/app_user/auth_method.dart';
+import '../../database/chat_api.dart';
 import '../../function/crypto_function.dart';
 import '../../function/report_bottom_sheets.dart';
+import '../../function/unique_id_functions.dart';
 import '../../models/app_user/app_user.dart';
+import '../../models/chat/chat.dart';
 import '../../models/location.dart';
 import '../../models/product/product_model.dart';
 import '../../providers/location_provider.dart';
@@ -17,9 +20,10 @@ import '../../widgets/custom_widgets/custom_profile_image.dart';
 import '../../widgets/product/add_to_cart_widget.dart';
 import '../../widgets/product/product_url_slider.dart';
 import '../../widgets/product/send_offer_widget.dart';
+import '../chat_screen/private/personal_chat_screen.dart';
+import '../chat_screen/private/product_chat_screen.dart';
 import '../../widgets/profile/other_user_profile.dart';
 import '../map_screen/map_screen.dart';
-
 class ProductDetailScreen extends StatefulWidget {
   const ProductDetailScreen({required this.product, super.key});
   final Product product;
@@ -31,6 +35,8 @@ class ProductDetailScreen extends StatefulWidget {
 class _ProductDetailScreenState extends State<ProductDetailScreen> {
   @override
   Widget build(BuildContext context) {
+    final AppUser seller =
+        Provider.of<UserProvider>(context).user(widget.product.uid);
     CartProvider cartPro = Provider.of<CartProvider>(context);
     LocationProvider locationPro = Provider.of<LocationProvider>(context);
     final UserLocation location =
@@ -41,6 +47,15 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
         centerTitle: true,
         backgroundColor: Colors.white,
         elevation: 0,
+        title: Row(
+          children: <Widget>[
+            CustomProfileImage(imageURL: seller.imageURL ?? '', radius: 24),
+            const SizedBox(width: 10),
+            Text(
+              seller.name ?? 'null',
+              style: const TextStyle(fontWeight: FontWeight.bold),
+            ),
+          ],
         title: Consumer<UserProvider>(
           builder: (BuildContext context, UserProvider userPro, _) {
             final AppUser user = userPro.user(widget.product.uid);
@@ -73,13 +88,30 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
               AuthMethods.uid.isNotEmpty)
             CircleAvatar(
               backgroundColor: Theme.of(context).secondaryHeaderColor,
+              // child: IconButton(
+              //     onPressed: () => ReportBottomSheets()
+              //         .productReport(context, widget.product),
+              //     icon: Icon(
+              //       Icons.report,
+              //       color: Theme.of(context).errorColor,
+              //     )),
               child: IconButton(
-                  onPressed: () => ReportBottomSheets()
-                      .productReport(context, widget.product),
-                  icon: Icon(
-                    Icons.report,
-                    color: Theme.of(context).errorColor,
-                  )),
+                onPressed: () async {
+                  if (!mounted) return;
+                  Navigator.of(context).push(
+                    MaterialPageRoute<PersonalChatScreen>(
+                      builder: (BuildContext context) => PersonalChatScreen(
+                        chat: Chat(
+                            chatID: UniqueIdFunctions.personalChatID(
+                                chatWith: seller.uid),
+                            persons: <String>[seller.uid, AuthMethods.uid]),
+                        chatWith: seller,
+                      ),
+                    ),
+                  );
+                },
+                icon: Icon(Icons.chat, color: Theme.of(context).primaryColor),
+              ),
             ),
           const SizedBox(width: 10),
         ],
@@ -188,6 +220,18 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                   Text(
                     widget.product.description.toString(),
                     style: const TextStyle(color: Colors.grey),
+                  ),
+                  const SizedBox(height: 100),
+                  CustomElevatedButton(
+                    title: 'Report Product',
+                    bgColor: Colors.transparent,
+                    border: Border.all(color: Theme.of(context).primaryColor),
+                    textStyle: TextStyle(
+                      color: Theme.of(context).primaryColor,
+                      fontSize: 18,
+                    ),
+                    onTap: () => ReportBottomSheets()
+                        .productReport(context, widget.product),
                   ),
                   const SizedBox(height: 100),
                 ],

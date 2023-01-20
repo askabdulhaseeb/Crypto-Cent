@@ -15,7 +15,6 @@ dynamic get listOfProvider => [
       ChangeNotifierProvider<AddProductProvider>(
         create: (BuildContext context) => AddProductProvider(),
       ),
-
       ChangeNotifierProvider<AuthProvider>(
         create: (BuildContext context) => AuthProvider(),
       ),
@@ -54,4 +53,5 @@ dynamic get listOfProvider => [
       ChangeNotifierProvider<ContactProvider>.value(
         value: ContactProvider(),
       ),
+      ChangeNotifierProvider<PaymentProvider>.value(value: PaymentProvider()),
     ];

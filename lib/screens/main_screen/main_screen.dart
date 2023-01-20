@@ -5,6 +5,7 @@ import '../../models/app_user/app_user.dart';
 import '../../models/my_device_token.dart';
 import '../../providers/auth_provider.dart';
 import '../../providers/crypto_wallet/wallet_provider.dart';
+import '../../providers/payment/payment_provider.dart';
 import '../../providers/user_provider.dart';
 import '../chat_screen/chat_screen.dart';
 import '../screens.dart';
@@ -54,6 +55,7 @@ class _MainScreenState extends State<MainScreen> {
     AppUser me = userPro.user(AuthMethods.uid);
     PushNotification.instance
         .init(devicesToken: me.deviceToken ?? <MyDeviceToken>[]);
+    Provider.of<PaymentProvider>(context, listen: false).load();
   }
 
   bool loading = false;
