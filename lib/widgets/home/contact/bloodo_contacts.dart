@@ -5,8 +5,8 @@ import '../../custom_widgets/custom_elevated_button.dart';
 import '../../custom_widgets/custom_profile_image.dart';
 
 class BloodoContacts extends StatelessWidget {
-  BloodoContacts({super.key, required this.user});
-  AppUser user;
+  const BloodoContacts({required this.user, super.key});
+  final AppUser user;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -23,7 +23,7 @@ class BloodoContacts extends StatelessWidget {
           children: [
             CustomElevatedButton(
               bgColor: Theme.of(context).secondaryHeaderColor,
-              title: 'Send',
+              title: '  Send  ',
               textStyle: const TextStyle(color: Colors.black54, fontSize: 16),
               onTap: () {},
               padding: const EdgeInsets.symmetric(horizontal: 6),
@@ -34,9 +34,6 @@ class BloodoContacts extends StatelessWidget {
             CustomElevatedButton(
               title: 'Message',
               onTap: () {},
-
-              // textStyle: TextStyle(
-              //     color: Theme.of(context).secondaryHeaderColor, fontSize: 18),
               border: Border.all(color: Theme.of(context).primaryColor),
               padding: const EdgeInsets.symmetric(horizontal: 6),
             )
