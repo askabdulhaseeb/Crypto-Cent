@@ -34,78 +34,80 @@ class GroupChatDetailScreen extends StatelessWidget {
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16),
-        child: Column(
-          children: <Widget>[
-            CustomProfileImage(imageURL: info.imageURL, radius: 80),
-            const SizedBox(height: 8),
-            Text(
-              info.name,
-              textAlign: TextAlign.center,
-              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
-            ),
-            const SizedBox(height: 3),
-            Text(
-              info.members.length <= 1
-                  ? 'Group - ${info.members.length} member'
-                  : 'Group - ${info.members.length} members',
-              style: const TextStyle(color: Colors.grey),
-            ),
-            const SizedBox(height: 10),
-            TextFieldLikeBG(child: Text(info.description, maxLines: 5)),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: <Widget>[
-                TextButton.icon(
-                  onPressed: () async {
-                    await showModalBottomSheet(
-                      isDismissible: true,
-                      isScrollControlled: true,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(24.0),
-                      ),
-                      backgroundColor:
-                          Theme.of(context).scaffoldBackgroundColor,
-                      context: context,
-                      builder: (BuildContext context) {
-                        final List<String> customer =
-                            Provider.of<PaymentProvider>(context, listen: false)
-                                .oldCustomer();
-                        return AddGroupMemberWidget(
-                            chat: chat, customers: customer);
-                      },
-                    );
-                  },
-                  icon: const Icon(Icons.add),
-                  label: const Text('Add Member'),
-                ),
-              ],
-            ),
-            Expanded(
-              child: TextFieldLikeBG(
-                padding: const EdgeInsets.all(0),
-                child: Consumer<UserProvider>(
-                    builder: (BuildContext context, UserProvider userPro, _) {
-                  return ListView.builder(
-                      // shrinkWrap: true,
-                      // primary: false,
-                      itemCount: info.members.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        final AppUser user =
-                            userPro.user(info.members[index].uid);
-                        return ListTile(
-                          leading:
-                              CustomProfileImage(imageURL: user.imageURL ?? ''),
-                          title: Text(user.name ?? ''),
-                          subtitle: Text(
-                            info.members[index].role.json,
-                          ),
-                        );
-                      });
-                }),
+        child: SingleChildScrollView(
+          child: Column(
+            children: <Widget>[
+              CustomProfileImage(imageURL: info.imageURL, radius: 80),
+              const SizedBox(height: 8),
+              Text(
+                info.name,
+                textAlign: TextAlign.center,
+                style:
+                    const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
               ),
-            ),
-            const SizedBox(height: 16),
-          ],
+              const SizedBox(height: 3),
+              Text(
+                info.members.length <= 1
+                    ? 'Group - ${info.members.length} member'
+                    : 'Group - ${info.members.length} members',
+                style: const TextStyle(color: Colors.grey),
+              ),
+              const SizedBox(height: 10),
+              TextFieldLikeBG(child: Text(info.description, maxLines: 5)),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: <Widget>[
+                  TextButton.icon(
+                    onPressed: () async {
+                      await showModalBottomSheet(
+                        isDismissible: true,
+                        isScrollControlled: true,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(24.0),
+                        ),
+                        backgroundColor:
+                            Theme.of(context).scaffoldBackgroundColor,
+                        context: context,
+                        builder: (BuildContext context) {
+                          final List<String> customer =
+                              Provider.of<PaymentProvider>(context,
+                                      listen: false)
+                                  .oldCustomer();
+                          return AddGroupMemberWidget(
+                              chat: chat, customers: customer);
+                        },
+                      );
+                    },
+                    icon: const Icon(Icons.add),
+                    label: const Text('Add Member'),
+                  ),
+                ],
+              ),
+              Expanded(
+                child: TextFieldLikeBG(
+                  padding: const EdgeInsets.all(0),
+                  child: Consumer<UserProvider>(
+                      builder: (BuildContext context, UserProvider userPro, _) {
+                    return ListView.builder(
+                        itemCount: info.members.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          final AppUser user =
+                              userPro.user(info.members[index].uid);
+                          return ListTile(
+                            leading: CustomProfileImage(
+                                imageURL: user.imageURL ?? ''),
+                            title: Text(user.name ?? ''),
+                            subtitle: Text(
+                              info.members[index].role.json,
+                            ),
+                          );
+                        });
+                  }),
+                ),
+              ),
+              const SizedBox(height: 16),
+            ],
+          ),
         ),
       ),
     );
