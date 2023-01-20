@@ -93,7 +93,7 @@ class _AddGroupMemberWidgetState extends State<AddGroupMemberWidget> {
                     )
                   ],
                 ),
-              Flexible(
+              Expanded(
                 child: widget.customers.isEmpty
                     ? const Center(
                         child: Text('All Contacts are already in group'),
@@ -104,8 +104,8 @@ class _AddGroupMemberWidgetState extends State<AddGroupMemberWidget> {
                         _,
                       ) {
                         return ListView.builder(
-                          shrinkWrap: true,
-                          primary: false,
+                          // shrinkWrap: true,
+                          // primary: false,
                           controller: scrollController,
                           itemCount: widget.customers.length,
                           itemBuilder: (BuildContext context, int index) {
