@@ -30,7 +30,8 @@ class _GetProductImageAttachments extends State<GetProductAttachments> {
                 height: (width / 3) * 2,
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
-                  color: const Color.fromARGB(255, 245, 244, 244),
+                  color:
+                      Theme.of(context).secondaryHeaderColor.withOpacity(0.3),
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: Column(
@@ -112,7 +113,7 @@ class _ImageBox extends StatelessWidget {
                 height: double.infinity,
                 width: double.infinity,
                 padding: const EdgeInsets.all(32),
-                color: const Color.fromARGB(255, 245, 244, 244),
+                color: Theme.of(context).secondaryHeaderColor.withOpacity(0.3),
                 child: FittedBox(
                   child: Text(
                     index.toString(),
