@@ -5,6 +5,7 @@ import '../../../function/time_date_function.dart';
 import '../../../models/app_user/app_user.dart';
 import '../../../models/chat/chat.dart';
 import '../../../providers/user_provider.dart';
+import '../../../screens/chat_screen/private/personal_chat_screen.dart';
 import '../../custom_widgets/custom_profile_image.dart';
 
 class ChatDashboardTile extends StatelessWidget {
@@ -20,11 +21,11 @@ class ChatDashboardTile extends StatelessWidget {
           .first);
       return ListTile(
         onTap: () {
-          // Navigator.of(context).push(
-          //   MaterialPageRoute<PersonalChatScreen>(
-          //     builder: (_) => PersonalChatScreen(chatWith: user, chat: chat),
-          //   ),
-          // );
+          Navigator.of(context).push(
+            MaterialPageRoute<PersonalChatScreen>(
+              builder: (_) => PersonalChatScreen(chatWith: user, chat: chat),
+            ),
+          );
         },
         dense: true,
         leading: CustomProfileImage(imageURL: user.imageURL ?? ''),

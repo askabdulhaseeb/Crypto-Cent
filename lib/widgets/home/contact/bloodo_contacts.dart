@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 
+import '../../../database/app_user/auth_method.dart';
+import '../../../function/unique_id_functions.dart';
 import '../../../models/app_user/app_user.dart';
+import '../../../models/chat/chat.dart';
+import '../../../screens/chat_screen/private/personal_chat_screen.dart';
 import '../../custom_widgets/custom_elevated_button.dart';
 import '../../custom_widgets/custom_profile_image.dart';
 
 class BloodoContacts extends StatelessWidget {
-  BloodoContacts({super.key, required this.user});
-  AppUser user;
+  const BloodoContacts({required this.user, super.key});
+  final AppUser user;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -23,7 +27,7 @@ class BloodoContacts extends StatelessWidget {
           children: [
             CustomElevatedButton(
               bgColor: Theme.of(context).secondaryHeaderColor,
-              title: 'Send',
+              title: '  Send  ',
               textStyle: const TextStyle(color: Colors.black54, fontSize: 16),
               onTap: () {},
               padding: const EdgeInsets.symmetric(horizontal: 6),
@@ -33,10 +37,20 @@ class BloodoContacts extends StatelessWidget {
             ),
             CustomElevatedButton(
               title: 'Message',
-              onTap: () {},
-
-              // textStyle: TextStyle(
-              //     color: Theme.of(context).secondaryHeaderColor, fontSize: 18),
+              onTap: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute<PersonalChatScreen>(
+                    builder: (BuildContext context) => PersonalChatScreen(
+                      chat: Chat(
+                        chatID: UniqueIdFunctions.personalChatID(
+                            chatWith: user.uid),
+                        persons: <String>[AuthMethods.uid, user.uid],
+                      ),
+                      chatWith: user,
+                    ),
+                  ),
+                );
+              },
               border: Border.all(color: Theme.of(context).primaryColor),
               padding: const EdgeInsets.symmetric(horizontal: 6),
             )

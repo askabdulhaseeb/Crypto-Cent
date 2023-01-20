@@ -1,7 +1,6 @@
 import 'dart:developer';
 
-import 'package:flutter/material.dart';
-
+import 'package:flutter/foundation.dart';
 import '../database/app_user/auth_method.dart';
 import '../database/app_user/user_api.dart';
 import '../enum/login_method.dart';
@@ -36,6 +35,9 @@ class UserProvider extends ChangeNotifier {
         _allDeviceToken.add(_user[i].deviceToken![j]);
       }
     }
+    if (kDebugMode) {
+      print('Total no of users in user provuder: ${_user.length}');
+    }
     notifyListeners();
   }
 
@@ -51,6 +53,7 @@ class UserProvider extends ChangeNotifier {
     }
     return temp;
   }
+
   block(AppUser user) async {
     int index = _indexOf(user.uid);
     int myIndex = _indexOf(AuthMethods.uid);

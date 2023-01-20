@@ -41,7 +41,6 @@ class CategoriesProvider with ChangeNotifier {
     _currentCat = value;
     _subcurrentCat = _currentCat!.subCategories[0];
     _subCa = _currentCat!.subCategories;
-    notifyListeners();
   }
 
   subCategoryChange(SubCategory value) {
@@ -54,7 +53,6 @@ class CategoriesProvider with ChangeNotifier {
   List<SubCategory> get subCa => <SubCategory>[..._subCa];
   SubCategory? _subcurrentCat;
   SubCategory? get subcurrentCat => _subcurrentCat;
-  //Search in the product
   String? _search;
   onSearch(String? value) {
     _search = value;

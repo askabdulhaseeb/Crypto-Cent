@@ -3,9 +3,11 @@ import 'dart:developer';
 
 import 'package:cloud_functions/cloud_functions.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../database/app_user/auth_method.dart';
 import '../database/app_user/user_api.dart';
 import '../database/notification_services.dart';
 import '../models/my_device_token.dart';
@@ -19,13 +21,12 @@ class PushNotification {
   String? _token;
   String? get token => _token;
 
-  Future<List<MyDeviceToken>?>? init({required List<MyDeviceToken> devicesToken}) async {
+  Future<List<MyDeviceToken>?>? init(
+      {required List<MyDeviceToken> devicesToken}) async {
     final NotificationSettings? settings = await _requestPermission();
-
     if (settings!.authorizationStatus == AuthorizationStatus.authorized) {}
-
     if ((settings.authorizationStatus == AuthorizationStatus.provisional ||
-            settings.authorizationStatus == AuthorizationStatus.authorized)) {
+        settings.authorizationStatus == AuthorizationStatus.authorized)) {
       List<MyDeviceToken>? updatedDevicesToken = await getToken(devicesToken);
       if (updatedDevicesToken != null && updatedDevicesToken.isNotEmpty) {
         return updatedDevicesToken;
@@ -37,17 +38,23 @@ class PushNotification {
     return null;
   }
 
-  Future<List<MyDeviceToken>?>? getToken(List<MyDeviceToken> devicesToken) async {
-   
+  Future<List<MyDeviceToken>?>? getToken(
+      List<MyDeviceToken> devicesToken) async {
+    if (AuthMethods.uid.isEmpty) return null;
     _token = await _firebaseMessaging.getToken();
     log('CURRENT DEVICE TOKEN');
     if (_token == null) {
-      CustomToast.errorToast(message: 'Unable to fetch Data, Tryagain Later');
+      CustomToast.errorToast(
+          message: 'Unable to fetch Device token, Try again later');
       return null;
     }
-
-    if (NotificationsServices().tokenAlreadyExist(devicesValue: devicesToken, tokenValue: _token??'')) return devicesToken;
-    devicesToken.add(MyDeviceToken(token:  _token??''));
+    final bool exist = NotificationsServices().tokenAlreadyExist(
+        devicesValue: devicesToken, tokenValue: _token ?? '');
+    if (kDebugMode) {
+      print('Deiver Token already exist: $exist');
+    }
+    if (exist) return devicesToken;
+    devicesToken.add(MyDeviceToken(token: _token ?? ''));
     UserApi().setDeviceToken(devicesToken);
     return devicesToken;
   }

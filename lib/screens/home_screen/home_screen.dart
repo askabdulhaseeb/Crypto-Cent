@@ -1,8 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../function/push_notification.dart';
-import '../../models/my_device_token.dart';
 import '../../providers/provider.dart';
 import '../../utilities/app_images.dart';
 import '../../widgets/custom_widgets/custom_network_image_slider.dart';
@@ -33,12 +31,6 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     super.initState();
     controller = BottomSheet.createAnimationController(this);
     controller!.duration = const Duration(milliseconds: 400);
-    _init();
-  }
-
-  _init() async {
-    final List<MyDeviceToken>? devices = await PushNotification().getToken([]);
-    print(devices);
   }
 
   @override
@@ -51,9 +43,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     return Scaffold(
       key: _key,
-      //appBar: appBar(context),
       drawer: drawerScreen(context),
-
       body: SafeArea(
         child: Consumer2<ProductProvider, CategoriesProvider>(builder: (
           BuildContext context,
@@ -102,16 +92,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                             child: Image.asset(AppImages.logo),
                           ),
                           GestureDetector(
-                            onTap: () {
-                              bottomSheet(context);
-                              // Navigator.push(
-                              //   context,
-                              //   MaterialPageRoute<SerachScreen>(
-                              //     builder: (BuildContext context) =>
-                              //         const SerachScreen(),
-                              //   ),
-                              // );
-                            },
+                            onTap: () => bottomSheet(context),
                             child: CircleAvatar(
                               backgroundColor:
                                   Theme.of(context).secondaryHeaderColor,
@@ -161,9 +142,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                     ],
                   ),
                 ),
-                const SizedBox(
-                  height: 10,
-                ),
+                const SizedBox(height: 10),
                 const SomeCategories(),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16),

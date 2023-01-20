@@ -72,7 +72,6 @@ class CustomTextFormFieldState extends State<CustomTextFormField> {
           widget.contentPadding ?? const EdgeInsets.symmetric(horizontal: 12),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(14),
-        border: Border.all(color: Colors.blueGrey),
         color: widget.color ?? Theme.of(context).secondaryHeaderColor,
       ),
       child: TextFormField(
@@ -96,7 +95,6 @@ class CustomTextFormFieldState extends State<CustomTextFormField> {
         style: widget.style,
         validator: (String? value) =>
             widget.validator == null ? null : widget.validator!(value),
-        cursorColor: Theme.of(context).colorScheme.secondary,
         decoration: InputDecoration(
           fillColor: widget.color ??
               Theme.of(context).textTheme.bodyText1!.color!.withOpacity(0.15),

@@ -1,4 +1,5 @@
 import 'package:fast_contacts/fast_contacts.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
 
@@ -26,8 +27,14 @@ class ContactProvider with ChangeNotifier {
     _blodooUser.clear();
     _boloodoContacts.clear();
     _inviteContacts.clear();
+    if (kDebugMode) {
+      print('Length of Phone Number: ${_mobileContacts.length}');
+    }
     for (int i = 0; i < _mobileContacts.length; i++) {
       isFind = false;
+      if (_mobileContacts[i].phones.isEmpty) {
+        continue;
+      }
       String temp = _mobileContacts[i].phones[0];
       temp = temp.replaceAll(' ', '');
       if (temp.length >= 10) {
@@ -54,6 +61,7 @@ class ContactProvider with ChangeNotifier {
       _mobileContacts.add(_inviteContacts[i]);
     }
     change = true;
+    notifyListeners();
     return change;
   }
 

@@ -32,6 +32,7 @@ class UserApi {
   Future<void> setDeviceToken(List<MyDeviceToken> deviceToken) async {
     try {
       final String me = AuthMethods.uid;
+      if (me.isEmpty) return;
       await _instance.collection(_collection).doc(me).update(<String, dynamic>{
         'devices_tokens':
             deviceToken.map((MyDeviceToken e) => e.toMap()).toList()
