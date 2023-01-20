@@ -24,6 +24,7 @@ import '../chat_screen/private/personal_chat_screen.dart';
 import '../chat_screen/private/product_chat_screen.dart';
 import '../../widgets/profile/other_user_profile.dart';
 import '../map_screen/map_screen.dart';
+
 class ProductDetailScreen extends StatefulWidget {
   const ProductDetailScreen({required this.product, super.key});
   final Product product;
@@ -56,32 +57,6 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
               style: const TextStyle(fontWeight: FontWeight.bold),
             ),
           ],
-        title: Consumer<UserProvider>(
-          builder: (BuildContext context, UserProvider userPro, _) {
-            final AppUser user = userPro.user(widget.product.uid);
-
-            return GestureDetector(
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute<ProductDetailScreen>(
-                      builder: (BuildContext context) => OtherUserProfile(
-                        appUser: user,
-                      ),
-                    ));
-              },
-              child: Row(
-                children: <Widget>[
-                  CustomProfileImage(imageURL: user.imageURL ?? '', radius: 24),
-                  const SizedBox(width: 10),
-                  Text(
-                    user.name ?? 'null',
-                    style: const TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                ],
-              ),
-            );
-          },
         ),
         actions: <Widget>[
           if (widget.product.uid != AuthMethods.uid &&
