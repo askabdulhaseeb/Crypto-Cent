@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'database/app_user/auth_method.dart';
@@ -44,7 +45,6 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-      // ignore: always_specify_types
       providers: listOfProvider,
       child: Consumer<AppThemeProvider>(
           builder: (BuildContext context, AppThemeProvider theme, _) {
@@ -54,12 +54,11 @@ class MyApp extends StatelessWidget {
           theme: AppThemes.light,
           darkTheme: AppThemes.dark,
           themeMode: theme.themeMode,
-          home: (AuthMethods.uid.isEmpty)
-              ? const WelcomeScreen()
-              : const MainScreen(),
-
-          // home: const SpalshScreen(),
-
+          home: kDebugMode
+              ? (AuthMethods.uid.isEmpty)
+                  ? const WelcomeScreen()
+                  : const MainScreen()
+              : const SpalshScreen(),
           routes: <String, WidgetBuilder>{
             EmptyScreen.routeName: (_) => const EmptyScreen(),
             WelcomeScreen.routeName: (_) => const WelcomeScreen(),
