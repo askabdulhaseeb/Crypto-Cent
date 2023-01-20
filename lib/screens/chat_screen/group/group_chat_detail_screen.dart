@@ -86,8 +86,8 @@ class GroupChatDetailScreen extends StatelessWidget {
                 child: Consumer<UserProvider>(
                     builder: (BuildContext context, UserProvider userPro, _) {
                   return ListView.builder(
-                      shrinkWrap: true,
-                      primary: false,
+                      // shrinkWrap: true,
+                      // primary: false,
                       itemCount: info.members.length,
                       itemBuilder: (BuildContext context, int index) {
                         final AppUser user =
