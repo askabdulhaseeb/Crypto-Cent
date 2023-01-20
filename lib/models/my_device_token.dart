@@ -26,7 +26,8 @@ class MyDeviceToken {
       failNotificationByUID: map['fail_notification_by_uid'] != null
           ? List<String>.from((map['fail_notification_by_uid']) ?? <String>[])
           : <String>[],
-      registerTimestamp: map['register_timestamp'] as int,
+      registerTimestamp:
+          int.parse(map['register_timestamp']?.toString() ?? '0'),
     );
   }
 }

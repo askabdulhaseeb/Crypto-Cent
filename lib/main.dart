@@ -22,12 +22,6 @@ import 'screens/spalsh_screen/splash_screen.dart';
 Future<void> _firebaseMessBackgroundHand(RemoteMessage message) async {
   RemoteNotification? notification = message.notification;
   if (notification == null) return;
-
-  // LocalNotifications.showNotification(
-  //   title: notification.title ?? 'Notification',
-  //   body: notification.body ?? 'Hi',
-  //   payload: message.data.toString(),
-  // );
 }
 
 Future<void> main() async {
