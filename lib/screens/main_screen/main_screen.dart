@@ -50,9 +50,8 @@ class _MainScreenState extends State<MainScreen> {
 
   init() async {
     UserProvider userPro = Provider.of<UserProvider>(context, listen: false);
-    await userPro.init();
-    AppUser me = userPro.currentUser;
-    if (me.deviceToken != null && me.deviceToken!.isNotEmpty) return;
+    if (userPro.users.isEmpty) return;
+    AppUser me = userPro.user(AuthMethods.uid);
     PushNotification.instance
         .init(devicesToken: me.deviceToken ?? <MyDeviceToken>[]);
   }
