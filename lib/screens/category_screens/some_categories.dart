@@ -12,7 +12,6 @@ class SomeCategories extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     CategoriesProvider catPro = Provider.of<CategoriesProvider>(context);
-    double width = MediaQuery.of(context).size.width;
     return GridView.count(
       shrinkWrap: true,
       primary: false,
@@ -24,12 +23,12 @@ class SomeCategories extends StatelessWidget {
         return InkWell(
           onTap: () {
             Navigator.push(
-                context,
-                // ignore: always_specify_types
-                MaterialPageRoute(
-                    builder: (BuildContext context) => CategoriesExtend(
-                          categoryName: catPro.someCategories[index].catID,
-                        )));
+              context,
+              MaterialPageRoute<CategoriesExtend>(
+                  builder: (BuildContext context) => CategoriesExtend(
+                        categoryName: catPro.someCategories[index].catID,
+                      )),
+            );
           },
           child: Padding(
             padding: const EdgeInsets.all(4),
