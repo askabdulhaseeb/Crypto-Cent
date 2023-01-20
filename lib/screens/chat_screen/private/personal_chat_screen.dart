@@ -6,6 +6,7 @@ import '../../../models/chat/chat.dart';
 import '../../../models/chat/message.dart';
 import '../../../widgets/chat/chat_text_field.dart';
 import '../../../widgets/chat/message_list.dart';
+import '../../../widgets/chat/message_tile.dart';
 import '../../../widgets/chat/no_old_chat_available_widget.dart';
 import '../../../widgets/custom_widgets/custom_profile_image.dart';
 import '../../../widgets/custom_widgets/show_loading.dart';
@@ -60,23 +61,39 @@ class PersonalChatScreen extends StatelessWidget {
         body: Column(
           children: <Widget>[
             Expanded(
-              child: StreamBuilder<List<Message>>(
+            child: StreamBuilder<List<Message>>(
                 stream: ChatAPI().messages(chat.chatID),
                 builder: (BuildContext context,
                     AsyncSnapshot<List<Message>> snapshot) {
-                  if (snapshot.hasError) {
-                    return const Center(child: Text('Facinf some error'));
-                  } else if (snapshot.hasData) {
-                    final List<Message> messages = snapshot.data!;
-                    return messages.isEmpty
+                  if (snapshot.hasData) {
+                    List<Message> messages = snapshot.data ?? <Message>[];
+                    return (messages.isEmpty)
                         ? const NoOldChatAvailableWidget()
-                        : MessageLists(messages: messages);
+                        : ListView.builder(
+                            shrinkWrap: true,
+                            itemCount: messages.length,
+                            reverse: true,
+                            itemBuilder: (BuildContext context, int index) {
+                              return MessageTile(message: messages[index]);
+                            },
+                          );
                   } else {
-                    return const ShowLoading();
+                    return snapshot.hasError
+                        ? Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            mainAxisSize: MainAxisSize.max,
+                            children: const <Widget>[
+                              Icon(Icons.report, color: Colors.grey),
+                              Text(
+                                'Some issue found',
+                                style: TextStyle(color: Colors.grey),
+                              ),
+                            ],
+                          )
+                        : const ShowLoading();
                   }
-                },
-              ),
-            ),
+                }),
+          ),
             ChatTextField(chat: chat),
           ],
         ),

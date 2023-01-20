@@ -1,6 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
+import 'show_loading.dart';
+
 class CustomProfileImage extends StatelessWidget {
   const CustomProfileImage({
     required this.imageURL,
@@ -35,13 +37,7 @@ class CustomProfileImage extends StatelessWidget {
             },
             progressIndicatorBuilder: (BuildContext context, String url,
                     DownloadProgress downloadProgress) =>
-                Center(
-                    child: Text(
-              'loading...  ${downloadProgress.progress?.toStringAsFixed(1) ?? ''}',
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-              style: const TextStyle(color: Colors.grey),
-            )),
+                const ShowLoading(),
             errorWidget: (BuildContext context, String url, dynamic _) =>
                 const Icon(Icons.error, color: Colors.grey),
           );
