@@ -20,6 +20,6 @@ class UniqueIdFunctions {
   }
 
   static String productID(String pid) {
-    return '${AuthMethods.uid}$pid';
+    return '${AuthMethods.uid}-product-$pid';
   }
 }
