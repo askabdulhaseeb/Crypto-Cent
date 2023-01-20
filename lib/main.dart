@@ -56,7 +56,7 @@ class MyApp extends StatelessWidget {
           routes: <String, WidgetBuilder>{
             EmptyScreen.routeName: (_) => const EmptyScreen(),
             WelcomeScreen.routeName: (_) => const WelcomeScreen(),
-            AddNewAddress.routeName: (_) => const AddNewAddress(),
+   
             SigninWithEmailScreen.routeName: (_) =>
                 const SigninWithEmailScreen(),
             SignupWithEmailScreen.routeName: (_) =>

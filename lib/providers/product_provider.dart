@@ -89,6 +89,7 @@ class ProductProvider with ChangeNotifier {
       amount: 0,
       colors: 'null',
       quantity: '0',
+      locationUID: '',
       productname: ' ',
       description: 'null',
       timestamp: 0,
