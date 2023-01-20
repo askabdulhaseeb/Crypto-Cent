@@ -74,13 +74,6 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
               AuthMethods.uid.isNotEmpty)
             CircleAvatar(
               backgroundColor: Theme.of(context).secondaryHeaderColor,
-              // child: IconButton(
-              //     onPressed: () => ReportBottomSheets()
-              //         .productReport(context, widget.product),
-              //     icon: Icon(
-              //       Icons.report,
-              //       color: Theme.of(context).errorColor,
-              //     )),
               child: IconButton(
                 onPressed: () async {
                   if (!mounted) return;
