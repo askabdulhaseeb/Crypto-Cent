@@ -3,7 +3,7 @@ class Review {
     required this.reviewID,
     required this.customerUID,
     required this.sellerUID,
-    required this.products,
+    required this.productID,
     required this.timestamp,
     required this.rating,
     required this.comment,
@@ -12,7 +12,7 @@ class Review {
   final String reviewID;
   final String customerUID;
   final String sellerUID;
-  final List<String> products;
+  final String productID;
   final int timestamp;
   final double rating;
   final String comment;
@@ -22,7 +22,7 @@ class Review {
       'review_id': reviewID,
       'customer_uid': customerUID,
       'seller_uid': sellerUID,
-      'products': products,
+      'product_id': productID,
       'timestamp': timestamp,
       'rating': rating,
       'comment': comment,
@@ -38,7 +38,8 @@ class Review {
       timestamp: map['timestamp'] ?? 0,
       rating: map['rating'] ?? 0.0,
       comment: map['comment'] ?? '',
-      products: List<String>.from((map['products'] as List<String>)),
+      productID: map['product_id'],
+      
     );
   }
 }

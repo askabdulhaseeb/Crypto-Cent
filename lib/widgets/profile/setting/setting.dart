@@ -36,7 +36,10 @@ class Setting extends StatelessWidget {
               ProfileNavTile(
                 name: 'Edit Address',
                 onTap: () {
-                   Navigator.of(context).pushNamed(AddNewAddress.routeName);
+                   Navigator.of(context).push(MaterialPageRoute(
+                    builder: (BuildContext context) => AddNewAddress(isProduct: false),
+                  ));
+                  
                 },
               ),
               const SizedBox(

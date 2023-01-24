@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
-
-import '../../widgets/custom_widgets/cutom_text.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:provider/provider.dart';
+import '../../providers/rating_provider.dart';
+import '../../widgets/custom_widgets/custom_dialog.dart';
+import '../../widgets/custom_widgets/custom_elevated_button.dart';
+import '../../widgets/custom_widgets/custom_review_dialoge.dart';
+import '../../widgets/custom_widgets/custom_textformfield.dart';
 
 class TestingScreen extends StatefulWidget {
   const TestingScreen({super.key});
@@ -10,65 +15,87 @@ class TestingScreen extends StatefulWidget {
 }
 
 class _TestingScreenState extends State<TestingScreen> {
-  String name = 'Running';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
         child: Column(
-          children: <Widget>[
-            const SizedBox(
-              height: 30
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            CustomElevatedButton(
+              title: 'title',
+              onTap: () {
+                alertBox(context);
+              },
             ),
-            Row(
-              children:<Widget>[
-                newMethod(context, 'All', () {
-                  setState(() {
-                    name = 'All';
-                  });
-                }, name),
-                newMethod(context, 'Running', () {
-                  setState(() {
-                    name = 'Running';
-                  });
-                }, name),
-                newMethod(context, 'Previous', () {
-                  setState(() {
-                    name = 'Previous';
-                  });
-                }, name),
-              ],
-            )
           ],
         ),
       ),
     );
   }
 
-  Widget newMethod(
-      BuildContext context, String title, VoidCallback onTap, String name) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 4),
-      child: GestureDetector(
-        onTap: onTap,
-        child: Container(
-          padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 24),
-          decoration: BoxDecoration(
-            color: title == name
-                ? Theme.of(context).primaryColor
-                : Theme.of(context).secondaryHeaderColor,
-            borderRadius: BorderRadius.circular(46),
-          ),
-          child: Center(
-            child: ForText(
-              name: title,
-              color: Colors.white,
-              size: 20,
-              bold: true,
-            ),
-          ),
-        ),
+  Future<dynamic> alertBox(
+    BuildContext context,
+  ) async {
+    showDialog(
+        useSafeArea: true,
+        context: context,
+        builder: (BuildContext context) {
+          return Consumer<RatingProvider>(
+              builder: (BuildContext context, RatingProvider ratingPro, _) {
+            //return const CustomReviewDialogBox();
+            return AlertDialog(
+              title: Column(
+                children: [
+                  Row(
+                    children: [
+                      Container(
+                        height: 30,
+                        width: 30,
+                        decoration: BoxDecoration(
+                            color: Colors.red,
+                            borderRadius: BorderRadius.circular(4)),
+                      ),
+                      const SizedBox(
+                        width: 10,
+                      ),
+                      const Text('Product name'),
+                    ],
+                  ),
+                  ratingBar(ratingPro),
+                ],
+              ),
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(15)),
+              content: CustomTextFormField(
+                controller: ratingPro.ratingComment,
+                hint: 'Comment',
+                maxLength: 500,
+                maxLines: 5,
+              ),
+              actions: [
+                CustomElevatedButton(title: 'Done', onTap: () {}),
+              ],
+            );
+          });
+        });
+  }
+
+  RatingBar ratingBar(RatingProvider ratingPro) {
+    return RatingBar.builder(
+      initialRating: 3,
+      minRating: 1,
+      direction: Axis.horizontal,
+      allowHalfRating: true,
+      itemCount: 5,
+      itemPadding: const EdgeInsets.symmetric(horizontal: 4.0),
+      itemBuilder: (BuildContext context, _) => const Icon(
+        Icons.star,
+        color: Colors.amber,
       ),
+      onRatingUpdate: (double rating) {
+        ratingPro.rating = rating;
+      },
     );
   }
 }

@@ -36,7 +36,11 @@ class CustomRatingBar extends StatelessWidget {
           color: Theme.of(context).primaryColor.withOpacity(0.3),
         ),
       ),
-      onRatingUpdate: (double value) => onRatingUpdate(value),
+      
+      onRatingUpdate: (double value) {
+        print('chl ya yar');
+        onRatingUpdate(value);
+      },
     );
   }
 }

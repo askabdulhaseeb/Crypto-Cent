@@ -11,6 +11,7 @@ import 'providers/provider.dart';
 import 'providers/providers_list.dart';
 import 'screens/chat_screen/group/create_group_screen.dart';
 import 'screens/empty_screen/empty_screen.dart';
+import 'screens/empty_screen/testing_screen.dart';
 import 'screens/map_screen/add_new_address.dart';
 import 'screens/map_screen/location_screen.dart';
 import 'screens/order/payment.dart';
@@ -53,10 +54,11 @@ class MyApp extends StatelessWidget {
                   ? const WelcomeScreen()
                   : const MainScreen()
               : const SpalshScreen(),
+         // home: const TestingScreen(),
           routes: <String, WidgetBuilder>{
             EmptyScreen.routeName: (_) => const EmptyScreen(),
             WelcomeScreen.routeName: (_) => const WelcomeScreen(),
-   
+
             SigninWithEmailScreen.routeName: (_) =>
                 const SigninWithEmailScreen(),
             SignupWithEmailScreen.routeName: (_) =>
