@@ -41,11 +41,11 @@ class PaymentProvider with ChangeNotifier {
     _order.clear();
     List<Order> tempOrder = <Order>[];
     tempOrder = await OrderApi().get();
-    // for (int i = 0; i < tempOrder.length; i++) {
-    //   if (AuthMethods.uid == tempOrder[i].customerUID) {
-    //     _order.add(tempOrder[i]);
-    //   }
-    // }
+    for (int i = 0; i < tempOrder.length; i++) {
+      if (AuthMethods.uid == tempOrder[i].customerUID) {
+        _order.add(tempOrder[i]);
+      }
+    }
     _allOrder = tempOrder;
     _receipt = await ReceiptApi().get();
     getGraphData();

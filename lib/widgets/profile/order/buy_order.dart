@@ -10,6 +10,7 @@ class BuyOrder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     PaymentProvider orderPro = Provider.of<PaymentProvider>(context);
+    // print(orderPro.)
     return Scaffold(
       body: ListView.builder(
         itemCount: orderPro.order.length,

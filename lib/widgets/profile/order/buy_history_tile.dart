@@ -184,7 +184,9 @@ class _OrderHistoryTileState extends State<OrderHistoryTile> {
                     onTap: () async {
                       bool temp = await ratingPro.uploadRating(orderded);
                       if (temp) {
-                         Navigator.pop(context);
+                        ratingPro.clear();
+
+                        Navigator.pop(context);
                       }
                     }),
               ],

@@ -25,4 +25,9 @@ class RatingProvider with ChangeNotifier {
     }
     return temp;
   }
+
+  clear() {
+    rating = 1;
+    ratingComment.clear();
+  }
 }
