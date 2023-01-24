@@ -14,9 +14,11 @@ import '../../models/chat/chat.dart';
 import '../../models/location.dart';
 import '../../models/product/product_model.dart';
 import '../../providers/location_provider.dart';
+import '../../providers/rating_provider.dart';
 import '../../providers/user_provider.dart';
 import '../../widgets/custom_widgets/custom_dialog.dart';
 import '../../widgets/custom_widgets/custom_profile_image.dart';
+import '../../widgets/custom_widgets/custom_toast.dart';
 import '../../widgets/product/add_to_cart_widget.dart';
 import '../../widgets/product/product_url_slider.dart';
 import '../../widgets/product/send_offer_widget.dart';
@@ -40,6 +42,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
         Provider.of<UserProvider>(context).user(widget.product.uid);
     CartProvider cartPro = Provider.of<CartProvider>(context);
     LocationProvider locationPro = Provider.of<LocationProvider>(context);
+    RatingProvider ratingPro = Provider.of<RatingProvider>(context);
     final UserLocation location =
         locationPro.productLocation(widget.product.locationUID);
     return Scaffold(
@@ -117,7 +120,9 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                     ),
                   ),
                   GestureDetector(
-                    onTap: () => mapBottomSheet(context, location),
+                    onTap: () {
+                      mapBottomSheet(context, location);
+                    },
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -149,12 +154,13 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
                           CustomRatingBar(
-                            itemSize: 24,
-                            initialRating: 5,
+                            itemSize: 20,
+                            initialRating: ratingPro.userRating(seller.uid),
                             onRatingUpdate: (_) {},
                           ),
-                          const ForText(
-                            name: '(0 reviews)',
+                          ForText(
+                            name:
+                                '(${ratingPro.userReviewsCount(seller.uid)} reviews)',
                             size: 13,
                             color: Colors.grey,
                           ),
@@ -302,7 +308,6 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
   ) async {
     return await showModalBottomSheet(
         isScrollControlled: true,
-        //transitionAnimationController: controller,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10.0),
         ),
@@ -336,12 +341,46 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                   clipBehavior: Clip.hardEdge,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(12),
-                    color: Colors.black,
+                    color: location.longitude == 0
+                        ? Colors.transparent
+                        : Colors.black,
                   ),
-                  child: GoogleMapWidget(
-                    latitude: location.latitude,
-                    longitude: location.longitude,
-                  ),
+                  child: location.longitude == 0
+                      ? Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 16),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: const <Widget>[
+                              Icon(
+                                Icons.wrong_location_outlined,
+                                size: 52,
+                                color: Colors.grey,
+                              ),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              ForText(
+                                name: 'Location not found',
+                                bold: true,
+                              ),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              ForText(
+                                name:
+                                    'Location not found, please check your devices GPS settings and ensure that you have a stable internet connection',
+                                color: Colors.grey,
+                              ),
+                              SizedBox(
+                                height: 50,
+                              ),
+                            ],
+                          ),
+                        )
+                      : GoogleMapWidget(
+                          latitude: location.latitude,
+                          longitude: location.longitude,
+                        ),
                 ),
               ],
             ),

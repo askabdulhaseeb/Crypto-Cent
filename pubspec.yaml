@@ -65,6 +65,7 @@ dependencies:
   geolocator: ^9.0.2
   google_maps_webservice: ^0.0.19
   flutter_gen: ^5.1.0+1
+  share_plus: ^6.3.0
 
 dev_dependencies:
   flutter_test:

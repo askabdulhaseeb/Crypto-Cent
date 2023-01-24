@@ -20,4 +20,15 @@ class ReviewApi {
       return false;
     }
   }
+  Future<List<Review>> getdata() async {
+    List<Review> value = <Review>[];
+    QuerySnapshot<Map<String, dynamic>> snapshot = await _instance
+        .collection(_collection)
+        .orderBy('timestamp', descending: true)
+        .get();
+    for (DocumentSnapshot<Map<String, dynamic>> e in snapshot.docs) {
+      value.add(Review.fromMap(e));
+    }
+    return value;
+  }
 }

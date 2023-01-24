@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class Review {
   Review({
     required this.reviewID,
@@ -30,15 +32,15 @@ class Review {
   }
 
   // ignore: sort_constructors_first
-  factory Review.fromMap(Map<String, dynamic> map) {
+  factory Review.fromMap(DocumentSnapshot <Map<String, dynamic>> doc) {
     return Review(
-      reviewID: map['review_id'] ?? '',
-      customerUID: map['customer_uid'] ?? '',
-      sellerUID: map['seller_uid'] ?? '',
-      timestamp: map['timestamp'] ?? 0,
-      rating: map['rating'] ?? 0.0,
-      comment: map['comment'] ?? '',
-      productID: map['product_id'],
+      reviewID: doc.data()?['review_id'] ?? '',
+      customerUID: doc.data()?['customer_uid'] ?? '',
+      sellerUID: doc.data()?['seller_uid'] ?? '',
+      timestamp: doc.data()?['timestamp'] ?? 0,
+      rating: doc.data()?['rating'] ?? 0.0,
+      comment: doc.data()?['comment'] ?? '',
+      productID: doc.data()?['product_id']??'',
       
     );
   }

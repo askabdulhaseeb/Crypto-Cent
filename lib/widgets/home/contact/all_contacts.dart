@@ -1,11 +1,14 @@
+import 'package:share_plus/share_plus.dart';
+import 'package:url_launcher/url_launcher.dart';
+
 import 'contact_image.dart';
 import 'package:fast_contacts/fast_contacts.dart';
 import 'package:flutter/material.dart';
-
+import 'dart:io' show Platform;
 import '../../custom_widgets/custom_widget.dart';
 
 class ContactItem extends StatelessWidget {
-  const ContactItem({
+  ContactItem({
     Key? key,
     required this.contact,
   }) : super(key: key);
@@ -32,9 +35,11 @@ class ContactItem extends StatelessWidget {
     ].join('\n');
   }
 
+  String text =
+      'Download our app now for a convenient and seamless experience. Available on both iOS and Android. Download now!\n www.bloodo.com';
+  String link = 'www.google.com';
   @override
   Widget build(BuildContext context) {
-    print(1);
     return SizedBox(
       height: height,
       child: ListTile(
@@ -46,7 +51,9 @@ class ContactItem extends StatelessWidget {
               width: 80,
               child: CustomElevatedButton(
                 title: 'Invite',
-                onTap: () {},
+                onTap: () {
+                  onShare(context);
+                },
 
                 // textStyle: TextStyle(
                 //     color: Theme.of(context).secondaryHeaderColor, fontSize: 18),
@@ -55,4 +62,12 @@ class ContactItem extends StatelessWidget {
               ))),
     );
   }
+
+  void onShare(BuildContext context) async {
+    final box = context.findRenderObject() as RenderBox?;
+    await Share.share(text,
+        subject: link,
+        sharePositionOrigin: box!.localToGlobal(Offset.zero) & box.size);
+  }
+
 }
