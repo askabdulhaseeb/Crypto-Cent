@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../providers/provider.dart';
+import '../../database/app_user/auth_method.dart';
 import '../../function/rating_function.dart';
+import '../../function/report_bottom_sheets.dart';
 import '../../models/app_user/app_user.dart';
 import '../../models/product/product_model.dart';
 import '../../models/review.dart';
@@ -26,7 +28,16 @@ class OtherUserProfile extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Theme.of(context).secondaryHeaderColor,
         title: Text(appUser.name!),
-        actions: [],
+        actions: <Widget>[
+          if (AuthMethods.uid.isNotEmpty)
+            IconButton(
+                onPressed: () => ReportBottomSheets()
+                    .otherUserProfileMoreButton(context, appUser),
+                icon: const Icon(
+                  Icons.more_vert_outlined,
+                  color: Colors.black,
+                ))
+        ],
       ),
       body: SingleChildScrollView(
         child: Column(
