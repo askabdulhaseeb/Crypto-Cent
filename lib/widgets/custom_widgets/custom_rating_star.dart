@@ -7,18 +7,20 @@ class CustomRatingBar extends StatelessWidget {
     this.initialRating = 0,
     this.ignoreGestures = true,
     this.itemSize = 14,
+    this.isPadding=true,
     super.key,
   });
   final double itemSize;
   final double initialRating;
   final bool ignoreGestures;
+  final bool isPadding;
   final void Function(double) onRatingUpdate;
 
   @override
   Widget build(BuildContext context) {
     return RatingBar(
       itemSize: itemSize,
-      itemPadding: const EdgeInsets.symmetric(vertical: 4),
+      itemPadding: isPadding? EdgeInsets.symmetric(vertical: 4):EdgeInsets.symmetric(vertical: 0),
       initialRating: initialRating,
       allowHalfRating: true,
       ignoreGestures: ignoreGestures,
@@ -36,7 +38,6 @@ class CustomRatingBar extends StatelessWidget {
           color: Theme.of(context).primaryColor.withOpacity(0.3),
         ),
       ),
-      
       onRatingUpdate: (double value) {
         print('chl ya yar');
         onRatingUpdate(value);

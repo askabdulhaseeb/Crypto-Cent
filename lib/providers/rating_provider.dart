@@ -32,25 +32,17 @@ class RatingProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  double userRating(String uid) {
+  List<Review> productReviews(String uid) {
     print('chala ha');
-    List<Review> currentUserReview =
-        _review.where((Review e) => e.sellerUID == uid).toList();
-    int i = 0;
-    double total = 0;
-    for (; i < currentUserReview.length; i++) {
-      total = currentUserReview[i].rating;
-    }
-    return total / i;
+    List<Review> currentReview =
+        _review.where((Review e) => e.productID == uid).toList();
+    return currentReview;
   }
-
-  int userReviewsCount(String uid) {
-    print('chala ha');
-    List<Review> currentUserReview =
+  List<Review> userReviews(String uid) {
+    List<Review> currentReview =
         _review.where((Review e) => e.sellerUID == uid).toList();
-    return currentUserReview.length;
+    return currentReview;
   }
-
   clear() {
     rating = 1;
     ratingComment.clear();

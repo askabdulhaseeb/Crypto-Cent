@@ -1,16 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../function/rating_function.dart';
 import '../../models/product/product_model.dart';
 import '../../../providers/product_provider.dart';
 import '../../../utilities/app_images.dart';
 import '../../../widgets/custom_widgets/custom_network_image.dart';
 import '../../../widgets/custom_widgets/custom_widget.dart';
+import '../../models/review.dart';
 import '../../screens/product_screens/product_detail_screen.dart';
+import '../custom_widgets/custom_rating_star.dart';
 
 class ProductTile extends StatelessWidget {
-  const ProductTile({required this.product, Key? key}) : super(key: key);
+  const ProductTile({required this.product, this.reviews, Key? key})
+      : super(key: key);
   final Product product;
+  final List<Review>? reviews;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -72,22 +77,26 @@ class ProductTile extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(height: 5),
-                      Row(
-                        children: <Widget>[
-                          const SizedBox(width: 6),
-                          Icon(
-                            Icons.star,
-                            color: Theme.of(context).primaryColor,
-                            size: 14,
-                          ),
-                          const SizedBox(width: 6),
-                          const ForText(
-                            name: '0 Review',
-                            size: 11,
-                            color: Colors.grey,
-                          ),
-                        ],
-                      ),
+                      reviews == null
+                          ? SizedBox()
+                          : Row(
+                              children: <Widget>[
+                                const SizedBox(width: 6),
+                                CustomRatingBar(
+                                  itemSize: 14,
+                                  initialRating:
+                                      ReviewFunction().rating(reviews!),
+                                  onRatingUpdate: (_) {},
+                                  isPadding: false,
+                                ),
+                                const SizedBox(width: 6),
+                                ForText(
+                                  name: '(${reviews!.length} reviews)',
+                                  size: 11,
+                                  color: Colors.grey,
+                                ),
+                              ],
+                            ),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 8),
                         child: Row(

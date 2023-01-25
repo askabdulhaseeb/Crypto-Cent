@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../providers/provider.dart';
+import '../../function/rating_function.dart';
 import '../../models/app_user/app_user.dart';
 import '../../models/product/product_model.dart';
+import '../../models/review.dart';
+import '../../providers/rating_provider.dart';
+import '../../screens/reviews/review_screen.dart';
 import '../custom_widgets/custom_rating_star.dart';
 import '../custom_widgets/cutom_text.dart';
 import '../product/extend_product_tile.dart';
@@ -15,6 +19,8 @@ class OtherUserProfile extends StatelessWidget {
   Widget build(BuildContext context) {
     ProductProvider prouctPro = Provider.of<ProductProvider>(context);
     List<Product> products = <Product>[];
+    List<Review> reviews =
+        Provider.of<RatingProvider>(context).userReviews(appUser.uid);
     products = prouctPro.productByUID(appUser.uid);
     return Scaffold(
       appBar: AppBar(
@@ -46,11 +52,11 @@ class OtherUserProfile extends StatelessWidget {
                     children: <Widget>[
                       CustomRatingBar(
                         itemSize: 24,
-                        initialRating: 5,
+                        initialRating: ReviewFunction().rating(reviews),
                         onRatingUpdate: (_) {},
                       ),
-                      const ForText(
-                        name: '(0 reviews)',
+                      ForText(
+                        name: '(${reviews.length} reviews)',
                         size: 13,
                         color: Colors.grey,
                       ),
@@ -59,7 +65,14 @@ class OtherUserProfile extends StatelessWidget {
                 ],
               ),
             ),
-            tilewidget(context: context, text: 'Reviews', icon: Icons.reviews),
+            tilewidget(context: context, text: 'Reviews', icon: Icons.reviews,onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute<ReviewScreen>(
+                                builder: (BuildContext context) =>
+                                    ReviewScreen(reviews: reviews, isProduct: false,id: appUser.uid,),
+                              ));
+                        },),
             const SizedBox(height: 30),
             GridView.count(
               childAspectRatio: 200 / 330,
@@ -78,21 +91,24 @@ class OtherUserProfile extends StatelessWidget {
     );
   }
 
-  Widget tilewidget({BuildContext? context, String? text, IconData? icon}) {
-    return Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(12),
-        color: const Color(0xffF6F7F9),
-      ),
-      margin: const EdgeInsets.symmetric(vertical: 4, horizontal: 25),
-      child: ListTile(
-        leading: Icon(
-          icon!,
-          color: Theme.of(context!).primaryColor,
+  Widget tilewidget({BuildContext? context, String? text, IconData? icon, VoidCallback? onTap,}) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(12),
+          color: const Color(0xffF6F7F9),
         ),
-        title: ForText(
-          name: text!,
-          bold: true,
+        margin: const EdgeInsets.symmetric(vertical: 4, horizontal: 25),
+        child: ListTile(
+          leading: Icon(
+            icon!,
+            color: Theme.of(context!).primaryColor,
+          ),
+          title: ForText(
+            name: text!,
+            bold: true,
+          ),
         ),
       ),
     );

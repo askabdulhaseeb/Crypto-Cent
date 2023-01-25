@@ -7,12 +7,14 @@ import '../../../widgets/custom_widgets/custom_widget.dart';
 import '../../database/app_user/auth_method.dart';
 import '../../database/chat_api.dart';
 import '../../function/crypto_function.dart';
+import '../../function/rating_function.dart';
 import '../../function/report_bottom_sheets.dart';
 import '../../function/unique_id_functions.dart';
 import '../../models/app_user/app_user.dart';
 import '../../models/chat/chat.dart';
 import '../../models/location.dart';
 import '../../models/product/product_model.dart';
+import '../../models/review.dart';
 import '../../providers/location_provider.dart';
 import '../../providers/rating_provider.dart';
 import '../../providers/user_provider.dart';
@@ -26,6 +28,7 @@ import '../chat_screen/private/personal_chat_screen.dart';
 import '../chat_screen/private/product_chat_screen.dart';
 import '../../widgets/profile/other_user_profile.dart';
 import '../map_screen/map_screen.dart';
+import '../reviews/review_screen.dart';
 
 class ProductDetailScreen extends StatefulWidget {
   const ProductDetailScreen({required this.product, super.key});
@@ -42,9 +45,11 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
         Provider.of<UserProvider>(context).user(widget.product.uid);
     CartProvider cartPro = Provider.of<CartProvider>(context);
     LocationProvider locationPro = Provider.of<LocationProvider>(context);
-    RatingProvider ratingPro = Provider.of<RatingProvider>(context);
     final UserLocation location =
         locationPro.productLocation(widget.product.locationUID);
+
+    List<Review> reviews =
+        Provider.of<RatingProvider>(context).productReviews(widget.product.pid);
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -150,21 +155,30 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                   const SizedBox(height: 10),
                   Row(
                     children: <Widget>[
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          CustomRatingBar(
-                            itemSize: 20,
-                            initialRating: ratingPro.userRating(seller.uid),
-                            onRatingUpdate: (_) {},
-                          ),
-                          ForText(
-                            name:
-                                '(${ratingPro.userReviewsCount(seller.uid)} reviews)',
-                            size: 13,
-                            color: Colors.grey,
-                          ),
-                        ],
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute<ReviewScreen>(
+                                builder: (BuildContext context) =>
+                                    ReviewScreen(reviews: reviews, isProduct: true,id: widget.product.pid,),
+                              ));
+                        },
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            CustomRatingBar(
+                              itemSize: 20,
+                              initialRating: ReviewFunction().rating(reviews),
+                              onRatingUpdate: (_) {},
+                            ),
+                            ForText(
+                              name: '(${reviews.length} reviews)',
+                              size: 13,
+                              color: Colors.grey,
+                            ),
+                          ],
+                        ),
                       ),
                       const Spacer(),
                       Column(

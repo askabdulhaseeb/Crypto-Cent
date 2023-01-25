@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 
 import '../../../providers/product_provider.dart';
 import '../../../widgets/product/product_tile.dart';
+import '../../providers/rating_provider.dart';
 
 class LatestProductsList extends StatelessWidget {
   const LatestProductsList({Key? key}) : super(key: key);
@@ -20,6 +21,7 @@ class LatestProductsList extends StatelessWidget {
         itemBuilder: (BuildContext context, int index) {
           return ProductTile(
             product: productPro.products[index],
+            reviews:  Provider.of<RatingProvider>(context).productReviews(productPro.products[index].pid),
           );
         },
       ),
