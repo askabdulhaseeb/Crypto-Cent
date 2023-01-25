@@ -26,6 +26,7 @@ class OtherUserProfile extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Theme.of(context).secondaryHeaderColor,
         title: Text(appUser.name!),
+        actions: [],
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -47,32 +48,53 @@ class OtherUserProfile extends StatelessWidget {
                         : null,
                   ),
                   const SizedBox(height: 10),
-                  Column(
-                    //crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      CustomRatingBar(
-                        itemSize: 24,
-                        initialRating: ReviewFunction().rating(reviews),
-                        onRatingUpdate: (_) {},
-                      ),
-                      ForText(
-                        name: '(${reviews.length} reviews)',
-                        size: 13,
-                        color: Colors.grey,
-                      ),
-                    ],
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute<ReviewScreen>(
+                            builder: (BuildContext context) => ReviewScreen(
+                              reviews: reviews,
+                              isProduct: false,
+                              id: appUser.uid,
+                            ),
+                          ));
+                    },
+                    child: Column(
+                      //crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        CustomRatingBar(
+                          itemSize: 24,
+                          initialRating: ReviewFunction().rating(reviews),
+                          onRatingUpdate: (_) {},
+                        ),
+                        ForText(
+                          name: '(${reviews.length} reviews)',
+                          size: 13,
+                          color: Colors.grey,
+                        ),
+                      ],
+                    ),
                   ),
                 ],
               ),
             ),
-            tilewidget(context: context, text: 'Reviews', icon: Icons.reviews,onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute<ReviewScreen>(
-                                builder: (BuildContext context) =>
-                                    ReviewScreen(reviews: reviews, isProduct: false,id: appUser.uid,),
-                              ));
-                        },),
+            tilewidget(
+              context: context,
+              text: 'Reviews',
+              icon: Icons.reviews,
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute<ReviewScreen>(
+                      builder: (BuildContext context) => ReviewScreen(
+                        reviews: reviews,
+                        isProduct: false,
+                        id: appUser.uid,
+                      ),
+                    ));
+              },
+            ),
             const SizedBox(height: 30),
             GridView.count(
               childAspectRatio: 200 / 330,
@@ -91,7 +113,12 @@ class OtherUserProfile extends StatelessWidget {
     );
   }
 
-  Widget tilewidget({BuildContext? context, String? text, IconData? icon, VoidCallback? onTap,}) {
+  Widget tilewidget({
+    BuildContext? context,
+    String? text,
+    IconData? icon,
+    VoidCallback? onTap,
+  }) {
     return GestureDetector(
       onTap: onTap,
       child: Container(
