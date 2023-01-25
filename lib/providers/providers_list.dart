@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'add_product_p.dart';
-import 'location_provider.dart';
+
 import 'provider.dart';
-import 'rating_provider.dart';
 
 // ignore: always_specify_types
 dynamic get listOfProvider => [

@@ -9,16 +9,8 @@ import 'database/notification_services.dart';
 import 'firebase_options.dart';
 import 'providers/provider.dart';
 import 'providers/providers_list.dart';
-import 'screens/chat_screen/group/create_group_screen.dart';
-import 'screens/empty_screen/empty_screen.dart';
-import 'screens/empty_screen/testing_screen.dart';
-import 'screens/map_screen/add_new_address.dart';
-import 'screens/map_screen/location_screen.dart';
-import 'screens/order/payment.dart';
-import 'screens/product_screens/add_product_screen.dart';
-import 'screens/profile_screen/selling_screen.dart';
+
 import 'screens/screens.dart';
-import 'screens/spalsh_screen/splash_screen.dart';
 
 Future<void> _firebaseMessBackgroundHand(RemoteMessage message) async {
   RemoteNotification? notification = message.notification;
@@ -54,7 +46,7 @@ class MyApp extends StatelessWidget {
                   ? const WelcomeScreen()
                   : const MainScreen()
               : const SpalshScreen(),
-         // home: const TestingScreen(),
+          // home: const TestingScreen(),
           routes: <String, WidgetBuilder>{
             EmptyScreen.routeName: (_) => const EmptyScreen(),
             WelcomeScreen.routeName: (_) => const WelcomeScreen(),

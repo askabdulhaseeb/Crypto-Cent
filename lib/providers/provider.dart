@@ -10,3 +10,7 @@ export 'crypto_wallet/wallet_provider.dart';
 export 'payment/payment_provider.dart';
 export 'product_provider.dart';
 export 'user_provider.dart';
+
+export 'add_product_p.dart';
+export 'location_provider.dart';
+export 'rating_provider.dart';
