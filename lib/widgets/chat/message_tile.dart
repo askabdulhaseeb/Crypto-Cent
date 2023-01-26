@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 import '../../database/app_user/auth_method.dart';
@@ -94,7 +95,8 @@ class MessageTile extends StatelessWidget {
                                   final AppUser senderInfo =
                                       userPro.user(message.sendBy);
                                   return InkWell(
-                                    onTap: () {
+                                    onTap: () async{
+                                      await HapticFeedback.heavyImpact();
                                       // Navigator.of(context).push(
                                       //     MaterialPageRoute<OthersProfile>(
                                       //   builder: (BuildContext context) =>
@@ -186,7 +188,8 @@ class DisplayAttachment extends StatelessWidget {
                   topLeft: Radius.circular(_borderRadius),
                 ),
           child: GestureDetector(
-            onTap: () {
+            onTap: () async{
+              await HapticFeedback.heavyImpact();
               // Navigator.of(context).push(
               //     MaterialPageRoute<MessageAttachmentScreen>(
               //         builder: (BuildContext context) =>

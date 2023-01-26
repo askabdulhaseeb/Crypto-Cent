@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:intl_phone_field/phone_number.dart';
 import 'package:provider/provider.dart';
 
@@ -51,7 +52,8 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
                 child: CustomElevatedButton(
                   borderRadius: BorderRadius.circular(12),
                   title: 'Send'.toUpperCase(),
-                  onTap: () {
+                  onTap: () async{
+                       await HapticFeedback.heavyImpact();
                     authPro.verifyPhone(context);
                     Navigator.push(
                       context,

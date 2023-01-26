@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 import '../../function/crypto_function.dart';
@@ -91,7 +92,8 @@ class CartItem extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
                 GestureDetector(
-                  onTap: () {
+                  onTap: () async {
+                    await HapticFeedback.heavyImpact();
                     cartPro.addProduct(item.id);
                   },
                   child: const Icon(Icons.add, size: 15),
@@ -127,7 +129,10 @@ class CartItem extends StatelessWidget {
           Consumer<CartProvider>(
               builder: (BuildContext context, CartProvider cartPro, _) {
             return GestureDetector(
-              onTap: () => cartPro.removeProduct(item.id),
+              onTap: () async {
+                await HapticFeedback.heavyImpact();
+                cartPro.removeProduct(item.id);
+              },
               child: const Padding(
                 padding: EdgeInsets.all(8.0),
                 child: Icon(Icons.delete, color: Colors.red),

@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import '../../utilities/app_images.dart';
 import '../../widgets/custom_widgets/custom_widget.dart';
@@ -70,18 +71,23 @@ class EmptyAuthScreen extends StatelessWidget {
                                   textStyle: const TextStyle(
                                       color: Colors.black,
                                       fontWeight: FontWeight.bold),
-                                  onTap: () => Navigator.of(context)
-                                      .pushNamedAndRemoveUntil(
-                                          WelcomeScreen.routeName,
-                                          (Route<dynamic> route) => false),
+                                  onTap: () async {
+                                    await HapticFeedback.heavyImpact();
+                                    Navigator.of(context)
+                                        .pushNamedAndRemoveUntil(
+                                            WelcomeScreen.routeName,
+                                            (Route<dynamic> route) => false);
+                                  },
                                   bgColor:
                                       const Color.fromARGB(255, 215, 236, 254)),
                               CustomElevatedButton(
                                 title: 'Create a account',
-                                onTap: () => Navigator.of(context)
-                                    .pushNamedAndRemoveUntil(
-                                        WelcomeScreen.routeName,
-                                        (Route<dynamic> route) => false),
+                                onTap: () async {
+                                  await HapticFeedback.heavyImpact();
+                                  Navigator.of(context).pushNamedAndRemoveUntil(
+                                      WelcomeScreen.routeName,
+                                      (Route<dynamic> route) => false);
+                                },
                               ),
                             ],
                           ),

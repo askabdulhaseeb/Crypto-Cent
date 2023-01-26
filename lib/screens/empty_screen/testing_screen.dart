@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:provider/provider.dart';
 import '../../providers/rating_provider.dart';
@@ -24,7 +25,8 @@ class _TestingScreenState extends State<TestingScreen> {
           children: [
             CustomElevatedButton(
               title: 'title',
-              onTap: () {
+              onTap: () async{
+                   await HapticFeedback.heavyImpact();
                 alertBox(context);
               },
             ),
@@ -74,7 +76,7 @@ class _TestingScreenState extends State<TestingScreen> {
                 maxLines: 5,
               ),
               actions: [
-                CustomElevatedButton(title: 'Done', onTap: () {}),
+                CustomElevatedButton(title: 'Done', onTap: () async{await HapticFeedback.heavyImpact();}),
               ],
             );
           });

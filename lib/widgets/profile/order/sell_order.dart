@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 import '../../../database/payment/order_api.dart';
@@ -54,6 +55,7 @@ class SellOrder extends StatelessWidget {
                             title: 'Cancel',
                             bgColor: Colors.red[200],
                             onTap: () async {
+                              await HapticFeedback.heavyImpact();
                               orderPro.sellProducts[index].status =
                                   OrderStatusEnum.cancel;
                               await OrderApi().updateStatus(item);
@@ -71,6 +73,7 @@ class SellOrder extends StatelessWidget {
                             child: CustomElevatedButton(
                               title: 'Deliver',
                               onTap: () async {
+                                await HapticFeedback.heavyImpact();
                                 orderPro.sellProducts[index].status =
                                     OrderStatusEnum.inProgress;
                                 await OrderApi().updateStatus(item);

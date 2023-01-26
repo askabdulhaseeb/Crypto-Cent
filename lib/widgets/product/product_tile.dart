@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 import '../../function/rating_function.dart';
@@ -23,7 +24,8 @@ class ProductTile extends StatelessWidget {
         left: 4,
       ),
       child: InkWell(
-        onTap: () {
+        onTap: () async{
+          await HapticFeedback.heavyImpact();
           Navigator.push(
               context,
               MaterialPageRoute<ProductDetailScreen>(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:provider/provider.dart';
@@ -173,6 +174,7 @@ class _AddNewAddressState extends State<AddNewAddress> {
                     : CustomElevatedButton(
                         title: 'Add Address',
                         onTap: () async {
+                          await HapticFeedback.heavyImpact();
                           if (_formKey.currentState!.validate()) {
                             UserLocation location = UserLocation(
                               address: address.text,

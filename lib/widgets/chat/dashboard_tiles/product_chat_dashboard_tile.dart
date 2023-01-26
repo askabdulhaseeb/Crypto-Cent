@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import '../../../database/app_user/auth_method.dart';
 import '../../../function/time_date_function.dart';
@@ -26,7 +27,8 @@ class ProductChatDashboardTile extends StatelessWidget {
       final AppUser user = userPro.user(chat.persons[chat.persons
           .indexWhere((String element) => element != AuthMethods.uid)]);
       return ListTile(
-        onTap: () {
+        onTap: () async{
+          await HapticFeedback.heavyImpact();
           Navigator.of(context).push(
             MaterialPageRoute<ProductChatScreen>(
               builder: (_) => ProductChatScreen(chat: chat),

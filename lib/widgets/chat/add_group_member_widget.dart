@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 import '../../database/app_user/auth_method.dart';
@@ -122,7 +123,8 @@ class _AddGroupMemberWidgetState extends State<AddGroupMemberWidget> {
                             final bool alreadyMember =
                                 widget.chat.persons.contains(cUserUID);
                             return InkWell(
-                              onTap: () {
+                              onTap: () async{
+                                await HapticFeedback.heavyImpact();
                                 if (alreadyMember) return;
                                 if (selectedUser.contains(cUserUID)) {
                                   selectedUser.remove(cUserUID);

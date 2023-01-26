@@ -137,7 +137,10 @@ class _SendOfferWidgetState extends State<SendOfferWidget> {
                           children: <Widget>[
                             Expanded(
                               child: CustomElevatedButton(
-                                onTap: () => Navigator.of(context).pop(),
+                                onTap: () async {
+                                  await HapticFeedback.heavyImpact();
+                                  Navigator.of(context).pop();
+                                },
                                 title: 'Back',
                               ),
                             ),

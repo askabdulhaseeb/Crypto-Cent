@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 import '../../../database/app_user/auth_method.dart';
@@ -41,7 +42,10 @@ class ChatProductTile extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         InkWell(
-                          onTap: () => showProdDetail(context, product),
+                          onTap: () async {
+                            await HapticFeedback.heavyImpact();
+                            showProdDetail(context, product);
+                          },
                           child: Text(
                             product.productname,
                             maxLines: 1,
@@ -81,7 +85,10 @@ class ChatProductTile extends StatelessWidget {
           const SizedBox(width: 10),
           if (product.prodURL.isNotEmpty)
             InkWell(
-              onTap: () => showProdDetail(context, product),
+              onTap: () async {
+                await HapticFeedback.heavyImpact();
+                showProdDetail(context, product);
+              },
               child: SizedBox(
                 height: imageSize * 1.3,
                 width: imageSize * 1.3,

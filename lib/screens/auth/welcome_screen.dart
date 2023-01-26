@@ -1,6 +1,7 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 import '../../database/app_user/auth_method.dart';
@@ -62,8 +63,11 @@ class WelcomeScreen extends StatelessWidget {
             CustomElevatedButton(
               title: 'Login with email',
               borderRadius: BorderRadius.circular(24),
-              onTap: () => Navigator.of(context)
-                  .pushNamed(SigninWithEmailScreen.routeName),
+              onTap: () async {
+                await HapticFeedback.heavyImpact();
+                Navigator.of(context)
+                    .pushNamed(SigninWithEmailScreen.routeName);
+              },
             ),
             Padding(
               padding: const EdgeInsets.all(32),
@@ -79,8 +83,11 @@ class WelcomeScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
                 GestureDetector(
-                  onTap: () async => Navigator.of(context)
-                      .pushNamed(PhoneNumberScreen.routeName),
+                  onTap: () async {
+                    await HapticFeedback.heavyImpact();
+                    Navigator.of(context)
+                        .pushNamed(PhoneNumberScreen.routeName);
+                  },
                   child: CircleAvatar(
                     radius: 30,
                     backgroundColor: Theme.of(context).secondaryHeaderColor,
@@ -90,15 +97,14 @@ class WelcomeScreen extends StatelessWidget {
                 ),
                 GestureDetector(
                   onTap: () async {
+                       await HapticFeedback.heavyImpact();
                     int index = await AuthMethods().signinWithGoogle();
                     if (index == -1) {
                       return;
                     } else if (index == 0) {
-                   
                       await NotificationsServices().onLogin(context);
                       bool temp1 = await WalletCreation().addWallet();
                       if (temp1) {
-                        
                         Provider.of<AppProvider>(context, listen: false)
                             .onTabTapped(0);
                         Navigator.of(context).pushNamedAndRemoveUntil(
@@ -119,6 +125,7 @@ class WelcomeScreen extends StatelessWidget {
                 ),
                 GestureDetector(
                   onTap: () async {
+                       await HapticFeedback.heavyImpact();
                     // TODO: SIGN IN WITH APPLE
                   },
                   child: CircleAvatar(

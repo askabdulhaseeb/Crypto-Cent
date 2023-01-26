@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 import '../../providers/auth_provider.dart';
@@ -44,7 +45,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       const SizedBox(height: 30),
                       CustomFileImageBox(
                         file: authPro.profilePhoto,
-                        onTap: () => authPro.pickProfilePhoto(),
+                        onTap: () async {
+                          await HapticFeedback.heavyImpact();
+                          authPro.pickProfilePhoto();
+                        },
                       ),
                       CustomTextFormField(
                         controller: authPro.name,
@@ -70,8 +74,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           ? const ShowLoading()
                           : CustomElevatedButton(
                               title: 'Register',
-                              onTap: () => authPro.onRegister(context),
-                            ),
+                              onTap: () async {
+                                await HapticFeedback.heavyImpact();
+                                authPro.onRegister(context);
+                              }),
                       const SizedBox(height: 40),
                     ],
                   ),

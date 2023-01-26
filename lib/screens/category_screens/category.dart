@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 import '../../providers/categories_provider.dart';
@@ -23,7 +24,8 @@ class CategoryScreen extends StatelessWidget {
           // ignore: always_specify_types
           children: List.generate(catPro.categories.length, (int index) {
             return InkWell(
-              onTap: () {
+              onTap: () async{
+                   await HapticFeedback.heavyImpact();
                 Navigator.push(
                     context,
                     // ignore: always_specify_types

@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import '../../providers/provider.dart';
 import '../../utilities/app_images.dart';
@@ -66,7 +67,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
                           GestureDetector(
-                            onTap: () {
+                            onTap: () async {
+                              await HapticFeedback.heavyImpact();
                               _key.currentState!.openDrawer();
                             },
                             child: Container(
@@ -92,7 +94,10 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                             child: Image.asset(AppImages.logo),
                           ),
                           GestureDetector(
-                            onTap: () => bottomSheet(context),
+                            onTap: () async {
+                              await HapticFeedback.heavyImpact();
+                              bottomSheet(context);
+                            },
                             child: CircleAvatar(
                               backgroundColor:
                                   Theme.of(context).secondaryHeaderColor,
@@ -421,7 +426,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     return AppBar(
       actions: <Widget>[
         GestureDetector(
-          onTap: () {
+          onTap: () async{
+            await HapticFeedback.heavyImpact();
             Navigator.push(
               context,
               MaterialPageRoute<SerachScreen>(

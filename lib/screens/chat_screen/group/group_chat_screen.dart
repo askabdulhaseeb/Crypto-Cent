@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import '../../../database/chat_api.dart';
 import '../../../models/chat/chat.dart';
@@ -20,7 +21,8 @@ class GroupChatScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: InkWell(
-          onTap: () {
+          onTap: () async{
+               await HapticFeedback.heavyImpact();
             Navigator.of(context).push(MaterialPageRoute<GroupChatDetailScreen>(
               builder: (BuildContext context) =>
                   GroupChatDetailScreen(chat: chat),

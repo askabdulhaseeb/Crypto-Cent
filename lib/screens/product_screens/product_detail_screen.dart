@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 import '../../../providers/cart_provider.dart';
@@ -57,7 +58,8 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
         backgroundColor: Colors.white,
         elevation: 0,
         title: GestureDetector(
-          onTap: () {
+          onTap: () async {
+            await HapticFeedback.heavyImpact();
             Navigator.push(
                 context,
                 MaterialPageRoute<ProductDetailScreen>(
@@ -125,21 +127,13 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                     ),
                   ),
                   GestureDetector(
-                    onTap: () {
+                    onTap: () async {
+                      await HapticFeedback.heavyImpact();
                       mapBottomSheet(context, location);
                     },
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          location.address,
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          style: TextStyle(
-                              fontSize: 12,
-                              fontWeight: FontWeight.w200,
-                              color: Theme.of(context).primaryColor),
-                        ),
                         Text(
                           '${location.city} , ${location.state}',
                           maxLines: 1,
@@ -156,12 +150,16 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                   Row(
                     children: <Widget>[
                       GestureDetector(
-                        onTap: () {
+                        onTap: () async {
+                          await HapticFeedback.heavyImpact();
                           Navigator.push(
                               context,
                               MaterialPageRoute<ReviewScreen>(
-                                builder: (BuildContext context) =>
-                                    ReviewScreen(reviews: reviews, isProduct: true,id: widget.product.pid,),
+                                builder: (BuildContext context) => ReviewScreen(
+                                  reviews: reviews,
+                                  isProduct: true,
+                                  id: widget.product.pid,
+                                ),
                               ));
                         },
                         child: Column(
@@ -229,8 +227,11 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                       color: Theme.of(context).primaryColor,
                       fontSize: 18,
                     ),
-                    onTap: () => ReportBottomSheets()
-                        .productReport(context, widget.product),
+                    onTap: () async {
+                      await HapticFeedback.heavyImpact();
+                      ReportBottomSheets()
+                          .productReport(context, widget.product);
+                    },
                   ),
                   const SizedBox(height: 100),
                 ],
@@ -247,7 +248,8 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                 child: (AuthMethods.uid.isEmpty)
                     ? CustomElevatedButton(
                         title: 'Add To Cart',
-                        onTap: () {
+                        onTap: () async{
+                          await HapticFeedback.heavyImpact();
                           showDialog(
                               context: context,
                               builder: (BuildContext context) {
@@ -268,6 +270,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                                   color: Colors.black, fontSize: 18),
                               bgColor: Theme.of(context).secondaryHeaderColor,
                               onTap: () async {
+                                await HapticFeedback.heavyImpact();
                                 await sendOfferBottomSheet(context);
                               },
                             ),
@@ -277,6 +280,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                             child: CustomElevatedButton(
                                 title: 'Add to Cart',
                                 onTap: () async {
+                                  await HapticFeedback.heavyImpact();
                                   await bottomSheet(context, cartPro);
                                 }),
                           ),

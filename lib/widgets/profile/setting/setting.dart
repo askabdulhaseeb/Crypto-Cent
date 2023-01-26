@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import '../../../screens/empty_screen/empty_screen.dart';
 import '../../../screens/map_screen/add_new_address.dart';
@@ -24,7 +25,8 @@ class Setting extends StatelessWidget {
               ),
               ProfileNavTile(
                 name: 'Change Password',
-                onTap: () {
+                onTap: () async{
+                  await HapticFeedback.heavyImpact();
                   Navigator.of(context).push(MaterialPageRoute(
                     builder: (BuildContext context) => ChnagePassword(),
                   ));
@@ -35,7 +37,8 @@ class Setting extends StatelessWidget {
               ),
               ProfileNavTile(
                 name: 'Edit Address',
-                onTap: () {
+                onTap: () async{
+                  await HapticFeedback.heavyImpact();
                    Navigator.of(context).push(MaterialPageRoute(
                     builder: (BuildContext context) => AddNewAddress(isProduct: false),
                   ));
@@ -47,7 +50,8 @@ class Setting extends StatelessWidget {
               ),
               ProfileNavTile(
                 name: 'Location',
-                onTap: () {
+                onTap: () async{
+                  await HapticFeedback.heavyImpact();
                   Navigator.of(context).push(MaterialPageRoute<EmptyScreen>(
                     builder: (BuildContext context) => const LocationScreen(text: 'location',),
                   ));
@@ -58,7 +62,8 @@ class Setting extends StatelessWidget {
               ),
               ProfileNavTile(
                 name: 'Profile Setting',
-                onTap: () {
+                onTap: () async{
+                  await HapticFeedback.heavyImpact();
                   Navigator.of(context).push(MaterialPageRoute(
                     builder: (BuildContext context) => const EditProfile(),
                   ));

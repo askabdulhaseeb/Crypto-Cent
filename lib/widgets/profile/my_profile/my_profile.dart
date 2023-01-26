@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 import '../../../providers/provider.dart';
@@ -46,7 +47,8 @@ class MyProfile extends StatelessWidget {
               padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 25),
               child: CustomElevatedButton(
                   title: 'Update Profile',
-                  onTap: () {
+                  onTap: () async{
+                    await HapticFeedback.heavyImpact();
                     Navigator.of(context).push(MaterialPageRoute<EditProfile>(
                       builder: (BuildContext context) => const EditProfile(),
                     ));

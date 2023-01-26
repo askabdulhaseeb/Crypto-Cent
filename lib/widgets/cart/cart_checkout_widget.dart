@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 import '../../function/crypto_function.dart';
@@ -88,7 +89,8 @@ class CartCheckoutWidget extends StatelessWidget {
                   child: CustomElevatedButton(
                       title: 'Check out',
                       borderRadius: BorderRadius.circular(24),
-                      onTap: () {
+                      onTap: () async{
+                        await HapticFeedback.heavyImpact();
                         Navigator.push(
                           context,
                           // ignore: always_specify_types

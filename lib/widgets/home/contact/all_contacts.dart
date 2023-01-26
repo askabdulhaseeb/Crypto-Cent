@@ -1,3 +1,4 @@
+import 'package:flutter/services.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -51,7 +52,8 @@ class ContactItem extends StatelessWidget {
               width: 80,
               child: CustomElevatedButton(
                 title: 'Invite',
-                onTap: () {
+                onTap: () async{
+                  await HapticFeedback.heavyImpact();
                   onShare(context);
                 },
 

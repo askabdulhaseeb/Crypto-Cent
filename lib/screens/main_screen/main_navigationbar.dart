@@ -1,5 +1,6 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 import '../../providers/app_provider.dart';
@@ -24,11 +25,12 @@ class _MainBottomNavigationBarState extends State<MainBottomNavigationBar> {
         animationCurve: Curves.ease,
         index: currentTap,
         // key: _bottomNavigationKey,
-        onTap: (int index) {
+        onTap: (int index) async{
           // if (AuthMethods.uid.isEmpty && (index != 0 && index != 1)) {
           //   Navigator.of(context).pushNamed(EmptyScreen.routeName);
           // } else {
           // }
+          await HapticFeedback.heavyImpact();
           navBar.onTabTapped(index);
         },
         items: <Widget>[

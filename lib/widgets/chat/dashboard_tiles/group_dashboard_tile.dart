@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import '../../../function/time_date_function.dart';
 import '../../../models/chat/chat.dart';
 import '../../../screens/chat_screen/group/group_chat_screen.dart';
@@ -12,7 +13,8 @@ class GroupChatDashboardTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      onTap: () {
+      onTap: () async{
+        await HapticFeedback.heavyImpact();
         Navigator.of(context).push(
           MaterialPageRoute<GroupChatScreen>(
             builder: (_) => GroupChatScreen(chat: chat),

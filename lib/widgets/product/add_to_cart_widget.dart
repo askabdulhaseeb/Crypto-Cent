@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 import '../../models/product/product_model.dart';
@@ -150,7 +151,8 @@ class _AddToCartWidgetState extends State<AddToCartWidget> {
                   )
                 : CustomElevatedButton(
                     title: widget.buttonText,
-                    onTap: () {
+                    onTap: () async{
+                      await HapticFeedback.heavyImpact();
                       cartPro.addtocart(widget.product, quantity);
                       Navigator.of(context).pop();
                     }),

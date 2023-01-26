@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import '../../../database/app_user/auth_method.dart';
 import '../../../function/unique_id_functions.dart';
@@ -29,7 +30,9 @@ class BloodoContacts extends StatelessWidget {
               bgColor: Theme.of(context).secondaryHeaderColor,
               title: '  Send  ',
               textStyle: const TextStyle(color: Colors.black54, fontSize: 16),
-              onTap: () {},
+              onTap: () async{
+                await HapticFeedback.heavyImpact();
+              },
               padding: const EdgeInsets.symmetric(horizontal: 6),
             ),
             const SizedBox(
@@ -37,7 +40,8 @@ class BloodoContacts extends StatelessWidget {
             ),
             CustomElevatedButton(
               title: 'Message',
-              onTap: () {
+              onTap: () async{
+                await HapticFeedback.heavyImpact();
                 Navigator.of(context).push(
                   MaterialPageRoute<PersonalChatScreen>(
                     builder: (BuildContext context) => PersonalChatScreen(

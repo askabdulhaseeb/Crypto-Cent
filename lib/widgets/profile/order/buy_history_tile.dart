@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:provider/provider.dart';
 
@@ -73,6 +74,7 @@ class _OrderHistoryTileState extends State<OrderHistoryTile> {
                                   title: 'Cancel',
                                   bgColor: Colors.red[200],
                                   onTap: () async {
+                                    await HapticFeedback.heavyImpact();
                                     shrink();
                                     e.status = OrderStatusEnum.cancel;
                                     await OrderApi().updateStatus(widget.item);
@@ -87,6 +89,7 @@ class _OrderHistoryTileState extends State<OrderHistoryTile> {
                                   child: CustomElevatedButton(
                                     title: 'Done',
                                     onTap: () async {
+                                      await HapticFeedback.heavyImpact();
                                       shrink();
                                       e.status = OrderStatusEnum.completed;
                                       alertBox(context, product, e);
@@ -182,6 +185,7 @@ class _OrderHistoryTileState extends State<OrderHistoryTile> {
                 CustomElevatedButton(
                     title: 'Done',
                     onTap: () async {
+                      await HapticFeedback.heavyImpact();
                       bool temp = await ratingPro.uploadRating(orderded);
                       if (temp) {
                         ratingPro.clear();

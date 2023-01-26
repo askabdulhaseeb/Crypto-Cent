@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:intl_phone_field/phone_number.dart';
 import 'package:provider/provider.dart';
 
@@ -84,6 +85,7 @@ class _SignupWithEmailScreenState extends State<SignupWithEmailScreen> {
                     : CustomElevatedButton(
                         title: 'Sign up',
                         onTap: () async {
+                             await HapticFeedback.heavyImpact();
                           if (_key.currentState!.validate()) {
                             if (_password.text != _confPassword.text) return;
                             setState(() {

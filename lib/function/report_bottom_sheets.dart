@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 import '../database/app_user/auth_method.dart';
@@ -32,13 +33,18 @@ class ReportBottomSheets {
             const SizedBox(height: 10),
             const Divider(thickness: 0.2),
             ListTile(
-              onTap: () =>
-                  _reportConfirmSheet(context, user, 'report', 'Report'),
+              onTap: () async {
+                await HapticFeedback.heavyImpact();
+                _reportConfirmSheet(context, user, 'report', 'Report');
+              },
               leading: const Icon(Icons.report),
               title: const Text('Report'),
             ),
             ListTile(
-              onTap: () => _reportConfirmSheet(context, user, 'block', 'Block'),
+              onTap: () async {
+                await HapticFeedback.heavyImpact();
+                _reportConfirmSheet(context, user, 'block', 'Block');
+              },
               leading: const Icon(Icons.block),
               title: Text(
                 (Provider.of<UserProvider>(context)
@@ -83,7 +89,8 @@ class ReportBottomSheets {
               ListTile(
                 title: const Text('''It's a spam'''),
                 trailing: const Icon(Icons.arrow_forward_ios),
-                onTap: () {
+                onTap: () async{
+                  await HapticFeedback.heavyImpact();
                   Navigator.pop(context);
                   _showreportcompletedbottom(
                     context,
@@ -96,7 +103,8 @@ class ReportBottomSheets {
               ListTile(
                 title: const Text('Sale of illegal'),
                 trailing: const Icon(Icons.arrow_forward_ios),
-                onTap: () {
+                onTap: () async{
+                  await HapticFeedback.heavyImpact();
                   Navigator.pop(context);
                   _showreportcompletedbottom(
                     context,
@@ -109,7 +117,8 @@ class ReportBottomSheets {
               ListTile(
                 title: const Text('Scam'),
                 trailing: const Icon(Icons.arrow_forward_ios),
-                onTap: () {
+                onTap: () async{
+                  await HapticFeedback.heavyImpact();
                   Navigator.pop(context);
                   _showreportcompletedbottom(
                     context,
@@ -122,7 +131,8 @@ class ReportBottomSheets {
               ListTile(
                 title: const Text('Hate Speech'),
                 trailing: const Icon(Icons.arrow_forward_ios),
-                onTap: () {
+                onTap: () async{
+                  await HapticFeedback.heavyImpact();
                   Navigator.pop(context);
                   _showreportcompletedbottom(
                     context,
@@ -135,7 +145,8 @@ class ReportBottomSheets {
               ListTile(
                 title: const Text('Voilence or dangerous'),
                 trailing: const Icon(Icons.arrow_forward_ios),
-                onTap: () {
+                onTap: () async{
+                  await HapticFeedback.heavyImpact();
                   Navigator.pop(context);
                   _showreportcompletedbottom(
                     context,
@@ -148,7 +159,8 @@ class ReportBottomSheets {
               ListTile(
                 title: const Text('Bullying or Harrasment'),
                 trailing: const Icon(Icons.arrow_forward_ios),
-                onTap: () {
+                onTap: () async{
+                  await HapticFeedback.heavyImpact();
                   Navigator.pop(context);
                   _showreportcompletedbottom(
                     context,
@@ -162,7 +174,8 @@ class ReportBottomSheets {
               ListTile(
                 title: const Text('Intellectual Property Voilation'),
                 trailing: const Icon(Icons.arrow_forward_ios),
-                onTap: () {
+                onTap: () async{
+                  await HapticFeedback.heavyImpact();
                   Navigator.pop(context);
                   _showreportcompletedbottom(
                     context,
@@ -175,7 +188,8 @@ class ReportBottomSheets {
               ListTile(
                 title: const Text('Self Injury or Sucide'),
                 trailing: const Icon(Icons.arrow_forward_ios),
-                onTap: () {
+                onTap: () async{
+                  await HapticFeedback.heavyImpact();
                   Navigator.pop(context);
                   _showreportcompletedbottom(
                     context,
@@ -189,7 +203,8 @@ class ReportBottomSheets {
               ListTile(
                 title: const Text('False Information'),
                 trailing: const Icon(Icons.arrow_forward_ios),
-                onTap: () {
+                onTap: () async{
+                  await HapticFeedback.heavyImpact();
                   Navigator.pop(context);
                   _showreportcompletedbottom(
                     context,
@@ -283,6 +298,7 @@ _showreportcompletedbottom(
           CustomElevatedButton(
             title: 'Done',
             onTap: () async {
+              await HapticFeedback.heavyImpact();
               if (product.reports!.indexWhere((ReportProduct element) =>
                       element.reportBy == AuthMethods.uid) >=
                   0) {
@@ -357,6 +373,7 @@ _reportConfirmSheet(
             child: CustomElevatedButton(
               title: 'Done',
               onTap: () async {
+                   await HapticFeedback.heavyImpact();
                 ReportUser repo = ReportUser(
                   reportBy: AuthMethods.uid,
                   category: id,

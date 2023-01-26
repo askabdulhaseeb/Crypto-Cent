@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 import '../../models/product/product_model.dart';
@@ -15,7 +16,8 @@ class ExtendProductTile extends StatelessWidget {
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     return InkWell(
-      onTap: () {
+      onTap: () async{
+        await HapticFeedback.heavyImpact();
         Navigator.push(
             context,
             MaterialPageRoute<ProductDetailScreen>(

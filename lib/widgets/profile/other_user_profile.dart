@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import '../../../providers/provider.dart';
 import '../../database/app_user/auth_method.dart';
@@ -60,7 +61,8 @@ class OtherUserProfile extends StatelessWidget {
                   ),
                   const SizedBox(height: 10),
                   GestureDetector(
-                    onTap: () {
+                    onTap: () async{
+                      await HapticFeedback.heavyImpact();
                       Navigator.push(
                           context,
                           MaterialPageRoute<ReviewScreen>(
@@ -94,8 +96,9 @@ class OtherUserProfile extends StatelessWidget {
               context: context,
               text: 'Reviews',
               icon: Icons.reviews,
-              onTap: () {
-                Navigator.push(
+              onTap: () async{
+                await HapticFeedback.heavyImpact();
+                                Navigator.push(
                     context,
                     MaterialPageRoute<ReviewScreen>(
                       builder: (BuildContext context) => ReviewScreen(

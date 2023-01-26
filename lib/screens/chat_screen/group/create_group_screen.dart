@@ -2,6 +2,7 @@ import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import '../../../../../widgets/custom_widgets/custom_elevated_button.dart';
 import '../../../../../widgets/custom_widgets/custom_textformfield.dart';
@@ -70,16 +71,25 @@ class _CreateChatGroupScreenState extends State<CreateChatGroupScreen> {
                             snapshot.hasData
                                 ? CustomFileImageBox(
                                     file: snapshot.data,
-                                    onTap: () => onImagePick(),
+                                    onTap: () async {
+                                      await HapticFeedback.heavyImpact();
+                                      onImagePick();
+                                    },
                                   )
                                 : CustomFileImageBox(
                                     file: null,
-                                    onTap: () => onImagePick(),
+                                    onTap: () async {
+                                      await HapticFeedback.heavyImpact();
+                                      onImagePick();
+                                    },
                                   ),
                       )
                     : CustomFileImageBox(
                         file: null,
-                        onTap: () => onImagePick(),
+                        onTap: () async {
+                          await HapticFeedback.heavyImpact();
+                          onImagePick();
+                        },
                       ),
                 CustomTextFormField(
                   controller: _name,
@@ -101,7 +111,10 @@ class _CreateChatGroupScreenState extends State<CreateChatGroupScreen> {
                     ? const ShowLoading()
                     : CustomElevatedButton(
                         title: 'Create Group',
-                        onTap: () => onCreateGroup(),
+                        onTap: () async {
+                          await HapticFeedback.heavyImpact();
+                          onCreateGroup();
+                        },
                       ),
               ],
             ),

@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 import '../../database/app_user/auth_method.dart';
@@ -107,6 +108,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                 GetProductAttachments(
                     file: addProductPro.files,
                     onTap: () async {
+                      await HapticFeedback.heavyImpact();
                       showModalBottomSheet(
                         context: context,
                         builder: (BuildContext context) => Column(
@@ -115,6 +117,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                             const SizedBox(height: 10),
                             ListTile(
                               onTap: () async {
+                                await HapticFeedback.heavyImpact();
                                 final List<File?> temp =
                                     await AttachmentPicker().camera();
                                 if (temp[0] == null) return;
@@ -132,6 +135,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                             ),
                             ListTile(
                               onTap: () async {
+                                await HapticFeedback.heavyImpact();
                                 final List<File?> temp =
                                     await AttachmentPicker().multiImage();
                                 if (temp[0] == null) return;
@@ -208,7 +212,8 @@ class _AddProductScreenState extends State<AddProductScreen> {
                     ? const CircularProgressIndicator()
                     : CustomElevatedButton(
                         title: 'Next',
-                        onTap: () {
+                        onTap: () async{
+                          await HapticFeedback.heavyImpact();
                           addProductPro.productData(context);
                         },
                         //onTap: () async => await uploaddata(catPro),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import '../../database/app_user/auth_method.dart';
 import '../../utilities/app_images.dart';
@@ -44,7 +45,8 @@ class ProfileScreen extends StatelessWidget {
                       children: <Widget>[
                         Expanded(
                           child: GestureDetector(
-                            onTap: () {
+                            onTap: () async {
+                              await HapticFeedback.heavyImpact();
                               Navigator.push(
                                 context,
                                 // ignore: always_specify_types
@@ -63,7 +65,8 @@ class ProfileScreen extends StatelessWidget {
                         const SizedBox(width: 16),
                         Expanded(
                           child: GestureDetector(
-                            onTap: () {
+                            onTap: () async {
+                              await HapticFeedback.heavyImpact();
                               Navigator.push(
                                 context,
                                 // ignore: always_specify_types
@@ -90,7 +93,8 @@ class ProfileScreen extends StatelessWidget {
                         ProfileNavTile(
                             name: 'My Profile',
                             image: AppImages.profileUnselected,
-                            onTap: () {
+                            onTap: () async {
+                              await HapticFeedback.heavyImpact();
                               Navigator.push(
                                 context,
                                 MaterialPageRoute<EmptyScreen>(
@@ -103,7 +107,8 @@ class ProfileScreen extends StatelessWidget {
                         ProfileNavTile(
                             name: 'Setting',
                             image: AppImages.setting,
-                            onTap: () {
+                            onTap: () async {
+                              await HapticFeedback.heavyImpact();
                               Navigator.push(
                                 context,
                                 MaterialPageRoute<EmptyScreen>(
@@ -116,7 +121,8 @@ class ProfileScreen extends StatelessWidget {
                         ProfileNavTile(
                             name: 'Orders',
                             image: AppImages.orderhistory,
-                            onTap: () {
+                            onTap: () async {
+                              await HapticFeedback.heavyImpact();
                               Navigator.push(
                                 context,
                                 MaterialPageRoute<EmptyScreen>(
@@ -129,7 +135,8 @@ class ProfileScreen extends StatelessWidget {
                         ProfileNavTile(
                             name: 'Wallet',
                             image: AppImages.wallet,
-                            onTap: () {
+                            onTap: () async {
+                              await HapticFeedback.heavyImpact();
                               Navigator.push(
                                 context,
                                 MaterialPageRoute<WalletScreen>(
@@ -142,14 +149,18 @@ class ProfileScreen extends StatelessWidget {
                         ProfileNavTile(
                           name: 'Selling',
                           image: AppImages.bitcoinIcon,
-                          onTap: () => Navigator.of(context)
-                              .pushNamed(SellingScreen.routeName),
+                          onTap: () async {
+                            await HapticFeedback.heavyImpact();
+                            Navigator.of(context)
+                                .pushNamed(SellingScreen.routeName);
+                          },
                         ),
                         const SizedBox(height: 24),
                         ProfileNavTile(
                           name: 'Log Out',
                           image: AppImages.logout,
                           onTap: () async {
+                            await HapticFeedback.heavyImpact();
                             await AuthMethods().signOut();
                             // ignore: use_build_context_synchronously
                             Navigator.of(context).pushNamedAndRemoveUntil(

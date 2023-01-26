@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 import '../../function/crypto_function.dart';
@@ -161,6 +162,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
               CustomElevatedButton(
                 title: 'Pay',
                 onTap: () async {
+                  await HapticFeedback.heavyImpact();
                   // WalletProvider walletPro =
                   //     Provider.of<WalletProvider>(context, listen: false);
                   // double amount = totalAmount;

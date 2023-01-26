@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 import '../../providers/categories_provider.dart';
@@ -21,7 +22,8 @@ class SomeCategories extends StatelessWidget {
       // ignore: always_specify_types
       children: List.generate(catPro.someCategories.length, (int index) {
         return InkWell(
-          onTap: () {
+          onTap: () async{
+               await HapticFeedback.heavyImpact();
             Navigator.push(
               context,
               MaterialPageRoute<CategoriesExtend>(

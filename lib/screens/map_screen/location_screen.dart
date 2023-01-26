@@ -1,6 +1,7 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 import '../../models/location.dart';
@@ -72,7 +73,8 @@ class _LocationScreenState extends State<LocationScreen> {
                   return Padding(
                     padding: const EdgeInsets.symmetric(vertical: 4),
                     child: GestureDetector(
-                      onTap: () {
+                      onTap: () async{
+                        await HapticFeedback.heavyImpact();
                         setState(() {
                           isSelectedIndex = index;
                         });
@@ -152,6 +154,7 @@ class _LocationScreenState extends State<LocationScreen> {
                         : CustomElevatedButton(
                             title: 'Upload',
                             onTap: () async {
+                              await HapticFeedback.heavyImpact();
                               await locationPro
                                   .selectedIndex(location[isSelectedIndex]);
                               addProductPro.upload(context);
@@ -161,6 +164,7 @@ class _LocationScreenState extends State<LocationScreen> {
                     ? CustomElevatedButton(
                         title: 'Adress Done',
                         onTap: () async {
+                          await HapticFeedback.heavyImpact();
                           await locationPro
                               .selectedIndex(location[isSelectedIndex]);
                           Navigator.of(context)

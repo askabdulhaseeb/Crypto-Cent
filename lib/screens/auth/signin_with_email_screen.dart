@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 import '../../database/app_user/auth_method.dart';
@@ -68,6 +69,7 @@ class _SigninWithEmailScreenState extends State<SigninWithEmailScreen> {
                   : CustomElevatedButton(
                       title: 'Sign In',
                       onTap: () async {
+                           await HapticFeedback.heavyImpact();
                         if (_key.currentState!.validate()) {
                           setState(() {
                             _isLoading = true;

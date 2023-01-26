@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import '../../models/product/product_model.dart';
 import '../../providers/product_provider.dart';
@@ -58,7 +59,8 @@ class SerachScreen extends StatelessWidget {
                 primary: false,
                 itemBuilder: (BuildContext context, int index) {
                   return ListTile(
-                    onTap: () {
+                    onTap: () async{
+                      await HapticFeedback.heavyImpact();
                       FocusScope.of(context).unfocus();
                       Navigator.push(
                           context,

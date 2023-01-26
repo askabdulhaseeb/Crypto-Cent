@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import '../../../function/crypto_function.dart';
 import '../../../models/chat/chat.dart';
@@ -69,7 +70,8 @@ class ChatProdSellerView extends StatelessWidget {
               child: CustomElevatedButton(
                 title: 'Confirm',
                 padding: const EdgeInsets.all(5),
-                onTap: () {
+                onTap: () async{
+                  await HapticFeedback.heavyImpact();
                   // TODO: Accept offer
 
                   // when user accept the offer it remove update the value amount from
@@ -89,7 +91,8 @@ class ChatProdSellerView extends StatelessWidget {
                 title: 'Decline',
                 padding: const EdgeInsets.all(5),
                 bgColor: Colors.red[200],
-                onTap: () {
+                onTap: () async{
+                  await HapticFeedback.heavyImpact();
                   // TODO: Decline offer
                 },
               ),

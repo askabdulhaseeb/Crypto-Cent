@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import '../../widgets/custom_widgets/cutom_text.dart';
@@ -43,7 +44,8 @@ class _GoogleMapWidgetState extends State<GoogleMapWidget> {
       // ignore: always_specify_types
       markers: {
         Marker(
-          onTap: () {
+          onTap: () async{
+            await HapticFeedback.heavyImpact();
             // showModalBottomSheet(
             //     shape: RoundedRectangleBorder(
             //       borderRadius: BorderRadius.circular(10.0),

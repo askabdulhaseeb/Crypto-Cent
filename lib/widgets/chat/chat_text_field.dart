@@ -2,6 +2,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 import '../../database/app_user/auth_method.dart';
@@ -100,6 +101,7 @@ class _ChatTextFieldState extends State<ChatTextField> {
           children: <Widget>[
             InkWell(
               onTap: () async {
+                await HapticFeedback.heavyImpact();
                 showModalBottomSheet(
                   context: context,
                   isDismissible: true,
@@ -110,6 +112,7 @@ class _ChatTextFieldState extends State<ChatTextField> {
                         leading: const Icon(Icons.camera_alt_outlined),
                         title: const Text('Camera'),
                         onTap: () async {
+                          await HapticFeedback.heavyImpact();
                           Navigator.of(context).pop();
                           types = MessageTypeEnum.image;
                           final List<File> file =
@@ -124,6 +127,7 @@ class _ChatTextFieldState extends State<ChatTextField> {
                         leading: const Icon(Icons.photo_library_outlined),
                         title: const Text('Photos'),
                         onTap: () async {
+                          await HapticFeedback.heavyImpact();
                           Navigator.of(context).pop();
                           types = MessageTypeEnum.image;
                           final List<File> file =
