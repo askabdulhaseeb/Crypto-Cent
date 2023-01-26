@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:provider/provider.dart';
+import '../../database/app_user/auth_method.dart';
+import '../../database/notification_services.dart';
+import '../../enum/notification_type.dart';
 import '../../providers/provider.dart';
 import '../../utilities/app_images.dart';
 import '../../widgets/custom_widgets/custom_network_image_slider.dart';
@@ -43,9 +46,28 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
+    UserProvider users = Provider.of<UserProvider>(context);
     return Scaffold(
       key: _key,
       drawer: drawerScreen(context),
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () async {
+          if (users.allDeviceToken.isNotEmpty ) {
+            await NotificationsServices().sendSubsceibtionNotification(
+              deviceToken: users.allDeviceToken,
+              messageTitle: 'Discount a gie oye',
+              messageBody: 'Dicount be discount',
+              data: <String>['chat', 'message', 'personal'],
+              isMessage: false,
+              type: NotificationType.discountOffer,
+              fromId: AuthMethods.uid,
+            );
+          }
+        },
+        label: const Text('Upload'),
+        icon: const Icon(Icons.upload),
+        backgroundColor: Colors.pink,
+      ),
       body: SafeArea(
         child: Consumer2<ProductProvider, CategoriesProvider>(builder: (
           BuildContext context,

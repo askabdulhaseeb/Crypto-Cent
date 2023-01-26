@@ -18,6 +18,14 @@ class NotificationScreen extends StatelessWidget {
         title: const Text('NotificationScreen'),
         actions: [IconButton(onPressed: () {}, icon: Icon(Icons.more_vert))],
       ),
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () {
+          // Add your onPressed code here!
+        },
+        label: const Text('Upload'),
+        icon: const Icon(Icons.upload),
+        backgroundColor: Colors.pink,
+      ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
         child: Column(

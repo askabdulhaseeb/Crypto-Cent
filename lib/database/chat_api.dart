@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 
+import '../enum/notification_type.dart';
 import '../models/app_user/app_user.dart';
 import '../models/chat/chat.dart';
 import '../models/chat/message.dart';
@@ -110,6 +111,9 @@ class ChatAPI {
           messageTitle: sender.name ?? 'App User',
           messageBody: newMessage!.text ?? 'Send you a message',
           data: <String>['chat', 'message', 'personal'],
+          isMessage: true,
+          type: NotificationType.message,
+          fromId: AuthMethods.uid,
         );
       }
     } catch (e) {

@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+import '../../enum/notification_type.dart';
 import '../../models/app_user/app_user.dart';
 import '../../models/my_device_token.dart';
 import '../../models/payment/receipt.dart';
@@ -27,6 +28,9 @@ class ReceiptApi {
           messageTitle: 'New Order',
           messageBody: '${sender.name} send you a new order',
           data: <String>['order', 'receipt', receipt.receiptID],
+          isMessage: false,
+          type: NotificationType.deliverySuccess,
+          fromId: AuthMethods.uid,
         );
       }
       // CustomToast.successToast(message: 'Successfully Added');

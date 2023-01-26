@@ -11,12 +11,16 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:http/http.dart' as http;
+import '../enum/notification_type.dart';
+import '../function/time_date_function.dart';
 import '../models/app_user/app_user.dart';
 import '../models/my_device_token.dart';
+import '../models/my_notification.dart';
 import '../providers/user_provider.dart';
 import '../utilities/utilities.dart';
 import 'app_user/auth_method.dart';
 import 'app_user/user_api.dart';
+import 'notification_api.dart';
 
 class NotificationsServices {
   static final FlutterLocalNotificationsPlugin localNotificationPlugin =
@@ -123,6 +127,9 @@ class NotificationsServices {
     required String messageTitle,
     required String messageBody,
     required List<String> data,
+    required bool isMessage,
+    required NotificationType type,
+    required String fromId,
   }) async {
     // String value3 = data.length == 2 ? '' : data[2];
     // HttpsCallable func =
@@ -165,11 +172,20 @@ class NotificationsServices {
             print(await response.stream.bytesToString());
             log('Notification send to: ${deviceToken[i].token}');
           }
-          
         } else {
           log('ERROR in FCM');
         }
       }
+        MyNotification value = MyNotification(
+          body: messageBody,
+          fromUID: fromId,
+          toUID: '123',
+          notificationID: fromId + TimeStamp.timestamp.toString(),
+          timestamp: TimeStamp.timestamp,
+          title: messageTitle,
+          type: type,
+        );
+        NotificationAPI().sendNotification(value);
       return true;
     } catch (e) {
       log('ERROR in FCM: ${e.toString()}');
