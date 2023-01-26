@@ -50,7 +50,7 @@ class ProfileScreen extends StatelessWidget {
                               Navigator.push(
                                 context,
                                 // ignore: always_specify_types
-                                MaterialPageRoute(
+                                MaterialPageRoute<OrderHistory>(
                                   builder: (BuildContext context) =>
                                       const OrderHistory(),
                                 ),
@@ -105,7 +105,7 @@ class ProfileScreen extends StatelessWidget {
                             }),
                         const SizedBox(height: 24),
                         ProfileNavTile(
-                            name: 'Setting',
+                            name: 'Settings',
                             image: AppImages.setting,
                             onTap: () async {
                               await HapticFeedback.heavyImpact();
@@ -156,18 +156,18 @@ class ProfileScreen extends StatelessWidget {
                           },
                         ),
                         const SizedBox(height: 24),
-                        ProfileNavTile(
-                          name: 'Log Out',
-                          image: AppImages.logout,
-                          onTap: () async {
-                            await HapticFeedback.heavyImpact();
-                            await AuthMethods().signOut();
-                            // ignore: use_build_context_synchronously
-                            Navigator.of(context).pushNamedAndRemoveUntil(
-                                WelcomeScreen.routeName,
-                                (Route<dynamic> route) => false);
-                          },
-                        ),
+                        // ProfileNavTile(
+                        //   name: 'Log Out',
+                        //   image: AppImages.logout,
+                        //   onTap: () async {
+                        //     await HapticFeedback.heavyImpact();
+                        //     await AuthMethods().signOut();
+                        //     // ignore: use_build_context_synchronously
+                        //     Navigator.of(context).pushNamedAndRemoveUntil(
+                        //         WelcomeScreen.routeName,
+                        //         (Route<dynamic> route) => false);
+                        //   },
+                        // ),
                       ],
                     ),
                   ),

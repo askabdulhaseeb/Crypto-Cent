@@ -165,6 +165,7 @@ class NotificationsServices {
             print(await response.stream.bytesToString());
             log('Notification send to: ${deviceToken[i].token}');
           }
+          
         } else {
           log('ERROR in FCM');
         }

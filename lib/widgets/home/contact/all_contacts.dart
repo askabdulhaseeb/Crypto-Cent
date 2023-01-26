@@ -52,9 +52,9 @@ class ContactItem extends StatelessWidget {
               width: 80,
               child: CustomElevatedButton(
                 title: 'Invite',
-                onTap: () async{
+                onTap: () async {
                   await HapticFeedback.heavyImpact();
-                  onShare(context);
+                  _launchSMS(contact.phones[0], 'Download the bloodo app');
                 },
 
                 // textStyle: TextStyle(
@@ -65,11 +65,23 @@ class ContactItem extends StatelessWidget {
     );
   }
 
+  // Future<void> _launchUrl(String phoneNumber) async {
+  //   if (!await launchUrl(Uri.parse('sms:$phoneNumber'))) {
+  //     throw Exception('Could not launch $phoneNumber');
+  //   }
+  // }
+
+  void _launchSMS(String phone, String message) async {
+    var url = 'sms:$phone?body=$message';
+    if (!await launchUrl(Uri.parse(url))) {
+      throw 'Could not launch $url';
+    }
+  }
+
   void onShare(BuildContext context) async {
     final box = context.findRenderObject() as RenderBox?;
     await Share.share(text,
         subject: link,
         sharePositionOrigin: box!.localToGlobal(Offset.zero) & box.size);
   }
-
 }

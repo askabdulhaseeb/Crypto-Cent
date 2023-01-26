@@ -34,7 +34,11 @@ class AppImages {
   static String get logout => 'assets/icons/logout.png';
   static String get setting => 'assets/icons/setting.png';
   static String get wallet => 'assets/icons/wallet.png';
-
+//notificationIcon
+  static String get shoppingCart => 'assets/icons/shoppingCart.png';
+  static String get discount => 'assets/icons/discount.png';
+  static String get deliveryCart => 'assets/icons/deliveryCart.png';
+  static String get deliveryTruck => 'assets/icons/delivery.png';
 //Favorite
   static String get fvrtSelected => 'assets/icons/heartfill.png';
   static String get fvrtUnselected => 'assets/icons/Heart.png';

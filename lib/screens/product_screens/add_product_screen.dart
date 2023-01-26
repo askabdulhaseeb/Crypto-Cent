@@ -206,13 +206,13 @@ class _AddProductScreenState extends State<AddProductScreen> {
                 const SizedBox(height: 6),
                 categorie(context, catPro),
                 const SizedBox(height: 12),
-                subCategorie(context, catPro),
+                 subCategorie(context, catPro),
                 const SizedBox(height: 20),
                 addProductPro.isloading
                     ? const CircularProgressIndicator()
                     : CustomElevatedButton(
                         title: 'Next',
-                        onTap: () async{
+                        onTap: () async {
                           await HapticFeedback.heavyImpact();
                           addProductPro.productData(context);
                         },

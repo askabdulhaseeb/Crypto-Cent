@@ -18,7 +18,7 @@ class ChatPageProvider extends ChangeNotifier {
   // Tab Bar
   //
 
-  MessageTabBarEnum _tab = MessageTabBarEnum.group;
+  MessageTabBarEnum _tab = MessageTabBarEnum.chat;
   void updateTab(MessageTabBarEnum upate) {
     _tab = upate;
     notifyListeners();

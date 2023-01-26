@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import '../../../database/app_user/auth_method.dart';
+import '../../../screens/auth/welcome_screen.dart';
 import '../../../screens/empty_screen/empty_screen.dart';
 import '../../../screens/map_screen/add_new_address.dart';
 import '../../../screens/map_screen/location_screen.dart';
+import '../../../utilities/app_images.dart';
 import '../my_profile/edit_profile.dart';
 import '../profile_nav_tile.dart';
 import 'change_password.dart';
@@ -14,7 +17,7 @@ class Setting extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text('Setting'),
+          title: const Text('Settings'),
         ),
         body: Padding(
           padding: const EdgeInsets.all(12),
@@ -25,7 +28,7 @@ class Setting extends StatelessWidget {
               ),
               ProfileNavTile(
                 name: 'Change Password',
-                onTap: () async{
+                onTap: () async {
                   await HapticFeedback.heavyImpact();
                   Navigator.of(context).push(MaterialPageRoute(
                     builder: (BuildContext context) => ChnagePassword(),
@@ -37,12 +40,12 @@ class Setting extends StatelessWidget {
               ),
               ProfileNavTile(
                 name: 'Edit Address',
-                onTap: () async{
+                onTap: () async {
                   await HapticFeedback.heavyImpact();
-                   Navigator.of(context).push(MaterialPageRoute(
-                    builder: (BuildContext context) => AddNewAddress(isProduct: false),
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (BuildContext context) =>
+                        AddNewAddress(isProduct: false),
                   ));
-                  
                 },
               ),
               const SizedBox(
@@ -50,10 +53,12 @@ class Setting extends StatelessWidget {
               ),
               ProfileNavTile(
                 name: 'Location',
-                onTap: () async{
+                onTap: () async {
                   await HapticFeedback.heavyImpact();
                   Navigator.of(context).push(MaterialPageRoute<EmptyScreen>(
-                    builder: (BuildContext context) => const LocationScreen(text: 'location',),
+                    builder: (BuildContext context) => const LocationScreen(
+                      text: 'location',
+                    ),
                   ));
                 },
               ),
@@ -62,7 +67,7 @@ class Setting extends StatelessWidget {
               ),
               ProfileNavTile(
                 name: 'Profile Setting',
-                onTap: () async{
+                onTap: () async {
                   await HapticFeedback.heavyImpact();
                   Navigator.of(context).push(MaterialPageRoute(
                     builder: (BuildContext context) => const EditProfile(),
@@ -80,6 +85,18 @@ class Setting extends StatelessWidget {
               //     ));
               //   },
               // ),
+
+              ProfileNavTile(
+                name: 'Log Out',
+                image: AppImages.logout,
+                onTap: () async {
+                  await HapticFeedback.heavyImpact();
+                  await AuthMethods().signOut();
+                  // ignore: use_build_context_synchronously
+                  Navigator.of(context).pushNamedAndRemoveUntil(
+                      WelcomeScreen.routeName, (Route<dynamic> route) => false);
+                },
+              ),
             ],
           ),
         ));

@@ -14,7 +14,7 @@ class WalletsApi {
       //CustomToast.successToast(message: 'Successfully Added');
       return true;
     } catch (e) {
-      CustomToast.errorToast(message: e.toString());
+      //CustomToast.errorToast(message: e.toString());
       return false;
     }
   }
@@ -27,11 +27,10 @@ class WalletsApi {
           await _instance.collection(_collection).get();
       for (DocumentSnapshot<Map<String, dynamic>> e in snapshot.docs) {
         wallets.add(Wallets.fromMap(e));
-        
       }
-      //CustomToast.successToast(message: 'Success');
+      ////CustomToast.successToast(message: 'Success');
     } catch (e) {
-      CustomToast.errorToast(message: e.toString());
+      //CustomToast.errorToast(message: e.toString());
     }
     return wallets;
   }

@@ -16,6 +16,8 @@ class ProductProvider with ChangeNotifier {
   List<Product> get products => _product;
 
   Future<void> load() async {
+    _product.clear();
+    _favorites.clear();
     _product = await ProductApi().getdata();
     _favorites.addAll(LocalData.getFavroites);
     notifyListeners();

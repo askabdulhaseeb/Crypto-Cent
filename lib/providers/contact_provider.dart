@@ -65,8 +65,49 @@ class ContactProvider with ChangeNotifier {
     return change;
   }
 
+  String? _search;
+  onSearch(String? value) {
+    _search = value;
+    notifyListeners();
+  }
+
+  List<Contact> forSearch() {
+    _boloodoContacts.clear();
+    _allContacts.clear();
+    //final List<Contact> temp = <Contact>[];
+    if (_search == null || (_search?.isEmpty ?? true)) {
+      return _mobileContacts;
+      //temp.add(_null);
+    }
+    for (Contact element in _mobileContacts) {
+      if (element.displayName
+          .toLowerCase()
+          .startsWith((_search?.toLowerCase() ?? ''))) {
+        _allContacts.add(element);
+      }
+    }
+    return _allContacts;
+  }
+ List<AppUser> forUserSearch() {
+
+    final List<AppUser> temp = <AppUser>[];
+    if (_search == null || (_search?.isEmpty ?? true)) {
+      return _blodooUser;
+      //temp.add(_null);
+    }
+    for (AppUser element in _blodooUser) {
+      if (element.name!
+          .toLowerCase()
+          .startsWith((_search?.toLowerCase() ?? ''))) {
+        temp.add(element);
+      }
+    }
+    return temp;
+  }
   List<Contact> _mobileContacts = [];
   List<Contact> get mobileContact => _mobileContacts;
+  List<Contact> _allContacts = [];
+  List<Contact> get allContact => _allContacts;
   final List<Contact> _boloodoContacts = [];
   List<Contact> get boloodoContact => _boloodoContacts;
   final List<Contact> _inviteContacts = [];

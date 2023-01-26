@@ -41,6 +41,7 @@ class CategoriesProvider with ChangeNotifier {
     _currentCat = value;
     _subcurrentCat = _currentCat!.subCategories[0];
     _subCa = _currentCat!.subCategories;
+    notifyListeners();
   }
 
   subCategoryChange(SubCategory value) {

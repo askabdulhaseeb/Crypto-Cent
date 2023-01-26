@@ -7,7 +7,9 @@ import 'package:provider/provider.dart';
 import '../../models/location.dart';
 import '../../providers/add_product_p.dart';
 import '../../providers/location_provider.dart';
+import '../../providers/product_provider.dart';
 import '../../widgets/custom_widgets/custom_widget.dart';
+import '../main_screen/main_screen.dart';
 import '../order/payment.dart';
 import 'add_new_address.dart';
 
@@ -73,7 +75,7 @@ class _LocationScreenState extends State<LocationScreen> {
                   return Padding(
                     padding: const EdgeInsets.symmetric(vertical: 4),
                     child: GestureDetector(
-                      onTap: () async{
+                      onTap: () async {
                         await HapticFeedback.heavyImpact();
                         setState(() {
                           isSelectedIndex = index;
@@ -147,8 +149,9 @@ class _LocationScreenState extends State<LocationScreen> {
               ),
             ),
             widget.text == 'product upload'
-                ? Consumer<AddProductProvider>(builder: (BuildContext context,
-                    AddProductProvider addProductPro, _) {
+                ? Consumer2<AddProductProvider, ProductProvider>(builder:
+                    (BuildContext context, AddProductProvider addProductPro,
+                        ProductProvider productPro, _) {
                     return addProductPro.isupload
                         ? const CircularProgressIndicator()
                         : CustomElevatedButton(
@@ -157,7 +160,17 @@ class _LocationScreenState extends State<LocationScreen> {
                               await HapticFeedback.heavyImpact();
                               await locationPro
                                   .selectedIndex(location[isSelectedIndex]);
-                              addProductPro.upload(context);
+                              bool temp = await addProductPro.upload(context);
+                              if (temp) {
+                                await productPro.load();
+                                Navigator.pushAndRemoveUntil(
+                                    context,
+                                    MaterialPageRoute<MainScreen>(
+                                      builder: (BuildContext context) =>
+                                          const MainScreen(),
+                                    ),
+                                    (Route route) => false);
+                              }
                             });
                   })
                 : widget.text == 'order'

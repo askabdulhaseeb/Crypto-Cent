@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_html/flutter_html.dart';
 import 'package:provider/provider.dart';
 import '../../providers/provider.dart';
 import '../../utilities/app_images.dart';
@@ -426,7 +427,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     return AppBar(
       actions: <Widget>[
         GestureDetector(
-          onTap: () async{
+          onTap: () async {
             await HapticFeedback.heavyImpact();
             Navigator.push(
               context,

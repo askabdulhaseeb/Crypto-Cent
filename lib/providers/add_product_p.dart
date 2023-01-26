@@ -67,7 +67,7 @@ class AddProductProvider with ChangeNotifier {
     }
   }
 
-  upload(BuildContext context) async {
+  Future<bool> upload(BuildContext context) async {
     isupload = true;
     notifyListeners();
     LocationProvider locationPro =
@@ -79,13 +79,14 @@ class AddProductProvider with ChangeNotifier {
       isupload = false;
       notifyListeners();
       // ignore: use_build_context_synchronously
-      Navigator.pushAndRemoveUntil(
-          context,
-          MaterialPageRoute<MainScreen>(
-            builder: (BuildContext context) => const MainScreen(),
-          ),
-          (Route route) => false);
+      // Navigator.pushAndRemoveUntil(
+      //     context,
+      //     MaterialPageRoute<MainScreen>(
+      //       builder: (BuildContext context) => const MainScreen(),
+      //     ),
+      //     (Route route) => false);
     }
+    return temp;
   }
 
   emptyProduct() {
