@@ -1,6 +1,7 @@
 # crypto_cent
 
 Haseeb: <a href="https://wakatime.com/badge/user/a62cfb23-ccbd-4bfc-b190-5dd5c13cd292/project/42871fb9-89ff-42c4-b5d7-5e8a9cbdde09"><img src="https://wakatime.com/badge/user/a62cfb23-ccbd-4bfc-b190-5dd5c13cd292/project/42871fb9-89ff-42c4-b5d7-5e8a9cbdde09.svg" alt="wakatime"></a>
+
 A new Flutter project.
 
 ## Getting Started
