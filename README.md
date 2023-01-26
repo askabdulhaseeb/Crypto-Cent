@@ -4,7 +4,6 @@ Haseeb: <a href="https://wakatime.com/badge/user/a62cfb23-ccbd-4bfc-b190-5dd5c13
 
 Usman Afzal: <a href="https://wakatime.com/badge/user/9a95afcc-2546-45ea-a4cd-082f5bd4dc04/project/647edda0-be70-4b9f-92dd-8508023c9e4a"><img src="https://wakatime.com/badge/user/9a95afcc-2546-45ea-a4cd-082f5bd4dc04/project/647edda0-be70-4b9f-92dd-8508023c9e4a.svg" alt="wakatime"></a>
 
-
 ## Getting Started
 
 This project is a starting point for a Flutter application.
