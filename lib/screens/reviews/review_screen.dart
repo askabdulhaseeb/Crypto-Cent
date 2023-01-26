@@ -2,7 +2,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../database/app_user/auth_method.dart';
 import '../../function/rating_function.dart';
+import '../../function/time_date_function.dart';
 import '../../models/app_user/app_user.dart';
 import '../../models/product/product_model.dart';
 import '../../models/review.dart';
@@ -146,7 +148,23 @@ class ReviewScreen extends StatelessWidget {
                   Text(
                     reviews[index].comment,
                     textAlign: TextAlign.justify,
-                  )
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      reviews[index].sellerUID == AuthMethods.uid
+                          ? Text(
+                              TimeStamp.convertToHourDayMonthYear(
+                                  reviews[index].timestamp),
+                              style: TextStyle(color: Colors.grey),
+                            )
+                          : Text(
+                              TimeStamp.convertToMonthYear(
+                                  reviews[index].timestamp),
+                              style: TextStyle(color: Colors.grey),
+                            )
+                    ],
+                  ),
                 ],
               ),
             );

@@ -79,24 +79,24 @@ class ProductTile extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(height: 5),
-                      if (reviews == null)
-                        Row(
-                          children: <Widget>[
-                            const SizedBox(width: 6),
-                            CustomRatingBar(
-                              itemSize: 14,
-                              initialRating: ReviewFunction().rating(reviews!),
-                              onRatingUpdate: (_) {},
-                              isPadding: false,
-                            ),
-                            const SizedBox(width: 6),
-                            ForText(
-                              name: '(${reviews!.length} reviews)',
-                              size: 11,
-                              color: Colors.grey,
-                            ),
-                          ],
-                        ),
+                      // if (reviews == null)
+                      //   Row(
+                      //     children: <Widget>[
+                      //       const SizedBox(width: 6),
+                      //       CustomRatingBar(
+                      //         itemSize: 14,
+                      //         initialRating: ReviewFunction().rating(reviews!),
+                      //         onRatingUpdate: (_) {},
+                      //         isPadding: false,
+                      //       ),
+                      //       const SizedBox(width: 6),
+                      //       ForText(
+                      //         name: '(${reviews!.length} reviews)',
+                      //         size: 11,
+                      //         color: Colors.grey,
+                      //       ),
+                      //     ],
+                      //   ),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 8),
                         child: Row(

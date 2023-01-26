@@ -10,6 +10,16 @@ class TimeStamp {
     return format.format(date);
   }
 
+  static String convertToMonthYear(int number) {
+    DateTime date = DateTime.fromMicrosecondsSinceEpoch(number);
+    return '${date.month}/${date.year}';
+  }
+
+  static String convertToHourDayMonthYear(int number) {
+    var date = DateTime.fromMicrosecondsSinceEpoch(number);
+    return DateFormat('HH:mm dd/MM/yyyy').format(date);
+  }
+
   static String timeInWords(int timestamp) {
     DateTime now = DateTime.now();
     DateTime date = DateTime.fromMicrosecondsSinceEpoch(timestamp);
