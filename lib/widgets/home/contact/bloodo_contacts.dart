@@ -35,13 +35,12 @@ class BloodoContacts extends StatelessWidget {
               textStyle: const TextStyle(color: Colors.black54, fontSize: 16),
               onTap: () async {
                 await HapticFeedback.heavyImpact();
-                Navigator.of(context).pushAndRemoveUntil(
+                Navigator.of(context).push(
                   MaterialPageRoute<SendBitcoinScreen>(
                       builder: (BuildContext context) => SendBitcoinScreen(
                             iscontact: true,
                             sellerUser: user,
                           )),
-                  (Route<dynamic> route) => false,
                 );
               },
               padding: const EdgeInsets.symmetric(horizontal: 6),
