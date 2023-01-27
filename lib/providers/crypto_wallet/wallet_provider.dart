@@ -54,7 +54,17 @@ class WalletProvider with ChangeNotifier {
     }
     return temp;
   }
-
+ Wallets? getWallet(String id) {
+    Wallets? temp ;
+    for (int i = 0; i < _allWallets.length; i++) {
+      if (_allWallets[i].walletId == id) {
+      
+        temp = _allWallets[i];
+        break;
+      }
+    }
+    return temp;
+  }
   getBalance() async {
     double tempBalance = 0;
     String walletIDD = Encryption().appDecrypt(_wallet!.coinsWallet[0].wallet);

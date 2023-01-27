@@ -25,7 +25,7 @@ class ReceiptApi {
       if (receiver.deviceToken?.isNotEmpty ?? false) {
         await NotificationsServices().sendSubsceibtionNotification(
           deviceToken: receiver.deviceToken ?? <MyDeviceToken>[],
-          messageTitle: 'New Order',
+          messageTitle: 'New MyOrder',
           messageBody: '${sender.name} send you a new order',
           data: <String>['order', 'receipt', receipt.receiptID],
           isMessage: false,

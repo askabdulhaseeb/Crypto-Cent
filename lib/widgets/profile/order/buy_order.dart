@@ -15,7 +15,7 @@ class BuyOrder extends StatelessWidget {
       body: ListView.builder(
         itemCount: orderPro.order.length,
         itemBuilder: (BuildContext context, int index) {
-          final Order item = orderPro.order[index];
+          final MyOrder item = orderPro.order[index];
           return OrderHistoryTile(item: item);
         },
       ),

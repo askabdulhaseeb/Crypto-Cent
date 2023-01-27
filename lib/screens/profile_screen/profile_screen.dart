@@ -57,7 +57,7 @@ class ProfileScreen extends StatelessWidget {
                               );
                             },
                             child: ProfileMiddleTile(
-                              text: 'My Order\nHistory',
+                              text: 'My MyOrder\nHistory',
                               image: AppImages.orderhistory,
                             ),
                           ),

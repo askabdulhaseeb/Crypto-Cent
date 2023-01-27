@@ -18,7 +18,7 @@ enum NotificationType {
   ),
   confirmOrder(
     'assets/icons/deliveryCart.png',
-    'Confirm Order',
+    'Confirm MyOrder',
     'Click to check all your confirm orders here',
     'confirm_order',
   ),
@@ -30,7 +30,7 @@ enum NotificationType {
   ),
   cancelOrder(
     'assets/icons/shoppingCart.png',
-    'Cancel Order',
+    'Cancel MyOrder',
     'Click to check all your cancel orders here',
     'cancel_order',
   ),

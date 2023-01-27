@@ -3,19 +3,23 @@ import 'package:provider/provider.dart';
 
 import '../../../database/crypto_wallet/wallet_create_api.dart';
 import '../../../function/encryption_function.dart';
+import '../../../models/app_user/app_user.dart';
+import '../../../models/crypto_wallet/wallet.dart';
 import '../../../providers/crypto_wallet/wallet_provider.dart';
 import '../../../widgets/custom_widgets/custom_toast.dart';
 import '../../../widgets/custom_widgets/show_loading.dart';
 
 class SendBitcoinScreen extends StatefulWidget {
-  const SendBitcoinScreen({Key? key}) : super(key: key);
-
+  const SendBitcoinScreen({required this.iscontact, this.sellerUser, Key? key})
+      : super(key: key);
+  final bool iscontact;
+  final AppUser? sellerUser;
   @override
   State<SendBitcoinScreen> createState() => _SendBitcoinScreenState();
 }
 
 class _SendBitcoinScreenState extends State<SendBitcoinScreen> {
-  final TextEditingController _walletaddress = TextEditingController();
+  TextEditingController _walletaddress = TextEditingController();
   final TextEditingController _amount = TextEditingController();
   btcSend() async {
     WalletProvider walletPro =
@@ -38,10 +42,38 @@ class _SendBitcoinScreenState extends State<SendBitcoinScreen> {
     }
   }
 
+  String sellerAddress = '';
+  SellerAddress() {
+    WalletProvider walletPro =
+        Provider.of<WalletProvider>(context, listen: false);
+    print('User Addresss ${widget.sellerUser}');
+    Wallets? wallet = walletPro.getWallet(widget.sellerUser!.uid);
+    String sellerAddress = walletPro.wallet == null
+        ? 'loading...'
+        : Encryption().userDecrypt(
+            wallet!.coinsWallet[0].address, widget.sellerUser!.uid);
+    print('User Addresss ${sellerAddress}');
+    setState(() {
+     _walletaddress = TextEditingController(text: sellerAddress);
+    });
+  }
+
+  @override
+  void initState() {
+    if (widget.iscontact) {
+      SellerAddress();
+    }
+    // TODO: implement initState
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Send Btc')),
+      appBar: AppBar(
+        title: const Text('Send Btc'),
+        leading: IconButton(onPressed: () {}, icon: Icon(Icons.arrow_back_ios)),
+      ),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -63,6 +95,7 @@ class _SendBitcoinScreenState extends State<SendBitcoinScreen> {
                     borderRadius: BorderRadius.circular(40)),
                 child: TextFormField(
                   controller: _walletaddress,
+                  readOnly: widget.iscontact ? true : false,
                   decoration: const InputDecoration(
                       border: InputBorder.none,
                       hintText: 'BTC Address',
@@ -92,27 +125,27 @@ class _SendBitcoinScreenState extends State<SendBitcoinScreen> {
                 ),
               ),
               Row(
-                children:<Widget> [
+                children: <Widget>[
                   const Text(
                     'Available Balance : ',
                     style: TextStyle(fontWeight: FontWeight.w500, fontSize: 16),
                   ),
-                 FutureBuilder<double>(
-                        future: Provider.of<WalletProvider>(context)
-                            .currentBalance(),
-                        builder: (BuildContext context,
-                            AsyncSnapshot<double> snapshot) {
-                          return snapshot.hasError
-                              ? Text(snapshot.error.toString())
-                              : snapshot.hasData
-                                  ? Text(
-                                      snapshot.data.toString(),
-                                      style: const TextStyle(
-                                          fontWeight: FontWeight.w500,
-                                          fontSize: 16),
-                                    )
-                                  : const ShowLoading();
-                        }),
+                  FutureBuilder<double>(
+                      future:
+                          Provider.of<WalletProvider>(context).currentBalance(),
+                      builder: (BuildContext context,
+                          AsyncSnapshot<double> snapshot) {
+                        return snapshot.hasError
+                            ? Text(snapshot.error.toString())
+                            : snapshot.hasData
+                                ? Text(
+                                    snapshot.data.toString(),
+                                    style: const TextStyle(
+                                        fontWeight: FontWeight.w500,
+                                        fontSize: 16),
+                                  )
+                                : const ShowLoading();
+                      }),
                 ],
               ),
               const SizedBox(

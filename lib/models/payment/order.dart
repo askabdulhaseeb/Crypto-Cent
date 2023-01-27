@@ -3,8 +3,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import '../../enum/order_status_enum.dart';
 import 'orderd_product.dart';
 
-class Order {
-  Order({
+class MyOrder {
+  MyOrder({
     required this.orderID,
     required this.receiptID,
     required this.sellerUID,
@@ -41,8 +41,8 @@ class Order {
   }
 
   // ignore: sort_constructors_first
-  factory Order.fromMap(DocumentSnapshot<Map<String, dynamic>> doc) {
-    return Order(
+  factory MyOrder.fromMap(DocumentSnapshot<Map<String, dynamic>> doc) {
+    return MyOrder(
       orderID: doc.data()?['order_id'] ?? '',
       receiptID: doc.data()?['receipt_id'] ?? '',
       sellerUID: doc.data()?['seller_uid'] ?? '',

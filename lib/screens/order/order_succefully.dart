@@ -18,7 +18,6 @@ class OrderSuccefully extends StatelessWidget {
               Navigator.pop(context);
             }),
             icon: const Icon(Icons.arrow_back_ios_sharp)),
-        
         actions: const <Widget>[Icon(Icons.more_vert)],
       ),
       body: SingleChildScrollView(
@@ -46,7 +45,7 @@ class OrderSuccefully extends StatelessWidget {
               ),
               const SizedBox(height: 30),
               const ForText(
-                name: 'Order placed successfully',
+                name: 'MyOrder placed successfully',
                 bold: true,
                 size: 20,
               ),
@@ -64,7 +63,7 @@ class OrderSuccefully extends StatelessWidget {
               CustomElevatedButton(title: 'Continue', onTap: () {}),
               const SizedBox(height: 10),
               CustomElevatedButton(
-                  title: 'Track Order',
+                  title: 'Track MyOrder',
                   onTap: () {},
                   border: Border.all(color: Theme.of(context).primaryColor),
                   textStyle: TextStyle(color: Theme.of(context).primaryColor),

@@ -2,10 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import '../../../database/app_user/auth_method.dart';
+
 import '../../../function/unique_id_functions.dart';
 import '../../../models/app_user/app_user.dart';
 import '../../../models/chat/chat.dart';
+
 import '../../../screens/chat_screen/private/personal_chat_screen.dart';
+import '../../../screens/profile_screen/wallet/send_bitcoin.dart';
 import '../../custom_widgets/custom_elevated_button.dart';
 import '../../custom_widgets/custom_profile_image.dart';
 
@@ -25,13 +28,21 @@ class BloodoContacts extends StatelessWidget {
         // subtitle: Text(_subtitle),
         trailing: Row(
           mainAxisSize: MainAxisSize.min,
-          children: [
+          children: <Widget>[
             CustomElevatedButton(
               bgColor: Theme.of(context).secondaryHeaderColor,
               title: '  Send  ',
               textStyle: const TextStyle(color: Colors.black54, fontSize: 16),
-              onTap: () async{
+              onTap: () async {
                 await HapticFeedback.heavyImpact();
+                Navigator.of(context).pushAndRemoveUntil(
+                  MaterialPageRoute<SendBitcoinScreen>(
+                      builder: (BuildContext context) => SendBitcoinScreen(
+                            iscontact: true,
+                            sellerUser: user,
+                          )),
+                  (Route<dynamic> route) => false,
+                );
               },
               padding: const EdgeInsets.symmetric(horizontal: 6),
             ),
@@ -40,7 +51,7 @@ class BloodoContacts extends StatelessWidget {
             ),
             CustomElevatedButton(
               title: 'Message',
-              onTap: () async{
+              onTap: () async {
                 await HapticFeedback.heavyImpact();
                 Navigator.of(context).push(
                   MaterialPageRoute<PersonalChatScreen>(

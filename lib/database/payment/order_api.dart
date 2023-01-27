@@ -12,7 +12,7 @@ class OrderApi {
   final FirebaseFirestore _instance = FirebaseFirestore.instance;
   static const String _collection = 'orders';
   Future<bool> add({
-   required Order order,
+    required MyOrder order,
     required AppUser sender,
     required List<AppUser> receiver,
     required List<Product> product,
@@ -28,7 +28,7 @@ class OrderApi {
             deviceToken: receiver[i].deviceToken ?? <MyDeviceToken>[],
             messageTitle: product[i].productname,
             messageBody: '${sender.name} send you a new order',
-            data: <String>['order', 'confirm Order', order.orderID],
+            data: <String>['order', 'confirm MyOrder', order.orderID],
             isMessage: false,
             type: NotificationType.confirmOrder,
             fromId: order.customerUID,
@@ -44,19 +44,19 @@ class OrderApi {
     }
   }
 
-  Future<List<Order>> get() async {
-    List<Order> orders = <Order>[];
+  Future<List<MyOrder>> get() async {
+    List<MyOrder> orders = <MyOrder>[];
     QuerySnapshot<Map<String, dynamic>> snapshot = await _instance
         .collection(_collection)
         .orderBy('timestamp', descending: true)
         .get();
     for (DocumentSnapshot<Map<String, dynamic>> e in snapshot.docs) {
-      orders.add(Order.fromMap(e));
+      orders.add(MyOrder.fromMap(e));
     }
     return orders;
   }
 
-  Future<void> updateStatus(Order value) async {
+  Future<void> updateStatus(MyOrder value) async {
     await _instance
         .collection(_collection)
         .doc(value.orderID)

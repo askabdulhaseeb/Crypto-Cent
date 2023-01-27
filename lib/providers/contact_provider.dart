@@ -12,7 +12,7 @@ class ContactProvider with ChangeNotifier {
     final PermissionStatus status = await Permission.contacts.status;
     print(status.name);
     if (await Permission.contacts.isGranted) {
-      _mobileContacts = await FastContacts.allContacts;
+      _mobileContacts = await FastContacts.getAllContacts();
       temp = true;
     } else {
       await openAppSettings();
@@ -32,10 +32,10 @@ class ContactProvider with ChangeNotifier {
     }
     for (int i = 0; i < _mobileContacts.length; i++) {
       isFind = false;
-      if (_mobileContacts[i].phones.isEmpty) {
+      if (_mobileContacts[i].phones[0].number.isEmpty) {
         continue;
       }
-      String temp = _mobileContacts[i].phones[0];
+      String temp = _mobileContacts[i].phones[0].number;
       temp = temp.replaceAll(' ', '');
       if (temp.length >= 10) {
         mobileNumber = temp.substring(temp.length - 10, temp.length);

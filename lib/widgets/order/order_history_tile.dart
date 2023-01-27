@@ -8,7 +8,7 @@ import '../custom_widgets/cutom_text.dart';
 
 class OrderHistoryTile extends StatelessWidget {
   const OrderHistoryTile({required this.order, Key? key}) : super(key: key);
-  final Order order;
+  final MyOrder order;
 
   @override
   Widget build(BuildContext context) {

@@ -51,25 +51,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     return Scaffold(
       key: _key,
       drawer: drawerScreen(context),
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: () async {
-          if (users.allDeviceToken.isNotEmpty ) {
-            await NotificationsServices().sendSubsceibtionNotification(
-              deviceToken: users.allDeviceToken,
-              messageTitle: 'Discount a gie oye',
-              messageBody: 'Dicount be discount',
-              data: <String>['chat', 'message', 'personal'],
-              isMessage: false,
-              type: NotificationType.discountOffer,
-              fromId: AuthMethods.uid,
-              toId: '123'
-            );
-          }
-        },
-        label: const Text('Upload'),
-        icon: const Icon(Icons.upload),
-        backgroundColor: Colors.pink,
-      ),
+     
+      
       body: SafeArea(
         child: Consumer2<ProductProvider, CategoriesProvider>(builder: (
           BuildContext context,

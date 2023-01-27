@@ -17,7 +17,7 @@ import '../../custom_widgets/custom_textformfield.dart';
 
 class OrderHistoryTile extends StatefulWidget {
   const OrderHistoryTile({required this.item, super.key});
-  final Order item;
+  final MyOrder item;
 
   @override
   State<OrderHistoryTile> createState() => _OrderHistoryTileState();

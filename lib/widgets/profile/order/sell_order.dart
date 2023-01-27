@@ -23,8 +23,8 @@ class SellOrder extends StatelessWidget {
           itemBuilder: (BuildContext context, int index) {
             Product product =
                 productPro.product(orderPro.sellProducts[index].pid);
-            Order item = orderPro.sellingOrder[index];
-            //final Order item = orderPro.order[index];
+            MyOrder item = orderPro.sellingOrder[index];
+            //final MyOrder item = orderPro.order[index];
             return ListTile(
               leading: SizedBox(
                 width: 50,

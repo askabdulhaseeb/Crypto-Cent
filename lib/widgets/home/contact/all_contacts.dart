@@ -54,7 +54,7 @@ class ContactItem extends StatelessWidget {
                 title: 'Invite',
                 onTap: () async {
                   await HapticFeedback.heavyImpact();
-                  _launchSMS(contact.phones[0], 'Download the bloodo app');
+                  _launchSMS(contact.phones[0] as String, 'Download the bloodo app');
                 },
 
                 // textStyle: TextStyle(

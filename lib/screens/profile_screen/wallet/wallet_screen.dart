@@ -124,7 +124,7 @@ class _WalletScreenState extends State<WalletScreen> {
                       context,
                       MaterialPageRoute<SendBitcoinScreen>(
                         builder: (BuildContext context) =>
-                            const SendBitcoinScreen(),
+                            const SendBitcoinScreen(iscontact: false),
                       ),
                     );
                   },

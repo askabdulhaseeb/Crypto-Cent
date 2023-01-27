@@ -39,7 +39,7 @@ class PaymentProvider with ChangeNotifier {
     _allOrder.clear();
     _receipt.clear();
     _order.clear();
-    List<Order> tempOrder = <Order>[];
+    List<MyOrder> tempOrder = <MyOrder>[];
     tempOrder = await OrderApi().get();
     for (int i = 0; i < tempOrder.length; i++) {
       if (AuthMethods.uid == tempOrder[i].customerUID) {
@@ -111,8 +111,8 @@ class PaymentProvider with ChangeNotifier {
     print('All Orders -> ${_allOrder.length}');
     final List<String> temp = <String>[];
     final String me = AuthMethods.uid;
-    final List<Order> tempOrder = _allOrder;
-    for (Order element in tempOrder) {
+    final List<MyOrder> tempOrder = _allOrder;
+    for (MyOrder element in tempOrder) {
       if (element.sellerUID == me && (!temp.contains(element.sellerUID))) {
         temp.add(element.customerUID);
       }
@@ -141,7 +141,7 @@ class PaymentProvider with ChangeNotifier {
       total += cart[i].price * cart[i].quantity;
       _orderProduct.add(tempOrderProduct);
     }
-    Order tempOrder = Order(
+    MyOrder tempOrder = MyOrder(
       orderID: uniqueID,
       receiptID: uniqueID,
       sellerUID: _orderProduct[0].sellerID,
@@ -172,22 +172,25 @@ class PaymentProvider with ChangeNotifier {
     final UserProvider userPro =
         // ignore: use_build_context_synchronously
         Provider.of<UserProvider>(context, listen: false);
-        final ProductProvider productPro=Provider.of<ProductProvider>(context, listen: false);
+    final ProductProvider productPro =
+        Provider.of<ProductProvider>(context, listen: false);
     final AppUser sender = userPro.user(AuthMethods.uid);
     final AppUser receiver = userPro.user(_orderProduct[0].sellerID);
-    final List<AppUser> recieverList=[];
-    for(int i=0;i<cart.length;i++)
-    {
+    final List<AppUser> recieverList = [];
+    for (int i = 0; i < cart.length; i++) {
       final AppUser temp = userPro.user(cart[0].sellerID);
       recieverList.add(temp);
     }
-     final List<Product> productList=[];
-    for(int i=0;i<cart.length;i++)
-    {
+    final List<Product> productList = [];
+    for (int i = 0; i < cart.length; i++) {
       final Product temp = productPro.product(cart[i].id);
       productList.add(temp);
     }
-    final bool orderBool = await OrderApi().add( order: tempOrder, receiver: recieverList, sender: sender,product: productList);
+    final bool orderBool = await OrderApi().add(
+        order: tempOrder,
+        receiver: recieverList,
+        sender: sender,
+        product: productList);
     final bool receiptBool = await ReceiptApi()
         .add(receipt: tempReceipt, sender: sender, receiver: receiver);
     final bool transactionBool = await TransactionApi().add(tempTransaction);
@@ -212,17 +215,17 @@ class PaymentProvider with ChangeNotifier {
   double shipped = 0;
   final List<OrderdProduct> _orderProduct = <OrderdProduct>[];
   List<OrderdProduct> get orderdProduct => _orderProduct;
-  final List<Order> _order = <Order>[];
-  List<Order> get order => _order;
-  List<Order> _allOrder = <Order>[];
-  List<Order> get allOrder => _allOrder;
+  final List<MyOrder> _order = <MyOrder>[];
+  List<MyOrder> get order => _order;
+  List<MyOrder> _allOrder = <MyOrder>[];
+  List<MyOrder> get allOrder => _allOrder;
   List<Receipt> _receipt = <Receipt>[];
   List<Receipt> get receipt => _receipt;
 
   final List<Product> _product = <Product>[];
   List<Product> get products => _product;
-  final List<Order> _sellingOrder = <Order>[];
-  List<Order> get sellingOrder => _sellingOrder;
+  final List<MyOrder> _sellingOrder = <MyOrder>[];
+  List<MyOrder> get sellingOrder => _sellingOrder;
   final List<OrderdProduct> _sellProduct = <OrderdProduct>[];
   List<OrderdProduct> get sellProducts => _sellProduct;
 }
