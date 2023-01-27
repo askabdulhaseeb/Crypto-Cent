@@ -114,6 +114,7 @@ class ChatAPI {
           isMessage: true,
           type: NotificationType.message,
           fromId: AuthMethods.uid,
+          toId: sender.uid
         );
       }
     } catch (e) {

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'notification_provider.dart';
 import 'provider.dart';
 
 // ignore: always_specify_types
@@ -10,6 +11,9 @@ dynamic get listOfProvider => [
       ),
       ChangeNotifierProvider<CartProvider>(
         create: (BuildContext context) => CartProvider(),
+      ),
+      ChangeNotifierProvider<NotificationProvider>(
+        create: (BuildContext context) => NotificationProvider(),
       ),
       ChangeNotifierProvider<AddProductProvider>(
         create: (BuildContext context) => AddProductProvider(),

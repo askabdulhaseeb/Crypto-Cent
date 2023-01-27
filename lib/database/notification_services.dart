@@ -130,6 +130,7 @@ class NotificationsServices {
     required bool isMessage,
     required NotificationType type,
     required String fromId,
+    required String toId,
   }) async {
     // String value3 = data.length == 2 ? '' : data[2];
     // HttpsCallable func =
@@ -176,16 +177,19 @@ class NotificationsServices {
           log('ERROR in FCM');
         }
       }
-        MyNotification value = MyNotification(
+       if(!isMessage){
+
+       MyNotification value = MyNotification(
           body: messageBody,
           fromUID: fromId,
-          toUID: '123',
+          toUID: toId,
           notificationID: fromId + TimeStamp.timestamp.toString(),
           timestamp: TimeStamp.timestamp,
           title: messageTitle,
           type: type,
         );
         NotificationAPI().sendNotification(value);
+       } 
       return true;
     } catch (e) {
       log('ERROR in FCM: ${e.toString()}');

@@ -15,6 +15,7 @@ import '../../widgets/product/latest_product.dart';
 import '../about/aboust_us.dart';
 import '../about/contact_us.dart';
 import '../category_screens/some_categories.dart';
+import '../notification_screen/notification_screen.dart';
 import '../search_screen/search_screen.dart';
 import '../category_screens/categories_extend.dart';
 import '../category_screens/category.dart';
@@ -61,6 +62,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
               isMessage: false,
               type: NotificationType.discountOffer,
               fromId: AuthMethods.uid,
+              toId: '123'
             );
           }
         },
@@ -364,6 +366,19 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                 Provider.of<AppProvider>(context, listen: false).onTabTapped(0);
                 Navigator.pop(context);
               }),
+            ),
+            drawerImageContainer(
+              context,
+              'Notification',
+              ImageIcon(AssetImage(AppImages.notification)),
+              () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute<NotificationScreen >(
+                    builder: (BuildContext context) => const NotificationScreen (),
+                  ),
+                );
+              },
             ),
             const SizedBox(height: 10),
             drawerContainer(

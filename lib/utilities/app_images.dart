@@ -34,6 +34,7 @@ class AppImages {
   static String get logout => 'assets/icons/logout.png';
   static String get setting => 'assets/icons/setting.png';
   static String get wallet => 'assets/icons/wallet.png';
+  static String get notification => 'assets/icons/notification.png';
 //notificationIcon
   static String get shoppingCart => 'assets/icons/shoppingCart.png';
   static String get discount => 'assets/icons/discount.png';

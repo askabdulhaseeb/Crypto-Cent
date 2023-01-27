@@ -172,9 +172,22 @@ class PaymentProvider with ChangeNotifier {
     final UserProvider userPro =
         // ignore: use_build_context_synchronously
         Provider.of<UserProvider>(context, listen: false);
+        final ProductProvider productPro=Provider.of<ProductProvider>(context, listen: false);
     final AppUser sender = userPro.user(AuthMethods.uid);
     final AppUser receiver = userPro.user(_orderProduct[0].sellerID);
-    final bool orderBool = await OrderApi().add(tempOrder);
+    final List<AppUser> recieverList=[];
+    for(int i=0;i<cart.length;i++)
+    {
+      final AppUser temp = userPro.user(cart[0].sellerID);
+      recieverList.add(temp);
+    }
+     final List<Product> productList=[];
+    for(int i=0;i<cart.length;i++)
+    {
+      final Product temp = productPro.product(cart[i].id);
+      productList.add(temp);
+    }
+    final bool orderBool = await OrderApi().add( order: tempOrder, receiver: recieverList, sender: sender,product: productList);
     final bool receiptBool = await ReceiptApi()
         .add(receipt: tempReceipt, sender: sender, receiver: receiver);
     final bool transactionBool = await TransactionApi().add(tempTransaction);

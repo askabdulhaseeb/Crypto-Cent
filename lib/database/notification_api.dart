@@ -15,7 +15,17 @@ class NotificationAPI {
         .doc(value.notificationID)
         .set(value.toMap());
   }
-
+Future<List<MyNotification>> getdata() async {
+    List<MyNotification> value = <MyNotification>[];
+    QuerySnapshot<Map<String, dynamic>> snapshot = await _instance
+        .collection(_collection)
+        .orderBy('timestamp', descending: true)
+        .get();
+    for (DocumentSnapshot<Map<String, dynamic>> e in snapshot.docs) {
+      value.add(MyNotification.fromDoc(e));
+    }
+    return value;
+  }
   Future<List<MyNotification>> notificationsOfType(
       NotificationType type) async {
     final List<MyNotification> notice = <MyNotification>[];

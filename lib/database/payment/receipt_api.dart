@@ -31,6 +31,7 @@ class ReceiptApi {
           isMessage: false,
           type: NotificationType.deliverySuccess,
           fromId: AuthMethods.uid,
+          toId: receiver.uid,
         );
       }
       // CustomToast.successToast(message: 'Successfully Added');
