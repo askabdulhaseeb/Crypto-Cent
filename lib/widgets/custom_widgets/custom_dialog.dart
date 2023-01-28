@@ -1,3 +1,5 @@
+import '../../screens/auth/welcome_screen.dart';
+import '../../screens/main_screen/main_screen.dart';
 import 'constants.dart';
 import 'package:flutter/material.dart';
 
@@ -5,7 +7,6 @@ import '../../utilities/app_images.dart';
 import 'custom_elevated_button.dart';
 
 class CustomDialogBox extends StatefulWidget {
-
   const CustomDialogBox(
       {Key? key,
       required this.title,
@@ -71,7 +72,15 @@ class _CustomDialogBoxState extends State<CustomDialogBox> {
               Align(
                 alignment: Alignment.bottomRight,
                 child: CustomElevatedButton(
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute<WelcomeScreen>(
+                          builder: (BuildContext context) =>
+                              const WelcomeScreen(),
+                        ),
+                        (Route route) => false);
+                  },
                   title: widget.text,
                 ),
               ),

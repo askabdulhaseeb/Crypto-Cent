@@ -68,7 +68,7 @@ class _SignupWithEmailScreenState extends State<SignupWithEmailScreen> {
                 ),
                 CustomTextFormField(
                   controller: _email,
-                  hint: 'boloodo@host.com',
+                  hint: 'Email',
                   validator: (String? value) => CustomValidator.email(value),
                   keyboardType: TextInputType.emailAddress,
                   autoFocus: true,
@@ -85,7 +85,7 @@ class _SignupWithEmailScreenState extends State<SignupWithEmailScreen> {
                     : CustomElevatedButton(
                         title: 'Sign up',
                         onTap: () async {
-                             await HapticFeedback.heavyImpact();
+                          await HapticFeedback.heavyImpact();
                           if (_key.currentState!.validate()) {
                             if (_password.text != _confPassword.text) return;
                             setState(() {

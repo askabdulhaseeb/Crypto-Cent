@@ -60,6 +60,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
         title: GestureDetector(
           onTap: () async {
             await HapticFeedback.heavyImpact();
+            // ignore: use_build_context_synchronously
             Navigator.push(
                 context,
                 MaterialPageRoute<ProductDetailScreen>(
@@ -242,14 +243,16 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
       ),
       floatingActionButton: SizedBox(
         height: 60,
+        width: double.infinity,
         child: (AuthMethods.uid != widget.product.uid)
             ? Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: (AuthMethods.uid.isEmpty)
                     ? CustomElevatedButton(
                         title: 'Add To Cart',
-                        onTap: () async{
+                        onTap: () async {
                           await HapticFeedback.heavyImpact();
+                          // ignore: use_build_context_synchronously
                           showDialog(
                               context: context,
                               builder: (BuildContext context) {
@@ -261,6 +264,11 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                                 );
                               });
                         })
+                    // ? Container(
+                    //     height: 59,
+                    //     width: double.infinity,
+                    //     color: Colors.red,
+                    //   )
                     : Row(
                         children: <Widget>[
                           Expanded(

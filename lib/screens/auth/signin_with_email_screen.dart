@@ -49,14 +49,14 @@ class _SigninWithEmailScreenState extends State<SigninWithEmailScreen> {
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
               ),
               const Text(
-                'Enter your Boloodo email and password to signin',
+                'Enter your email and password to signin',
                 textAlign: TextAlign.center,
                 style: TextStyle(color: Colors.grey),
               ),
               const SizedBox(height: 64),
               CustomTextFormField(
                 controller: _email,
-                hint: 'boloodo@host.com',
+                hint: 'Email',
                 validator: (String? value) => CustomValidator.email(value),
                 keyboardType: TextInputType.emailAddress,
                 autoFocus: true,
@@ -69,7 +69,7 @@ class _SigninWithEmailScreenState extends State<SigninWithEmailScreen> {
                   : CustomElevatedButton(
                       title: 'Sign In',
                       onTap: () async {
-                           await HapticFeedback.heavyImpact();
+                        await HapticFeedback.heavyImpact();
                         if (_key.currentState!.validate()) {
                           setState(() {
                             _isLoading = true;

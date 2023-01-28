@@ -61,7 +61,7 @@ class EmptyAuthScreen extends StatelessWidget {
                               ),
                               const ForText(
                                 name:
-                                    'You must be 18 or above to place an order,For customer in age 13-17 please ask a parent or guardian for conset. ',
+                                    'You must be 18 or over to place an order or have the permission of a parent or guardian ',
                               ),
                               const SizedBox(
                                 height: 10,
