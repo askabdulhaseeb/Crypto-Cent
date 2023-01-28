@@ -203,10 +203,41 @@ class _AddProductScreenState extends State<AddProductScreen> {
                     ),
                   ],
                 ),
+                Row(
+                  children: <Widget>[
+                    Expanded(
+                      child: CustomTextFormField(
+                        controller: addProductPro.amount,
+                        hint: 'Local Delivery',
+                        // readOnly: _isloading,
+                        validator: (String? value) =>
+                            CustomValidator.isEmpty(value),
+                        keyboardType: const TextInputType.numberWithOptions(
+                          decimal: true,
+                          signed: true,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: 16),
+                    Expanded(
+                      child: CustomTextFormField(
+                        controller: addProductPro.quantity,
+                        hint: 'International Delivery',
+                        //readOnly: _isloading,
+                        validator: (String? value) =>
+                            CustomValidator.isEmpty(value),
+                        keyboardType: const TextInputType.numberWithOptions(
+                          decimal: true,
+                          signed: true,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
                 const SizedBox(height: 6),
                 categorie(context, catPro),
                 const SizedBox(height: 12),
-                 subCategorie(context, catPro),
+                subCategorie(context, catPro),
                 const SizedBox(height: 20),
                 addProductPro.isloading
                     ? const CircularProgressIndicator()

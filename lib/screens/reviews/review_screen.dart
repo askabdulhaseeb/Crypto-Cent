@@ -53,7 +53,7 @@ class ReviewScreen extends StatelessWidget {
             Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                isProduct ? const Text('PRODUCT') : Text(appUser.name!),
+                isProduct ? const Text('REVIEWS') : Text(appUser.name!),
                 Text(
                   'Total Reviews: ${reviews.length}'.toUpperCase(),
                   style: const TextStyle(color: Colors.grey, fontSize: 11),
