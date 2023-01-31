@@ -24,7 +24,7 @@ class UserProvider extends ChangeNotifier {
   AppUser get currentUser => _currentUser ?? _null;
   Future<void> init() async {
     if (_user.isNotEmpty) return;
-    if (AuthMethods.uid.isEmpty) return;
+    //if (AuthMethods.uid.isEmpty) return;
     final List<AppUser> temp = await UserApi().getAllUsers();
     _user = temp;
     _currentUser = user(AuthMethods.uid);

@@ -41,8 +41,12 @@ class MyApp extends StatelessWidget {
           theme: AppThemes.light,
           darkTheme: AppThemes.dark,
           themeMode: theme.themeMode,
-          home:const SpalshScreen(),
-         // home: const NotificationScreen(),
+          home: !kReleaseMode
+              ? (AuthMethods.uid.isEmpty)
+                  ? const WelcomeScreen()
+                  : const MainScreen()
+              : const SpalshScreen(),
+          // home: const NotificationScreen(),
           routes: <String, WidgetBuilder>{
             EmptyScreen.routeName: (_) => const EmptyScreen(),
             WelcomeScreen.routeName: (_) => const WelcomeScreen(),
