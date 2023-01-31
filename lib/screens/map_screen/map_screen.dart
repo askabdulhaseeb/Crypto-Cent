@@ -89,7 +89,7 @@ class _GoogleMapWidgetState extends State<GoogleMapWidget> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
-                          Icon(Icons.location_on),
+                          const Icon(Icons.location_on),
                           const SizedBox(
                             width: 20,
                           ),

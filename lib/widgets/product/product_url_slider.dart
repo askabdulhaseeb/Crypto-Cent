@@ -2,6 +2,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 
 import '../../models/product/product_url.dart';
+import '../../screens/product_screens/image_full_screen.dart';
 import '../custom_widgets/custom_network_image.dart';
 
 class ProductURLsSlider extends StatelessWidget {
@@ -27,7 +28,7 @@ class ProductURLsSlider extends StatelessWidget {
               ))
           .toList(),
       options: CarouselOptions(
-        aspectRatio: 5 / 6   ,
+        aspectRatio: 5 / 6,
         viewportFraction: 1,
         enlargeCenterPage: true,
         enableInfiniteScroll: false,
@@ -54,7 +55,18 @@ class _Attachment extends StatelessWidget {
             width: MediaQuery.of(context).size.width,
             height: double.infinity,
             child: InteractiveViewer(
-              child: CustomNetworkImage(imageURL: url.url),
+              child: GestureDetector(
+                  onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) {
+                      return DetailScreen(
+                        url: url.url,
+                      );
+                    }));
+                  },
+                  child: Hero(
+                      tag: 'imageHero',
+                      child: CustomNetworkImage(imageURL: url.url))),
             ),
           ),
           if (totalLength > 1)

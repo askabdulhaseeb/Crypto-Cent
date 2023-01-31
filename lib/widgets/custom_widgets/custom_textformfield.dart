@@ -72,6 +72,14 @@ class CustomTextFormFieldState extends State<CustomTextFormField> {
           widget.contentPadding ?? const EdgeInsets.symmetric(horizontal: 12),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(14),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.2),
+            spreadRadius: 2,
+            blurRadius: 7,
+            offset: const Offset(0, 3), // changes position of shadow
+          ),
+        ],
         color: widget.color ?? Theme.of(context).secondaryHeaderColor,
       ),
       child: TextFormField(

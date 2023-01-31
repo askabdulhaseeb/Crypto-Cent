@@ -207,7 +207,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                   children: <Widget>[
                     Expanded(
                       child: CustomTextFormField(
-                        controller: addProductPro.amount,
+                        controller: addProductPro.localDelivery,
                         hint: 'Local Delivery',
                         // readOnly: _isloading,
                         validator: (String? value) =>
@@ -221,7 +221,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                     const SizedBox(width: 16),
                     Expanded(
                       child: CustomTextFormField(
-                        controller: addProductPro.quantity,
+                        controller: addProductPro.internationalDelivery,
                         hint: 'International Delivery',
                         //readOnly: _isloading,
                         validator: (String? value) =>

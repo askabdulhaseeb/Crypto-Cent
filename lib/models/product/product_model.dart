@@ -14,6 +14,8 @@ class Product {
     required this.productname,
     required this.description,
     required this.timestamp,
+    required this.localDelivery,
+    required this.internationalDelivery,
     required this.category,
     required this.subCategory,
     required this.createdByUID,
@@ -23,6 +25,8 @@ class Product {
   final String pid;
   final String uid;
   final double amount;
+  final double localDelivery;
+  final double internationalDelivery;
   final String colors;
   final String quantity;
   final String productname;
@@ -49,6 +53,8 @@ class Product {
       'created_by_uid': createdByUID,
       'product_name': productname,
       'location_uid':locationUID,
+      'local_delivery':localDelivery,
+      'international_delivery':internationalDelivery,
       'reports': <ReportProduct>[],
       'prod_urls': prodURL.map((ProductURL e) => e.toMap()).toList(),
     };
@@ -77,6 +83,8 @@ class Product {
       pid: doc.data()?['pid'] ?? '',
       uid: doc.data()?['uid'] ?? '',
       amount: double.parse(doc.data()?['amount']?.toString() ?? '0.0'),
+      localDelivery: double.parse(doc.data()?['local_delivery']?.toString() ?? '0.0'),
+      internationalDelivery: double.parse(doc.data()?['international_delivery']?.toString() ?? '0.0'),
       colors: doc.data()?['colors'] ?? '',
       quantity: doc.data()?['quantity'] ?? '',
       description: doc.data()?['description'] ?? '',

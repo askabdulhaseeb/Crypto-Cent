@@ -53,7 +53,7 @@ class _ContactListState extends State<ContactList> {
         (BuildContext context, ContactProvider contactPro, Widget? snapshot) {
       List<Contact> mobileContacts = contactPro.forSearch();
       List<AppUser> users = contactPro.forUserSearch();
-     // List<Contact> temp = contactPro.forSearch();
+      // List<Contact> temp = contactPro.forSearch();
       int bloodoContactLength = users.length;
       print('Contact Length: ${mobileContacts.length}');
       return Scaffold(
@@ -69,15 +69,24 @@ class _ContactListState extends State<ContactList> {
           children: <Widget>[
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: TextField(
-                  decoration: const InputDecoration(
-                      border: InputBorder.none,
-                      prefixIcon: Icon(Icons.search),
-                      hintText: 'Search...'),
-                  // onChanged: (String val) => testPro.onSearch(val),
-                  onChanged: (String val) {
-                    contactPro.onSearch(val);
-                  }),
+              // child: TextField(
+              //     decoration: const InputDecoration(
+              //         border: InputBorder.none,
+              //         prefixIcon: Icon(Icons.search),
+              //         hintText: 'Search...'),
+              //     // onChanged: (String val) => testPro.onSearch(val),
+              //     onChanged: (String val) {
+              //       contactPro.onSearch(val);
+              //     }),
+              child: CustomTextFormField(
+                starticon: Icons.search,
+                hint: 'Search Contacts...',
+                color: Colors.white,
+                controller: _searchController,
+                onChanged: (p0) {
+                  contactPro.onSearch(p0);
+                },
+              ),
             ),
             Expanded(
               child: ListView.builder(

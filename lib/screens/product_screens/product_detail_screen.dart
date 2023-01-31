@@ -53,192 +53,179 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
         Provider.of<RatingProvider>(context).productReviews(widget.product.pid);
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        centerTitle: true,
-        backgroundColor: Colors.white,
-        elevation: 0,
-        title: GestureDetector(
-          onTap: () async {
-            await HapticFeedback.heavyImpact();
-            // ignore: use_build_context_synchronously
-            Navigator.push(
-                context,
-                MaterialPageRoute<ProductDetailScreen>(
-                  builder: (BuildContext context) => OtherUserProfile(
-                    appUser: seller,
-                  ),
-                ));
-          },
-          child: Row(
+      // appBar: AppBar(
+      //   centerTitle: true,
+      //   backgroundColor: Colors.white,
+      //   elevation: 0,
+      //   title: userDetails(context, seller),
+      //   actions: <Widget>[
+      //     if (widget.product.uid != AuthMethods.uid &&
+      //         AuthMethods.uid.isNotEmpty)
+      //       messages(mounted: mounted, seller: seller),
+      //     const SizedBox(width: 10),
+      //   ],
+      // ),
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              CustomProfileImage(imageURL: seller.imageURL ?? '', radius: 24),
-              const SizedBox(width: 10),
-              Text(
-                seller.name ?? 'null',
-                style: const TextStyle(fontWeight: FontWeight.bold),
+              ProductURLsSlider(urls: widget.product.prodURL),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    const SizedBox(height: 15),
+                    Text(
+                      widget.product.productname,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(
+                        fontSize: 22,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                    GestureDetector(
+                      onTap: () async {
+                        await HapticFeedback.heavyImpact();
+                        mapBottomSheet(context, location);
+                      },
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            '${location.city} , ${location.state}',
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w300,
+                                color: Theme.of(context).primaryColor),
+                          ),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(height: 10),
+                    Row(
+                      children: <Widget>[
+                        GestureDetector(
+                          onTap: () async {
+                            await HapticFeedback.heavyImpact();
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute<ReviewScreen>(
+                                  builder: (BuildContext context) =>
+                                      ReviewScreen(
+                                    reviews: reviews,
+                                    isProduct: true,
+                                    id: widget.product.pid,
+                                  ),
+                                ));
+                          },
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              CustomRatingBar(
+                                itemSize: 20,
+                                initialRating: ReviewFunction().rating(reviews),
+                                onRatingUpdate: (_) {},
+                              ),
+                              ForText(
+                                name: '(${reviews.length} reviews)',
+                                size: 13,
+                                color: Colors.grey,
+                              ),
+                            ],
+                          ),
+                        ),
+                        const Spacer(),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: <Widget>[
+                            Text(
+                              '\$ ${widget.product.amount}',
+                              style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20,
+                              ),
+                            ),
+                            FutureBuilder<double>(
+                                future: CryptoFunction().btcPrinceLive(
+                                    dollor: widget.product.amount),
+                                builder: (BuildContext context,
+                                    AsyncSnapshot<double> exchangeRate) {
+                                  return ForText(
+                                    name: exchangeRate.hasError
+                                        ? '-- ERROR --'
+                                        : exchangeRate.hasData
+                                            ? 'Btc: ${exchangeRate.data ?? 0}'
+                                            : 'fetching ...',
+                                    size: 11,
+                                  );
+                                }),
+                          ],
+                        )
+                      ],
+                    ),
+                    const SizedBox(height: 10),
+                    SizedBox(
+                      height: 50,
+                      width: double.infinity,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          userDetails(context, seller),
+                          if (widget.product.uid != AuthMethods.uid &&
+                              AuthMethods.uid.isNotEmpty)
+                            messages(mounted: mounted, seller: seller),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(height: 20),
+                    const ForText(
+                      name: 'Description',
+                      bold: true,
+                      size: 22,
+                    ),
+                    const SizedBox(height: 10),
+                    Text(
+                      widget.product.description.toString(),
+                      style: const TextStyle(color: Colors.grey),
+                    ),
+                    const SizedBox(height: 30),
+                    ForText(
+                      name: 'Local Delivery : ${widget.product.localDelivery}',
+                      size: 16,
+                    ),
+                    const SizedBox(height: 10),
+                    ForText(
+                      name:
+                          'International Delivery : ${widget.product.internationalDelivery}',
+                      size: 16,
+                    ),
+                    const SizedBox(height: 100),
+                    CustomElevatedButton(
+                      title: 'Report Product',
+                      bgColor: Colors.transparent,
+                      border: Border.all(color: Theme.of(context).primaryColor),
+                      textStyle: TextStyle(
+                        color: Theme.of(context).primaryColor,
+                        fontSize: 18,
+                      ),
+                      onTap: () async {
+                        await HapticFeedback.heavyImpact();
+                        ReportBottomSheets()
+                            .productReport(context, widget.product);
+                      },
+                    ),
+                    const SizedBox(height: 100),
+                  ],
+                ),
               ),
             ],
           ),
-        ),
-        actions: <Widget>[
-          if (widget.product.uid != AuthMethods.uid &&
-              AuthMethods.uid.isNotEmpty)
-            CircleAvatar(
-              backgroundColor: Theme.of(context).secondaryHeaderColor,
-              child: IconButton(
-                onPressed: () async {
-                  if (!mounted) return;
-                  Navigator.of(context).push(
-                    MaterialPageRoute<PersonalChatScreen>(
-                      builder: (BuildContext context) => PersonalChatScreen(
-                        chat: Chat(
-                            chatID: UniqueIdFunctions.personalChatID(
-                                chatWith: seller.uid),
-                            persons: <String>[seller.uid, AuthMethods.uid]),
-                        chatWith: seller,
-                      ),
-                    ),
-                  );
-                },
-                icon: Icon(Icons.chat, color: Theme.of(context).primaryColor),
-              ),
-            ),
-          const SizedBox(width: 10),
-        ],
-      ),
-      body: SingleChildScrollView(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            ProductURLsSlider(urls: widget.product.prodURL),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  const SizedBox(height: 15),
-                  Text(
-                    widget.product.productname,
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                    style: const TextStyle(
-                      fontSize: 22,
-                      fontWeight: FontWeight.w700,
-                    ),
-                  ),
-                  GestureDetector(
-                    onTap: () async {
-                      await HapticFeedback.heavyImpact();
-                      mapBottomSheet(context, location);
-                    },
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          '${location.city} , ${location.state}',
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          style: TextStyle(
-                              fontSize: 14,
-                              fontWeight: FontWeight.w300,
-                              color: Theme.of(context).primaryColor),
-                        ),
-                      ],
-                    ),
-                  ),
-                  const SizedBox(height: 10),
-                  Row(
-                    children: <Widget>[
-                      GestureDetector(
-                        onTap: () async {
-                          await HapticFeedback.heavyImpact();
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute<ReviewScreen>(
-                                builder: (BuildContext context) => ReviewScreen(
-                                  reviews: reviews,
-                                  isProduct: true,
-                                  id: widget.product.pid,
-                                ),
-                              ));
-                        },
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            CustomRatingBar(
-                              itemSize: 20,
-                              initialRating: ReviewFunction().rating(reviews),
-                              onRatingUpdate: (_) {},
-                            ),
-                            ForText(
-                              name: '(${reviews.length} reviews)',
-                              size: 13,
-                              color: Colors.grey,
-                            ),
-                          ],
-                        ),
-                      ),
-                      const Spacer(),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        children: <Widget>[
-                          Text(
-                            '\$ ${widget.product.amount}',
-                            style: const TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 20,
-                            ),
-                          ),
-                          FutureBuilder<double>(
-                              future: CryptoFunction()
-                                  .btcPrinceLive(dollor: widget.product.amount),
-                              builder: (BuildContext context,
-                                  AsyncSnapshot<double> exchangeRate) {
-                                return ForText(
-                                  name: exchangeRate.hasError
-                                      ? '-- ERROR --'
-                                      : exchangeRate.hasData
-                                          ? 'Btc: ${exchangeRate.data ?? 0}'
-                                          : 'fetching ...',
-                                  size: 11,
-                                );
-                              }),
-                        ],
-                      )
-                    ],
-                  ),
-                  const SizedBox(height: 10),
-                  const ForText(
-                    name: 'Description',
-                    bold: true,
-                    size: 22,
-                  ),
-                  const SizedBox(height: 10),
-                  Text(
-                    widget.product.description.toString(),
-                    style: const TextStyle(color: Colors.grey),
-                  ),
-                  const SizedBox(height: 100),
-                  CustomElevatedButton(
-                    title: 'Report Product',
-                    bgColor: Colors.transparent,
-                    border: Border.all(color: Theme.of(context).primaryColor),
-                    textStyle: TextStyle(
-                      color: Theme.of(context).primaryColor,
-                      fontSize: 18,
-                    ),
-                    onTap: () async {
-                      await HapticFeedback.heavyImpact();
-                      ReportBottomSheets()
-                          .productReport(context, widget.product);
-                    },
-                  ),
-                  const SizedBox(height: 100),
-                ],
-              ),
-            ),
-          ],
         ),
       ),
       floatingActionButton: SizedBox(
@@ -296,6 +283,32 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                       ),
               )
             : const SizedBox(),
+      ),
+    );
+  }
+
+  GestureDetector userDetails(BuildContext context, AppUser seller) {
+    return GestureDetector(
+      onTap: () async {
+        await HapticFeedback.heavyImpact();
+        // ignore: use_build_context_synchronously
+        Navigator.push(
+            context,
+            MaterialPageRoute<ProductDetailScreen>(
+              builder: (BuildContext context) => OtherUserProfile(
+                appUser: seller,
+              ),
+            ));
+      },
+      child: Row(
+        children: <Widget>[
+          CustomProfileImage(imageURL: seller.imageURL ?? '', radius: 24),
+          const SizedBox(width: 10),
+          Text(
+            seller.name ?? 'null',
+            style: const TextStyle(fontWeight: FontWeight.bold),
+          ),
+        ],
       ),
     );
   }
@@ -404,7 +417,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                           ),
                         )
                       : GoogleMapWidget(
-                        productName: widget.product.productname,
+                          productName: widget.product.productname,
                           latitude: location.latitude,
                           longitude: location.longitude,
                         ),
@@ -413,5 +426,40 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
             ),
           );
         });
+  }
+}
+
+class messages extends StatelessWidget {
+  const messages({
+    super.key,
+    required this.mounted,
+    required this.seller,
+  });
+
+  final bool mounted;
+  final AppUser seller;
+
+  @override
+  Widget build(BuildContext context) {
+    return CircleAvatar(
+      backgroundColor: Theme.of(context).secondaryHeaderColor,
+      child: IconButton(
+        onPressed: () async {
+          if (!mounted) return;
+          Navigator.of(context).push(
+            MaterialPageRoute<PersonalChatScreen>(
+              builder: (BuildContext context) => PersonalChatScreen(
+                chat: Chat(
+                    chatID:
+                        UniqueIdFunctions.personalChatID(chatWith: seller.uid),
+                    persons: <String>[seller.uid, AuthMethods.uid]),
+                chatWith: seller,
+              ),
+            ),
+          );
+        },
+        icon: Icon(Icons.chat, color: Theme.of(context).primaryColor),
+      ),
+    );
   }
 }

@@ -85,15 +85,15 @@ class HomeCategoriesList extends StatelessWidget {
                         ),
                       );
                     }),
-          allitems(context, 'News', false, () {
-            HapticFeedback.heavyImpact();
-            Navigator.push(
-              context,
-              MaterialPageRoute<EmptyScreen>(
-                builder: (BuildContext context) => const EmptyScreen(),
-              ),
-            );
-          }),
+          // allitems(context, 'News', false, () {
+          //   HapticFeedback.heavyImpact();
+          //   Navigator.push(
+          //     context,
+          //     MaterialPageRoute<EmptyScreen>(
+          //       builder: (BuildContext context) => const EmptyScreen(),
+          //     ),
+          //   );
+          // }),
           const SizedBox(width: 48),
         ],
       ),

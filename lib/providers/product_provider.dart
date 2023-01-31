@@ -98,6 +98,8 @@ class ProductProvider with ChangeNotifier {
       category: 'null',
       subCategory: 'null',
       createdByUID: 'null',
+      internationalDelivery: 0,
+      localDelivery: 0,
       prodURL: <ProductURL>[],
       reports: <ReportProduct>[]);
 }

@@ -61,7 +61,7 @@ class OtherUserProfile extends StatelessWidget {
                   ),
                   const SizedBox(height: 10),
                   GestureDetector(
-                    onTap: () async{
+                    onTap: () async {
                       await HapticFeedback.heavyImpact();
                       Navigator.push(
                           context,
@@ -96,9 +96,9 @@ class OtherUserProfile extends StatelessWidget {
               context: context,
               text: 'Reviews',
               icon: Icons.reviews,
-              onTap: () async{
+              onTap: () async {
                 await HapticFeedback.heavyImpact();
-                                Navigator.push(
+                Navigator.push(
                     context,
                     MaterialPageRoute<ReviewScreen>(
                       builder: (BuildContext context) => ReviewScreen(
@@ -110,16 +110,19 @@ class OtherUserProfile extends StatelessWidget {
               },
             ),
             const SizedBox(height: 30),
-            GridView.count(
-              childAspectRatio: 200 / 330,
-              mainAxisSpacing: 8,
-              crossAxisSpacing: 4,
-              crossAxisCount: 2,
-              shrinkWrap: true,
-              primary: false,
-              children: List<Widget>.generate(products.length, (int index) {
-                return ExtendProductTile(product: products[index]);
-              }),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8),
+              child: GridView.count(
+                childAspectRatio: 200 / 340,
+                mainAxisSpacing: 8,
+                crossAxisSpacing: 8,
+                crossAxisCount: 2,
+                shrinkWrap: true,
+                primary: false,
+                children: List<Widget>.generate(products.length, (int index) {
+                  return ExtendProductTile(product: products[index]);
+                }),
+              ),
             ),
           ],
         ),
@@ -139,6 +142,14 @@ class OtherUserProfile extends StatelessWidget {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12),
           color: const Color(0xffF6F7F9),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.2),
+              spreadRadius: 2,
+              blurRadius: 7,
+              offset: const Offset(0, 3), // changes position of shadow
+            ),
+          ],
         ),
         margin: const EdgeInsets.symmetric(vertical: 4, horizontal: 25),
         child: ListTile(
