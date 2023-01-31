@@ -404,6 +404,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                           ),
                         )
                       : GoogleMapWidget(
+                        productName: widget.product.productname,
                           latitude: location.latitude,
                           longitude: location.longitude,
                         ),

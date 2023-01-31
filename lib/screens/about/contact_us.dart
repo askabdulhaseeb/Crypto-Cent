@@ -60,7 +60,10 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                     borderRadius: BorderRadius.circular(12),
                     color: Colors.black,
                   ),
-                  child: GoogleMapWidget(latitude: 120,longitude: 130,),
+                  child: GoogleMapWidget(
+                      latitude: 120,
+                      longitude: 130,
+                      productName: 'Bloodo Headquater'),
                 ),
                 const SizedBox(height: 15),
               ],
@@ -121,4 +124,3 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
     );
   }
 }
-
