@@ -1,4 +1,3 @@
-
 class AppImages {
   static String get banner => 'assets/images/banner.png';
   static String get brandIntroIcon => 'assets/images/brand_icon.png';
@@ -35,6 +34,7 @@ class AppImages {
   static String get setting => 'assets/icons/setting.png';
   static String get wallet => 'assets/icons/wallet.png';
   static String get notification => 'assets/icons/notification.png';
+  static String get filtterIcon => 'assets/icons/filter.png';
 //notificationIcon
   static String get shoppingCart => 'assets/icons/shoppingCart.png';
   static String get discount => 'assets/icons/discount.png';

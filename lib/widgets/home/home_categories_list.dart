@@ -39,7 +39,8 @@ class HomeCategoriesList extends StatelessWidget {
                             );
                           });
                     }
-                  : () {
+                  : () async {
+                      await HapticFeedback.heavyImpact();
                       Navigator.push(
                         context,
                         MaterialPageRoute<ContactList>(

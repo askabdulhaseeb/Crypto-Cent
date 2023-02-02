@@ -69,15 +69,6 @@ class _ContactListState extends State<ContactList> {
           children: <Widget>[
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
-              // child: TextField(
-              //     decoration: const InputDecoration(
-              //         border: InputBorder.none,
-              //         prefixIcon: Icon(Icons.search),
-              //         hintText: 'Search...'),
-              //     // onChanged: (String val) => testPro.onSearch(val),
-              //     onChanged: (String val) {
-              //       contactPro.onSearch(val);
-              //     }),
               child: CustomTextFormField(
                 starticon: Icons.search,
                 hint: 'Search Contacts...',

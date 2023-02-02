@@ -37,13 +37,34 @@ class ProductProvider with ChangeNotifier {
 
   // ignore: always_specify_types
   List<String> categories = [];
+  String? _catsearch;
+  onCatSearch(String? value) {
+    _catsearch = value;
+    print('search main enter hova ha');
+    notifyListeners();
+  }
 
   List<Product> findByCategory(String categoryname) {
+    List<Product> tempcategoryList = [];
+    tempcategoryList.clear();
+    print(_catsearch);
     List<Product> categoryList = _product
         .where((Product element) =>
             element.category.toLowerCase().contains(categoryname.toLowerCase()))
         .toList();
-    return categoryList;
+    print('category main enter hova ha');
+    if (_catsearch == null || (_catsearch?.isEmpty ?? true)) {
+      return categoryList;
+      //temp.add(_null);
+    }
+    for (Product element in categoryList) {
+      if (element.productname
+          .toLowerCase()
+          .startsWith((_catsearch?.toLowerCase() ?? ''))) {
+        tempcategoryList.add(element);
+      }
+    }
+    return tempcategoryList;
   }
 
   updateFavorite(String value) {
