@@ -9,14 +9,13 @@ import 'dart:io' show Platform;
 import '../../custom_widgets/custom_widget.dart';
 
 class ContactItem extends StatelessWidget {
-  ContactItem({
-    Key? key,
-    required this.contact,
-  }) : super(key: key);
+  const ContactItem({required this.contact, Key? key}) : super(key: key);
 
-  static const double height = 72.0;
-
+  final double height = 72.0;
   final Contact contact;
+  final String text =
+      'Download our app now for a convenient and seamless experience. Available on both iOS and Android. Download now!\n www.bloodo.com';
+  final String link = 'www.google.com';
 
   String get _subtitle {
     final String phones = contact.phones.join(', ');
@@ -36,9 +35,6 @@ class ContactItem extends StatelessWidget {
     ].join('\n');
   }
 
-  String text =
-      'Download our app now for a convenient and seamless experience. Available on both iOS and Android. Download now!\n www.bloodo.com';
-  String link = 'www.google.com';
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -54,7 +50,8 @@ class ContactItem extends StatelessWidget {
                 title: 'Invite',
                 onTap: () async {
                   await HapticFeedback.heavyImpact();
-                  _launchSMS(contact.phones[0].number, 'Download the bloodo app');
+                  _launchSMS(
+                      contact.phones[0].number, 'Download the bloodo app');
                 },
 
                 // textStyle: TextStyle(

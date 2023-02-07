@@ -2,7 +2,7 @@ name: crypto_cent
 description: A new Flutter project.
 
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
-version: 0.1.0+10
+version: 0.1.0+11
 
 environment:
   sdk: '>=2.18.2 <3.0.0'
@@ -74,6 +74,7 @@ dev_dependencies:
     sdk: flutter
   flutter_lints: ^2.0.0
   flutter_launcher_icons: ^0.11.0
+  flutter_native_splash: ^2.2.16
 
 flutter_icons:
   android: true
@@ -81,6 +82,13 @@ flutter_icons:
   remove_alpha_ios: true
   adaptive_icon_background: "#ffffff"
   image_path: "assets/logos/icon.png"
+
+flutter_native_splash:
+  android: true
+  ios: true
+  # color_dark: "#000000"
+  color: "#ffffff"
+  image: assets/logos/logo.png
 
 flutter:
   uses-material-design: true

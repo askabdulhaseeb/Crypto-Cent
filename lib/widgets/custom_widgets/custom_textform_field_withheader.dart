@@ -117,7 +117,7 @@ class CustomTextFormFieldWithHeaderState
               fillColor: widget.color ??
                   Theme.of(context)
                       .textTheme
-                      .bodyText1!
+                      .bodyLarge!
                       .color!
                       .withOpacity(0.15),
               hintText: widget.hint,
@@ -126,17 +126,19 @@ class CustomTextFormFieldWithHeaderState
                       fontSize: 14, color: widget.hintColor ?? Colors.white)
                   : TextStyle(
                       fontSize: 15, color: widget.hintColor ?? Colors.white),
-              suffixIcon: (widget._controller!.text.isEmpty ||
-                      !widget.showSuffixIcon ||
-                      widget.showSuffixIcon == false)
+              suffixIcon: widget.readOnly
                   ? null
-                  : IconButton(
-                      splashRadius: 16,
-                      onPressed: () => setState(() {
-                        widget._controller!.clear();
-                      }),
-                      icon: const Icon(CupertinoIcons.clear, size: 18),
-                    ),
+                  : (widget._controller!.text.isEmpty ||
+                          !widget.showSuffixIcon ||
+                          widget.showSuffixIcon == false)
+                      ? null
+                      : IconButton(
+                          splashRadius: 16,
+                          onPressed: () => setState(() {
+                            widget._controller!.clear();
+                          }),
+                          icon: const Icon(CupertinoIcons.clear, size: 18),
+                        ),
               prefixIcon: widget.starticon == null
                   ? null
                   : SizedBox(

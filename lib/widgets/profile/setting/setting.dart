@@ -26,18 +26,18 @@ class Setting extends StatelessWidget {
               const SizedBox(
                 height: 30,
               ),
-              ProfileNavTile(
-                name: 'Change Password',
-                onTap: () async {
-                  await HapticFeedback.heavyImpact();
-                  Navigator.of(context).push(MaterialPageRoute(
-                    builder: (BuildContext context) => ChnagePassword(),
-                  ));
-                },
-              ),
-              const SizedBox(
-                height: 20,
-              ),
+              // ProfileNavTile(
+              //   name: 'Change Password',
+              //   onTap: () async {
+              //     await HapticFeedback.heavyImpact();
+              //     Navigator.of(context).push(MaterialPageRoute(
+              //       builder: (BuildContext context) => ChnagePassword(),
+              //     ));
+              //   },
+              // ),
+              // const SizedBox(
+              //   height: 20,
+              // ),
               ProfileNavTile(
                 name: 'Edit Address',
                 onTap: () async {

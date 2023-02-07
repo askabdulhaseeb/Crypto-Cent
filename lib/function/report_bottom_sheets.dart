@@ -67,8 +67,8 @@ class ReportBottomSheets {
     );
   }
 
-  productReport(BuildContext context, Product product) {
-    showModalBottomSheet(
+  productReport(BuildContext context, Product product) async {
+    await showModalBottomSheet(
         context: context,
         isScrollControlled: true,
         shape: const RoundedRectangleBorder(
@@ -89,7 +89,7 @@ class ReportBottomSheets {
               ListTile(
                 title: const Text('''It's a spam'''),
                 trailing: const Icon(Icons.arrow_forward_ios),
-                onTap: () async{
+                onTap: () async {
                   await HapticFeedback.heavyImpact();
                   Navigator.pop(context);
                   _showreportcompletedbottom(
@@ -103,7 +103,7 @@ class ReportBottomSheets {
               ListTile(
                 title: const Text('Sale of illegal'),
                 trailing: const Icon(Icons.arrow_forward_ios),
-                onTap: () async{
+                onTap: () async {
                   await HapticFeedback.heavyImpact();
                   Navigator.pop(context);
                   _showreportcompletedbottom(
@@ -117,7 +117,7 @@ class ReportBottomSheets {
               ListTile(
                 title: const Text('Scam'),
                 trailing: const Icon(Icons.arrow_forward_ios),
-                onTap: () async{
+                onTap: () async {
                   await HapticFeedback.heavyImpact();
                   Navigator.pop(context);
                   _showreportcompletedbottom(
@@ -131,7 +131,7 @@ class ReportBottomSheets {
               ListTile(
                 title: const Text('Hate Speech'),
                 trailing: const Icon(Icons.arrow_forward_ios),
-                onTap: () async{
+                onTap: () async {
                   await HapticFeedback.heavyImpact();
                   Navigator.pop(context);
                   _showreportcompletedbottom(
@@ -145,7 +145,7 @@ class ReportBottomSheets {
               ListTile(
                 title: const Text('Voilence or dangerous'),
                 trailing: const Icon(Icons.arrow_forward_ios),
-                onTap: () async{
+                onTap: () async {
                   await HapticFeedback.heavyImpact();
                   Navigator.pop(context);
                   _showreportcompletedbottom(
@@ -159,7 +159,7 @@ class ReportBottomSheets {
               ListTile(
                 title: const Text('Bullying or Harrasment'),
                 trailing: const Icon(Icons.arrow_forward_ios),
-                onTap: () async{
+                onTap: () async {
                   await HapticFeedback.heavyImpact();
                   Navigator.pop(context);
                   _showreportcompletedbottom(
@@ -174,7 +174,7 @@ class ReportBottomSheets {
               ListTile(
                 title: const Text('Intellectual Property Voilation'),
                 trailing: const Icon(Icons.arrow_forward_ios),
-                onTap: () async{
+                onTap: () async {
                   await HapticFeedback.heavyImpact();
                   Navigator.pop(context);
                   _showreportcompletedbottom(
@@ -188,7 +188,7 @@ class ReportBottomSheets {
               ListTile(
                 title: const Text('Self Injury or Sucide'),
                 trailing: const Icon(Icons.arrow_forward_ios),
-                onTap: () async{
+                onTap: () async {
                   await HapticFeedback.heavyImpact();
                   Navigator.pop(context);
                   _showreportcompletedbottom(
@@ -203,7 +203,7 @@ class ReportBottomSheets {
               ListTile(
                 title: const Text('False Information'),
                 trailing: const Icon(Icons.arrow_forward_ios),
-                onTap: () async{
+                onTap: () async {
                   await HapticFeedback.heavyImpact();
                   Navigator.pop(context);
                   _showreportcompletedbottom(
@@ -263,7 +263,7 @@ _showreportcompletedbottom(
           RichText(
             text: TextSpan(
               style: TextStyle(
-                  color: Theme.of(context).textTheme.bodyText1!.color),
+                  color: Theme.of(context).textTheme.bodyLarge!.color),
               children: <TextSpan>[
                 const TextSpan(text: 'You have reported this post with reason'),
                 TextSpan(
@@ -347,7 +347,7 @@ _reportConfirmSheet(
           RichText(
             text: TextSpan(
               style: TextStyle(
-                  color: Theme.of(context).textTheme.bodyText1!.color),
+                  color: Theme.of(context).textTheme.bodyLarge!.color),
               children: <TextSpan>[
                 const TextSpan(text: 'Sre you sure to '),
                 TextSpan(
@@ -373,7 +373,7 @@ _reportConfirmSheet(
             child: CustomElevatedButton(
               title: 'Done',
               onTap: () async {
-                   await HapticFeedback.heavyImpact();
+                await HapticFeedback.heavyImpact();
                 ReportUser repo = ReportUser(
                   reportBy: AuthMethods.uid,
                   category: id,
@@ -414,7 +414,7 @@ class _Handle extends StatelessWidget {
       margin: const EdgeInsets.all(8),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12),
-        color: Theme.of(context).textTheme.bodyText1!.color!.withOpacity(0.1),
+        color: Theme.of(context).textTheme.bodyLarge!.color!.withOpacity(0.1),
       ),
     );
   }

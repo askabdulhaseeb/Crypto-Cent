@@ -29,9 +29,11 @@ class CategoriesProvider with ChangeNotifier {
         _someCategories.add(_categories[i]);
       }
     }
-    _currentCat = _categories[0];
-    _subCa = _categories[0].subCategories;
-    _subcurrentCat = _categories[0].subCategories[0];
+    if (_categories.isNotEmpty) {
+      _currentCat = _categories[0];
+      _subCa = _categories[0].subCategories;
+      _subcurrentCat = _categories[0].subCategories[0];
+    }
     notifyListeners();
   }
 

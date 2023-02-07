@@ -97,7 +97,7 @@ class ProfileScreen extends StatelessWidget {
                               await HapticFeedback.heavyImpact();
                               Navigator.push(
                                 context,
-                                MaterialPageRoute<EmptyScreen>(
+                                MaterialPageRoute<MyProfile>(
                                   builder: (BuildContext context) =>
                                       const MyProfile(),
                                 ),
@@ -111,7 +111,7 @@ class ProfileScreen extends StatelessWidget {
                               await HapticFeedback.heavyImpact();
                               Navigator.push(
                                 context,
-                                MaterialPageRoute<EmptyScreen>(
+                                MaterialPageRoute<Setting>(
                                   builder: (BuildContext context) =>
                                       const Setting(),
                                 ),
@@ -125,7 +125,7 @@ class ProfileScreen extends StatelessWidget {
                               await HapticFeedback.heavyImpact();
                               Navigator.push(
                                 context,
-                                MaterialPageRoute<EmptyScreen>(
+                                MaterialPageRoute<OrderTabbar>(
                                   builder: (BuildContext context) =>
                                       const OrderTabbar(),
                                 ),
