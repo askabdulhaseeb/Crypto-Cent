@@ -218,20 +218,24 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                       size: 16,
                     ),
                     const SizedBox(height: 100),
-                    CustomElevatedButton(
-                      title: 'Report Product',
-                      bgColor: Colors.transparent,
-                      border: Border.all(color: Theme.of(context).primaryColor),
-                      textStyle: TextStyle(
-                        color: Theme.of(context).primaryColor,
-                        fontSize: 18,
+                    if (AuthMethods.uid.isNotEmpty)
+                      CustomElevatedButton(
+                        title: 'Report Product',
+                        bgColor: Colors.transparent,
+                        border:
+                            Border.all(color: Theme.of(context).primaryColor),
+                        textStyle: TextStyle(
+                          color: Theme.of(context).primaryColor,
+                          fontSize: 18,
+                        ),
+                        onTap: () async {
+                          await HapticFeedback.heavyImpact();
+                          if (!mounted) {
+                            await ReportBottomSheets()
+                                .productReport(context, widget.product);
+                          }
+                        },
                       ),
-                      onTap: () async {
-                        await HapticFeedback.heavyImpact();
-                        ReportBottomSheets()
-                            .productReport(context, widget.product);
-                      },
-                    ),
                     const SizedBox(height: 100),
                   ],
                 ),

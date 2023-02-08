@@ -105,7 +105,7 @@ class CustomTextFormFieldState extends State<CustomTextFormField> {
             widget.validator == null ? null : widget.validator!(value),
         decoration: InputDecoration(
           fillColor: widget.color ??
-              Theme.of(context).textTheme.bodyText1!.color!.withOpacity(0.15),
+              Theme.of(context).textTheme.bodyLarge!.color!.withOpacity(0.15),
           hintText: widget.hint,
           hintStyle: widget.hint!.length > 15
               ? const TextStyle(fontSize: 14)
