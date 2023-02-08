@@ -54,7 +54,7 @@ class ContactItem extends StatelessWidget {
                 title: 'Invite',
                 onTap: () async {
                   await HapticFeedback.heavyImpact();
-                  _launchSMS(contact.phones[0].number, 'Download the bloodo app');
+                  _launchSMS(contact.phones[0].number, 'Download the bloodo app',context);
                 },
 
                 // textStyle: TextStyle(
@@ -71,11 +71,26 @@ class ContactItem extends StatelessWidget {
   //   }
   // }
 
-  void _launchSMS(String phone, String message) async {
-    var url = 'sms:$phone?body=$message';
-    if (!await launchUrl(Uri.parse(url))) {
-      throw 'Could not launch $url';
+  void _launchSMS(String phone, String message,BuildContext context) async {
+     try {
+      if (Platform.isAndroid) {
+        String uri = 'sms:$phone?body=$message';
+        await launchUrl(Uri.parse(uri));
+      } else if (Platform.isIOS) {
+        String uri = 'sms:$phone&body=$message';
+        await launchUrl(Uri.parse(uri));
+      }
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Some error occurred. Please try again!'),
+        ),
+      );
     }
+    // var url = 'sms:$phone?body=$message';
+    // if (!await launchUrl(Uri.parse(url))) {
+    //   throw 'Could not launch $url';
+    // }
   }
 
   void onShare(BuildContext context) async {

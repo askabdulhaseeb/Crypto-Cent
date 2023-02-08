@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 
 import '../database/local_data.dart';
 import '../database/product_api.dart';
+import '../models/categories/sub_categories.dart';
 import '../models/product/product_model.dart';
 import '../models/product/product_url.dart';
 import '../models/reports/report_product.dart';
@@ -43,7 +44,11 @@ class ProductProvider with ChangeNotifier {
     print('search main enter hova ha');
     notifyListeners();
   }
+  List<SubCategory> _subCa = <SubCategory>[];
 
+  List<SubCategory> get subCa => <SubCategory>[..._subCa];
+  SubCategory? _subcurrentCat;
+  SubCategory? get subcurrentCat => _subcurrentCat;
   List<Product> findByCategory(String categoryname) {
     List<Product> tempcategoryList = [];
     tempcategoryList.clear();
@@ -52,6 +57,7 @@ class ProductProvider with ChangeNotifier {
         .where((Product element) =>
             element.category.toLowerCase().contains(categoryname.toLowerCase()))
         .toList();
+        
     print('category main enter hova ha');
     if (_catsearch == null || (_catsearch?.isEmpty ?? true)) {
       return categoryList;

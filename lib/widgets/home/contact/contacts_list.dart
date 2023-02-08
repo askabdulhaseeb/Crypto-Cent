@@ -46,7 +46,7 @@ class _ContactListState extends State<ContactList> {
     }
   }
 
-  TextEditingController _searchController = TextEditingController();
+  final TextEditingController _searchController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Consumer<ContactProvider>(builder:
