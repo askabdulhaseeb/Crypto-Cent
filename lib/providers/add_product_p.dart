@@ -41,7 +41,7 @@ class AddProductProvider with ChangeNotifier {
           uid: AuthMethods.uid,
           amount: double.parse(amount.text),
           colors: '',
-          internationalDelivery: double.parse(internationalDelivery.text),
+          internationalDelivery: internationalDelivery,
           localDelivery: double.parse(localDelivery.text),
           quantity: quantity.text,
           productname: productname.text,
@@ -107,6 +107,11 @@ class AddProductProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  internationalDeliverUpdate(bool value) {
+    internationalDelivery = value;
+    notifyListeners();
+  }
+
   bool isloading = false;
   bool isupload = false;
   Product? _product;
@@ -115,7 +120,7 @@ class AddProductProvider with ChangeNotifier {
   final TextEditingController productdecription = TextEditingController();
   final TextEditingController amount = TextEditingController();
   final TextEditingController localDelivery = TextEditingController();
-  final TextEditingController internationalDelivery = TextEditingController();
+  bool internationalDelivery = false;
   final TextEditingController quantity = TextEditingController();
   List<File?> files = <File?>[
     null,
@@ -130,7 +135,8 @@ class AddProductProvider with ChangeNotifier {
       pid: 'null',
       uid: 'null',
       amount: 0,
-      internationalDelivery: 0,localDelivery: 0,
+      internationalDelivery: false,
+      localDelivery: 0,
       colors: 'null',
       quantity: '0',
       locationUID: '',

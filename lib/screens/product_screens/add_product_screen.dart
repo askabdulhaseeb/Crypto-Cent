@@ -27,6 +27,11 @@ class AddProductScreen extends StatefulWidget {
   State<AddProductScreen> createState() => _AddProductScreenState();
 }
 
+var items = [
+  false,
+  true,
+];
+
 class _AddProductScreenState extends State<AddProductScreen> {
   // final TextEditingController productname = TextEditingController();
   // final TextEditingController productdecription = TextEditingController();
@@ -109,6 +114,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                     file: addProductPro.files,
                     onTap: () async {
                       await HapticFeedback.heavyImpact();
+                      // ignore: use_build_context_synchronously
                       showModalBottomSheet(
                         context: context,
                         builder: (BuildContext context) => Column(
@@ -206,6 +212,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                 Row(
                   children: <Widget>[
                     Expanded(
+                      flex: 2,
                       child: CustomTextFormField(
                         controller: addProductPro.localDelivery,
                         hint: 'Local Delivery',
@@ -220,18 +227,56 @@ class _AddProductScreenState extends State<AddProductScreen> {
                     ),
                     const SizedBox(width: 16),
                     Expanded(
-                      child: CustomTextFormField(
-                        controller: addProductPro.internationalDelivery,
-                        hint: 'International Delivery',
-                        //readOnly: _isloading,
-                        validator: (String? value) =>
-                            CustomValidator.isEmpty(value),
-                        keyboardType: const TextInputType.numberWithOptions(
-                          decimal: true,
-                          signed: true,
+                      flex: 4,
+                      child: Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(12),
+                          color: Theme.of(context).secondaryHeaderColor,
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            SizedBox(
+                              width: 3,
+                            ),
+                            Text(
+                              overflow: TextOverflow.ellipsis,
+                              'International Delivery',
+                              style: TextStyle(color: Colors.black54),
+                            ),
+                            DropdownButton<bool>(
+                              value: addProductPro.internationalDelivery,
+                              alignment: Alignment.centerRight,
+                              items: items
+                                  .map((bool e) => DropdownMenuItem<bool>(
+                                        value: e,
+                                        child: Text(
+                                          e.toString(),
+                                          style: const TextStyle(),
+                                        ),
+                                      ))
+                                  .toList(),
+                              onChanged: (bool? value) => addProductPro
+                                  .internationalDeliverUpdate(value!),
+                            ),
+                          ],
                         ),
                       ),
-                    ),
+                    )
+                    // Expanded(
+                    //   child: CustomTextFormField(
+                    //     controller: addProductPro.internationalDelivery,
+                    //     hint: 'International Delivery',
+                    //     //readOnly: _isloading,
+                    //     validator: (String? value) =>
+                    //         CustomValidator.isEmpty(value),
+                    //     keyboardType: const TextInputType.numberWithOptions(
+                    //       decimal: true,
+                    //       signed: true,
+                    //     ),
+                    //   ),
+                    // ),
+                    // categorie(context, catPro),
                   ],
                 ),
                 const SizedBox(height: 6),

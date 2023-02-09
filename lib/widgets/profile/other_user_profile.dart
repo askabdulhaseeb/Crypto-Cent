@@ -157,9 +157,20 @@ class OtherUserProfile extends StatelessWidget {
             icon!,
             color: Theme.of(context!).primaryColor,
           ),
-          title: ForText(
-            name: text!,
-            bold: true,
+          title: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SizedBox(
+                width: 10,
+              ),
+              ForText(
+                name: text!,
+                bold: true,
+              ),
+              SizedBox(
+                width: 50,
+              )
+            ],
           ),
         ),
       ),

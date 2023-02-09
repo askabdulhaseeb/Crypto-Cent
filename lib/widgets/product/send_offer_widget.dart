@@ -31,6 +31,7 @@ class SendOfferWidget extends StatefulWidget {
 
 class _SendOfferWidgetState extends State<SendOfferWidget> {
   final TextEditingController offer = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
   int quantity = 1;
   bool isLoading = false;
   @override
@@ -44,126 +45,132 @@ class _SendOfferWidgetState extends State<SendOfferWidget> {
           BuildContext context,
           ScrollController scrollController,
         ) {
-          return Padding(
-            padding: const EdgeInsets.all(16),
-            child: SingleChildScrollView(
-              controller: scrollController,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  const SizedBox(height: 8),
-                  const Center(
-                    child: Text(
-                      'Send Your Offer',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 18,
+          return Form(
+            key: _formKey,
+            child: Padding(
+              padding: const EdgeInsets.all(16),
+              child: SingleChildScrollView(
+                controller: scrollController,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    const SizedBox(height: 8),
+                    const Center(
+                      child: Text(
+                        'Send Your Offer',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18,
+                        ),
                       ),
                     ),
-                  ),
-                  const SizedBox(height: 24),
-                  Text('Orignal Price: ${widget.product.amount}'),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: <Widget>[
-                      IconButton(
-                        onPressed: quantity < 2
-                            ? null
-                            : () {
-                                setState(() {
-                                  quantity--;
-                                });
-                              },
-                        splashRadius: 16,
-                        icon: Icon(
-                          Icons.remove_circle_outline,
-                          size: 24,
-                          color: quantity < 2 ? Colors.grey : Colors.red,
-                        ),
-                      ),
-                      Container(
-                        padding: const EdgeInsets.symmetric(vertical: 8),
-                        width: 80,
-                        alignment: Alignment.center,
-                        decoration: BoxDecoration(
-                          color: Theme.of(context).secondaryHeaderColor,
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: Text(
-                          quantity.toString(),
-                          style: const TextStyle(
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 16,
+                    const SizedBox(height: 24),
+                    Text('Orignal Price: ${widget.product.amount}'),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: <Widget>[
+                        IconButton(
+                          onPressed: quantity < 2
+                              ? null
+                              : () {
+                                  setState(() {
+                                    quantity--;
+                                  });
+                                },
+                          splashRadius: 16,
+                          icon: Icon(
+                            Icons.remove_circle_outline,
+                            size: 24,
+                            color: quantity < 2 ? Colors.grey : Colors.red,
                           ),
                         ),
-                      ),
-                      IconButton(
-                        onPressed:
-                            quantity >= int.parse(widget.product.quantity)
-                                ? null
-                                : () {
-                                    setState(() {
-                                      quantity++;
-                                    });
-                                  },
-                        splashRadius: 16,
-                        icon: Icon(
-                          Icons.add_circle_outline,
-                          size: 24,
-                          color: quantity >= int.parse(widget.product.quantity)
-                              ? Colors.grey
-                              : Colors.green,
-                        ),
-                      ),
-                      Expanded(
-                        child: CustomTextFormField(
-                          controller: offer,
-                          autoFocus: true,
-                          style: const TextStyle(color: Colors.black),
-                          keyboardType: TextInputType.number,
-                          hint: 'Set your offer here',
-                          validator: (String? value) =>
-                              CustomValidator.isEmpty(value),
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 16),
-                  isLoading
-                      ? const ShowLoading()
-                      : Row(
-                          children: <Widget>[
-                            Expanded(
-                              child: CustomElevatedButton(
-                                onTap: () async {
-                                  await HapticFeedback.heavyImpact();
-                                  Navigator.of(context).pop();
-                                },
-                                title: 'Back',
-                              ),
+                        Container(
+                          padding: const EdgeInsets.symmetric(vertical: 8),
+                          width: 80,
+                          alignment: Alignment.center,
+                          decoration: BoxDecoration(
+                            color: Theme.of(context).secondaryHeaderColor,
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: Text(
+                            quantity.toString(),
+                            style: const TextStyle(
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16,
                             ),
-                            const SizedBox(width: 10),
-                            Expanded(
-                              child: CustomElevatedButton(
-                                title: 'Send',
-                                onTap: () async {
-                                  await HapticFeedback.heavyImpact();
-                                  sendOffer(
-                                    offer: offer.text,
-                                    quantity: quantity,
-                                    // ignore: use_build_context_synchronously
-                                    user: Provider.of<UserProvider>(context,
-                                            listen: false)
-                                        .user(widget.product.uid),
-                                  );
-                                },
-                              ),
-                            )
-                          ],
+                          ),
                         ),
-                ],
+                        IconButton(
+                          onPressed:
+                              quantity >= int.parse(widget.product.quantity)
+                                  ? null
+                                  : () {
+                                      setState(() {
+                                        quantity++;
+                                      });
+                                    },
+                          splashRadius: 16,
+                          icon: Icon(
+                            Icons.add_circle_outline,
+                            size: 24,
+                            color:
+                                quantity >= int.parse(widget.product.quantity)
+                                    ? Colors.grey
+                                    : Colors.green,
+                          ),
+                        ),
+                        Expanded(
+                          child: CustomTextFormField(
+                            controller: offer,
+                            autoFocus: true,
+                            style: const TextStyle(color: Colors.black),
+                            keyboardType: TextInputType.number,
+                            hint: 'Set your offer here',
+                            validator: (String? value) =>
+                                CustomValidator.isEmpty(value),
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 16),
+                    isLoading
+                        ? const ShowLoading()
+                        : Row(
+                            children: <Widget>[
+                              Expanded(
+                                child: CustomElevatedButton(
+                                  onTap: () async {
+                                    await HapticFeedback.heavyImpact();
+                                    Navigator.of(context).pop();
+                                  },
+                                  title: 'Back',
+                                ),
+                              ),
+                              const SizedBox(width: 10),
+                              Expanded(
+                                child: CustomElevatedButton(
+                                  title: 'Send',
+                                  onTap: () async {
+                                    await HapticFeedback.heavyImpact();
+                                    if (_formKey.currentState!.validate()) {
+                                      sendOffer(
+                                        offer: offer.text,
+                                        quantity: quantity,
+                                        // ignore: use_build_context_synchronously
+                                        user: Provider.of<UserProvider>(context,
+                                                listen: false)
+                                            .user(widget.product.uid),
+                                      );
+                                    }
+                                  },
+                                ),
+                              )
+                            ],
+                          ),
+                  ],
+                ),
               ),
             ),
           );

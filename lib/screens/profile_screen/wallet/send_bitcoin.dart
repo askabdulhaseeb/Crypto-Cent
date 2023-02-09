@@ -54,7 +54,7 @@ class _SendBitcoinScreenState extends State<SendBitcoinScreen> {
             wallet!.coinsWallet[0].address, widget.sellerUser!.uid);
     print('User Addresss ${sellerAddress}');
     setState(() {
-     _walletaddress = TextEditingController(text: sellerAddress);
+      _walletaddress = TextEditingController(text: sellerAddress);
     });
   }
 
@@ -72,7 +72,11 @@ class _SendBitcoinScreenState extends State<SendBitcoinScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Send Btc'),
-        leading: IconButton(onPressed: () {}, icon: Icon(Icons.arrow_back_ios)),
+        leading: IconButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+            icon: Icon(Icons.arrow_back_ios)),
       ),
       body: SafeArea(
         child: Padding(

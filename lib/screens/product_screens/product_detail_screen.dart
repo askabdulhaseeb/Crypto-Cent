@@ -81,6 +81,9 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                       icon: Icon(
                         Icons.arrow_back_ios,
                         color: Colors.white,
+                        shadows: <Shadow>[
+                          Shadow(color: Colors.black, blurRadius: 15.0)
+                        ],
                       )),
                 ],
               ),
@@ -230,10 +233,9 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                         ),
                         onTap: () async {
                           await HapticFeedback.heavyImpact();
-                          if (!mounted) {
-                            await ReportBottomSheets()
-                                .productReport(context, widget.product);
-                          }
+
+                          await ReportBottomSheets()
+                              .productReport(context, widget.product);
                         },
                       ),
                     const SizedBox(height: 100),

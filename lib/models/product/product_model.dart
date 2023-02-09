@@ -26,7 +26,7 @@ class Product {
   final String uid;
   final double amount;
   final double localDelivery;
-  final double internationalDelivery;
+  final bool internationalDelivery;
   final String colors;
   final String quantity;
   final String productname;
@@ -54,7 +54,7 @@ class Product {
       'product_name': productname,
       'location_uid':locationUID,
       'local_delivery':localDelivery,
-      'international_delivery':internationalDelivery,
+      'internationaldelivery':internationalDelivery,
       'reports': <ReportProduct>[],
       'prod_urls': prodURL.map((ProductURL e) => e.toMap()).toList(),
     };
@@ -84,7 +84,7 @@ class Product {
       uid: doc.data()?['uid'] ?? '',
       amount: double.parse(doc.data()?['amount']?.toString() ?? '0.0'),
       localDelivery: double.parse(doc.data()?['local_delivery']?.toString() ?? '0.0'),
-      internationalDelivery: double.parse(doc.data()?['international_delivery']?.toString() ?? '0.0'),
+      internationalDelivery: doc.data()?['internationaldelivery'] ?? false,
       colors: doc.data()?['colors'] ?? '',
       quantity: doc.data()?['quantity'] ?? '',
       description: doc.data()?['description'] ?? '',
