@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
+import '../../database/crypto_wallet/wallet_create_api.dart';
 import '../../function/crypto_function.dart';
 import '../../function/encryption_function.dart';
 import '../../models/app_user/app_user.dart';
 import '../../models/my_device_token.dart';
 import '../../providers/provider.dart';
+import '../../widgets/custom_widgets/custom_toast.dart';
 import '../../widgets/custom_widgets/custom_widget.dart';
 import '../../widgets/custom_widgets/show_loading.dart';
 
@@ -21,45 +23,29 @@ class PaymentScreen extends StatefulWidget {
 class _PaymentScreenState extends State<PaymentScreen> {
   Encryption encryption = Encryption();
   bool paid = false;
-
-  // uploadAndsend() async {
-  //   CartProvider cartPro = Provider.of<CartProvider>(context, listen: false);
-  //   PaymentProvider paymentPro =
-  //       Provider.of<PaymentProvider>(context, listen: false);
-  //   WalletProvider walletPro =
-  //       Provider.of<WalletProvider>(context, listen: false);
-  //   final double currentBalance = await walletPro.currentBalance();
-  //   if (currentBalance > cartPro.totalPrice()) {
-  //     final bool? temp =
-  //         await paymentPro.productOrder(cartPro.cartItem, cartPro.totalPrice());
-  //   } else {
-  //     CustomToast.errorToast(message: 'You didnot Have Enough Balance ');
-  //   }
-  // }
-
-  // Future<bool> btcSend(
-  //   double totalAmount,
-  // ) async {
-  // WalletProvider walletPro =
-  //     Provider.of<WalletProvider>(context, listen: false);
-  // double amount = totalAmount;
-  // String address =
-  //     encryption.appDecrypt(walletPro.wallet!.coinsWallet[0].address);
-  // String walletAddress =
-  //     encryption.appDecrypt(walletPro.wallet!.coinsWallet[0].wallet);
-  // String transferKey =
-  //     encryption.appDecrypt(walletPro.wallet!.coinsWallet[0].transferKey);
-  // final double balance = await WallletWithApi().getWalletBalance(address);
-  // String adminWalletAddress = '3Fv1QCCbmUfNf8R8y7Ujp1tg9VHnEWMm27';
-  // if (balance > amount) {
-  //   await WallletWithApi().transferCoin(
-  //       walletAddress, transferKey, adminWalletAddress, amount.toString());
-  //   paid = true;
-  // } else {
-  //   CustomToast.errorToast(message: 'You havenot enough Balance ');
-  // }
-  //   return paid;
-  // }
+  Future<bool> btcSend(
+    double totalAmount,
+  ) async {
+  WalletProvider walletPro =
+      Provider.of<WalletProvider>(context, listen: false);
+  double amount = totalAmount;
+  String address =
+      encryption.appDecrypt(walletPro.wallet!.coinsWallet[0].address);
+  String walletAddress =
+      encryption.appDecrypt(walletPro.wallet!.coinsWallet[0].wallet);
+  String transferKey =
+      encryption.appDecrypt(walletPro.wallet!.coinsWallet[0].transferKey);
+  final double balance = await WallletWithApi().getWalletBalance(address);
+  String adminWalletAddress = '3Fv1QCCbmUfNf8R8y7Ujp1tg9VHnEWMm27';
+  if (balance > amount) {
+    await WallletWithApi().transferCoin(
+        walletAddress, transferKey, adminWalletAddress, amount.toString());
+    paid = true;
+  } else {
+    CustomToast.errorToast(message: 'You havenot enough Balance ');
+  }
+    return paid;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -163,28 +149,25 @@ class _PaymentScreenState extends State<PaymentScreen> {
                 title: 'Pay',
                 onTap: () async {
                   await HapticFeedback.heavyImpact();
-                  // WalletProvider walletPro =
-                  //     Provider.of<WalletProvider>(context, listen: false);
-                  // double amount = totalAmount;
-                  // String address = encryption
-                  //     .appDecrypt(walletPro.wallet!.coinsWallet[0].address);
-                  // String walletAddress = encryption
-                  //     .appDecrypt(walletPro.wallet!.coinsWallet[0].wallet);
-                  // String transferKey = encryption.appDecrypt(
-                  //     walletPro.wallet!.coinsWallet[0].transferKey);
-                  // final double balance =
-                  //     await WallletWithApi().getWalletBalance(address);
-                  // // String adminWalletAddress =
-                  // //     '3Fv1QCCbmUfNf8R8y7Ujp1tg9VHnEWMm27';
-                  // if (balance > amount) {
-                  //   await WallletWithApi().transferCoin(walletAddress,
-                  //       transferKey, adminWalletAddress, amount.toString());
-                  //   paid = true;
-                  // } else {
-                  //   CustomToast.errorToast(
-                  //       message: 'You havenot enough Balance ');
-                  // }
-                  AppUser me = userPro.user(cartPro.cartItem[0].sellerID);
+                  WalletProvider walletPro =
+                      Provider.of<WalletProvider>(context, listen: false);
+                  double amount = await CryptoFunction()
+                      .btcPrinceLive(dollor: cartPro.totalPrice());
+                  String address = encryption
+                      .appDecrypt(walletPro.wallet!.coinsWallet[0].address);
+                  String walletAddress = encryption
+                      .appDecrypt(walletPro.wallet!.coinsWallet[0].wallet);
+                  String transferKey = encryption.appDecrypt(
+                      walletPro.wallet!.coinsWallet[0].transferKey);
+                  final double balance =
+                      await WallletWithApi().getWalletBalance(address);
+                  // String adminWalletAddress =
+                  //     '3Fv1QCCbmUfNf8R8y7Ujp1tg9VHnEWMm27';
+                  if (balance > amount) {
+                    await WallletWithApi().transferCoin(walletAddress,
+                        transferKey, '3Fv1QCCbmUfNf8R8y7Ujp1tg9VHnEWMm27', amount.toString());
+                    paid = true;
+                     AppUser me = userPro.user(cartPro.cartItem[0].sellerID);
                   List<MyDeviceToken> deviceToken = me.deviceToken ?? [];
                   final bool done =
                       await Provider.of<PaymentProvider>(context, listen: false)
@@ -194,6 +177,11 @@ class _PaymentScreenState extends State<PaymentScreen> {
                     cartPro.deleteAllItem();
                     Navigator.of(context).pop();
                   }
+                  } else {
+                    CustomToast.errorToast(
+                        message: 'You havenot enough Balance ');
+                  }
+                 
                 },
               ),
             ],

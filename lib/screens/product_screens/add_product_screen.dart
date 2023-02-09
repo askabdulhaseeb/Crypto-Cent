@@ -236,10 +236,10 @@ class _AddProductScreenState extends State<AddProductScreen> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            SizedBox(
+                            const SizedBox(
                               width: 3,
                             ),
-                            Text(
+                            const Text(
                               overflow: TextOverflow.ellipsis,
                               'International Delivery',
                               style: TextStyle(color: Colors.black54),
