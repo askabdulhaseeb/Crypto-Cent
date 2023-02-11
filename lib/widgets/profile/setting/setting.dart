@@ -9,6 +9,7 @@ import '../../../screens/empty_screen/empty_screen.dart';
 import '../../../screens/map_screen/add_new_address.dart';
 import '../../../screens/map_screen/location_screen.dart';
 import '../../../utilities/app_images.dart';
+import '../../custom_widgets/policy_widget.dart';
 import '../my_profile/edit_profile.dart';
 import '../profile_nav_tile.dart';
 import 'change_password.dart';
@@ -30,25 +31,13 @@ class Setting extends StatelessWidget {
               const SizedBox(
                 height: 30,
               ),
-              // ProfileNavTile(
-              //   name: 'Change Password',
-              //   onTap: () async {
-              //     await HapticFeedback.heavyImpact();
-              //     Navigator.of(context).push(MaterialPageRoute(
-              //       builder: (BuildContext context) => ChnagePassword(),
-              //     ));
-              //   },
-              // ),
-              // const SizedBox(
-              //   height: 20,
-              // ),
               ProfileNavTile(
                 name: 'Edit Address',
                 onTap: () async {
                   await HapticFeedback.heavyImpact();
                   Navigator.of(context).push(MaterialPageRoute(
                     builder: (BuildContext context) =>
-                        AddNewAddress(isProduct: false),
+                        const AddNewAddress(isProduct: false),
                   ));
                 },
               ),
@@ -91,7 +80,9 @@ class Setting extends StatelessWidget {
                   ));
                 },
               ),
-
+              const SizedBox(
+                height: 20,
+              ),
               ProfileNavTile(
                 name: 'Log Out',
                 image: AppImages.logout,
@@ -103,6 +94,8 @@ class Setting extends StatelessWidget {
                       WelcomeScreen.routeName, (Route<dynamic> route) => false);
                 },
               ),
+              const Spacer(),
+              const PoliciesWidget(),
             ],
           ),
         ));

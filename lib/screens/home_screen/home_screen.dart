@@ -10,6 +10,7 @@ import '../../providers/provider.dart';
 import '../../utilities/app_images.dart';
 import '../../widgets/custom_widgets/custom_network_image_slider.dart';
 import '../../widgets/custom_widgets/custom_widget.dart';
+import '../../widgets/custom_widgets/policy_widget.dart';
 import '../../widgets/home/home_categories_list.dart';
 import '../../widgets/product/latest_product.dart';
 import '../about/aboust_us.dart';
@@ -51,8 +52,6 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     return Scaffold(
       key: _key,
       drawer: drawerScreen(context),
-     
-      
       body: SafeArea(
         child: Consumer2<ProductProvider, CategoriesProvider>(builder: (
           BuildContext context,
@@ -355,10 +354,11 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
               'Notification',
               ImageIcon(AssetImage(AppImages.notification)),
               () {
-              Navigator.push(
+                Navigator.push(
                   context,
-                  MaterialPageRoute<NotificationScreen >(
-                    builder: (BuildContext context) => const NotificationScreen (),
+                  MaterialPageRoute<NotificationScreen>(
+                    builder: (BuildContext context) =>
+                        const NotificationScreen(),
                   ),
                 );
               },
@@ -391,6 +391,9 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                 );
               }),
             ),
+            const Spacer(),
+            const Center(child: PoliciesWidget()),
+            const SizedBox(height: 16),
           ],
         ),
       ),
