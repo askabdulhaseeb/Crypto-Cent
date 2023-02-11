@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../custom_widgets/custom_elevated_button.dart';
 import '../../custom_widgets/custom_textformfield.dart';
 import '../../custom_widgets/cutom_text.dart';
+import 'delete_account_widget.dart';
 
 class DeleteAccount extends StatelessWidget {
   DeleteAccount({super.key});
@@ -35,7 +36,14 @@ class DeleteAccount extends StatelessWidget {
             const Spacer(),
             CustomElevatedButton(
               title: 'Delete my Acoount',
-              onTap: () {},
+              onTap: () {
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) => const Dialog(
+                    child: DeleteAccountWidget(),
+                  ),
+                );
+              },
             ),
             const SizedBox(
               height: 30,

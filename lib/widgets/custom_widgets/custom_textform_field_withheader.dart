@@ -112,7 +112,7 @@ class CustomTextFormFieldWithHeaderState
             maxLength: widget.maxLength,
             style: widget.style,
             validator: (String? value) => widget.validator!(value),
-            cursorColor: Theme.of(context).colorScheme.secondary,
+            cursorColor: Theme.of(context).colorScheme.primary,
             decoration: InputDecoration(
               fillColor: widget.color ??
                   Theme.of(context)

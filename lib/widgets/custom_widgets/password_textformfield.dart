@@ -51,7 +51,7 @@ class PasswordTextFormFieldState extends State<PasswordTextFormField> {
         obscureText: _notVisible,
         keyboardType: TextInputType.visiblePassword,
         textInputAction: widget.textInputAction,
-        cursorColor: Theme.of(context).colorScheme.secondary,
+        cursorColor: Theme.of(context).colorScheme.primary,
         validator: (String? value) => CustomValidator.password(value),
         decoration: InputDecoration(
           hintText: widget.hint,

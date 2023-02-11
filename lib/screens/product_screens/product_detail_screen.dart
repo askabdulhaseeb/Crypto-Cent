@@ -233,7 +233,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                         ),
                         onTap: () async {
                           await HapticFeedback.heavyImpact();
-
+                          // ignore: use_build_context_synchronously
                           await ReportBottomSheets()
                               .productReport(context, widget.product);
                         },

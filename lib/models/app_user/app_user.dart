@@ -43,6 +43,12 @@ class AppUser {
     };
   }
 
+  Map<String, dynamic> updateProfile() {
+    return <String, dynamic>{
+      'display_name': name ?? '',
+    };
+  }
+
   factory AppUser.fromDoc(DocumentSnapshot<Map<String, dynamic>> doc) {
     List<MyDeviceToken> dtData = <MyDeviceToken>[];
     List<ReportUser> reportInfo = <ReportUser>[];

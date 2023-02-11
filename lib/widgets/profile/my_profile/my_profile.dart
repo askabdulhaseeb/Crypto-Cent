@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
+import '../../../database/app_user/auth_method.dart';
 import '../../../providers/provider.dart';
 import '../../custom_widgets/custom_widget.dart';
 import '../profile_header.dart';
@@ -47,10 +48,12 @@ class MyProfile extends StatelessWidget {
               padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 25),
               child: CustomElevatedButton(
                   title: 'Update Profile',
-                  onTap: () async{
+                  onTap: () async {
                     await HapticFeedback.heavyImpact();
                     Navigator.of(context).push(MaterialPageRoute<EditProfile>(
-                      builder: (BuildContext context) => const EditProfile(),
+                      builder: (BuildContext context) => EditProfile(
+                          me: Provider.of<UserProvider>(context)
+                              .user(AuthMethods.uid)),
                     ));
                   }),
             ),

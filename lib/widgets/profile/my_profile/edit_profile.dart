@@ -1,34 +1,44 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../../models/app_user/app_user.dart';
 import '../../../providers/user_provider.dart';
 import '../../custom_widgets/custom_elevated_button.dart';
 import '../../custom_widgets/custom_textform_field_withHeader.dart';
 import '../../custom_widgets/cutom_text.dart';
+import '../../custom_widgets/show_loading.dart';
 
-class EditProfile extends StatelessWidget {
-  const EditProfile({super.key});
+class EditProfile extends StatefulWidget {
+  const EditProfile({required this.me, super.key});
+  final AppUser me;
 
-  // final TextEditingController _firstName =
+  @override
+  State<EditProfile> createState() => _EditProfileState();
+}
+
+class _EditProfileState extends State<EditProfile> {
+  late TextEditingController firstName;
+  late TextEditingController phoneNo;
+  late TextEditingController googleAccount;
+  bool isLoading = false;
+  @override
+  void initState() {
+    firstName = TextEditingController(text: widget.me.name);
+    phoneNo = TextEditingController(text: widget.me.phoneNumber.completeNumber);
+    googleAccount = TextEditingController(
+        text: widget.me.email!.isEmpty ? 'boloodo@gmail.com' : widget.me.email);
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
-    UserProvider userPro = Provider.of<UserProvider>(context);
-    final TextEditingController firstName =
-        TextEditingController(text: userPro.currentUser.name);
-    final TextEditingController phoneNo = TextEditingController(
-        text: userPro.currentUser.phoneNumber.completeNumber);
-    final TextEditingController googleAccount = TextEditingController(
-        text: userPro.currentUser.email!.isEmpty
-            ? 'boloodo@gmail.com'
-            : userPro.currentUser.email);
     double width = MediaQuery.of(context).size.width;
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
             children: [
-              stackWidget(width, context, userPro.currentUser.imageURL!,
-                  userPro.currentUser.name!),
+              stackWidget(width, context, widget.me.imageURL!, widget.me.name!),
               Padding(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
@@ -63,18 +73,22 @@ class EditProfile extends StatelessWidget {
               Padding(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                child: CustomElevatedButton(
-                  title: 'Update',
-                  onTap: () {
-                    // Navigator.push(
-                    //   context,
-                    //   // ignore: always_specify_types
-                    //   MaterialPageRoute(
-                    //     builder: (BuildContext context) => ChnagePassword(),
-                    //   ),
-                    // );
-                  },
-                ),
+                child: isLoading
+                    ? const ShowLoading()
+                    : CustomElevatedButton(
+                        title: 'Update',
+                        onTap: () {
+                          setState(() {
+                            isLoading = true;
+                          });
+                          widget.me.name = firstName.text;
+                          Provider.of<UserProvider>(context, listen: false)
+                              .updateProfile(widget.me);
+                          if (Navigator.of(context).canPop()) {
+                            Navigator.of(context).pop();
+                          }
+                        },
+                      ),
               ),
             ],
           ),

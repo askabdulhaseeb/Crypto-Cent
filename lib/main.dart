@@ -1,6 +1,5 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'database/app_user/auth_method.dart';
@@ -36,7 +35,7 @@ class MyApp extends StatelessWidget {
       child: Consumer<AppThemeProvider>(
           builder: (BuildContext context, AppThemeProvider theme, _) {
         return MaterialApp(
-          title: 'Crypto Cent',
+          title: 'Boloodo',
           debugShowCheckedModeBanner: false,
           theme: AppThemes.light,
           darkTheme: AppThemes.dark,
@@ -49,8 +48,8 @@ class MyApp extends StatelessWidget {
           // home: const NotificationScreen(),
           routes: <String, WidgetBuilder>{
             EmptyScreen.routeName: (_) => const EmptyScreen(),
+            // AUTH
             WelcomeScreen.routeName: (_) => const WelcomeScreen(),
-
             SigninWithEmailScreen.routeName: (_) =>
                 const SigninWithEmailScreen(),
             SignupWithEmailScreen.routeName: (_) =>

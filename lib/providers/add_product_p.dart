@@ -30,7 +30,7 @@ class AddProductProvider with ChangeNotifier {
       for (int i = 0; files[i] != null; i++) {
         String imageurl = await Storagemethod().uploadtostorage(
           'post',
-          'tester',
+          AuthMethods.uid,
           file: files[i],
         );
         urls.add(ProductURL(url: imageurl, isVideo: false, index: i));

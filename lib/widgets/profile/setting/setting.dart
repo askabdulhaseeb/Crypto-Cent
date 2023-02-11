@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 
 import '../../../database/app_user/auth_method.dart';
+import '../../../providers/user_provider.dart';
 import '../../../screens/auth/welcome_screen.dart';
 import '../../../screens/empty_screen/empty_screen.dart';
 import '../../../screens/map_screen/add_new_address.dart';
@@ -10,12 +12,14 @@ import '../../../utilities/app_images.dart';
 import '../my_profile/edit_profile.dart';
 import '../profile_nav_tile.dart';
 import 'change_password.dart';
+import 'deactive_account.dart';
 
 class Setting extends StatelessWidget {
   const Setting({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        resizeToAvoidBottomInset: false,
         appBar: AppBar(
           title: const Text('Settings'),
         ),
@@ -70,21 +74,23 @@ class Setting extends StatelessWidget {
                 onTap: () async {
                   await HapticFeedback.heavyImpact();
                   Navigator.of(context).push(MaterialPageRoute(
-                    builder: (BuildContext context) => const EditProfile(),
+                    builder: (BuildContext context) => EditProfile(
+                        me: Provider.of<UserProvider>(context)
+                            .user(AuthMethods.uid)),
                   ));
                 },
               ),
               const SizedBox(
                 height: 20,
               ),
-              // ProfileNavTile(
-              //   name: 'Deactive Account',
-              //   onTap: () {
-              //     Navigator.of(context).push(MaterialPageRoute(
-              //       builder: (BuildContext context) => DeleteAccount(),
-              //     ));
-              //   },
-              // ),
+              ProfileNavTile(
+                name: 'Delete Account',
+                onTap: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (BuildContext context) => DeleteAccount(),
+                  ));
+                },
+              ),
 
               ProfileNavTile(
                 name: 'Log Out',

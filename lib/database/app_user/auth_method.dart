@@ -1,4 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 import '../../enum/login_method.dart';
@@ -129,6 +131,25 @@ class AuthMethods {
       CustomToast.errorToast(message: error.toString());
     }
     return false;
+  }
+
+  Future<void> deleteAccount() async {
+    await FirebaseFirestore.instance.collection('users').doc(uid).delete();
+    final QuerySnapshot<Map<String, dynamic>> products = await FirebaseFirestore
+        .instance
+        .collection('post')
+        .where('uid', isEqualTo: uid)
+        .get();
+    if (products.docs.isNotEmpty) {
+      for (DocumentSnapshot<Map<String, dynamic>> doc in products.docs) {
+        await FirebaseFirestore.instance
+            .collection('post')
+            .doc(doc.data()?['pid'])
+            .delete();
+      }
+      await FirebaseStorage.instance.ref('post/$uid').delete();
+    }
+    await _auth.currentUser?.delete();
   }
 
   Future<void> signOut() async {
