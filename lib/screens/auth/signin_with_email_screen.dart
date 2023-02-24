@@ -79,7 +79,7 @@ class _SigninWithEmailScreenState extends State<SigninWithEmailScreen> {
                             _email.text,
                             _password.text,
                           );
-                          await NotificationsServices().onLogin(context);
+                         // await NotificationsServices().onLogin(context);
                           setState(() {
                             _isLoading = false;
                           });

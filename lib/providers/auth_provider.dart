@@ -65,7 +65,7 @@ class AuthProvider extends ChangeNotifier {
 
       if (added) { 
         bool temp1 = await WalletCreation().addWallet();
-        await NotificationsServices().onLogin(context);
+        //await NotificationsServices().onLogin(context);
         _isRegsiterScreenLoading = false;
         notifyListeners();
         if (temp1) {

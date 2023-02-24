@@ -20,8 +20,8 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await LocalData.init();
-  FirebaseMessaging.onBackgroundMessage(_firebaseMessBackgroundHand);
-  await NotificationsServices.init();
+  // FirebaseMessaging.onBackgroundMessage(_firebaseMessBackgroundHand);
+  // await NotificationsServices.init();
   runApp(const MyApp());
 }
 
@@ -41,9 +41,7 @@ class MyApp extends StatelessWidget {
           darkTheme: AppThemes.dark,
           themeMode: theme.themeMode,
 
-          home: AuthMethods.uid.isEmpty
-              ? const WelcomeScreen()
-              : const MainScreen(),
+          home:  const MainScreen(),
 
           // home: const NotificationScreen(),
           routes: <String, WidgetBuilder>{

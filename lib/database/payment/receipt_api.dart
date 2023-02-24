@@ -22,18 +22,18 @@ class ReceiptApi {
           .collection(_collection)
           .doc(receipt.receiptID)
           .set(receipt.toMap());
-      if (receiver.deviceToken?.isNotEmpty ?? false) {
-        await NotificationsServices().sendSubsceibtionNotification(
-          deviceToken: receiver.deviceToken ?? <MyDeviceToken>[],
-          messageTitle: 'New MyOrder',
-          messageBody: '${sender.name} send you a new order',
-          data: <String>['order', 'receipt', receipt.receiptID],
-          isMessage: false,
-          type: NotificationType.deliverySuccess,
-          fromId: AuthMethods.uid,
-          toId: receiver.uid,
-        );
-      }
+      // if (receiver.deviceToken?.isNotEmpty ?? false) {
+      //   await NotificationsServices().sendSubsceibtionNotification(
+      //     deviceToken: receiver.deviceToken ?? <MyDeviceToken>[],
+      //     messageTitle: 'New MyOrder',
+      //     messageBody: '${sender.name} send you a new order',
+      //     data: <String>['order', 'receipt', receipt.receiptID],
+      //     isMessage: false,
+      //     type: NotificationType.deliverySuccess,
+      //     fromId: AuthMethods.uid,
+      //     toId: receiver.uid,
+      //   );
+      // }
       // CustomToast.successToast(message: 'Successfully Added');
       return true;
     } catch (e) {

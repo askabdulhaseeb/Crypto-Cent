@@ -51,6 +51,7 @@ class DefaultFirebaseOptions {
     appId: '1:624098099021:web:b6465db26313fe43884104',
     messagingSenderId: '624098099021',
     projectId: 'bloodo-app',
+    databaseURL: "https://bloodo-app.firebaseio.com",
     authDomain: 'bloodo-app.firebaseapp.com',
     storageBucket: 'bloodo-app.appspot.com',
     measurementId: 'G-8E9765HQC6',

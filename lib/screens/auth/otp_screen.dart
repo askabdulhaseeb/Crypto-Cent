@@ -54,7 +54,7 @@ class _OTPScreenState extends State<OTPScreen> {
                       });
                       Navigator.of(context).pushNamed(RegisterScreen.routeName);
                     } else if (num == 1) {
-                      await NotificationsServices().onLogin(context);
+                     // await NotificationsServices().onLogin(context);
                       setState(() {
                         isLoading = false;
                       });

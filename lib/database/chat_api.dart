@@ -86,41 +86,41 @@ class ChatAPI {
     });
   }
 
-  Future<void> sendMessage({
-    required Chat chat,
-    required AppUser receiver,
-    required AppUser sender,
-  }) async {
-    final Message? newMessage = chat.lastMessage;
-    try {
-      if (newMessage != null) {
-        await _instance
-            .collection(_collection)
-            .doc(chat.chatID)
-            .collection(_subCollection)
-            .doc(newMessage.messageID)
-            .set(newMessage.toMap());
-      }
-      await _instance
-          .collection(_collection)
-          .doc(chat.chatID)
-          .set(chat.toMap());
-      if (receiver.deviceToken?.isNotEmpty ?? false) {
-        await NotificationsServices().sendSubsceibtionNotification(
-          deviceToken: receiver.deviceToken ?? <MyDeviceToken>[],
-          messageTitle: sender.name ?? 'App User',
-          messageBody: newMessage!.text ?? 'Send you a message',
-          data: <String>['chat', 'message', 'personal'],
-          isMessage: true,
-          type: NotificationType.message,
-          fromId: AuthMethods.uid,
-          toId: sender.uid
-        );
-      }
-    } catch (e) {
-      CustomToast.errorToast(message: e.toString());
-    }
-  }
+  // Future<void> sendMessage({
+  //   required Chat chat,
+  //   required AppUser receiver,
+  //   required AppUser sender,
+  // }) async {
+  //   final Message? newMessage = chat.lastMessage;
+  //   try {
+  //     if (newMessage != null) {
+  //       await _instance
+  //           .collection(_collection)
+  //           .doc(chat.chatID)
+  //           .collection(_subCollection)
+  //           .doc(newMessage.messageID)
+  //           .set(newMessage.toMap());
+  //     }
+  //     await _instance
+  //         .collection(_collection)
+  //         .doc(chat.chatID)
+  //         .set(chat.toMap());
+  //     if (receiver.deviceToken?.isNotEmpty ?? false) {
+  //       await NotificationsServices().sendSubsceibtionNotification(
+  //         deviceToken: receiver.deviceToken ?? <MyDeviceToken>[],
+  //         messageTitle: sender.name ?? 'App User',
+  //         messageBody: newMessage!.text ?? 'Send you a message',
+  //         data: <String>['chat', 'message', 'personal'],
+  //         isMessage: true,
+  //         type: NotificationType.message,
+  //         fromId: AuthMethods.uid,
+  //         toId: sender.uid
+  //       );
+  //     }
+  //   } catch (e) {
+  //     CustomToast.errorToast(message: e.toString());
+  //   }
+  // }
 
   Future<void> updateOffer(Chat chat) async {
     final Message? newMessage = chat.lastMessage;

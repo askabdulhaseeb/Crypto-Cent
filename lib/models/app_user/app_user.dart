@@ -15,7 +15,7 @@ class AppUser {
     this.name,
     this.imageURL,
     this.email,
-    this.deviceToken,
+
     this.reports,
     this.blockTo,
     this.blockedBy,
@@ -23,7 +23,7 @@ class AppUser {
   final String uid;
   String? name;
   String? imageURL;
-  final List<MyDeviceToken>? deviceToken;
+
   final NumberDetails phoneNumber;
   final String? email;
   final LoginMethod loginMethod;
@@ -38,8 +38,7 @@ class AppUser {
       'number_details': phoneNumber.toMap(),
       'image_url': imageURL ?? '',
       'email': email ?? '',
-      'devices_tokens':
-          deviceToken?.map((MyDeviceToken e) => e.toMap()).toList() ?? [],
+     
     };
   }
 
@@ -50,13 +49,13 @@ class AppUser {
   }
 
   factory AppUser.fromDoc(DocumentSnapshot<Map<String, dynamic>> doc) {
-    List<MyDeviceToken> dtData = <MyDeviceToken>[];
-    List<ReportUser> reportInfo = <ReportUser>[];
-    if (doc.data()!['devices_tokens'] != null) {
-      doc.data()!['devices_tokens'].forEach((dynamic e) {
-        dtData.add(MyDeviceToken.fromMap(e));
-      });
-    }
+    // List<MyDeviceToken> dtData = <MyDeviceToken>[];
+     List<ReportUser> reportInfo = <ReportUser>[];
+    // if (doc.data()!['devices_tokens'] != null) {
+    //   doc.data()!['devices_tokens'].forEach((dynamic e) {
+    //     dtData.add(MyDeviceToken.fromMap(e));
+    //   });
+    // }
     if (doc.data()!['reports'] != null) {
       doc.data()!['reports'].forEach((dynamic e) {
         reportInfo.add(ReportUser.fromMap(e));
@@ -71,7 +70,7 @@ class AppUser {
       name: doc.data()?['display_name'] ?? '',
       imageURL: doc.data()?['image_url'] ?? '',
       email: doc.data()?['email'] ?? '',
-      deviceToken: dtData,
+    
       reports: reportInfo,
       blockTo: List<String>.from(doc.data()?['block_to'] ?? <String>[]),
       blockedBy: List<String>.from(doc.data()?['blocked_by'] ?? <String>[]),

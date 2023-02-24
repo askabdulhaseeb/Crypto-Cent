@@ -22,20 +22,20 @@ class OrderApi {
           .collection(_collection)
           .doc(order.orderID)
           .set(order.toMap());
-      for (int i = 0; i < receiver.length; i++) {
-        if (receiver[i].deviceToken?.isNotEmpty ?? false) {
-          await NotificationsServices().sendSubsceibtionNotification(
-            deviceToken: receiver[i].deviceToken ?? <MyDeviceToken>[],
-            messageTitle: product[i].productname,
-            messageBody: '${sender.name} send you a new order',
-            data: <String>['order', 'confirm MyOrder', order.orderID],
-            isMessage: false,
-            type: NotificationType.confirmOrder,
-            fromId: order.customerUID,
-            toId: receiver[i].uid,
-          );
-        }
-      }
+      // for (int i = 0; i < receiver.length; i++) {
+      //   if (receiver[i].deviceToken?.isNotEmpty ?? false) {
+      //     await NotificationsServices().sendSubsceibtionNotification(
+      //       deviceToken: receiver[i].deviceToken ?? <MyDeviceToken>[],
+      //       messageTitle: product[i].productname,
+      //       messageBody: '${sender.name} send you a new order',
+      //       data: <String>['order', 'confirm MyOrder', order.orderID],
+      //       isMessage: false,
+      //       type: NotificationType.confirmOrder,
+      //       fromId: order.customerUID,
+      //       toId: receiver[i].uid,
+      //     );
+      //   }
+      // }
       // CustomToast.successToast(message: 'Successfully Added');
       return true;
     } catch (e) {

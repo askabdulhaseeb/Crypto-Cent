@@ -124,7 +124,7 @@ class PaymentProvider with ChangeNotifier {
   Future<bool> productOrder(
     BuildContext context,
     List<Cart> cart,
-    List<MyDeviceToken> deviceToken,
+    //List<MyDeviceToken> deviceToken,
   ) async {
     String uniqueID = UniqueIdFunctions.postID;
     bool retBool = false;
@@ -168,7 +168,7 @@ class PaymentProvider with ChangeNotifier {
       cryptoSymbol: 'btc',
       totalCryptoPrice: total,
     );
-    print(deviceToken);
+    //print(deviceToken);
     final UserProvider userPro =
         // ignore: use_build_context_synchronously
         Provider.of<UserProvider>(context, listen: false);

@@ -233,11 +233,11 @@ class _ChatTextFieldState extends State<ChatTextField> {
                       widget.chat.timestamp = time;
                       widget.chat.lastMessage = msg;
                       _text.clear();
-                      await ChatAPI().sendMessage(
-                        chat: widget.chat,
-                        sender: sender,
-                        receiver: receiver,
-                      );
+                      // await ChatAPI().sendMessage(
+                      //   chat: widget.chat,
+                      //   sender: sender,
+                      //   receiver: receiver,
+                      // );
                     },
                     splashRadius: 16,
                     icon: Icon(

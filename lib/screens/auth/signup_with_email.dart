@@ -103,7 +103,7 @@ class _SignupWithEmailScreenState extends State<SignupWithEmailScreen> {
                             if (user != null) {
                               bool temp1 = await WalletCreation().addWallet();
                               if (temp1) {
-                                await NotificationsServices().onLogin(context);
+                               // await NotificationsServices().onLogin(context);
                                 Provider.of<AppProvider>(context, listen: false)
                                     .onTabTapped(0);
                                 Navigator.of(context).pushNamedAndRemoveUntil(

@@ -168,10 +168,10 @@ class _PaymentScreenState extends State<PaymentScreen> {
                         transferKey, '3Fv1QCCbmUfNf8R8y7Ujp1tg9VHnEWMm27', amount.toString());
                     paid = true;
                      AppUser me = userPro.user(cartPro.cartItem[0].sellerID);
-                  List<MyDeviceToken> deviceToken = me.deviceToken ?? [];
+                  //List<MyDeviceToken> deviceToken = me.deviceToken ?? [];
                   final bool done =
                       await Provider.of<PaymentProvider>(context, listen: false)
-                          .productOrder(context, cartPro.cartItem, deviceToken);
+                          .productOrder(context, cartPro.cartItem);
                   if (done) {
                     if (!mounted) return;
                     cartPro.deleteAllItem();

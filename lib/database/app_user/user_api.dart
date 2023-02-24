@@ -29,19 +29,19 @@ class UserApi {
     return appUser;
   }
 
-  Future<void> setDeviceToken(List<MyDeviceToken> deviceToken) async {
-    try {
-      final String me = AuthMethods.uid;
-      if (me.isEmpty) return;
-      await _instance.collection(_collection).doc(me).update(<String, dynamic>{
-        'devices_tokens':
-            deviceToken.map((MyDeviceToken e) => e.toMap()).toList()
-      });
-    } catch (e) {
-      print(e.toString());
-      CustomToast.errorToast(message: 'Something Went Wrong');
-    }
-  }
+  // Future<void> setDeviceToken(List<MyDeviceToken> deviceToken) async {
+  //   try {
+  //     final String me = AuthMethods.uid;
+  //     if (me.isEmpty) return;
+  //     await _instance.collection(_collection).doc(me).update(<String, dynamic>{
+  //       'devices_tokens':
+  //           deviceToken.map((MyDeviceToken e) => e.toMap()).toList()
+  //     });
+  //   } catch (e) {
+  //     print(e.toString());
+  //     CustomToast.errorToast(message: 'Something Went Wrong');
+  //   }
+  // }
 
   Future<void> updateProfile({required AppUser user}) async {
     if (user.uid != AuthMethods.uid) return;

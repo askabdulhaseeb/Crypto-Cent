@@ -165,36 +165,36 @@ class _CreateChatGroupScreenState extends State<CreateChatGroupScreen> {
           ),
         ],
       );
-      await ChatAPI().sendMessage(
-        sender: sender,
-        receiver: AppUser(
-          uid: 'null',
-          loginMethod: LoginMethod.email,
-          phoneNumber: NumberDetails(
-            completeNumber: '',
-            countryCode: '',
-            isoCode: '',
-            number: '',
-            timestamp: time,
-          ),
-        ),
-        chat: Chat(
-          chatID: groupID,
-          persons: <String>[AuthMethods.uid],
-          groupInfo: info,
-          isGroup: true,
-          timestamp: time,
-          lastMessage: Message(
-            messageID: time.toString(),
-            text: 'New Group Created',
-            type: MessageTypeEnum.announcement,
-            attachment: <MessageAttachment>[],
-            sendBy: me,
-            sendTo: <MessageReadInfo>[],
-            timestamp: time,
-          ),
-        ),
-      );
+      // await ChatAPI().sendMessage(
+      //   sender: sender,
+      //   receiver: AppUser(
+      //     uid: 'null',
+      //     loginMethod: LoginMethod.email,
+      //     phoneNumber: NumberDetails(
+      //       completeNumber: '',
+      //       countryCode: '',
+      //       isoCode: '',
+      //       number: '',
+      //       timestamp: time,
+      //     ),
+      //   ),
+      //   chat: Chat(
+      //     chatID: groupID,
+      //     persons: <String>[AuthMethods.uid],
+      //     groupInfo: info,
+      //     isGroup: true,
+      //     timestamp: time,
+      //     lastMessage: Message(
+      //       messageID: time.toString(),
+      //       text: 'New Group Created',
+      //       type: MessageTypeEnum.announcement,
+      //       attachment: <MessageAttachment>[],
+      //       sendBy: me,
+      //       sendTo: <MessageReadInfo>[],
+      //       timestamp: time,
+      //     ),
+      //   ),
+      // );
       if (!mounted) return;
       Navigator.of(context).pop();
     }

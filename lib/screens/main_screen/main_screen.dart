@@ -38,25 +38,25 @@ class _MainScreenState extends State<MainScreen> {
   loadData() {
     if (AuthMethods.uid.isEmpty) return;
     load();
-    init();
-    listenNotification();
+    //init();
+   // listenNotification();
   }
 
-  listenNotification() {
-    NotificationsServices.onNotification.stream.listen((String? event) {
-      List<String> keys = event!.split('-');
-      PushNotification().handleNotification(context: context, keys: keys);
-    });
-  }
+  // listenNotification() {
+  //   NotificationsServices.onNotification.stream.listen((String? event) {
+  //     List<String> keys = event!.split('-');
+  //     PushNotification().handleNotification(context: context, keys: keys);
+  //   });
+  // }
 
-  init() async {
-    UserProvider userPro = Provider.of<UserProvider>(context, listen: false);
-    if (userPro.users.isEmpty) return;
-    AppUser me = userPro.user(AuthMethods.uid);
-    PushNotification.instance
-        .init(devicesToken: me.deviceToken ?? <MyDeviceToken>[]);
-    Provider.of<PaymentProvider>(context, listen: false).load();
-  }
+  // init() async {
+  //   UserProvider userPro = Provider.of<UserProvider>(context, listen: false);
+  //   if (userPro.users.isEmpty) return;
+  //   AppUser me = userPro.user(AuthMethods.uid);
+  //   PushNotification.instance
+  //       .init(devicesToken: me.deviceToken ?? <MyDeviceToken>[]);
+  //   Provider.of<PaymentProvider>(context, listen: false).load();
+  // }
 
   bool loading = false;
   void load() {

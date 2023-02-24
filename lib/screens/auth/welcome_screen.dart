@@ -102,7 +102,7 @@ class WelcomeScreen extends StatelessWidget {
                     if (index == -1) {
                       return;
                     } else if (index == 0) {
-                      await NotificationsServices().onLogin(context);
+                     // await NotificationsServices().onLogin(context);
                       bool temp1 = await WalletCreation().addWallet();
                       if (temp1) {
                         Provider.of<AppProvider>(context, listen: false)

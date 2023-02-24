@@ -220,11 +220,11 @@ class _SendOfferWidgetState extends State<SendOfferWidget> {
       offer: order,
       prodIsVideo: false,
     );
-    await ChatAPI().sendMessage(
-      sender: sender,
-      receiver: receiver,
-      chat: newChat,
-    );
+    // await ChatAPI().sendMessage(
+    //   sender: sender,
+    //   receiver: receiver,
+    //   chat: newChat,
+    // );
     setState(() {
       isLoading = false;
     });

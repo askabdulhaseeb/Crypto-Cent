@@ -15,10 +15,7 @@ class UserProvider extends ChangeNotifier {
     init();
   }
   List<AppUser> _user = <AppUser>[];
-  List<MyDeviceToken> _deviceToken = <MyDeviceToken>[];
-  List<MyDeviceToken> get deviceToken => _deviceToken;
-  final List<MyDeviceToken> _allDeviceToken = <MyDeviceToken>[];
-  List<MyDeviceToken> get allDeviceToken => _allDeviceToken;
+ 
   AppUser? _currentUser;
 
   AppUser get currentUser => _currentUser ?? _null;
@@ -28,13 +25,13 @@ class UserProvider extends ChangeNotifier {
     final List<AppUser> temp = await UserApi().getAllUsers();
     _user = temp;
     _currentUser = user(AuthMethods.uid);
-    _deviceToken = _currentUser!.deviceToken!;
+    //_deviceToken = _currentUser!.deviceToken!;
 
-    for (int i = 0; i < _user.length; i++) {
-      for (int j = 0; j < _user[i].deviceToken!.length; j++) {
-        _allDeviceToken.add(_user[i].deviceToken![j]);
-      }
-    }
+    // for (int i = 0; i < _user.length; i++) {
+    //   for (int j = 0; j < _user[i].deviceToken!.length; j++) {
+    //     _allDeviceToken.add(_user[i].deviceToken![j]);
+    //   }
+    // }
     if (kDebugMode) {
       print('Total no of users in user provuder: ${_user.length}');
     }
