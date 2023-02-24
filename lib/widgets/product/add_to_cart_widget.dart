@@ -48,8 +48,8 @@ class _AddToCartWidgetState extends State<AddToCartWidget> {
                   child: SizedBox(
                     height: 120,
                     width: 120,
-                    child: CustomNetworkImage(
-                        imageURL: widget.product.prodURL[0].url),
+                    child: Image(image: NetworkImage(widget.product.prodURL[0].url),fit: BoxFit.fill,),
+                    
                   ),
                 ),
                 Expanded(

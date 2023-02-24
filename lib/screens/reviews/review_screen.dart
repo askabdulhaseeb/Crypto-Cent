@@ -136,8 +136,8 @@ class ReviewScreen extends StatelessWidget {
                                     ),
                                   ],
                                   borderRadius: BorderRadius.circular(12)),
-                              child: CustomNetworkImage(
-                                  imageURL: product.prodURL[0].url),
+                             
+                                  child: Image(image: NetworkImage(product.prodURL[0].url),fit: BoxFit.fill,),
                             )
                           : const SizedBox(),
                     ],

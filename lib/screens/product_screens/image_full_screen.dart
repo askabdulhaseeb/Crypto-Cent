@@ -15,7 +15,8 @@ class DetailScreen extends StatelessWidget {
         child: Center(
           child: Hero(
             tag: 'imageHero',
-            child: CustomNetworkImage(imageURL: url, fit: BoxFit.fill),
+            child: Image(image: NetworkImage(url),fit: BoxFit.fill,),
+           
           ),
         ),
       ),

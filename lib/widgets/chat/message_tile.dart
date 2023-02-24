@@ -255,9 +255,10 @@ class DisplayAttachment extends StatelessWidget {
   }
 
   _display(MessageAttachment attachment) {
-    return CustomNetworkImage(
-      imageURL: attachment.url,
-      fit: BoxFit.cover,
-    );
+    // return CustomNetworkImage(
+    //   imageURL: attachment.url,
+    //   fit: BoxFit.cover,
+    // );
+    return  Image(image: NetworkImage(attachment.url),fit: BoxFit.fill,);
   }
 }

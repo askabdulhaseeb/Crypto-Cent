@@ -35,10 +35,8 @@ class ExtendProductTile extends StatelessWidget {
               color: const Color.fromARGB(255, 245, 244, 244),
               borderRadius: BorderRadius.circular(16),
             ),
-            child: CustomNetworkImage(
-              imageURL: product.prodURL[0].url,
-              fit: BoxFit.fill,
-            ),
+            child: Image(image: NetworkImage( product.prodURL[0].url),fit: BoxFit.fill,),
+           
           ),
           SizedBox(
                   height: 75,

@@ -66,7 +66,8 @@ class _Attachment extends StatelessWidget {
                   },
                   child: Hero(
                       tag: 'imageHero',
-                      child: CustomNetworkImage(imageURL: url.url))),
+                      child: Image(image: NetworkImage( url.url),fit: BoxFit.fill,),
+                  ))
             ),
           ),
           if (totalLength > 1)

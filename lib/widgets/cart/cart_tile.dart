@@ -121,10 +121,8 @@ class CartItem extends StatelessWidget {
           SizedBox(
             height: double.infinity,
             width: 120,
-            child: CustomNetworkImage(
-              imageURL: item.imageurl,
-              fit: BoxFit.cover,
-            ),
+            child: Image(image: NetworkImage(item.imageurl),fit: BoxFit.fill,),
+           
           ),
           Consumer<CartProvider>(
               builder: (BuildContext context, CartProvider cartPro, _) {

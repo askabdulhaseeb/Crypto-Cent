@@ -52,10 +52,9 @@ class _OrderHistoryTileState extends State<OrderHistoryTile> {
                       height: 50,
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(4),
-                        child: CustomNetworkImage(
-                          imageURL: product.prodURL[0].url,
-                          fit: BoxFit.fill,
-                        ),
+                        child: Image(image: NetworkImage(product.prodURL[0].url),fit: BoxFit.fill,),
+                      
+                       
                       ),
                     ),
                     title: Text(product.productname),
@@ -158,10 +157,7 @@ class _OrderHistoryTileState extends State<OrderHistoryTile> {
                           height: 30,
                           width: 30,
                           child: ClipRRect(
-                            child: CustomNetworkImage(
-                              imageURL: product.prodURL[0].url,
-                              fit: BoxFit.fill,
-                            ),
+                            child: Image(image: NetworkImage(product.prodURL[0].url),fit: BoxFit.fill,),
                           )),
                       const SizedBox(
                         width: 10,

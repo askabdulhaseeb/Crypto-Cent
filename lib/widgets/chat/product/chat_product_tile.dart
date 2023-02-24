@@ -94,7 +94,8 @@ class ChatProductTile extends StatelessWidget {
                 width: imageSize * 1.3,
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(6),
-                  child: CustomNetworkImage(imageURL: product.prodURL[0].url),
+                  child: Image(image: NetworkImage(product.prodURL[0].url),fit: BoxFit.fill,),
+                 // child: CustomNetworkImage(imageURL: product.prodURL[0].url),
                 ),
               ),
             ),
