@@ -21,6 +21,7 @@ class CustomTextFormField extends StatefulWidget {
     this.textAlign = TextAlign.start,
     this.style,
     this.border,
+    this.sufixicon,
     this.starticon,
     this.borderRadius=12,
     this.borderColor,
@@ -47,6 +48,7 @@ class CustomTextFormField extends StatefulWidget {
   final InputBorder? border;
   final TextStyle? style;
   final IconData? starticon;
+  final Widget? sufixicon;
   final Color? borderColor;
   @override
   CustomTextFormFieldState createState() => CustomTextFormFieldState();
@@ -112,17 +114,20 @@ class CustomTextFormFieldState extends State<CustomTextFormField> {
           hintStyle: widget.hint!.length > 15
               ? const TextStyle(fontSize: 14)
               : const TextStyle(fontSize: 15),
-          suffixIcon: (widget._controller!.text.isEmpty ||
-                  !widget.showSuffixIcon ||
-                  widget.showSuffixIcon == false)
+          // suffixIcon: (widget._controller!.text.isEmpty ||
+          //         !widget.showSuffixIcon ||
+          //         widget.showSuffixIcon == false)
+          //     ? null
+          //     : IconButton(
+          //         splashRadius: 16,
+          //         onPressed: () => setState(() {
+          //           widget._controller!.clear();
+          //         }),
+          //         icon: const Icon(CupertinoIcons.clear, size: 18),
+          //       ),
+          suffixIcon: widget.sufixicon == null
               ? null
-              : IconButton(
-                  splashRadius: 16,
-                  onPressed: () => setState(() {
-                    widget._controller!.clear();
-                  }),
-                  icon: const Icon(CupertinoIcons.clear, size: 18),
-                ),
+              :widget.sufixicon ,
           prefixIcon: widget.starticon == null
               ? null
               : SizedBox(

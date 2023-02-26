@@ -25,6 +25,7 @@ class OtherUserProfile extends StatelessWidget {
     List<Review> reviews =
         Provider.of<RatingProvider>(context).userReviews(appUser.uid);
     products = prouctPro.productByUID(appUser.uid);
+    double width = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).secondaryHeaderColor,
@@ -120,7 +121,7 @@ class OtherUserProfile extends StatelessWidget {
                 shrinkWrap: true,
                 primary: false,
                 children: List<Widget>.generate(products.length, (int index) {
-                  return ExtendProductTile(product: products[index]);
+                  return ExtendProductTile(product: products[index],width: width*0.6,);
                 }),
               ),
             ),

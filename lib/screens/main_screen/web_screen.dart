@@ -2,6 +2,11 @@ import 'package:flutter/material.dart';
 
 import '../../utilities/app_images.dart';
 import '../../widgets/custom_widgets/custom_widget.dart';
+import '../../widgets/custom_widgets/footer_widget.dart';
+import '../../widgets/custom_widgets/promo_widget.dart';
+import '../../widgets/home/home_categories_list.dart';
+import '../category_screens/categories_extend.dart';
+import '../home_screen/web_home_screen.dart';
 
 class WebScreen extends StatelessWidget {
     WebScreen({super.key});
@@ -10,7 +15,18 @@ class WebScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: webscreenAppbar(context),
-      body: const Center(child: Text('Web Screen')),
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+          WebHomeScreen(),
+            
+                  const SizedBox(height: 20,),
+            PromoWidget(),
+            FooterWidget(),
+          ],
+        ),
+      ),
     );
   }
 
@@ -98,3 +114,7 @@ class WebScreen extends StatelessWidget {
     );
   }
 }
+
+
+
+

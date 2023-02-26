@@ -61,4 +61,12 @@ class AppImages {
   static String get frame5 => 'assets/images/Frame115.png';
   static String get pro2 => 'assets/images/pro2.png';
   static String get emptyProfile => 'assets/images/emptyProfile.jpg';
+
+
+  //social media
+  static String get facebook => 'assets/images/facebook.png';
+  static String get twitter => 'assets/images/twitter.png';
+  static String get instagram => 'assets/images/instagram.png';
+  static String get linkedin => 'assets/images/linkedin.png';
+
 }

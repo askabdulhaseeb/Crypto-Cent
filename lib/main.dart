@@ -42,7 +42,7 @@ class MyApp extends StatelessWidget {
           darkTheme: AppThemes.dark,
           themeMode: theme.themeMode,
 
-          home:  WebScreen(),
+          home: const MainScreen(),
 
           // home: const NotificationScreen(),
           routes: <String, WidgetBuilder>{

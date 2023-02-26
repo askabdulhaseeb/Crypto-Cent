@@ -10,14 +10,16 @@ import '../../../widgets/custom_widgets/custom_widget.dart';
 import '../../screens/product_screens/product_detail_screen.dart';
 
 class ExtendProductTile extends StatelessWidget {
-  const ExtendProductTile({required this.product, Key? key}) : super(key: key);
+  ExtendProductTile({required this.product,required this.width,Key? key}) : super(key: key);
   final Product product;
+  final double width;
   @override
   Widget build(BuildContext context) {
-    double width = MediaQuery.of(context).size.width;
+    double widthe = MediaQuery.of(context).size.width;
     return InkWell(
       onTap: () async{
         await HapticFeedback.heavyImpact();
+        // ignore: use_build_context_synchronously
         Navigator.push(
             context,
             MaterialPageRoute<ProductDetailScreen>(
@@ -30,7 +32,7 @@ class ExtendProductTile extends StatelessWidget {
           Container(
             clipBehavior: Clip.hardEdge,
             width: double.infinity,
-            height: width * 0.6,
+            height: width,
             decoration: BoxDecoration(
               color: const Color.fromARGB(255, 245, 244, 244),
               borderRadius: BorderRadius.circular(16),
