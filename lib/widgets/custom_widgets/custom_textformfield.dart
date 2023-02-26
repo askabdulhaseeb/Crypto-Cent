@@ -22,6 +22,7 @@ class CustomTextFormField extends StatefulWidget {
     this.style,
     this.border,
     this.starticon,
+    this.borderRadius=12,
     this.borderColor,
     Key? key,
   })  : _controller = controller,
@@ -34,6 +35,7 @@ class CustomTextFormField extends StatefulWidget {
   final String? Function(String? value)? validator;
   final EdgeInsetsGeometry? contentPadding;
   final int? minLines;
+  final double? borderRadius;
   final int? maxLines;
   final int? maxLength;
   final Color? color;
@@ -71,7 +73,7 @@ class CustomTextFormFieldState extends State<CustomTextFormField> {
       padding:
           widget.contentPadding ?? const EdgeInsets.symmetric(horizontal: 12),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(14),
+        borderRadius: BorderRadius.circular(widget.borderRadius!),
         boxShadow: [
           BoxShadow(
             color: Colors.grey.withOpacity(0.2),
@@ -131,14 +133,14 @@ class CustomTextFormFieldState extends State<CustomTextFormField> {
                         widget.starticon,
                         color: Colors.grey,
                       ),
-                      const SizedBox(
-                        width: 5,
-                      ),
-                      Container(
-                        width: 1,
-                        height: 30,
-                        color: Colors.grey,
-                      ),
+                      // const SizedBox(
+                      //   width: 5,
+                      // ),
+                      // Container(
+                      //   width: 1,
+                      //   height: 30,
+                      //   color: Colors.grey,
+                      // ),
                     ],
                   ),
                 ),

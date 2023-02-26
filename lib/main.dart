@@ -9,6 +9,7 @@ import 'firebase_options.dart';
 import 'providers/provider.dart';
 import 'providers/providers_list.dart';
 
+import 'screens/main_screen/web_screen.dart';
 import 'screens/screens.dart';
 
 Future<void> _firebaseMessBackgroundHand(RemoteMessage message) async {
@@ -41,7 +42,7 @@ class MyApp extends StatelessWidget {
           darkTheme: AppThemes.dark,
           themeMode: theme.themeMode,
 
-          home:  const MainScreen(),
+          home:  WebScreen(),
 
           // home: const NotificationScreen(),
           routes: <String, WidgetBuilder>{

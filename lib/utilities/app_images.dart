@@ -27,6 +27,9 @@ class AppImages {
   static String get ellipse => 'assets/icons/ellipse.png';
   static String get ellipsecancel => 'assets/icons/ellipsecancel.png';
   static String get bitcoinIcon => 'assets/icons/bitcoin.png';
+  static String get wallet2Icon => 'assets/icons/wallet2.png';
+  static String get fvrtIcon => 'assets/icons/fvrt.png';
+  static String get shoppingcartIcon => 'assets/icons/shopping_cart.png';
   //profile screen icon
   static String get deliveryaddress => 'assets/icons/delivery_address.png';
   static String get orderhistory => 'assets/icons/order_history.png';

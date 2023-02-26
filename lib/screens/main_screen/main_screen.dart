@@ -7,11 +7,13 @@ import '../../providers/auth_provider.dart';
 import '../../providers/crypto_wallet/wallet_provider.dart';
 import '../../providers/payment/payment_provider.dart';
 import '../../providers/user_provider.dart';
+import '../../utilities/responsive.dart';
 import '../chat_screen/chat_screen.dart';
 import '../screens.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../providers/app_provider.dart';
+import 'web_screen.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({Key? key}) : super(key: key);
@@ -69,6 +71,24 @@ class _MainScreenState extends State<MainScreen> {
       loading = false;
     });
   }
+
+  @override
+  Widget build(BuildContext context) {
+    return ResponsiveApp(
+      mobile: mobileUi(pages: _pages),
+      tablet:  mobileUi(pages: _pages),
+      desktop: WebScreen(),
+    );
+  }
+}
+
+class mobileUi extends StatelessWidget {
+  const mobileUi({
+    super.key,
+    required List<Widget> pages,
+  }) : _pages = pages;
+
+  final List<Widget> _pages;
 
   @override
   Widget build(BuildContext context) {
