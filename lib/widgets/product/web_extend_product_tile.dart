@@ -8,6 +8,7 @@ import '../../../utilities/app_images.dart';
 import '../../../widgets/custom_widgets/custom_network_image.dart';
 import '../../../widgets/custom_widgets/custom_widget.dart';
 import '../../screens/product_screens/product_detail_screen.dart';
+import '../../screens/product_screens/web_product_detail_screen.dart';
 
 class WebExtendProductTile extends StatelessWidget {
   WebExtendProductTile({required this.product,required this.width,Key? key}) : super(key: key);
@@ -20,13 +21,14 @@ class WebExtendProductTile extends StatelessWidget {
       onTap: () async{
         await HapticFeedback.heavyImpact();
         // ignore: use_build_context_synchronously
-        // Navigator.push(
           print('Hello aoa');
-        //     context,
-        //     MaterialPageRoute<ProductDetailScreen>(
-        //       builder: (BuildContext context) =>
-        //           ProductDetailScreen(product: product),
-        //     ));
+        // ignore: use_build_context_synchronously
+        Navigator.push(
+            context,
+            MaterialPageRoute<WebProductDetailScreen>(
+              builder: (BuildContext context) =>
+                  WebProductDetailScreen(product: product),
+            ));
       },
       child: Column(
         children: [

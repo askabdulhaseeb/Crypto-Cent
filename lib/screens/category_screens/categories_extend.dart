@@ -6,6 +6,7 @@ import '../../utilities/app_images.dart';
 import '../../utilities/responsive.dart';
 import '../../widgets/custom_widgets/custom_textformfield.dart';
 import '../../widgets/product/extend_product_tile.dart';
+import '../../widgets/product/web_extend_product_tile.dart';
 
 // ignore: must_be_immutable
 class CategoriesExtend extends StatefulWidget {
@@ -91,9 +92,9 @@ class _CategoriesExtendState extends State<CategoriesExtend> {
                     ),
                     value: selectedItem,
                     items: dropDownItem
-                        .map((e) => DropdownMenuItem(value: e, child: Text(e)))
+                        .map((String e) => DropdownMenuItem(value: e, child: Text(e)))
                         .toList(),
-                    onChanged: (value) {
+                    onChanged: (String? value) {
                       setState(() {
                         selectedItem = value!;
                       });
@@ -113,15 +114,15 @@ class _CategoriesExtendState extends State<CategoriesExtend> {
                   children: List<Widget>.generate(products.length, (int index) {
                     if (selectedItem == 'Price Low To High') {
                       products.sort(
-                        (a, b) => a.amount.compareTo(b.amount),
+                        (Product a, Product b) => a.amount.compareTo(b.amount),
                       );
                     } else if (selectedItem == dropDownItem[2]) {
                       products.sort(
-                        (b, a) => a.amount.compareTo(b.amount),
+                        (Product b, Product a) => a.amount.compareTo(b.amount),
                       );
                     }
         
-                    return ExtendProductTile(product: products[index],width: width,);
+                    return WebExtendProductTile(product: products[index],width: width,);
                   }),
                 ),
               ),
@@ -176,9 +177,9 @@ class _CategoriesExtendState extends State<CategoriesExtend> {
                   ),
                   value: selectedItem,
                   items: dropDownItem
-                      .map((e) => DropdownMenuItem(value: e, child: Text(e)))
+                      .map((String e) => DropdownMenuItem(value: e, child: Text(e)))
                       .toList(),
-                  onChanged: (value) {
+                  onChanged: (String? value) {
                     setState(() {
                       selectedItem = value!;
                     });
@@ -198,11 +199,11 @@ class _CategoriesExtendState extends State<CategoriesExtend> {
                 children: List<Widget>.generate(products.length, (int index) {
                   if (selectedItem == 'Price Low To High') {
                     products.sort(
-                      (a, b) => a.amount.compareTo(b.amount),
+                      (Product a, Product b) => a.amount.compareTo(b.amount),
                     );
                   } else if (selectedItem == dropDownItem[2]) {
                     products.sort(
-                      (b, a) => a.amount.compareTo(b.amount),
+                      (Product b, Product a) => a.amount.compareTo(b.amount),
                     );
                   }
   

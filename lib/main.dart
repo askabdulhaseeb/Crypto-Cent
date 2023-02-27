@@ -9,6 +9,7 @@ import 'firebase_options.dart';
 import 'providers/provider.dart';
 import 'providers/providers_list.dart';
 
+import 'screens/category_screens/category.dart';
 import 'screens/main_screen/web_screen.dart';
 import 'screens/screens.dart';
 
@@ -58,6 +59,7 @@ class MyApp extends StatelessWidget {
             AddProductScreen.routeName: (_) => const AddProductScreen(),
             // PROFILE
             PaymentScreen.routeName: (_) => const PaymentScreen(),
+           CategoryScreen.routeName: (_) => const CategoryScreen(),
             LocationScreen.routeName: (_) => const LocationScreen(text: ''),
             SellingScreen.routeName: (_) => const SellingScreen(),
             // CHAT
