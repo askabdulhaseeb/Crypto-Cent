@@ -35,14 +35,14 @@ class CategoryScreen extends StatelessWidget {
             return InkWell(
               onTap: () async{
                    await HapticFeedback.heavyImpact();
-                  Navigator.pushNamed(context, CategoriesExtend.routeName,arguments: ScreenArguments(catPro.categories[index].catID==null?catPro.categories[index].catID:'All'));
-                // Navigator.push(
-                //     context,
-                //     // ignore: always_specify_types
-                //     MaterialPageRoute(
-                //         builder: (BuildContext context) => CategoriesExtend(
-                //               categoryName: catPro.categories[index].catID,
-                //             )));
+               //   Navigator.pushNamed(context, CategoriesExtend.routeName,arguments: ScreenArguments(catPro.categories[index].catID==null?catPro.categories[index].catID:'All'));
+                Navigator.push(
+                    context,
+                    // ignore: always_specify_types
+                    MaterialPageRoute(
+                        builder: (BuildContext context) => CategoriesExtend(
+                              categoryName: catPro.categories[index].catID,
+                            )));
               },
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -98,14 +98,14 @@ class CategoryScreen extends StatelessWidget {
             return InkWell(
               onTap: () async{
                    await HapticFeedback.heavyImpact();
-                     Navigator.pushNamed(context, CategoriesExtend.routeName,arguments: ScreenArguments(catPro.categories[index].catID));
-                // Navigator.push(
-                //     context,
-                //     // ignore: always_specify_types
-                //     MaterialPageRoute(
-                //         builder: (BuildContext context) => CategoriesExtend(
-                //               categoryName: catPro.categories[index].catID,
-                //             )));
+                    // Navigator.pushNamed(context, CategoriesExtend.routeName,arguments: ScreenArguments(catPro.categories[index].catID));
+                Navigator.push(
+                    context,
+                    // ignore: always_specify_types
+                    MaterialPageRoute(
+                        builder: (BuildContext context) => CategoriesExtend(
+                              categoryName: catPro.categories[index].catID,
+                            )));
               },
               child: Padding(
                 padding: const EdgeInsets.all(8.0),

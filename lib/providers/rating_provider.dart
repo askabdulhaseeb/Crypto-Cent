@@ -28,6 +28,7 @@ class RatingProvider with ChangeNotifier {
   }
 
   Future<void> load() async {
+    if(_review.isNotEmpty) return;
     _review = await ReviewApi().getdata();
     notifyListeners();
   }

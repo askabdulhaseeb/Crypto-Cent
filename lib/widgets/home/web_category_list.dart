@@ -25,13 +25,9 @@ class WebCategoriesList extends StatelessWidget {
         
           allitems(context, 'Categories', false, () {
             HapticFeedback.heavyImpact();
-            Navigator.push(
-              context,
-              // ignore: always_specify_types
-              MaterialPageRoute(
-                builder: (BuildContext context) => const CategoryScreen(),
-              ),
-            );
+              Navigator.of(context)
+                            .pushNamed(CategoryScreen.routeName);
+            
           }),
           allitems(
               context,

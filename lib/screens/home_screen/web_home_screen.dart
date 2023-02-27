@@ -33,11 +33,11 @@ class WebHomeScreen extends StatelessWidget {
                       ),
                       TextButton(
                         onPressed: (() {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute<CategoriesExtend>(
-                                  builder: (BuildContext context) =>
-                                      CategoriesExtend(categoryName: 'All')));
+                          // Navigator.push(
+                          //     context,
+                          //     MaterialPageRoute<CategoriesExtend>(
+                          //         builder: (BuildContext context) =>
+                          //             CategoriesExtend(categoryName: 'All')));
                         }),
                         child: ForText(
                           name: 'View All',
@@ -50,9 +50,9 @@ class WebHomeScreen extends StatelessWidget {
                 const SizedBox(
                   height: 10,
                 ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16,vertical: 8),
-                  child: const LatestProductsList(),
+               const Padding(
+                  padding:  EdgeInsets.symmetric(horizontal: 16,vertical: 8),
+                  child:  LatestProductsList(),
                 ),
       ],
     );
