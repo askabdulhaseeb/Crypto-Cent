@@ -59,7 +59,7 @@ class MyApp extends StatelessWidget {
             AddProductScreen.routeName: (_) => const AddProductScreen(),
             // PROFILE
             PaymentScreen.routeName: (_) => const PaymentScreen(),
-           CategoryScreen.routeName: (_) => const CategoryScreen(),
+            CategoryScreen.routeName: (_) => const CategoryScreen(),
             LocationScreen.routeName: (_) => const LocationScreen(text: ''),
             SellingScreen.routeName: (_) => const SellingScreen(),
             // CHAT
@@ -72,5 +72,7 @@ class MyApp extends StatelessWidget {
   }
 }
 
+// flutter build web
+// firebase deploy --only hosting
 // Figma File
 //https://www.figma.com/file/9ictqL5CrszrXY302KBqDa/Cryptocent?node-id=27%3A4835
