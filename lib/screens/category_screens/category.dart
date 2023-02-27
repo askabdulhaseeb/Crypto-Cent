@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
+import '../../function/web_appbar.dart';
 import '../../providers/categories_provider.dart';
 import '../../utilities/responsive.dart';
 import '../../widgets/custom_widgets/custom_widget.dart';
@@ -24,7 +25,7 @@ class CategoryScreen extends StatelessWidget {
   }
  Widget _desktopUi(CategoriesProvider catPro, BuildContext context) {
     return Scaffold(
-       
+        appBar: WebAppBar.webAppBar,
         body: GridView.count(
           childAspectRatio: 96 / 118,
           mainAxisSpacing: 8,
@@ -34,13 +35,14 @@ class CategoryScreen extends StatelessWidget {
             return InkWell(
               onTap: () async{
                    await HapticFeedback.heavyImpact();
-                Navigator.push(
-                    context,
-                    // ignore: always_specify_types
-                    MaterialPageRoute(
-                        builder: (BuildContext context) => CategoriesExtend(
-                              categoryName: catPro.categories[index].catID,
-                            )));
+                  Navigator.pushNamed(context, CategoriesExtend.routeName,arguments: ScreenArguments(catPro.categories[index].catID==null?catPro.categories[index].catID:'All'));
+                // Navigator.push(
+                //     context,
+                //     // ignore: always_specify_types
+                //     MaterialPageRoute(
+                //         builder: (BuildContext context) => CategoriesExtend(
+                //               categoryName: catPro.categories[index].catID,
+                //             )));
               },
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -96,13 +98,14 @@ class CategoryScreen extends StatelessWidget {
             return InkWell(
               onTap: () async{
                    await HapticFeedback.heavyImpact();
-                Navigator.push(
-                    context,
-                    // ignore: always_specify_types
-                    MaterialPageRoute(
-                        builder: (BuildContext context) => CategoriesExtend(
-                              categoryName: catPro.categories[index].catID,
-                            )));
+                     Navigator.pushNamed(context, CategoriesExtend.routeName,arguments: ScreenArguments(catPro.categories[index].catID));
+                // Navigator.push(
+                //     context,
+                //     // ignore: always_specify_types
+                //     MaterialPageRoute(
+                //         builder: (BuildContext context) => CategoriesExtend(
+                //               categoryName: catPro.categories[index].catID,
+                //             )));
               },
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
