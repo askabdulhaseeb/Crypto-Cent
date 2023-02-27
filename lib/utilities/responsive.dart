@@ -1,35 +1,35 @@
 import 'package:flutter/material.dart';
 
+import 'utilities.dart';
+
 class ResponsiveApp extends StatelessWidget {
+  const ResponsiveApp({
+    required this.desktop,
+    required this.mobile,
+    required this.tablet,
+    Key? key,
+  }) : super(key: key);
   final Widget mobile;
   final Widget tablet;
   final Widget desktop;
 
-  const ResponsiveApp({
-    Key? key,
-    required this.desktop,
-    required this.mobile,
-    required this.tablet,
-  }) : super(key: key);
-
   static bool isMobile(BuildContext context) =>
-      MediaQuery.of(context).size.width < 800.0;
+      MediaQuery.of(context).size.width < Utilities.mobileMaxWidth;
 
   static bool isTablet(BuildContext context) =>
-      MediaQuery.of(context).size.width >= 800.0 &&
-      MediaQuery.of(context).size.width < 1000.0;
+      MediaQuery.of(context).size.width >= Utilities.mobileMaxWidth &&
+      MediaQuery.of(context).size.width < Utilities.tabMaxWidth;
 
   static bool isDesktop(BuildContext context) =>
-      MediaQuery.of(context).size.width >= 1000.0;
+      MediaQuery.of(context).size.width >= Utilities.tabMaxWidth;
 
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (BuildContext context, BoxConstraints constraints) {
-        if (constraints.maxWidth >= 1000.0) {
+        if (isDesktop(context)) {
           return desktop;
-        } else if (constraints.maxWidth >= 800 &&
-            constraints.maxWidth < 1000.0) {
+        } else if (isTablet(context)) {
           return tablet;
         } else {
           return mobile;

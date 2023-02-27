@@ -22,12 +22,9 @@ class WebCategoriesList extends StatelessWidget {
         children: <Widget>[
           const SizedBox(width: 16),
           allitems(context, 'All', true, () {}),
-        
           allitems(context, 'Categories', false, () {
             HapticFeedback.heavyImpact();
-              Navigator.of(context)
-                            .pushNamed(CategoryScreen.routeName);
-            
+            Navigator.of(context).pushNamed(CategoryScreen.routeName);
           }),
           allitems(
               context,
@@ -80,14 +77,12 @@ class WebCategoriesList extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 24),
         margin: const EdgeInsets.symmetric(horizontal: 4),
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(16),
-          color: Theme.of(context).primaryColor
-           
-        ),
+            borderRadius: BorderRadius.circular(16),
+            color: Theme.of(context).primaryColor),
         child: Center(
             child: ForText(
           name: name,
-          color:  Colors.black,
+          color: Colors.black,
         )),
       ),
     );
