@@ -1,5 +1,6 @@
 import '../../screens/auth/welcome_screen.dart';
 import '../../screens/main_screen/main_screen.dart';
+import '../../utilities/utilities.dart';
 import 'constants.dart';
 import 'package:flutter/material.dart';
 
@@ -7,12 +8,12 @@ import '../../utilities/app_images.dart';
 import 'custom_elevated_button.dart';
 
 class CustomDialogBox extends StatefulWidget {
-  const CustomDialogBox(
-      {Key? key,
-      required this.title,
-      required this.descriptions,
-      required this.text})
-      : super(key: key);
+  const CustomDialogBox({
+    required this.text,
+    required this.title,
+    required this.descriptions,
+    Key? key,
+  }) : super(key: key);
   final String title, descriptions, text;
 
   @override
@@ -32,10 +33,11 @@ class _CustomDialogBoxState extends State<CustomDialogBox> {
     );
   }
 
-  contentBox(context) {
+  contentBox(BuildContext context) {
     return Stack(
       children: <Widget>[
         Container(
+          constraints: BoxConstraints(maxWidth: Utilities.tabMaxWidth / 2),
           padding: const EdgeInsets.only(
               left: Constants.padding,
               top: Constants.avatarRadius + Constants.padding,

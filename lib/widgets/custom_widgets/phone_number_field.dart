@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:intl_phone_field/phone_number.dart';
 
+import '../../utilities/utilities.dart';
+
 class PhoneNumberField extends StatefulWidget {
   const PhoneNumberField({
     required this.initialCountryCode,
@@ -20,6 +22,7 @@ class _PhoneNumberFieldState extends State<PhoneNumberField> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      constraints: BoxConstraints(maxWidth: Utilities.tabMaxWidth / 2),
       padding: const EdgeInsets.only(top: 10, right: 10),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(14),

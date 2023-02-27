@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+
+import '../../utilities/utilities.dart';
+
 class CustomElevatedButton extends StatelessWidget {
   const CustomElevatedButton({
     required this.title,
@@ -29,6 +32,7 @@ class CustomElevatedButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      constraints: BoxConstraints(maxWidth: Utilities.tabMaxWidth / 2),
       margin: margin ?? const EdgeInsets.symmetric(vertical: 6),
       decoration: BoxDecoration(
         color: readOnly

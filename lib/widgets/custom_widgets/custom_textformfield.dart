@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../../utilities/utilities.dart';
+
 class CustomTextFormField extends StatefulWidget {
   const CustomTextFormField({
     required TextEditingController? controller,
@@ -71,6 +73,7 @@ class CustomTextFormFieldState extends State<CustomTextFormField> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      constraints: BoxConstraints(maxWidth: Utilities.tabMaxWidth / 2),
       margin: const EdgeInsets.symmetric(vertical: 6),
       padding:
           widget.contentPadding ?? const EdgeInsets.symmetric(horizontal: 12),
