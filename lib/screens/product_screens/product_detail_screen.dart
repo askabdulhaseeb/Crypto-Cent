@@ -78,7 +78,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                       onPressed: () {
                         Navigator.of(context).pop();
                       },
-                      icon: Icon(
+                      icon: const Icon(
                         Icons.arrow_back_ios,
                         color: Colors.white,
                         shadows: <Shadow>[
@@ -128,6 +128,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                         GestureDetector(
                           onTap: () async {
                             await HapticFeedback.heavyImpact();
+                            // ignore: use_build_context_synchronously
                             Navigator.push(
                                 context,
                                 MaterialPageRoute<ReviewScreen>(

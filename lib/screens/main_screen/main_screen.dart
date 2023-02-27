@@ -13,7 +13,8 @@ import '../screens.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../providers/app_provider.dart';
-import 'web_screen.dart';
+import 'mobile_main.dart';
+import 'web_main.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({Key? key}) : super(key: key);
@@ -24,83 +25,14 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
-  static final List<Widget> _pages = <Widget>[
-    const HomeScreen(),
-    const FavoriteScreen(),
-    const CartScreen(),
-    const ChatScreen(),
-    const ProfileScreen(),
-  ];
-  @override
-  void initState() {
-    loadData();
-    super.initState();
-  }
-
-  loadData() {
-    if (AuthMethods.uid.isEmpty) return;
-    load();
-    //init();
-   // listenNotification();
-  }
-
-  // listenNotification() {
-  //   NotificationsServices.onNotification.stream.listen((String? event) {
-  //     List<String> keys = event!.split('-');
-  //     PushNotification().handleNotification(context: context, keys: keys);
-  //   });
-  // }
-
-  // init() async {
-  //   UserProvider userPro = Provider.of<UserProvider>(context, listen: false);
-  //   if (userPro.users.isEmpty) return;
-  //   AppUser me = userPro.user(AuthMethods.uid);
-  //   PushNotification.instance
-  //       .init(devicesToken: me.deviceToken ?? <MyDeviceToken>[]);
-  //   Provider.of<PaymentProvider>(context, listen: false).load();
-  // }
-
-  bool loading = false;
-  void load() {
-    setState(() {
-      loading = true;
-    });
-    Provider.of<AuthProvider>(context, listen: false).getUser();
-    Provider.of<WalletProvider>(context, listen: false).load();
-    setState(() {
-      loading = false;
-    });
-  }
-
+ 
   @override
   Widget build(BuildContext context) {
     return ResponsiveApp(
-      mobile: mobileUi(pages: _pages),
-      tablet:  mobileUi(pages: _pages),
-      desktop: WebScreen(),
+      mobile: MobileMain(),
+      tablet:  MobileMain(),
+      desktop: WebMain(),
     );
   }
 }
 
-class mobileUi extends StatelessWidget {
-  const mobileUi({
-    super.key,
-    required List<Widget> pages,
-  }) : _pages = pages;
-
-  final List<Widget> _pages;
-
-  @override
-  Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        body: Consumer<AppProvider>(
-          builder: (BuildContext context, AppProvider navBar, _) {
-            return _pages[navBar.currentTap];
-          },
-        ),
-        bottomNavigationBar: const MainBottomNavigationBar(),
-      ),
-    );
-  }
-}

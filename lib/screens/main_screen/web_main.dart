@@ -10,8 +10,8 @@ import '../../widgets/home/home_categories_list.dart';
 import '../category_screens/categories_extend.dart';
 import '../home_screen/web_home_screen.dart';
 
-class WebScreen extends StatelessWidget {
-    WebScreen({super.key});
+class WebMain extends StatelessWidget {
+    WebMain({super.key});
   final TextEditingController _search=TextEditingController();
   @override
   Widget build(BuildContext context) {

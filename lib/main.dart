@@ -10,7 +10,7 @@ import 'providers/provider.dart';
 import 'providers/providers_list.dart';
 
 import 'screens/category_screens/category.dart';
-import 'screens/main_screen/web_screen.dart';
+import 'screens/main_screen/web_main.dart';
 import 'screens/screens.dart';
 
 Future<void> _firebaseMessBackgroundHand(RemoteMessage message) async {

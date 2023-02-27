@@ -34,13 +34,13 @@ import '../reviews/review_screen.dart';
 class WebProductDetailScreen extends StatefulWidget {
   const WebProductDetailScreen({required this.product, super.key});
   final Product product;
-
   @override
   State<WebProductDetailScreen> createState() => _WebProductDetailScreenState();
 }
 
 class _WebProductDetailScreenState extends State<WebProductDetailScreen> {
   @override
+int quantity = 1;
   Widget build(BuildContext context) {
     final AppUser seller =
         Provider.of<UserProvider>(context).user(widget.product.uid);
@@ -51,8 +51,8 @@ class _WebProductDetailScreenState extends State<WebProductDetailScreen> {
 
     List<Review> reviews =
         Provider.of<RatingProvider>(context).productReviews(widget.product.pid);
-        double height=MediaQuery.of(context).size.height;
-        double width=MediaQuery.of(context).size.width;
+        // double height=MediaQuery.of(context).size.height;
+        // double width=MediaQuery.of(context).size.width;
     return Scaffold(
       body: SafeArea(child: SizedBox(
         child: Padding(
@@ -64,13 +64,13 @@ class _WebProductDetailScreenState extends State<WebProductDetailScreen> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   WebProductURLsSlider(urls:widget.product.prodURL,),
-                 SizedBox(width: 50,),
+                 const SizedBox(width: 50,),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       reviewWidget(context, reviews),
-                      SizedBox(height: 20,),
+                      const SizedBox(height: 20,),
                        Text(
                             widget.product.productname,
                             maxLines: 2,
@@ -80,7 +80,7 @@ class _WebProductDetailScreenState extends State<WebProductDetailScreen> {
                               fontWeight: FontWeight.w900,
                             ),
                           ),
-                          SizedBox(height: 20,),
+                          const SizedBox(height: 20,),
                            Text(
                                     '\$ ${widget.product.amount}',
                                     style: const TextStyle(
@@ -88,14 +88,25 @@ class _WebProductDetailScreenState extends State<WebProductDetailScreen> {
                                       fontSize: 28,
                                     ),
                                   ),
-                                  SizedBox(height: 20,),
-                                  Text('Add to cart'),
-                                  SizedBox(height: 20,),
-                                  Divider(),
-                                  Text('Description'),
-                                  SizedBox(height: 20,),
-                                  Divider(),
-                                  Text('Reviews'),
+                                  const SizedBox(height: 20,),
+                                   addToCartWidget(context),
+                                  const SizedBox(height: 20,),
+                                  
+                                 SizedBox(
+                                  height: 300,
+                                  width: 300,
+                                   child: ExpansionTile(
+                                    
+                                           title: const Text('Description'),
+                                           trailing:  Icon(Icons.add),
+                                           children: <Widget>[
+                                             ListTile(title: Text(widget.product.description)),
+                                           ],
+                                         ),
+                                 ),
+                                  const SizedBox(height: 20,),
+                                  const Divider(color: Colors.grey,thickness: 2,),
+                               
                     ],
                   ),
                 ],
@@ -108,6 +119,69 @@ class _WebProductDetailScreenState extends State<WebProductDetailScreen> {
     );
   }
 
+  Row addToCartWidget(BuildContext context) {
+    return Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: <Widget>[
+              IconButton(
+                onPressed: quantity < 2
+                    ? null
+                    : () {
+                        setState(() {
+                          quantity--;
+                        });
+                      },
+                icon: Icon(
+                  Icons.remove_circle_outline,
+                  size: 24,
+                  color: quantity < 2 ? Colors.grey : Colors.red,
+                ),
+              ),
+              Container(
+                width: 50,
+                padding: const EdgeInsets.symmetric(vertical: 8),
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                  color: Theme.of(context).secondaryHeaderColor,
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Text(
+                  quantity.toString(),
+                  style: const TextStyle(
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16,
+                  ),
+                ),
+              ),
+              IconButton(
+                onPressed: quantity >= int.parse(widget.product.quantity)
+                    ? null
+                    : () {
+                        setState(() {
+                          quantity++;
+                        });
+                      },
+                icon: Icon(
+                  Icons.add_circle_outline,
+                  size: 24,
+                  color: quantity >= int.parse(widget.product.quantity)
+                      ? Colors.grey
+                      : Colors.green,
+                ),
+              ),
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 4),
+                decoration: BoxDecoration(
+                  color: Theme.of(context).primaryColor,
+                  borderRadius: BorderRadius.circular(4),
+                ),
+              child: const ForText(name: 'Add To cart',color: Colors.white,),
+              )
+            ],
+          );
+  }
+
   Row reviewWidget(BuildContext context, List<Review> reviews) {
     return Row(
                 children: [
@@ -115,7 +189,7 @@ class _WebProductDetailScreenState extends State<WebProductDetailScreen> {
                     fontWeight: FontWeight.w800,
                     fontSize: 28,
                   )),
-                  SizedBox(width: 100,),
+                  const SizedBox(width: 100,),
                   GestureDetector(
                         onTap: () async {
                           await HapticFeedback.heavyImpact();
