@@ -12,8 +12,8 @@ class SignInScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return const ResponsiveApp(
       desktop: SignInWebview(),
-      mobile: SigninMobview(),
       tablet: SignInWebview(),
+      mobile: SigninMobview(),
     );
   }
 }
