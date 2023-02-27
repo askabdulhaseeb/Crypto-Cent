@@ -12,7 +12,8 @@ import '../../../widgets/custom_widgets/custom_elevated_button.dart';
 import '../../../widgets/custom_widgets/footer_widget.dart';
 import '../../main_screen/main_screen.dart';
 import '../phone_number_screen.dart';
-import '../signin_with_email_screen.dart';
+import '../signin_screen/signin_screen.dart';
+import '../signin_screen/signin_mobview.dart';
 
 class WelcomeWebview extends StatelessWidget {
   const WelcomeWebview({super.key});
@@ -60,7 +61,7 @@ class WelcomeWebview extends StatelessWidget {
                               borderRadius: BorderRadius.circular(24),
                               onTap: () async {
                                 Navigator.of(context)
-                                    .pushNamed(SigninWithEmailScreen.routeName);
+                                    .pushNamed(SignInScreen.routeName);
                               },
                             ),
                             Padding(

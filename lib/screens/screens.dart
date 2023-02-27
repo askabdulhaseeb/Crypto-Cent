@@ -7,8 +7,8 @@ export 'notification_screen/notification_screen.dart';
 export 'profile_screen/profile_screen.dart';
 
 export 'auth/phone_number_screen.dart';
-export 'auth/signin_with_email_screen.dart';
-export 'auth/signup_with_email.dart';
+export 'auth/signin_screen/signin_mobview.dart';
+export 'auth/signup_screen/signup_mobview.dart';
 export 'auth/welcome_screen/welcome_mobview.dart';
 export 'main_screen/main_screen.dart';
 

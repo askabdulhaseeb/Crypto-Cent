@@ -1,29 +1,26 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl_phone_field/phone_number.dart';
 import 'package:provider/provider.dart';
 
-import '../../database/app_user/auth_method.dart';
-import '../../database/crypto_wallet/wallet_creation.dart';
-import '../../database/notification_services.dart';
-import '../../providers/app_provider.dart';
-import '../../utilities/app_images.dart';
-import '../../widgets/custom_widgets/custom_widget.dart';
-import '../../widgets/custom_widgets/password_textformfield.dart';
-import '../../widgets/custom_widgets/show_loading.dart';
-import '../main_screen/main_screen.dart';
+import '../../../database/app_user/auth_method.dart';
+import '../../../database/crypto_wallet/wallet_creation.dart';
+import '../../../providers/app_provider.dart';
+import '../../../utilities/app_images.dart';
+import '../../../widgets/custom_widgets/custom_widget.dart';
+import '../../../widgets/custom_widgets/password_textformfield.dart';
+import '../../../widgets/custom_widgets/show_loading.dart';
+import '../../main_screen/main_screen.dart';
 
-class SignupWithEmailScreen extends StatefulWidget {
-  const SignupWithEmailScreen({Key? key}) : super(key: key);
-  static const String routeName = '/signup-wuth-email';
+class SignupMobview extends StatefulWidget {
+  const SignupMobview({Key? key}) : super(key: key);
 
   @override
-  State<SignupWithEmailScreen> createState() => _SignupWithEmailScreenState();
+  State<SignupMobview> createState() => _SignupMobviewState();
 }
 
-class _SignupWithEmailScreenState extends State<SignupWithEmailScreen> {
+class _SignupMobviewState extends State<SignupMobview> {
   final TextEditingController _email = TextEditingController();
   final TextEditingController _password = TextEditingController();
   final TextEditingController _confPassword = TextEditingController();

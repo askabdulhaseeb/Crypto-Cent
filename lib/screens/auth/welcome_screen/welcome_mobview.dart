@@ -11,7 +11,8 @@ import '../../../utilities/app_images.dart';
 import '../../../widgets/custom_widgets/custom_elevated_button.dart';
 import '../../main_screen/main_screen.dart';
 import '../phone_number_screen.dart';
-import '../signin_with_email_screen.dart';
+import '../signin_screen/signin_screen.dart';
+import '../signin_screen/signin_mobview.dart';
 
 class WelcomeMobview extends StatelessWidget {
   const WelcomeMobview({Key? key}) : super(key: key);
@@ -64,7 +65,7 @@ class WelcomeMobview extends StatelessWidget {
               onTap: () async {
                 await HapticFeedback.heavyImpact();
                 Navigator.of(context)
-                    .pushNamed(SigninWithEmailScreen.routeName);
+                    .pushNamed(SignInScreen.routeName);
               },
             ),
             Padding(

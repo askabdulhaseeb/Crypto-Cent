@@ -8,6 +8,8 @@ import 'firebase_options.dart';
 import 'providers/provider.dart';
 import 'providers/providers_list.dart';
 
+import 'screens/auth/signin_screen/signin_screen.dart';
+import 'screens/auth/signup_screen/signup_screen.dart';
 import 'screens/auth/welcome_screen/welcome_screen.dart';
 import 'screens/category_screens/category.dart';
 import 'screens/screens.dart';
@@ -50,10 +52,8 @@ class MyApp extends StatelessWidget {
             EmptyScreen.routeName: (_) => const EmptyScreen(),
             // AUTH
             WelcomeScreen.routeName: (_) => const WelcomeScreen(),
-            SigninWithEmailScreen.routeName: (_) =>
-                const SigninWithEmailScreen(),
-            SignupWithEmailScreen.routeName: (_) =>
-                const SignupWithEmailScreen(),
+            SignInScreen.routeName: (_) => const SignInScreen(),
+            SignupScreen.routeName: (_) => const SignupScreen(),
             PhoneNumberScreen.routeName: (_) => const PhoneNumberScreen(),
             MainScreen.routeName: (_) => const MainScreen(),
             AddProductScreen.routeName: (_) => const AddProductScreen(),

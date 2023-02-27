@@ -4,25 +4,23 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
-import '../../database/app_user/auth_method.dart';
-import '../../database/notification_services.dart';
-import '../../providers/app_provider.dart';
-import '../../utilities/app_images.dart';
-import '../../widgets/custom_widgets/custom_widget.dart';
-import '../../widgets/custom_widgets/password_textformfield.dart';
-import '../../widgets/custom_widgets/show_loading.dart';
-import '../main_screen/main_screen.dart';
-import 'signup_with_email.dart';
+import '../../../database/app_user/auth_method.dart';
+import '../../../providers/app_provider.dart';
+import '../../../utilities/app_images.dart';
+import '../../../widgets/custom_widgets/custom_widget.dart';
+import '../../../widgets/custom_widgets/password_textformfield.dart';
+import '../../../widgets/custom_widgets/show_loading.dart';
+import '../../main_screen/main_screen.dart';
+import '../signup_screen/signup_screen.dart';
 
-class SigninWithEmailScreen extends StatefulWidget {
-  const SigninWithEmailScreen({Key? key}) : super(key: key);
-  static const String routeName = '/signin-with-email';
+class SigninMobview extends StatefulWidget {
+  const SigninMobview({Key? key}) : super(key: key);
 
   @override
-  State<SigninWithEmailScreen> createState() => _SigninWithEmailScreenState();
+  State<SigninMobview> createState() => _SigninMobviewState();
 }
 
-class _SigninWithEmailScreenState extends State<SigninWithEmailScreen> {
+class _SigninMobviewState extends State<SigninMobview> {
   final TextEditingController _email = TextEditingController();
   final TextEditingController _password = TextEditingController();
   final GlobalKey<FormState> _key = GlobalKey<FormState>();
@@ -105,7 +103,7 @@ class _SigninWithEmailScreenState extends State<SigninWithEmailScreen> {
                       text: '''Sign Up''',
                       recognizer: TapGestureRecognizer()
                         ..onTap = () => Navigator.of(context)
-                            .pushNamed(SignupWithEmailScreen.routeName),
+                            .pushNamed(SignupScreen.routeName),
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         color: Theme.of(context).primaryColor,
