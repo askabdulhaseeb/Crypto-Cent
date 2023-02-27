@@ -1,10 +1,9 @@
-import '../../screens/auth/welcome_screen.dart';
-import '../../screens/main_screen/main_screen.dart';
-import '../../utilities/utilities.dart';
-import 'constants.dart';
 import 'package:flutter/material.dart';
 
+import '../../screens/auth/welcome_screen/welcome_screen.dart';
 import '../../utilities/app_images.dart';
+import '../../utilities/utilities.dart';
+import 'constants.dart';
 import 'custom_elevated_button.dart';
 
 class CustomDialogBox extends StatefulWidget {

@@ -5,7 +5,7 @@ import 'package:flutter/services.dart';
 
 import '../../utilities/app_images.dart';
 import '../../widgets/custom_widgets/custom_widget.dart';
-import '../auth/welcome_screen.dart';
+import '../auth/welcome_screen/welcome_screen.dart';
 
 class EmptyAuthScreen extends StatelessWidget {
   const EmptyAuthScreen({required this.text, super.key});

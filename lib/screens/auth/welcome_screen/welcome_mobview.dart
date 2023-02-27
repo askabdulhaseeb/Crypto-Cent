@@ -4,19 +4,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
-import '../../database/app_user/auth_method.dart';
-import '../../database/crypto_wallet/wallet_creation.dart';
-import '../../database/notification_services.dart';
-import '../../providers/app_provider.dart';
-import '../../utilities/app_images.dart';
-import '../../widgets/custom_widgets/custom_elevated_button.dart';
-import '../main_screen/main_screen.dart';
-import 'phone_number_screen.dart';
-import 'signin_with_email_screen.dart';
+import '../../../database/app_user/auth_method.dart';
+import '../../../database/crypto_wallet/wallet_creation.dart';
+import '../../../providers/app_provider.dart';
+import '../../../utilities/app_images.dart';
+import '../../../widgets/custom_widgets/custom_elevated_button.dart';
+import '../../main_screen/main_screen.dart';
+import '../phone_number_screen.dart';
+import '../signin_with_email_screen.dart';
 
-class WelcomeScreen extends StatelessWidget {
-  const WelcomeScreen({Key? key}) : super(key: key);
-  static const String routeName = '/welcome-screen';
+class WelcomeMobview extends StatelessWidget {
+  const WelcomeMobview({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -97,12 +95,12 @@ class WelcomeScreen extends StatelessWidget {
                 ),
                 GestureDetector(
                   onTap: () async {
-                       await HapticFeedback.heavyImpact();
+                    await HapticFeedback.heavyImpact();
                     int index = await AuthMethods().signinWithGoogle();
                     if (index == -1) {
                       return;
                     } else if (index == 0) {
-                     // await NotificationsServices().onLogin(context);
+                      // await NotificationsServices().onLogin(context);
                       bool temp1 = await WalletCreation().addWallet();
                       if (temp1) {
                         Provider.of<AppProvider>(context, listen: false)
@@ -125,7 +123,7 @@ class WelcomeScreen extends StatelessWidget {
                 ),
                 GestureDetector(
                   onTap: () async {
-                       await HapticFeedback.heavyImpact();
+                    await HapticFeedback.heavyImpact();
                     // TODO: SIGN IN WITH APPLE
                   },
                   child: CircleAvatar(

@@ -2,8 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../../database/app_user/auth_method.dart';
-import '../../../screens/auth/phone_number_screen.dart';
-import '../../../screens/auth/welcome_screen.dart';
+import '../../../screens/auth/welcome_screen/welcome_screen.dart';
 import '../../custom_widgets/custom_elevated_button.dart';
 import '../../custom_widgets/custom_textformfield.dart';
 

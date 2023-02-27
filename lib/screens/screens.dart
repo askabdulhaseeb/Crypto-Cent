@@ -9,7 +9,7 @@ export 'profile_screen/profile_screen.dart';
 export 'auth/phone_number_screen.dart';
 export 'auth/signin_with_email_screen.dart';
 export 'auth/signup_with_email.dart';
-export 'auth/welcome_screen.dart';
+export 'auth/welcome_screen/welcome_mobview.dart';
 export 'main_screen/main_screen.dart';
 
 export 'search_screen/search_screen.dart';

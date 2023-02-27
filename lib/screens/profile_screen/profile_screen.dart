@@ -9,7 +9,7 @@ import '../../widgets/profile/profile_header.dart';
 import '../../widgets/profile/profile_middle_tile.dart';
 import '../../widgets/profile/profile_nav_tile.dart';
 import '../../widgets/profile/setting/setting.dart';
-import '../auth/welcome_screen.dart';
+import '../auth/welcome_screen/welcome_mobview.dart';
 import '../empty_screen/empty_screen.dart';
 import '../empty_screen/empty_auth_screen.dart';
 import '../map_screen/location_screen.dart';

@@ -28,9 +28,7 @@ class ResponsiveApp extends StatelessWidget {
     return LayoutBuilder(
       builder: (BuildContext context, BoxConstraints constraints) {
         if (isDesktop(context)) {
-          return Center(
-            child: SizedBox(width: Utilities.maxWidth, child: desktop),
-          );
+          return desktop;
         } else if (isTablet(context)) {
           return tablet;
         } else {

@@ -4,13 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'database/app_user/auth_method.dart';
 import 'database/local_data.dart';
-import 'database/notification_services.dart';
 import 'firebase_options.dart';
 import 'providers/provider.dart';
 import 'providers/providers_list.dart';
 
+import 'screens/auth/welcome_screen/welcome_screen.dart';
 import 'screens/category_screens/category.dart';
-import 'screens/main_screen/web_main.dart';
 import 'screens/screens.dart';
 
 Future<void> _firebaseMessBackgroundHand(RemoteMessage message) async {
@@ -42,7 +41,10 @@ class MyApp extends StatelessWidget {
           theme: AppThemes.light,
           darkTheme: AppThemes.dark,
           themeMode: theme.themeMode,
-          home: const MainScreen(),
+          // home: const MainScreen(),
+          home: AuthMethods.getCurrentUser == null
+              ? const WelcomeScreen()
+              : const MainScreen(),
           // home: const NotificationScreen(),
           routes: <String, WidgetBuilder>{
             EmptyScreen.routeName: (_) => const EmptyScreen(),

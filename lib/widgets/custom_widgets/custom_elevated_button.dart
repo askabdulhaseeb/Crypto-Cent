@@ -46,6 +46,8 @@ class CustomElevatedButton extends StatelessWidget {
         color: Colors.transparent,
         child: readOnly
             ? Container(
+                constraints:
+                    BoxConstraints(maxWidth: Utilities.tabMaxWidth / 2),
                 padding: padding ?? const EdgeInsets.symmetric(vertical: 12),
                 alignment: Alignment.center,
                 child: Text(
@@ -62,6 +64,8 @@ class CustomElevatedButton extends StatelessWidget {
                 //splashColor: Colors.black,
                 onTap: onTap,
                 child: Container(
+                  constraints:
+                      BoxConstraints(maxWidth: Utilities.tabMaxWidth / 2),
                   padding: padding ?? const EdgeInsets.symmetric(vertical: 12),
                   alignment: Alignment.center,
                   child: Row(
