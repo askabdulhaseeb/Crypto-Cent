@@ -1,3 +1,4 @@
+import 'package:crypto_cent/policies_pages/term_and_condition_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
@@ -5,6 +6,15 @@ import 'package:provider/provider.dart';
 import 'database/app_user/auth_method.dart';
 import 'database/local_data.dart';
 import 'firebase_options.dart';
+import 'pages/support_page.dart';
+import 'policies_pages/accebtable_use_policy_page.dart';
+import 'policies_pages/cookie_policy.dart';
+import 'policies_pages/disclaimer_page.dart';
+import 'policies_pages/privacy_policy.dart';
+import 'policies_pages/return_policy_page.dart';
+import 'policies_pages/shipping_and_delivery_policy_page.dart';
+import 'policies_pages/shipping_delivery.dart';
+import 'policies_pages/user_license_page.dart';
 import 'providers/provider.dart';
 import 'providers/providers_list.dart';
 
@@ -65,6 +75,17 @@ class MyApp extends StatelessWidget {
             // CHAT
             CreateChatGroupScreen.routeName: (_) =>
                 const CreateChatGroupScreen(),
+                AcceptableUserPolicy.routeName: (_) => const AcceptableUserPolicy(),
+        CookiesPolices.routeName: (_) => const CookiesPolices(),
+        DisclaimerPage.routeName: (_) => const DisclaimerPage(),
+        PrivacyPolicy.routeName: (_) => const PrivacyPolicy(),
+        ReturnPolicyPage.routeName: (_) => const ReturnPolicyPage(),
+        ShippingAndDeliveryPolicyPage.routeName: (_) =>
+            const ShippingAndDeliveryPolicyPage(),
+        ShippingandDelivery.routeName: (_) => const ShippingandDelivery(),
+        TermAndConditionPage.routeName: (_) => const TermAndConditionPage(),
+        UserLicensePage.routeName: (_) => const UserLicensePage(),
+        SupportPage.routePath: (_) =>  SupportPage(),
           },
         );
       }),

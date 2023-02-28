@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 
+import '../../pages/support_page.dart';
+import '../../policies_pages/privacy_policy.dart';
+import '../../policies_pages/shipping_delivery.dart';
+import '../../policies_pages/term_and_condition_page.dart';
 import '../../utilities/app_images.dart';
 import '../../utilities/utilities.dart';
 import 'custom_widget.dart';
@@ -44,10 +48,16 @@ class FooterWidget extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
-                  customText(text: 'About'),
-                  customText(text: 'Contact us'),
-                  customText(text: 'Support'),
-                  customText(text: 'Careers'),
+                  customText(text: 'About', onTap: () {}),
+                  customText(text: 'Contact us', onTap: () {
+                     Navigator.pushNamed(context, SupportPage.routePath);
+                  }),
+                  customText(
+                      text: 'Support',
+                      onTap: () {
+                        Navigator.pushNamed(context, SupportPage.routePath);
+                      }),
+                  customText(text: 'Careers', onTap: () {}),
                 ],
               ),
               const SizedBox(width: 30),
@@ -56,10 +66,19 @@ class FooterWidget extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
-                  customText(text: 'Share Location'),
-                  customText(text: 'Orders Tracking'),
-                  customText(text: 'Size Guide'),
-                  customText(text: 'FAQs'),
+                  customText(text: 'Share Location', onTap: () {}),
+                  customText(
+                      text: 'Orders Tracking',
+                      onTap: () {
+                        Navigator.pushNamed(
+                            context, ShippingandDelivery.routeName);
+                      }),
+                  customText(text: 'Size Guide', onTap: () {}),
+                  customText(
+                      text: 'FAQs',
+                      onTap: () {
+                        //Navigator.pushNamed(context, SupportPage.routePath);
+                      }),
                 ],
               ),
               const SizedBox(width: 30),
@@ -68,8 +87,17 @@ class FooterWidget extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
-                  customText(text: 'Terms & conditions'),
-                  customText(text: 'Privacy Policy'),
+                  customText(
+                      text: 'Terms & conditions',
+                      onTap: () {
+                        Navigator.pushNamed(
+                            context, TermAndConditionPage.routeName);
+                      }),
+                  customText(
+                      text: 'Privacy Policy',
+                      onTap: () {
+                        Navigator.pushNamed(context, PrivacyPolicy.routeName);
+                      }),
                 ],
               ),
               const SizedBox(width: 30),
@@ -80,10 +108,11 @@ class FooterWidget extends StatelessWidget {
     );
   }
 
-  Widget customText({required String text}) => Padding(
+  Widget customText({required String text, required VoidCallback onTap}) =>
+      Padding(
         padding: const EdgeInsets.symmetric(vertical: 10),
         child: TextButton(
-            onPressed: () {},
+            onPressed: onTap,
             child: ForText(
               name: text,
               color: Colors.grey,

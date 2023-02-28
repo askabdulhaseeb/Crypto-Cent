@@ -97,7 +97,7 @@ class WelcomeWebview extends StatelessWidget {
                                 ),
                                 GestureDetector(
                                   onTap: () async {
-                                    await HapticFeedback.heavyImpact();
+                                    //await HapticFeedback.heavyImpact();
                                     int index =
                                         await AuthMethods().signinWithGoogle();
                                     if (index == -1) {
