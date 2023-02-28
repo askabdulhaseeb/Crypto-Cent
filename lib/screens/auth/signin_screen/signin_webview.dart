@@ -38,10 +38,14 @@ class _SignInWebviewState extends State<SignInWebview> {
           Expanded(
             child: Center(
               child: ConstrainedBox(
-                constraints: BoxConstraints(maxWidth: Utilities.tabMaxWidth),
+                constraints: BoxConstraints(maxWidth: Utilities.maxWidth),
                 child: Row(
                   children: <Widget>[
-                    Expanded(child: Image.asset(AppImages.logo)),
+                   Expanded(child: SizedBox(
+                    height: double.infinity,
+
+                    child: Image.asset(AppImages.loginWebUi,fit: BoxFit.cover,))),
+                   //Expanded(child: Container(color: Colors.red,)),
                     Expanded(
                       child: Padding(
                         padding: const EdgeInsets.all(32),
@@ -49,6 +53,7 @@ class _SignInWebviewState extends State<SignInWebview> {
                           key: _key,
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.center,
                             children: <Widget>[
                               const Text(
                                 'Sign In',

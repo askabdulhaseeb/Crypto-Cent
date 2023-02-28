@@ -68,5 +68,7 @@ class AppImages {
   static String get twitter => 'assets/images/twitter.png';
   static String get instagram => 'assets/images/instagram.png';
   static String get linkedin => 'assets/images/linkedin.png';
+  //login web ui
+  static String get loginWebUi => 'assets/images/login.png';
 
 }

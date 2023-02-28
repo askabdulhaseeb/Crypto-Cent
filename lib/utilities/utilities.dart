@@ -1,6 +1,6 @@
 import 'package:url_launcher/url_launcher.dart';
 class Utilities {
-  static double get mobileMaxWidth => 400;
+  static double get mobileMaxWidth => 501;
   static double get tabMaxWidth => 720;
   static double get desktopMaxWidth => 800;
   static double get maxWidth => 1000;

@@ -53,10 +53,10 @@ class MyApp extends StatelessWidget {
           theme: AppThemes.light,
           darkTheme: AppThemes.dark,
           themeMode: theme.themeMode,
-          // home: const MainScreen(),
-          home: AuthMethods.getCurrentUser == null
-              ? const WelcomeScreen()
-              : const MainScreen(),
+           home: const MainScreen(),
+          // home: AuthMethods.getCurrentUser == null
+          //     ? const WelcomeScreen()
+          //     : const MainScreen(),
           // home: const NotificationScreen(),
           routes: <String, WidgetBuilder>{
             EmptyScreen.routeName: (_) => const EmptyScreen(),

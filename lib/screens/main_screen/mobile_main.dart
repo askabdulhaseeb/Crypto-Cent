@@ -9,6 +9,7 @@ import '../cart_screen/cart_screen.dart';
 import '../chat_screen/chat_screen.dart';
 import '../favorite_screen/favorite_screen.dart';
 import '../home_screen/home_screen.dart';
+import '../home_screen/mobile_home_screen.dart';
 import '../profile_screen/profile_screen.dart';
 import 'main_navigationbar.dart';
 

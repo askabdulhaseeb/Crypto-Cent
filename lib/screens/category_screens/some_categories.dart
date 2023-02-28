@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 
 import '../../providers/categories_provider.dart';
 import '../../widgets/custom_widgets/custom_widget.dart';
-import 'categories_extend.dart';
+import 'categroey_extend/categories_extend.dart';
 
 class SomeCategories extends StatelessWidget {
   const SomeCategories({super.key});

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../widgets/custom_widgets/cutom_text.dart';
+import '../../widgets/home/category_list.dart';
 import '../../widgets/home/web_category_list.dart';
 import '../../widgets/product/latest_product.dart';
 
@@ -20,7 +21,7 @@ class WebHomeScreen extends StatelessWidget {
             size: 20,
           ),
         ),
-        const WebCategoriesList(),
+        const CategoryList(),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
           child: Row(

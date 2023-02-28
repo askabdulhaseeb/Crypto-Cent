@@ -44,7 +44,7 @@ class _SignupWebviewState extends State<SignupWebview> {
                 constraints: BoxConstraints(maxWidth: Utilities.maxWidth),
                 child: Row(
                   children: <Widget>[
-                    Expanded(child: Image.asset(AppImages.logo)),
+                    
                     Expanded(
                       child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -131,6 +131,7 @@ class _SignupWebviewState extends State<SignupWebview> {
                         ),
                       ),
                     ),
+                    Expanded(child: Image.asset(AppImages.loginWebUi,fit: BoxFit.cover,)),
                   ],
                 ),
               ),

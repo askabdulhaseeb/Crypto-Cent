@@ -11,8 +11,8 @@ import '../custom_widgets/custom_dialog.dart';
 import 'contact/contacts_list.dart';
 import 'package:flutter/services.dart';
 
-class HomeCategoriesList extends StatelessWidget {
-  const HomeCategoriesList({super.key});
+class MobileCategoriesList extends StatelessWidget {
+  const MobileCategoriesList({super.key});
   @override
   Widget build(BuildContext context) {
     return SizedBox(

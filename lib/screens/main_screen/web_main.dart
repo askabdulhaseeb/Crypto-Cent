@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../../function/web_appbar.dart';
 import '../../widgets/custom_widgets/footer_widget.dart';
 import '../../widgets/custom_widgets/promo_widget.dart';
-import '../home_screen/web_home_screen.dart';
+import '../home_screen/home_screen.dart';
 
 class WebMain extends StatelessWidget {
   WebMain({super.key});
@@ -16,8 +16,8 @@ class WebMain extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const WebHomeScreen(),
+          children: <Widget>[
+            const HomeScreen(),
             const SizedBox(height: 20),
             PromoWidget(),
             const FooterWidget(),
