@@ -12,7 +12,7 @@ class CategoriesExtend extends StatelessWidget {
   Widget build(BuildContext context) {
     
     return ResponsiveApp(
-           tablet: WebCategoryExtend(categoryName: categoryName),
+           tablet: MobileCategoryExtend(categoryName: categoryName),
            desktop: WebCategoryExtend(categoryName: categoryName),
            mobile: MobileCategoryExtend(categoryName: categoryName),
       // mobile: _mobileUi(prouctPro, products,width*0.6),

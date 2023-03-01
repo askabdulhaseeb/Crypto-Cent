@@ -2,10 +2,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../../function/web_appbar.dart';
 import '../../../models/product/product_model.dart';
 import '../../../providers/product_provider.dart';
 import '../../../utilities/app_images.dart';
 import '../../../widgets/custom_widgets/custom_textformfield.dart';
+import '../../../widgets/product/extend_product_tile/web_extend_product_tile.dart';
 import '../../../widgets/product/web_extend_product_tile.dart';
 
 class WebCategoryExtend extends StatefulWidget {
@@ -41,6 +43,7 @@ class _WebCategoryExtendState extends State<WebCategoryExtend> {
     }
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 243, 243, 243),
+      appBar: WebAppBar.webAppBar,
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8),
         child: Column(
@@ -116,7 +119,7 @@ class _WebCategoryExtendState extends State<WebCategoryExtend> {
                       );
                     }
         
-                    return WebExtendProductTile(product: products[index],width: width,);
+                    return WebExtendProductTile(product: products[index]);
                   }),
                 ),
               ),

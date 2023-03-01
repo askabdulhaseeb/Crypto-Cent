@@ -4,8 +4,9 @@ import 'package:provider/provider.dart';
 import '../../../models/product/product_model.dart';
 import '../../../providers/product_provider.dart';
 import '../../../utilities/app_images.dart';
+import '../../../utilities/responsive.dart';
 import '../../../widgets/custom_widgets/custom_textformfield.dart';
-import '../../../widgets/product/extend_product_tile.dart';
+import '../../../widgets/product/extend_product_tile/extend_product_tile.dart';
 
 class MobileCategoryExtend extends StatefulWidget {
   MobileCategoryExtend({
@@ -30,7 +31,9 @@ class _MobileCategoryExtendState extends State<MobileCategoryExtend> {
   @override
   Widget build(BuildContext context) {
     ProductProvider prouctPro = Provider.of<ProductProvider>(context);
-    double width = MediaQuery.of(context).size.width*0.6;
+    // double width =ResponsiveApp.isTablet(context)? MediaQuery.of(context).size.width*0.4:MediaQuery.of(context).size.width*0.6;
+    // print(width);
+    double width=MediaQuery.of(context).size.width;
     List<Product> products = <Product>[];
     if (widget.categoryName == 'All') {
       products = prouctPro.products;
@@ -111,7 +114,7 @@ class _MobileCategoryExtendState extends State<MobileCategoryExtend> {
                     );
                   }
   
-                  return ExtendProductTile(product: products[index],width: width,);
+                  return ExtendProductTile(product: products[index]);
                 }),
               ),
             ),

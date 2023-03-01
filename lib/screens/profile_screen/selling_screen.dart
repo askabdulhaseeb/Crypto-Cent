@@ -6,7 +6,7 @@ import '../../models/product/product_model.dart';
 import '../../providers/provider.dart';
 import '../../utilities/app_images.dart';
 import '../../widgets/custom_widgets/cutom_text.dart';
-import '../../widgets/product/product_tile.dart';
+import '../../widgets/product/product_tile/product_tile.dart';
 import '../product_screens/add_product_screen.dart';
 
 class SellingScreen extends StatelessWidget {

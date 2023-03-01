@@ -2,44 +2,44 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
-import '../../../providers/cart_provider.dart';
-import '../../../widgets/custom_widgets/custom_rating_star.dart';
-import '../../../widgets/custom_widgets/custom_widget.dart';
-import '../../database/app_user/auth_method.dart';
-import '../../database/chat_api.dart';
-import '../../function/crypto_function.dart';
-import '../../function/rating_function.dart';
-import '../../function/report_bottom_sheets.dart';
-import '../../function/unique_id_functions.dart';
-import '../../models/app_user/app_user.dart';
-import '../../models/chat/chat.dart';
-import '../../models/location.dart';
-import '../../models/product/product_model.dart';
-import '../../models/review.dart';
-import '../../providers/location_provider.dart';
-import '../../providers/rating_provider.dart';
-import '../../providers/user_provider.dart';
-import '../../widgets/custom_widgets/custom_dialog.dart';
-import '../../widgets/custom_widgets/custom_profile_image.dart';
-import '../../widgets/custom_widgets/custom_toast.dart';
-import '../../widgets/product/add_to_cart_widget.dart';
-import '../../widgets/product/product_url_slider.dart';
-import '../../widgets/product/send_offer_widget.dart';
-import '../chat_screen/private/personal_chat_screen.dart';
-import '../chat_screen/private/product_chat_screen.dart';
-import '../../widgets/profile/other_user_profile.dart';
-import '../map_screen/map_screen.dart';
-import '../reviews/review_screen.dart';
+import '../../../../providers/cart_provider.dart';
+import '../../../../widgets/custom_widgets/custom_rating_star.dart';
+import '../../../../widgets/custom_widgets/custom_widget.dart';
+import '../../../database/app_user/auth_method.dart';
+import '../../../database/chat_api.dart';
+import '../../../function/crypto_function.dart';
+import '../../../function/rating_function.dart';
+import '../../../function/report_bottom_sheets.dart';
+import '../../../function/unique_id_functions.dart';
+import '../../../models/app_user/app_user.dart';
+import '../../../models/chat/chat.dart';
+import '../../../models/location.dart';
+import '../../../models/product/product_model.dart';
+import '../../../models/review.dart';
+import '../../../providers/location_provider.dart';
+import '../../../providers/rating_provider.dart';
+import '../../../providers/user_provider.dart';
+import '../../../widgets/custom_widgets/custom_dialog.dart';
+import '../../../widgets/custom_widgets/custom_profile_image.dart';
+import '../../../widgets/custom_widgets/custom_toast.dart';
+import '../../../widgets/product/add_to_cart_widget.dart';
+import '../../../widgets/product/product_url_slider.dart';
+import '../../../widgets/product/send_offer_widget.dart';
+import '../../chat_screen/private/personal_chat_screen.dart';
+import '../../chat_screen/private/product_chat_screen.dart';
+import '../../../widgets/profile/other_user_profile.dart';
+import '../../map_screen/map_screen.dart';
+import '../../reviews/review_screen.dart';
 
-class ProductDetailScreen extends StatefulWidget {
-  const ProductDetailScreen({required this.product, super.key});
+class MobileProductDetailScreen extends StatefulWidget {
+  const MobileProductDetailScreen({required this.product, super.key});
   final Product product;
 
   @override
-  State<ProductDetailScreen> createState() => _ProductDetailScreenState();
+  State<MobileProductDetailScreen> createState() => _MobileProductDetailScreenState();
 }
 
-class _ProductDetailScreenState extends State<ProductDetailScreen> {
+class _MobileProductDetailScreenState extends State<MobileProductDetailScreen> {
   @override
   Widget build(BuildContext context) {
     final AppUser seller =
@@ -314,7 +314,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
         // ignore: use_build_context_synchronously
         Navigator.push(
             context,
-            MaterialPageRoute<ProductDetailScreen>(
+            MaterialPageRoute<MobileProductDetailScreen>(
               builder: (BuildContext context) => OtherUserProfile(
                 appUser: seller,
               ),

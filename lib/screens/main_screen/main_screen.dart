@@ -15,10 +15,9 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
-    double width=MediaQuery.of(context).size.width;
+    
     return ResponsiveApp(
       mobile: const MobileMain(),
-    
       tablet:   WebMain(),
       desktop: WebMain(),
     );

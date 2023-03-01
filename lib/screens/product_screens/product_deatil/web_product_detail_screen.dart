@@ -2,34 +2,39 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
-import '../../../providers/cart_provider.dart';
-import '../../../widgets/custom_widgets/custom_rating_star.dart';
-import '../../../widgets/custom_widgets/custom_widget.dart';
-import '../../database/app_user/auth_method.dart';
-import '../../database/chat_api.dart';
-import '../../function/crypto_function.dart';
-import '../../function/rating_function.dart';
-import '../../function/report_bottom_sheets.dart';
-import '../../function/unique_id_functions.dart';
-import '../../models/app_user/app_user.dart';
-import '../../models/chat/chat.dart';
-import '../../models/location.dart';
-import '../../models/product/product_model.dart';
-import '../../models/review.dart';
-import '../../providers/location_provider.dart';
-import '../../providers/rating_provider.dart';
-import '../../providers/user_provider.dart';
-import '../../widgets/custom_widgets/custom_dialog.dart';
-import '../../widgets/custom_widgets/custom_profile_image.dart';
-import '../../widgets/custom_widgets/custom_toast.dart';
-import '../../widgets/product/add_to_cart_widget.dart';
-import '../../widgets/product/product_url_slider.dart';
-import '../../widgets/product/send_offer_widget.dart';
-import '../chat_screen/private/personal_chat_screen.dart';
-import '../chat_screen/private/product_chat_screen.dart';
-import '../../widgets/profile/other_user_profile.dart';
-import '../map_screen/map_screen.dart';
-import '../reviews/review_screen.dart';
+import '../../../../providers/cart_provider.dart';
+import '../../../../widgets/custom_widgets/custom_rating_star.dart';
+import '../../../../widgets/custom_widgets/custom_widget.dart';
+import '../../../database/app_user/auth_method.dart';
+import '../../../database/chat_api.dart';
+import '../../../function/crypto_function.dart';
+import '../../../function/rating_function.dart';
+import '../../../function/report_bottom_sheets.dart';
+import '../../../function/unique_id_functions.dart';
+import '../../../function/web_appbar.dart';
+import '../../../models/app_user/app_user.dart';
+import '../../../models/chat/chat.dart';
+import '../../../models/location.dart';
+import '../../../models/product/product_model.dart';
+import '../../../models/review.dart';
+import '../../../providers/location_provider.dart';
+import '../../../providers/rating_provider.dart';
+import '../../../providers/user_provider.dart';
+import '../../../utilities/utilities.dart';
+import '../../../widgets/custom_widgets/custom_dialog.dart';
+import '../../../widgets/custom_widgets/custom_profile_image.dart';
+import '../../../widgets/custom_widgets/custom_toast.dart';
+import '../../../widgets/custom_widgets/footer_widget.dart';
+import '../../../widgets/custom_widgets/promo_widget.dart';
+import '../../../widgets/product/add_to_cart_widget.dart';
+import '../../../widgets/product/latest_Product/latest_product.dart';
+import '../../../widgets/product/product_url_slider.dart';
+import '../../../widgets/product/send_offer_widget.dart';
+import '../../chat_screen/private/personal_chat_screen.dart';
+import '../../chat_screen/private/product_chat_screen.dart';
+import '../../../widgets/profile/other_user_profile.dart';
+import '../../map_screen/map_screen.dart';
+import '../../reviews/review_screen.dart';
 
 class WebProductDetailScreen extends StatefulWidget {
   const WebProductDetailScreen({required this.product, super.key});
@@ -54,64 +59,109 @@ int quantity = 1;
         // double height=MediaQuery.of(context).size.height;
         // double width=MediaQuery.of(context).size.width;
     return Scaffold(
-      body: SafeArea(child: SizedBox(
+      appBar: WebAppBar.webAppBar,
+      body: SafeArea(child: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 30,vertical: 25),
           child: Column(
             children: [
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  WebProductURLsSlider(urls:widget.product.prodURL,),
-                 const SizedBox(width: 50,),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      reviewWidget(context, reviews),
-                      const SizedBox(height: 20,),
-                       Text(
-                            widget.product.productname,
-                            maxLines: 2,
-                            overflow: TextOverflow.ellipsis,
-                            style: const TextStyle(
-                              fontSize: 35,
-                              fontWeight: FontWeight.w900,
-                            ),
-                          ),
-                          const SizedBox(height: 20,),
-                           Text(
-                                    '\$ ${widget.product.amount}',
-                                    style: const TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 28,
-                                    ),
+              ConstrainedBox(
+                constraints: BoxConstraints(maxWidth: Utilities.maxWidth),
+                child: Column(
+                  children: [
+                    Row(
+                   
+                      children: [
+                        Expanded(child: WebProductURLsSlider(urls:widget.product.prodURL,)),
+                       const SizedBox(width: 50,),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            reviewWidget(context, reviews),
+                            const SizedBox(height: 20,),
+                             Text(
+                                  widget.product.productname,
+                                  maxLines: 2,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: const TextStyle(
+                                    fontSize: 35,
+                                    fontWeight: FontWeight.w900,
                                   ),
-                                  const SizedBox(height: 20,),
-                                   addToCartWidget(context),
-                                  const SizedBox(height: 20,),
-                                  
-                                 SizedBox(
-                                  height: 300,
-                                  width: 300,
-                                   child: ExpansionTile(
-                                    
-                                           title: const Text('Description'),
-                                           trailing:  Icon(Icons.add),
-                                           children: <Widget>[
-                                             ListTile(title: Text(widget.product.description)),
-                                           ],
-                                         ),
-                                 ),
-                                  const SizedBox(height: 20,),
-                                  const Divider(color: Colors.grey,thickness: 2,),
-                               
-                    ],
+                                ),
+                                const SizedBox(height: 20,),
+                                 Text(
+                                          '\$ ${widget.product.amount}',
+                                          style: const TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 28,
+                                          ),
+                                        ),
+                                        const SizedBox(height: 20,),
+                                         addToCartWidget(context),
+                                        const SizedBox(height: 20,),
+                                        
+                                       SizedBox(
+                                        height: 300,
+                                        width: 300,
+                                         child: ExpansionTile(
+                                          
+                                                 title: const Text('Description'),
+                                                 trailing:  Icon(Icons.add),
+                                                 children: <Widget>[
+                                                   ListTile(title: Text(widget.product.description)),
+                                                 ],
+                                               ),
+                                       ),
+                                        const SizedBox(height: 20,),
+                                        const Divider(color: Colors.grey,thickness: 2,),
+                                     
+                          ],
+                        ),
+                      ],
+                    ),
+                 
+                  ],
+                ),
+              ),
+                   Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  const ForText(
+                    name: 'Popular Products',
+                    bold: true,
+                    size: 18,
+                  ),
+                  TextButton(
+                    onPressed: (() {
+                      // Navigator.push(
+                      //     context,
+                      //     MaterialPageRoute<CategoriesExtend>(
+                      //         builder: (BuildContext context) =>
+                      //             CategoriesExtend(categoryName: 'All')));
+                    }),
+                    child: ForText(
+                      name: 'View All',
+                      color: Theme.of(context).primaryColor,
+                      bold: true,
+                    ),
                   ),
                 ],
               ),
-         
+        ),
+        const SizedBox(
+              height: 10,
+        ),
+        const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              child: LatestProductsList(),
+        ), 
+       const SizedBox(height: 40,),
+        const SizedBox(height: 20),
+            PromoWidget(),
+            const FooterWidget(),
             ],
           ),
         ),

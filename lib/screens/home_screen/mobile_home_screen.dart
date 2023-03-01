@@ -13,7 +13,7 @@ import '../../widgets/custom_widgets/custom_widget.dart';
 import '../../widgets/custom_widgets/policy_widget.dart';
 import '../../widgets/home/category_list.dart';
 import '../../widgets/home/mobile_categories_list.dart';
-import '../../widgets/product/latest_product.dart';
+import '../../widgets/product/latest_Product/latest_product.dart';
 import '../about/aboust_us.dart';
 import '../about/contact_us.dart';
 import '../category_screens/some_categories.dart';

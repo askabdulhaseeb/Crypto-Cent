@@ -12,7 +12,7 @@ import '../../providers/rating_provider.dart';
 import '../../screens/reviews/review_screen.dart';
 import '../custom_widgets/custom_rating_star.dart';
 import '../custom_widgets/cutom_text.dart';
-import '../product/extend_product_tile.dart';
+import '../product/extend_product_tile/extend_product_tile.dart';
 import 'profile_header.dart';
 
 class OtherUserProfile extends StatelessWidget {
@@ -121,7 +121,7 @@ class OtherUserProfile extends StatelessWidget {
                 shrinkWrap: true,
                 primary: false,
                 children: List<Widget>.generate(products.length, (int index) {
-                  return ExtendProductTile(product: products[index],width: width*0.6,);
+                  return ExtendProductTile(product: products[index]);
                 }),
               ),
             ),

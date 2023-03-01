@@ -1,46 +1,67 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
-import '../../models/product/product_model.dart';
-import '../../../providers/product_provider.dart';
-import '../../../utilities/app_images.dart';
-import '../../../widgets/custom_widgets/custom_network_image.dart';
-import '../../../widgets/custom_widgets/custom_widget.dart';
-import '../../screens/product_screens/product_detail_screen.dart';
+import '../../../function/rating_function.dart';
+import '../../../models/product/product_model.dart';
+import '../../../../providers/product_provider.dart';
+import '../../../../utilities/app_images.dart';
+import '../../../../widgets/custom_widgets/custom_network_image.dart';
+import '../../../../widgets/custom_widgets/custom_widget.dart';
+import '../../../models/review.dart';
+import '../../../screens/product_screens/product_deatil/mobile_product_detail_screen.dart';
+import '../../../screens/product_screens/product_deatil/product_detail_screen.dart';
+import '../../custom_widgets/custom_rating_star.dart';
 
-class ExtendProductTile extends StatelessWidget {
-  ExtendProductTile({required this.product,required this.width,Key? key}) : super(key: key);
+class WebProductTile extends StatelessWidget {
+  const WebProductTile({required this.product, this.reviews, Key? key})
+      : super(key: key);
   final Product product;
-  final double width;
+  final List<Review>? reviews;
   @override
   Widget build(BuildContext context) {
-    double widthe = MediaQuery.of(context).size.width;
-    return InkWell(
-      onTap: () async{
-        await HapticFeedback.heavyImpact();
-        // ignore: use_build_context_synchronously
-        Navigator.push(
-            context,
-            MaterialPageRoute<ProductDetailScreen>(
-              builder: (BuildContext context) =>
-                  ProductDetailScreen(product: product),
-            ));
-      },
-      child: Column(
-        children: [
-          Container(
-            clipBehavior: Clip.hardEdge,
+    return Padding(
+      padding: const EdgeInsets.only(
+        left: 4,
+      ),
+      child: InkWell(
+        onTap: () async{
+          //await HapticFeedback.heavyImpact();
+          // Navigator.push(
+          //     context,
+          //     MaterialPageRoute<ProductDetailScreen>(
+          //       builder: (BuildContext context) =>
+          //           ProductDetailScreen(product: product),
+          //     ));
+        },
+        child: AspectRatio(
+          aspectRatio: 10 / 14,
+          child: Container(
             width: double.infinity,
-            height: width,
             decoration: BoxDecoration(
               color: const Color.fromARGB(255, 245, 244, 244),
               borderRadius: BorderRadius.circular(16),
             ),
-            child: Image(image: NetworkImage( product.prodURL[0].url),fit: BoxFit.fill,),
-           
-          ),
-          SizedBox(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.all(1),
+                    child: SizedBox(
+                      width: double.infinity,
+                      height: double.infinity,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(4),
+                         child: Image(image: NetworkImage(product.prodURL[0].url),fit: BoxFit.fill,),
+                     
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(
                   height: 75,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -59,22 +80,7 @@ class ExtendProductTile extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(height: 5),
-                      Row(
-                        children: <Widget>[
-                          const SizedBox(width: 6),
-                          Icon(
-                            Icons.star,
-                            color: Theme.of(context).primaryColor,
-                            size: 14,
-                          ),
-                          const SizedBox(width: 6),
-                          const ForText(
-                            name: '0 Review',
-                            size: 11,
-                            color: Colors.grey,
-                          ),
-                        ],
-                      ),
+                     
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 8),
                         child: Row(
@@ -134,7 +140,10 @@ class ExtendProductTile extends StatelessWidget {
                     ],
                   ),
                 ),
-        ],
+              ],
+            ),
+          ),
+        ),
       ),
     );
   }

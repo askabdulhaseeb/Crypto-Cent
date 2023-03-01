@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../providers/product_provider.dart';
-import '../product/product_tile.dart';
+import '../product/product_tile/product_tile.dart';
 
 class FillFavoriteWidget extends StatelessWidget {
   const FillFavoriteWidget({Key? key}) : super(key: key);

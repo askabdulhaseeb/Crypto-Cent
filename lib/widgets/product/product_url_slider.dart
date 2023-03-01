@@ -108,8 +108,8 @@ class WebProductURLsSlider extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       clipBehavior: Clip.hardEdge,
-      height: 930/2,
-      width: 886/2,
+      // height: 930/2,
+      // width: 886/2,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12),
       ),

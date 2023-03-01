@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../../widgets/custom_widgets/cutom_text.dart';
 import '../../widgets/home/category_list.dart';
 import '../../widgets/home/web_category_list.dart';
-import '../../widgets/product/latest_product.dart';
+import '../../widgets/product/latest_Product/latest_product.dart';
 
 class WebHomeScreen extends StatelessWidget {
   const WebHomeScreen({super.key});

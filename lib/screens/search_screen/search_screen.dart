@@ -3,7 +3,8 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import '../../models/product/product_model.dart';
 import '../../providers/product_provider.dart';
-import '../product_screens/product_detail_screen.dart';
+import '../product_screens/product_deatil/mobile_product_detail_screen.dart';
+import '../product_screens/product_deatil/product_detail_screen.dart';
 
 class SerachScreen extends StatelessWidget {
   const SerachScreen({super.key});
