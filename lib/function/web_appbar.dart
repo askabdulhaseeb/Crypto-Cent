@@ -5,6 +5,7 @@ import '../widgets/custom_widgets/cutom_text.dart';
 
 class WebAppBar{
   static AppBar get webAppBar => AppBar(
+    leading: SizedBox(),
       title: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
