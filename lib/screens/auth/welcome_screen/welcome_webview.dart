@@ -151,10 +151,10 @@ class WelcomeWebview extends StatelessWidget {
                 ),
               ),
             ),
-            const FooterWidget(),
           ],
         ),
       ),
+      bottomNavigationBar: const FooterWidget(),
     );
   }
 }
