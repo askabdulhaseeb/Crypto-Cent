@@ -6,7 +6,7 @@ import 'package:provider/provider.dart';
 import '../../../providers/auth_provider.dart';
 import '../../../widgets/custom_widgets/custom_elevated_button.dart';
 import '../../../widgets/custom_widgets/phone_number_field.dart';
-import '../otp_screen.dart';
+import '../otp_screen/otp_screen.dart';
 
 class MobilePhoneNumberScreen extends StatefulWidget {
   const MobilePhoneNumberScreen({Key? key}) : super(key: key);
@@ -54,14 +54,14 @@ class _MobilePhoneNumberScreenState extends State<MobilePhoneNumberScreen> {
                   onTap: () async{
                        await HapticFeedback.heavyImpact();
                     authPro.verifyPhone(context);
-                    Navigator.push(
-                      context,
-                      // ignore: always_specify_types
-                      MaterialPageRoute(
-                        builder: (BuildContext context) => const OTPScreen(),
-                      ),
-                    );
-                    //Navigator.of(context).pushNamed(OTPScreen.routeName);
+                    // Navigator.push(
+                    //   context,
+                    //   // ignore: always_specify_types
+                    //   MaterialPageRoute(
+                    //     builder: (BuildContext context) => const OTPScreen(),
+                    //   ),
+                    // );
+                    Navigator.of(context).pushNamed(OTPScreen.routeName);
                   },
                 ),
               ),

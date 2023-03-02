@@ -18,6 +18,7 @@ import 'policies_pages/user_license_page.dart';
 import 'providers/provider.dart';
 import 'providers/providers_list.dart';
 
+import 'screens/auth/otp_screen/otp_screen.dart';
 import 'screens/auth/signin_screen/signin_screen.dart';
 import 'screens/auth/signup_screen/signup_screen.dart';
 import 'screens/auth/welcome_screen/welcome_screen.dart';
@@ -62,6 +63,7 @@ class MyApp extends StatelessWidget {
             EmptyScreen.routeName: (_) => const EmptyScreen(),
             // AUTH
             WelcomeScreen.routeName: (_) => const WelcomeScreen(),
+            OTPScreen.routeName: (_) => const OTPScreen(),
             CartScreen.routeName: (_) => const CartScreen(),
             SignInScreen.routeName: (_) => const SignInScreen(),
             SignupScreen.routeName: (_) => const SignupScreen(),

@@ -7,7 +7,7 @@ import '../../../providers/auth_provider.dart';
 import '../../../utilities/responsive.dart';
 import '../../../widgets/custom_widgets/custom_elevated_button.dart';
 import '../../../widgets/custom_widgets/phone_number_field.dart';
-import '../otp_screen.dart';
+import '../otp_screen/otp_screen.dart';
 import 'mobile_phone_number_screen.dart';
 import 'web_phone_number_screen.dart';
 

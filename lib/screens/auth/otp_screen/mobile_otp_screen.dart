@@ -1,22 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../database/notification_services.dart';
-import '../../providers/auth_provider.dart';
-import '../../widgets/custom_widgets/custom_textformfield.dart';
-import '../../widgets/custom_widgets/show_loading.dart';
-import '../main_screen/main_screen.dart';
-import 'registration_screen.dart';
+import '../../../database/notification_services.dart';
+import '../../../providers/auth_provider.dart';
+import '../../../widgets/custom_widgets/custom_textformfield.dart';
+import '../../../widgets/custom_widgets/show_loading.dart';
+import '../../main_screen/main_screen.dart';
+import '../registration_screen.dart';
 
-class OTPScreen extends StatefulWidget {
-  const OTPScreen({Key? key}) : super(key: key);
-  static const String routeName = '/otp-screen';
+class MobileOTPScreen extends StatefulWidget {
+  const MobileOTPScreen({Key? key}) : super(key: key);
+
 
   @override
-  State<OTPScreen> createState() => _OTPScreenState();
+  State<MobileOTPScreen> createState() => _MobileOTPScreenState();
 }
 
-class _OTPScreenState extends State<OTPScreen> {
+class _MobileOTPScreenState extends State<MobileOTPScreen> {
   final TextEditingController _otp = TextEditingController();
   bool isLoading = false;
   @override
