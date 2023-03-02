@@ -61,19 +61,19 @@ int quantity = 1;
     return Scaffold(
       appBar:  WebAppBar().webAppBar(context),
       body: SafeArea(child: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 30,vertical: 25),
-          child: Column(
-            children: [
-              ConstrainedBox(
-                constraints: BoxConstraints(maxWidth: Utilities.maxWidth),
+        child: Column(
+          children: [
+            ConstrainedBox(
+              constraints: BoxConstraints(maxWidth: Utilities.maxWidth),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 30,vertical: 25),
                 child: Column(
                   children: [
                     Row(
                    
                       children: [
                         Expanded(child: SizedBox(
-                          height: MediaQuery.of(context).size.height*0.7,
+                          height: MediaQuery.of(context).size.height*0.6,
                           child: WebProductURLsSlider(urls:widget.product.prodURL,))),
                        const SizedBox(width: 50,),
                         Column(
@@ -100,7 +100,7 @@ int quantity = 1;
                                           ),
                                         ),
                                         const SizedBox(height: 20,),
-                                         addToCartWidget(context),
+                                         addToCartWidget(context,cartPro),
                                         const SizedBox(height: 20,),
                                         
                                        SizedBox(
@@ -122,56 +122,56 @@ int quantity = 1;
                         ),
                       ],
                     ),
-                 
+                    Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                const ForText(
+                  name: 'Popular Products',
+                  bold: true,
+                  size: 18,
+                ),
+                TextButton(
+                  onPressed: (() {
+                    // Navigator.push(
+                    //     context,
+                    //     MaterialPageRoute<CategoriesExtend>(
+                    //         builder: (BuildContext context) =>
+                    //             CategoriesExtend(categoryName: 'All')));
+                  }),
+                  child: ForText(
+                    name: 'View All',
+                    color: Theme.of(context).primaryColor,
+                    bold: true,
+                  ),
+                ),
+              ],
+            ),
+        ),
+        const SizedBox(
+            height: 10,
+        ),
+        const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            child: LatestProductsList(),
+        ), 
                   ],
                 ),
               ),
-                   Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  const ForText(
-                    name: 'Popular Products',
-                    bold: true,
-                    size: 18,
-                  ),
-                  TextButton(
-                    onPressed: (() {
-                      // Navigator.push(
-                      //     context,
-                      //     MaterialPageRoute<CategoriesExtend>(
-                      //         builder: (BuildContext context) =>
-                      //             CategoriesExtend(categoryName: 'All')));
-                    }),
-                    child: ForText(
-                      name: 'View All',
-                      color: Theme.of(context).primaryColor,
-                      bold: true,
-                    ),
-                  ),
-                ],
-              ),
-        ),
-        const SizedBox(
-              height: 10,
-        ),
-        const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-              child: LatestProductsList(),
-        ), 
+            ),
+              
        const SizedBox(height: 40,),
         const SizedBox(height: 20),
-            PromoWidget(),
-            const FooterWidget(),
-            ],
-          ),
+          PromoWidget(),
+          const FooterWidget(),
+          ],
         ),
       )),
     );
   }
 
-  Row addToCartWidget(BuildContext context) {
+  Row addToCartWidget(BuildContext context,CartProvider cartPro) {
     return Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
@@ -222,14 +222,27 @@ int quantity = 1;
                       : Colors.green,
                 ),
               ),
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 4),
-                decoration: BoxDecoration(
-                  color: Theme.of(context).primaryColor,
-                  borderRadius: BorderRadius.circular(4),
-                ),
-              child: const ForText(name: 'Add To cart',color: Colors.white,),
+              SizedBox(
+                width: 150,
+                child: CustomElevatedButton(title: 'Add To cart', 
+                
+                onTap: (){
+               cartPro.addtocart(widget.product, quantity);
+                }),
               )
+              // GestureDetector(
+              //   onTap: (){
+                   
+              //   },
+              //   child: Container(
+              //     padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 4),
+              //     decoration: BoxDecoration(
+              //       color: Theme.of(context).primaryColor,
+              //       borderRadius: BorderRadius.circular(4),
+              //     ),
+              //   child: const ForText(name: 'Add To cart',color: Colors.white,),
+              //   ),
+              // )
             ],
           );
   }

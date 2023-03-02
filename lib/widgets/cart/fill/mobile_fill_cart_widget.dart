@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../models/cart.dart';
-import '../../providers/cart_provider.dart';
-import 'cart_checkout_widget.dart';
-import 'cart_tile.dart';
+import '../../../models/cart.dart';
+import '../../../providers/cart_provider.dart';
+import '../cart_checkout_widget.dart';
+import '../tile/cart_tile.dart';
 
-class FillCartWidget extends StatelessWidget {
-  const FillCartWidget({super.key});
+class MobileFillCartWidget extends StatelessWidget {
+  const MobileFillCartWidget({super.key});
   @override
   Widget build(BuildContext context) {
     return Column(

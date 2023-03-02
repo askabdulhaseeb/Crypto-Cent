@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
-import '../../function/crypto_function.dart';
-import '../../models/cart.dart';
-import '../../providers/cart_provider.dart';
-import '../custom_widgets/custom_network_image.dart';
-import '../custom_widgets/cutom_text.dart';
+import '../../../function/crypto_function.dart';
+import '../../../models/cart.dart';
+import '../../../providers/cart_provider.dart';
+import '../../custom_widgets/custom_network_image.dart';
+import '../../custom_widgets/cutom_text.dart';
 
-class CartItem extends StatelessWidget {
-  const CartItem({required this.item, Key? key}) : super(key: key);
+class MobileCartItem extends StatelessWidget {
+  const MobileCartItem({required this.item, Key? key}) : super(key: key);
 
   final Cart item;
 

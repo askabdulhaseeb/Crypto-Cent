@@ -3,8 +3,8 @@ import 'package:provider/provider.dart';
 
 import '../../database/app_user/auth_method.dart';
 import '../../providers/cart_provider.dart';
-import '../../widgets/cart/empty_cart_widget.dart';
-import '../../widgets/cart/fill_cart_widget.dart';
+import '../../widgets/cart/empty/empty_cart_widget.dart';
+import '../../widgets/cart/fill/fill_cart_widget.dart';
 import '../empty_screen/empty_auth_screen.dart';
 
 
