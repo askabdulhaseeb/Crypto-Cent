@@ -84,6 +84,7 @@ class WebProductTile extends StatelessWidget {
                             ),
                           ),
                           IconButton(onPressed: (){
+                            //Todo: make this as pushedname
                             Navigator.push(
               context,
               MaterialPageRoute<ProductDetailScreen>(

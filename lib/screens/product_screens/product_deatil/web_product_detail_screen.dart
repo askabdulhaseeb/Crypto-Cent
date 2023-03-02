@@ -72,7 +72,9 @@ int quantity = 1;
                     Row(
                    
                       children: [
-                        Expanded(child: WebProductURLsSlider(urls:widget.product.prodURL,)),
+                        Expanded(child: SizedBox(
+                          height: MediaQuery.of(context).size.height*0.7,
+                          child: WebProductURLsSlider(urls:widget.product.prodURL,))),
                        const SizedBox(width: 50,),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
