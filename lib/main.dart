@@ -62,6 +62,7 @@ class MyApp extends StatelessWidget {
             EmptyScreen.routeName: (_) => const EmptyScreen(),
             // AUTH
             WelcomeScreen.routeName: (_) => const WelcomeScreen(),
+            CartScreen.routeName: (_) => const CartScreen(),
             SignInScreen.routeName: (_) => const SignInScreen(),
             SignupScreen.routeName: (_) => const SignupScreen(),
             PhoneNumberScreen.routeName: (_) => const PhoneNumberScreen(),

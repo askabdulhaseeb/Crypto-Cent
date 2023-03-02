@@ -16,7 +16,7 @@ class WebCategoryScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     CategoriesProvider catPro = Provider.of<CategoriesProvider>(context);
     return Scaffold(
-        appBar: WebAppBar.webAppBar,
+        appBar:  WebAppBar().webAppBar(context),
         body: GridView.count(
           childAspectRatio: 96 / 118,
           mainAxisSpacing: 8,

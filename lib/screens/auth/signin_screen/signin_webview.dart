@@ -32,7 +32,7 @@ class _SignInWebviewState extends State<SignInWebview> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: WebAppBar.webAppBar,
+      appBar:  WebAppBar().webAppBar(context),
       body: Column(
         children: <Widget>[
           Expanded(

@@ -35,7 +35,7 @@ class _SignupWebviewState extends State<SignupWebview> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: WebAppBar.webAppBar,
+      appBar:  WebAppBar().webAppBar(context),
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[

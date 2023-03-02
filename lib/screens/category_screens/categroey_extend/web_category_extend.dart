@@ -43,7 +43,7 @@ class _WebCategoryExtendState extends State<WebCategoryExtend> {
     }
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 243, 243, 243),
-      appBar: WebAppBar.webAppBar,
+      appBar:  WebAppBar().webAppBar(context),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8),
         child: Column(

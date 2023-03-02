@@ -12,7 +12,7 @@ class WebMain extends StatelessWidget {
   Widget build(BuildContext context) {
     print(MediaQuery.of(context).size.width);
     return Scaffold(
-      appBar: WebAppBar.webAppBar,
+      appBar:  WebAppBar().webAppBar(context),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

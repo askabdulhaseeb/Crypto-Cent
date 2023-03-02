@@ -59,7 +59,7 @@ int quantity = 1;
         // double height=MediaQuery.of(context).size.height;
         // double width=MediaQuery.of(context).size.width;
     return Scaffold(
-      appBar: WebAppBar.webAppBar,
+      appBar:  WebAppBar().webAppBar(context),
       body: SafeArea(child: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 30,vertical: 25),
