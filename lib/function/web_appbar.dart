@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:crypto_cent/widgets/custom_widgets/web/header_text_widget.dart';
 import '../screens/cart_screen/cart_screen.dart';
+import '../screens/main_screen/main_screen.dart';
 import '../utilities/app_images.dart';
 import '../widgets/custom_widgets/cutom_text.dart';
 
@@ -21,15 +22,16 @@ class WebAppBar {
             HeaderTextWidget(
               name: 'HOME',
               image: AppImages.homeUnselected,
-              color: Color(0xffFFA44B),
+              color: txt=='HOME'?const Color(0xffFFA44B): Colors.black,
               ontap: () {
                 txt='HOME';
+                Navigator.of(context).pushNamedAndRemoveUntil(MainScreen.routeName, (route) => false);
               },
             ),
             HeaderTextWidget(
               name: 'WISHLIST',
               image: AppImages.fvrtIcon,
-              color: Colors.black,
+              color: txt=='WISHLIST'?const Color(0xffFFA44B): Colors.black,
               ontap: () {
                 txt='WISHLIST';
               },
@@ -38,14 +40,16 @@ class WebAppBar {
                 name: 'CART',
                 image: AppImages.shoppingcartIcon,
                 ontap: () {
+                  
                   txt='CART';
-                  Navigator.of(context).pushNamed(CartScreen.routeName);
+                  Navigator.of(context).pushNamedAndRemoveUntil(CartScreen.routeName, (route) => false);
+                 // Navigator.of(context).pushNamed(CartScreen.routeName);
                 },
-                color: Colors.black),
+                color: txt=='CART'?const Color(0xffFFA44B): Colors.black),
             HeaderTextWidget(
               name: 'WALLET',
               image: AppImages.wallet2Icon,
-              color: Colors.black,
+              color: txt=='WALLET'?const Color(0xffFFA44B): Colors.black,
               ontap: () {
                 txt='WALLET';
               },
@@ -67,13 +71,13 @@ class WebAppBar {
             ),
             Container(
               width: 100,
-              constraints: BoxConstraints(
+              constraints: const BoxConstraints(
                 maxWidth: 100,
                 minWidth: 40,
               ),
               height: 40,
               decoration: BoxDecoration(
-                  color: Color(0xffFFA44B),
+                  color: const Color(0xffFFA44B),
                   borderRadius: BorderRadius.circular(8)),
               child: const Center(
                   child: ForText(

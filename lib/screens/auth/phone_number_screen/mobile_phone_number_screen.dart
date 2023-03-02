@@ -3,19 +3,18 @@ import 'package:flutter/services.dart';
 import 'package:intl_phone_field/phone_number.dart';
 import 'package:provider/provider.dart';
 
-import '../../providers/auth_provider.dart';
-import '../../widgets/custom_widgets/custom_elevated_button.dart';
-import '../../widgets/custom_widgets/phone_number_field.dart';
-import 'otp_screen.dart';
+import '../../../providers/auth_provider.dart';
+import '../../../widgets/custom_widgets/custom_elevated_button.dart';
+import '../../../widgets/custom_widgets/phone_number_field.dart';
+import '../otp_screen.dart';
 
-class PhoneNumberScreen extends StatefulWidget {
-  const PhoneNumberScreen({Key? key}) : super(key: key);
-  static const String routeName = '/phone-number-screen';
+class MobilePhoneNumberScreen extends StatefulWidget {
+  const MobilePhoneNumberScreen({Key? key}) : super(key: key);
   @override
-  State<PhoneNumberScreen> createState() => _PhoneNumberScreenState();
+  State<MobilePhoneNumberScreen> createState() => _MobilePhoneNumberScreenState();
 }
 
-class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
+class _MobilePhoneNumberScreenState extends State<MobilePhoneNumberScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

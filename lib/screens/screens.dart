@@ -6,7 +6,7 @@ export 'main_screen/main_navigationbar.dart';
 export 'notification_screen/notification_screen.dart';
 export 'profile_screen/profile_screen.dart';
 
-export 'auth/phone_number_screen.dart';
+export 'auth/phone_number_screen/phone_number_screen.dart';
 export 'auth/signin_screen/signin_mobview.dart';
 export 'auth/signup_screen/signup_mobview.dart';
 export 'auth/welcome_screen/welcome_mobview.dart';

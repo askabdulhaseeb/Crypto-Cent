@@ -11,7 +11,7 @@ import '../../../utilities/utilities.dart';
 import '../../../widgets/custom_widgets/custom_elevated_button.dart';
 import '../../../widgets/custom_widgets/footer_widget.dart';
 import '../../main_screen/main_screen.dart';
-import '../phone_number_screen.dart';
+import '../phone_number_screen/phone_number_screen.dart';
 import '../signin_screen/signin_screen.dart';
 import '../signin_screen/signin_mobview.dart';
 
