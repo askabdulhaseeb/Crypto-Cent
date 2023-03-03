@@ -6,6 +6,7 @@ import '../../../function/web_appbar.dart';
 import '../../../models/product/product_model.dart';
 import '../../../providers/product_provider.dart';
 import '../../../utilities/app_images.dart';
+import '../../../utilities/utilities.dart';
 import '../../../widgets/custom_widgets/custom_textformfield.dart';
 import '../../../widgets/product/extend_product_tile/web_extend_product_tile.dart';
 import '../../../widgets/product/web_extend_product_tile.dart';
@@ -44,87 +45,90 @@ class _WebCategoryExtendState extends State<WebCategoryExtend> {
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 243, 243, 243),
       appBar:  WebAppBar().webAppBar(context),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 8),
-        child: Column(
-          children: [
-          
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                    Text(
-           widget.categoryName,
-            style: const TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 22),
-          ),
-                  SizedBox(
-                    width: 300,
-                    child: CustomTextFormField(
-                      starticon: Icons.search,
-                      hint: 'Search ...',
-                      color: Colors.white,borderRadius: 8,
-                      controller: _searchController,
-                      onChanged: (String p0) {
-                        prouctPro.onCatSearch(p0);
-                      },
-                    ),
-                  ),
-                ],
-              ),
+      body: ConstrainedBox(
+        constraints: BoxConstraints(maxWidth: Utilities.maxWidth),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8),
+          child: Column(
+            children: [
+            
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                      Text(
+             widget.categoryName,
+              style: const TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 22),
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  DropdownButton(
-                    icon: Padding(
-                      padding: const EdgeInsets.only(left: 12),
-                      child: SizedBox(
-                        height: 20,
-                        width: 20,
-                        child: Image.asset(AppImages.filtterIcon),
+                    SizedBox(
+                      width: 300,
+                      child: CustomTextFormField(
+                        starticon: Icons.search,
+                        hint: 'Search ...',
+                        color: Colors.white,borderRadius: 8,
+                        controller: _searchController,
+                        onChanged: (String p0) {
+                          prouctPro.onCatSearch(p0);
+                        },
                       ),
                     ),
-                    value: selectedItem,
-                    items: dropDownItem
-                        .map((String e) => DropdownMenuItem(value: e, child: Text(e)))
-                        .toList(),
-                    onChanged: (String? value) {
-                      setState(() {
-                        selectedItem = value!;
-                      });
-                    },
-                  ),
-                ],
-              ),
-            ),
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 4),
-                child: GridView.count(
-                  childAspectRatio: 200 / 330,
-                  mainAxisSpacing: 8,
-                  crossAxisSpacing: 8,
-                  crossAxisCount: 6 ,
-                  children: List<Widget>.generate(products.length, (int index) {
-                    if (selectedItem == 'Price Low To High') {
-                      products.sort(
-                        (Product a, Product b) => a.amount.compareTo(b.amount),
-                      );
-                    } else if (selectedItem == dropDownItem[2]) {
-                      products.sort(
-                        (Product b, Product a) => a.amount.compareTo(b.amount),
-                      );
-                    }
-        
-                    return WebExtendProductTile(product: products[index]);
-                  }),
+                  ],
                 ),
               ),
-            ),
-          ],
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    DropdownButton(
+                      icon: Padding(
+                        padding: const EdgeInsets.only(left: 12),
+                        child: SizedBox(
+                          height: 20,
+                          width: 20,
+                          child: Image.asset(AppImages.filtterIcon),
+                        ),
+                      ),
+                      value: selectedItem,
+                      items: dropDownItem
+                          .map((String e) => DropdownMenuItem(value: e, child: Text(e)))
+                          .toList(),
+                      onChanged: (String? value) {
+                        setState(() {
+                          selectedItem = value!;
+                        });
+                      },
+                    ),
+                  ],
+                ),
+              ),
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 4),
+                  child: GridView.count(
+                    childAspectRatio: 200 / 330,
+                    mainAxisSpacing: 8,
+                    crossAxisSpacing: 8,
+                    crossAxisCount: 6 ,
+                    children: List<Widget>.generate(products.length, (int index) {
+                      if (selectedItem == 'Price Low To High') {
+                        products.sort(
+                          (Product a, Product b) => a.amount.compareTo(b.amount),
+                        );
+                      } else if (selectedItem == dropDownItem[2]) {
+                        products.sort(
+                          (Product b, Product a) => a.amount.compareTo(b.amount),
+                        );
+                      }
+          
+                      return WebExtendProductTile(product: products[index]);
+                    }),
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

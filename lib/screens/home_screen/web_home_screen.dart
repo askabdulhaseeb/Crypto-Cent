@@ -4,6 +4,7 @@ import '../../widgets/custom_widgets/cutom_text.dart';
 import '../../widgets/home/category_list.dart';
 import '../../widgets/home/web_category_list.dart';
 import '../../widgets/product/latest_Product/latest_product.dart';
+import '../category_screens/categroey_extend/categories_extend.dart';
 import 'web_recetly_browsed.dart';
 
 class WebHomeScreen extends StatelessWidget {
@@ -35,11 +36,11 @@ class WebHomeScreen extends StatelessWidget {
               ),
               TextButton(
                 onPressed: (() {
-                  // Navigator.push(
-                  //     context,
-                  //     MaterialPageRoute<CategoriesExtend>(
-                  //         builder: (BuildContext context) =>
-                  //             CategoriesExtend(categoryName: 'All')));
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute<CategoriesExtend>(
+                          builder: (BuildContext context) =>
+                              CategoriesExtend(categoryName: 'All')));
                 }),
                 child: ForText(
                   name: 'see All',
