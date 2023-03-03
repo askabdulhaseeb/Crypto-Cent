@@ -15,7 +15,7 @@ import '../models/product/product_url.dart';
 import '../models/reports/report_product.dart';
 import '../screens/empty_screen/empty_screen.dart';
 import '../screens/main_screen/main_screen.dart';
-import '../screens/map_screen/location_screen.dart';
+import '../screens/map_screen/location_screen/location_screen.dart';
 import 'categories_provider.dart';
 import 'location_provider.dart';
 

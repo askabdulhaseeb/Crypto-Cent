@@ -78,7 +78,7 @@ class WebAppBar {
          AuthMethods.uid.isEmpty?  SizedBox(width: 100,
             child: CustomElevatedButton(title: 'Signup', onTap: (){})):Consumer<UserProvider>(
               
-              builder: (context, UserProvider userPro,snapshot) {
+              builder: (BuildContext context, UserProvider userPro,Widget? snapshot) {
                 AppUser user=userPro.user(AuthMethods.uid);
                 return CustomProfileImage(imageURL: user.imageURL);
               }

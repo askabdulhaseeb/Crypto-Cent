@@ -87,7 +87,7 @@ class CustomTextFormFieldState extends State<CustomTextFormField> {
             offset: const Offset(0, 3), // changes position of shadow
           ),
         ],
-        color: widget.color ?? Theme.of(context).secondaryHeaderColor,
+        color: widget.color ?? Colors.white,
       ),
       child: TextFormField(
         initialValue: widget.initialValue,

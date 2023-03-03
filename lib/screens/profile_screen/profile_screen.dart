@@ -12,7 +12,7 @@ import '../../widgets/profile/setting/setting.dart';
 import '../auth/welcome_screen/welcome_mobview.dart';
 import '../empty_screen/empty_screen.dart';
 import '../empty_screen/empty_auth_screen.dart';
-import '../map_screen/location_screen.dart';
+import '../map_screen/location_screen/location_screen.dart';
 import '../order/order_history.dart';
 import 'selling_screen.dart';
 import 'wallet/wallet_screen.dart';

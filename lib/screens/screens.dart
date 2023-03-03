@@ -16,7 +16,7 @@ export 'search_screen/search_screen.dart';
 
 export 'chat_screen/group/create_group_screen.dart';
 export 'empty_screen/empty_screen.dart';
-export 'map_screen/location_screen.dart';
+export 'map_screen/location_screen/location_screen.dart';
 export 'order/payment.dart';
 export 'product_screens/add_product_screen.dart';
 export 'profile_screen/selling_screen.dart';

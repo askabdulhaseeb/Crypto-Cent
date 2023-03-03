@@ -7,7 +7,7 @@ import '../../../providers/user_provider.dart';
 import '../../../screens/auth/welcome_screen/welcome_screen.dart';
 import '../../../screens/empty_screen/empty_screen.dart';
 import '../../../screens/map_screen/add_new_address.dart';
-import '../../../screens/map_screen/location_screen.dart';
+import '../../../screens/map_screen/location_screen/location_screen.dart';
 import '../../../utilities/app_images.dart';
 import '../../custom_widgets/policy_widget.dart';
 import '../my_profile/edit_profile.dart';

@@ -4,25 +4,25 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
-import '../../models/location.dart';
-import '../../providers/add_product_p.dart';
-import '../../providers/location_provider.dart';
-import '../../providers/product_provider.dart';
-import '../../widgets/custom_widgets/custom_widget.dart';
-import '../main_screen/main_screen.dart';
-import '../order/payment.dart';
-import 'add_new_address.dart';
+import '../../../models/location.dart';
+import '../../../providers/add_product_p.dart';
+import '../../../providers/location_provider.dart';
+import '../../../providers/product_provider.dart';
+import '../../../widgets/custom_widgets/custom_widget.dart';
+import '../../main_screen/main_screen.dart';
+import '../../order/payment.dart';
+import '../add_new_address.dart';
 
-class LocationScreen extends StatefulWidget {
-  const LocationScreen({required this.text, super.key});
+class MobileLocationScreen extends StatefulWidget {
+  const MobileLocationScreen({required this.text, super.key});
   final String text;
   static const String routeName = '/locationScreen';
 
   @override
-  State<LocationScreen> createState() => _LocationScreenState();
+  State<MobileLocationScreen> createState() => _MobileLocationScreenState();
 }
 
-class _LocationScreenState extends State<LocationScreen> {
+class _MobileLocationScreenState extends State<MobileLocationScreen> {
   int isSelectedIndex = 0;
   @override
   Widget build(BuildContext context) {

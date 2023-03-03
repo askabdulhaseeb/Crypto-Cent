@@ -1,10 +1,12 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 import '../../function/crypto_function.dart';
 import '../../providers/cart_provider.dart';
-import '../../screens/map_screen/location_screen.dart';
+import '../../screens/map_screen/location_screen/location_screen.dart';
 import '../custom_widgets/custom_elevated_button.dart';
 import '../custom_widgets/cutom_text.dart';
 
