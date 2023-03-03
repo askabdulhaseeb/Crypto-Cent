@@ -5,6 +5,7 @@ import '../../../function/crypto_function.dart';
 import '../../../models/cart.dart';
 import '../../../providers/cart_provider.dart';
 import '../../../utilities/utilities.dart';
+import '../../custom_widgets/custom_elevated_button.dart';
 import '../../custom_widgets/cutom_text.dart';
 import '../cart_checkout_widget.dart';
 import '../tile/cart_tile.dart';
@@ -96,6 +97,11 @@ class WebFillCartWidget extends StatelessWidget {
                         }),
                   ],
                 ),
+                SizedBox(width: 200,
+                  child: CustomElevatedButton(title: 'Proceed to Checkout', onTap: (){
+                
+                  }),
+                )
                 ],
               ),
             ),
