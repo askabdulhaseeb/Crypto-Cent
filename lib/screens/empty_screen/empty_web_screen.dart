@@ -75,10 +75,7 @@ class EmptyWebAuthScreen extends StatelessWidget {
                                       fontWeight: FontWeight.bold),
                                   onTap: () async {
                                     await HapticFeedback.heavyImpact();
-                                    Navigator.of(context)
-                                        .pushNamedAndRemoveUntil(
-                                            WelcomeScreen.routeName,
-                                            (Route<dynamic> route) => false);
+                                   Navigator.pushNamed( context,WelcomeScreen.routeName);
                                   },
                                   bgColor:
                                       const Color.fromARGB(255, 215, 236, 254)),
@@ -86,9 +83,10 @@ class EmptyWebAuthScreen extends StatelessWidget {
                                 title: 'Create a account',
                                 onTap: () async {
                                   await HapticFeedback.heavyImpact();
-                                  Navigator.of(context).pushNamedAndRemoveUntil(
-                                      WelcomeScreen.routeName,
-                                      (Route<dynamic> route) => false);
+                                  // Navigator.of(context).pushNamedAndRemoveUntil(
+                                  //     WelcomeScreen.routeName,
+                                  //     (Route<dynamic> route) => false);
+                                  Navigator.pushNamed( context,WelcomeScreen.routeName);
                                 },
                               ),
                             ],

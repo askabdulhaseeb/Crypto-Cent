@@ -8,6 +8,7 @@ import '../../../providers/product_provider.dart';
 import '../../../utilities/app_images.dart';
 import '../../../utilities/utilities.dart';
 import '../../../widgets/custom_widgets/custom_textformfield.dart';
+import '../../../widgets/custom_widgets/footer_widget.dart';
 import '../../../widgets/product/extend_product_tile/web_extend_product_tile.dart';
 import '../../../widgets/product/web_extend_product_tile.dart';
 
@@ -106,27 +107,36 @@ class _WebCategoryExtendState extends State<WebCategoryExtend> {
               Expanded(
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 4),
-                  child: GridView.count(
-                    childAspectRatio: 200 / 330,
-                    mainAxisSpacing: 8,
-                    crossAxisSpacing: 8,
-                    crossAxisCount: 6 ,
-                    children: List<Widget>.generate(products.length, (int index) {
-                      if (selectedItem == 'Price Low To High') {
-                        products.sort(
-                          (Product a, Product b) => a.amount.compareTo(b.amount),
-                        );
-                      } else if (selectedItem == dropDownItem[2]) {
-                        products.sort(
-                          (Product b, Product a) => a.amount.compareTo(b.amount),
-                        );
-                      }
-          
-                      return WebExtendProductTile(product: products[index]);
-                    }),
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        GridView.count(
+                          childAspectRatio: 200 / 330,
+                          mainAxisSpacing: 8,
+                          crossAxisSpacing: 8,
+                          shrinkWrap: true,
+                          crossAxisCount: 6 ,
+                          children: List<Widget>.generate(products.length, (int index) {
+                            if (selectedItem == 'Price Low To High') {
+                              products.sort(
+                                (Product a, Product b) => a.amount.compareTo(b.amount),
+                              );
+                            } else if (selectedItem == dropDownItem[2]) {
+                              products.sort(
+                                (Product b, Product a) => a.amount.compareTo(b.amount),
+                              );
+                            }
+                            
+                            return WebExtendProductTile(product: products[index]);
+                          }),
+                        ),
+                        const FooterWidget(),
+                      ],
+                    ),
                   ),
                 ),
               ),
+              
             ],
           ),
         ),

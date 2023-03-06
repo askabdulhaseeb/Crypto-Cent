@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import '../database/app_user/auth_method.dart';
 import '../models/app_user/app_user.dart';
 import '../providers/provider.dart';
+import '../screens/auth/welcome_screen/welcome_screen.dart';
 import '../screens/cart_screen/cart_screen.dart';
 import '../screens/main_screen/main_screen.dart';
 import '../utilities/app_images.dart';
@@ -76,7 +77,9 @@ class WebAppBar {
               width: 20,
             ),
          AuthMethods.uid.isEmpty?  SizedBox(width: 100,
-            child: CustomElevatedButton(title: 'Signup', onTap: (){})):Consumer<UserProvider>(
+            child: CustomElevatedButton(title: 'Signup', onTap: (){
+               Navigator.pushNamed( context,WelcomeScreen.routeName);
+            })):Consumer<UserProvider>(
               
               builder: (BuildContext context, UserProvider userPro,Widget? snapshot) {
                 AppUser user=userPro.user(AuthMethods.uid);
