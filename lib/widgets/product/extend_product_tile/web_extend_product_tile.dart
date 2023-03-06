@@ -17,7 +17,7 @@ class WebExtendProductTile extends StatelessWidget {
  
   @override
   Widget build(BuildContext context) {
-   double width=MediaQuery.of(context).size.width;
+   //double width=MediaQuery.of(context).size.width;
     return InkWell(
       onTap: () async{
         await HapticFeedback.heavyImpact();
@@ -33,7 +33,7 @@ class WebExtendProductTile extends StatelessWidget {
         children: [
           Container(
             clipBehavior: Clip.hardEdge,
-            height: width*0.15,
+            height: 300,
             width: double.infinity,
             // constraints:const BoxConstraints(
             //   maxWidth: double.infinity,

@@ -23,7 +23,7 @@ class WebFillCartWidget extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            ForText(name: 'Shopping Cart',bold: true,size: 20),
+            const ForText(name: 'Shopping Cart',bold: true,size: 20),
             ForText(name: 'Total ${cartProv.cartItem.length} item',size: 16),
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -50,7 +50,7 @@ class WebFillCartWidget extends StatelessWidget {
             Expanded(
               child: Column(
                 children: [
-                  ForText(name: 'Order Summary',bold: true,size: 22,),
+                  const ForText(name: 'Order Summary',bold: true,size: 22,),
                    Row(
                   children: <Widget>[
                     const ForText(

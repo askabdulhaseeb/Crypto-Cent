@@ -118,7 +118,7 @@ class CustomTextFormFieldState extends State<CustomTextFormField> {
               ? const TextStyle(fontSize: 14)
               : const TextStyle(fontSize: 15),
           // suffixIcon: (widget._controller!.text.isEmpty ||
-          //         !widget.showSuffixIcon ||
+          //         widget.showSuffixIcon ||
           //         widget.showSuffixIcon == false)
           //     ? null
           //     : IconButton(
@@ -128,9 +128,7 @@ class CustomTextFormFieldState extends State<CustomTextFormField> {
           //         }),
           //         icon: const Icon(CupertinoIcons.clear, size: 18),
           //       ),
-          suffixIcon: widget.sufixicon == null
-              ? null
-              :widget.sufixicon ,
+          suffixIcon: widget.sufixicon ,
           prefixIcon: widget.starticon == null
               ? null
               : SizedBox(
