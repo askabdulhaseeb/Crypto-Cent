@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import '../../database/app_user/auth_method.dart';
 import '../../function/web_appbar.dart';
 import '../../providers/cart_provider.dart';
+import '../../utilities/utilities.dart';
 import '../../widgets/cart/empty/empty_cart_widget.dart';
 import '../../widgets/cart/fill/fill_cart_widget.dart';
 import '../../widgets/custom_widgets/footer_widget.dart';
@@ -18,18 +19,26 @@ class WebCartScreen extends StatelessWidget {
     CartProvider cartPro = Provider.of<CartProvider>(context);
     return AuthMethods.uid.isEmpty
         ? const EmptyAuthScreen(text: 'Please Log in to view your cart',)
-        : Scaffold(
-            appBar: WebAppBar().webAppBar(context),
-            body: Column(
-              children: [
-                Expanded(
-                  child: cartPro.cartItem.isNotEmpty
-                      ? const FillCartWidget()
-                      : const EmptyCartWidget(),
+        : Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+             ConstrainedBox(
+              constraints: BoxConstraints(maxWidth: Utilities.maxWidth),
+              child: Scaffold(
+                  appBar: WebAppBar().webAppBar(context),
+                  body: Column(
+                    children: <Widget>[
+                      Expanded(
+                        child: cartPro.cartItem.isNotEmpty
+                            ? const FillCartWidget()
+                            : const EmptyCartWidget(),
+                      ),
+                      const FooterWidget(),
+                    ],
+                  ),
                 ),
-                FooterWidget(),
-              ],
             ),
-          );
+          ],
+        );
   }
 }

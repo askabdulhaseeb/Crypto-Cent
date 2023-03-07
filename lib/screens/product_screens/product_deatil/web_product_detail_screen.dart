@@ -58,116 +58,121 @@ int quantity = 1;
         Provider.of<RatingProvider>(context).productReviews(widget.product.pid);
         // double height=MediaQuery.of(context).size.height;
         // double width=MediaQuery.of(context).size.width;
-    return Scaffold(
-      appBar:  WebAppBar().webAppBar(context),
-      body: SafeArea(child: SingleChildScrollView(
-        child: Column(
-          children: [
-            ConstrainedBox(
-              constraints: BoxConstraints(maxWidth: Utilities.maxWidth),
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 30,vertical: 25),
-                child: Column(
-                  children: [
-                    Row(
-                   
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+         ConstrainedBox(
+          constraints: BoxConstraints(maxWidth: Utilities.maxWidth),
+          child: Scaffold(
+            appBar:  WebAppBar().webAppBar(context),
+            body: SafeArea(child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 30,vertical: 25),
+                    child: Column(
                       children: [
-                        Expanded(child: SizedBox(
-                          height: MediaQuery.of(context).size.height*0.6,
-                          child: WebProductURLsSlider(urls:widget.product.prodURL,))),
-                       const SizedBox(width: 50,),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        Row(
+                       
                           children: [
-                            reviewWidget(context, reviews),
-                            const SizedBox(height: 20,),
-                             Text(
-                                  widget.product.productname,
-                                  maxLines: 2,
-                                  overflow: TextOverflow.ellipsis,
-                                  style: const TextStyle(
-                                    fontSize: 35,
-                                    fontWeight: FontWeight.w900,
-                                  ),
-                                ),
+                            Expanded(child: SizedBox(
+                              height: MediaQuery.of(context).size.height*0.6,
+                              child: WebProductURLsSlider(urls:widget.product.prodURL,))),
+                           const SizedBox(width: 50,),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                reviewWidget(context, reviews),
                                 const SizedBox(height: 20,),
                                  Text(
-                                          '\$ ${widget.product.amount}',
-                                          style: const TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 28,
-                                          ),
-                                        ),
-                                        const SizedBox(height: 20,),
-                                         addToCartWidget(context,cartPro),
-                                        const SizedBox(height: 20,),
-                                        
-                                       SizedBox(
-                                        height: 300,
-                                        width: 300,
-                                         child: ExpansionTile(
-                                          
-                                                 title: const Text('Description'),
-                                                 trailing:  Icon(Icons.add),
-                                                 children: <Widget>[
-                                                   ListTile(title: Text(widget.product.description)),
-                                                 ],
-                                               ),
-                                       ),
-                                        const SizedBox(height: 20,),
-                                        const Divider(color: Colors.grey,thickness: 2,),
-                                     
+                                      widget.product.productname,
+                                      maxLines: 2,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: const TextStyle(
+                                        fontSize: 35,
+                                        fontWeight: FontWeight.w900,
+                                      ),
+                                    ),
+                                    const SizedBox(height: 20,),
+                                     Text(
+                                              '\$ ${widget.product.amount}',
+                                              style: const TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 28,
+                                              ),
+                                            ),
+                                            const SizedBox(height: 20,),
+                                             addToCartWidget(context,cartPro),
+                                            const SizedBox(height: 20,),
+                                            
+                                           SizedBox(
+                                            height: 300,
+                                            width: 300,
+                                             child: ExpansionTile(
+                                              
+                                                     title: const Text('Description'),
+                                                     trailing:  Icon(Icons.add),
+                                                     children: <Widget>[
+                                                       ListTile(title: Text(widget.product.description)),
+                                                     ],
+                                                   ),
+                                           ),
+                                            const SizedBox(height: 20,),
+                                            const Divider(color: Colors.grey,thickness: 2,),
+                                         
+                              ],
+                            ),
                           ],
                         ),
+                        Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                  child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    const ForText(
+                      name: 'Popular Products',
+                      bold: true,
+                      size: 18,
+                    ),
+                    TextButton(
+                      onPressed: (() {
+                        // Navigator.push(
+                        //     context,
+                        //     MaterialPageRoute<CategoriesExtend>(
+                        //         builder: (BuildContext context) =>
+                        //             CategoriesExtend(categoryName: 'All')));
+                      }),
+                      child: ForText(
+                        name: 'View All',
+                        color: Theme.of(context).primaryColor,
+                        bold: true,
+                      ),
+                    ),
+                  ],
+                  ),
+              ),
+              const SizedBox(
+                  height: 10,
+              ),
+              const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                  child: LatestProductsList(),
+              ), 
                       ],
                     ),
-                    Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                const ForText(
-                  name: 'Popular Products',
-                  bold: true,
-                  size: 18,
-                ),
-                TextButton(
-                  onPressed: (() {
-                    // Navigator.push(
-                    //     context,
-                    //     MaterialPageRoute<CategoriesExtend>(
-                    //         builder: (BuildContext context) =>
-                    //             CategoriesExtend(categoryName: 'All')));
-                  }),
-                  child: ForText(
-                    name: 'View All',
-                    color: Theme.of(context).primaryColor,
-                    bold: true,
                   ),
-                ),
-              ],
-            ),
-        ),
-        const SizedBox(
-            height: 10,
-        ),
-        const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-            child: LatestProductsList(),
-        ), 
-                  ],
-                ),
+                    
+             const SizedBox(height: 40,),
+              const SizedBox(height: 20),
+                PromoWidget(),
+                const FooterWidget(),
+                ],
               ),
-            ),
-              
-       const SizedBox(height: 40,),
-        const SizedBox(height: 20),
-          PromoWidget(),
-          const FooterWidget(),
-          ],
+            )),
+          ),
         ),
-      )),
+      ],
     );
   }
 
