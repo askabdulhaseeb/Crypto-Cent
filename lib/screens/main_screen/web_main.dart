@@ -12,21 +12,27 @@ class WebMain extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     print(MediaQuery.of(context).size.width);
-    return Scaffold(
-      appBar:  WebAppBar().webAppBar(context),
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            ConstrainedBox(
-              constraints: BoxConstraints(maxWidth: Utilities.maxWidth),
-              child: const HomeScreen()),
-            const SizedBox(height: 20),
-            PromoWidget(),
-            const FooterWidget(),
-          ],
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+         ConstrainedBox(
+           constraints: BoxConstraints(maxWidth: Utilities.maxWidth),
+          child: Scaffold(
+            appBar:  WebAppBar().webAppBar(context),
+            body: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  const HomeScreen(),
+                  const SizedBox(height: 20),
+                  PromoWidget(),
+                  const FooterWidget(),
+                ],
+              ),
+            ),
+          ),
         ),
-      ),
+      ],
     );
   }
 }

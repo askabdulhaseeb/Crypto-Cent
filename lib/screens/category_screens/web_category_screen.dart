@@ -4,7 +4,9 @@ import 'package:provider/provider.dart';
 
 import '../../function/web_appbar.dart';
 import '../../providers/categories_provider.dart';
+import '../../utilities/utilities.dart';
 import '../../widgets/custom_widgets/cutom_text.dart';
+import '../../widgets/custom_widgets/footer_widget.dart';
 import 'categroey_extend/categories_extend.dart';
 
 class WebCategoryScreen extends StatelessWidget {
@@ -17,62 +19,76 @@ class WebCategoryScreen extends StatelessWidget {
     CategoriesProvider catPro = Provider.of<CategoriesProvider>(context);
     return Scaffold(
         appBar:  WebAppBar().webAppBar(context),
-        body: GridView.count(
-          childAspectRatio: 96 / 118,
-          mainAxisSpacing: 8,
-          crossAxisCount: 4,
-          // ignore: always_specify_types
-          children: List.generate(catPro.categories.length, (int index) {
-            return InkWell(
-              onTap: () async{
-                   
-               //   Navigator.pushNamed(context, CategoriesExtend.routeName,arguments: ScreenArguments(catPro.categories[index].catID==null?catPro.categories[index].catID:'All'));
-                Navigator.push(
-                    context,
-                    // ignore: always_specify_types
-                    MaterialPageRoute(
-                        builder: (BuildContext context) => CategoriesExtend(
-                              categoryName: catPro.categories[index].catID,
-                            )));
-              },
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(12),
-                  child: Container(
-                    color: const Color.fromARGB(255, 245, 244, 244),
-                    padding: const EdgeInsets.all(8),
-                    child: Column(
-                      children: <Widget>[
-                        Expanded(
-                          child: Container(
-                            decoration: BoxDecoration(
-                              borderRadius: const BorderRadius.only(
-                                topLeft: Radius.circular(6),
-                                topRight: Radius.circular(6),
+        body: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+             ConstrainedBox(
+              constraints: BoxConstraints(maxWidth: Utilities.maxWidth),
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    GridView.count(
+                      childAspectRatio: 96 / 118,
+                      mainAxisSpacing: 8,
+                      crossAxisCount: 4,
+                      shrinkWrap: true,
+                      // ignore: always_specify_types
+                      children: List.generate(catPro.categories.length, (int index) {
+                        return InkWell(
+                          onTap: () async{
+                               
+                           //   Navigator.pushNamed(context, CategoriesExtend.routeName,arguments: ScreenArguments(catPro.categories[index].catID==null?catPro.categories[index].catID:'All'));
+                            Navigator.push(
+                                context,
+                                // ignore: always_specify_types
+                                MaterialPageRoute(
+                                    builder: (BuildContext context) => CategoriesExtend(
+                                          categoryName: catPro.categories[index].catID,
+                                        )));
+                          },
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(12),
+                            child: Container(
+                              color: const Color.fromARGB(255, 245, 244, 244),
+                              padding: const EdgeInsets.all(8),
+                              child: Column(
+                                children: <Widget>[
+                                  Expanded(
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                        borderRadius: const BorderRadius.only(
+                                          topLeft: Radius.circular(6),
+                                          topRight: Radius.circular(6),
+                                        ),
+                                        image: DecorationImage(
+                                            image: NetworkImage(
+                                                catPro.categories[index].imageURl),
+                                            fit: BoxFit.fill),
+                                      ),
+                                    ),
+                                  ),
+                                  const SizedBox(height: 6),
+                                  Center(
+                                    child: ForText(
+                                      name: catPro.categories[index].title,
+                                      color: Colors.black,
+                                      bold: true,
+                                    ),
+                                  )
+                                ],
                               ),
-                              image: DecorationImage(
-                                  image: NetworkImage(
-                                      catPro.categories[index].imageURl),
-                                  fit: BoxFit.fill),
                             ),
                           ),
-                        ),
-                        const SizedBox(height: 6),
-                        Center(
-                          child: ForText(
-                            name: catPro.categories[index].title,
-                            color: Colors.black,
-                            bold: true,
-                          ),
-                        )
-                      ],
+                        );
+                      }),
                     ),
-                  ),
+                    const FooterWidget(),
+                  ],
                 ),
               ),
-            );
-          }),
+            ),
+            
+          ],
         ));
   }
 }

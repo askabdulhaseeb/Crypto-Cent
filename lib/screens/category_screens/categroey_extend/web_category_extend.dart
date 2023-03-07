@@ -43,15 +43,15 @@ class _WebCategoryExtendState extends State<WebCategoryExtend> {
     } else {
       products = prouctPro.findByCategory(widget.categoryName);
     }
-    return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 243, 243, 243),
-      appBar:  WebAppBar().webAppBar(context),
-      body: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          ConstrainedBox(
-            constraints: BoxConstraints(maxWidth: Utilities.maxWidth),
-            child: Column(
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+         ConstrainedBox(
+          constraints: BoxConstraints(maxWidth: Utilities.maxWidth),
+          child: Scaffold(
+            
+            appBar:  WebAppBar().webAppBar(context),
+            body: Column(
               children: [
               
                 Padding(
@@ -131,7 +131,7 @@ class _WebCategoryExtendState extends State<WebCategoryExtend> {
                               return WebExtendProductTile(product: products[index]);
                             }),
                           ),
-                         
+                         const FooterWidget(),
                         ],
                       ),
                     ),
@@ -141,8 +141,8 @@ class _WebCategoryExtendState extends State<WebCategoryExtend> {
               ],
             ),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
