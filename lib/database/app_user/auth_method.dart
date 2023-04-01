@@ -27,8 +27,8 @@ class AuthMethods {
       if (authCredential.user != null) {
         final AppUser? appUser =
             await UserApi().user(uid: authCredential.user!.uid);
-        if (appUser == null) return 0; // User is New on App
-        return 1; // User Already Exist NO new info needed
+        if (appUser == null) return 0; 
+        return 1; 
       }
       return -1; // ERROR while Entering OTP
     } catch (ex) {

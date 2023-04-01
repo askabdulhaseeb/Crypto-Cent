@@ -22,6 +22,7 @@ class WebCartScreen extends StatelessWidget {
         : Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+               
              ConstrainedBox(
               constraints: BoxConstraints(maxWidth: Utilities.maxWidth),
               child: Scaffold(

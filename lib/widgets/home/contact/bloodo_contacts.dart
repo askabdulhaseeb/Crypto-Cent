@@ -19,58 +19,67 @@ class BloodoContacts extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       height: 60,
-      child: ListTile(
-        leading: SizedBox(
+      width: double.infinity,
+      child: Row(children: [
+        SizedBox(
             height: 40,
             width: 40,
             child: CustomProfileImage(imageURL: user.imageURL, radius: 24)),
-        title: Text(user.name ?? ''),
-        // subtitle: Text(_subtitle),
-        trailing: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            CustomElevatedButton(
-              bgColor: Theme.of(context).secondaryHeaderColor,
-              title: '  Send  ',
-              textStyle: const TextStyle(color: Colors.black54, fontSize: 16),
-              onTap: () async {
-                await HapticFeedback.heavyImpact();
-                Navigator.of(context).push(
-                  MaterialPageRoute<SendBitcoinScreen>(
-                      builder: (BuildContext context) => SendBitcoinScreen(
-                            iscontact: true,
-                            sellerUser: user,
-                          )),
-                );
-              },
-              padding: const EdgeInsets.symmetric(horizontal: 6),
-            ),
-            const SizedBox(
-              width: 10,
-            ),
-            CustomElevatedButton(
-              title: 'Message',
-              onTap: () async {
-                await HapticFeedback.heavyImpact();
-                Navigator.of(context).push(
-                  MaterialPageRoute<PersonalChatScreen>(
-                    builder: (BuildContext context) => PersonalChatScreen(
-                      chat: Chat(
-                        chatID: UniqueIdFunctions.personalChatID(
-                            chatWith: user.uid),
-                        persons: <String>[AuthMethods.uid, user.uid],
-                      ),
-                      chatWith: user,
-                    ),
-                  ),
-                );
-              },
-              border: Border.all(color: Theme.of(context).primaryColor),
-              padding: const EdgeInsets.symmetric(horizontal: 6),
-            )
-          ],
-        ),
-      ),
+            SizedBox(width: 10,),
+            Text(user.name ?? ''),
+      ]),
+      // child: ListTile(
+      //   leading: SizedBox(
+      //       height: 40,
+      //       width: 40,
+      //       child: CustomProfileImage(imageURL: user.imageURL, radius: 24)),
+      //   title: Text(user.name ?? ''),
+      //   // subtitle: Text(_subtitle),
+      //   trailing: Row(
+      //     mainAxisSize: MainAxisSize.min,
+      //     children: <Widget>[
+      //       CustomElevatedButton(
+      //         bgColor: Theme.of(context).secondaryHeaderColor,
+      //         title: '  Send  ',
+      //         textStyle: const TextStyle(color: Colors.black54, fontSize: 16),
+      //         onTap: () async {
+      //           await HapticFeedback.heavyImpact();
+      //           Navigator.of(context).push(
+      //             MaterialPageRoute<SendBitcoinScreen>(
+      //                 builder: (BuildContext context) => SendBitcoinScreen(
+      //                       iscontact: true,
+      //                       sellerUser: user,
+      //                     )),
+      //           );
+      //         },
+      //         padding: const EdgeInsets.symmetric(horizontal: 6),
+      //       ),
+      //       const SizedBox(
+      //         width: 10,
+      //       ),
+      //       CustomElevatedButton(
+      //         title: 'Message',
+      //         onTap: () async {
+      //           await HapticFeedback.heavyImpact();
+      //           Navigator.of(context).push(
+      //             MaterialPageRoute<PersonalChatScreen>(
+      //               builder: (BuildContext context) => PersonalChatScreen(
+      //                 chat: Chat(
+      //                   chatID: UniqueIdFunctions.personalChatID(
+      //                       chatWith: user.uid),
+      //                   persons: <String>[AuthMethods.uid, user.uid],
+      //                 ),
+      //                 chatWith: user,
+      //               ),
+      //             ),
+      //           );
+      //         },
+      //         border: Border.all(color: Theme.of(context).primaryColor),
+      //         padding: const EdgeInsets.symmetric(horizontal: 6),
+      //       )
+      //     ],
+      //   ),
+      // ),
     );
   }
 }

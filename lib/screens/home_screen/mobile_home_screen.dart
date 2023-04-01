@@ -4,6 +4,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:provider/provider.dart';
 import '../../database/app_user/auth_method.dart';
+import '../../database/coinbaseapi/coinbase.dart';
+import '../../database/coinbaseapi/coinbase_api.dart';
 import '../../database/notification_services.dart';
 import '../../enum/notification_type.dart';
 import '../../providers/provider.dart';
@@ -18,10 +20,11 @@ import '../about/aboust_us.dart';
 import '../about/contact_us.dart';
 import '../category_screens/some_categories.dart';
 import '../notification_screen/notification_screen.dart';
+import '../product_screens/add_product_screen.dart';
 import '../search_screen/search_screen.dart';
 import '../category_screens/categroey_extend/categories_extend.dart';
 import '../category_screens/category.dart';
-
+import 'package:url_launcher/url_launcher.dart';
 class MobileHomeScreen extends StatefulWidget {
   const MobileHomeScreen({super.key});
   static const String routeName = '/home-screen';
@@ -52,6 +55,28 @@ class _MobileHomeScreenState extends State<MobileHomeScreen> with TickerProvider
     UserProvider users = Provider.of<UserProvider>(context);
     return Scaffold(
       key: _key,
+      floatingActionButton: FloatingActionButton(onPressed: () async {
+        List<Item> items=[Item(name: 'first', price: 1)];
+String? paymentLink=await CoinbaseeCommerce.generatePaymentLink(items);
+if (paymentLink != null) {
+  bool isAppOpened = await launch(
+    paymentLink,
+    forceSafariVC: false,
+    forceWebView: false,
+    universalLinksOnly: true,
+    enableJavaScript: true,
+  );
+
+  if (!isAppOpened) {
+    launch(
+      paymentLink,
+      forceSafariVC: false,
+      forceWebView: false,
+      universalLinksOnly: true,
+    );
+  }
+}
+      },child: Icon(Icons.add),),
       drawer: drawerScreen(context),
       body: SafeArea(
         child: Consumer2<ProductProvider, CategoriesProvider>(builder: (
