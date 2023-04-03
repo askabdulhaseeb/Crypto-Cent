@@ -39,6 +39,7 @@ class ContactProvider with ChangeNotifier {
       temp = temp.replaceAll(' ', '');
       if (temp.length >= 10) {
         mobileNumber = temp.substring(temp.length - 10, temp.length);
+        print('object');
       }
 
       for (int j = 0; j < value.length; j++) {

@@ -49,6 +49,12 @@ class MobileCategoriesList extends StatelessWidget {
                         ),
                       );
                     }),
+                   allitems(context, 'upload', false, () {
+                    
+                    }),
+                   allitems(context, 'purchase', false, () { }),
+                   allitems(context, 'Filter', false, () { }),
+                   
           allitems(context, 'Categories', false, () {
             HapticFeedback.heavyImpact();
             Navigator.push(

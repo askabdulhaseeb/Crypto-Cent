@@ -12,6 +12,7 @@ class LocationProvider with ChangeNotifier {
   Future<void> load() async {
     _allUserLocation = await LocationApi().getdata();
     userLocationwithUID();
+    print('load');
     debugPrint('all user Length LOcation:  ${_allUserLocation.length}');
     notifyListeners();
   }
