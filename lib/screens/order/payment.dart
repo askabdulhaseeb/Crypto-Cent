@@ -38,8 +38,8 @@ class _PaymentScreenState extends State<PaymentScreen> {
   final double balance = await WallletWithApi().getWalletBalance(address);
   String adminWalletAddress = '3Fv1QCCbmUfNf8R8y7Ujp1tg9VHnEWMm27';
   if (balance > amount) {
-    await WallletWithApi().transferCoin(
-        walletAddress, transferKey, adminWalletAddress, amount.toString());
+    // await WallletWithApi().transferCoin(
+    //     walletAddress, transferKey, adminWalletAddress, amount.toString());
     paid = true;
   } else {
     CustomToast.errorToast(message: 'You havenot enough Balance ');
@@ -164,8 +164,8 @@ class _PaymentScreenState extends State<PaymentScreen> {
                   // String adminWalletAddress =
                   //     '3Fv1QCCbmUfNf8R8y7Ujp1tg9VHnEWMm27';
                   if (balance > amount) {
-                    await WallletWithApi().transferCoin(walletAddress,
-                        transferKey, '3Fv1QCCbmUfNf8R8y7Ujp1tg9VHnEWMm27', amount.toString());
+                    // await WallletWithApi().transferCoin(walletAddress,
+                    //     transferKey, '3Fv1QCCbmUfNf8R8y7Ujp1tg9VHnEWMm27', amount.toString());
                     paid = true;
                      AppUser me = userPro.user(cartPro.cartItem[0].sellerID);
                   List<MyDeviceToken> deviceToken = me.deviceToken ?? [];

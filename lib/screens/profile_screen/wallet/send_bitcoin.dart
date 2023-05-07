@@ -35,8 +35,8 @@ class _SendBitcoinScreenState extends State<SendBitcoinScreen> {
         encryption.appDecrypt(walletPro.wallet!.coinsWallet[0].transferKey);
     final double balance = await walletPro.currentBalance();
     if (balance > amount) {
-      await WallletWithApi().transferCoin(
-          walletAddress, transferKey, _walletaddress.text, amount.toString());
+      // await WallletWithApi().transferCoin(
+      //     walletAddress, transferKey, _walletaddress.text, amount.toString());
     } else {
       CustomToast.errorToast(message: 'You havenot enough Balance ');
     }

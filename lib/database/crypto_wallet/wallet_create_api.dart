@@ -136,10 +136,10 @@ class WallletWithApi {
   String STATUS = 'status';
   String HASH = 'hash';
   Future<Map> transferCoin(
-    String walletId,
-    String transferKey,
-    String address,
-    String amount,
+   { required String walletId,
+    required String transferKey,
+    required String address,
+    required String amount,}
   ) async {
     Map result;
 
