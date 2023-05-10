@@ -180,8 +180,7 @@ class _LocationScreenState extends State<LocationScreen> {
                           await HapticFeedback.heavyImpact();
                           await locationPro
                               .selectedIndex(location[isSelectedIndex]);
-                          Navigator.of(context)
-                              .pushNamed(PaymentScreen.routeName);
+                          
                         })
                     : SizedBox(),
             const SizedBox(

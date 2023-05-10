@@ -6,7 +6,6 @@ import 'package:intl_phone_field/phone_number.dart';
 import 'package:provider/provider.dart';
 
 import '../../database/app_user/auth_method.dart';
-import '../../database/crypto_wallet/wallet_creation.dart';
 import '../../database/notification_services.dart';
 import '../../providers/app_provider.dart';
 import '../../utilities/app_images.dart';
@@ -101,8 +100,8 @@ class _SignupWithEmailScreenState extends State<SignupWithEmailScreen> {
                             });
                             if (!mounted) return;
                             if (user != null) {
-                              bool temp1 = await WalletCreation().addWallet();
-                              if (temp1) {
+                            
+                              
                                 await NotificationsServices().onLogin(context);
                                 Provider.of<AppProvider>(context, listen: false)
                                     .onTabTapped(0);
@@ -110,7 +109,7 @@ class _SignupWithEmailScreenState extends State<SignupWithEmailScreen> {
                                   MainScreen.routeName,
                                   (Route<dynamic> route) => false,
                                 );
-                              }
+                              
                             }
                           }
                         },

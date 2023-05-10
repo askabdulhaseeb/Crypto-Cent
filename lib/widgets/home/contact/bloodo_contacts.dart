@@ -8,7 +8,6 @@ import '../../../models/app_user/app_user.dart';
 import '../../../models/chat/chat.dart';
 
 import '../../../screens/chat_screen/private/personal_chat_screen.dart';
-import '../../../screens/profile_screen/wallet/send_bitcoin.dart';
 import '../../custom_widgets/custom_elevated_button.dart';
 import '../../custom_widgets/custom_profile_image.dart';
 
@@ -29,22 +28,7 @@ class BloodoContacts extends StatelessWidget {
         trailing: Row(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-            CustomElevatedButton(
-              bgColor: Theme.of(context).secondaryHeaderColor,
-              title: '  Send  ',
-              textStyle: const TextStyle(color: Colors.black54, fontSize: 16),
-              onTap: () async {
-                await HapticFeedback.heavyImpact();
-                Navigator.of(context).push(
-                  MaterialPageRoute<SendBitcoinScreen>(
-                      builder: (BuildContext context) => SendBitcoinScreen(
-                            iscontact: true,
-                            sellerUser: user,
-                          )),
-                );
-              },
-              padding: const EdgeInsets.symmetric(horizontal: 6),
-            ),
+            
             const SizedBox(
               width: 10,
             ),

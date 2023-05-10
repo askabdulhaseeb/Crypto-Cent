@@ -217,7 +217,7 @@ class _SendOfferWidgetState extends State<SendOfferWidget> {
       ),
       timestamp: time,
       pid: widget.product.pid,
-      offer: order,
+      
       prodIsVideo: false,
     );
     await ChatAPI().sendMessage(

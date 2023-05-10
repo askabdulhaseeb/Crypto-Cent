@@ -1,6 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-
-import '../payment/orderd_product.dart';
 import 'chat_group_info.dart';
 import 'message.dart';
 
@@ -10,7 +8,7 @@ class Chat {
     required this.persons,
     this.lastMessage,
     this.pid,
-    this.offer,
+  
     this.prodIsVideo = false,
     this.isGroup = false,
     this.groupInfo,
@@ -23,7 +21,7 @@ class Chat {
   final ChatGroupInfo? groupInfo;
   final String? pid;
   final bool? prodIsVideo;
-  OrderdProduct? offer;
+ 
   Message? lastMessage;
   List<Message>? unseenMessages;
   int timestamp;
@@ -36,7 +34,6 @@ class Chat {
       'group_info': groupInfo?.toMap(),
       'last_message': lastMessage!.toMap(),
       'pid': pid,
-      'offer': offer?.toMap(),
       'prod_is_video': prodIsVideo ?? false,
       'unseen_messages': unseenMessages?.map((Message x) => x.toMap()).toList(),
       'timestamp': timestamp,
@@ -69,7 +66,6 @@ class Chat {
 
   Map<String, dynamic> updateOffer() {
     return <String, dynamic>{
-      'offer': offer!.toMap(),
       'last_message': lastMessage!.toMap(),
     };
   }
@@ -84,15 +80,7 @@ class Chat {
           ? ChatGroupInfo.fromMap(map['group_info'])
           : null,
       pid: map['pid'] ?? '',
-      offer: map['offer'] == null
-          ? OrderdProduct(
-              pid: map['pid'] ?? '',
-              sellerID: '',
-              localAmount: 0,
-              exchangeRate: 0,
-              quantity: 0,
-            )
-          : OrderdProduct.fromMap(map['offer']),
+     
       prodIsVideo: map['prod_is_video'] ?? true,
       lastMessage: Message.fromMap(map['last_message']),
       timestamp: map['timestamp'] ?? 0,

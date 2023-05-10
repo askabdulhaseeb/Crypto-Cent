@@ -33,9 +33,7 @@ dynamic get listOfProvider => [
       ChangeNotifierProvider<CategoriesProvider>.value(
         value: CategoriesProvider(),
       ),
-      ChangeNotifierProvider<WalletProvider>.value(
-        value: WalletProvider(),
-      ),
+     
       ChangeNotifierProvider<AppProvider>.value(
         value: AppProvider(),
       ),
@@ -45,19 +43,12 @@ dynamic get listOfProvider => [
       ChangeNotifierProvider<BinanceProvider>.value(
         value: BinanceProvider(),
       ),
-      ChangeNotifierProvider<PaymentProvider>.value(
-        value: PaymentProvider(),
-      ),
-      ChangeNotifierProxyProvider<PaymentProvider, WalletProvider>(
-        create: (_) => WalletProvider(),
-        update: (_, PaymentProvider paymentPro, WalletProvider? walletPro) =>
-            walletPro!..update(paymentPro),
-      ),
+     
       ChangeNotifierProvider<ChatPageProvider>.value(
         value: ChatPageProvider(),
       ),
       ChangeNotifierProvider<ContactProvider>.value(
         value: ContactProvider(),
       ),
-      ChangeNotifierProvider<PaymentProvider>.value(value: PaymentProvider()),
+    
     ];
