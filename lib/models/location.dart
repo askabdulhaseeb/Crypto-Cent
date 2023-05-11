@@ -54,8 +54,10 @@ class UserLocation {
       locationID: doc.data()?['locationID'] ?? '',
       userID: doc.data()?['userID'] ?? '',
       locationName: doc.data()?['locationName'] ?? '',
-      latitude: double.parse(doc.data()?['latitude'].toString()??''),
-      longitude:double.parse ( doc.data()?['longitude'].toString() ?? ''),
+
+      latitude:double.parse(doc.data()?['latitude'].toString()??'0' ),
+      longitude: double.parse(doc.data()?['longitude'].toString()??'0' ),
+
       address: doc.data()?['address'] ?? '',
       city: doc.data()?['city'] ?? '',
       state: doc.data()?['state'] ?? '',

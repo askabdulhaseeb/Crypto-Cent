@@ -4,8 +4,12 @@ import 'package:flutter/services.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:provider/provider.dart';
 import '../../database/app_user/auth_method.dart';
+import '../../database/crypto_wallet/wallet_create_api.dart';
 import '../../database/notification_services.dart';
 import '../../enum/notification_type.dart';
+import '../../function/encryption_function.dart';
+import '../../models/app_user/app_user.dart';
+import '../../models/crypto_wallet/wallet.dart';
 import '../../providers/provider.dart';
 import '../../utilities/app_images.dart';
 import '../../widgets/custom_widgets/custom_network_image_slider.dart';
@@ -48,10 +52,11 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    UserProvider users = Provider.of<UserProvider>(context);
+    UserProvider userPro = Provider.of<UserProvider>(context);
     return Scaffold(
       key: _key,
       drawer: drawerScreen(context),
+      
       body: SafeArea(
         child: Consumer2<ProductProvider, CategoriesProvider>(builder: (
           BuildContext context,
