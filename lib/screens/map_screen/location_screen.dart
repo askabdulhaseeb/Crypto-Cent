@@ -10,7 +10,6 @@ import '../../providers/location_provider.dart';
 import '../../providers/product_provider.dart';
 import '../../widgets/custom_widgets/custom_widget.dart';
 import '../main_screen/main_screen.dart';
-import '../order/payment.dart';
 import 'add_new_address.dart';
 
 class LocationScreen extends StatefulWidget {

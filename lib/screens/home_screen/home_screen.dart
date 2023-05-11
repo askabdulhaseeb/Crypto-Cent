@@ -1,15 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_html/flutter_html.dart';
 import 'package:provider/provider.dart';
-import '../../database/app_user/auth_method.dart';
-import '../../database/crypto_wallet/wallet_create_api.dart';
-import '../../database/notification_services.dart';
-import '../../enum/notification_type.dart';
-import '../../function/encryption_function.dart';
-import '../../models/app_user/app_user.dart';
-import '../../models/crypto_wallet/wallet.dart';
+
+
 import '../../providers/provider.dart';
 import '../../utilities/app_images.dart';
 import '../../widgets/custom_widgets/custom_network_image_slider.dart';
