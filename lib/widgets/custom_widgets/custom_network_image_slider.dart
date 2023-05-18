@@ -11,8 +11,7 @@ class CustomNetworkImageSlider extends StatefulWidget {
     AppImages.frame1,
     AppImages.frame2,
     AppImages.frame3,
-    AppImages.frame4,
-    AppImages.frame5,
+    
   ];
 
   @override
