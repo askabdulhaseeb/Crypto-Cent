@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 
 import '../../database/app_user/auth_method.dart';
+import '../auth/phone_number_screen.dart';
 import '../auth/welcome_screen.dart';
 import '../main_screen/main_screen.dart';
 
@@ -31,7 +32,7 @@ class _SpalshScreenState extends State<SpalshScreen> {
               // ignore: always_specify_types
               MaterialPageRoute(
                 builder: (BuildContext context) => (AuthMethods.uid.isEmpty)
-                    ? const WelcomeScreen()
+                    ? const PhoneNumberScreen()
                     : const MainScreen(),
               ),
             );

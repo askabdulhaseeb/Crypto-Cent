@@ -42,14 +42,14 @@ class MyApp extends StatelessWidget {
           themeMode: theme.themeMode,
 
           home: AuthMethods.uid.isEmpty
-              ? const WelcomeScreen()
+              ? const PhoneNumberScreen()
               : const MainScreen(),
 
           // home: const NotificationScreen(),
           routes: <String, WidgetBuilder>{
             EmptyScreen.routeName: (_) => const EmptyScreen(),
             // AUTH
-            WelcomeScreen.routeName: (_) => const WelcomeScreen(),
+           
             SigninWithEmailScreen.routeName: (_) =>
                 const SigninWithEmailScreen(),
             SignupWithEmailScreen.routeName: (_) =>
