@@ -325,19 +325,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
               ],
             ),
             const SizedBox(height: 20),
-            drawerContainer(
-              context,
-              'Search',
-              Icons.search,
-              (() {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute<SerachScreen>(
-                    builder: (BuildContext context) => const SerachScreen(),
-                  ),
-                );
-              }),
-            ),
+         
             const SizedBox(height: 10),
             drawerImageContainer(
               context,

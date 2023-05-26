@@ -46,7 +46,6 @@ class ProfileScreen extends StatelessWidget {
                           child: GestureDetector(
                             onTap: () async {
                               await HapticFeedback.heavyImpact();
-                             
                             },
                             child: ProfileMiddleTile(
                               text: 'My MyOrder\nHistory',
@@ -115,16 +114,9 @@ class ProfileScreen extends StatelessWidget {
                             image: AppImages.orderhistory,
                             onTap: () async {
                               await HapticFeedback.heavyImpact();
-                             
                             }),
                         const SizedBox(height: 24),
-                        ProfileNavTile(
-                            name: 'Wallet',
-                            image: AppImages.wallet,
-                            onTap: () async {
-                              await HapticFeedback.heavyImpact();
-                            
-                            }),
+
                         const SizedBox(height: 24),
                         ProfileNavTile(
                           name: 'Selling',
