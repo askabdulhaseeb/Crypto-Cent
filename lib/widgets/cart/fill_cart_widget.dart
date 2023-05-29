@@ -24,7 +24,7 @@ class FillCartWidget extends StatelessWidget {
               itemCount: cart.length,
               itemBuilder: (BuildContext context, int index) {
                 final Cart item = cart[index];
-                return CartItem(item: item);
+                return CartItems(item: item);
               },
             );
           }),

@@ -8,8 +8,8 @@ import '../../providers/cart_provider.dart';
 import '../custom_widgets/custom_network_image.dart';
 import '../custom_widgets/cutom_text.dart';
 
-class CartItem extends StatelessWidget {
-  const CartItem({required this.item, Key? key}) : super(key: key);
+class CartItems extends StatelessWidget {
+  const CartItems({required this.item, Key? key}) : super(key: key);
 
   final Cart item;
 

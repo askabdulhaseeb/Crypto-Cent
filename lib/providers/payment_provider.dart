@@ -14,6 +14,7 @@ import '../models/my_order.dart';
 import '../models/payment/orderd_product.dart';
 import '../models/product/product_model.dart';
 import '../models/transaction.dart';
+import 'cart_provider.dart';
 import 'product_provider.dart';
 
 
@@ -53,8 +54,9 @@ class PaymentProvider with ChangeNotifier{
   List<OrderdProduct> get orderdProduct => _orderProduct;
   Future<bool> productOrder({
   required   BuildContext context,
-    required List<Cart> cart,
+    required CartProvider cartPro
  } ) async {
+  List<Cart> cart=cartPro.cartItem;
     isLoading=true;
     notifyListeners();
     String uniqueID = UniqueIdFunctions.postID;
@@ -108,6 +110,7 @@ class PaymentProvider with ChangeNotifier{
     
     final bool transactionBool = await TransactionApi().add(tempTransaction);
     orderdProduct.clear();
+    cartPro.deleteAllItem();
     isLoading=true;
     notifyListeners();
     if (orderBool && transactionBool) {

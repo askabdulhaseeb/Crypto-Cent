@@ -6,9 +6,13 @@ import 'package:provider/provider.dart';
 
 import '../../models/location.dart';
 import '../../providers/add_product_p.dart';
+import '../../providers/app_provider.dart';
+import '../../providers/cart_provider.dart';
 import '../../providers/location_provider.dart';
+import '../../providers/payment_provider.dart';
 import '../../providers/product_provider.dart';
 import '../../widgets/custom_widgets/custom_widget.dart';
+import '../../widgets/custom_widgets/show_loading.dart';
 import '../main_screen/main_screen.dart';
 import 'add_new_address.dart';
 
@@ -23,6 +27,7 @@ class LocationScreen extends StatefulWidget {
 
 class _LocationScreenState extends State<LocationScreen> {
   int isSelectedIndex = 0;
+  bool isLoading=false;
   @override
   Widget build(BuildContext context) {
     LocationProvider locationPro = Provider.of<LocationProvider>(context);
@@ -173,14 +178,27 @@ class _LocationScreenState extends State<LocationScreen> {
                             });
                   })
                 : widget.text == 'order'
-                    ? CustomElevatedButton(
-                        title: 'Adress Done',
-                        onTap: () async {
-                          await HapticFeedback.heavyImpact();
-                          await locationPro
-                              .selectedIndex(location[isSelectedIndex]);
-                          
-                        })
+                    ? Consumer3<CartProvider,PaymentProvider,AppProvider>(
+                      
+                      builder: (context,CartProvider cartPro,PaymentProvider paymentPro,AppProvider appPro ,snapshot) {
+                        return isLoading? ShowLoading():CustomElevatedButton(
+                            title: 'Adress Done',
+                            onTap: () async {
+                              setState(() {
+                                isLoading=true;
+                              });
+                              await HapticFeedback.heavyImpact();
+                              await locationPro
+                                  .selectedIndex(location[isSelectedIndex]);
+                             await paymentPro.productOrder(context: context,cartPro: cartPro);
+                             appPro.onTabTapped(0);
+                             Navigator.of(context).push(MaterialPageRoute(builder: (context) => MainScreen(),));
+                              setState(() {
+                                isLoading=false;
+                              });
+                            });
+                      }
+                    )
                     : SizedBox(),
             const SizedBox(
               height: 20,
