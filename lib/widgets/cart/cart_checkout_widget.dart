@@ -48,8 +48,8 @@ class CartCheckoutWidget extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 10),
-              Row(
-                children: const <Widget>[
+              const Row(
+                children: <Widget>[
                   ForText(name: 'Discount'),
                   Spacer(),
                   ForText(

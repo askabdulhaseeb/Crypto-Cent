@@ -46,10 +46,12 @@ class ProfileScreen extends StatelessWidget {
                           child: GestureDetector(
                             onTap: () async {
                               await HapticFeedback.heavyImpact();
+                               Navigator.of(context).push(MaterialPageRoute(builder: (context) => OrderTabbar(),));
                             },
                             child: ProfileMiddleTile(
                               text: 'My MyOrder\nHistory',
                               image: AppImages.orderhistory,
+
                             ),
                           ),
                         ),
@@ -114,6 +116,7 @@ class ProfileScreen extends StatelessWidget {
                             image: AppImages.orderhistory,
                             onTap: () async {
                               await HapticFeedback.heavyImpact();
+                              Navigator.of(context).push(MaterialPageRoute(builder: (context) => OrderTabbar(),));
                             }),
                         const SizedBox(height: 24),
 
