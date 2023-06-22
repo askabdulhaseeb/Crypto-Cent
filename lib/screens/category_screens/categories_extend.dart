@@ -18,7 +18,7 @@ class CategoriesExtend extends StatefulWidget {
 class _CategoriesExtendState extends State<CategoriesExtend> {
   final TextEditingController _searchController = TextEditingController();
 
-  List<String> dropDownItem = [
+  List<String> dropDownItem = <String>[
     'Sort by Date',
     'Price Low To High',
     'Price High To Low',

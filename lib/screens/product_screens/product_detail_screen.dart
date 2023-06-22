@@ -222,22 +222,24 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                     ),
                     const SizedBox(height: 100),
                     if (AuthMethods.uid.isNotEmpty)
-                      CustomElevatedButton(
-                        title: 'Report Product',
-                        bgColor: Colors.transparent,
-                        border:
-                            Border.all(color: Theme.of(context).primaryColor),
-                        textStyle: TextStyle(
-                          color: Theme.of(context).primaryColor,
-                          fontSize: 18,
-                        ),
-                        onTap: () async {
-                          await HapticFeedback.heavyImpact();
-                          // ignore: use_build_context_synchronously
-                          await ReportBottomSheets()
-                              .productReport(context, widget.product);
-                        },
-                      ),
+                      widget.product.uid == AuthMethods.uid
+                          ? const SizedBox()
+                          : CustomElevatedButton(
+                              title: 'Report Product',
+                              bgColor: Colors.transparent,
+                              border: Border.all(
+                                  color: Theme.of(context).primaryColor),
+                              textStyle: TextStyle(
+                                color: Theme.of(context).primaryColor,
+                                fontSize: 18,
+                              ),
+                              onTap: () async {
+                                await HapticFeedback.heavyImpact();
+                                // ignore: use_build_context_synchronously
+                                await ReportBottomSheets()
+                                    .productReport(context, widget.product);
+                              },
+                            ),
                     const SizedBox(height: 100),
                   ],
                 ),

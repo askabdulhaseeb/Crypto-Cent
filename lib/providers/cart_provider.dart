@@ -19,10 +19,26 @@ class CartProvider extends ChangeNotifier {
       exchangeRate: exchangeRate,
       quantity: quantity,
     );
+    for(int i=0;i<receiptList.length;i++){
+        if(value.uid==receiptList[i].sellerId){
+          receiptList[i].cartsItems.add(temp);
+          check=true;
+          break;
+        }
+      }
+      if(check==false){
+        List<Cart> temp1=<Cart>[];
+        temp1.add(temp);
+        Receipt receipt=Receipt(
+         
+          sellerId: value.uid, cartsItems: temp1);
+        receiptList.add(receipt);
+      }
     _cartItems.add(temp);
     notifyListeners();
   }
-
+      bool check=false;
+List<Receipt> receiptList=[];
   bool checkExit(Product value) {
     bool temp = false;
     final int index = _indexOfSelectedIndex(value.pid);
