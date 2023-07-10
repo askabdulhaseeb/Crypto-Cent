@@ -95,7 +95,7 @@ class _DeleteAccountWidgetState extends State<DeleteAccountWidget> {
                           await AuthMethods().deleteAccount();
                           if (!mounted) return;
                           Navigator.of(context).pushNamedAndRemoveUntil(
-                            WelcomeScreen.routeName,
+                            PhoneNumberScreen.routeName,
                             (Route<dynamic> route) => false,
                           );
                         }

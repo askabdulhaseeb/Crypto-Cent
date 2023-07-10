@@ -191,8 +191,8 @@ class _SendOfferWidgetState extends State<SendOfferWidget> {
     OrderdProduct order = OrderdProduct(
       pid: widget.product.pid,
       sellerID: widget.product.uid,
-      localAmount: double.parse(offer),
-      exchangeRate: await BinanceApi().btcPrice(),
+      amount: double.parse(offer),
+     
       quantity: quantity,
     );
     final String me = AuthMethods.uid;
@@ -217,7 +217,7 @@ class _SendOfferWidgetState extends State<SendOfferWidget> {
       ),
       timestamp: time,
       pid: widget.product.pid,
-      offer: order,
+      
       prodIsVideo: false,
     );
     await ChatAPI().sendMessage(

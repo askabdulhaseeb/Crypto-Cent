@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 
 import '../../utilities/app_images.dart';
 import '../../widgets/custom_widgets/custom_widget.dart';
+import '../auth/phone_number_screen.dart';
 import '../auth/welcome_screen.dart';
 
 class EmptyAuthScreen extends StatelessWidget {
@@ -75,7 +76,7 @@ class EmptyAuthScreen extends StatelessWidget {
                                     await HapticFeedback.heavyImpact();
                                     Navigator.of(context)
                                         .pushNamedAndRemoveUntil(
-                                            WelcomeScreen.routeName,
+                                            PhoneNumberScreen.routeName,
                                             (Route<dynamic> route) => false);
                                   },
                                   bgColor:
@@ -85,7 +86,7 @@ class EmptyAuthScreen extends StatelessWidget {
                                 onTap: () async {
                                   await HapticFeedback.heavyImpact();
                                   Navigator.of(context).pushNamedAndRemoveUntil(
-                                      WelcomeScreen.routeName,
+                                      PhoneNumberScreen.routeName,
                                       (Route<dynamic> route) => false);
                                 },
                               ),

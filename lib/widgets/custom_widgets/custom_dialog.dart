@@ -1,5 +1,6 @@
 import '../../screens/auth/welcome_screen.dart';
 import '../../screens/main_screen/main_screen.dart';
+import '../../screens/screens.dart';
 import 'constants.dart';
 import 'package:flutter/material.dart';
 
@@ -75,9 +76,9 @@ class _CustomDialogBoxState extends State<CustomDialogBox> {
                   onTap: () {
                     Navigator.pushAndRemoveUntil(
                         context,
-                        MaterialPageRoute<WelcomeScreen>(
+                        MaterialPageRoute<PhoneNumberScreen>(
                           builder: (BuildContext context) =>
-                              const WelcomeScreen(),
+                              const PhoneNumberScreen(),
                         ),
                         (Route route) => false);
                   },

@@ -1,7 +1,10 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 
-import '../../enum/order_status_enum.dart';
-import 'orderd_product.dart';
+
+
+import 'package:crypto_cent/models/payment/orderd_product.dart';
+
+import '../enum/order_status_enum.dart';
 
 class Transactions {
   Transactions({
@@ -11,9 +14,8 @@ class Transactions {
     required this.customerUID,
     required this.sellerUID,
     required this.timeStamp,
-    required this.exchangeRate,
-    required this.cryptoSymbol,
-    required this.totalCryptoPrice,
+   
+    required this.totalPrice,
     this.status = OrderStatusEnum.pending,
   });
 
@@ -23,9 +25,8 @@ class Transactions {
   final String customerUID;
   final String sellerUID;
   final int timeStamp;
-  final double exchangeRate;
-  final String cryptoSymbol;
-  final double totalCryptoPrice;
+ 
+  final double totalPrice;
   OrderStatusEnum<String> status;
 
   Map<String, dynamic> toMap() {
@@ -37,9 +38,8 @@ class Transactions {
       'seller_uid': sellerUID,
       'status': status.value,
       'timestamp': timeStamp,
-      'exchange_rate': exchangeRate,
-      'crypto_symbol': cryptoSymbol,
-      'total_local_price': totalCryptoPrice,
+    
+      'total_local_price': totalPrice,
     };
   }
 
@@ -58,9 +58,8 @@ class Transactions {
       sellerUID: map['seller_uid'] ?? '',
       status: OrderStatusConvetion().stringToEnum(map['status']),
       timeStamp: map['timestamp'] as int,
-      exchangeRate: map['exchange_rate'] as double,
-      cryptoSymbol: map['crypto_symbol'] as String,
-      totalCryptoPrice: map['total_local_price'] as double,
+      
+      totalPrice: map['total_local_price'] as double,
     );
   }
 }

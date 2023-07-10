@@ -3,9 +3,11 @@ import 'package:flutter/services.dart';
 import 'package:intl_phone_field/phone_number.dart';
 import 'package:provider/provider.dart';
 
+import '../../providers/app_provider.dart';
 import '../../providers/auth_provider.dart';
 import '../../widgets/custom_widgets/custom_elevated_button.dart';
 import '../../widgets/custom_widgets/phone_number_field.dart';
+import '../main_screen/main_screen.dart';
 import 'otp_screen.dart';
 
 class PhoneNumberScreen extends StatefulWidget {
@@ -19,7 +21,24 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        actions: [
+          TextButton(
+            // onPressed: () => Navigator.canPop(context)
+            //     ? Navigator.of(context).pop()
+            //     : Navigator.of(context).pushNamedAndRemoveUntil(
+            //         MainScreen.routeName, (Route<dynamic> route) => false),
+            onPressed: () {
+              Provider.of<AppProvider>(context, listen: false).onTabTapped(0);
+              Navigator.of(context).pushNamedAndRemoveUntil(
+                MainScreen.routeName,
+                (Route<dynamic> route) => false,
+              );
+            },
+            child: const Text('Skip login for now'),
+          ),
+        ],
+      ),
       body: Consumer<AuthProvider>(
           builder: (BuildContext context, AuthProvider authPro, _) {
         return Padding(

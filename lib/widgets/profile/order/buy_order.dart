@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
-import '../../../models/payment/order.dart';
+import '../../../models/my_order.dart';
+import '../../../providers/payment_provider.dart';
 import '../../../providers/provider.dart';
 import 'buy_history_tile.dart';
 

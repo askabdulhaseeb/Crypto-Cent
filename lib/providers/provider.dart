@@ -6,8 +6,7 @@ export 'categories_provider.dart';
 export 'chat/chat_page_provider.dart';
 export 'contact_provider.dart';
 export 'crypto_wallet/binance_provider.dart';
-export 'crypto_wallet/wallet_provider.dart';
-export 'payment/payment_provider.dart';
+
 export 'product_provider.dart';
 export 'user_provider.dart';
 

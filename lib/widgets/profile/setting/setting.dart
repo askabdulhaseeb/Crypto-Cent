@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 
 import '../../../database/app_user/auth_method.dart';
 import '../../../providers/user_provider.dart';
+import '../../../screens/auth/phone_number_screen.dart';
 import '../../../screens/auth/welcome_screen.dart';
 import '../../../screens/empty_screen/empty_screen.dart';
 import '../../../screens/map_screen/add_new_address.dart';
@@ -91,7 +92,7 @@ class Setting extends StatelessWidget {
                   await AuthMethods().signOut();
                   // ignore: use_build_context_synchronously
                   Navigator.of(context).pushNamedAndRemoveUntil(
-                      WelcomeScreen.routeName, (Route<dynamic> route) => false);
+                      PhoneNumberScreen.routeName, (Route<dynamic> route) => false);
                 },
               ),
               const Spacer(),

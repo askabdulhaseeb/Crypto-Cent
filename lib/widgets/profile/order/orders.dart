@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../providers/provider.dart';
+import '../../../providers/payment_provider.dart';
 import 'buy_order.dart';
 import 'sell_order.dart';
 
@@ -25,16 +25,25 @@ class _OrderTabbarState extends State<OrderTabbar> {
       length: 2,
       child: Scaffold(
         appBar: AppBar(
-          backgroundColor: Colors.transparent,
+          //backgroundColor: Colors.transparent,
           elevation: 0,
+          leading: IconButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              icon: Icon(
+                Icons.arrow_back_ios,
+                color: Colors.black,
+              )),
           title: const Text(
-            'MyOrder Complete Transaction',
+            'My Orders ',
             style: TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.bold,
               color: Colors.black,
             ),
           ),
+
           bottom: const TabBar(tabs: <Widget>[
             Text(
               'Buy',

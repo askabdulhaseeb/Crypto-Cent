@@ -10,7 +10,6 @@ import '../../../providers/provider.dart';
 import '../../../widgets/chat/chat_text_field.dart';
 import '../../../widgets/chat/message_tile.dart';
 import '../../../widgets/chat/no_old_chat_available_widget.dart';
-import '../../../widgets/chat/product/chat_product_tile.dart';
 import '../../../widgets/custom_widgets/show_loading.dart';
 
 class ProductChatScreen extends StatelessWidget {
@@ -35,7 +34,7 @@ class ProductChatScreen extends StatelessWidget {
                         ? const NoOldChatAvailableWidget()
                         : Column(
                             children: <Widget>[
-                              ChatProductTile(chat: chat),
+                              
                               Expanded(
                                 child: ListView.builder(
                                   shrinkWrap: true,

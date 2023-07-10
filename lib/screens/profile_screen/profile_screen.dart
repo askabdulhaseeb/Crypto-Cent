@@ -15,7 +15,6 @@ import '../empty_screen/empty_auth_screen.dart';
 import '../map_screen/location_screen.dart';
 import '../order/order_history.dart';
 import 'selling_screen.dart';
-import 'wallet/wallet_screen.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -47,18 +46,12 @@ class ProfileScreen extends StatelessWidget {
                           child: GestureDetector(
                             onTap: () async {
                               await HapticFeedback.heavyImpact();
-                              Navigator.push(
-                                context,
-                                // ignore: always_specify_types
-                                MaterialPageRoute<OrderHistory>(
-                                  builder: (BuildContext context) =>
-                                      const OrderHistory(),
-                                ),
-                              );
+                               Navigator.of(context).push(MaterialPageRoute(builder: (context) => OrderTabbar(),));
                             },
                             child: ProfileMiddleTile(
                               text: 'My MyOrder\nHistory',
                               image: AppImages.orderhistory,
+
                             ),
                           ),
                         ),
@@ -123,28 +116,10 @@ class ProfileScreen extends StatelessWidget {
                             image: AppImages.orderhistory,
                             onTap: () async {
                               await HapticFeedback.heavyImpact();
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute<OrderTabbar>(
-                                  builder: (BuildContext context) =>
-                                      const OrderTabbar(),
-                                ),
-                              );
+                              Navigator.of(context).push(MaterialPageRoute(builder: (context) => OrderTabbar(),));
                             }),
                         const SizedBox(height: 24),
-                        ProfileNavTile(
-                            name: 'Wallet',
-                            image: AppImages.wallet,
-                            onTap: () async {
-                              await HapticFeedback.heavyImpact();
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute<WalletScreen>(
-                                  builder: (BuildContext context) =>
-                                      const WalletScreen(),
-                                ),
-                              );
-                            }),
+
                         const SizedBox(height: 24),
                         ProfileNavTile(
                           name: 'Selling',

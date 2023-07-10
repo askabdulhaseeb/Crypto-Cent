@@ -6,6 +6,7 @@ class ForText extends StatelessWidget {
     this.size,
     this.bold,
     this.color,
+    this.textAlign,
     this.textStyle,
     Key? key,
   }) : super(key: key);
@@ -14,10 +15,11 @@ class ForText extends StatelessWidget {
   final bool? bold;
   final Color? color;
   final TextStyle? textStyle;
+  final TextAlign? textAlign;
   @override
   Widget build(BuildContext context) {
     return Text(
-      textAlign: TextAlign.center,
+      textAlign:textAlign?? TextAlign.center,
       name,
       
       style: textStyle ??

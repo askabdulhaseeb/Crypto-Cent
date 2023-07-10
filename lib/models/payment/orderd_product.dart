@@ -1,24 +1,23 @@
+
 import '../../enum/order_status_enum.dart';
 
 class OrderdProduct {
   OrderdProduct({
     required this.pid,
     required this.sellerID,
-    required this.localAmount,
-    required this.exchangeRate,
+    required this.amount,
     required this.quantity,
     this.status = OrderStatusEnum.pending,
-    this.localCurrency = '\$',
-    this.cryptoCoinSymbol = 'btc',
+    this.localCurrency = 'pkr',
+ 
   });
 
   final String pid;
   final String sellerID;
   int quantity;
   final String localCurrency;
-  final String cryptoCoinSymbol;
-  final double exchangeRate;
-  double localAmount;
+
+  double amount;
   OrderStatusEnum<String> status;
 
   Map<String, dynamic> toMap() {
@@ -27,9 +26,8 @@ class OrderdProduct {
       'seller_id': sellerID,
       'quantity': quantity,
       'local_currency': localCurrency,
-      'crypto_coin_symbol': cryptoCoinSymbol,
-      'exchange_rate': exchangeRate,
-      'local_amount': localAmount,
+ 
+      'local_amount': amount,
       'status': status.value,
     };
   }
@@ -46,10 +44,9 @@ class OrderdProduct {
       pid: map['pid'] ?? '',
       sellerID: map['seller_id'] ?? '',
       quantity: map['quantity'] ?? 0,
-      localCurrency: map['local_currency'] ?? '\$',
-      cryptoCoinSymbol: map['crypto_coin_symbol'] ?? 'btc',
-      exchangeRate: map['exchange_rate'] ?? 0.0,
-      localAmount: double.parse(map['local_amount']?.toString() ?? '0.0'),
+      localCurrency: map['local_currency'] ?? 'pkr',
+     
+      amount: double.parse(map['local_amount']?.toString() ?? '0.0'),
       status: OrderStatusConvetion().stringToEnum(map['status']),
     );
   }

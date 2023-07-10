@@ -1,19 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:provider/provider.dart';
-
-import '../../../database/payment/order_api.dart';
+import '../../../database/order_api.dart';
 import '../../../enum/order_status_enum.dart';
-import '../../../models/payment/order.dart';
+import '../../../models/my_order.dart';
 import '../../../models/payment/orderd_product.dart';
 import '../../../models/product/product_model.dart';
-import '../../../providers/crypto_wallet/wallet_provider.dart';
 import '../../../providers/product_provider.dart';
-import '../../../providers/rating_provider.dart';
 import '../../custom_widgets/custom_elevated_button.dart';
 import '../../custom_widgets/custom_network_image.dart';
-import '../../custom_widgets/custom_textformfield.dart';
+
 
 class OrderHistoryTile extends StatefulWidget {
   const OrderHistoryTile({required this.item, super.key});
@@ -40,9 +36,9 @@ class _OrderHistoryTileState extends State<OrderHistoryTile> {
       subtitle: Text(widget.item.orderID,
           maxLines: 1, overflow: TextOverflow.ellipsis),
       children: widget.item.products
-          .map((OrderdProduct e) => Consumer2<ProductProvider, WalletProvider>(
+          .map((OrderdProduct e) => Consumer<ProductProvider>(
                   builder: (BuildContext context, ProductProvider productPro,
-                      WalletProvider walletPro, Widget? snapshot) {
+                      Widget? snapshot) {
                 Product product = productPro.product(e.pid);
                 return Padding(
                   padding: const EdgeInsets.all(8.0),
@@ -63,7 +59,7 @@ class _OrderHistoryTileState extends State<OrderHistoryTile> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         Text(
-                          ' \$ :${e.localAmount.toString()} - Btc :${(e.localAmount / e.exchangeRate).toStringAsFixed(8)}',
+                          ' pkr :${e.amount}',
                         ),
                         Row(
                           children: <Widget>[
@@ -92,21 +88,7 @@ class _OrderHistoryTileState extends State<OrderHistoryTile> {
                                       await HapticFeedback.heavyImpact();
                                       shrink();
                                       e.status = OrderStatusEnum.completed;
-                                      alertBox(context, product, e);
-                                      // bool temp =
-                                      //     walletPro.getSellerWallet(e.sellerID);
-                                      // if (temp) {
-                                      //   print(walletPro
-                                      //       .sellerWallet!.coinsWallet[0].wallet);
-
-                                      //   String walletIDD = Encryption()
-                                      //       .userDecrypt(
-                                      //           walletPro.sellerWallet!
-                                      //               .coinsWallet[0].wallet,
-                                      //           e.sellerID);
-                                      //   print(walletIDD);
-                                      // }
-                                      //print(e.sellerID);
+                                     
                                       await OrderApi()
                                           .updateStatus(widget.item);
                                     },
@@ -137,83 +119,6 @@ class _OrderHistoryTileState extends State<OrderHistoryTile> {
     );
   }
 
-  Future<dynamic> alertBox(
-    BuildContext context,
-    Product product,
-    OrderdProduct orderded,
-  ) async {
-    showDialog(
-        useSafeArea: true,
-        context: context,
-        builder: (BuildContext context) {
-          return Consumer<RatingProvider>(
-              builder: (BuildContext context, RatingProvider ratingPro, _) {
-            //return const CustomReviewDialogBox();
-            return AlertDialog(
-              title: Column(
-                children: [
-                  Row(
-                    children: [
-                      SizedBox(
-                          height: 30,
-                          width: 30,
-                          child: ClipRRect(
-                            child: CustomNetworkImage(
-                              imageURL: product.prodURL[0].url,
-                              fit: BoxFit.fill,
-                            ),
-                          )),
-                      const SizedBox(
-                        width: 10,
-                      ),
-                      Text(product.productname),
-                    ],
-                  ),
-                  ratingBar(ratingPro),
-                ],
-              ),
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(15)),
-              content: CustomTextFormField(
-                controller: ratingPro.ratingComment,
-                hint: 'Comment',
-                maxLength: 500,
-                maxLines: 5,
-              ),
-              // ignore: always_specify_types
-              actions: [
-                CustomElevatedButton(
-                    title: 'Done',
-                    onTap: () async {
-                      await HapticFeedback.heavyImpact();
-                      bool temp = await ratingPro.uploadRating(orderded);
-                      if (temp) {
-                        ratingPro.clear();
 
-                        Navigator.pop(context);
-                      }
-                    }),
-              ],
-            );
-          });
-        });
-  }
 
-  RatingBar ratingBar(RatingProvider ratingPro) {
-    return RatingBar.builder(
-      initialRating: 3,
-      minRating: 1,
-      direction: Axis.horizontal,
-      allowHalfRating: true,
-      itemCount: 5,
-      itemPadding: const EdgeInsets.symmetric(horizontal: 4.0),
-      itemBuilder: (BuildContext context, _) => const Icon(
-        Icons.star,
-        color: Colors.amber,
-      ),
-      onRatingUpdate: (double rating) {
-        ratingPro.rating = rating;
-      },
-    );
-  }
 }

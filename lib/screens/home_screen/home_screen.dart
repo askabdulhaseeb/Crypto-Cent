@@ -1,11 +1,11 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_html/flutter_html.dart';
 import 'package:provider/provider.dart';
-import '../../database/app_user/auth_method.dart';
-import '../../database/notification_services.dart';
-import '../../enum/notification_type.dart';
+
+
 import '../../providers/provider.dart';
 import '../../utilities/app_images.dart';
 import '../../widgets/custom_widgets/custom_network_image_slider.dart';
@@ -48,10 +48,11 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    UserProvider users = Provider.of<UserProvider>(context);
+    UserProvider userPro = Provider.of<UserProvider>(context);
     return Scaffold(
       key: _key,
       drawer: drawerScreen(context),
+      
       body: SafeArea(
         child: Consumer2<ProductProvider, CategoriesProvider>(builder: (
           BuildContext context,
@@ -145,11 +146,11 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                 const SizedBox(
                   height: 20,
                 ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 16),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: const <Widget>[
+                    children: <Widget>[
                       ForText(name: 'Quick Picks', size: 18, bold: true),
                     ],
                   ),
@@ -326,19 +327,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
               ],
             ),
             const SizedBox(height: 20),
-            drawerContainer(
-              context,
-              'Search',
-              Icons.search,
-              (() {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute<SerachScreen>(
-                    builder: (BuildContext context) => const SerachScreen(),
-                  ),
-                );
-              }),
-            ),
+         
             const SizedBox(height: 10),
             drawerImageContainer(
               context,

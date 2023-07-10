@@ -42,14 +42,14 @@ class MyApp extends StatelessWidget {
           themeMode: theme.themeMode,
 
           home: AuthMethods.uid.isEmpty
-              ? const WelcomeScreen()
+              ? const PhoneNumberScreen()
               : const MainScreen(),
 
           // home: const NotificationScreen(),
           routes: <String, WidgetBuilder>{
             EmptyScreen.routeName: (_) => const EmptyScreen(),
             // AUTH
-            WelcomeScreen.routeName: (_) => const WelcomeScreen(),
+           
             SigninWithEmailScreen.routeName: (_) =>
                 const SigninWithEmailScreen(),
             SignupWithEmailScreen.routeName: (_) =>
@@ -58,7 +58,7 @@ class MyApp extends StatelessWidget {
             MainScreen.routeName: (_) => const MainScreen(),
             AddProductScreen.routeName: (_) => const AddProductScreen(),
             // PROFILE
-            PaymentScreen.routeName: (_) => const PaymentScreen(),
+           
             LocationScreen.routeName: (_) => const LocationScreen(text: ''),
             SellingScreen.routeName: (_) => const SellingScreen(),
             // CHAT

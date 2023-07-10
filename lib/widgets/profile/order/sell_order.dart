@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-
-import '../../../database/payment/order_api.dart';
+import '../../../database/order_api.dart';
 import '../../../enum/order_status_enum.dart';
-import '../../../models/payment/order.dart';
+import '../../../models/my_order.dart';
 import '../../../models/product/product_model.dart';
-import '../../../providers/provider.dart';
+import '../../../providers/payment_provider.dart';
+import '../../../providers/product_provider.dart';
 import '../../custom_widgets/custom_elevated_button.dart';
 import '../../custom_widgets/custom_network_image.dart';
 
@@ -42,7 +42,7 @@ class SellOrder extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Text(
-                    ' \$ : ${orderPro.sellProducts[index].localAmount.toString()} - Btc : ${(orderPro.sellProducts[index].localAmount / orderPro.sellProducts[index].exchangeRate).toStringAsFixed(8)}',
+                    ' \pkr : ${orderPro.sellProducts[index].amount} ',
                   ),
                   Row(
                     children: <Widget>[
@@ -59,8 +59,8 @@ class SellOrder extends StatelessWidget {
                               orderPro.sellProducts[index].status =
                                   OrderStatusEnum.cancel;
                               await OrderApi().updateStatus(item);
-                              Provider.of<AppProvider>(context, listen: false)
-                                  .onTabTapped(4);
+                              // Provider.of<AppProvider>(context, listen: false)
+                              //     .onTabTapped(4);
                               Navigator.pop(context);
                             },
                           ),
@@ -77,8 +77,8 @@ class SellOrder extends StatelessWidget {
                                 orderPro.sellProducts[index].status =
                                     OrderStatusEnum.inProgress;
                                 await OrderApi().updateStatus(item);
-                                Provider.of<AppProvider>(context, listen: false)
-                                    .onTabTapped(4);
+                                // Provider.of<AppProvider>(context, listen: false)
+                                //     .onTabTapped(4);
                                 Navigator.pop(context);
                               },
                             ),

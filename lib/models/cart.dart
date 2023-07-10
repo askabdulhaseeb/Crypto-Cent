@@ -16,3 +16,12 @@ class Cart {
   final double exchangeRate;
   int quantity;
 }
+
+class Receipt {
+  Receipt({
+    required this.sellerId,
+    required this.cartsItems,
+  });
+  String sellerId;
+  List<Cart> cartsItems;
+}

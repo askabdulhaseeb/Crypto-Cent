@@ -28,7 +28,7 @@ class UserProvider extends ChangeNotifier {
     final List<AppUser> temp = await UserApi().getAllUsers();
     _user = temp;
     _currentUser = user(AuthMethods.uid);
-    _deviceToken = _currentUser!.deviceToken!;
+    _deviceToken = _currentUser!.deviceToken??[];
 
     for (int i = 0; i < _user.length; i++) {
       for (int j = 0; j < _user[i].deviceToken!.length; j++) {

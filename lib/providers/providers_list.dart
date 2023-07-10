@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'notification_provider.dart';
+import 'payment_provider.dart';
 import 'provider.dart';
 
 // ignore: always_specify_types
@@ -33,9 +34,10 @@ dynamic get listOfProvider => [
       ChangeNotifierProvider<CategoriesProvider>.value(
         value: CategoriesProvider(),
       ),
-      ChangeNotifierProvider<WalletProvider>.value(
-        value: WalletProvider(),
+      ChangeNotifierProvider<PaymentProvider>.value(
+        value: PaymentProvider(),
       ),
+     
       ChangeNotifierProvider<AppProvider>.value(
         value: AppProvider(),
       ),
@@ -45,19 +47,12 @@ dynamic get listOfProvider => [
       ChangeNotifierProvider<BinanceProvider>.value(
         value: BinanceProvider(),
       ),
-      ChangeNotifierProvider<PaymentProvider>.value(
-        value: PaymentProvider(),
-      ),
-      ChangeNotifierProxyProvider<PaymentProvider, WalletProvider>(
-        create: (_) => WalletProvider(),
-        update: (_, PaymentProvider paymentPro, WalletProvider? walletPro) =>
-            walletPro!..update(paymentPro),
-      ),
+     
       ChangeNotifierProvider<ChatPageProvider>.value(
         value: ChatPageProvider(),
       ),
       ChangeNotifierProvider<ContactProvider>.value(
         value: ContactProvider(),
       ),
-      ChangeNotifierProvider<PaymentProvider>.value(value: PaymentProvider()),
+    
     ];

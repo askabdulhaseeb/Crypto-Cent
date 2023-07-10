@@ -56,24 +56,7 @@ class GroupChatDetailScreen extends StatelessWidget {
                 children: <Widget>[
                   TextButton.icon(
                     onPressed: () async {
-                      await showModalBottomSheet(
-                        isDismissible: true,
-                        isScrollControlled: true,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(24.0),
-                        ),
-                        backgroundColor:
-                            Theme.of(context).scaffoldBackgroundColor,
-                        context: context,
-                        builder: (BuildContext context) {
-                          final List<String> customer =
-                              Provider.of<PaymentProvider>(context,
-                                      listen: false)
-                                  .oldCustomer();
-                          return AddGroupMemberWidget(
-                              chat: chat, customers: customer);
-                        },
-                      );
+                   
                     },
                     icon: const Icon(Icons.add),
                     label: const Text('Add Member'),

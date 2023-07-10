@@ -1,18 +1,22 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-
-import '../../models/payment/transaction.dart';
 import '../../widgets/custom_widgets/custom_toast.dart';
-import '../app_user/auth_method.dart';
+import '../models/my_order.dart';
 
-class TransactionApi {
+
+
+class OrderApi {
   final FirebaseFirestore _instance = FirebaseFirestore.instance;
-  static const String _collection = 'transaction';
-  Future<bool> add(Transactions transaction) async {
+  static const String _collection = 'orders';
+  Future<bool> add({
+    required MyOrder order,
+
+  }) async {
     try {
       await _instance
           .collection(_collection)
-          .doc(transaction.transactionID)
-          .set(transaction.toMap());
+          .doc(order.orderID)
+          .set(order.toMap());
+    
       // CustomToast.successToast(message: 'Successfully Added');
       return true;
     } catch (e) {
@@ -21,15 +25,22 @@ class TransactionApi {
     }
   }
 
-  Future<List<Transactions>> get() async {
-    List<Transactions> value = <Transactions>[];
+  Future<List<MyOrder>> get() async {
+    List<MyOrder> orders = <MyOrder>[];
     QuerySnapshot<Map<String, dynamic>> snapshot = await _instance
         .collection(_collection)
-        .where('customer_uid', isEqualTo: AuthMethods.uid)
+        .orderBy('timestamp', descending: true)
         .get();
     for (DocumentSnapshot<Map<String, dynamic>> e in snapshot.docs) {
-      value.add(Transactions.fromMap(e.data() ?? <String, dynamic>{}));
+      orders.add(MyOrder.fromMap(e));
     }
-    return value;
+    return orders;
+  }
+
+  Future<void> updateStatus(MyOrder value) async {
+    await _instance
+        .collection(_collection)
+        .doc(value.orderID)
+        .update(value.updateStatus());
   }
 }

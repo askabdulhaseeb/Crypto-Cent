@@ -1,7 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:crypto_cent/models/payment/orderd_product.dart';
 
-import '../../enum/order_status_enum.dart';
-import 'orderd_product.dart';
+import '../enum/order_status_enum.dart';
+
 
 class MyOrder {
   MyOrder({
